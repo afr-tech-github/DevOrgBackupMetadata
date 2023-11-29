@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>FIFO(First In First Out)</fullName>
+        <default>false</default>
+        <label>FIFO(First In First Out)</label>
+    </customValue>
+    <customValue>
+        <fullName>LIFO(Last In First Out)</fullName>
+        <default>false</default>
+        <label>LIFO(Last In First Out)</label>
+    </customValue>
+    <customValue>
+        <fullName>FEFO( First Expiry First Out )</fullName>
+        <default>false</default>
+        <label>FEFO( First Expiry First Out )</label>
+    </customValue>
+    <customValue>
+        <fullName>Average</fullName>
+        <default>false</default>
+        <label>Average</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>INVENTORY TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

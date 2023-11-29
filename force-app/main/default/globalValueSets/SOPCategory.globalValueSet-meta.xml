@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Air Export</fullName>
+        <default>false</default>
+        <label>Air Export</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Import</fullName>
+        <default>false</default>
+        <label>Air Import</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocean Export</fullName>
+        <default>false</default>
+        <label>Ocean Export</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocean Import</fullName>
+        <default>false</default>
+        <label>Ocean Import</label>
+    </customValue>
+    <customValue>
+        <fullName>Domestic Transportation</fullName>
+        <default>false</default>
+        <label>Domestic Transportation</label>
+    </customValue>
+    <customValue>
+        <fullName>Cross-Boarder</fullName>
+        <default>false</default>
+        <label>Cross-Boarder</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Consolidation Import</fullName>
+        <default>false</default>
+        <label>Air Consolidation Import</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Consolidation Export</fullName>
+        <default>false</default>
+        <label>Air Consolidation Export</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocean Consolidation Import</fullName>
+        <default>false</default>
+        <label>Ocean Consolidation Import</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocean Consolidation Export</fullName>
+        <default>false</default>
+        <label>Ocean Consolidation Export</label>
+    </customValue>
+    <customValue>
+        <fullName>Truck</fullName>
+        <default>false</default>
+        <label>Truck</label>
+    </customValue>
+    <masterLabel>SOP CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

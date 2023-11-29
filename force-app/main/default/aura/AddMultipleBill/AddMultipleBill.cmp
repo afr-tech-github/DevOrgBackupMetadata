@@ -1,0 +1,122 @@
+<aura:component controller="AddMultipleBillController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="billList" type="AnkenMeisai__c[]"/>
+	<lightning:spinner aura:id="spinner" class="slds-hide"/>
+
+    <!-- <lightning:card> -->
+        <div style="overflow: auto;height: 300px;">
+            <div style="display: inline-block; min-width: 1500px;max-width: 2000px;">
+                    <lightning:recordEditForm aura:id="recordEditForm" objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                        <div>
+                            <div >        
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div>No</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Account Name">Service Name</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Phone">Charge Quantity</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Fax">Charge Unit</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Website">Description</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Account Name">Invoice to</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Phone">Unit Price of Selling</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Fax">Currency-Selling</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Website">Selling Tax(%)</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Account Name">Payment to-Buying</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Phone">Unit Price of Buying</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Fax">Currency-Buying</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Website">Buying Tax(%)</div>
+                                            </th>  
+                                            <th>
+                                                <div class="slds-truncate slds-col" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>   
+                                    <tbody>      
+                                        <aura:iteration items="{!v.billList}" var="bill" indexVar="index">
+                                            <tr>
+                                                <td> 
+                                                    {!index + 1}
+                                                </td>
+                                                <td style="vertical-align: bottom;width: 300px;">
+                                                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Tariff__c" value="{!bill.clofor_com_cfs__Tariff__c}"/>
+                                                </td>
+                                                <td >
+                                                    <lightning:input type="text" value="{!bill.clofor_com_cfs__Suryo__c}" />
+                                                </td>
+                                                <td style="vertical-align: bottom;">
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ChargeUnit__c" value="{!bill.clofor_com_cfs__ChargeUnit__c}" />
+                                                </td>
+                                                <td>
+                                                    <lightning:input type="text" value="{!bill.clofor_com_cfs__Description__c}" />
+                                                </td>
+                                                <td style="vertical-align: bottom;width:300px;">
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Seikyusaki__c" value="{!bill.clofor_com_cfs__Seikyusaki__c}"/>
+                                                </td>
+                                                <td>
+                                                    <lightning:input type="number" value="{!bill.clofor_com_cfs__SellTankaJPY__c}" />
+                                                </td>
+                                                <td style="vertical-align: bottom;">
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__curr__c" value="{!bill.clofor_com_cfs__curr__c}"/>
+                                                </td>
+                                                <td>
+                                                    <lightning:input type="number" formatter="percent-fixed" step="0.01" value="{!bill.clofor_com_cfs__TaxInitial__c}" />
+                                                </td>
+                                                
+                                                <td style="vertical-align: bottom;width: 300px;">
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__PaymentTo__c" value="{!bill.clofor_com_cfs__PaymentTo__c}"/>
+                                                </td>
+                                                <td>
+                                                    <lightning:input type="number" value="{!bill.clofor_com_cfs__BuyTankaJPY__c}" />
+                                                </td>
+                                                <td style="vertical-align: bottom;">
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__CurrencyBuying__c" value="{!bill.clofor_com_cfs__CurrencyBuying__c}"/>
+                                                </td>
+                                                <td>
+                                                    <lightning:input type="number" formatter="percent-fixed" step="0.01" value="{!bill.clofor_com_cfs__BuyTaxInitial__c}" />
+                                                </td>
+                                                <td style="vertical-align: center;">
+                                                    <a onclick="{!c.removeRecord}" data-record="{!index}">
+                                                        <lightning:icon iconName="utility:delete" size="small" alternativeText="Delete"/>
+                                                        <span class="slds-assistive-text">Delete</span>
+                                                    </a>
+                                                </td> 
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                                <div class="slds-align_absolute-center slds-p-top_small" style="padding-top: 150px;">
+                                    <lightning:button variant="brand" label="Add" title="Brand action" onclick="{!c.addRow}"/>
+                                    <lightning:button variant="brand" label="Submit" title="Brand action" onclick="{!c.saveBills}" />
+                                </div>
+                            </div>
+                        </div>
+                    </lightning:recordEditForm>
+            </div>    
+        </div>        
+        
+    <!-- </lightning:card> -->
+</aura:component>

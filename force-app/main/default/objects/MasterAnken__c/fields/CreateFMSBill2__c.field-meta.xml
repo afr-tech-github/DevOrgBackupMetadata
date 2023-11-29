@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CreateFMSBill2__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Create FMS Bill-2</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>RECEIVABLE_PAYABLE_ROLLUP_STATUS</valueSetName>
+    </valueSet>
+</CustomField>

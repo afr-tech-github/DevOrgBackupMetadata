@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Roll-Up Opening Balance</fullName>
+        <default>false</default>
+        <label>Roll-Up Opening Balance</label>
+    </customValue>
+    <customValue>
+        <fullName>Roll-Up Transaction Balance</fullName>
+        <default>false</default>
+        <label>Roll-Up Transaction Balance</label>
+    </customValue>
+    <customValue>
+        <fullName>Roll-Up Closing Balance</fullName>
+        <default>false</default>
+        <label>Roll-Up Closing Balance</label>
+    </customValue>
+    <customValue>
+        <fullName>Roll-Up All Balance</fullName>
+        <default>false</default>
+        <label>Roll-Up All Balance</label>
+    </customValue>
+    <masterLabel>ROLL-UP CHILD A/C BALANCE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

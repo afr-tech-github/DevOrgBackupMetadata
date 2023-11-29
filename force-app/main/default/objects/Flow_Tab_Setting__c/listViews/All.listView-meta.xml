@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Flow__c</columns>
+    <columns>Tab_Name__c</columns>
+    <columns>Tab_Order__c</columns>
+    <columns>External_Id__c</columns>
+    <columns>Is_Active__c</columns>
+    <columns>Tab_Style__c</columns>
+    <columns>Tab_Link__c</columns>
+    <columns>Tab_Name_VN__c</columns>
+    <columns>Tab_Name_JP__c</columns>
+    <columns>Tab_Name_KR__c</columns>
+    <columns>API_Object_Name__c</columns>
+    <columns>Flow_Style__c</columns>
+    <columns>Static_Resource_Image_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

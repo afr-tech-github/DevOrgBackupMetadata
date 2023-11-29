@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BillingFormat__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Billing Format</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>BillingFormat</valueSetName>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,92 @@
+<apex:page controller="ProfitSheetVFController" showHeader="false" sidebar="false" title="Profit Sheet">
+    <style>
+        .clsNotice{
+    		color: red;
+        }
+        body .bPageBlock {
+        	border-top-color: #42619f;
+        }
+        body .bPageBlock .pbBody .opAll .pbSubheader{
+        	background-color: #42619f;
+        }
+        body .bPageTitle .ptBody {
+        	color: #42619f;
+        }
+        .opAll{
+        	width: 100%;
+        }
+        .labelCol{
+        	width: 30% !important;
+        }
+    </style>
+
+    <apex:form >
+        <apex:sectionHeader subtitle="{!translations['Profit_Sheet']}"/>
+    	<apex:pageBlock >
+            <br/>
+            <apex:pageMessages ></apex:pageMessages>
+            <br/>
+            <!--<div class="clsHeader">
+                Comprehensive Profit Sheet
+            </div>-->
+            <apex:outputPanel styleClass="opAll" layout="block">
+            <apex:pageBlockSection columns="1" title="{!translations['Comprehensive']}" id="pbSection">
+                <apex:pageBlockSectionItem >
+                    <div class="clsNotice">
+                        {!translations['How_to_Use']}
+                    </div>
+                </apex:pageBlockSectionItem>
+                
+            	<apex:pageBlockSectionItem labelStyleClass="lblProfit">
+                	<apex:outputLabel styleClass="lblTitle" value="{!translations['On_Behalf_Of_Custome']}" />
+                	<apex:inputCheckbox value="{!isOnBehalfCustomer}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem labelStyleClass="lblProfit">
+                	<apex:outputLabel styleClass="lblTitle" value="{!translations['On_Behalf_Of_Our_Company']}" />
+                	<apex:inputCheckbox value="{!isOnBehalfOurCompany}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem labelStyleClass="lblProfit">
+                	<apex:outputLabel styleClass="lblTitle" value="{!translations['Kickback_Include']}" />
+                	<apex:inputCheckbox value="{!isKickback}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem labelStyleClass="lblProfit">
+                	<apex:outputLabel styleClass="lblTitle" value="{!translations['Percentage_Revenue']}" />
+                	<apex:inputText style="width: 40px;" value="{!percentRevenue}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem labelStyleClass="lblProfit">
+                	<apex:outputLabel styleClass="lblTitle" value="{!translations['Percentage_Profit']}" />
+                	<apex:inputText style="width: 40px;" value="{!percentProfit}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            </apex:outputPanel>
+            <!--<apex:panelGrid columns="4" styleClass="pngCondition">
+            	
+                
+                <apex:outputLabel styleClass="lblTitle" value="On Behalf Of Include :" />
+                <apex:outputLabel value="" />
+                
+                <apex:outputLabel styleClass="lblTitle" value="On Behalf Of Our Company" />
+                <apex:inputCheckbox value="{!isOnBehalfOurCompany}"/>
+                
+                <apex:outputLabel styleClass="lblTitle" value="Percentage of Revenue" />
+                <apex:inputText style="width: 40px;" value="{!percentRevenue}"/>
+                
+                <apex:outputLabel styleClass="lblTitle" value="Kickback Include" />
+                <apex:inputCheckbox value="{!isKickback}"/>
+                
+                <apex:outputLabel styleClass="lblTitle" value="Percentage of Profit" />
+                <apex:inputText style="width: 40px;" value="{!percentProfit}"/>
+            </apex:panelGrid>
+            <div class="clsNotice">
+                How to Use: Check or Input number to add it into Profit Sheet
+            </div>-->
+            <apex:pageBlockButtons location="bottom">
+            	<apex:commandButton action="{!exportPDF}" value="PDF"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

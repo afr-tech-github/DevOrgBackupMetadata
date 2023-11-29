@@ -1,0 +1,2449 @@
+<apex:page contentType="text-html" renderAs="pdf" controller="VATInvoiceController" showHeader="false" applyHtmlTag="false" action="{!checkCustomTemplateUsed}"> 
+    <head>
+        <style type="text/css">
+            @page {size: 210mm 300mm ;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;}
+            body {
+            font-family: Arial Unicode MS;
+            font-size: 10.5pt;
+            }
+
+            .F08    { font-size: 8px;}
+            .F09    { font-size: 9px;}
+            .F10    { font-size: 10.5px;}
+            .F12    { font-size: 12px;}
+            .FF     { font-size: 16px;color:red;}
+            .F14    { font-size: 14px;}
+            .F18    { font-size: 18px;}
+            .F20    { font-size: 20px;font-weight: bold;}
+            .F25    { font-size: 25px;font-weight: bold;}
+            .F30    { font-size: 30px;font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        <!-- ======================================= -->
+        <!-- SET 1 TEMPLATE for DEMO-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '1'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:outputText value="{!inlist.containerSize}" rendered="{!(inlist.unit == 'コンテナ' && inlist.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!inlist.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(inlist.unit != 'コンテナ' || inlist.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 2 TEMPLATE for AXIS -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '2'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <!-- <apex:outputText value="{!wrapper.NumberSeaAir}"/> -->
+                     <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 3 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '3'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                            
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 4 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '4'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 5 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '5'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                            <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                            
+                            <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                            <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 6 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '6'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 7 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '7'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 8 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '8'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 9 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '9'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                            <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 10 TEMPLATE -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '10'}">
+            <!-- header -->
+            <div style="position:absolute; z-index:-2; left:10px; margin-top:15px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>
+            <div style="position:absolute; left:10px; margin-top:20px; width:100%; text-align:center">
+                <span class="F25">HOÁ ĐƠN</span><br/>
+                <span class="F25">(VAT INVOICE)</span>
+            </div>
+            <div class="F12" style="position:absolute; left:560px; margin-top:100px;">
+                Mẩu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c}<br/>
+                Ký hiệu số: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>
+                Số hóa đơn: <apex:outputText value="{!wrapper.invoiceNo}" /><br/>
+                <apex:outputText value="Ngày: {0,date,yyyy/MM/dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <!-- end header -->
+
+            <!-- company info -->
+            <div class="F12" style="position:absolute; left:30px; margin-top:100px; width:450px;">
+                <apex:outputLabel value="Tên Công Ty: {!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/><br />
+                <apex:outputLabel value="Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/><br />
+                <apex:outputLabel value="Điện thoại: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}  Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/><br />
+            </div>
+            <!-- end company info -->
+
+
+            <!-- seller info -->
+            <div style="position:absolute; margin-left:10px; margin-top:187px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 5px;">
+                    Người bán: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}<br />
+                    Địa chỉ: {!$Setup.Site_Custom_Settings__c.Local_Company_Address__c} <br />
+                    Điện thoại: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c} &nbsp;&nbsp;&nbsp;Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c} &nbsp;&nbsp;&nbsp;Mã số thuế: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}<br />
+                    Tài khoản: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}&nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                </div>
+            </div>
+            <!-- end seller info -->
+
+            <!-- buyer info -->
+            <div style="position:absolute; margin-left:10px; margin-top:270px; width:760px;">
+                <div style="position:absolute; left:0px; top:1px; width:760px; border-width:0.5px; border-style:solid;"></div>
+                <div class="F10" style="margin-left:20px; margin-top: 1px; width: 100%;">
+                    Người mua: <apex:outputText value="{!wrapper.invoiceTo}"/><br />
+                    Địa chỉ: <apex:outputText value="{!wrapper.address}"/><br />
+                    Mã số thuế: <apex:outputText value="{!wrapper.taxCode}"/>
+                </div>
+            </div>
+            <!-- end buyer info -->
+
+            <!-- payment -->
+            <div style="position:absolute; left:10px; margin-top:333px; width:760px; border-width:0.5px; border-style:solid;"/>
+            <div class="F12" style="position:absolute; margin-left:30px; margin-top:335px; width:400px;">
+                Hình thức thanh toán:
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!-- end payment -->
+
+            <div STYLE="position:absolute; left:645px;  margin-top:370px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+            <!-- end HBL Details -->
+
+            <!-- HBL SH details -->
+            <div class="LINE(0,55)" style="position:absolute; left:10px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:35px;  margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:305px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:350px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:423px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:482px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:550px; margin-top:385px; width:0px; height:410px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:635px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:700px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:770px; margin-top:385px; width:0px; height:485px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:385px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:420px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:445px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div class="LINE(0,55)" style="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:390px; font-size:9pt;">
+                <div style="position:absolute; margin-top:3px;left:14px;">Số</div>
+                <div style="position:absolute; left:155px;width:60px;">Mô tả</div>
+                <div style="position:absolute; margin-top:3px; left:308px; width:50px;"> Tiền tệ</div>
+                <div style="position:absolute; left:370px;text-align:center;line-height:11px;">Đơn<BR/>giá </div>
+                <div style="position:absolute; left:412px; width:80px; text-align:center; line-height:11px; ">Đơn<br/>vị tính</div>
+                <div style="position:absolute; left:500px;text-align:center;line-height:11px;">Số<BR/>lượng</div>
+                <div style="position:absolute; margin-top:0px; left:580px;line-height:11px;">Số tiền</div>
+                <div STYLE="position:absolute; margin-top:3px; left:635px;width:60px; text-align:center;">Thuế VAT</div>
+                <div style="position:absolute; left:710px; width:50px; line-height:11px;text-align:center;">Loại thuế<br/>VAT</div>
+            </div>
+
+            <div style="position:absolute; margin-top:422px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="inlist">
+                    <!-- ----- NO ------- -->
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center; ">
+                        {!inlist.index}
+                    </div>
+                    <!-- ----- DESCRIPTION ------- -->
+                    <div style="padding-left:5px; height:25px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!inlist.productName}"></apex:outputText>
+                    </div>
+                    <!-- ----- CUR ------- -->
+                    <div style=" margin-left:13px; height:25px; width:25px; float:left; text-align:center;">
+                        <apex:outputLabel value="{!reportingCurrency}"/>
+                    </div>
+                    <!-- ----- UNIT COST ------- -->
+                    <div style=" margin-left:49px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!inlist.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+
+                    <!-- ----- UNIT ------- -->
+                    <div style=" margin-left:15px; height:25px; width:40px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!inlist.unit != null}">
+                           <apex:variable var="unitPrint" value="{!inlist.unit}"/>
+                        <apex:variable var="unitKey" value="{!inlist.chargeUnitFormula}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitPrint}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- ----- CHARGE UNIT ------- -->
+                    <div style=" margin-left:38px; padding-left:5px; height:25px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.quantity}"/>
+                    </div>
+                    <!-- ----- AMOUNT ------- -->
+                    <div style="margin-left:11px; padding-right:5px; height:25px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!inlist.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT ------- -->
+                    <div style="margin-left:45px; padding-right:5px; height:25px; width:15px; float:left; text-align:right; ">
+                        <c:formattedNumber ValueToFormat="{!inlist.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <!-- ----- VAT TYPE ------- -->
+                    <div style="margin-left:30px; padding-right:5px; height:20px; width:20px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory != null && (inlist.taxCategory != '課税' && inlist.taxCategory != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.taxCategory}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <c:formattedNumber ValueToFormat="{!inlist.tax}"  rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}"/>
+                    </div>
+                    <!-- ----- % ------- -->
+                    <div style="margin-left:5px; height:20px; width:5px; float:left; text-align:right;">
+                        <apex:outputPanel rendered="{!(inlist.taxCategory == '課税' || inlist.taxCategory == 'TAX(課税)')}">
+                            %
+                        </apex:outputPanel>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+
+                <div class="F12" style="margin-left: 40px; width:350px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div class="F11" style="margin-left: 40px;width:350px; width:250px; line-height:25px">
+                    <apex:outputText value="{!wrapper.remarks}" /><br/>
+                </div>
+            </div>
+
+            <div STYLE="position:absolute; left:60px; margin-top:800px;text-align:center; width:200px; ">
+                Tổng số trước thuế
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:825px;text-align:center; width:200px; ">
+                Thuế VAT
+            </div>
+            <div STYLE="position:absolute; left:60px; margin-top:850px;text-align:center; width:200px; ">
+                Tổng số
+            </div>
+
+            <div STYLE="position:absolute; left:220px; margin-top:800px; text-align:right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}"  RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:825px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}"  RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:220px; margin-top:850px; text-align: right; width:400px;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}"  RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:800px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:825px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:648px; margin-top:850px; ">
+                <apex:outputLabel value="{!reportingCurrency}"/>
+            </div>
+            <div STYLE="position:absolute; left:50px;  margin-top:875px; width:760px; font-size:10pt;">
+                <div>
+                    Số tiền viết bằng chữ: <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+                </div>
+            </div>
+            <!-- Signature(Buyer) info -->
+            <div style="position:absolute; left:10px; margin-top:935px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:160px;  margin-top:942px; width:760px; font-size:10pt;">
+                <div>
+                    Chử ký người mua hàng
+                </div>
+            </div>
+
+            <!-- Signature(Seller) info -->
+            <div STYLE="position:absolute; left:472px;  margin-top:942px; width:760px; font-size:10pt;">
+                Chử ký người bán hàng
+            </div>
+            <div style="position:absolute; left:140px; margin-top:1050px; width:180px; border-width:1px; border-style:solid; "></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:980px; width:760px; font-size:10pt;">
+                OPERATOR
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1005px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; left:400px;  margin-top:1025px; width:1050px; font-size:10pt;">
+                APPROVER
+            </div>
+            <div style="position:absolute; left:470px; margin-top:1050px; width:180px; border-width:1px; border-style:solid;"></div>
+
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1060px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co.,ltd
+            </div>
+        </apex:outputPanel>
+    </body>
+</apex:page>

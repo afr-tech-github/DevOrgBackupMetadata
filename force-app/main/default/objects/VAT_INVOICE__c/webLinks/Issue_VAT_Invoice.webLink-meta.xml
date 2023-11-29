@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Issue_VAT_Invoice</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Issue VAT Invoice</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var left = (screen.width/2)-(300);
+var top = (screen.height/2)-(200);
+
+var url = &apos;/apex/clofor_com_cfs__VATInvoiceSelection?id={!URLENCODE(VAT_INVOICE__c.Id)}&amp;reportType=invoice&amp;source=vat&apos;
+
+window.open(url,&apos;&apos;,&apos;width=600,height=400,top=&apos; + top + &apos;,left=&apos; + left);</url>
+</WebLink>

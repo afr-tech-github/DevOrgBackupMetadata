@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>환율승인이 기각되었을 때, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>환율프로세스 - 기각</name>
+    <style>none</style>
+    <subject>환율승인-기각- {!MgmtMaster__c.Name}-{!MgmtMaster__c.Mgmt_Exrate_fromto__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

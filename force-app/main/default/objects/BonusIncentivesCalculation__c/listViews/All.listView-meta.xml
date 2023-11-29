@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>EmployeeID__c</columns>
+    <columns>AccumulatedIncentives__c</columns>
+    <columns>JanGrossIncentives__c</columns>
+    <columns>FebGrossIncentives__c</columns>
+    <columns>MarGrossIncentives__c</columns>
+    <columns>AprGrossIncentives__c</columns>
+    <columns>MayGrossIncentives__c</columns>
+    <columns>JunGrossIncentives__c</columns>
+    <columns>JulGrossIncentives__c</columns>
+    <columns>AugGrossIncentives__c</columns>
+    <columns>SepGrossIncentives__c</columns>
+    <columns>OctGrossIncentives__c</columns>
+    <columns>NovGrossIncentives__c</columns>
+    <columns>DecGrossIncentives__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Locator_Layer</fullName>
+    <active>true</active>
+    <errorConditionFormula>Text(LocatorLayer__c) =  Text(ParentLocator__r.LocatorLayer__c)</errorConditionFormula>
+    <errorDisplayField>ParentLocator__c</errorDisplayField>
+    <errorMessage>Parent Locator&apos;s Locator Layer must be different from the record&apos;s</errorMessage>
+</ValidationRule>

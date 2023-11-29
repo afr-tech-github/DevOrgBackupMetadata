@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>CloSCM V3.72 Version Upgrade</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>Version Upgrade Detail</actionButtonLabel>
+        <actionButtonLink>https://www.dropbox.com/work/%E2%98%98%E2%98%98%E2%98%98AFR%20Service%E2%98%98%E2%98%98%E2%98%98/Release%20History</actionButtonLink>
+        <body>&lt;p&gt;We have released CloSCM V3.72.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Free of charge&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Contact to Multiple accounts&lt;/li&gt;&lt;li&gt;Account/Contact Hierarchy&lt;/li&gt;&lt;li&gt;Accounts Team&lt;/li&gt;&lt;li&gt;Prompt(Message on Top)&lt;/li&gt;&lt;li&gt;Utility Item&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Optional Service&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Bad Debt Control: &lt;span style=&quot;color: rgb(62, 62, 60);&quot;&gt; Post Chatter And/Or Not allow  to create a new S/O&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Uncollected Receivable Control: Post Chatter And/Or Not allow  to create a new S/O when Amount over Warning or Max&lt;/li&gt;&lt;li&gt;E-Booking&lt;/li&gt;&lt;li&gt;Web Tracking Service&lt;/li&gt;&lt;li&gt;Driver Mobile App&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Please contact to AFR Support Team.&lt;/p&gt;</body>
+        <customApplication>AFRCloCRM_LEX</customApplication>
+        <delayDays>3</delayDays>
+        <displayType>DockedComposer</displayType>
+        <endDate>2020-02-29</endDate>
+        <header>Version Upgrade 3.72</header>
+        <isPublished>true</isPublished>
+        <masterLabel>CloSCM V3.72 Version Upgrade</masterLabel>
+        <publishedDate>2020-02-09</publishedDate>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>false</shouldIgnoreGlobalDelay>
+        <startDate>2020-02-09</startDate>
+        <targetPageKey1>home</targetPageKey1>
+        <targetPageType>standard__namedPage</targetPageType>
+        <timesToDisplay>2</timesToDisplay>
+        <title>Version Upgrade 3.72</title>
+        <userAccess>Everyone</userAccess>
+        <userProfileAccess>Everyone</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>

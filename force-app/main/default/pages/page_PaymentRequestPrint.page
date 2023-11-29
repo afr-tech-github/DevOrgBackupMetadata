@@ -1,0 +1,265 @@
+<apex:page controller="PaymentRequestPrintController" contentType="text-html" showHeader="false" applyHtmlTag="false" title="PAYMENT REQUEST" renderAs="pdf">
+    <!--renderAs="pdf" -->
+    <head>
+        <style type="text/css">
+            @page {
+                size: A4 ;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            body {
+                font-family: Arial Unicode MS, Arial, Helvetica, "sans-serif", Verdana, Geneva;
+                font-size: 13px;
+            }
+            .tbl-request-detail, .billing-table{
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .tbl-request-detail th, .billing-table th{
+                border: 0.5px solid black;
+                background-color: gray;
+                text-align: center;
+            }
+            .tbl-request-detail td, .billing-table td{
+                border: 0.5px solid black;
+                text-align: center;
+                padding: 5px;
+                line-height: 20px;
+                min-height: 20px;
+            }
+            table { overflow: visible !important;}
+            tr { page-break-inside: avoid }
+        </style>
+    </head>
+    <body>
+        <!-- COMPANY INFO -->
+        <div>
+            <table>
+                <tr>
+                    <td width="20%"><apex:image value="{!setting.Logo_URL__c}" /></td>
+                    <td width="50%" style="text-align:left; padding-left: 10px;">
+                        <b><apex:outputText value="{!setting.Company_Name__c}" style="font-weight:bold; text-transform: capitalize; font-size:20px; font-family: sans-serif;"/></b>
+                        <br/>
+                        <apex:outputText value="{!setting.Company_Address__c}" style="font-weight:bold; text-transform: capitalize;"/>
+                        <br/>
+                        Tel: &nbsp; <apex:outputText value="{!setting.Company_Phone__c}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        Fax: &nbsp; <apex:outputText value="{!setting.Company_Fax__c}"/>
+                        <br/>
+                        Email: &nbsp; <apex:outputText value="{!setting.Company_Email__c}"/>
+                    </td>
+                    <td width="30%"><div style="width:100%; border:1px solid black; text-align:center; color:rgb(6, 6, 161); font-size:20px; min-height: 40px; font-weight:bold; text-transform: capitalize; vertical-align: middle; padding-top: 10px; font-family: sans-serif;">PAYMENT REQUEST</div></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Payment request INFO -->
+        <div style="margin-top: 20px;">
+            <table>
+                <tr>
+                    <td style="vertical-align:top; text-align: left; padding-left: 5px; width:70%">
+                        <table width="100%">
+                            <tr>
+                                <td style="vertical-align:top; text-align: left; padding-left: 5px; width:20%">Messrs:</td>
+                                <td style="vertical-align:top; text-align: left; padding-left: 5px;">
+                                    <apex:outputText value="{!paymentRequest.PaymentTo__r.Name}" style="font-size: 16px"/>
+                                    <br/>
+                                    <apex:outputText value="{!customerAddress}"/>
+                                    <!-- <br/>
+                                    <apex:outputText value="Customer ID:" style="font-style:italic;"/> &nbsp; <apex:outputText value="{!paymentRequest.PaymentTo__r.CompanyShortName__c}"/>    -->
+ 
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="vertical-align:top; text-align: left; padding-left: 5px; width:30%">
+                        <table>
+                            <tr>
+                                <td style="padding-left: 5px;">Ref: &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                                <td style="padding-left: 5px;">{!paymentRequest.Name}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 5px;">Date: &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                                <td style="padding-left: 5px;"> 
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!Today()}"/>
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td style="padding-left: 5px;">Job:&nbsp; &nbsp; &nbsp; &nbsp; </td>
+                                <td style="padding-left: 5px;"></td>
+                            </tr> -->
+                            <tr>
+                                <td style="padding-left: 5px;">Deadline: &nbsp; &nbsp; &nbsp; &nbsp; </td>
+                                <td style="padding-left: 5px;" >
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!paymentRequest.PaymentDueDate__c}"/>
+                                        </apex:outputText>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Payment request Detail -->
+        <div style="margin-top: 20px;">
+            <table width="100%">
+                <tr>
+                    <td width="60%" style="vertical-align:top">
+                        <apex:outputPanel rendered="{!listShippmentWrapper.size > 0}">
+                            <apex:repeat value="{!listShippmentWrapper}" var="firstShipment" rows="1">
+                                <table width="100%">
+                                    <tr>
+                                        <td width="30%">Vsl./Flight</td>
+                                        <td>: &nbsp; {!firstShipment.flight}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">ETD/ETA</td>
+                                        <td>: &nbsp; {!firstShipment.etd}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">P.O.L/P.O.D </td>
+                                        <td>: &nbsp; {!firstShipment.pol}</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">MBL No</td>
+                                        <td>: &nbsp; {!firstShipment.mbl}</td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td width="30%">Volume</td>
+                                        <td>: &nbsp; </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%">Weight</td>
+                                        <td>: &nbsp; </td>
+                                    </tr> -->
+                                </table>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                    </td>
+                    <td width="35%" style="text-align: left; vertical-align:top">
+                        <div style="width:97%; padding: 5px; min-height: 180px;border:1px solid black;">Note: &nbsp; {!paymentRequest.NotesinDocument__c}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Payment request Detail -->
+        <div style="margin-top: 20px;">
+            <table class="tbl-request-detail">
+                <tr>
+                    <th>Moving Type</th>
+                    <th>Direction</th>
+                    <th>Term</th>
+                    <th>Due Date</th>
+                </tr>
+                <tr>
+                    <td><apex:outputText value="{!paymentRequest.TransportType__c}"/></td>
+                    <td><apex:outputText value="{!paymentRequest.RequesterDepartment__c}"/></td>
+                    <td><apex:outputText value="{!paymentRequest.PaymentType__c}"/></td>
+                    <td>
+                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                            <apex:param value="{!paymentRequest.PaymentDueDate__c}"/>
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Bill request table -->
+        <div style="margin-top: 20px;">
+            <table class="billing-table">
+                <tr>
+                    <th>Description</th>
+                    <th> Type</th>
+                    <th>Unit Price</th>
+                    <th>Curr</th>
+                    <th>Q'ty</th>
+                    <th>Amount</th>
+                    <th>VAT Amount</th>
+                    <th>Amount Include VAT</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                </tr>
+                <apex:repeat value="{!listShippmentWrapper}" var="shipmentItem">
+                    <tr><td colspan="10" style="text-align:left; font-weight: bold; font-family: sans-serif;" >{!shipmentItem.shipmentName}</td></tr>
+                    <apex:repeat value="{!shipmentItem.listBilling}" var="billingItem">
+                            <tr>
+                                <td style="text-align: left">{!billingItem.billingName}</td>
+                                <td tyle="text-align: center">{!billingItem.type}</td>
+                                <td style="text-align: right">{!billingItem.unitPrice}</td>
+
+                                <td>{!billingItem.curr}</td>
+                                <td style="text-align: right">{!billingItem.quantity}</td>
+                                <td style="text-align: right">{!billingItem.amountStr}</td>
+                                <td style="text-align: right">{!billingItem.amountTaxStr}</td>
+                                <td style="text-align: right">{!billingItem.amountIncludeTaxStr}</td>
+                                <td style="text-align: right">{!billingItem.paidAmountStr}</td>
+                                <td style="text-align: right">{!billingItem.unpaidAmountStr}</td>
+                            </tr>
+                    </apex:repeat>
+                </apex:repeat>
+                <tr>
+                    <td colspan="3" rowspan="6" style="text-align:left; vertical-align:top">
+                            Please make payment to:
+                            <apex:outputPanel rendered="{!IF(total.totalFinalAmount >= 0, true, false) }">
+                            <br/>
+                            {!paymentRequest.PaymentTo__r.Bank1__c}
+                           
+                            <br/>
+                            {!paymentRequest.PaymentTo__r.Bank2__c}
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(total.totalFinalAmount < 0, true, false)}">
+                                <br/> 
+                                {!setting.Foreign_Bank_Name_1__c}
+                                <br/>
+                                {!setting.Foreign_Bank_Account_1__c}
+                                <br/>
+                                {!setting.Foreign_Bank_Address_1__c}
+                                <!-- <br/> 
+                                {!setting.Foreign_Bank_Name_2__c}
+                                <br/>
+                                {!setting.Foreign_Bank_Account_2__c}
+                                <br/>
+                                {!setting.Foreign_Bank_Address_2__c} -->
+                            </apex:outputPanel>
+                    </td>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Pre-tax Total:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalPreTaxAmountStr}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Tax:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalVatAmountStr}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Total Amount:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalAmountIncludeTaxStr}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Total Debit:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalPaidAmountStr}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Total Credit:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalUnpaidAmountStr}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:left; font-family: sans-serif;">Total Amount need to pay:</td>
+                    <td colspan="5" style="text-align:right">{!total.totalFinalAmountStr}</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            E.&amp;.O.E
+        </div>
+        <!--signature -->
+        <div width="100%" style="margin-top: 20px; font-size: 11px; min-height: 150px; page-break-inside: avoid">
+            <div width="25%" style="float:left; padding-left: 40px;">Signature of requester</div>
+            <div width="25%" style="float:left; padding-left: 60px;">Approved by Manager</div>
+            <div width="25%" style="float:left; padding-left: 60px;">Approved by Director </div>
+            <div width="25%" style="float:left; padding-left: 60px;">Approved by Accountant</div>
+        </div>
+    </body>
+</apex:page>

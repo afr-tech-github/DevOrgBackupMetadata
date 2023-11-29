@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>デポジット+口座入出</value>
+    </caseValues>
+    <nameFieldLabel>デポジット+口座入出 ID</nameFieldLabel>
+</CustomObjectTranslation>

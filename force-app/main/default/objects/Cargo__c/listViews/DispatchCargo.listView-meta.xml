@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DispatchCargo</fullName>
+    <columns>NAME</columns>
+    <columns>Product__c</columns>
+    <columns>ProductDetails__c</columns>
+    <columns>CargoLifeCycle__c</columns>
+    <columns>ExpireDateSKUNumber__c</columns>
+    <columns>LastWOJobRequestID__c</columns>
+    <columns>LastWosLineItem__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CargoLifeCycle__c</field>
+        <operation>equals</operation>
+        <value>No longer exists</value>
+    </filters>
+    <filters>
+        <field>LastWOSRecordType__c</field>
+        <operation>contains</operation>
+        <value>Dispatch</value>
+    </filters>
+    <label>Dispatch Cargo</label>
+    <language>en_US</language>
+</ListView>

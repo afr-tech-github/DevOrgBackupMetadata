@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Data Pull From PREVIOUS WORK ORDER SERVICE</fullName>
+        <default>false</default>
+        <label>Data Pull From PREVIOUS WORK ORDER SERVICE</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Work Order</fullName>
+        <default>false</default>
+        <label>Data Pull From WORK ORDER</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From SHIPMENT ORDER</fullName>
+        <default>false</default>
+        <label>Data Pull From CloFMS SHIPMENT ORDER</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Stock</fullName>
+        <default>false</default>
+        <label>Data Pull From STOCK</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Purchasing Order</fullName>
+        <default>false</default>
+        <label>Data Pull From GOODS PURCHASING ORDER</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Sales Order</fullName>
+        <default>false</default>
+        <label>Data Pull From GOODS SALES ORDER</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Contract</fullName>
+        <default>false</default>
+        <label>Data Pull From CONTRACT</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From WORK ORDER SERVICE</fullName>
+        <default>false</default>
+        <label>Data Pull From WORK ORDER SERVICE</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From ROLLUP INFORMATION</fullName>
+        <default>false</default>
+        <label>Data Pull From ROLLUP INFORMATION</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Receiving</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Pull From RECEIVING</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Putaway</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Pull From PUTAWAY</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Picking</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Pull From PICKING</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From VAS</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Pull From VAS</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From Dispatch</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Pull From DISPATCH</label>
+    </customValue>
+    <masterLabel>CloWMS/CloTRS DATA PULL</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

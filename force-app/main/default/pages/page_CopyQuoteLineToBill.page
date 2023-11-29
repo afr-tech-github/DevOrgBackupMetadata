@@ -1,0 +1,163 @@
+<apex:page controller="CopyQuoteLineToBill" showHeader="false" sidebar="false">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <style type="text/css">
+        
+        
+        table .quoteLineTable  {
+            border-collapse: collapse;
+            width:100%;
+            border: 1px solid grey;
+        }
+        .quoteLineTable th {
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: center;
+            white-space: initial;
+            border: 1px solid grey;
+            line-height: 22px;
+        }
+        .quoteLineTable td {
+            padding-left: 5px;
+            padding-right: 5px;
+            white-space: initial;
+            vertical-align: middle !important;
+            border: 1px solid grey;
+            line-height: 22px;
+        }
+    </style>
+    <script type="text/javascript">
+        function closePopupDialog() {
+            window.top.close();
+        }
+        j$ = jQuery.noConflict();
+        
+        function onchangeCheckBoxAll(){
+            if(j$('#checkBoxAll').is(":checked")){
+                j$('.quoteLine').prop( "checked", true);
+                
+            }else{
+                j$('.quoteLine').prop( "checked", false);
+            }
+        }
+    
+    </script>
+    <apex:form >
+        <apex:sectionHeader subtitle="QUOTE LINE TO BILL" id="sectionId">
+        <apex:pageBlock tabStyle="QuoteLine__c" id="msgPanel">
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandButton value="Create FMS BILL" onclick="createFMSBill(); return false;"/>
+                    <apex:commandButton value="Cancel" onclick="closePopupDialog(); return false;" rendered="{! $User.UIThemeDisplayed == 'Theme3' }"/>
+                    <apex:commandButton value="Cancel" onclick="openRecordDetailPage(); return false;" rendered="{! $User.UIThemeDisplayed == 'Theme4d'}"/>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:pageMessages id="msgError"/>
+            <apex:pageBlockSection title="Select Quote Line Item" columns="1">
+
+                <apex:outputPanel >
+                    <table width="100%" class="quoteLineTable">
+                        <tr>
+                            <th>
+                                <input type="checkbox"  id="checkBoxAll" class="checkBoxAll" onchange="onchangeCheckBoxAll(); return false" />
+                            </th>
+                            <th>QUOTE LINE ID (Name)</th>
+                            <th>LINE ITEM NAME</th>
+                            <th>LINE ITEM DESCRIPTION</th>
+                            <th>INVOICE TO</th>
+                            <th>CARRIER/AIRLINER/VENDOR</th>
+                            <th>CARGO QUANTITY</th>
+                            <th>CARGO UNIT</th>
+                            <th>TYPE</th>
+                            <th>SELLING LIST PRICE (LOCAL)</th>
+                            <th>SELLING LIST PRICE (FCY)</th>
+                            <th style="{! IF(checkcur3rd > 0,'','display: none;')}">SELLING LIST PRICE (3RD)</th>
+                            <th>TAX RATE-SELLING(%)</th>
+                        </tr>
+                        <apex:repeat value="{!lineItems}" var="item">
+                            <tr>
+                                <td style="text-align: center;">
+                                    <input type="checkbox" class="quoteLine{!item.Id} quoteLine"/>
+                                </td>
+                                <td style="text-align: center;"><a href="/{!item.Id}">{!item.Name}</a></td>
+                                <td style="text-align: left;">{!item.LineItemName__c}</td>
+                                <td style="text-align: left;">{!item.LineItemDescription__c}</td>
+                                <td style="text-align: left;">{!IF(item.SellingListPrice3rdCurrency__c == null && item.SellingListPriceUSD__c == null && item.SellingListPriceLocal__c == null,'',IF(item.clofor_com_cfs__Invoice_to__c != null, item.clofor_com_cfs__Invoice_to__r.Name, invoiceToSo.Field1__r.Name))}</td>
+                                <td style="text-align: left;">{!item.CarrierAirlinerVendorName__c}</td>
+                                <td style="text-align: left;">{!item.Quantity__c}</td>
+                                 <td style="text-align: center;">{!item.Unit__c}</td>
+                                 <td style="text-align: center;">{!item.ContainerType__c} </td>
+                                
+                                <td style="text-align: right;" >
+                                    <apex:outputText value="{0, number, ###,###,###}">
+                                        <apex:param value="{!item.SellingListPriceLocal__c}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td style="text-align: right;">
+                                    <apex:outputText value="{0, number, ###,###,###.###}">
+                                        <apex:param value="{!item.SellingListPriceUSD__c}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td style="{! IF(checkcur3rd > 0,'','display: none;')};text-align: right;">
+                                    <apex:outputText value="{0, number, ###,###,###.###}">
+                                        <apex:param value="{!item.SellingListPrice3rdCurrency__c}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td>{!item.TaxRate__c}</td>
+                            </tr> 
+
+                        </apex:repeat>
+                    </table>
+                </apex:outputPanel>
+
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+
+    </apex:sectionHeader>
+    <apex:outputPanel id="jsPanel">
+        <script type="text/javascript">
+            function createFMSBill(){
+                var quoteLinecheckeds = j$('.quoteLine:checkbox:checked');
+                var quoteLineIds = [];
+                for(var i =0; i<quoteLinecheckeds.length; i++){
+                   var idAnken = quoteLinecheckeds[i].className.replace(/\s/g, "").replace(/quoteLine/g, "");
+                   quoteLineIds.push(idAnken);
+                };
+                var strquoteLines = quoteLineIds.join(',');
+                console.log('strquoteLines' + strquoteLines);
+                
+                if(strquoteLines != ''){
+                    af_createFMSBill(strquoteLines);
+                }else{
+                    alert('Please Select Quote Line.');
+                }
+            }
+            function checkResult(){
+                console.log('{!msgError}');
+                if('{!msgError}' == ''){
+                    alert('Quote Lines have been copy to bill successfully.');
+                    if('{!$User.UIThemeDisplayed}' == 'Theme3'){
+                        window.top.close();
+                    	window.opener.location.href = '/{!JSENCODE(shipmentId)}';
+                    }else{
+                        window.open('/lightning/r/clofor_com_cfs__CustomObject1__c/{!JSENCODE(shipmentId)}/view','_self');
+                    }
+                    
+                }
+            }
+        	function openRecordDetailPage(){
+                
+                window.open('/lightning/r/clofor_com_cfs__CustomObject1__c/{!JSENCODE(shipmentId)}/view','_self');
+            }
+            
+            
+        </script>
+        
+        </apex:outputPanel>
+        <apex:actionFunction name="af_createFMSBill" action="{!createFMSBill}" oncomplete="checkResult();" rerender="msgPanel,jsPanel">
+            <apex:param name="quoteLineIds" value=""/>
+        </apex:actionFunction>
+    </apex:form>
+</apex:page>

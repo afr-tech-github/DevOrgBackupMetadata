@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gate_in</fullName>
+    <columns>NAME</columns>
+    <columns>CntrInTransport__c</columns>
+    <columns>ContainerNumber__c</columns>
+    <columns>PlateNumber__c</columns>
+    <columns>DriverName__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>GateEntryExitStatus__c</field>
+        <operation>equals</operation>
+        <value>Gate Entry</value>
+    </filters>
+    <label>Gate in</label>
+</ListView>

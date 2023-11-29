@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuyTaxNum__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>ROUND(BuyAmountJPN__c * BuyTaxInitial__c,0) + TAX_ADJUSTMENT__c
+/*
+IF (clofor_com_cfs__Tariff__r.clofor_com_cfs__wkTaxFlag__c,
+clofor_com_cfs__BuyAmountJPN__c * clofor_com_cfs__BuyTaxInitial__c + clofor_com_cfs__TAX_ADJUSTMENT__c ,
+0
+)
+*/</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Amount of Tax-Buying(Local)=Total Amount of Buying(Local)*Consumption Tax Ratio-Buying(Local)/100. ***Comsumption Tax Ratio-Buying Field shows percentage. **</inlineHelpText>
+    <label>AMOUNT OF TAX-BUYING(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

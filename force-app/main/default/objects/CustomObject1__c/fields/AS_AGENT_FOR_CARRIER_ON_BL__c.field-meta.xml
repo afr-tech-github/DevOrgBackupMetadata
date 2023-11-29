@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AS_AGENT_FOR_CARRIER_ON_BL__c</fullName>
+    <defaultValue>$Setup.Site_Custom_Settings__c.AS_AGENT_FOR_CARRIER_1__c
+&amp; BR() &amp; 
+$Setup.Site_Custom_Settings__c.AS_AGENT_FOR_CARRIER_2__c</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The Filed is synchronized from As Agent For Carrier 1 and As Agent For Carrier 2 at CloSCM Initial Setting. If you want you change the field, please edit at CloSCM Initial Setting.</inlineHelpText>
+    <label>AS AGENT FOR CARRIER ON B\L</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

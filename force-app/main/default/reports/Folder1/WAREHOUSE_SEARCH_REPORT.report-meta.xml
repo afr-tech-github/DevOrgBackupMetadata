@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadLocationID__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.WharehouseCompany__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadAddress__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadTEL__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadLocationPIC__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadLocation_english__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadAddress_English__c</field>
+    </columns>
+    <columns>
+        <field>LoadLocation__c.LoadFAX__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>CFS/CY/DEPOT REPORT</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$LoadLocation__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

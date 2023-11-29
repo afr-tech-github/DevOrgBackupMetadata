@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Application Receipt</fullName>
+        <default>false</default>
+        <label>Application Receipt</label>
+    </customValue>
+    <customValue>
+        <fullName>Application Cancelled</fullName>
+        <default>false</default>
+        <label>Application Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Application Review</fullName>
+        <default>false</default>
+        <label>Under Application Review</label>
+    </customValue>
+    <customValue>
+        <fullName>Application Returned</fullName>
+        <default>false</default>
+        <label>Application Returned</label>
+    </customValue>
+    <customValue>
+        <fullName>Contract Completed</fullName>
+        <default>false</default>
+        <label>Contract Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Contract Cancelled</fullName>
+        <default>false</default>
+        <label>Contract Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Order Completed</fullName>
+        <default>false</default>
+        <label>Sales Order Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Order Cancelled</fullName>
+        <default>false</default>
+        <label>Sales Order Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchasing Order Completed</fullName>
+        <default>false</default>
+        <label>Purchasing Order Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchasing Order Cancelled</fullName>
+        <default>false</default>
+        <label>Purchasing Order Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispatch Date Scheduling</fullName>
+        <default>false</default>
+        <label>Dispatch Date Scheduling</label>
+    </customValue>
+    <customValue>
+        <fullName>Reschedule Dispatch Data before Confirmed</fullName>
+        <default>false</default>
+        <label>Reschedule Dispatch Data before Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispatch Date Confirmed and Waiting for Dispatch</fullName>
+        <default>false</default>
+        <label>Dispatch Date Confirmed and Waiting for Dispatch</label>
+    </customValue>
+    <customValue>
+        <fullName>Reschedule Dispatch Data After Confirmed</fullName>
+        <default>false</default>
+        <label>Reschedule Dispatch Data After Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispatch Completed</fullName>
+        <default>false</default>
+        <label>Dispatch Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Charge Free Period</fullName>
+        <default>false</default>
+        <label>Charge Free Period</label>
+    </customValue>
+    <customValue>
+        <fullName>Terminate during Charge Free Period</fullName>
+        <default>false</default>
+        <label>Terminate during Charge Free Period</label>
+    </customValue>
+    <customValue>
+        <fullName>Charge Period</fullName>
+        <default>false</default>
+        <label>Charge Period</label>
+    </customValue>
+    <customValue>
+        <fullName>Terminate during Charge Period</fullName>
+        <default>false</default>
+        <label>Terminate during Charge Period</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting for Return</fullName>
+        <default>false</default>
+        <label>Waiting for Return</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed during Charge Free Period</fullName>
+        <default>false</default>
+        <label>Completed during Charge Free Period</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed after Charge Period End</fullName>
+        <default>false</default>
+        <label>Completed after Charge Period End</label>
+    </customValue>
+    <customValue>
+        <fullName>Inquiry Received</fullName>
+        <default>false</default>
+        <label>Inquiry Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Claim Registered</fullName>
+        <default>false</default>
+        <label>Claim Registered</label>
+    </customValue>
+    <customValue>
+        <fullName>Impact &amp; Root-Cause Analysis</fullName>
+        <default>false</default>
+        <label>Impact &amp; Root-Cause Analysis</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Improvement Action</fullName>
+        <default>false</default>
+        <label>Under Improvement Action</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+    </customValue>
+    <masterLabel>Cross-Function Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

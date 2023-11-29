@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalAmountInclTax__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>TOTAL PURCHASING AMOUNT INCL TAX(USD)</label>
+    <summarizedField>PurchasingInvoice__c.TotalAmount__c</summarizedField>
+    <summaryFilterItems>
+        <field>PurchasingInvoice__c.Currency__c</field>
+        <operation>equals</operation>
+        <value>USD</value>
+    </summaryFilterItems>
+    <summaryForeignKey>PurchasingInvoice__c.PurchasingOrder__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

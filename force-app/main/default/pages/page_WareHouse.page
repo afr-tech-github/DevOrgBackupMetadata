@@ -1,0 +1,371 @@
+<apex:page sidebar="false" controller="WareHouseController" applyBodyTag="false" cache="true" title="Warehouse Detail" showHeader="false" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+            
+<!--renderAs="advanced_pdf" -->
+    <head>
+        <style type="text/css">
+            @page {
+            
+            margin-left: 10px;
+            
+            margin-right: 10px;
+            @bottom-center{
+            content: element(footer);
+            }
+            }
+            body {
+            font-size: 12px;
+            font-family: Arial,Helvetica,sans-serif;
+            }
+            .fontBold{ 
+                font-weight: bold;
+                font-size: 15px;
+
+            }
+            table td, table th{
+            line-height: 20px;
+            padding: 5px;
+            
+            }
+            table th{
+            text-align: center;
+            }
+            table tr{
+            min-height: 25px;
+            }
+            .report-header{
+            width: 100%
+            }
+            .logo-company{
+            float: left;
+            width: 27%;
+            }
+            .info-company{
+            margin-left:250px;
+            /* float: left; */
+            width: 73%;
+            }
+            .name-company{
+            font-weight: bold;
+            font-size: 18px;
+            }
+            .address-company{
+            text-transform: capitalize;
+            font-size: 11px;
+            }
+            .contact-info-company{
+            font-size: 11px;
+            /* padding: 0 */
+            }
+            .contact-info-company-table{
+            border-spacing: 0;
+            }
+            .tax-company{
+            	font-size: 11px;
+            }
+            .report-tittle{
+            font-size: 25px;
+            text-align: center;
+            clear: both;
+            font-weight: bold;
+            /*font-family: sans-serif; */
+            padding-top: 20px;
+            }
+            .quotation-info, .client-customer-info{
+            width: 100%;
+            /*font-family: sans-serif;*/ 
+            }
+            .client-customer-info-table{
+            border-collapse: collapse;
+            }
+            .client-customer-info-table td{
+            border-left: solid black;
+            border-width: thin;
+            padding-left: 5px;
+            }
+            .border-bottom{
+            border-bottom: solid black;
+            border-width: thin;
+            }
+            .border-right{
+            border-right: solid black;
+            border-width: thin;
+            }
+            .border-top{
+            border-top: solid black;
+            border-width: thin;
+            }
+            .note-info, .quote-detail-info, .quotation-info{
+            padding-top: 10px
+            }
+            .note-info, .note-info-table, .quote-detail-info, .quote-detail-table, .bill-section1-table, .bill-section2-table{
+            width: 100%;
+            border-collapse: collapse
+            }
+            .note-info-table td,.quote-detail-info td,.note-info-table th,.quote-detail-info th, .bill-section1-table th, .bill-section2-table th{
+            
+            border: 0.5px solid black;
+            padding-left: 5px;
+            }
+            .bill-section1-table td,.bill-section2-table td{
+                border-left: 0.5px solid black;
+                border-right: 0.5px solid black;
+                padding-left: 5px;
+            }
+            .hideColumn{
+            display: none;
+            }
+            
+            table { overflow: visible !important;}
+            thead { display: table-header-group }
+            tfoot { display: table-row-group }
+            tr { page-break-inside: avoid }
+            div.footer {
+            
+            display: block;
+            
+            position: running(footer);
+            
+            }
+            
+            .pagenumber:before {
+            
+            content: counter(page);
+            
+            }
+            
+            .pagecount:before {
+            
+            content: counter(pages);
+            
+            }
+            .contact-info-company-table tr td{
+            	width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="footer" style="clear:both; width: 800px; font-size: 10px">
+            <!-- <div class="footerleft" style="float:left; width: 40%; text-align: left; margin-left: 10px">{!leftfooter}</div> -->
+            <div class="footercenter" style="float:left; width: 10%; text-align: right;"><span class="pagenumber"/>/<span class="pagecount"/></div>
+        </div>
+        <div class="report-header">
+            <div class="report-tittle">
+                <!-- <apex:outputText value="{!translations['quotation_title']}"/> -->
+                <apex:outputText value="BẢNG KÊ DANH MỤC HÀNG HÓA NHẬP KHẨU ĐƯA VÀO KHO CFS"/>
+            </div>
+        </div>
+        <div class="report-body-container">
+            <div>
+                <br/>
+                <br/>
+                <table width="100%" class="bill-section1-table" cellpadding="1" cellspacing="0" style="border-bottom: 1px solid black">
+                    <tr  bgcolor="#bfc4d4">
+                        <th>Kho</th>
+                        <th>DaiLy</th>
+                        <th>ToKhai</th>
+                        <th>TenTau</th>
+                        <th>Chuyen</th>
+                        <th>NgayCap</th>
+                        <th>Socont</th>
+                        <th>SealHt</th>
+                        <th>Kichco</th>
+                        <th>M_Bill</th>
+                        <th>Ng_M_Bill</th>
+                    </tr>
+                    <apex:repeat var="consol" value="{!arrResultConsol}">
+                    <tr >
+                        <td>{!consol.MDevan}</td>
+                        <td>{!consol.Mpartner}</td>
+                        <td></td>
+                        <td>{!consol.MVessel}</td>
+                        <td>{!consol.MVoyNo}</td>
+                        <td>{!consol.DateMBL}</td>
+                        <td>{!consol.ContainerNumber}</td>
+                        <td>{!consol.SealNo}</td>
+                        <td>{!consol.ContainerType}</td>
+                        <td></td>
+                        <td>{!consol.DateMBL}</td>
+                        <!-- <td>{!MDevan}</td> -->
+                        <!-- <td>{!Mpartner}</td> -->
+                        <!-- <td>2</td> -->
+                        <!-- <td>{!MVessel}</td> -->
+                        <!-- <td>{!MVoyNo}</td> -->
+                        <!-- <td>{!DateMBL}</td> -->
+                        <!-- <td>{!ContainerNumber}</td> -->
+                        <!-- <td>{!SealNo}</td> -->
+                        <!-- <td>{!ContainerType}</td> -->
+                        <!-- <td>2</td> -->
+                        <!-- <td>{!DateMBL}</td> -->
+                    </tr>
+                    </apex:repeat>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            <!--Table-->
+                <table width="100%" class="bill-section1-table" cellpadding="1" cellspacing="0" style="border-bottom: 1px solid black">
+                    <tr bgcolor="#bfc4d4">
+                        <th>STT</th>
+                        <th>H_Bill</th>
+                        <th>Ng_H_Bill</th>
+                        <th>MST</th>
+                        <th>ChuHang</th>
+                        <th>ShipMarks</th>
+                        <th>HangHoa</th>
+                        <th>DVT</th>
+                        <th>SoLuong</th>
+                        <th>TrLuong</th>
+                        <th>SoKhoi</th>
+                        <th>Category</th>
+                        <th>ChuHangEx</th>
+                        <th>BillDaiLy</th>
+                        <th>IMOs</th>
+                        <!-- <th>{!translations['pickup_label']}</th> -->
+                        <!-- <th style="{!IF(carrierStrMain != null,'','display: none;')}" width="3%">{!translations['carrier_label']}</th> -->
+                        <!-- <th>{!translations['delivery_label']}</th> -->
+                        <!-- <th width="7%">{!translations['unit_label']}</th> -->
+                        <!-- <th width="7%">{!translations['quantity_label']}</th> -->
+                        <!-- <th width="8%">{!translations['standard_rate_label']}</th> -->
+                        <!-- <th width="8%">{!translations['total_amount_label']}</th> -->
+                        <!-- <th style = "{!IF(isTax,'','display:none;')}" width="7%">{!translations['tax']}</th> -->
+                        <!-- <th width="10%">{!translations['unit_selling']}</th> -->
+                        <!-- <th style = "{!IF(isAmount,'','display:none;')}" width="10%">{!translations['amount']}</th> -->
+                        <!-- <th width="7%">{!translations['currency_label']}</th> -->
+                        <!-- <th width="23%">{!translations['remark_label']}</th> -->
+                    </tr>
+                    <apex:variable var="indexBill" value="{!0}"/>
+                    <apex:repeat value="{!arrResult}" var="bill">
+                        <apex:variable var="indexBill" value="{!indexBill + 1}"/>
+                        
+                        <tr>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!indexBill}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.HBLNumber}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.DateOfHouseBLIssued}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;"></td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.AddressOnBL}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.MarksAndNumbers}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.Item}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">{!bill.UnitType}</td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">
+                                <!-- {!bill.Carton} -->
+                                <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                    <apex:param value="{!bill.Carton}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">
+                                <!-- {!bill.weight} -->
+                                <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                    <apex:param value="{!bill.weight}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;">
+                                <!-- {!bill.CBM} -->
+                                <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                    <apex:param value="{!bill.CBM}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;"></td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;"></td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="text-align: left; border-left: 0.5px solid black; border-bottom: 0.5px solid black;"></td>
+                            <td class="{!IF(indexBill < arrResult.size ,'','border-bottom')}" style="border-right: 0.5px solid black; border-bottom: 0.5px solid black;"></td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black">TỔNG CỘNG</td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black">
+                            <!-- {!sumCarton} -->
+                            <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                <apex:param value="{!sumCarton}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black">
+                            <!-- {!sumWeight} -->
+                            <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                <apex:param value="{!sumWeight}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black">
+                            <!-- {!sumCBM} -->
+                            <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                <apex:param value="{!sumCBM}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                        <td style="text-align: left; border-left: 0.5px solid black; border-bottom: 1px solid black"></td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <br/>
+                <table width="100%" > 
+                    <tr>
+                        <td width="30%">
+                        </td>
+                        <td width="30%">
+                        </td>
+                        <td width="20%" style = "text-align: center; font-size: 14px">
+                            ..., ngày ... tháng ... năm ...
+                            <br/>
+                            Giám đốc
+                        </td>
+                        <td width="20%">
+                        </td>
+                    </tr>
+                </table>
+            <!-- <div class="note-info"  style="page-break-after:auto; page-break-inside: avoid" > -->
+                <!-- <table class="note-info-table" style="page-break-before:always"> -->
+                <!-- <table class="note-info-table"> -->
+                    <!-- <tr> -->
+                        <!-- <td colspan="2" class="fontBold" style="font-weight: bold;"> -->
+                            <!-- {!translations['note_and_payment_label']}: -->
+                        <!-- </td> -->
+                    <!-- </tr> -->
+                    <!-- <tr> -->
+                        <!-- <td  width="20%"> -->
+                            <!-- {!translations['note_label']}:  -->
+                        <!-- </td> -->
+                        <!-- <td width="80%"> -->
+                              <!-- Add line break by Dev 2 - Technical Team -->
+                            <!-- <apex:outputText style="white-space:pre-wrap;" value="{!quote.Remarks__c}"/><br /> -->
+                        <!-- </td> -->
+                    <!-- </tr> -->
+                    <!-- <tr> -->
+                        <!-- <td  width="20%"> -->
+                            <!-- {!translations['payment_label']}:  -->
+                        <!-- </td> -->
+                        <!-- <td width="80%"> -->
+                            <!-- <apex:outputText value="{!quote.PaymentCondition__c}"/> -->
+                        <!-- </td> -->
+                    <!-- </tr> -->
+                <!-- </table> -->
+            <!-- </div> -->
+            <!-- <table width="100%" style="padding-top: 20px; page-break-inside: avoid"> -->
+                <!-- <tr> -->
+                    <!-- <td width="45%" style="vertical-align: top"> -->
+                            <!-- {!translations['remark1_label']} -->
+                    <!-- </td> -->
+                    <!-- <td width="50%" style="vertical-align: top"> -->
+                        <!-- <div width="100%" style="text-align: center">{!translations['remark2_label']}</div> -->
+                        <!-- <div width="100%" style="text-align: center; margin-top:80px">{!quote.QuotePIC__r.Name}</div> -->
+                    <!-- </td> -->
+                <!-- </tr> -->
+            <!-- </table> -->
+            <!-- </div> -->
+        </div>
+
+    </body>
+</apex:page>

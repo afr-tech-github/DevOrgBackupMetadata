@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>No Update</fullName>
+        <default>false</default>
+        <label>No Update</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Plan Quantity to Bill</fullName>
+        <default>true</default>
+        <label>Update Plan Quantity to Bill</label>
+    </customValue>
+    <customValue>
+        <fullName>Plan Quantity Updated to Bill</fullName>
+        <default>false</default>
+        <label>Plan Quantity Updated to Bill</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Final Quantity to Bill</fullName>
+        <default>false</default>
+        <label>Update Final Quantity to Bill</label>
+    </customValue>
+    <customValue>
+        <fullName>Final Quantity Updated to Bill</fullName>
+        <default>false</default>
+        <label>Final Quantity Updated to Bill</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Amount to Goods S/O+Product</fullName>
+        <default>false</default>
+        <label>Update Amount to Goods S/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Amount Updated to Goods S/O+Product</fullName>
+        <default>false</default>
+        <label>Amount Updated to Goods S/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Amount to Goods P/O+Product</fullName>
+        <default>false</default>
+        <label>Update Amount to Goods P/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Amount Updated to Goods P/O+Product</fullName>
+        <default>false</default>
+        <label>Amount Updated to Goods P/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Plan Amount Updated to Goods S/O+Product</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Plan Amount Updated to Goods S/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Final Amount to Goods S/O+Product</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Update Final Amount to Goods S/O+Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Final Amount Updated to Goods S/O+Product</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Final Amount Updated to Goods S/O+Product</label>
+    </customValue>
+    <masterLabel>Bill Update Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

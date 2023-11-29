@@ -1,0 +1,224 @@
+<apex:page controller="ShippingInstructionController" contentType="text-html" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <head>
+        <style type="text/css">
+            .custom-title {
+                font-size: 20pt;
+                font-weight: bold;
+                color: red;
+                text-align:center;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                vertical-align: text-top;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            table, tr {
+                line-height: 35px;
+            }
+
+            .custom-label {
+                width: 10%;
+                font-weight: bold;
+            }
+
+            .custom-value {
+                width: 80%
+            }
+
+            .shipping-information {
+                width: 100%;
+                margin-top: 10px;
+                padding-left: 5px;
+                display: inline-flex;
+            }
+
+            .custom-th {
+                text-align: left;
+            }
+
+            .custom-th-color {
+                color:red;
+            }
+
+            .custom-no-border {
+                border: none;
+            }
+
+            #content-footer {
+                padding-top: 20px;
+            }
+
+            #custom-body {
+                padding-left: 2rem;
+            }
+
+        </style>
+    </head>
+    <body id="custom-body">
+        <div class="custom-title">
+            <apex:outputPanel >SHIPPING INSTRUCTION</apex:outputPanel>
+        </div>
+        <apex:pageBlock >
+            <!-- content-header -->
+            <div id="content-header">
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Booking No : " for="bookingNo"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.BookingNo__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Vessel/ Flight No : " for="vesselOrFlightNo"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.VESSEL_FLIGHT__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Bill Type : " for="billType"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.wkRecordType__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Freight and Charge : " for="freightAndCharge"/>
+                    </div>
+                    <div class="custom-value">
+                        <!-- <apex:outputText value="{!sobj.BookingNo__c}"/> -->
+                    </div>
+                </div>
+            </div>
+            <!-- content-header -->
+
+            <!-- content-middle -->
+            <div style="margin-top: 15px; display: block">
+                <table style="width: 98%; border: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th class="custom-th">Shipper :</th>
+                            <td colspan="10">{!sobj.clofor_com_cfs__ADDRESS_ON_B_L__c}</td>
+                        </tr>
+                        <tr>
+                            <th class="custom-th">Consignee :</th>
+                            <td colspan="10">{!sobj.clofor_com_cfs__CNEE_ADDRESS_ON_B_L__c}</td>
+                        </tr>
+                        <tr>
+                            <th class="custom-th">Notify Party :</th>
+                            <td colspan="10">{!sobj.clofor_com_cfs__NOTIFY_ADDRESS_ON_B_L__c}</td>
+                        </tr>
+                        <tr>
+                            <th>Container No</th>
+                            <th>Seal No</th>
+                            <th>Size Cont</th>
+                            <th>Shipping Mark</th>
+                            <th>Description of Goods</th>
+                            <th>Quantity</th>
+                            <th>Code Package</th>
+                            <th>Gross Weight</th>
+                            <th>CBM</th>
+                            <th>VGM</th>
+                            <th class="custom-th-color">HS CODE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td id="custom-td-rowspan" rowspan="1">xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                        </tr>
+                        <tr>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                            <td>xxx</td>
+                        </tr>
+                        <tr>
+                            <td class="custom-no-border" colspan="4"></td>
+                            <th class="custom-no-border">Total :</th>
+                            <td>10</td>
+                            <td>20</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- content-middle -->
+
+            <!-- content-footer -->
+            <div id="content-footer">
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Port of Loading : " for="portOfLoading"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.POL__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Port of Discharge : " for="PortOfDischarge"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.POD__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Port of Delivery : " for="portOfDelivery"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.Place_Of_Delivery__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="Remark : " for="remark"/>
+                    </div>
+                    <div class="custom-value">
+                        <apex:outputText value="{!sobj.Remarks__c}"/>
+                    </div>
+                </div>
+                <div class="shipping-information">
+                    <div class="custom-label">
+                        <apex:outputLabel value="NOTE : " for="note"/>
+                    </div>
+                    <div class="custom-value">
+                        <!-- <apex:outputText value="{!sobj.xxx}"/> -->
+                    </div>
+                </div>
+            </div>
+            <!-- content-footer -->
+        </apex:pageBlock>
+    </body>
+</apex:page>

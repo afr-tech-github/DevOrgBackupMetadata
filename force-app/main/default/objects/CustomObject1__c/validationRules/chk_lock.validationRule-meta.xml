@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>chk_lock</fullName>
+    <active>true</active>
+    <description>旧）and( CONTAINS( RecordType.Name , &quot;ロック&quot;), ISCHANGED( cnt__c )  )</description>
+    <errorConditionFormula>AND( CONTAINS( RecordType.Name , &quot;ロック&quot;),OR( ISCHANGED( cnt__c )  ), ISNULL(FlgCopy__c ))</errorConditionFormula>
+    <errorMessage>請求済み明細は削除できません。</errorMessage>
+</ValidationRule>

@@ -1,0 +1,106 @@
+<apex:page renderAs="advanced_pdf"  contentType="text-html" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <!-- Begin Default Content REMOVE THIS -->
+        <head>
+    
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}"/>
+        
+        <style type="text/css" media="print">
+            @page {
+            size: 210mm 300mm ;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 12px;
+            
+            /* @top-center {
+            
+            content: element(header);
+            
+            } */
+            @bottom-center{
+            content: element(footer);
+            }
+            }
+            body {
+            font-family: Times-Roman, Arial Unicode MS, Courier, Helvetica, sans-serif;
+            font-size: 7.5pt;
+            line-height: 15px; 
+            }
+            
+            .invoice-logo {
+            background-image: "{!URLFOR($Resource.invoice_logo_FMS, 'invoice_logo_FMS.png')}";
+            }
+            /* div.header {
+            padding-top: 30px;
+            position: running(header);
+            
+            } */
+            
+            div.footer {
+            
+            display: block;
+            
+            position: running(footer);
+            
+            }
+            
+            .pagenumber:before {
+            
+            content: counter(page);
+            
+            }
+            
+            .pagecount:before {
+            
+            content: counter(pages);
+            
+            }
+            /* table td, table th{
+            padding: 5px;
+            } */
+            .content-table,  .content-table tr{
+            border: 0.5px solid black !important;
+            border-collapse: collapse;
+            
+            }
+            .content-table th{
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+            }
+            .content-table td{
+            padding: 5px;
+            line-height: 22px;
+            min-height: 22px;
+            }
+            .border{
+            border: 0.5px solid black !important;
+            }
+            .border-left{
+            border-left: 0.5px solid black !important;
+            }
+            .border-right{
+            border-right: 0.5px solid black !important;
+            }
+            .invoice-debit-info td, .shipment-detail td{
+            padding: 0px !important;
+            }
+            .hide{
+            display: none;
+            }
+            
+            
+        </style>
+    </head>
+    <div class="footer" style="clear:both; width: 800px">
+        <div class="footerleft" style="float:left; width: 45%; text-align: right;"><span class="pagenumber"/>/<span class="pagecount"/></div>
+        <div class="footerRight" style="float:left; width: 45%; text-align: right;">
+            Powered by AFR Solutions Co., Ltd.
+        </div>
+    </div>
+    <h1>Congratulations</h1>
+    This is your new Page
+    <!-- End Default Content REMOVE THIS -->
+</apex:page>

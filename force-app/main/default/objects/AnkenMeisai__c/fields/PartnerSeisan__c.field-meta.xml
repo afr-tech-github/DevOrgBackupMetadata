@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PartnerSeisan__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF ( CONTAINS(TEXT(Seikyusaki__r.Business_Relationship__c), &apos;Partner&apos;),
+	Seikyusaki__r.Name,
+	IF (CONTAINS(TEXT(PaymentTo__r.Business_Relationship__c), &apos;Partner&apos;), 
+		PaymentTo__r.Name , 
+		&apos;国内請求先&apos;
+	)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>請求先と支払先の「種別」を見て、海外パートナーの取引先名を表示しています。
+どちらも国内の場合は「国内」が表示されます。</inlineHelpText>
+    <label>PARTNER INVOLVEMENT(INVOICE/PAYMENT TO)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

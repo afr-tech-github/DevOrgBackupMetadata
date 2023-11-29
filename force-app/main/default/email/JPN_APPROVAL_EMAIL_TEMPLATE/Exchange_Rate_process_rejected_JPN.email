@@ -1,0 +1,26 @@
+経理担当者 様
+
+{!MgmtMaster__c.Name}は却下されました。
+コメントを確認し、訂正の上もう一度申請をお願いいたします。
+
+ 
+却下されたレコードについては、こちらのリンクをクリックしてください。
+
+◎為替レートID：[{!MgmtMaster__c.Name}]  Link to SF:{!MgmtMaster__c.Link} 
+
+◎為替通貨 (USDに対する) : {!MgmtMaster__c.Mgmt_Exrate_fromto__c}
+◎Start Date : {!MgmtMaster__c.Mgmt_Exrate_Start_Date__c}
+◎End Date : {!MgmtMaster__c.Mgmt_Exrate_End_Date__c}
+◎国内顧客向け-フォワーディング標準為替 :{!MgmtMaster__c.Mgmt_Exrate_FowardingtoDomesticCustomer__c}
+◎国内顧客向け-通関標準為替 :{!MgmtMaster__c.Mgmt_Exrate_CCtoDomesticCustomer__c}
+◎パートナー向け-Selling標準為替 :{!MgmtMaster__c.Mgmt_Exrate_SellingtoPartner__c}
+◎パートナー向け-Buying標準為替 :{!MgmtMaster__c.Mgmt_Exrate_BuyingfromPartner__c}
+
+よろしくお願いいたします。
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

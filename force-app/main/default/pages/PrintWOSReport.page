@@ -1,0 +1,743 @@
+<apex:page controller="PrintWOSReportController" showHeader="false"
+    sidebar="false"
+    standardStylesheets="false"
+    applyBodyTag="false"
+    applyHtmlTag="false"
+    docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <head>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+                <apex:includeScript value="{!URLFOR($Resource.barcode ,'barcode/JsBarcode.all.min.js')}"/>
+            <style>
+                @media print {
+                    .no-print, .no-print * {
+                        display: none !important;
+                    }
+                    .pagination{
+                        display: none;
+                    }
+                }
+
+                @page {
+                    size: 297mm 210mm;
+                    margin: 10mm;
+                }
+                body {
+                    font-family: "Times New Roman", Times, serif;
+                }
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+                .divTitle{
+                    font-size: 16pt;
+                    text-align: center;
+                    display: table-cell;
+                    width: 100%;
+                    margin-top: -40px;
+                    position: absolute;
+                }
+                .divSO{
+                    font-size: 11pt;
+                    text-align: center;
+                    margin-bottom: 15px;
+                    margin-top: 15px;
+                }
+                .tblHeader{
+                    font-size: 11pt;
+                    width: 100%;
+                    margin-bottom: 30px;
+                }
+                .tblHeader tr{
+                    line-height: 20px;
+                }
+                .clsTitleLeft1{
+                    width: 13%;
+                }
+                .clsTitleRight1{
+                    width: 29%;
+                    text-align: left;
+                }
+                .clsTitleLeft2{
+                    width: 18%;
+                }
+                .clsTitleRight2{
+                    width: 39%;
+                    float: left;
+                }
+                .tblDetail{
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-top: 30px;
+                }
+                .tblDetail td{
+                    border: 1px solid black;
+                }
+                .clsColCenter{
+                    text-align: center;
+                }
+                .tblTotal{
+                    width: 100%;
+                    margin-top: 15px;
+                }
+                .col1{
+                    width: 5%;
+                }
+                .col2{
+                    width: 11%;
+                }
+                .col3{
+                    width: 10%;
+                }
+                .col4{
+                    width: 20%;
+                }
+                .col5{
+                    width: 5%;
+                }
+                .col6{
+                    width: 7%;
+                }
+                .col7{
+                    width: 7%;
+                }
+                .col8{
+                    width: 12%;
+                }
+                .col9{
+                    width: 12%;
+                }
+                .col10{
+                    width: 11%;
+                }
+                .clsTblTransHeader{
+                    width: 100%;
+                }
+                .clsTblTransHeader tr{
+                    height: 30px;
+                }
+                .clsTitleTrans1{
+                    width: 35%;
+                }
+                .clsTitleTrans2{
+                    width: 65%;
+                    float: left;
+                }
+                .clsImage img{
+                    width: 80px;
+                    height: 80px;
+                    padding: 2px;
+                }
+                .tblDetailTrans{
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                .tblDetailTrans td{
+                    border: 1px solid black;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                }
+                .colTrans1{
+                    width: 5%;
+                }
+                .colTrans2{
+                    width: 11%;
+                }
+                .colTrans3{
+                    width: 10%;
+                }
+                .colTrans4{
+                    width: 11%;
+                }
+                .colTrans5{
+                    width: 20%;
+                }
+                .colTrans6{
+                    width: 6%;
+                }
+                .colTrans7{
+                    width: 6%;
+                }
+                .colTrans8{
+                    width: 6%;
+                }
+                .colTrans9{
+                    width: 10%;
+                }
+                .colTrans10{
+                    width: 15%;
+                }
+                .clsLink a{
+                    text-decoration: none;
+                    color: black;
+                }
+                .tblTotalTrans{
+                    width: 100%;
+                }
+                .divHeader{
+                    display: table-row;
+                }
+                .divWOSCode{
+                    
+                }
+                .button{
+                    padding: 5px;
+                }
+            </style>
+            <script type="text/javascript">
+        
+                j$ = jQuery.noConflict();
+                j$(document).ready(function() {
+        
+                var barcodeItems = j$( ".barcode" );
+                for(var i = 0; i < barcodeItems.length; i++){
+                    var item = barcodeItems[i];
+                    var itemId = item.id;
+                    var itemInfos = itemId.split('__');
+                    j$( "#" + itemId).JsBarcode(itemInfos[1]);
+                }
+                    //j$( ".barcode" ).JsBarcode("Hi!");
+                });
+                </script>
+        </head>
+        
+        <body>
+            <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+                {!translations['print_label']}
+            </button>
+            <div class="divHeader">
+                <div class="divWOSCode"> 
+                    <apex:outputField value="{!wos.WOSQRLabel__c}" />
+                </div>
+                <div class="divTitle">
+                    <!-- <apex:outputText value="{!titleVN}" style="font-weight: bold;" />
+                    <br/> -->
+                    <apex:outputText value="{!translations[titleEN]}" style="font-style: bold;" />
+                </div>
+            </div>
+
+            <div>
+                <div class="divSO">
+                    <!-- <apex:outputText value="Số " style="font-weight: bold;" />
+                    / -->
+                    <apex:outputText value=" {!translations['number']}: " style="font-style: italic;" />
+                    <apex:outputText value="{!wos.Name}" style="font-weight: bold;" />
+                </div>
+            </div>
+            <apex:form >
+            <apex:outputPanel id="pbId">
+                    <apex:actionStatus id="fetchStatus">
+                            <apex:facet name="start">
+                                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                                    &nbsp;
+                                </div>
+                                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                                    <div style="display: inline-block; padding: 2px;width: 125px;">
+                                        <span style="display: inline-block; padding: 10px 0px; color:green; font-weight:bold; font-size: 20px;" >Loading...</span>
+                                    </div>
+                                </div>
+                            </apex:facet>
+                        </apex:actionStatus>
+            <div style="{!IF(titleEN == 'INTERNAL TRANSFER NOTE', 'display:none;', '')}">
+                <table class="tblHeader">
+                    <colgroup>
+                        <col class="clsTitleLeft1" />
+                        <col class="clsTitleRight1" />
+                        <col class="clsTitleLeft2" />
+                        <col class="clsTitleRight2" />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <!-- <apex:outputText value="Kho " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['warehouse']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.WarehouseName__c}" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <!-- <apex:outputText value="Ngày & Giờ " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['date_and_time']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date, dd/MM/yyyy hh:mm:ss}" style="font-weight: bold;"> 
+                                <apex:param value="{!wos.ActualStartTime__c}" /> 
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- <apex:outputText value="Số PO " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['po_no']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.GoodsPOID__r.Name}" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <!-- <apex:outputText value="Mã NCC " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['supplier_id']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.Carrier__r.AccountNumber}" style="font-weight: bold;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- <apex:outputText value="Loại PO " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['po_type']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.GoodsPOID__r.RecordType.Name}" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <!-- <apex:outputText value="Tên NCC " style="font-weight: bold;" />
+                            / -->
+                            <apex:outputText value="{!translations['supplier_name']}:" style="font-style: italic;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.Carrier__r.Name}" style="font-weight: bold;" />
+                        </td>
+                    </tr>
+                </table>
+                
+                    
+                        <div style="width: 100%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                            <div style="float:left; width: 50%; text-align: left;">
+                                {!translations['total']}: {!WOSLines.size}/{!lstWOSLine.size} records
+                            </div>
+                            <div style="float:left; width: 50%; text-align: left;" >
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="First" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="Previous" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+                
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="Next" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+                
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="Last" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                            </div>
+                        </div>
+                        <table class="tblDetail">
+                            <colgroup>
+                                <col class="col1" />
+                                <col class="col2" />
+                                <col class="col3" />
+                                <col class="col4" />
+                                <col class="col5" />
+                                <col class="col6" />
+                                <col class="col7" />
+                                <col class="col8" />
+                                <col class="col9" />
+                                <col class="col10" />
+                            </colgroup>
+                            <tr>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="STT" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['no']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="Mã Hàng" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['item_code']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="Mã Vạch" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['barcode']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="Diễn Giải" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['description']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="ĐVT" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['uom']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="SL đặt hàng" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['order_quantity']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="SL thực nhận" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['actual_quantity']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="Ngày SX" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['manu_date']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="Hạn sử dụng" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['expired_date']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                                <td class="clsColCenter">
+                                    <!-- <apex:outputText value="SL chênh lệch" style="font-weight: bold;" ></apex:outputText>   
+                                    <br/> -->
+                                    <apex:outputText value="{!translations['variance_quantity']}" style="font-weight: bold;" ></apex:outputText>
+                                </td>
+                            </tr>
+                            <apex:variable value="{!(setCon.PageNumber - 1)*setCon.PageSize}" var="index"/>
+                            
+                            <apex:repeat value="{!WOSLines}" var="item">
+                                <apex:variable var="index" value="{!index + 1}" />
+                                <tr>
+                                    <td style="text-align: center;">
+                                        {!index}
+                                    </td>
+                                    <td style="text-align: center;">
+                                        {!item.Cargo__r.Name}
+                                    </td>
+                                    <td class="clsImage" style="text-align: center;">
+                                        
+
+                                        <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c != 'Barcode'}">
+                                            <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Cargo__r.Product__r.QR_Code__c}" alt="Create Qr Code for this item" border="0"/>
+                                            <br/>
+                                            {!item.Cargo__r.Product__r.QR_Code__c}
+                                        </apex:outputPanel>
+
+                                        <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c == 'Barcode'}">
+                                            <img id="{!item.Id + '__' + item.Cargo__r.Product__r.QR_Code__c}" class="barcode"/>
+                                        </apex:outputPanel>
+                                    </td>
+                                    <td style="padding-left: 5px;">
+                                        {!item.Cargo__r.ProductDetails__c}
+                                    </td>
+                                    <td style="text-align: center;">
+                                        {!item.Cargo__r.CargoType__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        {!item.Cargo__r.Product__r.QuantityPerUnit__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <apex:outputText value="{0,date, dd/MM/yyyy}"> 
+                                            <apex:param value="{!item.Cargo__r.ManufacturedDate__c}" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <apex:outputText value="{0,date, dd/MM/yyyy}"> 
+                                            <apex:param value="{!item.Cargo__r.ExpiredDate__c}" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                                        {!item.WorkOrderService__r.VarianceQuantity__c}
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                            
+                        </table>
+                    
+                
+                <!---------------------------------TOTAL------------------------------------- -->
+                <table class="tblTotal" >
+                    <colgroup>
+                        <col class="col1" />
+                        <col class="col2" />
+                        <col class="col3" />
+                        <col class="col4" />
+                        <col class="col5" />
+                        <col class="col6" />
+                        <col class="col7" />
+                        <col class="col8" />
+                        <col class="col9" />
+                        <col class="col10" />
+                    </colgroup>
+                    <tr>
+                        <td colspan = "5" >
+                            <div style = "text-decoration: underline; margin-left: 28%;" >
+                                <!-- <apex:outputText value="Tổng cộng " style="font-weight: bold;" ></apex:outputText>   
+                                / -->
+                                <apex:outputText value="{!translations['grand_total']}" style="font-weight: bold;" ></apex:outputText>
+                            </div>
+                        </td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            {!decInitQuantity}
+                        </td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            {!decQuantity}
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            {!decVarQuantity}
+                        </td>
+                    </tr>
+                </table>
+                <div style="display: flex; margin-top: 100px;">
+                    <div style="width: 50%; text-align: center;" >
+                        <div style="text-decoration: overline; padding-left: 10px;">
+                            <!-- <apex:outputText value="Kho trung tâm " style="font-weight: bold;" ></apex:outputText>   
+                            / -->
+                            <apex:outputText value="{!translations['central_warehouse']}" style="font-weight: bold;" ></apex:outputText>
+                        </div>
+                    </div>
+                    <div style="width: 50%;  text-align: center;" >
+                        <div style="text-decoration: overline;">
+                            <!-- <apex:outputText value="Nhà cung cấp " style="font-weight: bold;" ></apex:outputText>   
+                            / -->
+                            <apex:outputText value="{!translations['supplier']}" style="font-weight: bold;" ></apex:outputText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="{!IF(titleEN != 'INTERNAL TRANSFER NOTE', 'display:none;', '')}">
+                <table class="clsTblTransHeader">
+                    <colgroup>
+                        <col class="clsTitleTrans1" />
+                        <col class="clsTitleTrans2" />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['shipment_id']}: " style="font-weight: bold;" />
+                        </td>
+                        <td class="clsLink" >
+                            <a href="/{!wos.WorkOrder__r.CloFMSShipmentOrderID__c}" target="_top"> S{!wos.WorkOrder__r.CloFMSShipmentOrderID__r.WkInitial__c}{!wos.WorkOrder__r.CloFMSShipmentOrderID__r.Name}</a>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <apex:outputText value="{!translations['ship_from']}: " style="font-weight: bold; text-decoration: underline;" /> 
+                            <br/>
+                            <apex:outputText value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <apex:outputText value="{!translations['ship_to']}: " style="font-weight: bold; text-decoration: underline;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['store_id']}:" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.DestinationWarehouse__r.Name}" style="font-weight: bold;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['store_address']}:" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.DestinationWarehouseAddress__c}" style="font-weight: bold;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['delivery_date']}: " />
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date, dd/MM/yyyy hh:mm:ss}" style="font-weight: bold;" >
+                                <apex:param value="{!wos.ActualEndTime__c}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+                <div style="width: 100%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                        <div style="float:left; width: 50%; text-align: left;">
+                            {!translations['total']}: {!WOSLines.size}/{!lstWOSLine.size} records
+                        </div>
+                        <div style="float:left; width: 50%; text-align: left;" >
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="First" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="Previous" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+            
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="Next" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+            
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="Last" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                        </div>
+                    </div>
+                <table class="tblDetailTrans">
+                    <colgroup>
+                        <col class="colTrans1" />
+                        <col class="colTrans2" />
+                        <col class="colTrans3" />
+                        <col class="colTrans4" />
+                        <col class="colTrans5" />
+                        <col class="colTrans6" />
+                        <col class="colTrans7" />
+                        <col class="colTrans8" />
+                        <col class="colTrans9" />
+                        <col class="colTrans10" />
+                    </colgroup>
+                    <tr>
+                        <td class="clsColCenter">
+                            <apex:outputText value="{!translations['no']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Mã Hàng" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['cargo_code']}" style="font-style: italic;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Mã Vạch" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['barcode']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <apex:outputText value="{!translations['item_code']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Diễn Giải" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['description']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Đơn Vị Tính" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['sale_uom']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Khối Lượng" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['weight_kilogram']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Số Lượng Xuất" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['quantity']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <apex:outputText value="Hạn Sử Dụng" style="font-weight: bold;" ></apex:outputText>   
+                            <br/>
+                            <apex:outputText value="{!translations['expriry']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                        <td class="clsColCenter">
+                            <!-- <apex:outputText value="Ghi chú" style="font-weight: bold;" ></apex:outputText>   
+                            <br/> -->
+                            <apex:outputText value="{!translations['note']}" style="font-weight: bold;" ></apex:outputText>
+                        </td>
+                    </tr>
+                        <apex:variable value="{!(setCon.PageNumber - 1)*setCon.PageSize}" var="index"/>
+                            
+                        <apex:repeat value="{!WOSLines}" var="item">
+                        <apex:variable var="index" value="{!index + 1}" />
+                        <tr>
+                            <td style="text-align: center;">
+                                {!index}
+                            </td>
+                            <td style="text-align: center;">
+                                {!item.Cargo__r.Name}
+                            </td>
+                            <td class="clsImage" style="text-align: center;">
+                                <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Cargo__r.Product__r.QR_Code__c}" alt="Product Qr Code" border="0"/>
+                            </td>
+                            <td style="text-align: center;">
+                                {!item.Cargo__r.Product__r.Name}
+                            </td>
+                            <td style="padding-left: 5px;">
+                                {!item.Cargo__r.ProductDetails__c}
+                            </td>
+                            <td style="text-align: center;">
+                                {!translations[item.Cargo__r.Product__r.UnitType__c]}
+                            </td>
+                            <td style="text-align: center;">
+                                {!item.Cargo__r.Product__r.GrossWeight__c}
+                            </td>
+                            <td style="text-align: center;">
+                                {!item.Cargo__r.Product__r.QuantityPerUnit__c}                            
+                            </td>
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0,date, dd/MM/yyyy}">
+                                    <apex:param value="{!mapStock[item.Id].ExpiredDate__c}"/>
+                                </apex:outputText>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                {!wos.Remarks__c}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                <br/>
+                <table class="tblTotalTrans">
+                    <colgroup>
+                        <col class="colTrans1" />
+                        <col class="colTrans2" />
+                        <col class="colTrans3" />
+                        <col class="colTrans4" />
+                        <col class="colTrans5" />
+                        <col class="colTrans6" />
+                        <col class="colTrans7" />
+                        <col class="colTrans8" />
+                        <col class="colTrans9" />
+                        <col class="colTrans10" />
+                    </colgroup>
+                    <tr>
+                        <td colspan="5" style="text-align: right; margin-right: 10px;" >
+                            <apex:outputText value="{!translations['total']}:" style="font-weight: bold;" ></apex:outputText> 
+                        </td>
+                        <td></td>
+                        <td style="text-align: center; font-weight: bold;">
+                            {!decWeight}
+                        </td>
+                        <td style="text-align: center; font-weight: bold;">
+                            {!decQuantity}
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="tblTotalTrans" style="{!IF(lstWOSLine.size == 2 || lstWOSLine.size == 3, 
+                                                    'page-break-before: always;', '')}" >
+                    <colgroup>
+                        <col class="colTrans1" />
+                        <col class="colTrans2" />
+                        <col class="colTrans3" />
+                        <col class="colTrans4" />
+                        <col class="colTrans5" />
+                        <col class="colTrans6" />
+                        <col class="colTrans7" />
+                        <col class="colTrans8" />
+                        <col class="colTrans9" />
+                        <col class="colTrans10" />
+                    </colgroup>
+                    
+                    <tr>
+                        <td></td>
+                        <td colspan="2" style="text-align: center;">
+                            <br/>
+                            <apex:outputText value="{!translations['checked_by']}" style="font-weight: bold;" />
+                            <br/>
+                            <apex:outputText value="({!translations['signature']})" style="font-style: italic;" />
+                        </td>
+                        <td></td>
+                        <td colspan="3" style="text-align: center;">
+                            <br/>
+                            <apex:outputText value="{!translations['receiving_by']}" style="font-weight: bold;" />
+                            <br/>
+                            <apex:outputText value="({!translations['signature']})" style="font-style: italic;" />
+                            <br/><br/><br/><br/>
+                            <apex:outputText value="({!translations['confirmation']})"
+                                             style="font-style: italic;" />
+                        </td>
+                        <td></td>
+                        <td colspan="2" style="text-align: center;">
+                            <br/>
+                            <apex:outputText value="({!translations['security']})" style="font-weight: bold;" />
+                            <br/>
+                            <apex:outputText value="({!translations['signature']})" style="font-style: italic;" />
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+            </apex:outputPanel>
+            </apex:form>
+        </body>
+    </html>
+
+</apex:page>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OpenEndedLoan</fullName>
+    <active>true</active>
+    <description>Borrow over and over buy have have a credit limit which is the maximum amount borrow at one time.</description>
+    <label>Open-Ended Loan-Local</label>
+</RecordType>

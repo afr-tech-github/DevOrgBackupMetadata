@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MesurementWithOccupiedCapacityCheck</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(RecordType.DeveloperName == &apos;StockOut&apos;,
+  Measurement__c &gt;   StockLocator__r.CurrentOccupiedCapacityCBM__c )</errorConditionFormula>
+    <errorDisplayField>Measurement__c</errorDisplayField>
+    <errorMessage>The Measurement of stock out can not greater than Current Occupied Capacity CBM of Locator.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Operator</fullName>
+        <default>true</default>
+        <label>Operator</label>
+    </customValue>
+    <customValue>
+        <fullName>Checker</fullName>
+        <default>false</default>
+        <label>Checker</label>
+    </customValue>
+    <customValue>
+        <fullName>Supervisor</fullName>
+        <default>false</default>
+        <label>Supervisor</label>
+    </customValue>
+    <customValue>
+        <fullName>Auditor</fullName>
+        <default>false</default>
+        <label>Auditor</label>
+    </customValue>
+    <customValue>
+        <fullName>Controller</fullName>
+        <default>false</default>
+        <label>Controller</label>
+    </customValue>
+    <customValue>
+        <fullName>Assistant</fullName>
+        <default>false</default>
+        <label>Assistant</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>WORKER ROLE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,284 @@
+<apex:component controller="DCBReportController">
+    <head>
+        
+        <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+        <style type="text/css">
+            body {
+            font-family: Arial,Helvetica,sans-serif;
+            }
+            
+            table {
+                border-collapse: collapse;
+                width:100%;
+            }
+            
+            .error_message {
+            color: red;
+            }
+            
+            .cell_border { 
+            border: 1px solid black;
+            }
+            
+            .title {
+            text-transform: uppercase;
+            font-size: 200%;       
+            }
+            
+            .tableHeader {
+                background-color: #bfc4d4;  
+                text-align:right;
+            }
+            
+            .tableBody1 {
+                background-color: #bfc4d4; 
+                width: 8%; 
+                border:1px solid black;
+            }
+            
+            .tableBody2 {
+                background-color: #bfc4d4; 
+                width: 10%; 
+                border:1px solid black;
+            }
+            
+            .tableBody3 {
+                background-color: #d4dadc; 
+                border:1px solid black;
+            }
+            
+            .tableBody4 {
+                background-color: #d4dadc; 
+                border:1px solid black;
+                text-align: right;
+            }
+            
+            .tableFoot1 {
+                width:50%;
+                background-color: grey;
+                font-weight: bold;
+                color: white;
+            }
+            
+            .tableFoot2 {
+                background-color: grey;
+                font-weight: bold;
+                text-align: left;
+                color: white;
+            }
+            
+        </style>
+        <script type="text/javascript">
+            j$ = jQuery.noConflict();
+            j$(document).ready(function() {
+                //j$('a[id$=mybutton]').click(function() {
+                    //alert('aaa');
+                    j$('input[id$=thelanguage]').val('abc');
+                    //alert(j$('input[id$=thelanguage]').val());
+
+                //});
+            });
+        </script>
+    </head>
+    
+    <apex:attribute name="reportWrapper" description="The type of record we are viewing."
+                    type="DCB_ReportWrapper" required="true"/>
+    <apex:attribute name="periodFrom" description="The type of record we are viewing."
+                    type="String" required="true"/>
+    <apex:attribute name="periodTo" description="The type of record we are viewing."
+                    type="String" required="true"/>
+    <apex:attribute name="language" description="The language to show"
+                    type="String" required="true"/>
+    <apex:input id="thelanguage" value="{!selectedLanguage}"/>                               
+    <table cellPadding="4" border="0" width="100%">
+        <tr>
+            <td colspan="9" border="1" width="70%"></td>
+            <td border="1" align="right"><b>Amount Selling</b></td>
+            <td border="1" align="right"><b>Unpaid Buying</b></td>
+            <td border="1" align="right"><b>Debit</b></td>
+            <td border="1" align="right"><b>Balance</b></td>
+            <td border="0"></td>
+        </tr>
+        <apex:repeat value="{!reportWrapper.customerReports}" var="record">        
+            <tr >
+                <td colspan="11" bgcolor="#bfc4d4">
+                    <b>Customer Name</b>: {!record.customerName} <b>({!record.recordCount} records)</b>   
+                </td>
+                <td bgcolor="#bfc4d4" ></td>
+                <td bgcolor="#bfc4d4" ></td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td colspan="13">
+                    <apex:commandLink id="mybutton" value="PDF {!translations['合計']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="pdf" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="1" />
+                        <apex:param name="param7" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="EXCEL {!translations['合計']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="excel" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="1" />
+                        <apex:param name="param7" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="PDF {!translations['請請求']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="pdf" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="2" />
+                        <apex:param name="param5" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="EXCEL {!translations['請請求']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="excel" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="2" />
+                        <apex:param name="param5" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="PDF {!translations['PDF 立替']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="pdf" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="3" />
+                        <apex:param name="param7" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="EXCEL {!translations['PDF 立替']}" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                      target="_blank" style="text-decoration:none; margin-left:20px">
+                        <apex:param name="param2" assignTo="{!fromDate}" value="{!periodFrom}" />
+                        <apex:param name="param3" assignTo="{!toDate}" value="{!periodTo}" />
+                        <apex:param name="param4" assignTo="{!pageType}" value="excel" />
+                        <apex:param name="param5" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                        <apex:param name="param6" assignTo="{!reportOption}" value="3" />
+                        <apex:param name="param7" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                        <apex:param name="param8" assignTo="{!language}" value="{!language}" />
+                    </apex:commandLink>
+                </td>
+            </tr>
+            <tr>
+                <td class="tableBody1"><b>WKID</b></td>
+                <td class="tableBody1"><b>HBL</b></td>
+                <td class="tableBody1"><b>MBL</b></td>
+                <td class="tableBody1"><b>ETA</b></td>
+                <td class="tableBody1"><b>ETD</b></td>
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_PAYMENT_EXCLUDE_TAX']}"></apex:outputLabel></b></td>
+                <td class="tableBody2"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_DUTY_PAYMENT_TAX']}"></apex:outputLabel></b></td>
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_EXPECTED_DELIVERY_DATE']}"></apex:outputLabel></b></td>
+                <!--
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_PAYMENT']}"></apex:outputLabel></b></td>
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_ADVANCE_PAYMENT']}"></apex:outputLabel></b></td>
+                -->
+                <td class="tableBody2"><b><apex:outputLabel value="{!translations['F_QUANTITY']}"></apex:outputLabel></b></td>
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_AMOUNT_SELLING']}"></apex:outputLabel></b></td>
+                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_UNPAID_BALANCE']}"></apex:outputLabel></b></td>
+                <td class="tableBody2"><b>DEBIT</b></td>
+                <td class="tableBody2"><b>BALANCE</b></td>
+                <td border="0">
+                </td>
+            </tr>
+            <apex:repeat value="{!record.lineItems}" var="lineItem">
+                <tr>
+                    <td class="tableBody3">{!lineItem.wkid}</td>
+                    <td class="tableBody3">{!lineItem.hblNo}</td>
+                    <td class="tableBody3">{!lineItem.mblNo}</td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                            <apex:param value="{!lineItem.eta}"/>
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                            <apex:param value="{!lineItem.etd}"/>
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                            <apex:param value="{!lineItem.deadlinePaymentInvoice}"/>
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                            <apex:param value="{!lineItem.deadlinePaymentExpense}"/>
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                            <apex:param value="{!lineItem.deliveryDate}"/>
+                        </apex:outputText>
+                    </td>
+                    <!--
+                    <td class="tableBody3">{!lineItem.dueDatePayment}</td>
+                    <td class="tableBody3">{!lineItem.dueDateAdvancePayment}</td>
+                    -->
+                    <td class="tableBody3">{!lineItem.recordCount}</td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!lineItem.sumOfAmountSelling}" />
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!lineItem.sumOfUnPaidBalance}" />
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!lineItem.sumOfUnPaidBalance}" />
+                        </apex:outputText>
+                    </td>
+                    <td class="tableBody3">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!lineItem.sumOfUnPaidBalance}" />
+                        </apex:outputText>
+                    </td>
+                    <td border="0"></td>
+                </tr>
+            </apex:repeat>
+            <tr >
+                <td colspan="13" class="tableFoot1" style="color:white;">Subtotal</td>
+                <td border="0"></td>
+            </tr>
+            <tr>
+                <td class="tableFoot2" colspan="9" border="1" width="70%"></td>
+                <td class="tableFoot2" style="color:white;" align="left"><b>{!record.sumOfAmountSelling}</b></td>
+                <td class="tableFoot2" style="color:white;" align="left"><b>{!record.sumOfUnPaidBalance}</b></td>
+                <td class="tableFoot2" style="color:white;" align="left"><b>{!record.sumOfUnPaidBalance}</b></td>
+                <td class="tableFoot2" style="color:white;" align="left"><b>{!record.sumOfUnPaidBalance}</b></td>
+                <td border="0"></td>
+            </tr>
+        </apex:repeat>
+        
+        <tr >
+            <td colspan="13" class="tableFoot1" style="color:white;">Grand Totals</td>
+            <td border="0"></td>
+        </tr>
+        <tr >
+            <td colspan="9" class="tableFoot1"></td>
+            <td class="tableFoot2" style="color:white;">{!reportWrapper.sumOfAmountSelling}</td>
+            <td class="tableFoot2" style="color:white;">{!reportWrapper.sumOfUnPaidBalance}</td>
+            <td class="tableFoot2" style="color:white;">{!reportWrapper.sumOfUnPaidBalance}</td>
+            <td class="tableFoot2" style="color:white;">{!reportWrapper.sumOfUnPaidBalance}</td>
+            <td border="0"></td>
+        </tr>
+    </table>
+</apex:component>

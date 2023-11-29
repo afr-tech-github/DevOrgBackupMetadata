@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CodeOfPort__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This field will replace PortCode__c. This field and Port Type will be a unique pair</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Combine Port Code Only+Country Code. To edit, directly edit or edit Port Code Only and Country Code.</inlineHelpText>
+    <label>Port Code</label>
+    <length>55</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

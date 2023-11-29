@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BadDebtUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>BAD DEBT(USD)</label>
+    <summarizedField>Billing__c.UnreceivedBalanceUSD__c</summarizedField>
+    <summaryFilterItems>
+        <field>Billing__c.BadDebtCheckBox__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Billing__c.Currency__c</field>
+        <operation>equals</operation>
+        <value>USD</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Billing__c.BadDebtorType__c</field>
+        <operation>equals</operation>
+        <value>Customer</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Billing__c.WorkOrderID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

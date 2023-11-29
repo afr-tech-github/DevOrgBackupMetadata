@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Depreciation Expense = (Cost – Salvage value) / Useful life</fullName>
+        <default>false</default>
+        <label>Depreciation Expense = (Cost – Salvage value) / Useful life</label>
+    </customValue>
+    <customValue>
+        <fullName>Depreciation Expense = (Number of units produced / Life in number of units) x (Cost – Salvage value)</fullName>
+        <default>false</default>
+        <label>Depreciation Expense = (Number of units produced / Life in number of units) x (Cost – Salvage value)</label>
+    </customValue>
+    <customValue>
+        <fullName>Depreciation Expense = (Remaining life / Sum of the years digits) x (Cost – Salvage value)</fullName>
+        <default>false</default>
+        <label>Depreciation Expense = (Remaining life / Sum of the years digits) x (Cost – Salvage value)</label>
+    </customValue>
+    <customValue>
+        <fullName>Depreciation Expense = Beginning book value x Rate of depreciation</fullName>
+        <default>false</default>
+        <label>Depreciation Expense = Beginning book value x Rate of depreciation</label>
+    </customValue>
+    <masterLabel>DEPRECIATION FORMULA</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

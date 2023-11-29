@@ -1,0 +1,3 @@
+<apex:page standardController="CustomObject1__c" extensions="ForwardingWorkProgressExt" docType="html-5.0" sidebar="false">
+    <c:WorkProgress WorkProgressList="{!workProgressItems}"></c:WorkProgress>
+</apex:page>

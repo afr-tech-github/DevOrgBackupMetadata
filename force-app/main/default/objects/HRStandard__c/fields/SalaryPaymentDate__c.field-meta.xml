@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalaryPaymentDate__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The date salary is paid.</inlineHelpText>
+    <label>SALARY PAYMENT DATE</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>End Of This Month</fullName>
+                <default>true</default>
+                <label>End Of This Month</label>
+            </value>
+            <value>
+                <fullName>1st Of This Month</fullName>
+                <default>false</default>
+                <label>1st Of This Month</label>
+            </value>
+            <value>
+                <fullName>2nd Of This Month</fullName>
+                <default>false</default>
+                <label>2nd Of This Month</label>
+            </value>
+            <value>
+                <fullName>3rd Of This Month</fullName>
+                <default>false</default>
+                <label>3rd Of This Month</label>
+            </value>
+            <value>
+                <fullName>5th Of This Month</fullName>
+                <default>false</default>
+                <label>5th Of This Month</label>
+            </value>
+            <value>
+                <fullName>10th Of This Month</fullName>
+                <default>false</default>
+                <label>10th Of This Month</label>
+            </value>
+            <value>
+                <fullName>15th Of This Month</fullName>
+                <default>false</default>
+                <label>15th Of This Month</label>
+            </value>
+            <value>
+                <fullName>20th Of This Month</fullName>
+                <default>false</default>
+                <label>20th Of This Month</label>
+            </value>
+            <value>
+                <fullName>25th Of This Month</fullName>
+                <default>false</default>
+                <label>25th Of This Month</label>
+            </value>
+            <value>
+                <fullName>30th Of This Month</fullName>
+                <default>false</default>
+                <label>30th Of This Month</label>
+            </value>
+            <value>
+                <fullName>31th Of This Month</fullName>
+                <default>false</default>
+                <label>31th Of This Month</label>
+            </value>
+            <value>
+                <fullName>End of Next Month</fullName>
+                <default>false</default>
+                <label>End of Next Month</label>
+            </value>
+            <value>
+                <fullName>1st Of Next Month</fullName>
+                <default>false</default>
+                <label>1st Of Next Month</label>
+            </value>
+            <value>
+                <fullName>2nd Of Next Month</fullName>
+                <default>false</default>
+                <label>2nd Of Next Month</label>
+            </value>
+            <value>
+                <fullName>3rd Of Next Month</fullName>
+                <default>false</default>
+                <label>3rd Of Next Month</label>
+            </value>
+            <value>
+                <fullName>5th Of Next Month</fullName>
+                <default>false</default>
+                <label>5th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>10th Of Next Month</fullName>
+                <default>false</default>
+                <label>10th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>15th Of Next Month</fullName>
+                <default>false</default>
+                <label>15th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>20th Of Next Month</fullName>
+                <default>false</default>
+                <label>20th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>25th Of Next Month</fullName>
+                <default>false</default>
+                <label>25th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>30th Of Next Month</fullName>
+                <default>false</default>
+                <label>30th Of Next Month</label>
+            </value>
+            <value>
+                <fullName>31th Of Next Month</fullName>
+                <default>false</default>
+                <label>31th Of Next Month</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

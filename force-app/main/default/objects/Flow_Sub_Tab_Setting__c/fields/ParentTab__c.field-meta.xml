@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ParentTab__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Flow Tab Setting</label>
+    <referenceTo>Flow_Tab_Setting__c</referenceTo>
+    <relationshipLabel>Flow Sub Tab Settings</relationshipLabel>
+    <relationshipName>Flow_Sub_Tab_Settings</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

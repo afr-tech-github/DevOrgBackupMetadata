@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Data Pull From KPI</fullName>
+        <default>false</default>
+        <label>Data Pull From KPI</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From BONUS &amp; INCENTIVES POLICY</fullName>
+        <default>false</default>
+        <label>Data Pull From BONUS &amp; INCENTIVES POLICY</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From EMPLOYEE</fullName>
+        <default>false</default>
+        <label>Data Pull From EMPLOYEE</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From ORGANIZATION TARGET</fullName>
+        <default>false</default>
+        <label>Data Pull From ORGANIZATION TARGET</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From INDIVIDUAL TARGET</fullName>
+        <default>false</default>
+        <label>Data Pull From INDIVIDUAL TARGET</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From ORGANIZATION PERFORMANCE</fullName>
+        <default>false</default>
+        <label>Data Pull From ORGANIZATION PERFORMANCE</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From PREVIOUS YEAR INDIVIDUAL PERFORMANCE</fullName>
+        <default>false</default>
+        <label>Data Pull From PREVIOUS YEAR INDIVIDUAL PERFORMANCE</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Pull From THIS YEAR INDIVIDUAL PERFORMANCE</fullName>
+        <default>false</default>
+        <label>Data Pull From THIS YEAR INDIVIDUAL PERFORMANCE</label>
+    </customValue>
+    <customValue>
+        <fullName>Organization Target allocates to Individual Target</fullName>
+        <default>false</default>
+        <label>Organization Target allocates to INDIVIDUAL TARGET</label>
+    </customValue>
+    <customValue>
+        <fullName>Organization Performance collect</fullName>
+        <default>false</default>
+        <label>Organization Performance collect from INDIVIDUAL PERFORMANCE</label>
+    </customValue>
+    <customValue>
+        <fullName>Organization Performance collect from CHILD ORGANIZATION PERFORMANCE</fullName>
+        <default>false</default>
+        <label>Organization Performance collect from CHILD ORGANIZATION PERFORMANCE</label>
+    </customValue>
+    <masterLabel>CloKPI DATA PULL</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>NOT COMBINED</fullName>
+        <default>false</default>
+        <label>NOT COMBINED</label>
+    </customValue>
+    <customValue>
+        <fullName>COMBINED</fullName>
+        <default>false</default>
+        <label>COMBINED</label>
+    </customValue>
+    <masterLabel>DEM &amp; DET COMBINED</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

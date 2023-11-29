@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Massive Process from VAT</fullName>
+        <default>false</default>
+        <label>Massive Process from VAT</label>
+    </customValue>
+    <customValue>
+        <fullName>Massive Process from Billing(More than 12 Billing)</fullName>
+        <default>false</default>
+        <label>Massive Process from Billing(More than 12 Billing)</label>
+    </customValue>
+    <customValue>
+        <fullName>Massive Process from Billing(Max 12 Billing)</fullName>
+        <default>false</default>
+        <label>Massive Process from Billing(Max 12 Billing)</label>
+    </customValue>
+    <customValue>
+        <fullName>No Massive Process</fullName>
+        <default>false</default>
+        <label>No Massive Process</label>
+    </customValue>
+    <masterLabel>HOW TO CONNECT SOURCE TO TRX PLAN</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

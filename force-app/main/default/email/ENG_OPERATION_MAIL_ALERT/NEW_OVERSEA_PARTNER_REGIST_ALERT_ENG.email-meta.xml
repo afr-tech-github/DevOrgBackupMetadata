@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when new oversea partner registered.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>NEW OVERSEA PARTNER REGIST ALERT</name>
+    <style>none</style>
+    <subject>NEW PARTNER CUSTOMER REGIST ALERT({!Account.Name})</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

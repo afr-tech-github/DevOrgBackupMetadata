@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FCLCargoTransportStatus</fullName>
+    <fields>Name</fields>
+    <fields>Driver__c</fields>
+    <fields>DeliveryCompany__c</fields>
+    <fields>EmptyPickupCompleted__c</fields>
+    <fields>EmptyTransportCompleted__c</fields>
+    <fields>CargoPickupCompleted__c</fields>
+    <fields>CargoTransportCompleted__c</fields>
+    <label>FCL Cargo Transport Status</label>
+</CompactLayout>

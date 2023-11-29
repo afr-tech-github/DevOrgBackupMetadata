@@ -1,0 +1,8 @@
+/*.THIS .linkBtn .slds-dropdown__item>a{
+    color: rgba(0, 112, 210, 1) !important;
+}
+.THIS .linkBtn a{
+    color: rgba(0, 112, 210, 1) !important;
+}
+.THIS .tableFixHead          { overflow: auto; height: 300px; }
+.THIS .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }*/

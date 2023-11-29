@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalyticSnapshot xmlns="http://soap.sforce.com/2006/04/metadata">
+    <groupColumn>GRAND_SUMMARY</groupColumn>
+    <mappings>
+        <aggregateType>Sum</aggregateType>
+        <sourceField>Stock__c.StockInQuantityFormula__c</sourceField>
+        <sourceType>summary</sourceType>
+        <targetField>InventoryReport__c.StockInQuantity__c</targetField>
+    </mappings>
+    <mappings>
+        <aggregateType>Sum</aggregateType>
+        <sourceField>Stock__c.StockOutQuantityFormula__c</sourceField>
+        <sourceType>summary</sourceType>
+        <targetField>InventoryReport__c.StockOutQuantity__c</targetField>
+    </mappings>
+    <mappings>
+        <aggregateType>Average</aggregateType>
+        <sourceField>FK_$PRODUCT__c.StockHoldFormula__c</sourceField>
+        <sourceType>summary</sourceType>
+        <targetField>InventoryReport__c.ClosingQuantity__c</targetField>
+    </mappings>
+    <mappings>
+        <sourceField>ExecutionTime</sourceField>
+        <sourceType>snapshot</sourceType>
+        <targetField>InventoryReport__c.EndDate__c</targetField>
+    </mappings>
+    <name>PRODUCT STOCK HOLD (WITH STOCK IN&amp;OUT)-2</name>
+    <runningUser>kwon-dev@afr-solution.com</runningUser>
+    <sourceReport>WAREHOUSE_REPORT/PRODUCT_STOCK_HOLD_WITH_STOCK_IN_OUT_2</sourceReport>
+    <targetObject>InventoryReport__c</targetObject>
+</AnalyticSnapshot>

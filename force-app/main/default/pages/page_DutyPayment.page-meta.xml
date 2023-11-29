@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>36.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Printing Name: 立替請求書 in DEBIT NOTE TO CUSTOMER button in SHIPMENT ORDER
+Language:日本語
+Currency:Local Currency</description>
+    <label>page_DutyPayment</label>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>19</minorNumber>
+        <namespace>sf_chttr_apps</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>7</minorNumber>
+        <namespace>sf_com_apps</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>1</minorNumber>
+        <namespace>sfadminapps</namespace>
+    </packageVersions>
+</ApexPage>

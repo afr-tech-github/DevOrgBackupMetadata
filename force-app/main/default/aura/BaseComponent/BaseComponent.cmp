@@ -1,0 +1,7 @@
+<aura:component extensible="true">
+    <aura:attribute name="isLoading" type="Boolean" />
+	{!v.body}
+    <aura:if isTrue="{!v.isLoading}">
+    	<lightning:spinner variant="brand" size="large" alternativeText="Loading..."/>
+    </aura:if>
+</aura:component>

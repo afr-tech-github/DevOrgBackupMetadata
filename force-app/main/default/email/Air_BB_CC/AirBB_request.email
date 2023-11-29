@@ -1,0 +1,216 @@
+{!CustomObject1__c.00N28000007WEBs}
+<br>
+{!CustomObject1__c.00N28000007WEBr} 様
+<br>
+<br>
+今回案件のBBをお願いします。
+<br>
+◎URLにアクセスしてパスワードを入力してください。 
+航空貨物取扱い及び代行回収依頼書類をダウンロードできます。 
+
+###################################################################################################################<br>
+航空貨物取扱い及び代行回収依頼書類 LINK :  {!CustomObject1__c.BREAK_BULK_INVOICE_LINK__c} <br>
+PASSWORD：{!CustomObject1__c.BREAL_BULK_INVOICE_PASSWORD__c} <br>
+###################################################################################################################
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				共通部分
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th width="200">
+				ID
+			</th>
+			<td width="400">
+				{!CustomObject1__c.ID__c}
+			</td >
+			<th width="200">
+				ステータス
+			</th>
+			<td width="400">
+				{!CustomObject1__c.status__c}
+			</td>
+		</tr>
+ 		<tr><thead>
+			<th colspan="4">
+				貨物基礎情報
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				HAWB 番号.
+			</th>
+			<td>
+				{!CustomObject1__c.HAWB__c}
+			</td>
+<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}様
+			</td>
+		</tr>
+		<tr>
+			<th>
+				MAWB 番号.
+			</th>
+			<td>
+				{!CustomObject1__c.MAWB__c}
+			</td>
+
+<th>
+				出港地
+			</th>
+			<td>
+				
+{!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}
+			</td>
+
+
+		</tr>
+<tr>
+<th>
+				FLIGHT 番号.
+			</th>
+			<td>
+				{!CustomObject1__c.FlightNo__c}
+			</td>
+
+			<th>
+				出港日
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+
+　　　　　　　　</tr>
+		
+　　　　　　　　　　　　　　　<tr>
+			
+<th>
+				商品
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>			
+<th>
+				入港地
+			</th>
+			<td>
+				{!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}
+			</td>
+		</tr>
+		　　　　　　　　　　　　　　<tr>
+			<th>
+				重量
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+			<th>
+			入港日	
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				個数/量積
+			</th>
+			<td>
+				{!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM
+			</td>
+			<th>
+				建値
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				通関有無
+			</th>
+			<td>
+				{!CustomObject1__c.Custom__c}
+			</td>
+			<th>
+				保険
+			</th>
+			<td>
+				{!CustomObject1__c.Insurance__c}
+			</td>
+		</tr>  
+　　　　　　　
+		
+
+		<tr><thead>
+			<th colspan="4">
+	三国間及びTS
+			</th></thead>
+<tr>
+			<th>
+				トランジット空港
+			</th>
+			<td>
+				{!CustomObject1__c.TS__c}	</td>
+<th>
+				トランジット便名
+			</th>
+			<td>
+				{!CustomObject1__c.TransitV__c}
+			</td>
+</tr>
+<tr>
+			<th>
+				トランジットSHIPPER
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WElD}	
+	</td>
+
+ 　　　　　　　　　　 <th>
+                           トランジット出発日
+	</th>
+	<td>
+	{!CustomObject1__c.T_ETD__c}	
+	</td>
+		</tr>
+
+					</tbody>
+</table>
+
+<br>
+ご不明な点やご質問などがございましたら、ご遠慮なくお知らせください。<br>
+
+今後ともどうぞよろしくお願い申し上げます。<br>
+
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

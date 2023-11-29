@@ -1,0 +1,722 @@
+<apex:page contentType="text-html" renderAs="pdf" controller="cntl_Document" showHeader="false" applyHtmlTag="false"> 
+    <head>
+        <style type="text/css">
+            <!-- 全体 -->
+            @page {size: 210mm 300mm ;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;}
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+            <!-- 属性 -->
+            .F08    { font-size: 8px;}
+            .F09    { font-size: 9px;}
+            .F10    { font-size: 10.5px;}
+            .F12    { font-size: 12px;}
+            .FF     { font-size: 16px;color:red;}
+            .F14    { font-size: 14px;}
+            .F18    { font-size: 18px;}
+            .F20    { font-size: 20px;font-weight: bold;}
+            .F25    { font-size: 25px;font-weight: bold;}
+            .F30    { font-size: 30px;font-weight: bold;}
+            
+            .FutaiNo{
+                width: 120px;
+                table-layout: fixed;
+                text-align:center;
+            }
+            .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+            
+        </style>
+    </head>
+    <body>
+        <apex:repeat value="{!WrapdisplayitemList}" var="list">
+            <div STYLE="position:absolute; z-index:-2; left:410px; margin-top:50px; width:160px; height: 107px;">
+                <img src="{!$Setup.Site_Custom_Settings__c.Logo_URL__c}" style="width:100%;"/>
+            </div>
+            <div STYLE="position:absolute; left:400px; margin-top:160px;F25; width:700px">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>
+            </div>
+            <div STYLE="position:absolute; left:400px; margin-top:180px;font-size: 12px; width:380px">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/>
+                <br/>
+                <span class="F14"><apex:outputLabel value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c} 　　FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/></span>
+            </div>
+            <div STYLE="position:absolute; left:400px; margin-top:230px;font-size: 12px">
+                
+            </div>
+            <div STYLE="position:absolute; left:10px; margin-top:15px; width:760px; text-align:center">
+                <apex:outputText rendered="{!DebitReportFlag == True}">
+                    <span class="F25">DEBIT NOTE</span>
+                </apex:outputText>
+                <apex:outputText rendered="{!DebitReportFlag == False}">
+                    <span class="F25">CREDIT NOTE</span>
+                </apex:outputText>
+            </div>
+
+            <div STYLE="position:absolute; left:570px; margin-top:70px; font-size:9pt;">
+                Job Request No.: {!AnkenList.JobRequestID__c}<br/>      <!-- added by kwon 20181208 -->             
+                Reference No.: {!AnkenList.REFNO__c}<br/>
+                <apex:outputText value="Date: {0,date,dd/MM/yyyy}">
+                    <apex:param value="{!AnkenList.PrintDate__c}"/>
+                </apex:outputText>
+            </div>
+            
+            <div STYLE="position:absolute; left:10px; margin-top:80px; ">
+            <div style="padding-left:20px; width:360px; left:10px; float:left;border-style:solid; border: 0px;">
+                
+            <table cellspacing="0" cellpadding="0" width="100%" >
+                    <tr>
+                        <td width="10%" style="vertical-align: top">DEAR:</td>
+                        <td width="90%" style="vertical-align: top; padding-left: 5px;">
+                            <div style="width: 100%;">
+                            <apex:outputText value="{!itemList[0].Seikyusaki__r.EnglishCompanyName__c} " rendered="{!(DebitReportFlag == True && itemList.size > 0)}"/>
+                            <apex:outputText value="{!itemList[0].PaymentTo__r.EnglishCompanyName__c} " rendered="{!(DebitReportFlag == false && itemList.size > 0)}"/>
+                            </div> 
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td width="10%" style="vertical-align: top">ADDRESS:</td> 
+                        <td width="90%" style="vertical-align: top; padding-left: 5px;">
+                            <div style="width: 100%;">
+                            <apex:outputText value="{!itemList[0].Seikyusaki__r.EnglishAddress__c} " rendered="{!(DebitReportFlag == True && itemList.size > 0)}"/>
+                            <apex:outputText value="{!itemList[0].PaymentTo__r.EnglishAddress__c} " rendered="{!(DebitReportFlag == false && itemList.size > 0)}"/>
+                            </div> 
+                        </td> 
+                    </tr> 
+                    <tr style="{!IF((DebitReportFlag == True && itemList.size > 0 && itemList[0].Seikyusaki__r.Phone != null && itemList[0].Seikyusaki__r.Fax!= null) || (DebitReportFlag == false && itemList.size > 0 && itemList[0].PaymentTo__r.Phone != null && itemList[0].PaymentTo__r.Fax != null), '', 'display: none')}">
+                        <td width="10%" style="text-align: top">TEL&amp;FAX:</td> 
+                         <td width="90%" style="text-align: top; padding-left: 5px;">
+                            <div style="width: 100%;">
+                                <apex:outputText value="{!itemList[0].Seikyusaki__r.Phone}" rendered="{!(DebitReportFlag == True && itemList.size > 0 && itemList[0].Seikyusaki__r.Phone != null)}"/>
+                                <apex:outputText value=" & " rendered="{!(DebitReportFlag == True && itemList.size > 0 && itemList[0].Seikyusaki__r.Phone != null && itemList[0].Seikyusaki__r.Fax!= null)}"/>
+                                <apex:outputText value="{!itemList[0].Seikyusaki__r.Fax} " rendered="{!(DebitReportFlag == True && itemList.size > 0 && itemList[0].Seikyusaki__r.Fax!= null)}"/>
+
+                                <apex:outputText value="{!itemList[0].PaymentTo__r.Phone}" rendered="{!(DebitReportFlag == false && itemList.size > 0 && itemList[0].PaymentTo__r.Phone != null)}"/>
+                                <apex:outputText value=" & " rendered="{!(DebitReportFlag == false && itemList.size > 0 && itemList[0].PaymentTo__r.Phone != null && itemList[0].PaymentTo__r.Fax != null)}"/>
+                                <apex:outputText value="{!itemList[0].PaymentTo__r.Fax} " rendered="{!(DebitReportFlag == false && itemList.size > 0 && itemList[0].PaymentTo__r.Fax != null)}"/>
+                             </div> 
+                        </td> 
+                    </tr>
+                </table> 
+            </div>
+        </div>
+
+            <!--
+            <div STYLE="position:absolute; left:10px; margin-top:100px; ">
+                <div style="padding-left:20px; width:50px; left:10px; float:left;min-width:370px; border-style:solid; border: 0px; height:30px;">
+                    <apex:outputText value="DEAR: {!itemList[0].Seikyusaki__r.EnglishCompanyName__c} " rendered="{!(DebitReportFlag == True && itemList.size > 0)}"/>
+                    <apex:outputText value="DEAR: {!itemList[0].PaymentTo__r.EnglishCompanyName__c} " rendered="{!(DebitReportFlag == false && itemList.size > 0)}"/>
+                </div>
+            </div>
+            <div STYLE="position:absolute; left:10px; margin-top:140px; ">
+                <div style="padding-left:20px; width:50px; left:10px; float:left;min-width:370px; border-style:solid; border: 0px; height:30px;">
+                    <apex:outputText value="ADDRESS: {!itemList[0].Seikyusaki__r.EnglishAddress__c} " rendered="{!(DebitReportFlag == True && itemList.size > 0)}"/>
+                    <apex:outputText value="ADDRESS: {!itemList[0].PaymentTo__r.EnglishAddress__c} " rendered="{!(DebitReportFlag == false && itemList.size > 0)}"/>
+                </div>
+            </div>
+            -->
+
+            <div class="F14" STYLE="position:absolute; left:10px; padding-left:20px; width:320px; margin-top:205px; border:solid 0px; border-bottom-width: 0.5px; height:20px;">
+                <apex:outputText value="DEBIT/INVOICE NO.: S{!AnkenList.WkInitial__c}{!AnkenList.Name}-{!AnkenList.QuotationVer__c}" />
+            </div>
+
+            <apex:outputText rendered="{!DebitReportFlag == True}">
+                <div STYLE="position:absolute; left:10px; margin-top:230px;">
+                    <span class="F14"></span><br />
+                    <span class="F14"></span>
+                </div>
+            </apex:outputText>
+
+            <div STYLE="position:absolute; margin-left:10px; margin-top:240px; width350px;">
+                <div STYLE="position:absolute; left:0px; top:0px; width:350px; height:120px;  border-width:1px; border-style:solid; "></DIV>
+                <div STYLE="position:absolute; left:0px; top:80px; width:350px; border-width:0.5px; border-style:solid;"></DIV>
+                <div STYLE="position:absolute; left:10px; top:10px; font-size:12pt; width:300px;">
+                    <apex:outputText rendered="{!DebitReportFlag == True}">
+                        DEBIT AMOUNT
+                    </apex:outputText>
+                    <apex:outputText rendered="{!DebitReportFlag == False}">
+                        CREDIT AMOUNT
+                    </apex:outputText>
+                </div>
+                <apex:outputText rendered="{!DebitReportFlag == True}">
+                    <div STYLE="position:absolute; left:10px; top:90px; font-size:11pt; width:300px;">
+                        Due Date
+                    </div>
+                </apex:outputText>
+            </div>
+            <apex:outputText rendered="{!DebitReportFlag == True}">
+                <div STYLE="position:absolute; left:100px; margin-top:270px; padding-right:5px; line-height:30px; text-align:center; height:30px; width:255px; font-size:20pt;">
+                    <!--<apex:outputText value="USD {0, number, ###,###,##0.0#}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!SyokeiUSD+SyohizeiUSD}" />
+                    </apex:outputText>-->
+                     <apex:outputText value="USD {0, number, ###,###,##0.00}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(SyokeiUSD, 2) + ROUND(SyohizeiUSD, 2)}" />
+                    </apex:outputText>
+                </div>
+            </apex:outputText>
+            <apex:outputText rendered="{!DebitReportFlag == false}">
+                <div STYLE="position:absolute; left:100px; margin-top:270px; padding-right:5px; line-height:30px; text-align:center; height:30px; width:255px; font-size:20pt;">
+                    <apex:outputText value="USD {0, number, ###,###,##0.0#}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(totalBuyAmountUSD, 2) + ROUND(sumAmountOfTaxBuyingUSD, 2)}" />
+                    </apex:outputText>
+                </div>
+            </apex:outputText>
+
+           <div style="position:absolute; left:20px; margin-top:300px;">
+                    <div style="float:left; width:50px;font-size:9pt;">
+                        EXCHANGE
+                    </div>
+                    <div style="float:left; margin-left:30px;font-size:9pt;">
+                        <apex:outputText value="{0,number,###,###,###,###}" rendered="{!ItemList.size > 0 && DebitReportFlag == true}">
+                            <apex:param value="{!ItemList[0].KawaseSel__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="{0,number,###,###,###,###}" rendered="{!ItemList.size > 0 && DebitReportFlag == false}">
+                            <apex:param value="{!ItemList[0].KawaseBay__c}" />
+                        </apex:outputText>
+                    </div>
+           </div>    
+
+            <div style="position:absolute; left:150px; margin-top:330px; width:255px;">
+                <apex:outputText value="{0,date,dd/MM/yyyy}"  rendered="{!DebitReportFlag == True}">
+                    <apex:param value="{!AnkenList.DebitNote_duedate__c}"/>
+                </apex:outputText>
+            </div>
+
+            <div STYLE="position:absolute; left:10px; margin-top:370px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:10px; margin-top:467px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="font-size:9pt;">
+                <div STYLE="position:absolute; left:10px; margin-top:375px;">
+                    <div style="float:left; width:100px;">
+                        HBL/HAWB NO.
+                    </div>
+                    <div style="float:left; margin-left:-2px;">
+                        <apex:outputText value="{!AnkenList.HBL__c}"  />
+                        <apex:outputText value="{!AnkenList.HAWB__c}" />
+                    </div>
+                </div>
+
+            <div STYLE="position:absolute; left:10px; margin-top:395px;">
+                    <div style="float:left; width:100px;">
+                        MBL/MAWB NO.
+                    </div>
+                    <div style="float:left; margin-left:-2px;">
+                        <apex:outputText value="{!AnkenList.Master_B_L__c}"  />
+                        <apex:outputText value="{!AnkenList.MAWB__c}" />
+                    </div>
+                </div>
+
+                <div STYLE="position:absolute; left:10px; margin-top:415px;">
+                    <div style="float:left; width:50px;">
+                        QUANTITY
+                    </div>
+                    <div style="float:left; margin-left:47px;">
+                        <apex:outputPanel rendered="{!AnkenList.carton__c != null}">
+                            <apex:outputText value="{!AnkenList.carton__c} {!AnkenList.UnitType__c}(s)"/>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+
+                <div style="position:absolute; left:10px; margin-top:435px;">
+                    <div style="float:left; width:100px;">
+                        SIZE
+                    </div>
+                    <div style="float:left; margin-left:-2px;">
+                        <apex:outputPanel rendered="{!AnkenList.Container__c != null && AnkenList.ContainerNumber__c!= null}">
+                            {!AnkenList.TranporationType__c + ' : ' +  AnkenList.Container__c} * {!AnkenList.ContainerNumber__c  }
+                        </apex:outputPanel>
+                    </div>
+                    <div style="float:left; margin-left:5px;">
+                        <apex:outputPanel rendered="{!AnkenList.Container2__c != null && AnkenList.ContainerNumber2__c!= null}">
+                            {!AnkenList.Container2__c} * {!AnkenList.ContainerNumber2__c }
+                        </apex:outputPanel>
+                    </div>
+                </div>
+
+                <div style="position:absolute; left:172px; margin-top:445px;">
+                    <div style="float:left; margin-left:-1px; margin-top:4px;">
+                        <apex:outputPanel rendered="{!AnkenList.Container3__c != null && AnkenList.ContainerNumber3__c!= null}">
+                            {!AnkenList.Container3__c} * {!AnkenList.ContainerNumber3__c }
+                        </apex:outputPanel>
+                    </div>
+
+                    <div style="float:left; margin-left:9px; margin-top:4px;">
+                        <apex:outputPanel rendered="{!AnkenList.Container4__c != null && AnkenList.ContainerNumber4__c!= null}">
+                            {!AnkenList.Container4__c} * {!AnkenList.ContainerNumber4__c }
+                        </apex:outputPanel>
+                    </div>
+                </div>
+
+                <div STYLE="position:absolute; left:280px; margin-top:375px;">
+                    <div style="float:left; width:50px;">
+                        VESSEL/FLIGHT
+                    </div>
+                    <div style="float:left; margin-left:60px;">
+                        <apex:outputText value="{!AnkenList.Vessle__c}"  />
+                        <apex:outputText value="{!AnkenList.FlightNo__c}" />
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:280px; margin-top:395px;">
+                    <div style="float:left; width:50px;">
+                        P.O.L(A.O.D)
+                    </div>
+                    <div style="float:left; margin-left:60px;">
+                        {!AnkenList.POL__r.Name}
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:280px; margin-top:415px;">
+                    <div style="float:left; width:50px;">
+                        E.T.D
+                    </div>
+                    <div style="float:left; margin-left:60px;">
+                        <apex:outputText value="{0,date,{!dateFormat}}">
+                            <apex:param value="{!AnkenList.ETD__c}"/>
+                        </apex:outputText>
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:280px; margin-top:435px;">
+                    <div style="float:left; width:50px;">
+                        MEASUREMENT
+                    </div>
+                    <div style="float:left; margin-left:60px;">
+                        <apex:outputPanel rendered="{!AnkenList.CBM__c!= null}">
+                            {!AnkenList.CBM__c}  <span class="F10"> CBM</span>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+
+                <div STYLE="position:absolute; left:565px; margin-top:375px;">
+                    <div style="float:left; width:50px;">
+                        VOY NO.
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        {!AnkenList.Voy_No__c}
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:565px; margin-top:395px;">
+                    <div style="float:left; width:50px;">
+                        P.O.D(A.O.A)
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        {!AnkenList.POD__r.Name}
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:565px; margin-top:415px;">
+                    <div style="float:left; width:50px;">
+                        E.T.A
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText value="{0,date,{!dateFormat}}">
+                            <apex:param value="{!AnkenList.ETA__c}"/>
+                        </apex:outputText>
+                    </div>
+                </div>
+                
+                <div STYLE="position:absolute; left:565px; margin-top:435px;">
+                    <div style="float:left; width:50px;">
+                        WEIGHT
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <!-- 2019/08/20 Chien Truong MODIFY START -->
+                        <!-- <apex:outputText rendered="{!OR(AnkenList.RecordType.DeveloperName = 'RecordType1', AnkenList.RecordType.DeveloperName = 'RecordType',
+                                AnkenList.RecordType.DeveloperName = 'oceanimport_lock', AnkenList.RecordType.DeveloperName = 'oceanexport_lock',
+                                AnkenList.RecordType.DeveloperName = 'CrossBoarder', AnkenList.RecordType.DeveloperName = 'CrossBoarderLock')
+                                && AnkenList.weight__c!= null}">
+                            {!AnkenList.weight__c} <span class="F10"> KGS</span>
+                        </apex:outputText> -->
+                        <apex:outputText rendered="{!OR(AnkenList.RecordType.DeveloperName = 'RecordType1', AnkenList.RecordType.DeveloperName = 'RecordType',
+                                AnkenList.RecordType.DeveloperName = 'oceanimport_lock', AnkenList.RecordType.DeveloperName = 'oceanexport_lock',
+                                AnkenList.RecordType.DeveloperName = 'CrossBoarder', AnkenList.RecordType.DeveloperName = 'CrossBoarderLock',
+                                AnkenList.RecordType.DeveloperName = 'LogisticsService', AnkenList.RecordType.DeveloperName = 'LogisticsServiceLock')
+                                && AnkenList.weight__c!= null}">
+                            {!AnkenList.weight__c} <span class="F10"> KGS</span>
+                        </apex:outputText>
+                         <!-- 2019/08/20 Chien Truong MODIFY END -->
+                        <apex:outputText rendered="{!OR(AnkenList.RecordType.DeveloperName = 'InAir',AnkenList.RecordType.DeveloperName = 'OutAir',AnkenList.RecordType.DeveloperName = 'OutAir_lock',AnkenList.RecordType.DeveloperName = 'airimportlock',AnkenList.RecordType.DeveloperName = 'Express',AnkenList.RecordType.DeveloperName = 'ExpressLock')&&AnkenList.weight__c!= null}">
+                            {!AnkenList.chargable_weight__c}  <span class="F10"> KGS</span>
+                        </apex:outputText>
+                    </div>
+                </div>
+             <!--
+            
+                <div STYLE="position:absolute; left:565px; margin-top:435px;">
+                    <div style="float:left; width:80px;font-size:9pt;">
+                        C/C DECL NO.
+                    </div>
+               
+                   <div style="float:left; margin-left:10px;font-size:9pt;">
+                        {!AnkenList.CustomsClearanceDeclarationNo__c}             
+                    </div>   
+                 
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText value="{0,number,###,###,###,###.00}" rendered="{!ItemList.size > 0 && DebitReportFlag == true}">
+                            <apex:param value="{!ItemList[0].KawaseSel__c}" />
+                        </apex:outputText>
+                        <apex:outputText value="{0,number,###,###,###,###.00}" rendered="{!ItemList.size > 0 && DebitReportFlag == false}">
+                            <apex:param value="{!ItemList[0].KawaseBay__c}" />
+                        </apex:outputText>
+                    </div>
+                  -->  
+             
+            </div>
+            
+            <div STYLE="position:absolute; left:655px;  margin-top:453px; width:760px; font-size:6.5pt;">
+                <div>
+                    *NT(Non Tax)/TF(Tax Free)
+                </div>
+            </div>
+
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px;  margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:35px;  margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:345px; margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:385px; margin-top:470px; width:0px; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:455px; margin-top:470px; width:0px; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:510px; margin-top:470px; width:0px; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:570px; margin-top:470px; width:0px; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:640px; margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:700px; margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:770px; margin-top:470px; width:0px; height:475px; border-width:0.3px; border-style:solid;"></div>
+
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:470px; width:760px; border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:495px; width:760px; border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:520px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:545px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:570px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:595px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:620px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:645px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:670px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:695px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:720px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:745px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:770px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:795px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:820px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:845px; width:760px; border-width:0.1px; border-style:solid;"></DIV>
+
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:870px; width:760px; border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:895px; width:760px; border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:920px; width:760px; border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:945px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+            <div style="position:absolute; margin-top:472px; font-size:9pt;">
+                <div STYLE="position:absolute; left:14px;">
+                    NO
+                </div>
+                <div STYLE="position:absolute; left:160px;">
+                    DESCRIPTION
+                </div>
+                <div STYLE="position:absolute; left:350px;">
+                    CUR
+                </div>
+                <div STYLE="position:absolute; left:371px; width:100px;line-height:9px;font-size:8pt;text-align:center; ">
+                    UNIT<BR/>COST
+                </div>
+                <div STYLE="position:absolute; left:465px; ">
+                    UNIT
+                </div>
+                <div STYLE="position:absolute; left:495px; width:100px;line-height:9px;font-size:8pt;text-align:center; ">
+                    CHARGE<BR/>UNIT
+                </div>
+                <div STYLE="position:absolute; left:584px;">
+                    AMOUNT
+                </div>
+                <div STYLE="position:absolute; left:662px;">
+                    TAX
+                </div>
+                <div STYLE="position:absolute;  left:688px; width:100px;line-height:9px;font-size:8pt;text-align:center;">
+                    TAX<BR/>TYPE
+                </div>
+            </div>
+
+            <div style="position:absolute; margin-top:497px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!list.objectList}" var="inlist">
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center;">
+                        {!inlist.SeikyuBangou__c}
+                    </div>
+                    <div style="padding-left:5px; height:25px; width:335px; float:left; text-align:left;">
+                        <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(inlist.InsatuyouSyohinEng__c,'Surcharge Included' ,''),'Surcharge Excluded','')}"></apex:outputText>
+                    </div>
+
+                    <apex:outputText rendered="{!DebitReportFlag == True}">
+                        <div style="margin-left:-35px; height:25px; width:45px; float:left; text-align:center;">
+                            USD
+                        </div>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!DebitReportFlag == False}">
+                        <div style="margin-left:-35px; height:25px; width:45px; float:left; text-align:center;">
+                            USD
+                        </div>
+                    </apex:outputText>
+
+                    <div style="margin-left:37px; height:25px; width:30px; float:left; text-align:right;">
+                        <apex:outputText rendered="{!DebitReportFlag == True}">
+                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!inlist.curr__c != 'USD'}">
+                                <apex:param value="{!inlist.SellTankaUSD__c}" />
+                            </apex:outputText>
+                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!inlist.curr__c = 'USD'}">
+                                <apex:param value="{!inlist.SellTankaUSD__c}" />
+                            </apex:outputText>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!DebitReportFlag == False}">
+                            <apex:outputText value="{0, number, ###,###,##0.000}">
+                                <apex:param value="{!inlist.BuyTankaUSD__c}" />
+                            </apex:outputText>
+                        </apex:outputText>
+                    </div>
+
+                    <div style="margin-left:15px; height:8px; width:30px; float:left; text-align:center;" >
+                        <div style=" margin-left:-5px; height:25px; width:40px; float:left; text-align:center;">
+                            <apex:variable var="unitPrint" value="{!inlist.ChargeUnitInPrint__c}"/>
+                        <apex:variable var="unitKey" value="{!inlist.ChargeUnitFormula__c}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!unitPrint != null && unitKey !='コンテナ' && unitKey != 'Container'}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!unitPrint == null && unitKey != 'コンテナ' && unitKey != 'Container'}"/>
+                        <apex:outputText value="{!inlist.ContainerSizeFormula__c}" rendered="{!inlist.ContainerSizeFormula__c != null && (unitKey == 'コンテナ' || unitKey == 'Container')}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'Container')}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'コンテナ')}"/>
+                    
+                        </div>
+                    </div>
+
+                    <div style="margin-left:10px; height:25px; width:60px; float:left; text-align:center;">
+                        {!VALUE(inlist.wkSuryo__c)}
+                    </div>
+
+                    <div style="margin-left:14px; height:25px; width:55px; float:left; text-align:right;">
+                        <apex:outputText rendered="{!DebitReportFlag == True}">
+                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!inlist.curr__c != 'USD'}">
+                                <apex:param value="{!inlist.SellAmountUSD__c}" />
+                            </apex:outputText>
+                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!inlist.curr__c = 'USD'}">
+                                <apex:param value="{!inlist.SellAmountUSD__c}" />
+                            </apex:outputText>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!DebitReportFlag == False}">
+                            <apex:outputText value="{0, number, ###,###,##0.000}">
+                                <apex:param value="{!inlist.BuyAmountUSD__c}" />
+                            </apex:outputText>
+                        </apex:outputText>
+                    </div>
+
+                    <apex:outputText rendered="{!DebitReportFlag == True}">
+                        <div style="margin-left:30px; height:25px; width:30px; float:left; text-align:right;font-size:8pt;">
+                            <apex:outputText value="{0,number,###,###,##0.000}">
+                                <apex:param value="{!inlist.SellTaxNum_USD__c}"/>
+                            </apex:outputText>
+                        </div>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!DebitReportFlag == False}">
+                        <div style="margin-left:30px; height:25px; width:30px; float:left; text-align:right;font-size:8pt;">
+                            <apex:outputText value="{0,number,###,###,##0.000}">
+                                <apex:param value="{!inlist.BuyTaxNum_USD__c}"/>
+                            </apex:outputText>
+                        </div>
+                    </apex:outputText>
+
+                    <apex:outputText rendered="{!DebitReportFlag == True}">
+                        <div style="margin-left:12px; height:20px; width:50px; float:left; text-align:center; font-size:8pt; ">
+                            <apex:outputPanel rendered="{!(inlist.ProductTax__c != null && (inlist.ProductTax__c != '課税' && inlist.ProductTax__c != 'TAX(課税)'))}">
+                                <apex:variable var="taxKey" value="{!inlist.ProductTax__c}"/>
+                                {!translations[taxKey]}
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!(inlist.ProductTax__c == '課税' || inlist.ProductTax__c == 'TAX(課税)')}">
+                            <!--    {!inlist.TaxInitial__c}%  -->
+                                
+                                   <apex:outputText value="{0,number,###,###,##0.########}%">
+                                   <apex:param value="{!inlist.TaxInitial__c}"/>
+                                   </apex:outputText>
+                                     
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!DebitReportFlag == False}">
+                        <div style="margin-left:20px; height:20px; width:50px; float:left; text-align:center;font-size:8pt; ">
+                            <apex:outputPanel rendered="{!(inlist.ProductTax__c != null && (inlist.ProductTax__c != '課税' && inlist.ProductTax__c != 'TAX(課税)'))}">
+                                <apex:variable var="taxKey" value="{!inlist.ProductTax__c}"/>
+                                {!translations[taxKey]}
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!(inlist.ProductTax__c == '課税' || inlist.ProductTax__c == 'TAX(課税)')}">
+                            <!--{!inlist.BuyTaxInitial__c}%-->
+                                <apex:outputText value="{0,number,###,###,##0.###}%">
+                                    <apex:param value="{!inlist.BuyTaxInitial__c}"/>
+                                </apex:outputText>
+                            </apex:outputPanel>
+                        </div>
+                    </apex:outputText>
+
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <!--
+                <div class="F12" style="margin-left: 40px;">
+                    <apex:outputText value="{!AnkenList.HBL__c}"  />
+                    <apex:outputText value="{!AnkenList.HAWB__c}" />
+                </div>
+                -->
+
+            </div>
+
+            <div STYLE="position:absolute; left:120px; margin-top:875px;text-align:center; width:200px; ">
+                SUB-TOTAL
+            </div>
+            <div STYLE="position:absolute; left:120px; margin-top:900px;text-align:center; width:200px; ">
+                TAX
+            </div>
+            <div STYLE="position:absolute; left:120px; margin-top:925px;text-align:center; width:200px; ">
+                TOTAL
+            </div>
+            
+             <!-- 
+            
+            <div STYLE="position:absolute; left:50px; margin-top:948px;text-align:Left; width:200px; font-size:9pt;">
+                AMOUNT IN WORD
+            </div>
+            
+             -->
+            
+
+            <div STYLE="position:absolute; right:170px; margin-top:875px; text-align:right; width:400px;">
+                <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!DebitReportFlag = True}">
+                    <apex:param value="{!ROUND(list.pageSyokeiUSD, 2)}" />
+                </apex:outputText>
+                <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!DebitReportFlag = False}">
+                    <apex:param value="{!ROUND(list.subTotalBuyAmountUSD, 2)}" />
+                </apex:outputText>
+                
+            </div>
+            <div STYLE="position:absolute; right:170px; margin-top:900px; text-align: right; width:400px;">
+                <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}" />
+                <apex:outputText rendered="{!DebitReportFlag == True}">
+                    <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(SyohizeiUSD, 2)}" />
+                    </apex:outputText>
+                </apex:outputText>
+                <apex:outputText rendered="{!DebitReportFlag == False}">
+                    <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(sumAmountOfTaxBuyingUSD, 2)}" />
+                    </apex:outputText>
+                </apex:outputText>
+            </div>
+            <div STYLE="position:absolute; right:170px; margin-top:925px; text-align: right; width:400px;">
+                <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}" />
+                <apex:outputText rendered="{!DebitReportFlag == True}">
+                    <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(SyokeiUSD, 2) + ROUND(SyohizeiUSD, 2)}" />
+                    </apex:outputText>
+                </apex:outputText>
+                <apex:outputText rendered="{!DebitReportFlag == False}">
+                    <apex:outputText value="{0, number, ###,###,##0.00}" rendered="{!list.gyoNo = displayListSize}">
+                        <apex:param value="{!ROUND(totalBuyAmountUSD, 2) + ROUND(sumAmountOfTaxBuyingUSD, 2)}" />
+                    </apex:outputText>
+                </apex:outputText>
+            </div>
+            
+            <!--
+            
+            <div STYLE="position:absolute; right:100px; margin-top:946px; text-align: right; width:600px;font-size:9pt;">
+                <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}" />
+                {!totalAmountText}
+            </div> 
+            -->
+
+
+
+            <div STYLE="position:absolute; left:665px; margin-top:875px; ">
+                USD
+            </div>
+            <div STYLE="position:absolute; left:665px; margin-top:900px; ">
+                USD
+            </div>
+            <div STYLE="position:absolute; left:665px; margin-top:925px; ">
+                USD
+            </div>
+
+            <!-- Remarks -->
+            <div style="position:absolute; left:15px; margin-top:980px;">
+                <div style="float:left; width:350px; font-size:9pt;">
+                    Remarks: {!AnkenList.DebitCreditRemark__c}
+                </div> 
+            </div>
+            <div STYLE="position:absolute; left:15px; margin-top:950px;text-align:left; width:600px; font-size:9pt; text-transform: uppercase;">
+            IN WORDS: {!totalAmountText}.
+            </div>
+            <div STYLE="position:absolute; left:10px;  margin-top:925px; width:760px; font-size:10pt;">
+                <div style="position:absolute; left:0x; margin-top:48px; width:760px; border-width:0.5px; border-style:solid;"></div>
+
+                <div style="position:absolute; left:480px;  margin-top:50px; width:760px; font-size:10pt;">
+                    <div>
+                        Authorized Signature
+                    </div>
+                </div>
+                
+                <!--
+                <div STYLE="position:absolute; left:350px;  margin-top:75px; width:760px; font-size:10pt;">
+                    <div>
+                        OPERATOR
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:350px;  margin-top:130px; width:1050px; font-size:10pt;">
+                    <div>
+                        APPROVER
+                    </div>
+                </div>
+                -->
+            </div>
+
+            <!--
+            <div style="position:absolute; left:470px; margin-top:1025px; width:180px; border-width:1px; border-style:solid;"></div>
+            <div style="position:absolute; left:470px; margin-top:1080px; width:180px; border-width:1px; border-style:solid;"></div>
+            -->
+            
+            <apex:outputText rendered="{!DebitReportFlag == True}">
+                <div STYLE="position:absolute; left:400px; margin-top:275px; font-size:7pt;">
+                    <table cellspacing="0" cellpadding="0" >
+                        <tr height="0px;">
+                            <td colspan="4" height="0px;">BANK ACCOUNT INFORMATION</td>
+                        </tr>
+                        <tr height="0px;">
+                            <td width="10px;" height="0px;">・BANK ACCOUNT</td>
+                            <td width="450px;">{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Name_1__c} </td>
+                        </tr>
+                        <tr height="0px;">
+                            <td width="135px;" height="0px;">・ACCOUNT NO.</td>
+                            <td >{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Account_No_1__c}</td>
+                        </tr>
+                        <tr height="0px;">
+                            <td width="135px;" height="0px;">・SWIFT CODE</td>
+                            <td >{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_1_Other__c}</td>
+                        </tr>
+                        <tr height="0px;">
+                            <td width="135px;" height="0px;">・ACCOUNTEE</td>
+                            <td >{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Account_1__c}</td>
+                        </tr>
+                        <tr height="0px;">
+                            <td width="135px;" height="0px;">・BANK ADDRESS </td>
+                            <td >{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Address_1__c} </td>
+                        </tr>
+                    </table>
+                </div>
+            </apex:outputText>
+
+            <div STYLE="position:absolute; left:385px; margin-top:1090px;">
+                <apex:outputText value="{!list.gyoNo}" />
+            </div>
+            <!--
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:1092px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co., Ltd.
+            </div>
+            -->
+            <apex:outputText rendered="{!NOT(list.gyoNo = displayListSize)}">
+                <div style="page-break-before: always;"></div>
+                <div style="height:8px;"></div>
+            </apex:outputText>
+        </apex:repeat>   
+    </body>
+</apex:page>

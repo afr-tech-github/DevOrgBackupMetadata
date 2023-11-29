@@ -1,0 +1,186 @@
+<apex:page controller="NavigationFlowController" sidebar="true" title="Navigation Flow">
+    <apex:sectionHeader subtitle="AFR CloSCM - NAVIGATION FLOW"/>
+    <div style="width: 100%; float: right; margin-right: 50px; display: block; text-align: right; font-weight: bold;">
+        <a href="/setup/languageAndTimeZoneSetup.apexp?retURL=%2Fui%2Fsetup%2FSetup%3Fsetupid%3DPersonalInfo&setupid=LanguageAndTimeZone">
+            {!translations['NF_93']}
+            <apex:image url="{!URLFOR($Resource.Navigation, '/Languages.png')}"
+                        style="vertical-align:middle; width:50px;height:50px; padding: 5px;"/>
+        </a>
+    </div>
+
+    <!--CloTra-Cargo Tracking Module & Searching-->
+    <h1>{!translations['NF_PRB_1']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!cloapps}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloFor-Forwarding Module-->
+    <h1>{!translations['NF_PRB_2']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!forwarding}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloLog-Logistic Module-->
+    <h1>{!translations['NF_PRB_3']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!logisticManagement}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloCon-Consolidation Module-->
+    <h1>{!translations['NF_PRB_4']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!consolidation}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloTruck-Truck Module-->
+    <h1>{!translations['NF_PRB_5']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!trucking}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloFil-JP24H AFR Module-->
+    <h1>{!translations['NF_PRB_6']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!clofil}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloAcc-Accounting Module:Revenues & Cost of Sales-->
+    <h1>{!translations['NF_PRB_7']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!accounting}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloAcc-Accounting Module-Purchasing/Expenses & Management-->
+    <h1>{!translations['NF_PRB_8']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!expenses}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloFin: Cloud Financial Report-->
+    <h1>{!translations['NF_PRB_21']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!financialReports}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloCha:Chatting Module-->
+    <h1>{!translations['NF_PRB_20']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!chatting}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloCRM-Cust/Ptnr Relationship Module & Quotation-->
+    <h1>{!translations['NF_PRB_9']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!quotation}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloHRM-->
+    <h1>{!translations['NF_PRB_22']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!cloHRM}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloSCM Package-Customization-->
+    <h1>{!translations['NF_PRB_10']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!managementProcess}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloSCM Package-Setup-->
+    <h1>{!translations['NF_PRB_11']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!initialSettings}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--CloSCM Package-Code-->
+    <h1>{!translations['NF_PRB_12']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!referenceData}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--New Release & Tutorial/Scenario for Self-Learning-->
+    <h1>{!translations['NF_PRB_13']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!tutorial}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--AFR Services & Contracts-->
+    <h1>{!translations['NF_PRB_14']}</h1>
+    <br />
+    <br />
+    <c:WorkProgress WorkProgressList="{!serviceAndContracts}"></c:WorkProgress>
+    <br />
+    <br />
+
+    <!--Consulting/Advisory Service & Best Practice-->
+    <h1>{!translations['NF_PRB_15']}</h1>
+    <br />
+    <br />
+    <c:NavigationBlock WorkProgressList="{!consultingServices}"></c:NavigationBlock>
+    <br />
+    <br />
+
+    <!--PC Setup & Data Upload Template-->
+    <h1>{!translations['NF_PRB_16']}</h1>
+    <br />
+    <br />
+    <c:NavigationBlock WorkProgressList="{!pcSetup}"></c:NavigationBlock>
+    <br />
+    <br />
+
+    <!--My Setup-->
+    <h1>{!translations['NF_PRB_17']}</h1>
+    <br />
+    <br />
+    <c:NavigationBlock WorkProgressList="{!mySetup}"></c:NavigationBlock>
+    <br />
+    <br />
+
+    <!--Operation Management-->
+    <h1>{!translations['NF_PRB_18']}</h1>
+    <br />
+    <br />
+    <c:NavigationBlock WorkProgressList="{!managementOperations}"></c:NavigationBlock>
+    <br />
+    <br />
+
+    <!--Organization Governance & Monitoring-->
+    <h1>{!translations['NF_PRB_19']}</h1>
+    <br />
+    <br />
+    <c:NavigationBlock WorkProgressList="{!governance}"></c:NavigationBlock>
+    <br />
+    <br />
+</apex:page>

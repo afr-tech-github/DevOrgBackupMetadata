@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>PayrollOrder__c</columns>
+    <columns>PayrollSlip__c</columns>
+    <columns>PayPeriodStartDate__c</columns>
+    <columns>PayPeriodEndDate__c</columns>
+    <columns>SalaryToContributeSocialInsurance__c</columns>
+    <columns>HSUInsuranceByEmployee__c</columns>
+    <columns>HSUInsuranceByEmployer__c</columns>
+    <columns>HSUInsuranceRatioByEmployee_r__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+    <sharedTo>
+        <role>HRManager</role>
+        <role>HRStaff</role>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,23 @@
+Dear Approver
+
+{!PurchasingOrder__c.CreatedBy} has requested your approval for the new Purchasing Order as below.
+
+Please click this link to approve or reject this record.
+
+◎PURCHASING ORDER ID：[{!PurchasingOrder__c.Name}] Link to :{!PurchasingOrder__c.Link} 
+◎PURCHASING ORDER NAME : {!PurchasingOrder__c.PurchasingOrderName__c}
+◎VENDOR : 
+{!PurchasingOrder__c.Vendor__c}
+◎PAYMENT DUE DATE: 
+{!PurchasingOrder__c.PaymentDueDate__c}
+
+You can also approve, reject and comment on this request from your feed.
+
+Best regards.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

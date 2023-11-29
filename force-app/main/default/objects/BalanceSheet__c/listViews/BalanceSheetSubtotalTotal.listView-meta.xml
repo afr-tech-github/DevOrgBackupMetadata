@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BalanceSheetSubtotalTotal</fullName>
+    <columns>NAME</columns>
+    <columns>AtDay__c</columns>
+    <columns>PeriodType__c</columns>
+    <columns>CloseBalCurrentAssets__c</columns>
+    <columns>OpenBalCurrentAssets__c</columns>
+    <columns>CloseBalFixedLongInv__c</columns>
+    <columns>OpenBalFixedLongInv__c</columns>
+    <columns>CloseBalTotalAsset__c</columns>
+    <columns>OpenBalTotalAsset__c</columns>
+    <columns>ClosingBalancePayableDebts__c</columns>
+    <columns>OpenBalPayableDebts__c</columns>
+    <columns>CloseBalCapitals__c</columns>
+    <columns>OpenBalCapitals__c</columns>
+    <columns>CloseBalTotalLiabilityEqu__c</columns>
+    <columns>OpenBalTotalLiabilityEqu__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>BALANCE SHEET-SUBTOTAL&amp;TOTAL</label>
+    <language>en_US</language>
+</ListView>

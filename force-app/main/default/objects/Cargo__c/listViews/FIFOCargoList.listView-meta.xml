@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FIFOCargoList</fullName>
+    <columns>Product__c</columns>
+    <columns>NAME</columns>
+    <columns>InboundDate__c</columns>
+    <columns>LastLocator__c</columns>
+    <columns>LastLocatorCode__c</columns>
+    <columns>LastWosLineItem__c</columns>
+    <columns>Summary__c</columns>
+    <columns>CargoLifeCycle__c</columns>
+    <columns>CargoType__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>QuantityInUnit__c</columns>
+    <columns>AcceptedQuantityInUnit__c</columns>
+    <columns>QuantityPerUnit__c</columns>
+    <columns>ManufacturedDate__c</columns>
+    <columns>ExpiredDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CargoLifeCycle__c</field>
+        <operation>equals</operation>
+        <value>For sales</value>
+    </filters>
+    <filters>
+        <field>LastWOSRecordType__c</field>
+        <operation>equals</operation>
+        <value>Putaway</value>
+    </filters>
+    <filters>
+        <field>InventoryType__c</field>
+        <operation>contains</operation>
+        <value>FIFO</value>
+    </filters>
+    <label>FIFO Cargo List</label>
+</ListView>

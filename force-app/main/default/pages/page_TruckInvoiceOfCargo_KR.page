@@ -1,0 +1,287 @@
+<apex:page controller="DeliveryLetterController" contentType="text-html" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: 300mm 210mm;
+                margin-top:50px;
+                margin-bottom:20px;
+                margin-left:20px;
+                margin-right:0px;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+            }
+
+            .f5 {
+                font-size: 5pt;
+            }
+            
+            .f7 {
+                font-size: 7pt;
+            }
+            
+            .f8 {
+                font-size: 8pt;
+            }
+            
+            .f9 {
+                font-size: 9pt;
+            }
+            
+            .f10 {
+                font-size: 10pt;
+            }
+            
+            .f11 {
+                font-size: 11pt;
+            }
+            
+            .f12 {
+                font-size: 12pt;
+            }
+            
+            .f14 {
+                font-size: 14pt;
+            }
+            
+            .f16 {
+                font-size: 16pt;
+            }
+            
+            .f18 {
+                font-size: 18pt;
+            }
+            
+            .f20 {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+            
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+            
+            .f30 {
+                font-size: 30pt;
+                font-weight: bold;
+            }
+            
+            .table-td {
+                padding: 0 5px;
+                text-align: left;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+            }
+            
+            .table-header-td {
+                padding: 0 5px;
+                text-align: center;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+                font-weight: bold;
+            }
+            
+            .table-1 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .table-2 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .section {
+                margin-top: 10px;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <apex:variable var="index" value="{!0}"/>
+        <apex:repeat value="{!cargoDeliveries}" var="cargoDelivery">
+            <!--heading-->
+            <div style="z-index:-2; width: 100%; margin-left:20px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+            </div>
+            <div class="f18 section" style="width:98%; text-align:center;">
+                화물수령증（트럭용）
+            </div><br/><br/>
+            <div class="f10, section" style="width: 95%;">
+                <table class="table-2">
+                    <tr>
+                        <td colspan="1" rowspan="3" class="table-td" style="width: 12.5%">배송처</td>
+                        <td colspan="3" class="table-td" style="width: 37.5%">
+                            <apex:outputText value="{!cargoDelivery.Destinationaddress__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td" style="width: 12.5%">픽업일</td>
+                        <td colspan="3" class="table-td" style="width: 37.5%">
+                            <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                <apex:param value="{!cargoDelivery.Pickupdate__c}"/>
+                            </apex:outputText>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!cargoDelivery.Destination__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td">배송일</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                <apex:param value="{!cargoDelivery.DeliveryDate__c}"/>
+                            </apex:outputText>
+                            
+                            <apex:outputPanel rendered="{!(isImport && cargoDelivery.DeliveryTime__c != null)}">
+                                <div style="border-left:solid 1px rgb(0,0,0); height:100%; display: inline; margin-left: 10px; margin-right: 10px"></div>
+                                <apex:outputText value="{!cargoDelivery.DeliveryTime__c}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="TEL: {!cargoDelivery.DeliveryPhone__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td">트럭 넘버플레이트</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!cargoDelivery.NumberPlateOfTheTruck__c}"/>
+                        </td>
+                    </tr>       
+                    
+                    <tr>
+                        <td colspan="1" class="table-td" rowspan="2">MARKS AND NUMBERS</td>
+                        <td colspan="1" class="table-td" rowspan="2" style="width: 12.5%">
+                            <apex:outputText value="{!shipment.Marks_and_Numbers__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td" rowspan="2" style="width: 12.5%">개수</td>
+                        <td colspan="1" class="table-td" rowspan="2" style="width: 12.5%">
+                            <apex:outputText value="{!shipment.carton__c}"/>
+                            <br/>
+                            <apex:outputText value="{!shipment.UnitType__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td">쉽퍼</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!shipment.Shipper__r.Name}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="table-td">선명</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!shipment.Vessle__c}"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2" class="table-td" style="width: 25%">상품</td>
+                        <td colspan="2" class="table-td" style="width: 25%"><apex:outputText value="{!shipment.Item__c}"/></td>
+                        <td colspan="1" class="table-td" style="width: 12.5%">H B/L 번호</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!shipment.HBL__c}"/>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2" class="table-td" style="width: 25%">
+                           품번
+                        </td>
+                        <td colspan="2" class="table-td" style="width: 25%">
+                           <apex:outputText value="{!shipment.Style_Number__c}"/>
+                        </td>
+                        <td colspan="1" class="table-td" style="width: 12.5%">화물 반입 장소</td>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="{!shipment.LoadLocation__r.Name}"/>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2" class="table-td" style="width: 25%">GROSS 중량</td>
+                        <td colspan="2" class="table-td" style="width: 25%">
+                            <apex:outputText value="{0, number, ###,##0} KGS" rendered="{!shipment.weight__c != null}">
+                                <apex:param value="{!shipment.weight__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td colspan="1" rowspan="2" class="table-td" style="width: 12.5%">배송 타입</td>
+                        <td colspan="3" rowspan="2" class="table-td">
+                            <apex:outputText value="{!cargoDelivery.DeliveryType__c}"/>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2" class="table-td" style="width: 25%">메져먼트(CBM)</td>
+                        <td colspan="2" class="table-td" style="width: 25%">
+                            <apex:outputText value=" {0, number, ###,##0.###} CBM"  rendered="{!shipment.CBM__c != null}">
+                                <apex:param value="{!shipment.CBM__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr> 
+                    
+                    <tr>
+                        <td colspan="1" rowspan="3" class="table-td" style="width: 12.5%">배송회사</td>
+                        <td colspan="3" class="table-td" style="width: 37.5%">
+                            <apex:outputText value="배송업체명: {!cargoDelivery.DeliveryCompany__r.Name}"/>
+                        </td>
+                        <td colspan="1" rowspan="3" class="table-td" style="width: 12.5%">배송시 주의사항</td>
+                        <td colspan="3" rowspan="3" class="table-td" style="width: 37.5%; vertical-align: top;">
+                         <apex:outputText value="{!cargoDelivery.DeliveryNote__c}"/>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="운전자 이름: {!cargoDelivery.NameOfTheDriver__c}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="table-td">
+                            <apex:outputText value="운전자 연락처: {!cargoDelivery.CPNumberOfTheDriver__c}"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4" class="table-td" style="width: 50%"></td>
+                        <td colspan="4" rowspan="3" class="table-td" style="width: 50%; vertical-align: top;">
+                            의뢰하신 화물의 수령 또는 배송을 완료하였습니다. 내용을 확인 후 사인을 부탁드립니다.<br/>
+                            담당자: <br/>
+                            서명:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="table-td"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="table-td"></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div style="width: 100%;" class="section">
+                <div style="display:inline-block; margin-left: 0px; width: 45%;">
+                    <apex:outputText value="발행일: {0,date,yyyy/MM/dd}"> 
+                        <apex:param value="{!shipment.PrintDate__c}"/>
+                    </apex:outputText>  <br/> 
+                    <apex:outputText value="REF NO: S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"/>              
+                </div>                       
+            </div>
+            
+            <div STYLE="position:absolute; margin-left:890px;  margin-top:38px; width:760px; font-size:10pt;">
+                Powered by AFR Solutions co.,ltd
+            </div>
+            
+            <apex:variable var="index" value="{!index + 1}"/>
+            <apex:outputPanel rendered="{!index < totalCargoes}">
+                <div style="page-break-after: always"/>
+            </apex:outputPanel>
+        </apex:repeat>        
+    </body>
+    
+</apex:page>

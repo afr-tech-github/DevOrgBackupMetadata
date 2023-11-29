@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PartnerSeisanJPY__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF ( CONTAINS(TEXT(Seikyusaki__r.Business_Relationship__c), &apos;Partner&apos;),
+
+	SellInTaxAmountJPY__c,
+
+	IF (CONTAINS(TEXT(PaymentTo__r.Business_Relationship__c), &apos;Partner&apos;), 
+		-1 * BuyInTaxAmountJPY__c, 
+		0
+	)
+
+)</formula>
+    <inlineHelpText>請求先と支払先の「種別」を見て、海外パートナーとのバランスの金額(税込み、標準通貨)を表示します。
+どちらも国内の場合は0で表示されます。</inlineHelpText>
+    <label>BALANCE(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

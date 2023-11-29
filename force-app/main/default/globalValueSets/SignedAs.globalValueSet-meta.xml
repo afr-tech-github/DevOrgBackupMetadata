@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AS CARRIER</fullName>
+        <default>false</default>
+        <label>AS CARRIER</label>
+    </customValue>
+    <customValue>
+        <fullName>AS AGENT</fullName>
+        <default>false</default>
+        <label>AS AGENT</label>
+    </customValue>
+    <customValue>
+        <fullName>AS AGENT OF CARRIER</fullName>
+        <default>false</default>
+        <label>AS AGENT OF CARRIER</label>
+    </customValue>
+    <masterLabel>SIGNED AS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

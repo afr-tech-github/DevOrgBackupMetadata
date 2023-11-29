@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Ex Rate-Account Team</name>
+    <queueMembers>
+        <roles>
+            <role>Accounting_Manager</role>
+            <role>Accounting_Staff</role>
+        </roles>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>MgmtMaster__c</sobjectType>
+    </queueSobject>
+</Queue>

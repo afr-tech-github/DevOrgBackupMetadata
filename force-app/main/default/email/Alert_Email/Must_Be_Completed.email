@@ -1,0 +1,225 @@
+オペレーションスタッフ様
+<br>
+<br>
+このメールはステータスを"完了"にし忘れたと思われる場合に自動的に送信されます。  <br>
+<br>
+案件入金残高(標準通貨)=消費税込み販売金額(標準通貨) -案件入金合計額(標準通貨)
+<br>
+{!CustomObject1__c.NyukinzandakaJPY__c}={!CustomObject1__c.SellInTaxAmountJPY_sum__c}-{!CustomObject1__c.NyukinGoukeigaku__c}
+<br>
+<br>
+案件支払残高(標準通貨)=(消費税込み仕入金額(標準通貨)-案件支払額(標準通貨)
+<br>
+{!CustomObject1__c.BuyDifferentiation_sum2__c}={!CustomObject1__c.BuyInTaxAmountJPY_sum__c}-{!CustomObject1__c.Siharaigaku_sum__c}
+<br>
+<br>
+本案件の現在のステータスは 「{!CustomObject1__c.status__c}」となっております。 
+<br>
+ステータスが正しいかどうか確認し、全ての入金及び支払いが処理されていれば、ステータスを "完了"に変更してください。 
+<br><br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				共通部分
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.ID__c}<br>
+Link to SF: {!CustomObject1__c.Link} 
+			</td width="400">
+			<th>
+				ステータス
+			</th>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				取引先
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c}様　
+
+			</td>
+	<th> 
+                                                            品番
+			</th>
+			<td>
+                                                {!CustomObject1__c.Style_Number__c}
+			</td>
+</tr>
+                 <tr>
+			<th>
+			輸送タイプ
+			</th>
+			<td> 
+ {!CustomObject1__c.TranporationType__c}	
+                                                               		</td>
+			<th>
+					
+			</th>
+			<td>
+                                            			                 </td>
+		</tr>
+
+		<tr><thead>
+			<th colspan="4">
+				貨物基礎情報
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				HOUSE B/L 番号. / HAWB 番号.		</th>
+			<td>
+				{!CustomObject1__c.HBL__c}{!CustomObject1__c.HAWB__c} 
+			</td>
+			<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}様
+			</td>
+		</tr>
+		<tr>
+			<th>
+				船 ・便名
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c} {!CustomObject1__c.FlightNo__c}
+			</td>
+			<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}様
+
+			</td>
+		</tr>
+		
+		<tr>
+			<th>
+				VOY NO
+			</th>
+			<td>
+				{!CustomObject1__c.Voy_No__c}
+			</td>
+			<th>
+				出発地
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}  
+			</td>
+		</tr>
+
+
+
+		<tr>
+			<th>
+				商品
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+			<th>
+				出発日
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				重量
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+			<th>
+				到着地
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}  
+			</td>
+		</tr>
+		<tr>
+			<th>
+				個数/量積	</th>
+			<td>
+				{!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM
+			</td>
+			<th>
+				到着日
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				コンテナ情報
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c} {!CustomObject1__c.Container__c} * {!CustomObject1__c.ContainerNumber__c} / {!CustomObject1__c.Container2__c} * {!CustomObject1__c.ContainerNumber2__c} 
+
+
+			</td>
+			<th>
+				B/L タイプ
+			</th>
+			<td>
+				{!CustomObject1__c.BLtype__c}
+			</td>
+		</tr>
+<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				情報共有用社内メモ
+			</th>
+			<td rowspan="2" colspan="3">
+				{!CustomObject1__c.Memo__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br> 
+<br>
+よろしくお願いいたします。<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

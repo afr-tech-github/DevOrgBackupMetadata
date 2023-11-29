@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AFR_Service_Provider__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>JP24H ADVANCED FILING SERVICE PROVIDER</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PLISM(AFR Solution+KLNET)</fullName>
+                <default>false</default>
+                <label>PLISM(AFR Solution+KLNET)</label>
+            </value>
+            <value>
+                <fullName>KTNET</fullName>
+                <default>false</default>
+                <label>KTNET</label>
+            </value>
+            <value>
+                <fullName>Tradeteck</fullName>
+                <default>false</default>
+                <label>Tradeteck</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

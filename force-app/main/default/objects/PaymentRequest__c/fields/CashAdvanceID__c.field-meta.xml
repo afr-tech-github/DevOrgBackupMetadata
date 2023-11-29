@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CashAdvanceID__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Cash Advance ID</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <filterItems>
+            <field>$Source.InternalUser__c</field>
+            <operation>equals</operation>
+            <valueField>CashAdvance__c.InternalRequester__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.ExternalRequester__c</field>
+            <operation>equals</operation>
+            <valueField>CashAdvance__c.ExternalRequester__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>CashAdvance__c</referenceTo>
+    <relationshipLabel>TRX PLAN-ADVANCE REQUEST</relationshipLabel>
+    <relationshipName>TrxPlan</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

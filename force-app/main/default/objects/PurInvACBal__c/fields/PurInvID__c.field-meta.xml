@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PurInvID__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>PUR INV ID</label>
+    <referenceTo>PurchasingInvoice__c</referenceTo>
+    <relationshipLabel>PUR INV+A/C BAL</relationshipLabel>
+    <relationshipName>PurInvID</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

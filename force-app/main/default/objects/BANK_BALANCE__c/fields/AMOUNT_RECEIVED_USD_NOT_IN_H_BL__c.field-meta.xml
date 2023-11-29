@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AMOUNT_RECEIVED_USD_NOT_IN_H_BL__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter Total USD Amount received from customers in case the receiptance is not registered in H B/L Invoice(Selling/Buying).</inlineHelpText>
+    <label>AMOUNT RECEIVED-USD(NOT IN H BL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

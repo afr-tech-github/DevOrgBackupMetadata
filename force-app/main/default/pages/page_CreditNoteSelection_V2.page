@@ -1,0 +1,115 @@
+<apex:page controller="CreditNoteSelection_V2Controller">
+        <head>
+            
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+            
+            
+                <script>
+        
+                    function closePopupDialog() {
+                        window.open('/{!JSENCODE(shipmentId)}','_self');
+                    }
+                </script>
+            </head>
+            <apex:form id="theform">
+                <apex:sectionHeader subtitle="{!translations['invoice_selection_title']}"/>
+                <apex:pageBlock tabStyle="CustomObject1__c" >
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:outputPanel id="buttonBlock">
+                            
+                             <apex:commandButton value="Generate" onclick="af_generateReportDoc(); return false;" rendered="{!customerList.size > 0}"/>
+                            <apex:commandButton value="close" action="{!closePopupDialog}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockSection title="{!translations['language_and_type_Header']}" columns="1">
+                         <apex:pageBlockSectionItem >
+                            <apex:outputLabel >{!translations['language_option']}</apex:outputLabel>
+                            <apex:selectList size="1" value="{!language}" id="language">
+                                <apex:selectOptions value="{!languageOptions}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel >{!translations['print_type']}</apex:outputLabel>
+                            <apex:selectList size="1" value="{!docType}" id="available_report">
+                                <apex:actionSupport event="onchange" action="{!refreshCustomerOption}" reRender="theform"/>
+                                <apex:selectOptions value="{!printOptions}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel >{!translations['customer_option']}</apex:outputLabel>
+                            <apex:selectList size="1" value="{!customerId}" id="customerOption">
+                                <apex:selectOptions value="{!customerList}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!translations['currency_option']}"/>
+                            <apex:selectList size="1" value="{!currencyType}">
+                                <apex:selectOptions value="{!currencyTypeOptions}"/>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!translations['bank_option']}"/>
+                            <apex:selectList size="1" value="{!bankType}">
+                                <apex:selectOptions value="{!bankOptions}"/>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                             <apex:outputLabel value="{!translations['show_container']}"/>
+                            <apex:inputCheckbox value="{!showContainer}"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!translations['template_option']}"/>
+                            <apex:selectList size="1" value="{!templateType}">
+                                <apex:selectOptions value="{!templateOptions}"/>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <!--<apex:outputLabel value="{!translations['file_type_option']}"/>-->
+                            <apex:outputLabel value="File Type"/>
+                            <apex:selectList size="1" value="{!fileType}">
+                                <apex:selectOptions value="{!fileTypeOptions}"/>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                       <!-- -->
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="{!translations['attachment_option']}" columns="1">
+                         <apex:pageBlockSectionItem >
+                            <apex:inputCheckbox styleClass="messageAttachment" value="{!requiredAttachmentCreation}"/>
+                            <apex:outputLabel >{!translations['create_attachment_label']}</apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:actionFunction action="{!generateAttachmentFile}" name="af_generateReportDoc" reRender="jsPanel" oncomplete="generateReportDoc('{!fileType}'); return false;">
+                    </apex:actionFunction>
+                </apex:pageBlock>
+                <apex:outputPanel id="jsPanel">
+            <script type="text/javascript">
+            function generateReportDoc(docType){
+                var requiredAttachmentCreation = document.querySelector('.messageAttachment').checked;
+                var url;
+                console.log('docType' + docType);
+                if(docType ==='pdf'){
+                    url = '/apex/page_CreditNote_V2?'
+                }else{
+                    url = '/apex/page_CreditNoteExcel_V2?'
+                }
+                url += 'shipmentId=' + '{!JSENCODE(shipmentId)}';
+                url += '&customerId=' + '{!JSENCODE(customerId)}';
+                url += '&typeDoc=' + '{!JSENCODE(docType)}';
+                url += '&curr=' + '{!JSENCODE(currencyType)}';
+                url += '&language=' + '{!JSENCODE(language)}';
+                url += '&bankType=' + '{!JSENCODE(bankType)}';
+                url += '&showContainer=' + '{!showContainer}';
+                url += '&templateType=' + '{!JSENCODE(templateType)}';
+                url += '&requiredAttachmentCreation=' + requiredAttachmentCreation;
+                if(docType !='pdf'){
+                     url += '&contentType='+'{!JSENCODE(attachName)}' + '.xls';
+                }
+                console.log('url' + url);
+                window.location.href = url;
+                
+            }
+            </script>
+        </apex:outputPanel>
+            </apex:form>
+</apex:page>

@@ -1,0 +1,21 @@
+팀멤버 여러분
+
+다음과 같이 마스터 안건이 생성되었습니다
+
+◎ 마스터 안건 ID : {! MasterAnken__c.MasterID__c} Link to SF : {! MasterAnken__c.Link}
+◎ MBL No : {! MasterAnken__c.MMaster_B_L_No__c}
+◎ 선박 · 편명 : {! MasterAnken__c.MVessel__c} {! MasterAnken__c.MVoy_No__c}
+◎ ETA : {! MasterAnken__c.META__c} (Day : {! MasterAnken__c.META_DAY__c})
+◎ HOUSE B / L 건수 : {! MasterAnken__c.NO_HOUSE_B_L__c} H B / L
+◎ 컨테이너 : {! MasterAnken__c.MContainer__c} * {! MasterAnken__c.MContainerNumber__c} / {! MasterAnken__c.MContainer2__c} * {! MasterAnken__c.MContainerNumber2__c}
+◎ Devan 예정일 : {! MasterAnken__c.MDevanningDate__c}
+◎ 사내 메모 : {! MasterAnken__c.Internal_Memo__c}
+
+확인한 후 변경해야 할 사항이 있으면 보고 부탁드립니다.
+
+*********************************************************
+{!Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c}
+************************************************** *******
+Powered by AFR Solutions Co., LTD 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

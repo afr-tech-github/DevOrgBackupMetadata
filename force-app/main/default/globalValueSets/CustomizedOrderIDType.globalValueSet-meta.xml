@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Initial+6 Digit ID+Month+Year+Department</fullName>
+        <default>false</default>
+        <label>Initial+6 Digit ID+Month+Year+Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial+6 Digit ID+Month+Year+POL+POD+Department</fullName>
+        <default>false</default>
+        <label>Initial+6 Digit ID+Month+Year+POL+POD+Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Country+POD+Year+Month+Monthly 4 Digit ID</fullName>
+        <default>false</default>
+        <label>Country+POD+Year+Month+Monthly 4 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial+Year+Month+Yearly 6 Digit ID</fullName>
+        <default>false</default>
+        <label>Initial+Year+Month+Yearly 6 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>Country+POD+Year+Month+HBL Monthly 4 Digit ID</fullName>
+        <default>false</default>
+        <label>Country+POD+Year+Month+HBL Monthly 4 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial Setting+Year+Month+Yearly 6 Digit ID</fullName>
+        <default>false</default>
+        <label>Initial Setting+Year+Month+Yearly 6 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial+Year+Month+Monthly 4 Digit ID</fullName>
+        <default>false</default>
+        <label>Initial+Year+Month+Monthly 4 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>B/L Number+POD+Year+Month+HBL Monthly 4 Digit ID</fullName>
+        <default>false</default>
+        <label>B/L Number+POD+Year+Month+HBL Monthly 4 Digit ID</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial+6 Digit ID+Year+POL+POD+Department</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Initial+6 Digit ID+Year+POL+POD+Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Initial+6 Digit ID+Year+Department</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Initial+6 Digit ID+Year+Department</label>
+    </customValue>
+    <masterLabel>CUSTOMIZED ORDER ID TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

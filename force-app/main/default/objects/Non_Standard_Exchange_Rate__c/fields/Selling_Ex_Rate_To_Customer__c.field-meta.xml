@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Selling_Ex_Rate_To_Customer__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Special selling ex-rate to customer</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Special selling ex-rate to customer</inlineHelpText>
+    <label>Selling Exchange Rate To Customer</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

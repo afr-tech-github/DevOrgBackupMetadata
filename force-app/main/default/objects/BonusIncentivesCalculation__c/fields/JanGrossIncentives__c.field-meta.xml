@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JanGrossIncentives__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>(JanPerformance__c -  MinimumAmountForIncentive__c ) *  JanBonusIncentiveRate__c</formula>
+    <inlineHelpText>Jan Gross Incentives = Jan Bonus &amp; Incentives Rate*(Jan Performance-Minimum Amount for Incentives)</inlineHelpText>
+    <label>JAN GROSS INCENTIVES</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

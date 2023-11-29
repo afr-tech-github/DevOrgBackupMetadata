@@ -1,0 +1,12 @@
+Kính gửi  {!Case.SuppliedName}, 
+
+Cám ơn bạn đã gửi yêu cầu trực tiếp lên web cho chúng tôi.  Case #{!Case.CaseNumber}: "{!Case.Subject}" Số hồ sơ đã được tạo {!Organization.Name} Bộ phận thông tin với khách hàng sẽ trả lời cho các bạn trong vòng 24h.
+
+Trân Trọng,
+
+Bộ phận thông tin khách hàng
+{!Organization.Name}
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************

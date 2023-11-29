@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Account Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">To manage Customers, Partners, Vendors or any 3rd parties who already/will have biz transaction.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">取引がすでにある・あるかも知らない顧客、パートナー、業者などを管理できます。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">비지니스거래가 있거나 있을 예정인 고객사, 파트너, 업체등을 관리가 가능합니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">Account</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Để quản lý Khách hàng, Đối tác, Nhà cung cấp hoặc bất kỳ bên thứ 3 khác đã/hoặc sẽ có các giao dịch với công ty.</value>
+    </values>
+</CustomMetadata>

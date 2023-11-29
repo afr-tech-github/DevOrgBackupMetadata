@@ -1,0 +1,10 @@
+.THIS .width-80px{
+    width: 60px !important;
+}
+.THIS td{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.THIS .slds-form-element__icon {/* Replace this class name "slds-form-element__icon" by your finding. */
+    display: none !important;
+}

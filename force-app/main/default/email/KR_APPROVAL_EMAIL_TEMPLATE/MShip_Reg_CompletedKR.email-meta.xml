@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>새로운 M B/L이 등록되었을 때, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>M B/L 등록 이메일</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-M B/L이 등록되었습니다.</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

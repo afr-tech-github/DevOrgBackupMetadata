@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Fixed Cost</fullName>
+        <default>true</default>
+        <label>Fixed Cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Hybrid</fullName>
+        <default>false</default>
+        <label>Hybrid</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Variable Cost</fullName>
+        <default>false</default>
+        <label>Variable Cost</label>
+    </customValue>
+    <masterLabel>COST CATEGORY</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

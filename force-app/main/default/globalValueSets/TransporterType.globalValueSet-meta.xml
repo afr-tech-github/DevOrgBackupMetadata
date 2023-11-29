@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Deliver by Express</fullName>
+        <default>false</default>
+        <label>Deliver by Express</label>
+    </customValue>
+    <customValue>
+        <fullName>Deliver by 3rd Party Last Mile Carriers</fullName>
+        <default>false</default>
+        <label>Deliver by 3rd Party Last Mile Carriers</label>
+    </customValue>
+    <customValue>
+        <fullName>Deliver by 3rd Party Truck Vendors</fullName>
+        <default>false</default>
+        <label>Deliver by 3rd Party Truck Vendors</label>
+    </customValue>
+    <customValue>
+        <fullName>Deliver by Own Truck</fullName>
+        <default>false</default>
+        <label>Deliver by Own Truck</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Transporter Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

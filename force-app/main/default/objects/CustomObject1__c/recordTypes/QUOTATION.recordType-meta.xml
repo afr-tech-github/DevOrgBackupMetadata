@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QUOTATION</fullName>
+    <active>false</active>
+    <compactLayoutAssignment>FMSSOCompactLayout</compactLayoutAssignment>
+    <description>Choose this record type to create a new Quotation for any kinds of shipment.</description>
+    <label>Quotation</label>
+</RecordType>

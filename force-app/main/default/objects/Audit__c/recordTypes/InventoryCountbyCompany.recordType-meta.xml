@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InventoryCountbyCompany</fullName>
+    <active>true</active>
+    <description>Conduct inventory check for all products related with the scope company.</description>
+    <label>Inventory Count base on Scope Company</label>
+</RecordType>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollUpBalanceAfterOffset__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLL-UP BALANCE AFTER OFFSET</label>
+    <summarizedField>DepositOffset__c.ClosingBalance__c</summarizedField>
+    <summaryForeignKey>DepositOffset__c.DepositID__c</summaryForeignKey>
+    <summaryOperation>min</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

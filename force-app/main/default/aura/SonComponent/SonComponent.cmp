@@ -1,0 +1,43 @@
+<aura:component controller="SonController">
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="inputLong" type="String"/>
+    <aura:attribute name="inputLat" type="String"/>
+    <aura:attribute name="listAddresses" type="String[]" default="[]"/>
+
+    <div class="slds-container_small" style="margin:auto">
+        <div class="slds-form slds-form_stacked" aura:id="formApiDemo">
+			<div class="slds-m-bottom_small">
+				<lightning:input type="number" aura:id="input" label="Longitude" step="0.000001"
+					value="{!v.inputLong}"
+					required="true"/>
+			</div>
+
+			<div class="slds-m-bottom_small">
+				<lightning:input type="number" aura:id="input" label="Latitude" step="0.000001"
+					value="{!v.inputLat}"
+					required="true"/>
+			</div>
+
+			<div class="slds-m-top_small slds-text-align_right">
+				<aura:if isTrue="{!isLoading}">
+					<lightning:button label="..." />
+					<aura:set attribute="else">
+						<lightning:button variant="brand" label="Get Address" onclick="{!c.doGetAddress}" />
+					</aura:set>
+				</aura:if>
+			</div>
+		</div>
+
+        <aura:if isTrue="{!v.listAddresses.length > 0}">
+            <div class="slds-box slds-m-top_small slds-p-around_small">
+                <aura:iteration items="{!v.listAddresses}" var="item">
+                    <p>{!item}</p>
+                </aura:iteration>
+            </div>
+        </aura:if>
+
+    	<aura:if isTrue="{!v.isLoading}">
+    		<lightning:spinner variant="brand" size="large" alternativeText="Loading..."/>
+    	</aura:if>
+    </div>
+</aura:component>

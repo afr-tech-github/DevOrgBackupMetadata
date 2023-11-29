@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>AFR_Letter_Head</letterhead>
+    <name>Goods S/O ASN to Warehouse</name>
+    <style>formalLetter</style>
+    <subject>ASN from Goods S/O-{!SALES_ORDER__c.Name}</subject>
+    <textOnly>W/O/S ID:{!WorkOrderService__c.Name}
+
+Delivery Plan Quantity:{!WorkOrderService__c.DeliveryPlanQuantity__c}
+Delivery Damaged Quantity:{!WorkOrderService__c.DeliveryDamagedQuantity__c}
+Delivery Initial Quantity:{!WorkOrderService__c.DeliveryInitialQuantity__c}
+Delivery Returned Quantity:{!WorkOrderService__c.DeliveryReturnedQuantity__c}
+Delivery Final Quantity:{!WorkOrderService__c.DeliveryFinalQuantity__c}
+Delivery Variance Quantity
+Delivery OSD Report:{!WorkOrderService__c.DeliveryOSDReport__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

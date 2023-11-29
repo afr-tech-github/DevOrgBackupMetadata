@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Date_Format__c</fullName>
+    <defaultValue>&quot;dd/MM/yyyy&quot;</defaultValue>
+    <deprecated>false</deprecated>
+    <description>A custom format for date value such as dd-MMM-yy</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A custom format for date value such as dd-MMM-yy</inlineHelpText>
+    <label>Custom Date Format</label>
+    <length>20</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

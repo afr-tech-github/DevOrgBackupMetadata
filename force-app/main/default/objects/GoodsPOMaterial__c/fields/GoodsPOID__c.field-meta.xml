@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsPOID__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>GOODS P/O ID</label>
+    <referenceTo>GoodsPurchasingOrder__c</referenceTo>
+    <relationshipLabel>GOODS P/O+MATERIAL</relationshipLabel>
+    <relationshipName>GoodsPOID</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

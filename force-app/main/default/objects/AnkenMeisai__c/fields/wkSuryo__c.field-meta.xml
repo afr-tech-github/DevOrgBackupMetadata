@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>wkSuryo__c</fullName>
+    <deprecated>false</deprecated>
+    <description>帳票表示用の項目です。他の数式やワークフローで使用しないで下さい。</description>
+    <externalId>false</externalId>
+    <formula>TEXT(
+ IF ( Suryo__c -  FLOOR(Suryo__c) = 0  , FLOOR(Suryo__c) , Suryo__c)
+)
+
+/*
+例①1.000の場合
+1.000 - 1 = 0 → FLOOR(Suryo__c)を表示
+
+例②2.345の場合
+2.345 - 2 ≠ 0→Suryo__cをそのまま表示
+
+他の数式やワークフローの計算値として使わせないため(計算が複雑になるため)
+テキスト型にしています。
+
+*/</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>wkQUANTITY</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

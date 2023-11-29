@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GMTGap__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Tokyo +0900(Tokyo is 9 Hour ahead from GMT)
+Ho Chi Minh +0700(Vietnam is 7 Hour ahead from GMT)
+New York -0500(New York is 5 Hour behind from GMT)</inlineHelpText>
+    <label>Greenwich Mean Time Gap</label>
+    <length>5</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

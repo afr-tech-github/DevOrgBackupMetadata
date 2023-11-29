@@ -1,0 +1,2878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <prompts>
+        <name>CloSCMV372VersionUpgrade</name>
+        <promptVersions>
+            <name>CloSCM V3.72 Version Upgrade</name>
+        </promptVersions>
+    </prompts>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>New Customer</label>
+        <name>CreateCustomer</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>New E-Booking</label>
+        <name>CreateEBooking</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>New Cargo Trouble</label>
+        <name>NewCargoTrouble</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewContact --></label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewEvent --></label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>New Quote</label>
+        <name>NewQuote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewTask --></label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <reportTypes>
+        <label>A/C CODE--&gt;PRICING--&gt;F/TMS Billing</label>
+        <name>ACCodeWithPriceingAndInvoicing</name>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ + VAT</label>
+            <name>BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL+VAT</label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>INVOICING(SERVICE NAME)</label>
+            <name>INVOICING(SERVICE NAME)</name>
+        </sections>
+        <sections>
+            <label>SERVICE MASTER</label>
+            <name>SERVICE MASTER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- APPLICATION with APPLICATION LINE with APPLICATION LINE+CARGO --></description>
+        <label><!-- APPLICATION with APPLICATION LINE with APPLICATION LINE+CARGO --></label>
+        <name>APPLICATION_with_APPLICATION_LINE_with_APPLICATION_LINE_CARGO</name>
+        <sections>
+            <label>ពាក្យស្នើរសុំ</label>
+            <name>APPLICATION</name>
+        </sections>
+        <sections>
+            <label>ជួរពាក្យស្នើរសុំ</label>
+            <name>APPLICATION LINE</name>
+        </sections>
+        <sections>
+            <label>ជួរពាក្យស្នើរសុំ+ទំនិញ</label>
+            <name>APPLICATION LINE+CARGO</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Asset--&gt;Asset Transfer--&gt;Asset Transfer+Others</label>
+        <name>ASSET_with_ASSET_TRANSFER_with_ASSET_TRANS_OTHER</name>
+        <sections>
+            <label>ទ្រព្យសកម្ម</label>
+            <name>ASSET</name>
+        </sections>
+        <sections>
+            <label>ទ្រព្យសកម្មផ្ទេរ+ផ្សេងទៀត</label>
+            <name>ASSET TRANS+OTHER</name>
+        </sections>
+        <sections>
+            <label>ផ្ទេរទ្រព្យសម្បត្តិ</label>
+            <name>ASSET TRANSFER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with A/C BAL+B/S --></description>
+        <label><!-- A/C CODE with A/C BAL with A/C BAL+B/S --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_B_S</name>
+        <sections>
+            <label>សមតុល្យគណនេយ្យ+B/S</label>
+            <name>A/C BAL+B/S</name>
+        </sections>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with A/C BAL+C/F --></description>
+        <label><!-- A/C CODE with A/C BAL with A/C BAL+C/F --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_C_F</name>
+        <sections>
+            <label>សមតុល្យ​គណនី</label>
+            <name>A/C BAL</name>
+        </sections>
+        <sections>
+            <label>សមតុល្យគណនេយ្យ+C/F</label>
+            <name>A/C BAL+C/F</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with A/C BAL+I/S(P/L) --></description>
+        <label><!-- A/C CODE with A/C BAL with A/C BAL+I/S(P/L) --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_I_S_P_L</name>
+        <sections>
+            <label>សមតុល្យ​គណនី</label>
+            <name>A/C BAL</name>
+        </sections>
+        <sections>
+            <label>សមតុល្យគណនេយ្យ+I/S(P/L)</label>
+            <name>A/C BAL+I/S(P/L)</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with A/C BAL+TAX --></description>
+        <label><!-- A/C CODE with A/C BAL with A/C BAL+TAX --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_TAX</name>
+        <sections>
+            <label>A/C BAL+ពន្ធ</label>
+            <name>A/C BAL+TAX</name>
+        </sections>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with BANK+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with BANK+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_BANK_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>ធនាគារ +សមតុល្យ​គណនី</label>
+            <name>BANK+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with CASH+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with CASH+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_CASH_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>សាច់ប្រាក់+សមតុល្យគណនី</label>
+            <name>CASH+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with DEPOSIT+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with DEPOSIT+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_DEPOSIT_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>ដាក់ប្រាក់ + A/C BAL</label>
+            <name>DEPOSIT+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with FMS BILL+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with FMS BILL+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_FMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>FMS BILL+A/C BAL</label>
+            <name>FMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with H/S/U INSURANCE+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with H/S/U INSURANCE+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_H_S_U_INSURANCE_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>H/S/U INSURANCE+A/C BAL</label>
+            <name>H/S/U INSURANCE+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with LOAN PAY+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with LOAN PAY+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_LOAN_PAY_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY+A/C BAL</label>
+            <name>LOAN PAY+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with LoanACBal --></description>
+        <label><!-- A/C CODE with A/C BAL with LoanACBal --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_LoanACBal</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>LoanACBal</label>
+            <name>LoanACBal</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with OTHER+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with OTHER+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_OTHER_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>OTHER+A/C BAL</label>
+            <name>OTHER+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with PAYSLIP+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with PAYSLIP+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_PAYSLIP_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP+A/C BAL</label>
+            <name>PAYSLIP+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with PUR INV+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with PUR INV+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_PUR_INV_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV+A/C BAL --></label>
+            <name>PUR INV+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with VAT+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with VAT+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_VAT_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- VAT+A/C BAL --></label>
+            <name>VAT+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- A/C CODE with A/C BAL with WMS BILL+A/C BAL --></description>
+        <label><!-- A/C CODE with A/C BAL with WMS BILL+A/C BAL --></label>
+        <name>A_C_CODE_with_A_C_BAL_with_WMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>A/C តុល្យភាព</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>WMS វិក័យប័ត្រ + គណនី / សមតុល្យបច្ចុប្បន្ន</label>
+            <name>WMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Goods P/O--&gt;Goods P/O+Product</label>
+        <name>AcccountPOPOProduct</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ P/O+ ផលិតផល</label>
+            <name>GOODS P/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Account with Application --></description>
+        <label><!-- Account with Application --></label>
+        <name>AccountApplication</name>
+        <sections>
+            <label><!-- 取引先 --></label>
+            <name>取引先</name>
+        </sections>
+        <sections>
+            <label><!-- 申請(顧客) --></label>
+            <name>申請(顧客)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Account with Cargo with Application+Cargo --></description>
+        <label><!-- Account with Cargo with Application+Cargo --></label>
+        <name>AccountCargoApplicationCargo</name>
+        <sections>
+            <label>ទំនិញ</label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label><!-- カーゴ --></label>
+            <name>カーゴ</name>
+        </sections>
+        <sections>
+            <label><!-- 取引先 --></label>
+            <name>取引先</name>
+        </sections>
+        <sections>
+            <label><!-- 申請カーゴ --></label>
+            <name>申請カーゴ</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Goods S/O+TRS Billing</label>
+        <name>AccountSOBill</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;CNTR in Transportation--&gt;F/TMS Billing</label>
+        <name>AccountSOCntrBill</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTAINER DETAIL</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL (CONTAINER ID)</label>
+            <name>FMS/TMS BILL (CONTAINER ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Goods S/O--&gt;Goods S/O+Product</label>
+        <name>AccountSOSOProduct</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;W/O/S--&gt;WMS Billing</label>
+        <name>AccountWOWOSBILL</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S --></label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>សេវាកម្មបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Account Code Report Type --></description>
+        <label><!-- Account Code Report Type --></label>
+        <name>Account_Code_Report_Type</name>
+        <sections>
+            <label>A/C កូដ</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>H B/L-SELLING/BUYING</label>
+            <name>H B/L-SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>SVC MASTER</label>
+            <name>SVC MASTER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Account - - &gt; Sales Order --></description>
+        <label><!-- Account - - &gt; Sales Order --></label>
+        <name>Account_Sales_Order</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / o (ឈ្មោះក្រុមហ៊ុនអតិថិជន)</label>
+            <name>GOODS S/O (Customer Company Name)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;CNTR in Transportation--&gt;Transport</label>
+        <name>Account_Shipment_Order_Container</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ការដឹកជញ្ជូនទំនិញ</label>
+            <name>CARGO DELIVERY</name>
+        </sections>
+        <sections>
+            <label>CONTAINER DETAIL</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER (CUSTOMER)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Accounts- - &gt;API Config- - &gt;Tracking --></description>
+        <label><!-- Accounts- - &gt;API Config- - &gt;Tracking --></label>
+        <name>AccountsAPIConfigTracking</name>
+        <sections>
+            <label>ការកំណត់ API</label>
+            <name>API CONFIG</name>
+        </sections>
+        <sections>
+            <label>ការតាមដានAPI</label>
+            <name>API TRACKING</name>
+        </sections>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Accounts- - &gt;Contract- - &gt;Goods S/O- - &gt;TRS Billing --></description>
+        <label><!-- Accounts- - &gt;Contract- - &gt;Goods S/O- - &gt;TRS Billing --></label>
+        <name>AccountsGoodsSOTRSBilling</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTRACT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Goods S/O--&gt;WMS W/O--&gt;WMS W/O+Product</label>
+        <name>AccountsGoodsSOWOProduct</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O --></label>
+            <name>CloWMS W/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>W/O+ ផលិតផល</label>
+            <name>W/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- W/W/O+Product --></label>
+            <name>W/W/O+Product</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Goods P/O--&gt;Goods P/O+Product--&gt;TRS Billing</label>
+        <name>AccountsSOProductBilling</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Accounts without activities --></description>
+        <label><!-- Accounts without activities --></label>
+        <name>AccountsWithoutActivities</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>សកម្មភាព</label>
+            <name>Activities</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;CNTR in Transportation</label>
+        <name>Accounts_with_FMS_S_O_with_FMS_CNTR</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTAINER DETAIL</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS  Billing+Bank</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_CloFMS_BILL_BANK</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloFMS BILL(BILL ID)</label>
+            <name>CloFMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>CloFMS BILL+BANK</label>
+            <name>CloFMS BILL+BANK</name>
+        </sections>
+        <sections>
+            <label>CloFMS S/O (CUSTOMER)</label>
+            <name>CloFMS S/O (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+A/C Bal</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS BILL+A/C BAL</label>
+            <name>FMS BILL+A/C BAL</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL(BILL ID)</label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+Trx Plan</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_BILL_PAY_REQ</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL+ផែនការTRX</label>
+            <name>F/TMS BILL+TRX PLAN</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill+TRX Plan --></label>
+            <name>F/TMS Bill+TRX Plan</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS BILL+PAY REQ</label>
+            <name>FMS BILL+PAY REQ</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL(BILL ID)</label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+Loan</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_TMS_BILL_LOAN</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL(BILL ID)</label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL+LOAN</label>
+            <name>FMS/TMS BILL+LOAN</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Accounts with F/TMS S/O with CONTRACT+F/TMS S/O --></description>
+        <label><!-- Accounts with F/TMS S/O with CONTRACT+F/TMS S/O --></label>
+        <name>Accounts_with_F_TMS_S_O_with_CONTRACT_F_TMS_S_O</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTRACT+F/TMS S/O</label>
+            <name>CONTRACT+F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>F/TMS S/O (អតិថិជន)</label>
+            <name>F/TMS S/O (Customer)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;S/O+Bank</label>
+        <name>Accounts_with_F_TMS_S_O_with_FTMSSOBankTrx</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- FTMSSOBankTrx --></label>
+            <name>FTMSSOBankTrx</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;S/O+Cash</label>
+        <name>Accounts_with_F_TMS_S_O_with_F_TMS_S_O_Cash_Trx</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>F/TMS S/O+CASH TRX</label>
+            <name>F/TMS S/O+CASH TRX</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;S/O+Trx Plan</label>
+        <name>Accounts_with_F_TMS_S_O_with_F_TMS_S_O_Trx_Plan</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>F/TMS S/O+Trx Plan</label>
+            <name>F/TMS S/O+Trx Plan</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (អតិថិជន)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;Transport</label>
+        <name>Accounts_with_H_B_L_SHIPMENTS_with_Cargo_Delivery</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ការដឹកជញ្ជូនទំនិញ</label>
+            <name>Cargo Delivery</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L-ការដឹកជញ្ជូន (អតិថិជន)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>ROUTE &amp;amp; LOAD</label>
+            <name>ROUTE &amp;amp; LOAD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;C.Clearance</label>
+        <name>Accounts_with_H_B_L_SHIPMENTS_with_Custom_Clearance</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>Custom Clearance</label>
+            <name>Custom Clearance</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L-ការដឹកជញ្ជូន (អតិថិជន)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Bank</label>
+        <name>Accounts_with_WMS_W_O_with_WMS_BILL_with_CloWMS_BILL_BANK</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS BILL</label>
+            <name>CloWMS BILL</name>
+        </sections>
+        <sections>
+            <label>CloWMS BILL+BANK</label>
+            <name>CloWMS BILL+BANK</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+A/C Bal</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>WMS វិក័យប័ត្រ + គណនី / សមតុល្យបច្ចុប្បន្ន</label>
+            <name>WMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Loan</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_LOAN</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>WMS វិក័យប័ត្រ + កម្ចី</label>
+            <name>WMS BILL+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Trx Plan</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_PAY_REQ</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>WMS វិក័យប័ត្រ + សំណើរបង់</label>
+            <name>WMS BILL+PAY REQ</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;WMS W/O--&gt;WMS W/O+Cargo</label>
+        <name>Accounts_with_W_O_with_WO_Cargoes</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CUSTOMER)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>WO+ ទំនិញ</label>
+            <name>WO+Cargoes</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Quote--&gt;F/TMS S/O</label>
+        <name>AcountQuoteSO</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- FMS/TMS S/O (QUOTE) --></label>
+            <name>FMS/TMS S/O (QUOTE)</name>
+        </sections>
+        <sections>
+            <label>QUOTE</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Approval history --></description>
+        <label><!-- Approval history --></label>
+        <name>Approval_history</name>
+        <sections>
+            <label>Process Instance</label>
+            <name>Process Instance</name>
+        </sections>
+        <sections>
+            <label>Process Instance Node</label>
+            <name>Process Instance Node</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Bank Bal</label>
+        <name>BANK_BALANCE</name>
+        <sections>
+            <label>សមតុល្យធនាគារ</label>
+            <name>BANK BAL.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Bank Acc--&gt;F/TMS Billing Payable</label>
+        <name>BankAccountWithInvoicePayment</name>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>INVOICING(BANK ACCOUNT FOR PAYMENT)</label>
+            <name>INVOICING(BANK ACCOUNT FOR PAYMENT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Bank Acc--&gt;F/TMS Billing Receivable</label>
+        <name>BankAccountWithInvoiceReceiving</name>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>INVOICING(BANK ACCOUNT FOR PAYMENT)</label>
+            <name>INVOICING(BANK ACCOUNT FOR PAYMENT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Bank Acc--&gt;Payable</label>
+        <name>BankAccountWithPayroll</name>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>H/S/UNEM INSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>PAYROLL SLIP</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Bank Acc--&gt;Procurement P/I</label>
+        <name>BankAccountWithPurchasingInvoice</name>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>គណនីធនាគារ</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>PURCHASING INVOICE</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Bill with or without VAT --></description>
+        <label><!-- Bill with or without VAT --></label>
+        <name>Bill_with_or_without_VAT</name>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL(F/TMS S/O)</label>
+            <name>F/TMS BILL(F/TMS S/O)</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL+VAT</label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- CONSUMPTION TAX with Historical Trending --></description>
+        <label><!-- CONSUMPTION TAX with Historical Trending --></label>
+        <name>CONSUMPTION_TAX_with_Historical_Trending</name>
+        <sections>
+            <label>CONSUMPTION TAX</label>
+            <name>CONSUMPTION TAX</name>
+        </sections>
+        <sections>
+            <label>CONSUMPTION TAX (Historical)</label>
+            <name>CONSUMPTION TAX (Historical)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- CONTRACT. with GOODS S/O with Container (Goods S/Os) --></description>
+        <label><!-- CONTRACT. with GOODS S/O with Container (Goods S/Os) --></label>
+        <name>CONTRACT_with_GOODS_S_O_with_Container_Goods_S_Os</name>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>Container (Goods S/Os)</label>
+            <name>Container (Goods S/Os)</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Contract--&gt;Goods S/O--&gt;Goods S/O+Product</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GOODS_SALES_ORDER_PRODUCT</name>
+        <sections>
+            <label>CONTRACT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>GOODS SALES ORDER+PRODUCT</label>
+            <name>GOODS SALES ORDER+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Contract--&gt;Goods S/O--&gt;Goods S/O+Cargo</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GoodsSOCargo</name>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O + CARGO</label>
+            <name>GOODS S/O+CARGO</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Contract--&gt;Goods S/O--&gt;Goods S/O+P/O</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GoodsSOPO</name>
+        <sections>
+            <label>CONTRACT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+P/O</label>
+            <name>GOODS S/O+P/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- CONTRACT. with GOODS S/O with Receivables Amount --></description>
+        <label><!-- CONTRACT. with GOODS S/O with Receivables Amount --></label>
+        <name>CONTRACT_with_GOODS_S_O_with_Receivables_Amount</name>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>Receivables Amount</label>
+            <name>Receivables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Contract--&gt;Goods S/O--&gt;TRS Billing</label>
+        <name>CONTRACT_with_GOODS_S_O_with_TRS_BILL</name>
+        <sections>
+            <label>CONTRACT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>GOODS SALES ORDER</label>
+            <name>GOODS SALES ORDER</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- CONTRACT. with GOODS S/O with TRS Buying --></description>
+        <label><!-- CONTRACT. with GOODS S/O with TRS Buying --></label>
+        <name>CONTRACT_with_GOODS_S_O_with_TRS_Buying</name>
+        <sections>
+            <label>CONTRACT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>TRS Buying</label>
+            <name>TRS Buying</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cargo　with Application+Cargo --></description>
+        <label><!-- Cargo　with Application+Cargo --></label>
+        <name>CargoApplicationCargo</name>
+        <sections>
+            <label>ពាក្យស្នើរសុំ+ទំនិញ</label>
+            <name>APPLICATION+CARGO</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ</label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with RC with BL --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with RC with BL --></label>
+        <name>CustPtnr3rdPartyWO_RC_BL</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party-&gt;PO-&gt;PI --></description>
+        <label><!-- Cust/Ptnr/3rd Party-&gt;PO-&gt;PI --></label>
+        <name>CustPtnr3rdParty_PO_PI</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>PURCHASING INVOICE</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>PURCHASING ORDER</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+VAT</label>
+        <name>Cust_Ptnr_3rd_Party_with_FORWARDING_with_INVOICING_with_INVOICING_VAT</name>
+        <sections>
+            <label>Cust/Ptnr/3rd Party</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL+VAT</label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FORWARDING (CUSTOMER)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>INVOICING &amp; VAT</label>
+            <name>INVOICING &amp; VAT</name>
+        </sections>
+        <sections>
+            <label>INVOICING(INVOICE ID)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS S/O+VAT</label>
+        <name>Cust_Ptnr_3rd_Party_with_FORWARDING_with_Junction_Object_Forwarding_VAT</name>
+        <sections>
+            <label>Cust/Ptnr/3rd Party</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>F/TMS S/O+VAT</label>
+            <name>F/TMS S/O+VAT</name>
+        </sections>
+        <sections>
+            <label>FORWARDING (CUSTOMER)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>VAT INVOICE JUNCTION</label>
+            <name>VAT INVOICE JUNCTION</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;Transit</label>
+        <name>Cust_Ptnr_3rd_Party_with_SHIPMENT_ORDER_with_TRANSIT</name>
+        <sections>
+            <label>Cust/Ptnr/3rd Party</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER (CUSTOMER)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>TRANSIT</label>
+            <name>TRANSIT</name>
+        </sections>
+        <sections>
+            <label><!-- Transit --></label>
+            <name>Transit</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;Billing+Cash</label>
+        <name>Cust_Ptnr_3rd_Party_with_SHIPPMENT_ORDER_with_INVOICING_with_CONNECT_INVOICING</name>
+        <sections>
+            <label>CONNECT INVOICING AND CASH</label>
+            <name>CONNECT INVOICING AND CASH</name>
+        </sections>
+        <sections>
+            <label>Cust/Ptnr/3rd Party</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>INVOICING(INVOICE ID)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER (CUSTOMER)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WORK ORDER with BILLING --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WORK ORDER with BILLING --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WORK_ORDER_with_BILLING</name>
+        <sections>
+            <label>ការចេញវិក្កយបត្</label>
+            <name>BILLING</name>
+        </sections>
+        <sections>
+            <label>Cust/Ptnr/3rd Party</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with VA with BL --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with VA with BL --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_BILLING</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with DP with BL --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with DP with BL --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_DP_with_BILLING</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with DP with DPD --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with DP with DPD --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_DP_with_DPD</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with ST with BL --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with ST with BL --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_Stoc_with_Billing</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>ការចេញវិក្កយបត្រ (លេខសម្គាល់ស្តុក)</label>
+            <name>BILLING(STOCK ID)</name>
+        </sections>
+        <sections>
+            <label>ស្តុក</label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Cust/Ptnr/3rd Party with WO with VAS with VAD --></description>
+        <label><!-- Cust/Ptnr/3rd Party with WO with VAS with VAD --></label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_VAS_with_VAD</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>ការបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;F/TMS S/O--&gt;Billing</label>
+        <name>CustomReportType</name>
+        <sections>
+            <label>គណនេយ្យ</label>
+            <name>Account</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L SELLING/BUYING</label>
+            <name>H B/L SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>H B/L SHIPMENT</label>
+            <name>H B/L SHIPMENT</name>
+        </sections>
+        <sections>
+            <label>H B/L-SELLING/BUYING</label>
+            <name>H B/L-SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>H B/L-ការដឹកជញ្ជូន (អតិថិជន)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- DEPOSIT with DEP OFFS with DEP OFF+A/C BAL --></description>
+        <label><!-- DEPOSIT with DEP OFFS with DEP OFF+A/C BAL --></label>
+        <name>DEPOSIT_with_DEP_OFFS_with_DEP_OFF_A_C_BAL</name>
+        <sections>
+            <label>ដាក់ប្រាក់</label>
+            <name>DEPOSIT</name>
+        </sections>
+        <sections>
+            <label>ប្រាក់បញ្ញើអុហ្វសិត</label>
+            <name>DEPOSIT OFFSET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- DEPOSIT with DEP OFFS with TRX PLAN+DEPOSIT OFFSET --></description>
+        <label><!-- DEPOSIT with DEP OFFS with TRX PLAN+DEPOSIT OFFSET --></label>
+        <name>DEPOSIT_with_DEP_OFFS_with_TRX_PLAN_DEPOSIT_OFFSET</name>
+        <sections>
+            <label>ដាក់ប្រាក់</label>
+            <name>DEPOSIT</name>
+        </sections>
+        <sections>
+            <label>ប្រាក់បញ្ញើអុហ្វសិត</label>
+            <name>DEPOSIT OFFSET</name>
+        </sections>
+        <sections>
+            <label>TRX PLAN+DEPOSIT OFFSET</label>
+            <name>TRX PLAN+DEPOSIT OFFSET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Facility--&gt;Locator--&gt;Audit Location</label>
+        <name>FAC_with_LOCATOR_with_Audit_Location</name>
+        <sections>
+            <label>សវនកម្ម</label>
+            <name>AUDIT</name>
+        </sections>
+        <sections>
+            <label><!-- FAC --></label>
+            <name>FAC</name>
+        </sections>
+        <sections>
+            <label>LOCATOR</label>
+            <name>LOCATOR</name>
+        </sections>
+        <sections>
+            <label><!-- Locator --></label>
+            <name>Locator</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Facility--&gt;Locator--&gt;Stock</label>
+        <name>FAC_with_LOCATOR_with_Stock_Masters</name>
+        <sections>
+            <label><!-- FAC --></label>
+            <name>FAC</name>
+        </sections>
+        <sections>
+            <label>LOCATOR</label>
+            <name>LOCATOR</name>
+        </sections>
+        <sections>
+            <label><!-- Locator --></label>
+            <name>Locator</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Good P/O - - &gt; Good P/O+Product --></description>
+        <label><!-- Good P/O - - &gt; Good P/O+Product --></label>
+        <name>Good_P_O_Good_P_O_Product</name>
+        <sections>
+            <label>ទំនិញ P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ P/O+ ផលិតផល</label>
+            <name>GOODS P/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Goods S/O+Product --></description>
+        <label><!-- Goods S/O+Product --></label>
+        <name>GoodsSOProduct</name>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Goods S/O- - &gt;Goods S/O+Product- - &gt;TRS Bill --></description>
+        <label><!-- Goods S/O- - &gt;Goods S/O+Product- - &gt;TRS Bill --></label>
+        <name>GoodsSOProductTRSBill</name>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>TRS BILL</label>
+            <name>TRS BILL</name>
+        </sections>
+        <sections>
+            <label>TRS BILL (GOODS S/O+PRODUCT)</label>
+            <name>TRS BILL (GOODS S/O+PRODUCT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Goods P/O - - &gt; Payables Amount --></description>
+        <label><!-- Goods P/O - - &gt; Payables Amount --></label>
+        <name>Goods_P_O_Payables_Amount</name>
+        <sections>
+            <label>ទំនិញ P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>Payables Amount</label>
+            <name>Payables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Goods S/O - - &gt; Goods S/O+product --></description>
+        <label><!-- Goods S/O - - &gt; Goods S/O+product --></label>
+        <name>Goods_S_O_Goods_S_O_product</name>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Goods S/O - - &gt; Receivables Amount --></description>
+        <label><!-- Goods S/O - - &gt; Receivables Amount --></label>
+        <name>Goods_S_O_Receivables_Amount</name>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>Receivables Amount</label>
+            <name>Receivables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>HR Policy--&gt;Insurance</label>
+        <name>HRStandardWithInsurance</name>
+        <sections>
+            <label>និយោជិត</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>EMPLOYEE MANAGEMENT</label>
+            <name>EMPLOYEE MANAGEMENT</name>
+        </sections>
+        <sections>
+            <label>H/S/UNEM INSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>គោលនយោបាយធនធានមនុស្ស</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>HR STANDARD</label>
+            <name>HR STANDARD</name>
+        </sections>
+        <sections>
+            <label>PAYROLL SLIP</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>HR Policy--&gt;PIT</label>
+        <name>HRStandardWithPIT</name>
+        <sections>
+            <label>និយោជិត</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>EMPLOYEE MANAGEMENT</label>
+            <name>EMPLOYEE MANAGEMENT</name>
+        </sections>
+        <sections>
+            <label>គោលនយោបាយធនធានមនុស្ស</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>HR STANDARD</label>
+            <name>HR STANDARD</name>
+        </sections>
+        <sections>
+            <label>PAYROLL SLIP</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PERSONAL INCOME TAX</label>
+            <name>PERSONAL INCOME TAX</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>HR Policy--&gt;Employee--&gt;Sup HR Policy+Employee</label>
+        <name>HR_POLICY_with_EMPLOYEE_with_SuppHRPolicyEmployee</name>
+        <sections>
+            <label>និយោជិត</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>គោលនយោបាយធនធានមនុស្ស</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>SUPPLEMENT HR POLICY+EMPLOYEE</label>
+            <name>SUPPLEMENT HR POLICY+EMPLOYEE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>HS Code--&gt;F/TMS Billing</label>
+        <name>HSCodeWithInvoicing</name>
+        <sections>
+            <label>លេខកូដ HS</label>
+            <name>HS CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- INVENTORY LOG with Historical Trending --></description>
+        <label><!-- INVENTORY LOG with Historical Trending --></label>
+        <name>INVENTORY_LOG_with_Historical_Trending</name>
+        <sections>
+            <label>INVENTORY LOG</label>
+            <name>INVENTORY LOG</name>
+        </sections>
+        <sections>
+            <label>INVENTORY LOG (Historical)</label>
+            <name>INVENTORY LOG (Historical)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Kickback</label>
+        <name>Kickback_report</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- KICKBACK --></label>
+            <name>KICKBACK</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER (CUSTOMER)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Loan--&gt;Loan Pay--&gt;Loan Pay+AC Bal</label>
+        <name>LOAN_with_LOAN_PAY_with_LOAN_PAY_A_C_BAL</name>
+        <sections>
+            <label>LOAN</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY</label>
+            <name>LOAN PAY</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY+A/C BAL</label>
+            <name>LOAN PAY+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Loan--&gt;Loan Pay--&gt;Loan Pay+Trx Plan</label>
+        <name>LOAN_with_LOAN_PAY_with_LOAN_PAY_PAY_REQ</name>
+        <sections>
+            <label>LOAN</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY+PAY REQ</label>
+            <name>LOAN PAY+PAY REQ</name>
+        </sections>
+        <sections>
+            <label>LOAN REPAYMENT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Loan--&gt;Loan Pay--&gt;Loan Pay+Bank</label>
+        <name>LOAN_with_LOAN_REPAYMENT_with_LOAN_PAY_BANK</name>
+        <sections>
+            <label>LOAN</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY+BANK</label>
+            <name>LOAN PAY+BANK</name>
+        </sections>
+        <sections>
+            <label>LOAN REPAYMENT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Loan--&gt;Loan Pay--&gt;Loan Pay+Others</label>
+        <name>LOAN_with_LOAN_REPAYMENT_with_LOAN_PAY_OTHERS</name>
+        <sections>
+            <label>LOAN</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>LOAN PAY+OTHERS</label>
+            <name>LOAN PAY+OTHERS</name>
+        </sections>
+        <sections>
+            <label>LOAN REPAYMENT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Load/Unload- - &gt;Container in Trans --></description>
+        <label><!-- Load/Unload- - &gt;Container in Trans --></label>
+        <name>LoadUnloadContainerInTrans</name>
+        <sections>
+            <label>CONTAINER IN TRANSACTION (Unload)</label>
+            <name>CONTAINER IN TRANSACTION (Unload)</name>
+        </sections>
+        <sections>
+            <label><!-- LOAD/UNLOAD --></label>
+            <name>LOAD/UNLOAD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Consolidation--&gt;F/TMS S/O--&gt;F/TMS Billing</label>
+        <name>MAnkenReport</name>
+        <sections>
+            <label>CONSOL</label>
+            <name>CONSOL</name>
+        </sections>
+        <sections>
+            <label><!-- Consol --></label>
+            <name>Consol</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- マスター案件 --></label>
+            <name>マスター案件</name>
+        </sections>
+        <sections>
+            <label><!-- 案件 --></label>
+            <name>案件</name>
+        </sections>
+        <sections>
+            <label><!-- 請求明細 --></label>
+            <name>請求明細</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- MNF - - &gt; Input --></description>
+        <label><!-- MNF - - &gt; Input --></label>
+        <name>MNF_Input</name>
+        <sections>
+            <label><!-- Input (MNF Process) --></label>
+            <name>Input (MNF Process)</name>
+        </sections>
+        <sections>
+            <label><!-- Manufacture Process --></label>
+            <name>Manufacture Process</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- MNF - - &gt; Output --></description>
+        <label><!-- MNF - - &gt; Output --></label>
+        <name>MNF_Output</name>
+        <sections>
+            <label><!-- Manufacture Process --></label>
+            <name>Manufacture Process</name>
+        </sections>
+        <sections>
+            <label><!-- Output (MNF Process) --></label>
+            <name>Output (MNF Process)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Other--&gt;Other+AC Bal</label>
+        <name>OtherToOtherACBal</name>
+        <sections>
+            <label>OTHER</label>
+            <name>OTHER</name>
+        </sections>
+        <sections>
+            <label>OTHER+A/C BAL</label>
+            <name>OTHER+A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- Other --></label>
+            <name>Other</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;Insurance</label>
+        <name>PAYROLL_ORDER_with_PAYROLL_SLIP_with_H_S_UNEM_INSURANCE</name>
+        <sections>
+            <label>H/S/UNEM INSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYROLL ORDER</label>
+            <name>PAYROLL ORDER</name>
+        </sections>
+        <sections>
+            <label>PAYROLL SLIP</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;PIT</label>
+        <name>PAYROLL_ORDER_with_PAYROLL_SLIP_with_PERSONAL_INCOME_TAX</name>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYROLL ORDER</label>
+            <name>PAYROLL ORDER</name>
+        </sections>
+        <sections>
+            <label>PAYROLL SLIP</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PERSONAL INCOME TAX</label>
+            <name>PERSONAL INCOME TAX</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;Payslip+AC Bal</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_A_C_BAL</name>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP+A/C BAL</label>
+            <name>PAYSLIP+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;Payslip+Bank</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_BANK</name>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP+BANK</label>
+            <name>PAYSLIP+BANK</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;Payslip+Cash</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_CASH</name>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP+CASH</label>
+            <name>PAYSLIP+CASH</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Payroll--&gt;Payslip--&gt;Payslip+Loan</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_LOAN</name>
+        <sections>
+            <label>PAYROLL</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>PAYSLIP+LOAN</label>
+            <name>PAYSLIP+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+Cash</label>
+        <name>PURCHASING_ORDER_with_PURCHASING_INVOICE_with_CONNECT_PURCHASING_INVOICE_AND_C</name>
+        <sections>
+            <label>CONNECT PURCHASING INVOICE AND CASH</label>
+            <name>CONNECT PURCHASING INVOICE AND CASH</name>
+        </sections>
+        <sections>
+            <label>PURCHASING INVOICE</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>PURCHASING ORDER</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+Loan</label>
+        <name>PUR_ORD_with_PUR_INV_with_PILoan</name>
+        <sections>
+            <label><!-- PUR INV --></label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+        <sections>
+            <label>PURCHASING INVOICE+LOAN</label>
+            <name>PURCHASING INVOICE+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+AC Bal</label>
+        <name>PUR_ORD_with_PUR_INV_with_PUR_INV_A_C_BAL</name>
+        <sections>
+            <label><!-- PUR INV --></label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV+A/C BAL --></label>
+            <name>PUR INV+A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+Trx Plan</label>
+        <name>PUR_ORD_with_PUR_INV_with_PUR_INV_PAY_REQ</name>
+        <sections>
+            <label><!-- PUR INV --></label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label>PUR INV+PAY REQ</label>
+            <name>PUR INV+PAY REQ</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+Bank</label>
+        <name>PUR_ORD_with_PUR_INV_with_P_I_BANK</name>
+        <sections>
+            <label><!-- P/I+BANK --></label>
+            <name>P/I+BANK</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV --></label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I--&gt;P/I+VAT/INV</label>
+        <name>PUR_ORD_with_PUR_INV_with_P_I_VAT_INV</name>
+        <sections>
+            <label><!-- P/I+VAT INV --></label>
+            <name>P/I+VAT INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV --></label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Product--&gt;Cargo--&gt;W/O/S/L</label>
+        <name>ProductCargoWOSL</name>
+        <sections>
+            <label>ទំនិញ</label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label>ផលិតផល</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+        <sections>
+            <label>W/O/S LINE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Product--&gt;Cargo--&gt;W/O/S/L--&gt;Stock</label>
+        <name>ProductCargoWOSLStock</name>
+        <sections>
+            <label>ទំនិញ</label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label>PROD PRICING</label>
+            <name>PROD PRICING</name>
+        </sections>
+        <sections>
+            <label>ផលិតផល</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+        <sections>
+            <label>ស្តុក</label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label>W/O/S LINE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Product- - &gt;Goods S/O- - &gt;S/O+Product --></description>
+        <label><!-- Product- - &gt;Goods S/O- - &gt;S/O+Product --></label>
+        <name>ProductSOProduct</name>
+        <sections>
+            <label>ទំនិញ S / O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>ទំនិញ S/O+ ផលិតផល</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>ផលិតផល</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Product(Stock) - - &gt; Stock In/Out --></description>
+        <label><!-- Product(Stock) - - &gt; Stock In/Out --></label>
+        <name>Product_Stock_Stock_In_Out</name>
+        <sections>
+            <label>ផលិតផល (ស្តុក)</label>
+            <name>PRODUCT (STOCK)</name>
+        </sections>
+        <sections>
+            <label>ស្តុកចូល/ចេញ</label>
+            <name>Stock In/Out</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Procurement P/O--&gt;P/I</label>
+        <name>PurchaseOrderInvoice</name>
+        <sections>
+            <label>សកម្មភាព</label>
+            <name>Activities</name>
+        </sections>
+        <sections>
+            <label>PURCHASING INVOICE</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>PURCHASING ORDER</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Quote--&gt;Quote Line--&gt;Pricing+Quote Line</label>
+        <name>QUOTE_with_QUOTE_LINE_with_PROD_SRV_PRICING_QUOTE_LINE</name>
+        <sections>
+            <label>តម្លៃ ផលិតផល/សេវាកម្ម + បន្ទាត់សម្រង់</label>
+            <name>PROD/SRV PRICING+QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label>សម្រង់</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label>ជួរបន្ទាត់សម្រង់</label>
+            <name>QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label><!-- Quote Line --></label>
+            <name>Quote Line</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Accounts--&gt;Quote--&gt;Quote Line</label>
+        <name>QuoteAnalysis</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>តម្លៃ ផលិតផល/សេវាកម្ម + បន្ទាត់សម្រង់</label>
+            <name>PROD/SVC PRICING+QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label>សម្រង់</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label>ជួរបន្ទាត់សម្រង់</label>
+            <name>QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label><!-- Quote Line --></label>
+            <name>Quote Line</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Route- - &gt;Container in Trans --></description>
+        <label><!-- Route- - &gt;Container in Trans --></label>
+        <name>RouteContainerInTrans</name>
+        <sections>
+            <label>CONTAINER IN TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label>ROUTE</label>
+            <name>ROUTE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Route</label>
+        <name>RouteReport</name>
+        <sections>
+            <label>ការដឹកជញ្ជូនទំនិញ</label>
+            <name>CARGO DELIVERY</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- LOADING &amp; UNLOADING --></label>
+            <name>LOADING &amp; UNLOADING</name>
+        </sections>
+        <sections>
+            <label>ROUTE</label>
+            <name>ROUTE</name>
+        </sections>
+        <sections>
+            <label>SHIPPMENT ORDER</label>
+            <name>SHIPPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>F/TMS S/O--&gt;F/TMS Billing</label>
+        <name>ShipmentOrderInvoice</name>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>INVOICING(INVOICE ID)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER</label>
+            <name>SHIPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>F/TMS S/O--&gt;Kickback</label>
+        <name>ShipmentOrderKickback</name>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- KICKBACK --></label>
+            <name>KICKBACK</name>
+        </sections>
+        <sections>
+            <label>SHIPMENT ORDER</label>
+            <name>SHIPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Shipment with Activities --></description>
+        <label><!-- Shipment with Activities --></label>
+        <name>Shipment_with_Activities</name>
+        <sections>
+            <label><!-- Activities --></label>
+            <name>Activities</name>
+        </sections>
+        <sections>
+            <label><!-- Goods S/O --></label>
+            <name>Goods S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- STOCK LOCATOR MAP SUMMARY --></description>
+        <label><!-- STOCK LOCATOR MAP SUMMARY --></label>
+        <name>StockLocatorMapSummary</name>
+        <sections>
+            <label>ស្តុក</label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>Truck--&gt;Route--&gt;CNTR in Transportation</label>
+        <name>TruckFleetRouteContainer</name>
+        <sections>
+            <label>CONTAINER IN TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label>ROUTE (TRUCK)</label>
+            <name>ROUTE (TRUCK)</name>
+        </sections>
+        <sections>
+            <label>TRUCK/FLEET</label>
+            <name>TRUCK/FLEET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Truck/Fleet- - &gt;Route- - &gt;Load/Unload --></description>
+        <label><!-- Truck/Fleet- - &gt;Route- - &gt;Load/Unload --></label>
+        <name>TruckFleetRouteLoadUnload</name>
+        <sections>
+            <label><!-- LOAD/UNLOAD --></label>
+            <name>LOAD/UNLOAD</name>
+        </sections>
+        <sections>
+            <label>ROUTE (TRUCK)</label>
+            <name>ROUTE (TRUCK)</name>
+        </sections>
+        <sections>
+            <label>TRUCK/FLEET</label>
+            <name>TRUCK/FLEET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>VAT/INV--&gt;F/TMS S/O--&gt;F/TMS Billing</label>
+        <name>VAT_INVOICE</name>
+        <sections>
+            <label>វិក្កយបត្រ VAT</label>
+            <name>VAT INVOICE</name>
+        </sections>
+        <sections>
+            <label><!-- VAT/INV --></label>
+            <name>VAT/INV</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>VAT/INV--&gt;F/TMS S/O</label>
+        <name>VAT_INVOICE_FORWARDING</name>
+        <sections>
+            <label>វិក្កយបត្រ VAT</label>
+            <name>VAT INVOICE</name>
+        </sections>
+        <sections>
+            <label><!-- VAT/INV --></label>
+            <name>VAT/INV</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>VAT/INV</label>
+        <name>VAT_REPORTS</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>វិក័យប័ត្រ F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS BILL+VAT</label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>F/TMS Bill</label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FORWARDING (CUSTOMER)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>WMS W/O--&gt;W/O/S</label>
+        <name>WOCargo</name>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S --></label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label><!-- WMS W/O/S --></label>
+            <name>WMS W/O/S</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>WMS W/O--&gt;W/O/S--&gt;W/O/S/L--&gt;Cargo</label>
+        <name>WOWOSWOSLCARGO</name>
+        <sections>
+            <label>ទំនិញ</label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S --></label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>W/O/S LINE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+        <sections>
+            <label>សេវាកម្មបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <label>WMS W/O--&gt;W/O/S--&gt;W/O/S/L--&gt;Stock</label>
+        <name>WOWOSWOSLStock</name>
+        <sections>
+            <label>ស្តុក</label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label><!-- W/O --></label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S --></label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>W/O/S LINE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+        <sections>
+            <label>សេវាកម្មបញ្ជាទិញការងារ</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- W/O+Product- - &gt;Product --></description>
+        <label><!-- W/O+Product- - &gt;Product --></label>
+        <name>W_O_Product_Product</name>
+        <sections>
+            <label>W/O+ ទំនិញ</label>
+            <name>W/O+CARGO</name>
+        </sections>
+        <sections>
+            <label>W/O+ ផលិតផល</label>
+            <name>W/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- W/W/O+Product --></label>
+            <name>W/W/O+Product</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Container analysis(Error in LE) --></description>
+        <label><!-- Container analysis(Error in LE) --></label>
+        <name>container_analysis</name>
+        <sections>
+            <label>គណនេយ្យ</label>
+            <name>Account</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L SHIPMENT</label>
+            <name>H B/L SHIPMENT</name>
+        </sections>
+        <sections>
+            <label>H B/L-ការដឹកជញ្ជូន (អតិថិជន)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>container</label>
+            <name>container</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- test --></description>
+        <label><!-- test --></label>
+        <name>test</name>
+        <sections>
+            <label>គណនី</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTAINER IN TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label><!-- E-BOOKING --></label>
+            <name>E-BOOKING</name>
+        </sections>
+        <sections>
+            <label><!-- F/T/SMS S/O --></label>
+            <name>F/T/SMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+</Translations>

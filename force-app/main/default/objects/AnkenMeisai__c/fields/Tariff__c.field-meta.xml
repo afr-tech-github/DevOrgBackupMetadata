@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tariff__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Service: Active status equals True</inlineHelpText>
+    <label>PRICING NAME</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>TariffMaster__c.ProductFlag__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <infoMessage>Service: Active status equals True</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>TariffMaster__c</referenceTo>
+    <relationshipLabel>F/TMS BILL</relationshipLabel>
+    <relationshipName>Tariff</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

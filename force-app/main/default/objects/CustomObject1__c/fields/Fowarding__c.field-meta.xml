@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fowarding__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose &apos;Forwarding by us&apos; if your company is responsible for forwarding. Otherwise, choose &apos;Forwarding by others&apos;</inlineHelpText>
+    <label>FORWARDING SERVICE PROVIDER</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>自社フォワーディング(Forwarding by us)</fullName>
+                <default>true</default>
+                <label>自社フォワーディング(Forwarding by us)</label>
+            </value>
+            <value>
+                <fullName>他社フォワーディング(Forwarding by others)</fullName>
+                <default>false</default>
+                <label>他社フォワーディング(Forwarding by others)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

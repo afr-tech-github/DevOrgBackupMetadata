@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Container No</fullName>
+        <default>false</default>
+        <label>Container No</label>
+    </customValue>
+    <customValue>
+        <fullName>H B/L No</fullName>
+        <default>true</default>
+        <label>H B/L No</label>
+    </customValue>
+    <customValue>
+        <fullName>Manual Input</fullName>
+        <default>false</default>
+        <label>Manual Input</label>
+    </customValue>
+    <customValue>
+        <fullName>M B/L No</fullName>
+        <default>false</default>
+        <label>M B/L No</label>
+    </customValue>
+    <customValue>
+        <fullName>Work Order No</fullName>
+        <default>false</default>
+        <label>Work Order No</label>
+    </customValue>
+    <customValue>
+        <fullName>Shipment Order No</fullName>
+        <default>false</default>
+        <label>Shipment Order No</label>
+    </customValue>
+    <customValue>
+        <fullName>Job Request ID From Customer</fullName>
+        <default>false</default>
+        <label>Job Request ID From Customer</label>
+    </customValue>
+    <masterLabel>ORDER INDENTIFICATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

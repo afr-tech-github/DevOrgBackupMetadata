@@ -1,0 +1,438 @@
+<apex:page controller="ProformaInvoiceController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false"
+    applyHtmlTag="false" docType="html-5.0">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <head>
+        <style>
+            @media print {
+                body {
+                    counter-reset: page;
+                }
+                .no-print,
+                .no-print * {
+                    display: none !important;
+                }
+
+                div.footer {
+                    counter-increment: page;
+                    display: block;
+                    text-align: center;
+                    position: running(footer);
+                }
+                @page {
+                    padding-bottom: 10mm;
+                    @bottom-center {
+                        content: element(footer);
+                    }
+                }
+                table {
+                    overflow: visible !important;
+                }
+                thead {
+                    display: table-header-group
+                }
+                tfoot {
+                    display: table-row-group
+                }
+                tr {
+                    page-break-inside: avoid
+                }
+
+                div.divFooter {
+                    font-size: 15px;
+                    position: fixed !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    display: block !important;
+                }
+            }
+
+            @page {
+                size: A4;
+                margin: 5mm;
+            }
+
+            .content {
+                max-height: calc(100% - 100px);
+            }
+
+            body {
+                font-family: "Times New Roman", Times, serif;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .footer {
+                width: -webkit-fill-available;
+                position: fixed;
+                bottom: 0;
+                display: none;
+            }
+
+            .hideColumn {
+                display: none;
+            }
+
+            .showColumn {
+                /*display: none;*/
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                vertical-align: text-top;
+                padding: 2px;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            .clsheader {
+                background-color: #42619f;
+                color: #FFFFFF;
+                font-weight: bold;
+            }
+
+            div.divFooter {
+                text-align: center !important;
+                font-size: 15px;
+            }
+
+            .bankDetail,
+            .bankDetail tr td {
+                border: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+            PRINT
+            <!-- {!translations['print_note']} -->
+        </button>
+        <!--<div style="text-align:center;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" height="70px" />
+        </div>-->
+        <div style="height: 10px"></div>
+        <div style="margin: 5px; display: block">
+            <table style="width: 100%; border: 1px solid black; font-size: 15px; height: 1030px;">
+                <tr>
+                    <td colspan="4" style="text-align:center; font-size: 19.5px;">
+                        <b>PROFORMA INVOICE</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Seller</td>
+                    <td colspan="2">Commercial Invoice No.:</td>
+
+                    <td>
+                        Date:
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!contract.SellerCompany__r.Name}"></apex:outputText>
+                        </b>
+                        <br/>
+                        <apex:outputText style="white-space:pre-wrap;" value="{!contract.SellerCompany__r.EnglishAddress__c}" escape="false"></apex:outputText>
+                    </td>
+                    <td colspan="2">
+                        <b>
+                            <apex:outputText value="{!contract.ProformaInvoiceNo__c}" />
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0,date,dd-MMM-yy}">
+                                <apex:param value="{!contract.ProformaInvoiceDate__c}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Contract No.:
+                    </td>
+                    <td>
+                        Date:
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <b>
+                            <apex:outputText value=" {!contract.ContractNumber__c}" />
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0,date,dd-MMM-yy}">
+                                <apex:param value="{!contract.ContractSignedDate__c}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Buyer</td>
+                    <td colspan="3">Remark:</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>
+                            <apex:outputText value="{!contract.ContractorName__r.Name}"></apex:outputText>
+                        </b>
+                        <br/>
+                        <apex:outputText style="white-space:pre-wrap;" value="{!contract.BuyersAddress__c}" escape="false"></apex:outputText>
+                    </td>
+                    <td colspan="3" rowspan="{!if(contract.NotifyParty__c != null, 4, 2)}">
+                        <apex:outputText style="white-space:pre-wrap;" value="Payment: {!contract.PaymentCondition__c}" escape="false"></apex:outputText>
+                        <!-- <apex:outputText rendered="{!or(contract.ReceiptancePaymentType__c == 'T/T', contract.ReceiptancePaymentType__c == 'D/P')}" value="Payment: {!contract.PaymentCondition__c}"></apex:outputText>
+                        <apex:outputText rendered="{!and(contract.ReceiptancePaymentType__c != 'T/T', contract.ReceiptancePaymentType__c != 'D/P')}" value="LC No: {!contract.LCNo__c}"></apex:outputText>
+                        <br/>
+                        <apex:outputText rendered="{!and(contract.ReceiptancePaymentType__c != 'T/T', contract.ReceiptancePaymentType__c != 'D/P')}" value="Date of Issue: {0,date,dd-MMM-yyyy}">
+                            <apex:param value="{!contract.LCDate__c}" />
+                        </apex:outputText> -->
+                    </td>
+                </tr>
+                <tr style="{!if(contract.NotifyParty__c != null, '', 'display: none;')}">
+                    <td>Notify Party</td>
+                </tr>
+                <tr style="{!if(contract.NotifyParty__c != null, '', 'display: none;')}">
+                    <td>
+                        <b>
+                            <apex:outputText value="{!contract.NotifyParty__r.Name}"></apex:outputText>
+                        </b>
+                        <br/>
+                        <apex:outputText style="white-space:pre-wrap;" value="{!contract.NotifyPartysAddress__c}" escape="false"></apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Port of Loading</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!contract.PortofLoading__r.Name + ', ' + contract.PortofLoading__r.Country_Name__c}"></apex:outputText>
+                        </b>
+                    </td>
+                    <td colspan="3" rowspan="3">
+                        <span>
+                            Bank charge:
+                            <strong>All bank charges outside of Vietnam (including the intermediary bank charge) must be paid by
+                                the BUYER.</strong>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Port of Discharging</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!contract.PortofDischarge__r.Name + ', ' + contract.PortofDischarge__r.Country_Name__c}"></apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td style="vertical-align:middle;text-transform: uppercase;">
+                        <b>Description of Goods</b>
+                    </td>
+                    <td style="width: 15%;vertical-align:middle;">
+                        <b>
+                            <apex:outputText value="{!if(contract.Unitpricewillbechargedbaseon__c == 'G.W (MT)', 'G.W', if(contract.Unitpricewillbechargedbaseon__c == 'N.W (MT)','N.W',contract.Unitpricewillbechargedbaseon__c ))}"></apex:outputText>
+                            <br/>
+                            <apex:outputText value="{!if(or(contract.Unitpricewillbechargedbaseon__c == 'N.W (MT)', contract.Unitpricewillbechargedbaseon__c == 'G.W (MT)'), '(MT)', '' )}"></apex:outputText>
+                        </b>
+                    </td>
+                    <td style="width: 15%;vertical-align:middle;">
+                        <b>Unit Price
+                            <br/>{!if(contract.UnitpriceChargeUnit__c != '', '(' + contract.UnitpriceChargeUnit__c + ')', '')}
+                        </b>
+                    </td>
+                    <td style="width: 15%;">
+                        <b>Amount
+                            <br/>(USD)
+                        </b>
+                    </td>
+                </tr>
+                <tr style="{!if(contract.CommodityDescriptionofGoodsPI__c == '', 'display: none;', '')}">
+                    <td>
+                        <apex:outputtext style="white-space:pre-wrap; text-transform: uppercase;" value="{!contract.CommodityDescriptionofGoodsPI__c}"
+                            escape="false" />
+                    </td>
+                    <td colspan="3"></td>
+                </tr>
+                <apex:repeat value="{!contractProducts}" var="conProc">
+                    <tr>
+                        <td>
+                            <apex:outputText style="white-space:pre-wrap;" value="{!conProc.BillNameatPrintENG__c}" escape="false"></apex:outputText>
+                        </td>
+                        <td style="text-align:right; vertical-align: middle;">
+                            <apex:outputText rendered="{!contract.Unitpricewillbechargedbaseon__c == 'G.W (MT)'}" value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(conProc.PlanGrossWeightMT__c != null, conProc.PlanGrossWeightMT__c, 0)}" />
+                            </apex:outputText>
+                            <apex:outputText rendered="{!contract.Unitpricewillbechargedbaseon__c == 'N.W (MT)'}" value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(conProc.PlanNetWeightMT__c != null, conProc.PlanNetWeightMT__c, 0)}" />
+                            </apex:outputText>
+                            <apex:outputText rendered="{!and(contract.Unitpricewillbechargedbaseon__c != 'G.W (MT)', contract.Unitpricewillbechargedbaseon__c != 'N.W (MT)')}"
+                                value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(conProc.PlanChargeQuantity__c != null, conProc.PlanChargeQuantity__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align:right; vertical-align: middle;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(conProc.UnitPriceofSellingFCY__c != null, conProc.UnitPriceofSellingFCY__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align:right; vertical-align: middle;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(conProc.PlanTotalAmountofSellingFCY__c != null, conProc.PlanTotalAmountofSellingFCY__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td>
+                        <b>TOTAL:</b>
+                    </td>
+                    <td style="text-align:right;">
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(totalWeightMT != null, totalWeightMT, 0)}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td></td>
+                    <td style="text-align:right;">
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(totalAmount != null, totalAmount, 0)}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="height: 100%;">
+                        <b>
+                            <apex:outputText style="text-transform: uppercase;" value="In word: {!sayContext}"></apex:outputText>
+                            <br/>
+                            <apex:outputText style="white-space:pre-wrap;" value="NOTES: {!contract.Notes__c}" escape="false"></apex:outputText>
+                            <br/>
+                            <br/>
+                            <apex:outputText value="Bank's Beneficiary detailed:"></apex:outputText>
+                        </b>
+                        <br/>
+                        <table class="bankDetail">
+                            <tr>
+                                <td>Account Name</td>
+                                <td>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}" rendered="{!bankType == 'local1'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}" rendered="{!bankType == 'local2'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}" rendered="{!bankType == 'local3'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}" rendered="{!bankType == 'local4'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}" rendered="{!bankType == 'local5'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bank Name</td>
+                                <td>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}" rendered="{!bankType == 'local1'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}" rendered="{!bankType == 'local2'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}" rendered="{!bankType == 'local3'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}" rendered="{!bankType == 'local4'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}" rendered="{!bankType == 'local5'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}" rendered="{!bankType == 'foreign1'}"
+                                    />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c}" rendered="{!bankType == 'foreign2'}"
+                                    />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_5__c}" rendered="{!bankType == 'foreign5'}"/>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bank Address</td>
+                                <td>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}" rendered="{!bankType == 'local1'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}" rendered="{!bankType == 'local2'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}" rendered="{!bankType == 'local3'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}" rendered="{!bankType == 'local4'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}" rendered="{!bankType == 'local5'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Swift Code</td>
+                                <td>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}" rendered="{!bankType == 'local1'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}" rendered="{!bankType == 'local2'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}" rendered="{!bankType == 'local3'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}" rendered="{!bankType == 'local4'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}" rendered="{!bankType == 'local5'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}" rendered="{!bankType == 'foreign1'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c}" rendered="{!bankType == 'foreign2'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_3_Other__c}" rendered="{!bankType == 'foreign3'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_4_Other__c}" rendered="{!bankType == 'foreign4'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_5_Other__c}" rendered="{!bankType == 'foreign5'}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Account No.</td>
+                                <td>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}" rendered="{!bankType == 'local1'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}" rendered="{!bankType == 'local2'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}" rendered="{!bankType == 'local3'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}" rendered="{!bankType == 'local4'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}" rendered="{!bankType == 'local5'}" />
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                    <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <b>
+                            <div style="text-align: right; width:95%;">
+                                <apex:outputText value="{!contract.SellerCompany__r.Name}"></apex:outputText>
+                            </div>
+                        </b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <apex:outputPanel rendered="{!showFooter}">
+            <div class="divFooter">
+                <!-- <span>
+                    <b>Head Office:</b> No.21 Street 10, Song Da Zone, Hiep Binh Chanh Ward, Thu Duc District, HCMC, Vietnam</span>
+                <br/>
+                <span>
+                    <b>Factory:</b> Dong Nai Province | Binh Duong Province | Binh Phuoc Province</span> -->
+                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Footer__c}" escape="false"  style="white-space:pre-wrap"/>
+            </div>
+        </apex:outputPanel>
+    </body>
+
+    </html>
+</apex:page>

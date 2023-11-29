@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImportBook</fullName>
+    <booleanFilter>1</booleanFilter>
+    <columns>ID__c</columns>
+    <columns>TranporationType__c</columns>
+    <columns>Field1__c</columns>
+    <columns>shipper__c</columns>
+    <columns>status__c</columns>
+    <columns>Partner__c</columns>
+    <columns>POD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>Priority_Urgency__c</columns>
+    <columns>Priority_Attenton_Required_lamp__c</columns>
+    <columns>POL__c</columns>
+    <columns>ETD__c</columns>
+    <columns>Vessle__c</columns>
+    <columns>carton__c</columns>
+    <columns>HBL__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CustomObject1__c.InAir,CustomObject1__c.RecordType1,CustomObject1__c.airimportlock,CustomObject1__c.oceanimport_lock</value>
+    </filters>
+    <label>1. Forwarding Import List</label>
+</ListView>

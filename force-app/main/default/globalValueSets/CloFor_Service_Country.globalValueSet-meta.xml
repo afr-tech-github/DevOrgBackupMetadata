@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>VIETNAM</fullName>
+        <default>true</default>
+        <label>VIETNAM</label>
+    </customValue>
+    <customValue>
+        <fullName>JAPAN</fullName>
+        <default>false</default>
+        <label>JAPAN</label>
+    </customValue>
+    <customValue>
+        <fullName>KOREA</fullName>
+        <default>false</default>
+        <label>KOREA</label>
+    </customValue>
+    <masterLabel>CloFor Service Country</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

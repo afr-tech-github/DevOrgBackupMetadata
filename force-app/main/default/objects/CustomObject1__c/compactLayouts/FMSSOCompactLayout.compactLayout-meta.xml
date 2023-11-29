@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FMSSOCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>RecordTypeId</fields>
+    <fields>status__c</fields>
+    <fields>SellInTaxAmountJPY_sum__c</fields>
+    <fields>TOTAL_AMOUT_OF_SELLING_WITH_TAX_USD__c</fields>
+    <fields>BuyInTaxAmountJPY_sum__c</fields>
+    <fields>TOTAL_AMOUT_OF_BUYING_WITH_TAX_USD__c</fields>
+    <label>FMS S/O Compact Layout</label>
+</CompactLayout>

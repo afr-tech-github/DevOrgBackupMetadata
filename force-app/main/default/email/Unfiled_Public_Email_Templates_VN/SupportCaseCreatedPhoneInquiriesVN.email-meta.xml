@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Thông báo tới khách hàng về các trường hợp được tạo qua điện thoại.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Hổ trợ : Tác vụ đã được thiết lập( yêu cầu số phone)</name>
+    <style>none</style>
+    <subject>Your Genwatt case number {!Case.CaseNumber} has been recorded</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

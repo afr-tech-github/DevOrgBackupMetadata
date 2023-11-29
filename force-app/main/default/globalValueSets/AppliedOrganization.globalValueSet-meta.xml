@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Marketing</fullName>
+        <default>false</default>
+        <label>Marketing</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales</fullName>
+        <default>false</default>
+        <label>Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Service</fullName>
+        <default>false</default>
+        <label>Customer Service</label>
+    </customValue>
+    <customValue>
+        <fullName>Export Forwarding</fullName>
+        <default>false</default>
+        <label>Export Forwarding</label>
+    </customValue>
+    <customValue>
+        <fullName>Import Forwarding</fullName>
+        <default>false</default>
+        <label>Import Forwarding</label>
+    </customValue>
+    <customValue>
+        <fullName>Domestic Transporation</fullName>
+        <default>false</default>
+        <label>Domestic Transporation</label>
+    </customValue>
+    <customValue>
+        <fullName>Cross-Border</fullName>
+        <default>false</default>
+        <label>Cross-Border</label>
+    </customValue>
+    <customValue>
+        <fullName>Export Customs Clearance</fullName>
+        <default>false</default>
+        <label>Export Customs Clearance</label>
+    </customValue>
+    <customValue>
+        <fullName>Import Customs Clearance</fullName>
+        <default>false</default>
+        <label>Import Customs Clearance</label>
+    </customValue>
+    <customValue>
+        <fullName>Export Consolidation</fullName>
+        <default>false</default>
+        <label>Export Consolidation</label>
+    </customValue>
+    <customValue>
+        <fullName>Import Consolidation</fullName>
+        <default>false</default>
+        <label>Import Consolidation</label>
+    </customValue>
+    <customValue>
+        <fullName>Warehouse Inbound</fullName>
+        <default>false</default>
+        <label>Warehouse Inbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Warehouse Outbound</fullName>
+        <default>false</default>
+        <label>Warehouse Outbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Warehouse VAS</fullName>
+        <default>false</default>
+        <label>Warehouse VAS</label>
+    </customValue>
+    <customValue>
+        <fullName>Logistic Operation</fullName>
+        <default>false</default>
+        <label>Logistic Operation</label>
+    </customValue>
+    <customValue>
+        <fullName>Trucking Operation</fullName>
+        <default>false</default>
+        <label>Trucking Operation</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver</fullName>
+        <default>false</default>
+        <label>Driver</label>
+    </customValue>
+    <customValue>
+        <fullName>Truck &amp; Fleet Operation</fullName>
+        <default>false</default>
+        <label>Truck &amp; Fleet Operation</label>
+    </customValue>
+    <customValue>
+        <fullName>Accounting</fullName>
+        <default>false</default>
+        <label>Accounting</label>
+    </customValue>
+    <customValue>
+        <fullName>HR</fullName>
+        <default>false</default>
+        <label>HR</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>APPLIED ROLES</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

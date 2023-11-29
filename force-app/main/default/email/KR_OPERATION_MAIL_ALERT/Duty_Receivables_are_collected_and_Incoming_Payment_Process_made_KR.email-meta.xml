@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>대납금의 입금예정분이 지불 기한이 지났을 때 본 템플릿을 사용하세요</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>대납금입금 확인 자동메일알림 템플릿</name>
+    <style>none</style>
+    <subject>자동메일알림-ID: {!CustomObject1__c.Name}-대납금입금 확인</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

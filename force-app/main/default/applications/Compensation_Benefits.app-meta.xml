@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X18</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Compensation &amp; Benefits</label>
+    <navType>Standard</navType>
+    <tabs>Employee__c</tabs>
+    <tabs>Employeecontract__c</tabs>
+    <tabs>DEPARTMENT__c</tabs>
+    <tabs>Employeeinformation__c</tabs>
+    <tabs>HRStandard__c</tabs>
+    <tabs>PayrollSlip__c</tabs>
+    <tabs>PayrollOrder__c</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Compensation_Benefits_UtilityBar</utilityBar>
+</CustomApplication>

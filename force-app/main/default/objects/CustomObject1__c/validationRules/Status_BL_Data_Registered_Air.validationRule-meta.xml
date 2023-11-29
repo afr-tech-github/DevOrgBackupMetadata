@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_BL_Data_Registered_Air</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(AND(ISPICKVAL(status__c , &quot;輸入 B/L情報登録済み(B/L Data Registered)&quot;),ISPICKVAL(CarrierType__c, &quot;航空(AIR)&quot;)) ,  OR(ISBLANK(HAWB__c),ISBLANK(MAWB__c))  , false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>HAWB 番号及びMAWB番号を必ず入れてください。
+Please enter the HAWB NO AND MAWB NO.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Revenue</fullName>
+        <default>false</default>
+        <label>Revenue</label>
+    </customValue>
+    <customValue>
+        <fullName>Profit</fullName>
+        <default>false</default>
+        <label>Profit</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct Cost</fullName>
+        <default>false</default>
+        <label>Direct Cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Indirect Cost</fullName>
+        <default>false</default>
+        <label>Indirect Cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Receivable</fullName>
+        <default>false</default>
+        <label>Receivable</label>
+    </customValue>
+    <customValue>
+        <fullName>Payable</fullName>
+        <default>false</default>
+        <label>Payable</label>
+    </customValue>
+    <customValue>
+        <fullName>Debt</fullName>
+        <default>false</default>
+        <label>Debt</label>
+    </customValue>
+    <customValue>
+        <fullName>Quote To Close Ratio</fullName>
+        <default>false</default>
+        <label>Quote To Close Ratio</label>
+    </customValue>
+    <customValue>
+        <fullName>New Customer</fullName>
+        <default>false</default>
+        <label>New Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Existing Customer</fullName>
+        <default>false</default>
+        <label>Existing Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Lifetime Value</fullName>
+        <default>false</default>
+        <label>Customer Lifetime Value</label>
+    </customValue>
+    <customValue>
+        <fullName>Lost Customer</fullName>
+        <default>false</default>
+        <label>Lost Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Number of Job</fullName>
+        <default>false</default>
+        <label>Number of Job</label>
+    </customValue>
+    <customValue>
+        <fullName>Cargo Volume</fullName>
+        <default>false</default>
+        <label>Cargo Volume</label>
+    </customValue>
+    <customValue>
+        <fullName>Activity</fullName>
+        <default>false</default>
+        <label>Activity</label>
+    </customValue>
+    <customValue>
+        <fullName>Complaint</fullName>
+        <default>false</default>
+        <label>Complaint</label>
+    </customValue>
+    <customValue>
+        <fullName>Claim</fullName>
+        <default>false</default>
+        <label>Claim</label>
+    </customValue>
+    <customValue>
+        <fullName>Survey</fullName>
+        <default>false</default>
+        <label>Survey</label>
+    </customValue>
+    <customValue>
+        <fullName>Time</fullName>
+        <default>false</default>
+        <label>Time</label>
+    </customValue>
+    <customValue>
+        <fullName>Fine</fullName>
+        <default>false</default>
+        <label>Fine</label>
+    </customValue>
+    <customValue>
+        <fullName>Penalty</fullName>
+        <default>false</default>
+        <label>Penalty</label>
+    </customValue>
+    <customValue>
+        <fullName>On-Time Delivery</fullName>
+        <default>false</default>
+        <label>On-Time Delivery</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>KPI CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

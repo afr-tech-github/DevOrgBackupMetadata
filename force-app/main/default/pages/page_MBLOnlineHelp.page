@@ -1,0 +1,284 @@
+<apex:page showHeader="false">
+
+<head>
+    <title>CONSOLIDATION</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+
+
+
+    </head>
+    <body>
+    <div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        CONSOLIDATION Help Page
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+    <h2>Trợ giúp trực tuyến cho Object HÀNG GHÉP</h2>
+<br></br>     <br></br>  
+Đây là phần để quản lý hàng ghép hoặc một bill Master cho nhiều bill House.Có nghĩa là nhiều vận đơn thứ cấp trong một container hàng ghép chỉ cần đăng ký chung thông tin với  bill Master hàng ghép.Lô hàng chỉ<br></br>
+có một Hàng ghép Master bill và một vận đơn thứ cấp House bill thì không cần phải đăng ký lô hàng ghép.<br></br>
+<br></br>
+Hàng ghép cung cấp một số ứng dụng và cung cấp việc tính toán tự động hay copy dữ liệu tự động<br></br>
+<br></br>
+-Sao chép dữ liệu tới vận đơn thứ cấp:  Copy thông tin chuyến tàu POL/POD ...sang thông tin H B/L shipment khi nhập liệu .<br></br>
+<br></br>
+Do đó nhân viên phụ trách không cần phải nhập lại từng lô hàng vận đơn thứ cấp H B/L trong container hàng ghép nữa<br></br>
+<br></br>
+<h3>Các thông tin dưới đây sẽ được "Sao chép dữ liệu tới vận đơn thứ cấp" </h3><br></br>
+<ul>
+-POL-COUNTRY<br></br>
+-POL-CẢNG<br></br>
+-ĐỊA ĐIỂM HÓA ĐƠN<br></br>
+-NGÀY KHỞI HÀNH DỰ KIẾN<br></br>
+-POD-COUNTRY<br></br>
+-POD-CẢNG<br></br>
+-ĐỊA ĐIỂM GIAO HÀNG<br></br>
+-DỰ KIẾN NGÀY ĐẾN CẢNG ĐÍCH<br></br>
+-TÊN CHUYẾN TÀU/TÊN CHUYẾN BAY<br></br>
+-TÊN TÀU<br></br>
+-SỐ CONTAINER/SỐ SEAL <br></br>
+-NHÀ XE NHẬN DỠ HÀNG<br></br>
+-NHÂN VIÊN PHỤ TRÁCH BÊN DỠ HÀNG<br></br>
+-NGÀY DỰ KIẾN DỠ HÀNG<br></br>
+-THỜI GIAN NỘP MANIFEST<br></br>
+-TÀU CHUYỂN TẢI<br></br>
+-CẢNG CHUYỂN TẢI<br></br>
+-NGÀY ĐẾN CẢNG CHUYỂN TẢI DỰ KIẾN<br></br>
+-SỐ VẬN ĐƠN CHỦ<br></br>
+-CO-LOADER/CARRIER<br></br>
+-KHO HÀNG<br></br>
+-SỐ CONTAINER &amp; SỐ SEAL <br></br>
+</ul>
+<br></br>
+- Hạch toán chi phí từ M BL sẽ tự động phân bổ cho từng H BL chỉ với cú nhấp chuột vào tab<br></br>
+ “ Bảng cân đối chi phí” Ví dụ ở Nhật thì có 4 loại phí từ M bl sẽ tự phân bổ cho các H BL sau khi nhập liệu và bấm “ Bảng cân đối chi phí”<br></br>
+"Sao chép vận đơn chủ với chi tiết mua hàng": copy thông tin hàng ghép MB/L gồm cả giá mua từ hàng ghép M B/L gốc<br></br>
+<br></br>
+KẾ HOẠCH XẾP HÀNG LÊN CONTAINER: Tạo ra danh sách của container hàng ghép để cung cấp cho kho dỡ hàng<br></br>
+<br></br>
+<li><h3>BẢNG CÂN ĐỐI CHI PHÍ</h3></li> ==>Tự động phân bổ chi phí, áp dụng cho trường hợp<br></br>
+1.Tất cả chi phí phân bổ giá mua/bán sẽ được tạo ra với dạng: " Phân bổ chi phí hàng ghép”<br></br> 
+2.Danh mục phân bổ chi phí phải được chọn trong object Hàng ghép-Mua <br></br>
+3. MÃ SỐ CHÍNH CỦA LÔ HÀNG, DANH MỤC PHÂN BỔ CHI PHÍ, MÃ DANH MỤC HÀNG CỦA VẬN ĐƠN CHỦ phải được nhập chính xác<br></br>
+<br></br>
+<li><h3>CHI TIẾT PHÂN BỔ CHI PHÍ</h3></li> ==> Sau khi áp dụng tự động phân bổ chi phí, kết quả sẽ thể hiện tự động. Chúng ta có thể so sánh chi phí mua ban đầu với số liệu sau khi  phân bổ<br></br>
+<br></br>
+<li><h3>PHÂN TÍCH LỢI NHUẬN (tất cả H B/L)</h3></li>==>Thể hiện toàn bộ thông tin mua bán của tất cả lô hàng trong cùng một M B/L<br></br>
+
+
+
+--------------------------------------------------------------------------------------------------<br></br> 
+<h2>Online Help for CONSOLIDATION Object</h2>   
+<br></br> <br></br>    
+This is an Object to manage Consolidation Cargo and One-Master-Multiple House BL shipment.<br></br>
+It means that many House BL in one container only need to be registered to M B/L Shipment.<br></br> 
+One Master B/L Shipment and One House B/L Shipment do not need to be registered to M B/L Shipment Object.<br></br>
+MBL provide a number of key buttons that provide automatic calculation and data copy.<br></br>
+<br></br>
+
+<!-- First item -->
+            <li>
+<h3>MB/L RECORD COPY WITH BUYING DETAILS</h3><br></br>==>Copies the CONSOLIDATION shipment with CONSOL Buying items.<br></br>
+<br></br>
+</li>
+<li>
+<h3>CONTAINER LOAD PLAN</h3> <br></br>==> Generates the CLP(container load plan) for devanning warehouse.<br></br>
+<br></br>
+</li>
+
+<li>
+<h3>DATA COPY TO H B/L SHIPMENTS</h3><br></br>==>copy vessle information and POD/POL field to H B/L Shipment. <br></br>
+so that operator do not need to enter vessle information and POD/POL information again and again to each H B/L.<br></br>
+</li>
+
+
+<br></br>
+<h3>Below DATA will be copied to H B/L Shipment.</h3> <br></br>
+<ul>
+
+-POL-COUNTRY<br></br>
+-POL-PORT<br></br>
+-PLACE OF RECEIPT<br></br>
+-ETD<br></br>
+-POD-COUNTRY<br></br>
+-POD-PORT<br></br>
+-PLACE OF DELIVERY<br></br>
+-ETA<br></br>
+-VESSEL/FLIGHT<br></br>
+-VOYAGE<br></br>
+-CONTAINER NO/SEAL NO<br></br>
+-DEVAN OPERATION COMPANY<br></br>
+-PIC OF DEVAN<br></br>
+-DEVAN DATE<br></br>
+-MANIFEST SUBMISSION DATE<br></br>
+-TRANSIT VESSEL<br></br>
+-TRANSIT PORT<br></br>
+-ETD AT TRANSIT PORT<br></br>
+-MASTER B/L NO<br></br>
+-CO-LOADER/CARRIER<br></br>
+-WAREHOUSE<br></br>
+-CONTAINER &amp; SEAL NO<br></br>
+<br></br>
+
+</ul>
+
+<li><h3>BALANCE COST ALLOCATION</h3></li>==> 4 shared costs for 1 container need to be allocated to each H BL based on Cargo Volume.<br></br>
+By clicking Balance Cost Allocation, the 4 shared costs are allocated automatically.<br></br>
+ To apply, <br></br>
+1.every cost allocation selling/buying items should be created with record type” Consolidation Cost allocation” <br></br>
+2. COST ALLOCATION CATEGORY must be selected in MBL BUYING Object.<br></br>
+3. CONSOLIDATION SHIPMENT NAME, COST ALLOCATION CATEGORY, M B/L SHIPMENT BUYING ID should be filled properly.<br></br> 
+<br></br>   
+
+<li><h3>COST ALLOCATION DETAIL</h3></li>==> After applying auto-allocation, it shows the result of allocation. You can compare the original buying cost and the amount after allocation.<br></br>
+<br></br>
+
+<li><h3>PROFIT ANALYSIS(ALL HB/L)</h3></li>==> It shows the overall balance of selling/buying in one MB/L shipment.<br></br>
+
+------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>MB/L案件に関するオンラインヘルプ</h2><br></br>
+<br></br>
+自社混載および複数BL貨物を管理するオブジェクトです。<br></br>
+一つのコンテナの中に複数のハウスBLが存在する場合のみ、MBL案件の登録が必要です。<br></br>
+一つのマスターBLに一つのハウスBLの場合はMBL案件の登録は必要ありません。<br></br>
+MB/L案件の中には自動按分やデータコピーに関わる主要なボタンがあります。<br></br>
+<br></br>
+<li><h3>M B/Lレコードコピー-仕入れ明細含む</h3></li>==>MB/L案件をMB/L仕入明細と一緒にコピーします。<br></br>
+<br></br>
+<li><h3>コンテナロードプラン</h3></li>==>デバン倉庫向けのCLP(コンテナロードプラン)を発行します<br></br>
+<br></br>
+<li><h3>HB/Lへのデータ移行</h3></li>==>本線情報やPOL/PODなどの情報をハウス案件にコピーします。<br></br>
+オペレーターは本船情報やPOL/PODを各個のハウス案件に何度も登録する必要がありません。<br></br>
+<br></br>
+<h3>HB/Lへのデータ移行でハウス案件にコピーされるのは以下の情報です。</h3><br></br>
+<ul>
+POL-国<br></br>
+POL-港<br></br>
+Place of receipt<br></br>
+ETD<br></br>
+POD- 国<br></br>
+Place of delivery<br></br>
+ETA<br></br>
+船名/Flight<br></br>
+Voyage<br></br>
+コンテナ,シール番号<br></br>
+Devan業者<br></br>
+Devan担当者<br></br>
+搬入予定日<br></br>
+積み替え前の船<br></br>
+積み替え港<br></br>
+TRANSIT出港日<br></br>
+Master B/L番号<br></br>
+Co-loader・船社<br></br>
+貨物搬入場所<br></br>
+コンテナ&amp;シール番号<br></br>
+</ul>
+<br></br>
+・MB/L費用按分->4つに分けられた費用がハウス案件のCBM(R/TON)にしたがって按分されます。MB/L費用按分をクリックすることにより、4つに分けられた費用が自動的に按分されます。<br></br>
+1.按分に関わる全てのHB/L請求・仕入明細のアイテムのレコードタイプが、”Consolidation Cost Allocation”として作られていなければなりません。<br></br>
+2.MB/L仕入明細のオブジェクトで、適切な按分カテゴリーが選択されていなければなりません。<br></br>
+3.マスター案件名, 按分カテゴリー、マスター案件明細IDが適切に入力されていなければなりません。<br></br>
+<br></br>
+<li><h3>按分詳細</h3></li>==>自動按分の実行後、按分の結果を表示します。元々の仕入価格と按分後の金額を比較することが出来ます。<br></br>
+<br></br>
+<li><h3>House合計金額</h3></li>==>一つのMB/L案件での請求額と仕入額のバランスを表示します。<br></br>
+
+
+------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>M B/L안건에 대한 온라인 도움말</h2><br></br>
+<br></br>
+자사 및 여러 BL화물을 관리하는 오브젝트(객체)입니다.<br></br>
+一하나의 컨테이너에 여러 HBL이 존재하는 경우에만 M B/L 안건의 등록이 필요합니다.<br></br>
+一하나의 M B/L에 하나의 하우스 BL의 경우 M B/L 안건의 등록이 필요하지 않습니다.<br></br>
+M B/L안건 중에는 비용배분과 데이터 복사에 관한 주요 버튼이 있습니다.<br></br>
+<br></br>
+<li><h3>M B/L기록 사본 - 구매 내역 포함</h3></li>==>M B/L안건을 M B/L 구매 명세서와 함께 복사합니다.<br></br>
+<br></br>
+<li><h3>컨테이너로드 플랜</h3></li> ==> 데바닝 창고를 위한 CLP(컨테이너로드 플랜)를 발행합니다.<br></br>
+<br></br>
+<li><h3>H B/L에 데이터 마이그레이션</h3></li> ==> 본선 정보 및 POL / POD 등의 정보를 하우스 안건에 복사합니다.<br></br>
+운영자는 선박 정보 및 POL / POD를 각 하우스 안건에 여러 번 등록 할 필요가 없습니다.<br></br>
+<br></br>
+<h3>HB/L 데이터 마이그레이션 하우스 안건에 복사되는 것은 다음의 정보입니다.</h3><br></br>
+<ul>
+POL-국<br></br>
+POL-항<br></br>
+Place of receipt<br></br>
+ETD<br></br>
+POD-국<br></br>
+Place of delivery<br></br>
+ETA<br></br>
+선명/Flight<br></br>
+Voyage<br></br>
+컨테이너 봉인 번호<br></br>
+Devan업자<br></br>
+Devan담당자<br></br>
+반입 예정일<br></br>
+환적선<br></br>
+환적항<br></br>
+TRANSIT출항일<br></br>
+Master B/L번호<br></br>
+Co-loader・선사<br></br>
+화물 반입 장소<br></br>
+컨테이너 번호 및 SEAL 번호<br></br>
+</ul>
+<br></br>
+・M B/L 비용배분 -> 하우스 안건의 CBM (R / TON)에 따라 비용이 4 가지로 안분됩니다. M B/L 비용배분를 클릭하면 비용이 4 가지로 자동으로 비용배분됩니다.<br></br>
+1.비용배분에 관한 모든 HB/L 청구 · 매입 내역 항목의 레코드 유형이 "Consolidation Cost Allocation"로 만들어져 있지 않으면 안됩니다.<br></br>
+2.MB/L 매입 명세서의 개체에서 적절한 비용 비용배분 분류가 선택되어 있지 않으면 안됩니다.<br></br>
+3.마스터 안건 명, 비용배분 분류 마스터 안건 항목 ID를 올바르게 입력해야 합니다.<br></br>
+<br></br>
+<li><h3>비용배분 상세</h3></li> ==> 비용배분을 실행 한 후 비용배분 결과를 표시합니다. 원래의 매입 가격과 비용배분된 금액을 비교할 수 있습니다.<br></br>
+<br></br>
+<li><h3>House합계금액</h3></li> ==> 하나의 MB/L 안건에서 판매액과 매입액의 차이를 표시합니다.<br></br>
+
+    </body>
+</apex:page>

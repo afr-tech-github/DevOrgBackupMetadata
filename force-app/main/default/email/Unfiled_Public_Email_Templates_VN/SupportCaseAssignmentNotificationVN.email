@@ -1,0 +1,9 @@
+Công việc đã được phân công tự động cho bộ phận của bạn. Việc này cần phải giải quyết trong thời gian cho phép theo tiêu chuẩn của công ty.
+
+Công Ty: {!Account.Name} 
+Người liên hệ: {!Contact.Name} 
+Chủ đề: {!Case.Subject} 
+Mô tả: {!Case.Description}
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************

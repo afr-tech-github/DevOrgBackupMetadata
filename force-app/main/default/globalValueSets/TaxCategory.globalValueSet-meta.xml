@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Value Added Tax(VAT)</fullName>
+        <default>false</default>
+        <label>Value Added Tax(VAT)</label>
+    </customValue>
+    <customValue>
+        <fullName>Special Duty Tax</fullName>
+        <default>false</default>
+        <label>Special Duty Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Import Tax</fullName>
+        <default>false</default>
+        <label>Import Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Export Tax</fullName>
+        <default>false</default>
+        <label>Export Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate Income Tax</fullName>
+        <default>false</default>
+        <label>Corporate Income Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Capital Use Tax</fullName>
+        <default>false</default>
+        <label>Capital Use Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Natural Resource Tax</fullName>
+        <default>false</default>
+        <label>Natural Resource Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Land Tax</fullName>
+        <default>false</default>
+        <label>Land Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Personal Income Tax</fullName>
+        <default>false</default>
+        <label>Personal Income Tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Late Payment Fee</fullName>
+        <default>false</default>
+        <label>Late Payment Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Tax</fullName>
+        <default>false</default>
+        <label>Other Tax</label>
+    </customValue>
+    <masterLabel>TAX CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

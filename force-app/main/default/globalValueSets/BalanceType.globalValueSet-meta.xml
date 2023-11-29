@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Cash On Hand</fullName>
+        <default>false</default>
+        <label>Cash On Hand</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash In Bank</fullName>
+        <default>false</default>
+        <label>Cash In Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash In Transit</fullName>
+        <default>false</default>
+        <label>Cash In Transit</label>
+    </customValue>
+    <customValue>
+        <fullName>Short term securities investment</fullName>
+        <default>false</default>
+        <label>Short term securities investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Other short term investment</fullName>
+        <default>false</default>
+        <label>Other short term investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision short term investment</fullName>
+        <default>false</default>
+        <label>Provision short term investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Receivable</fullName>
+        <default>false</default>
+        <label>Receivable</label>
+    </customValue>
+    <customValue>
+        <fullName>VAT Deducted</fullName>
+        <default>false</default>
+        <label>VAT Deducted</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Receivables</fullName>
+        <default>false</default>
+        <label>Internal Receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Receivable</fullName>
+        <default>false</default>
+        <label>Other Receivable</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for bad receivables</fullName>
+        <default>false</default>
+        <label>Provision for bad receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Advances (detailed by receivers)</fullName>
+        <default>false</default>
+        <label>Advances (detailed by receivers)</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term prepaid expenses</fullName>
+        <default>false</default>
+        <label>Short-term prepaid expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Mortage, collateral &amp; short term deposits</fullName>
+        <default>false</default>
+        <label>Mortage, collateral &amp; short term deposits</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchased goods in transit</fullName>
+        <default>false</default>
+        <label>Purchased goods in transit</label>
+    </customValue>
+    <customValue>
+        <fullName>Raw materials</fullName>
+        <default>false</default>
+        <label>Raw materials</label>
+    </customValue>
+    <customValue>
+        <fullName>Instrument &amp; tools</fullName>
+        <default>false</default>
+        <label>Instrument &amp; tools</label>
+    </customValue>
+    <customValue>
+        <fullName>Cost for work in process</fullName>
+        <default>false</default>
+        <label>Cost for work in process</label>
+    </customValue>
+    <customValue>
+        <fullName>Goods</fullName>
+        <default>false</default>
+        <label>Goods</label>
+    </customValue>
+    <customValue>
+        <fullName>Entrusted goods for sale</fullName>
+        <default>false</default>
+        <label>Entrusted goods for sale</label>
+    </customValue>
+    <customValue>
+        <fullName>Goods in tax-suspension warehouse / Applied for the companies which have Tax-suspension warehouse</fullName>
+        <default>false</default>
+        <label>Goods in tax-suspension warehouse / Applied for the companies which have Tax-suspension warehouse</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for devaluation of stocks</fullName>
+        <default>false</default>
+        <label>Provision for devaluation of stocks</label>
+    </customValue>
+    <customValue>
+        <fullName>Administrative expenses</fullName>
+        <default>false</default>
+        <label>Administrative expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Tangible Fixed Asset</fullName>
+        <default>false</default>
+        <label>Tangible Fixed Asset</label>
+    </customValue>
+    <customValue>
+        <fullName>Fixed assets of finance leasing</fullName>
+        <default>false</default>
+        <label>Fixed assets of finance leasing</label>
+    </customValue>
+    <customValue>
+        <fullName>Intangible fixed assets</fullName>
+        <default>false</default>
+        <label>Intangible fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Depreciation of fixed assets</fullName>
+        <default>false</default>
+        <label>Depreciation of fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment real estate</fullName>
+        <default>false</default>
+        <label>Investment real estate</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment in equity of subsidiaries</fullName>
+        <default>false</default>
+        <label>Investment in equity of subsidiaries</label>
+    </customValue>
+    <customValue>
+        <fullName>Joint venture capital contribution</fullName>
+        <default>false</default>
+        <label>Joint venture capital contribution</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment in joint-venture</fullName>
+        <default>false</default>
+        <label>Investment in joint-venture</label>
+    </customValue>
+    <customValue>
+        <fullName>Other long term investments</fullName>
+        <default>false</default>
+        <label>Other long term investments</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for long term investment devaluation</fullName>
+        <default>false</default>
+        <label>Provision for long term investment devaluation</label>
+    </customValue>
+    <customValue>
+        <fullName>Capital construction in process</fullName>
+        <default>false</default>
+        <label>Capital construction in process</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-Term Prepaid Expense</fullName>
+        <default>false</default>
+        <label>Long-Term Prepaid Expense</label>
+    </customValue>
+    <customValue>
+        <fullName>Differed income tax assets</fullName>
+        <default>false</default>
+        <label>Differed income tax assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Long term collateral &amp; deposit</fullName>
+        <default>false</default>
+        <label>Long term collateral &amp; deposit</label>
+    </customValue>
+    <customValue>
+        <fullName>Payable</fullName>
+        <default>false</default>
+        <label>Payable</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term loan</fullName>
+        <default>false</default>
+        <label>Short-term loan</label>
+    </customValue>
+    <customValue>
+        <fullName>Long term loans due to date</fullName>
+        <default>false</default>
+        <label>Long term loans due to date</label>
+    </customValue>
+    <customValue>
+        <fullName>Taxes and payable to state budget(Include VAT)</fullName>
+        <default>false</default>
+        <label>Taxes and payable to state budget(Include VAT)</label>
+    </customValue>
+    <customValue>
+        <fullName>Payable to employees</fullName>
+        <default>false</default>
+        <label>Payable to employees</label>
+    </customValue>
+    <customValue>
+        <fullName>Accruals</fullName>
+        <default>false</default>
+        <label>Accruals</label>
+    </customValue>
+    <customValue>
+        <fullName>Intercompany payable</fullName>
+        <default>false</default>
+        <label>Intercompany payable</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction contract progress payment due to customer</fullName>
+        <default>false</default>
+        <label>Construction contract progress payment due to customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Social Insurance</fullName>
+        <default>false</default>
+        <label>Social Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Health Insurance</fullName>
+        <default>false</default>
+        <label>Health Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Unemployment Insurance</fullName>
+        <default>false</default>
+        <label>Unemployment Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Payable</fullName>
+        <default>false</default>
+        <label>Other Payable</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-Term Borrowing</fullName>
+        <default>false</default>
+        <label>Long-Term Borrowing</label>
+    </customValue>
+    <customValue>
+        <fullName>Working Capital</fullName>
+        <default>false</default>
+        <label>Working Capital</label>
+    </customValue>
+    <customValue>
+        <fullName>Differences upon asset revaluation</fullName>
+        <default>false</default>
+        <label>Differences upon asset revaluation</label>
+    </customValue>
+    <customValue>
+        <fullName>Foreign exchange differences</fullName>
+        <default>false</default>
+        <label>Foreign exchange differences</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment &amp; development funds</fullName>
+        <default>false</default>
+        <label>Investment &amp; development funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial reserve funds</fullName>
+        <default>false</default>
+        <label>Financial reserve funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Other funds</fullName>
+        <default>false</default>
+        <label>Other funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Stock funds</fullName>
+        <default>false</default>
+        <label>Stock funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Undistributed Earnings</fullName>
+        <default>false</default>
+        <label>Undistributed Earnings</label>
+    </customValue>
+    <customValue>
+        <fullName>Bonus &amp; welfare funds</fullName>
+        <default>false</default>
+        <label>Bonus &amp; welfare funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction investment fund</fullName>
+        <default>false</default>
+        <label>Construction investment fund</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Revenue</fullName>
+        <default>false</default>
+        <label>Sales Revenue</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal gross sales</fullName>
+        <default>false</default>
+        <label>Internal gross sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial activities income</fullName>
+        <default>false</default>
+        <label>Financial activities income</label>
+    </customValue>
+    <customValue>
+        <fullName>Sale discount</fullName>
+        <default>false</default>
+        <label>Sale discount</label>
+    </customValue>
+    <customValue>
+        <fullName>Sale returns</fullName>
+        <default>false</default>
+        <label>Sale returns</label>
+    </customValue>
+    <customValue>
+        <fullName>Devaluation of sale</fullName>
+        <default>false</default>
+        <label>Devaluation of sale</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchase</fullName>
+        <default>false</default>
+        <label>Purchase</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct raw materials cost</fullName>
+        <default>false</default>
+        <label>Direct raw materials cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct labor cost</fullName>
+        <default>false</default>
+        <label>Direct labor cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Executing machine using cost</fullName>
+        <default>false</default>
+        <label>Executing machine using cost</label>
+    </customValue>
+    <customValue>
+        <fullName>General operation cost</fullName>
+        <default>false</default>
+        <label>General operation cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Production cost</fullName>
+        <default>false</default>
+        <label>Production cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Cost of goods sold</fullName>
+        <default>false</default>
+        <label>Cost of goods sold</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial activities expenses</fullName>
+        <default>false</default>
+        <label>Financial activities expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Selling expenses</fullName>
+        <default>false</default>
+        <label>Selling expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>General &amp; administration expenses</fullName>
+        <default>false</default>
+        <label>General &amp; administration expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Income</fullName>
+        <default>false</default>
+        <label>Other Income</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Expense</fullName>
+        <default>false</default>
+        <label>Other Expense</label>
+    </customValue>
+    <customValue>
+        <fullName>Business Income tax charge</fullName>
+        <default>false</default>
+        <label>Business Income tax charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>BALANCE TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Buying_Contract</fullName>
+    <columns>NAME</columns>
+    <columns>Active__c</columns>
+    <columns>ContractorType__c</columns>
+    <columns>ContractName__c</columns>
+    <columns>ContractorName__c</columns>
+    <columns>ContractTerm__c</columns>
+    <columns>ContractStartDate__c</columns>
+    <columns>ContractEndDate__c</columns>
+    <columns>BillingAddress__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Contract__c.BuyingClosedEnded</value>
+    </filters>
+    <label>1. Buying Contract</label>
+</ListView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BANKTRANSITTYPE__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>PAYMENT TYPE-SELLING</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>口座振込</fullName>
+                <default>true</default>
+                <label>Bank Transfer</label>
+            </value>
+            <value>
+                <fullName>現金</fullName>
+                <default>false</default>
+                <label>Cash</label>
+            </value>
+            <value>
+                <fullName>相殺</fullName>
+                <default>false</default>
+                <label>Payment Offset</label>
+            </value>
+            <value>
+                <fullName>Deposit Offset</fullName>
+                <default>false</default>
+                <label>Deposit Offset</label>
+            </value>
+            <value>
+                <fullName>小切手受領（当社口座へ入金前）</fullName>
+                <default>false</default>
+                <label>Cheque (Received but not Claimed)</label>
+            </value>
+            <value>
+                <fullName>小切手入金（当社口座へ入金完了）</fullName>
+                <default>false</default>
+                <label>Cheque (Received and Claimed)</label>
+            </value>
+            <value>
+                <fullName>Loan</fullName>
+                <default>false</default>
+                <label>Loan</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

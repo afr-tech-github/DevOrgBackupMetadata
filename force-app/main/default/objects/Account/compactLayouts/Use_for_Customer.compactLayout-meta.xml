@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Use_for_Customer</fullName>
+    <fields>Name</fields>
+    <fields>Website</fields>
+    <fields>mail__c</fields>
+    <fields>Phone</fields>
+    <fields>RecordTypeId</fields>
+    <label>Use for Customer</label>
+</CompactLayout>

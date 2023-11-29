@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConsolidationStatus__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Consolidation Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Plan Consolidation Service</fullName>
+                <default>false</default>
+                <label>Plan Consolidation Service</label>
+            </value>
+            <value>
+                <fullName>Booked a Container</fullName>
+                <default>false</default>
+                <label>Booked a Container</label>
+            </value>
+            <value>
+                <fullName>Unload from Truck/Pickup from Shipper</fullName>
+                <default>false</default>
+                <label>Unload from Truck/Pickup from Shipper</label>
+            </value>
+            <value>
+                <fullName>Created F/TMS S/O and Connect to Consolidation</fullName>
+                <default>false</default>
+                <label>Created F/TMS S/O and Connect to Consolidation</label>
+            </value>
+            <value>
+                <fullName>Copy from Consolidation to F/TMS S/O</fullName>
+                <default>false</default>
+                <label>Copy from Consolidation to F/TMS S/O</label>
+            </value>
+            <value>
+                <fullName>Loaded  Cargo to Container</fullName>
+                <default>false</default>
+                <label>Loaded  Cargo to Container</label>
+            </value>
+            <value>
+                <fullName>Issued Container Load Plan</fullName>
+                <default>false</default>
+                <label>Issued Container Load Plan</label>
+            </value>
+            <value>
+                <fullName>Transport Container to Yard</fullName>
+                <default>false</default>
+                <label>Transport Container to Yard</label>
+            </value>
+            <value>
+                <fullName>Application for Customs Clearance-Outbound</fullName>
+                <default>false</default>
+                <label>Application for Customs Clearance-Outbound</label>
+            </value>
+            <value>
+                <fullName>Customs Examination-Outbound</fullName>
+                <default>false</default>
+                <label>Customs Examination-Outbound</label>
+            </value>
+            <value>
+                <fullName>Customs Inspection-Outbound</fullName>
+                <default>false</default>
+                <label>Customs Inspection-Outbound</label>
+            </value>
+            <value>
+                <fullName>Export Permitted</fullName>
+                <default>false</default>
+                <label>Export Permitted</label>
+            </value>
+            <value>
+                <fullName>B/L Issued</fullName>
+                <default>false</default>
+                <label>B/L Issued</label>
+            </value>
+            <value>
+                <fullName>Departured at Origin Port</fullName>
+                <default>false</default>
+                <label>Departured at Origin Port</label>
+            </value>
+            <value>
+                <fullName>On Voyage</fullName>
+                <default>false</default>
+                <label>On Voyage</label>
+            </value>
+            <value>
+                <fullName>Delayed</fullName>
+                <default>false</default>
+                <label>Delayed</label>
+            </value>
+            <value>
+                <fullName>Buying Amount Confirmed</fullName>
+                <default>false</default>
+                <label>Buying Amount Confirmed</label>
+            </value>
+            <value>
+                <fullName>Create Consolidation Buying Record</fullName>
+                <default>false</default>
+                <label>Create Consolidation Buying Record</label>
+            </value>
+            <value>
+                <fullName>Create F/TMS Billing Records</fullName>
+                <default>false</default>
+                <label>Create F/TMS Billing Records</label>
+            </value>
+            <value>
+                <fullName>Cost Allocation from Consolidation Buying to F/TMS Buying</fullName>
+                <default>false</default>
+                <label>Cost Allocation from Consolidation Buying to F/TMS Buying</label>
+            </value>
+            <value>
+                <fullName>Arrived at Destination Port</fullName>
+                <default>false</default>
+                <label>Arrived at Destination Port</label>
+            </value>
+            <value>
+                <fullName>Application for Customs Clearance-Inbound</fullName>
+                <default>false</default>
+                <label>Application for Customs Clearance-Inbound</label>
+            </value>
+            <value>
+                <fullName>Customs Examination-Inbound</fullName>
+                <default>false</default>
+                <label>Customs Examination-Inbound</label>
+            </value>
+            <value>
+                <fullName>Customs Inspection-Inbound</fullName>
+                <default>false</default>
+                <label>Customs Inspection-Inbound</label>
+            </value>
+            <value>
+                <fullName>Import Permitted</fullName>
+                <default>false</default>
+                <label>Import Permitted</label>
+            </value>
+            <value>
+                <fullName>Transport Container to Warehouse</fullName>
+                <default>false</default>
+                <label>Transport Container to Warehouse</label>
+            </value>
+            <value>
+                <fullName>Unload from Container</fullName>
+                <default>false</default>
+                <label>Unload from Container</label>
+            </value>
+            <value>
+                <fullName>A/N Issued</fullName>
+                <default>false</default>
+                <label>A/N Issued</label>
+            </value>
+            <value>
+                <fullName>Collected Charges</fullName>
+                <default>false</default>
+                <label>Collected Charges</label>
+            </value>
+            <value>
+                <fullName>Payment Settled</fullName>
+                <default>false</default>
+                <label>Payment Settled</label>
+            </value>
+            <value>
+                <fullName>D/O Issued</fullName>
+                <default>false</default>
+                <label>D/O Issued</label>
+            </value>
+            <value>
+                <fullName>Load to Truck/Delivery to Import</fullName>
+                <default>false</default>
+                <label>Load to Truck/Delivery to Import</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>Cancel</fullName>
+                <default>false</default>
+                <label>Cancel</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Time</fullName>
+        <default>false</default>
+        <label>Time</label>
+    </customValue>
+    <customValue>
+        <fullName>Physical Quality</fullName>
+        <default>false</default>
+        <label>Physical Quality</label>
+    </customValue>
+    <masterLabel>DOWNGRADE FACTOR</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

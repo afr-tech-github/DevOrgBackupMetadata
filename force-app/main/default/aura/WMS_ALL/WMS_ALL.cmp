@@ -1,0 +1,37 @@
+<aura:component controller="WMS_AssignResource">
+    <aura:attribute name="parent" type="Aura.Component"/>
+    <aura:attribute name="locatorFilter" type="String"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="wosMassive" type="Object" default="{}" />
+    <aura:attribute name="recOrderService" type="WorkOrderService__c" 
+                    default="{'SObjectType': 'clofor_com_cfs__WorkOrderService__c','clofor_com_cfs__Status__c': 'Resource Assigned'}" />
+    <aura:attribute name="listWosStatus" type="String[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <!--<aura:handler event="force:refreshView" action="{!c.onInit}" />-->
+    <div class="slds-grid slds-wrap slds-grid_align-space">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+           <c:cmp_lookup
+                label="Locator"
+                objectType="clofor_com_cfs__LOCATOR__c"
+                searchField="Name"
+                subtitleField="clofor_com_cfs__LocatorCode__c"
+                optionalFields="clofor_com_cfs__MainOperator__c"
+                showRecentRecords="false" 
+                filter="{!v.locatorFilter}"
+                value="{!v.recOrderService.clofor_com_cfs__Locator__c}" ref="v.recOrderService.clofor_com_cfs__Locator__c" 
+                onselect="{!c.handleLocatorChange}"/>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small" style="padding-top:5px">
+            <lightning:combobox value="{!v.recOrderService.clofor_com_cfs__Status__c}" options="{!v.listWosStatus}" />
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+            <lightning:input type="datetime" label="Scheduled start date" 
+                             value="{!v.recOrderService.clofor_com_cfs__ScheduledStartTime__c}"/>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+            <lightning:input type="datetime" label="Scheduled end date" 
+                             value="{!v.recOrderService.clofor_com_cfs__ScheduledEndTime__c}"/>
+        </div>    
+    </div>
+</aura:component>

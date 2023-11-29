@@ -1,0 +1,21 @@
+オペレーションチーム各位
+
+以下の通り、マスター案件が作成されました
+
+◎マスター案件ID：{!MasterAnken__c.MasterID__c}  Link to SF:{!MasterAnken__c.Link} 
+◎MBL No：{!MasterAnken__c.MMaster_B_L_No__c} 
+◎船・便名：{!MasterAnken__c.MVessel__c} {!MasterAnken__c.MVoy_No__c} 
+◎ETA ： {!MasterAnken__c.META__c} (Day：{!MasterAnken__c.META_DAY__c}) 
+◎HOUSE B/L件数：{!MasterAnken__c.NO_HOUSE_B_L__c} H B/L 
+◎コンテナ： {!MasterAnken__c.MContainer__c}*{!MasterAnken__c.MContainerNumber__c} / {!MasterAnken__c.MContainer2__c}*{!MasterAnken__c.MContainerNumber2__c} 
+◎Devan予定日：{!MasterAnken__c.MDevanningDate__c} 
+◎社内メモ：{!MasterAnken__c.Internal_Memo__c} 
+
+確認のうえ、変更すべき点があれば報告をお願いします。
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

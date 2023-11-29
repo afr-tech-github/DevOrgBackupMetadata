@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Material</fullName>
+        <default>false</default>
+        <label>Material</label>
+    </customValue>
+    <customValue>
+        <fullName>Product for Sell</fullName>
+        <default>false</default>
+        <label>Product for Sell</label>
+    </customValue>
+    <customValue>
+        <fullName>Promotion</fullName>
+        <default>false</default>
+        <label>Promotion</label>
+    </customValue>
+    <masterLabel>Product Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

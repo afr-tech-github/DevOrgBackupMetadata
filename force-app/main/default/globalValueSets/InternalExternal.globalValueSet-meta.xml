@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>External Client</fullName>
+        <default>false</default>
+        <label>External Client</label>
+    </customValue>
+    <customValue>
+        <fullName>External Vendor</fullName>
+        <default>false</default>
+        <label>External Vendor</label>
+    </customValue>
+    <customValue>
+        <fullName>Government Office</fullName>
+        <default>false</default>
+        <label>Government Office</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Staff</fullName>
+        <default>false</default>
+        <label>Internal Staff</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Auditor</fullName>
+        <default>false</default>
+        <label>Internal Auditor</label>
+    </customValue>
+    <customValue>
+        <fullName>External Auditor</fullName>
+        <default>false</default>
+        <label>External Auditor</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver</fullName>
+        <default>false</default>
+        <label>Driver</label>
+    </customValue>
+    <masterLabel>INTERNAL/EXTERNAL</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CashOnHandUSD</fullName>
+    <columns>NAME</columns>
+    <columns>BalanceType__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>BankCashAccountID__c</columns>
+    <columns>BankCashAccountNumber__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>EndDate__c</columns>
+    <columns>AccountingCode__c</columns>
+    <columns>OpeningBalanceLocalDebit__c</columns>
+    <columns>OpeningBalanceLocalCredit__c</columns>
+    <columns>TransactionBalanceLocalDebit__c</columns>
+    <columns>TransactionBalanceLocalCredit__c</columns>
+    <columns>ClosingBalanceLocalDebit__c</columns>
+    <columns>ClosingBalanceLocalCredit__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>ACBalance__c.CashOnHandUSD</value>
+    </filters>
+    <filters>
+        <field>Currency__c</field>
+        <operation>equals</operation>
+        <value>USD</value>
+    </filters>
+    <label>CASH ON HAND-USD CURRENCY</label>
+    <language>en_US</language>
+</ListView>

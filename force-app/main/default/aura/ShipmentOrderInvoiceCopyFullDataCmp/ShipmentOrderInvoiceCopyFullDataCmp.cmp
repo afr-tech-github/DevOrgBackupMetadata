@@ -1,0 +1,35 @@
+<aura:component controller="cntl_opportunityCopy" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="confirmMessage" type="String" />
+    <aura:attribute name="isCopying" type="Boolean" default="false" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div>
+        <div class="slds-card">
+            <div class="slds-p-around_medium">
+
+                <div class="slds-section slds-is-open">
+
+                    <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                        <aura:if isTrue="{!v.isCopying}">
+                            <div class="demo-only demo-only demo-only_viewport" style="height:6rem">
+                                <div style="text-align: center; width:100%"><span>Copying...</span></div>
+                                <div role="status" class="slds-spinner slds-spinner_medium">
+
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                            <aura:set attribute="else">
+                                <div class="slds-align_absolute-center" style="width: 100%">{!v.confirmMessage}</div>
+                                <div aria-hidden="false" class="slds-section__content slds-align_absolute-center slds-m-top_large" id="expando-unique-id" style="width: 100%">
+                                    <lightning:button variant="brand" label="OK" title="OK" onclick="{!c.handleCopyData}" />
+                                    <lightning:button variant="brand" label="Cancel" title="Cancel" onclick="{!c.handleCancel}" />
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</aura:component>

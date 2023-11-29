@@ -1,0 +1,823 @@
+<apex:page controller="MassiveNewBankController" sidebar="false" title="MASSIVE NEW">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <style>
+        body .bPageBlock {
+            border-top-color: #42619f;
+        }
+        body .bPageBlock .pbBody .opAll .pbSubheader{
+            background-color: #42619f;
+        }
+        body .bPageTitle .ptBody {
+            color: #42619f;
+        }
+        .colLabelRight{
+            margin-left: 70px;
+        }
+        .cellHeader{
+            border: 1px solid black;
+            background-color: #42619f;
+            text-align: center;
+            line-height: 30px;
+        }
+        .cellDetail{
+            border: 1px solid black;
+            padding-left: 3px;
+            line-height: 25px;
+        }
+        .lblHeader{
+            color: #FFFFFF;
+        }
+        .tblDetail{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .col-1{
+            width: 25px;
+        }
+        .colHeaderBill{
+            border: 1px solid black;
+            background-color: #798799;
+            text-align: center;
+            line-height: 23px;
+        }
+        .colDetailBill{
+            background-color: #d4dadc;;
+            line-height: 23px;
+            border: 1px solid black;
+        }
+        .hideColumn{
+            display: none;
+        }
+        table th{
+            text-align: center;
+            white-space: normal;
+        }
+
+        .tblDetail td, .tblDetail th{
+            padding:5px;
+            line-height: 22px;
+            border: 1px solid black;
+        }
+        .tblDetail{
+            border-collapse: collapse;
+        }
+        .hideColumn{
+            display: none;
+        }
+		.clsTotal{
+        	text-align: right;
+        }        
+
+    </style>
+    <script type="text/javascript">
+        var listBillFMSString = [];
+        j$ = jQuery.noConflict();
+        j$(document).ready(function() {
+            j$("#select_language").hide();
+        
+            j$( "input[id$=dateFrom]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/mm/yy"
+            })
+            
+            j$( "input[id$=dateTo]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/mm/yy"
+            })
+            
+            j$("input[id$=inpTaxInit]").on("keypress keyup blur",function (event) {
+                j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+                if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            })
+            
+            j$("input[id$=inpBuyTaxInt]").on("keypress keyup blur",function (event) {
+                j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+                if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            })
+        });
+    </script>
+    <apex:form >
+        <apex:sectionHeader title="{!strHeader}"/>
+        <apex:pageBlock title="{!strHeader}" id="pbSearch" tabStyle="AnkenMeisai__c">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Search" action="{!doSearch}" reRender="pbResult" />
+                <apex:commandButton value="Clear" action="{!doClear}" reRender="pbSearch" />
+            </apex:pageBlockButtons>
+            <apex:outputPanel styleClass="opAll" layout="block" rendered="{!IF(strType == 'FMS', true, false)}">
+                    <apex:pageBlockSection columns="2" title="S/O - Condition Search">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel styleClass="colLabel" value="FMS/TMS S/O ID" />
+                            <apex:inputText value="{!objSearch.ShipmentOrderId}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="REF.NO / JOB REQUEST ID" />
+                            <apex:inputField value="{!shipmentOrderSearch.REFNO__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="CUSTOMER" />
+                            <apex:inputText value="{!objSearch.sCustomer}" id="shipment__customer"/>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="TIME" />
+                            <apex:selectList value="{!objSearch.sTimeType}" size="1">
+                                <apex:selectOption itemValue="Accounted Date" itemLabel="Accounted Date" />
+                                <apex:selectOption itemValue="ETD" itemLabel="ETD" />
+                                <apex:selectOption itemValue="ETA" itemLabel="ETA" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="FROM TIME" />
+                            <apex:inputText value="{!objSearch.sFromTime}" id="dateFrom" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="TO TIME" />
+                            <apex:inputText value="{!objSearch.sToTime}" id="dateTo" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="SHIPPER" />
+                           <apex:inputField value="{!shipmentOrderSearch.shipper__c}" id="shipment__shipper"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="CONSIGNEE" />
+                            <apex:inputField value="{!shipmentOrderSearch.Cnee__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="POL" />
+                            <apex:inputField value="{!shipmentOrderSearch.POL__c}" id="shipment__pol"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="POD" />
+                            <apex:inputField value="{!shipmentOrderSearch.POD__c}" id="shipment__pod"/>
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabel" value="H B/L NUMBER(Sea Or Air)" />
+                            <apex:inputText value="{!shipmentOrderSearch.HBL_Number_SEA_AIR__c}" id="shipment__hblnumberseaorair"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabel" value="M B/L NUMBER(Sea Or Air)" />
+                            <apex:inputText value="{!shipmentOrderSearch.MBL_Number_SEA_AIR__c}" id="shipment__mblnumberseaorair"/>
+                        </apex:pageBlockSectionItem>
+              
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" title="BILL - Condition Search">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="INBOUND VAT INVOICE NO" for="bill__invoiceboundinvoice"/>
+                            <apex:inputField value="{!billFMSSearch.InboundVATInvNo__c}" id="bill__invoiceboundinvoice"/> 
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="OUTBOUND VAT INVOICE NO" for="bill__outboundinvoice"/>
+                            <apex:inputField value="{!billFMSSearch.OutboundVATInvNo__c}" id="bill__outboundinvoice"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="INVOICE TO-SELLING" for="bill__invoiceto"/>
+                            <apex:inputField value="{!billFMSSearch.Seikyusaki__c}" id="bill__invoiceto"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="PAYMENT TO-BUYING" for="bill__paymento"/>
+                            <apex:inputField value="{!billFMSSearch.PaymentTo__c}" id="bill__paymento"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="CURRENCY" />
+                            <apex:selectList value="{!objSearch.currencyType}" size="1">
+                                <apex:selectOption itemValue="Both" itemLabel="Both" />
+                                <apex:selectOption itemValue="VND" itemLabel="VND" />
+                                <apex:selectOption itemValue="USD" itemLabel="USD" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="AMOUNT TYPE" />
+                            <apex:selectList value="{!objSearch.amountType}" size="1">
+                                <apex:selectOption itemValue="Both" itemLabel="Both" />
+                                <apex:selectOption itemValue="BUYING" itemLabel="BUYING" />
+                                <apex:selectOption itemValue="SELLING" itemLabel="SELLING" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>
+                    </apex:outputPanel>
+                    <apex:outputPanel styleClass="opAll" layout="block" rendered="{!IF(strType == 'WMS', true, false)}">
+                    <apex:pageBlockSection columns="1" title="Condition Search" >
+                        <apex:panelGrid columns="4">
+                            <apex:outputLabel rendered="{!IF(strType == 'FMS', true, false)}" styleClass="colLabel" value="CloFMS SHIPMENT ORDER ID" />
+                            <apex:inputText rendered="{!IF(strType == 'FMS', true, false)}" value="{!objSearch.ShipmentOrderId}" />
+                            <apex:outputLabel rendered="{!IF(strType == 'FMS', true, false)}" styleClass="colLabelRight" value="CloFMS BILL ID" />
+                            <apex:inputText rendered="{!IF(strType == 'FMS', true, false)}" value="{!objSearch.FMSBillId}" />
+                            
+                            <apex:outputLabel rendered="{!IF(strType == 'WMS', true, false)}" styleClass="colLabel" value="CloWMS WORK ORDER ID" />
+                            <apex:inputText rendered="{!IF(strType == 'WMS', true, false)}" value="{!objSearch.WorkOrderId}" />
+                            <apex:outputLabel rendered="{!IF(strType == 'WMS', true, false)}" styleClass="colLabelRight" value="CloWMS BILL ID" />
+                            <apex:inputText rendered="{!IF(strType == 'WMS', true, false)}" value="{!objSearch.WMSBillId}" />
+                            
+                            <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency' || strTypeFMS == 'Inbound Transaction-USD Currency' , true, false)}"
+                                              styleClass="colLabel" value="INVOICE TO" />
+                            <apex:inputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency' || strTypeFMS == 'Inbound Transaction-USD Currency' , true, false)}"
+                                            value="{!objSearch.InvoiceTo}" />
+                            <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , true, false)}"
+                                              styleClass="colLabelRight" value="PAYMENT TO" />
+                            <apex:inputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , true, false)}"
+                                            value="{!objSearch.PaymentTo}" />
+                        </apex:panelGrid>
+              
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pbResult">
+            <script >
+          		listBillFMSString = {!listBillFMSString};
+            	console.log('pbResult rerender listBillFMSString: ', listBillFMSString.length);
+            </script>
+            <br/>
+            <apex:pageMessages ></apex:pageMessages>
+            <br/>
+            <div style=" margin-bottom: 20px; {!IF(strType == 'FMS', '', 'display: none;')}">
+                <apex:outputLabel value="TOTAL: {!listBillFMSResult.size} record(s)" style="color: #42619f; font-weight: bold;" />
+            </div>
+            
+            <div style=" margin-bottom: 20px; {!IF(strType == 'WMS', '', 'display: none;')}">
+                <apex:outputLabel value="TOTAL: {!wrapperWMS.lstWMS.size} record(s)" style="color: #42619f; font-weight: bold;" />
+            </div>
+            
+            <div style="margin-bottom: 20px; float: right; margin-top: -25px; {!IF(strType == 'WMS', '', 'display: none;')}">
+                <apex:commandButton value="Insert" action="{!doInsert}" style="width: 85px;" />
+            </div>
+            <div style="margin-bottom: 20px; float: right; margin-top: -45px; {!IF(strType == 'FMS', '', 'display: none;')}">
+                <apex:commandButton value="Insert" onclick="insertRecord(); return false;" style="width: 85px;" />
+            </div>
+            <apex:outputPanel rendered="{!strType == 'FMS'}">
+                    <table class="tblDetail" width="100%">
+                            <tr>
+                                <th rowspan="2">
+                                    <input type="checkbox" id="billItemAll" onchange="checkAllRecord();return false;" />
+                                </th>
+                                <th rowspan="2">BILL ID</th>
+                                <th rowspan="2">ACTIVITY ID</th>
+                                <th rowspan="2">JOB REQUEST ID</th>
+                                <th rowspan="2">MBL NUMBER</th>
+                                <th rowspan="2">HBL NUMBER</th>
+                                <th rowspan="2"  class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">PAYMENT TO</th>
+                                <th rowspan="2"  class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">INVOICE TO</th>
+                                <th rowspan="2" >{!$ObjectType.AnkenMeisai__c.fields.InsatuyouSyohin__c.Label}</th>
+                                <th rowspan="2"  class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">INBOUND VAT INVOICE NO</th>
+                                <th rowspan="2"  class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">OUTBOUND VAT INVOICE NO</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT BUYING INCLUDING TAX(LOCAL)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT PAID-BUYING(LOCAL)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">UNPAID BALANCE OF BUYING(LOCAL)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT BUYING INCLUDING TAX(FCY)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT PAID-BUYING(FCY)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">UNPAID BALANCE OF BUYING(FCY)</th>
+            
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT SELLING INCLUDING TAX(LOCAL) </th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT RECEIVED-SELLING(LOCAL)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">UNRECEIVED BALANCE OF SELLING(LOCAL)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT SELLING INCLUDING TAX(FCY) </th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT RECEIVED-SELLING(FCY)</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">UNRECEIVED BALANCE OF SELLING(FCY)</th>
+                            </tr>
+                            <tr class="clsRowTotal">
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                                <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', 'clsTotal')}">0</th>
+                            </tr>
+                            <apex:variable value="{!0}" var="count"/>
+                            <apex:repeat value="{!listBillFMSResult}" var="item">
+                                <apex:variable value="{!count + 1}" var="count"/>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <input type="checkbox" id="{!item.Id}" class="billItem" onChange="toggleCheckbox(event, '{!item}'); return false;"/>
+                                    </td>
+                                    <td style="text-align: center;"><a href="/{!item.Id}">{!item.Name}</a></td>
+                                    <td style="text-align: center;"> <a href="/{!item.Anken__c}">{!item.Anken__r.Name}</a></td>
+                                    <td style="text-align: center;">{!item.Anken__r.JobRequestID__c}</td>
+                                    <td style="text-align: center;">{!item.Anken__r.MBL_Number_SEA_AIR__c}</td>
+                                    <td style="text-align: center;">{!item.Anken__r.HBL_Number_SEA_AIR__c}</td>
+                                    <td style="text-align: left; padding-left:5px" class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}"><a href="/{!item.PaymentTo__c}">{!item.PaymentTo__r.Name}</a></td>
+                                    <td style="text-align: left; padding-left:5px" class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}"><a href="/{!item.Seikyusaki__c}">{!item.Seikyusaki__r.Name}</a></td>
+                                    <td style="text-align: left; padding-left:5px">{!item.InsatuyouSyohin__c}</td>
+                                    
+                                    
+                                    <td style="text-align: center;" class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">{!item.InboundVATInvNo__c}</td>
+                                    <td style="text-align: center;" class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">{!item.OutboundVATInvNo__c}</td>
+            
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.BuyInTaxAmountJPY__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.Siharaigaku__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.BuyDifferentiation__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}" >
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.BuyInTaxAmountUSD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.AMOUNT_PAID_BUYING_USD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.UNPAID_BALANCE_OF_BUYING_USD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.SellInTaxAmountJPY__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.Nyukingaku__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!item.SellDifferentiation__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.SellInTaxAmount_USD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.AMOUNT_PAID_SELLING_USD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!item.UNPAID_BALANCE_OF_SELLING_USD__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </table> 
+            </apex:outputPanel>
+            <!-- <table class="tblDetail" width="100%" style="{!IF(strType == 'FMS', '', 'display: none;')}">
+                <tr>
+                    <td colspan="7">
+                        CloFMS BILL: {!strTypeFMS}
+                        <br/><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellHeader col-1">
+                        <apex:inputCheckbox value="{!wrapperFMS.isCheckFMSAll}">
+                            <apex:actionSupport event="onchange" action="{!doCheckAll}" reRender="pbResult" />
+                        </apex:inputCheckbox>
+                    </td>
+                    <td class="cellHeader col-2">
+                        <apex:outputLabel styleClass="lblHeader" value="BILL ID" />
+                    </td>
+                    <td class="cellHeader col-3">
+                        <apex:outputLabel styleClass="lblHeader" value="ACTIVITY ID" />
+                    </td>
+                    <td class="cellHeader col-4">
+                        <apex:outputLabel styleClass="lblHeader" value="PAYMENT TO"
+                          rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , true, false)}"/>
+                        <apex:outputLabel styleClass="lblHeader" value="INVOICE TO"
+                          rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency' || strTypeFMS == 'Inbound Transaction-USD Currency' , true, false)}"/>
+                    </td>
+                    <td class="cellHeader col-5">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT BUYING INCLUDING TAX(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT SELLING INCLUDING TAX(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT BUYING INCLUDING TAX(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT SELLING INCLUDING TAX(USD)" />
+                    </td>
+                    <td class="cellHeader col-6">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT PAID-BUYING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT RECEIVED-SELLING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT PAID-BUYING(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT RECEIVED-SELLING(USD)" />
+                    </td>
+                    <td class="cellHeader col-7">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNPAID BALANCE OF BUYING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNRECEIVED BALANCE OF SELLING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNPAID BALANCE OF BUYING(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNRECEIVED BALANCE OF SELLING(USD)" />
+                    </td>
+                </tr>
+                <apex:repeat value="{!wrapperFMS.lstFMS}" var="item">
+                    <tr>
+                        <td class="cellDetail">
+                            <apex:inputCheckbox value="{!item.isCheckFMS}" />
+                        </td>
+                        <td class="cellDetail">
+                            <a href="/{!item.anken.Id}" target="_blank">
+                                {!item.anken.Name}
+                            </a>
+                        </td>
+                        <td class="cellDetail">
+                            <a href="/{!item.anken.Anken__r.Id}" target="_blank">
+                                {!item.anken.Anken__r.Name}
+                            </a>
+                        </td>
+                        <td class="cellDetail">
+                            {!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , item.anken.PaymentTo__r.Name, item.anken.Seikyusaki__r.Name)}
+                            
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.BuyInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.SellInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.BuyInTaxAmountUSD__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.SellInTaxAmount_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.Siharaigaku__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.Nyukingaku__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.AMOUNT_PAID_BUYING_USD__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.AMOUNT_PAID_SELLING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.BuyDifferentiation__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.anken.SellDifferentiation__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.UNPAID_BALANCE_OF_BUYING_USD__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.anken.UNPAID_BALANCE_OF_SELLING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table> -->
+            
+            <!-- WMS -->
+            <table class="tblDetail" width="100%" style="{!IF(strType == 'WMS', '', 'display: none;')}">
+                <tr>
+                    <td colspan="7">
+                        CloWMS BILL: {!strTypeFMS}
+                        <br/><br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellHeader col-1">
+                        <apex:inputCheckbox value="{!wrapperWMS.isCheckWMSAll}">
+                            <apex:actionSupport event="onchange" action="{!doCheckAll}" reRender="pbResult" />
+                        </apex:inputCheckbox>
+                    </td>
+                    <td class="cellHeader col-2">
+                        <apex:outputLabel styleClass="lblHeader" value="BILL ID" />
+                    </td>
+                    <td class="cellHeader col-3">
+                        <apex:outputLabel styleClass="lblHeader" value="ACTIVITY ID" />
+                    </td>
+                    <td class="cellHeader col-4">
+                        <apex:outputLabel styleClass="lblHeader" value="PAYMENT TO"
+                          rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , true, false)}"/>
+                        <apex:outputLabel styleClass="lblHeader" value="INVOICE TO"
+                          rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency' || strTypeFMS == 'Inbound Transaction-USD Currency' , true, false)}"/>
+                    </td>
+                    <td class="cellHeader col-5">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT BUYING INCLUDING TAX(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT SELLING INCLUDING TAX(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT BUYING INCLUDING TAX(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT SELLING INCLUDING TAX(USD)" />
+                    </td>
+                    <td class="cellHeader col-6">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT PAID-BUYING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT RECEIVED-SELLING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT PAID-BUYING(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="AMOUNT RECEIVED-SELLING(USD)" />
+                    </td>
+                    <td class="cellHeader col-7">
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNPAID BALANCE OF BUYING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNRECEIVED BALANCE OF SELLING(LOCAL)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNPAID BALANCE OF BUYING(USD)" />
+                        
+                        <apex:outputLabel rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                          styleClass="lblHeader" value="UNRECEIVED BALANCE OF SELLING(USD)" />
+                    </td>
+                </tr>
+                <apex:repeat value="{!wrapperWMS.lstWMS}" var="item">
+                    <tr>
+                        <td class="cellDetail">
+                            <apex:inputCheckbox value="{!item.isCheckWMS}" />
+                        </td>
+                        <td class="cellDetail">
+                            <a href="/{!item.bill.Id}" target="_blank">
+                                {!item.bill.Name}
+                            </a>
+                        </td>
+                        <td class="cellDetail">
+                            <a href="/{!item.bill.WorkOrderID__r.Id}" target="_blank">
+                                {!item.bill.WorkOrderID__r.Name}
+                            </a>
+                        </td>
+                        <td class="cellDetail">
+                            {!IF(strTypeFMS == 'Outbound Transaction-Local Currency' || strTypeFMS == 'Outbound Transaction-USD Currency' , item.bill.PaymentTo__r.Name, item.bill.InvoiceTo__r.Name)}
+                            
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.AmountBuyingIncludeTAXLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.AmountSellingIncludeTAXLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.AmountBuyingIncludeTAXUSDCur__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.AmountSellingIncludeTAXUSDCur__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.AmountPaidBuyingLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.AmountReceivedFromCustomerLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.AmountPaidBuyingUSD__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.AmountReceivedFromCustomerUSD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.UnpaidBalanceOfBuyingLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-Local Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.bill.UnreceivedBalanceLocal__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Outbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.UnpaidBalanceOfBuyingUSD__c}" />
+                            </apex:outputText>
+                            
+                            <apex:outputText rendered="{!IF(strTypeFMS == 'Inbound Transaction-USD Currency', true, false)}"
+                                             style="float: right;" value="{0,number,###,###,###,###.##}">
+                                <apex:param value="{!item.bill.UnreceivedBalanceUSD__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <apex:actionFunction name="af_insertbillFMSBank"
+                                        action="{!doInsertFMS}"
+                                        reRender="pbResult"
+                                        status="Waiting">
+                <apex:param name="listBillIds" value=""/>
+            </apex:actionFunction>
+        </apex:pageBlock>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+            var totalBuyInTaxAmountJPY = 0;
+            var totalSiharaigaku = 0;
+            var totalBuyDifferentiation = 0;
+            var totalBuyInTaxAmountUSD = 0;
+            var totalAMOUNT_PAID_BUYING_USD = 0;
+            var totalUNPAID_BALANCE_OF_BUYING_USD = 0;
+            var totalSellInTaxAmountJPY = 0;
+            var totalNyukingaku = 0;
+            var totalSellDifferentiation = 0;
+            var totalSellInTaxAmount_USD = 0;
+            var totalAMOUNT_PAID_SELLING_USD = 0;
+            var totalUNPAID_BALANCE_OF_SELLING_USD = 0;
+            function doChangeTab(element) {
+                af_ChangeTab(element);
+            }
+            function checkAllRecord(){
+                
+                if(j$('#billItemAll').is(":checked")){
+                    j$('.billItem').prop( "checked", true);
+                    doSumAll();
+                }else{
+                    j$('.billItem').prop( "checked", false);
+                    refreshTotalValues();
+                }
+            }
+            function toggleCheckbox(event, item){
+                var recordId = event.target.id, checked = event.target.checked;
+                if(recordId) {
+                    doSum(recordId, checked);
+                    doShowSum();
+                }
+            }
+            function doSum(recordId, checked){
+                var weight = checked ? 1 : -1;
+                var currentRec = listBillFMSString.find(x => x.Id == recordId);
+                totalBuyInTaxAmountJPY += weight * (currentRec.clofor_com_cfs__BuyInTaxAmountJPY__c || 0);
+                totalSiharaigaku += weight * (currentRec.clofor_com_cfs__Siharaigaku__c || 0);
+                totalBuyDifferentiation += weight * (currentRec.clofor_com_cfs__BuyDifferentiation__c || 0);
+                totalBuyInTaxAmountUSD += weight * (currentRec.clofor_com_cfs__BuyInTaxAmountUSD__c || 0);
+                totalAMOUNT_PAID_BUYING_USD += weight * (currentRec.clofor_com_cfs__AMOUNT_PAID_BUYING_USD__c || 0);
+                totalUNPAID_BALANCE_OF_BUYING_USD += weight * (currentRec.clofor_com_cfs__UNPAID_BALANCE_OF_BUYING_USD__c || 0);
+                totalSellInTaxAmountJPY += weight * (currentRec.clofor_com_cfs__SellInTaxAmountJPY__c || 0);
+                totalNyukingaku += weight * (currentRec.clofor_com_cfs__Nyukingaku__c || 0);
+                totalSellDifferentiation += weight * (currentRec.clofor_com_cfs__SellDifferentiation__c || 0);
+                totalSellInTaxAmount_USD += weight * (currentRec.clofor_com_cfs__SellInTaxAmount_USD__c || 0);
+                totalAMOUNT_PAID_SELLING_USD += weight * (currentRec.clofor_com_cfs__AMOUNT_PAID_SELLING_USD__c || 0);
+                totalUNPAID_BALANCE_OF_SELLING_USD += weight * (currentRec.clofor_com_cfs__UNPAID_BALANCE_OF_SELLING_USD__c || 0);
+            }
+            function doSumAll(){
+                console.log('doSumAll listBillFMSString: ', listBillFMSString.length);
+                listBillFMSString.forEach(x => {
+                    doSum(x.Id, true);
+                });
+                doShowSum();
+            }
+            function doShowSum(){
+                var tr = $j('.clsRowTotal').find('th');
+    		    tr.eq(0).html(formatNumber(totalBuyInTaxAmountJPY));
+    		    tr.eq(1).html(formatNumber(totalSiharaigaku));
+    		    tr.eq(2).html(formatNumber(totalBuyDifferentiation));
+    		    tr.eq(3).html(formatNumber(totalBuyInTaxAmountUSD));
+    		    tr.eq(4).html(formatNumber(totalAMOUNT_PAID_BUYING_USD));
+    		    tr.eq(5).html(formatNumber(totalUNPAID_BALANCE_OF_BUYING_USD));
+    		    tr.eq(6).html(formatNumber(totalSellInTaxAmountJPY));
+    		    tr.eq(7).html(formatNumber(totalNyukingaku));
+    		    tr.eq(8).html(formatNumber(totalSellDifferentiation));
+    		    tr.eq(9).html(formatNumber(totalSellInTaxAmount_USD));
+    		    tr.eq(10).html(formatNumber(totalAMOUNT_PAID_SELLING_USD));
+    		    tr.eq(11).html(formatNumber(totalUNPAID_BALANCE_OF_SELLING_USD));
+            }
+            function formatNumber(num){
+                if(!num || typeof num !== 'number'){
+                    return 0;
+                } else {
+                    var numString = num.toString();
+                    var decimalPlaces = (numString.includes(".") && numString.substr(numString.indexOf('.') + 1).length) || 0;
+                    decimalPlaces = decimalPlaces > 3 ? 3 : decimalPlaces;
+                    return Number(num).toFixed(decimalPlaces).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            }
+            function refreshTotalValues(){
+                totalBuyInTaxAmountJPY = 0;
+                totalSiharaigaku = 0;
+                totalBuyDifferentiation = 0;
+                totalBuyInTaxAmountUSD = 0;
+                totalAMOUNT_PAID_BUYING_USD = 0;
+                totalUNPAID_BALANCE_OF_BUYING_USD = 0;
+                totalSellInTaxAmountJPY = 0;
+                totalNyukingaku = 0;
+                totalSellDifferentiation = 0;
+                totalSellInTaxAmount_USD = 0;
+                totalAMOUNT_PAID_SELLING_USD = 0;
+                totalUNPAID_BALANCE_OF_SELLING_USD = 0;
+                doShowSum();
+            }
+            function insertRecord(){
+                var billcheckeds = j$('.billItem:checkbox:checked');
+                var billIds = [];
+                for(var i =0; i<billcheckeds.length; i++){
+                   var idbill = billcheckeds[i].id;
+                   billIds.push(idbill);
+                };
+                var strbillIds = billIds.join(',');
+                if(!strbillIds){
+                    alert('Please select at least 1 bill to combine.');
+                }else{
+                    /*if(billIds.length > 12){
+                        alert('Maximum 12 records can be handled in once time.');
+                        
+                    }else{
+                        af_insertbillPlan(strbillIds);
+                    }*/
+                    af_insertbillFMSBank(strbillIds);
+                    
+                }
+            }
+        </script>
+    </apex:form>
+</apex:page>

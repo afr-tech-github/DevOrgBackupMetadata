@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Massive_Update_Locator</fullName>
+    <columns>NAME</columns>
+    <columns>LocatorCode_del__c</columns>
+    <columns>ProductID__c</columns>
+    <columns>ProductName__c</columns>
+    <columns>StockLocator__c</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>StockLocator__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>AgingInStockStartEnd__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Stock__c.StockIn</value>
+    </filters>
+    <label>Massive Update Locator</label>
+</ListView>

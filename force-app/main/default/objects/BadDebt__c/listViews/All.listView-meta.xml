@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>FMSBill__c</columns>
+    <columns>FMSSO__c</columns>
+    <columns>BadDebtStatus__c</columns>
+    <columns>BadDebtStartDate__c</columns>
+    <columns>Debtor__c</columns>
+    <columns>BadDebtAmountLocal__c</columns>
+    <columns>BadDebtAmountFCY__c</columns>
+    <columns>ProbabilityOfNotCollecting__c</columns>
+    <columns>ExpectedUncollectableAccountFCY__c</columns>
+    <columns>ExpectedUncollectableAccountLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

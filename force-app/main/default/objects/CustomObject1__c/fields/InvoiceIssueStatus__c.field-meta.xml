@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InvoiceIssueStatus__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose the status of invoice issue to customer. &apos;Copy Issued&apos; means invoice sent by Email or FAX and &apos;Original Issued&apos; means Original invoice is delivered to customer.</inlineHelpText>
+    <label>INVOICE ISSUE STATUS</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>On Progress</fullName>
+                <default>true</default>
+                <label>On Progress</label>
+            </value>
+            <value>
+                <fullName>Not issued Yet-Vendor Invoice not recieved</fullName>
+                <default>false</default>
+                <label>Not issued yet-Vendor Invoice not received</label>
+            </value>
+            <value>
+                <fullName>At Internal Chekcing After Issue</fullName>
+                <default>false</default>
+                <label>At Internal Checking After Issue</label>
+            </value>
+            <value>
+                <fullName>At Internal Checking Confirmed After Issue</fullName>
+                <default>false</default>
+                <label>At Internal Checking Confirmed After Issue</label>
+            </value>
+            <value>
+                <fullName>Waiting for Other Invoice for Combine After Issue</fullName>
+                <default>false</default>
+                <label>Waiting for Other Invoice for Combine After Issue</label>
+            </value>
+            <value>
+                <fullName>Invoice Copy Sent</fullName>
+                <default>false</default>
+                <label>Invoice Copy Sent</label>
+            </value>
+            <value>
+                <fullName>Original Invoice Sent</fullName>
+                <default>false</default>
+                <label>Original Invoice Sent</label>
+            </value>
+            <value>
+                <fullName>No Settlement Required(Collect from Partner)</fullName>
+                <default>false</default>
+                <label>No Settlement Required(Collect from Partner)</label>
+            </value>
+            <value>
+                <fullName>Carry Over to Next Month</fullName>
+                <default>false</default>
+                <label>Carry Over to Next Month</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

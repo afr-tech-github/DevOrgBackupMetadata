@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Permit_date_is_later_than_Submission_dat</fullName>
+    <active>true</active>
+    <errorConditionFormula>CUSTOMS_APPLICATION_SUBMISSION_DATE__c  &gt; Customs_Release_Day__c</errorConditionFormula>
+    <errorDisplayField>Customs_Release_Day__c</errorDisplayField>
+    <errorMessage>Customs Clearance Permit date must be later than Submission Date.</errorMessage>
+</ValidationRule>

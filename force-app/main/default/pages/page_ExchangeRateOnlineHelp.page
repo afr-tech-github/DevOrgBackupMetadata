@@ -1,0 +1,154 @@
+<apex:page showHeader="false">
+
+<head>
+    <title>Exchange Rate Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+  
+   
+   
+   
+   
+   
+   
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Exchange Rate Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <body>
+    <h2>Trợ giúp trực tuyến cho Object Tỷ Giá</h2>
+<br></br><br></br>  
+Phần này để quản lý tỉ giá mua bán tiêu chuẩn(chung). Còn tỉ giá đặt biệt phân bổ cho một số khách hàng riêng<br></br>
+biệt và đối tác thì có thể cao hơn (ưu tiên) tỉ giá tiêu chuẩn<br></br>
+<br></br>
+Khi chúng ta chọn BÊN NHẬN BÁO NỢ/ TRẢ TIỀN MUA(DỊCH VỤ)CHO trong phần Vận đơn thứ cấp-Bán/Mua là tỉ giá ngoài tiêu chuẩn.<br></br>
+ Thì tỉ giá ngoài tiêu chuẩn này sẽ đồng bộ với Vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, và Hàng ghép-Mua<br></br>
+
+Nếu chúng ta chọn Invoice to/ Payment to trong phần Vận đơn thứ cấp-Bán/Mua không phải là tỉ giá ngoài tiêu chuẩn.<br></br>
+Thì tỉ giá tiêu chuẩn sẽ đồng bộ với Vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, Hàng ghép-Mua<br></br> 
+<br></br>
+Tỉ giá tiêu chuẩn  được đồng bộ tới Vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, Hàng ghép-Mua.<br></br>
+<br></br>
+Tỉ gía bán tiêu chuẩn được đồng bộ tới Vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, Hàng ghép-Mua
+<br></br>-TỶ GIÁ BÁN CHO DỊCH VỤ GIAO NHẬN<br></br>
+-TỶ GIÁ BÁN CHO KHÁCH HÀNG KHAI HẢI QUAN<br></br>
+-TỶ GIÁ BÁN TỪ TIÊU CHUẨN CỦA ĐỐI TÁC<br></br>
+<br></br>
+Tỉ giá mua tiêu chuẩn được đồng bộ tới Vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, Hàng ghép-Mua.<br></br>
+-TỶ GIÁ MUA TỪ TIÊU CHUẨN CỦA ĐỐI TÁC.<br></br>
+
+----------------------------------------------------------------------------------------------------------<br></br>    
+         <h2>Online Help for EXCHANGE RATE Object</h2>
+<br></br><br></br>
+This object is to manage Standard Selling Exchange Rate and Standard Buying Exchange Rate.<br></br>
+Non-Standard Exchange Rate designated to specific customers and partners is prior than Standard Exchange Rate.<br></br>
+<br></br>
+In case the companies selected in Invoice To/Payment To in H B/L Selling/Buying are defined at Non-Standard Exchange Rate,<br></br>
+Non-Standard Exchange Rate will be synchronized to H B/L Shipment, H B/L Selling/Buying, M B/L Buying.<br></br>
+<br></br>
+In case the companies selected in Invoice To/Payment To in H B/L Selling/Buying are not defined at Non-Standard Exchange Rate,<br></br>
+Standard Rate will be synchronized to H B/L Shipment, H B/L Selling/Buying, M B/L Buying.<br></br>
+<br></br>
+Selling Standard Rate which is syncrhonized to H B/L Shipment, H B/L Selling/Buying, M B/L Buying.<br></br>
+-SELLING EX-RATE TO FORWARDING CUSTOMER<br></br>
+-SELLING EX-RATE TO CC(Custom Clearance) CUSTOMER<br></br>
+-SELLING EX-RATE TO PARTNER-STANDARD <br></br>
+<br></br>
+Buying Standard Rate which is sychronized to H B/L Shipment, H B/L Selling/Buying, M B/L Buying.<br></br>
+-BUYING EX-RATE FROM PARTNER-STANDARD<br></br>
+  
+----------------------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>為替に関するオンラインヘルプ</h2><br></br>
+<br></br>
+標準為替(selling)と標準為替(buying)を管理するオブジェクトです。<br></br>
+指定為替は特定の顧客やパートナーに関する為替レートで、標準為替より優先されます。<br></br>
+<br></br>
+HB/L請求・仕入明細の中の請求先、支払先に指定為替の設定された会社が選択された場合、HB/L案件、<br></br>
+為替レート(selling)/為替レート(buying)、MB/L仕入明細に指定為替が同期されます。<br></br>
+<br></br>
+HB/L請求・仕入明細の中の請求先、支払先に指定為替の設定されていない会社が選択された場合、HB/L案件、<br></br>
+為替レート(selling)/為替レート(buying)、MB/L仕入明細に標準為替が同期されます。<br></br>
+<br></br>
+HB/L案件、為替レート(selling)/為替レート(buying)、MB/L仕入明細に同期される標準為替(selling)は以下の通りです。<br></br>
+-国内顧客向け-フォワーディング標準為替<br></br>
+-国内顧客向け-通関標準為替<br></br>
+-パートナー向け-Selling標準為替<br></br>
+<br></br>
+HB/L案件、為替レート(selling)/為替レート(buying)、MB/L仕入明細に同期される標準為替(buying)は以下の通りです。<br></br>
+-パートナー向け-Buying標準為替<br></br>
+
+----------------------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>환율에 대한 온라인 도움말</h2><br></br>
+<br></br>
+청구 표준 환율(selling)과 매입 표준 환율(buying)을 관리하는 오브젝트(객체)입니다.<br></br>
+지정 환율은 특정 고객이나 파트너에 대한 환율로 표준 환율보다 우선합니다.<br></br>
+<br></br>
+H B/L-청구/지불 세부 사항 중 청구처, 지불처에 지정환율관리에 선택된 회사가 있는 경우,H B/L안건,<br></br>
+환율-청구용, 환율-매입용, M B/L(콘솔)-지불의 '환율-매입용'에 지정 환율이 동기화됩니다.<br></br>
+<br></br>
+H B/L-청구/지불 세부 사항 중 청구처, 지불처에 지정환율관리에 선택되지 않은 회사가 있는 경우, H B/L안건,<br></br>
+환율-청구용, 환율-매입용, M B/L(콘솔)-지불의 '환율-매입용'에 표준 환율이 동기화됩니다.<br></br>
+<br></br>
+H B/L 안건환율-청구용, 환율-매입용, M B/L(콘솔)-지불의 '환율(살 때)'에 동기화되는 표준 환율(selling)은 다음과 같습니다.<br></br>
+-국내 고객들 - 포워딩 표준 환율<br></br>
+-국내 고객들 - 통관 기준 환율<br></br>
+-파트너 - Selling 표준 환율<br></br>
+<br></br>
+H B/L 안건환율-청구용, 환율-매입용, M B/L(콘솔)-지불의 '환율(살 때)'에 동기화되는 표준 환율(selling)은 다음과 같습니다.<br></br>
+-파트너 - Buying 표준 환율<br></br>
+
+</body>
+
+
+
+
+
+</apex:page>

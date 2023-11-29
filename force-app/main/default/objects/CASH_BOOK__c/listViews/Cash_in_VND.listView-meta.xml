@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cash_in_VND</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>CashDescription__c</columns>
+    <columns>CASH_STATUS__c</columns>
+    <columns>AMOUNT_ADVANCE_PAID_TO_STAFF__c</columns>
+    <columns>ACTUAL_PAID_TO_VENDOR__c</columns>
+    <columns>EXPECTED_RETURN_AMOUNT__c</columns>
+    <columns>RETURNED_AMOUNT__c</columns>
+    <columns>DATE_TIME_HANDOVER_TO_STAFF__c</columns>
+    <columns>DATE_TIME_BALANCE_COLLECTED__c</columns>
+    <columns>DIFFERENCE_LEFT__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CASH_BOOK__c.CashIn</value>
+    </filters>
+    <label>Cash in VND</label>
+    <language>en_US</language>
+</ListView>

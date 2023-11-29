@@ -1,0 +1,104 @@
+<apex:page showHeader="false">
+<head>
+    <title>Non Standard Ex Rate Online Help</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       Non Standard Ex Rate Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+
+    <h2>Trợ giúp trực tuyến cho Object Tỷ giá không tiêu chuẩn</h2>
+<br></br>
+Object này để quản lý Tỷ giá Bán Không Tiêu Chuẩn và Tỷ giá Mua không Tiêu Chuẩn.<br></br>
+Tỷ giá không tiêu chuẩn được chỉ định cho những khách hàng và đối tác cụ thể thì được ưu tiên hơn Tỷ Giá Tiêu Chuẩn.<br></br>
+<br></br>
+Trong trường hợp những công ty được lựa chọn trong mục Hóa đơn Đến/ Thanh Toán đến trong Vận đơn thứ cấp Bán/Mua được quy định Tỷ Giá Không Tiêu Chuẩn,<br></br>
+Tỷ giá không tiêu chuẩn sẽ được đồng bộ tới lô hàng vận đơn thứ cấp, Vận đơn thứ cấp-Bán/Mua, Hàng ghép-Mua.<br></br>
+<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>   
+<h2>Online Help for NON STANDARD EXCHANGE RATE Object</h2>
+<br></br>
+This object is to manage Non-Standard Selling Exchange Rate and Non-Standard Buying Exchange Rate.<br></br>
+Non-Standard Exchange Rate designated to specific customers and partners is prior than Standard Exchange Rate.<br></br>
+<br></br>
+In case the companies selected in Invoice To/Payment To in H B/L Selling/Buying are defined at Non-Standard Exchange Rate,<br></br>
+Non-Standard Exchange Rate will be syncronixed to H B/L Shipment, H B/L Selling/Buying, M B/L Buying.<br></br>
+<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>指定為替に関するオンラインヘルプ</h2><br></br>
+<br></br>
+指定販売為替と指定仕入為替を管理するオブジェクトです。<br></br>
+特定の顧客やパートナー向けの指定為替は、標準為替よりも優先されます。<br></br>
+<br></br>
+
+HB/L請求・仕入明細の中の請求先、支払先に、指定為替の設定された取引先が選択されている場合、<br></br>
+指定為替がHB/L案件、HB/L請求・仕入明細、MB/L仕入明細に同期されます。<br></br>
+
+<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>지정 환율에 대한 온라인 도움말</h2><br></br>
+<br></br>
+공인 환율과 지정 매입 환율을 관리하는 오브젝트(객체)입니다.<br></br>
+특정 고객이나 파트너의 지정 환율은 표준 환율보다 우선합니다.<br></br>
+<br></br>
+
+H B/L-청구/지불 세부 사항 중 청구처, 지불처에 지정환율관리에 선택된 회사가 있는 경우,H B/L안건, <br></br>
+환율-청구용, 환율-매입용, M B/L(콘솔)-지불의 '환율(살 때)'에 지정 환율이 동기화됩니다.<br></br>
+
+</body>
+
+</apex:page>

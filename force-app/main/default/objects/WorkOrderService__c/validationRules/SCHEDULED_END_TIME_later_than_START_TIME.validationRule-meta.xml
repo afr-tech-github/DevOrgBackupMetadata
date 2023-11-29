@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SCHEDULED_END_TIME_later_than_START_TIME</fullName>
+    <active>true</active>
+    <errorConditionFormula>ScheduledEndTime__c &lt;  ScheduledStartTime__c</errorConditionFormula>
+    <errorDisplayField>ScheduledEndTime__c</errorDisplayField>
+    <errorMessage>SCHEDULED END TIME must be later than SCHEDULED START TIME.</errorMessage>
+</ValidationRule>

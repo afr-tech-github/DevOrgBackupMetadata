@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Seikyusaki__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Export and Not EXW--&gt;Set shipper
+Export and EXW--&gt;Set Partner
+Import and Not DDP/DDU--&gt;Set Consignee
+Import &amp; DDP/DDU--&gt;Set Partner</inlineHelpText>
+    <label>INVOICE TO</label>
+    <lookupFilter>
+        <active>false</active>
+        <filterItems>
+            <field>Account.RecordType.DeveloperName</field>
+            <operation>equals</operation>
+            <value>CustomerB2B</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>F/TMS BILL (INVOICE TO)</relationshipLabel>
+    <relationshipName>Seikyusakis</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

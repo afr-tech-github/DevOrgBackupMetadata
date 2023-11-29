@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>over_max__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>Accu_receivablelimits__c + receivable_limits__c  -  Unpaid__c -  UncollectedOnBehalfOfLocal__c</formula>
+    <label>BAL TO MAX COMBINED AMOUNT(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

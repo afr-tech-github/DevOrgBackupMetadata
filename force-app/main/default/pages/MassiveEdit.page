@@ -1,0 +1,238 @@
+<!--
+ - Created by khanhpham on 6/14/17.
+ -->
+
+<apex:page id="MassiveEdit" controller="MassiveEditController" applyHtmlTag="true" docType="html-5.0"
+           sideBar="false" action="{!init}" title="{!translations['MASSIVE_UPDATE']}">
+    <!--Workaroud to prevent the datepicker displayed by default on page load-->
+    <script type="text/javascript">
+        function setFocus() {
+            document.getElementById("dummy_hidden_input").focus();
+        }
+    </script>
+    <input type="hidden" id="dummy_hidden_input"/>
+
+    <apex:sectionHeader title="{!translations['MASS_EXRATE_TITLE']}" rendered="{!(isExchangeRate == true && isCreation == false)}"/>
+    <apex:sectionHeader title="{!translations['MASS_CARGO_TITLE']}" rendered="{!(isCargoDelivery == true && isCreation == false)}"/>
+    <apex:sectionHeader title="{!translations['MASS_CARGO_CREATION']}" rendered="{!(isCargoDelivery == true && isCreation == true)}"/>
+
+    <apex:sectionHeader title="{!translations['MASS_LOCATION_TITLE']}" rendered="{!(isLoadingLocation == true && isCreation == false)}"/>
+    <apex:sectionHeader title="{!translations['MASS_LOCATION_CREATION']}" rendered="{!(isLoadingLocation == true && isCreation == true)}"/>
+
+    <apex:sectionHeader title="{!translations['MASS_CONSOL_TITLE']}" rendered="{!(isConsolBuying == true && isCreation == false)}"/>
+    <apex:sectionHeader title="{!translations['MASS_CONSOL_CREATION']}" rendered="{!(isConsolBuying == true && isCreation == true)}"/>
+
+    <apex:sectionHeader title="{!translations['MASS_PI_TITLE']}" rendered="{!(isPurchasingInvoice == true && isCreation == false)}"/>
+    <apex:sectionHeader title="{!translations['MASS_PI_CREATION']}" rendered="{!(isPurchasingInvoice == true && isCreation == true)}"/>
+
+    <apex:sectionHeader title="{!translations['MASS_INVAT_CREATION']}" rendered="{!(isInvoicingVAT == true && isCreation == true)}"/>
+
+    <apex:sectionHeader title="{!translations['MASS_SHIPMENTVAT_CREATION']}" rendered="{!(isShipmentVAT == true && isCreation == true)}"/>
+
+    <apex:form >
+        <apex:pageBlock title="{!translations['UPDATE_OPTIONS']}" rendered="{!(isCreation = true && numberOfRecords = null)}">
+            <apex:outputPanel >
+                <table>
+                    <tr>
+                        <td>{!translations['MASS_NUM_RECORDS']}</td>
+                        <td>
+                            <apex:inputText value="{!numberOfRecords}"/>
+                        </td>
+                    </tr>
+                    <tr/>
+                    <tr>
+                        <td>
+                            <apex:commandButton value="{!translations['BTN_GENERATE']}" action="{!createNewRecords}"/>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:pageBlock>
+
+        <apex:pageBlock id="information_panel" rendered="{!((isCreation = false) || (isCreation = true && numberOfRecords != null))}">
+            <!-- HACK: Fake pbSection to inject the twistSection JS function -->
+            <apex:pageBlockSection title="Test" showHeader="true" rendered="false">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Label"/>
+                    <apex:outputText value="Value"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageMessages ></apex:pageMessages>
+
+            <!--CARGO DELIVERY update-->
+            <apex:outputPanel rendered="{!(isCargoDelivery = true)}">
+                <apex:repeat value="{!cargoDeliveryList}" var="delivery">
+                    <apex:pageBlockSection columns="2" title="{!IF(ISNULL(delivery.Name), '---', delivery.Name)}">
+                        <apex:inputField value="{!delivery.HBL_SHIPMENT__c}"/>
+                        <apex:inputField value="{!delivery.CONTAINER_ID__c}"/>
+                        <apex:inputField value="{!delivery.OUR_TRUCK_FLEET__c}"/>
+                        <apex:inputField value="{!delivery.DeliveryCompany__c}"/>
+                        <apex:inputField value="{!delivery.DeliveryType__c}"/>
+                        <apex:inputField value="{!delivery.TRUCKING_COMPANY_PIC__c}"/>
+                        <apex:inputField value="{!delivery.Packing_Type__c}"/>
+                        <apex:inputField value="{!delivery.DeliveryNote__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.Pickupdate__c}"/>
+                        <apex:inputField value="{!delivery.DeliveryDate__c}"/>
+                        <apex:inputField value="{!delivery.EXPECTED_PICKUP_TIME__c}"/>
+                        <apex:inputField value="{!delivery.DeliveryTime__c}"/>
+                        <apex:inputField value="{!delivery.Receiver__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.Destination__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.AddressForAccept__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.Destinationaddress__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.PersonInChargeForAccept__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.ReceiverRep__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.ReceiverContact__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.DeliveryPhone__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.transporter_type__c}"/>
+                        <apex:inputField value="{!delivery.NameOfTheDriver__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.NumberPlateOfTheTruck__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!delivery.CPNumberOfTheDriver__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--LOADING LOCATION update-->
+            <apex:outputPanel rendered="{!(isLoadingLocation = true)}">
+                <apex:repeat value="{!loadingLocationList}" var="location">
+                    <apex:pageBlockSection columns="2" title="{!IF(ISNULL(location.Name), '---', location.Name)}">
+                        <apex:inputField value="{!location.Route__c}"/>
+                        <apex:inputField value="{!location.Delivery__c}"/>
+                        <apex:inputField value="{!location.SequenceNumber__c}"/>
+                        <apex:inputField value="{!location.HandlingType__c}"/>
+                        <apex:inputField value="{!location.LoadingUnloadingStatus__c}"/>
+                        <apex:inputField value="{!location.CargoWeight__c}"/>
+                        <apex:inputField value="{!location.CargoMeasurement__c}"/>
+                        <apex:outputLabel value=""/>
+                        <apex:inputField value="{!location.StartingTime__c}"/>
+                        <apex:inputField value="{!location.StartingAddress__c}"/>
+                        <apex:inputField value="{!location.ArrivalTime__c}"/>
+                        <apex:inputField value="{!location.DestinationAddress__c}"/>
+                        <apex:inputField value="{!location.ActualStartTime__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!location.ActualArrivalTime__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!location.Notes__c}" style="width: 300px;"/>
+                        <apex:outputLabel value=""/>
+                        <apex:inputField value="{!location.CargoMeasurementBefore__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!location.CargoWeightBefore__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!location.DistanceKM__c}" style="width: 300px;"/>
+                        <apex:outputLabel value=""/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--PURCHASING INVOICE update-->
+            <apex:outputPanel rendered="{!(isPurchasingInvoice = true)}">
+                <apex:repeat value="{!purchasingInvoiceList}" var="purchasingInvoice">
+                    <apex:pageBlockSection columns="2" title="{!IF(ISNULL(purchasingInvoice.Name), '---', purchasingInvoice.Name)}">
+                        <apex:inputField value="{!purchasingInvoice.Name}" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PurchasingOrder__c}" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.InvoiceId__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.ExchangeRate__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.ResourceID__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.Currency__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.InvoiceNameInPrint__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.ChargeUnit__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaymentToVendor__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.TaxRate__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.UnitPriceLocal__c}"/>
+                        <apex:inputField value="{!purchasingInvoice.UnitPrice__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!purchasingInvoice.Beneficiary__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaymentConfirmed__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaymentSettledDate__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaymentType__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaidAmountLocal__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.PaidAmount__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:inputField value="{!purchasingInvoice.BankAccountPurchasing__c}" style="width: 300px;" rendered="{!isCreation = false}"/>
+                        <apex:outputLabel value=""/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--CONSOL BUYING update-->
+            <apex:outputPanel rendered="{!(isConsolBuying = true)}">
+                <apex:repeat value="{!consolBuyngList}" var="consolBuying">
+                    <apex:variable var="taxKey" value="{!consolBuying.ProductTax__c}"/>
+                    <!--for update-->
+                    <apex:pageBlockSection columns="2" title="{!consolBuying.Name}" rendered="{!isCreation = false}">
+                        <apex:inputField value="{!consolBuying.MasterAnken__c}"/>
+                        <apex:inputField value="{!consolBuying.Name}"/>
+                        <apex:inputField value="{!consolBuying.SerchSyubetu__c}"/>
+                        <apex:inputField value="{!consolBuying.Cost_Allocation_Catetory__c}"/>
+                        <apex:inputField value="{!consolBuying.MTariff__c}"/>
+                        <apex:inputField value="{!consolBuying.curr__c}"/>
+                        <apex:inputField value="{!consolBuying.KawaseBay__c}"/>
+                        <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap">
+                            <apex:outputLabel value="{!$ObjectType.MasterAnkenMeisai__c.fields.ProductTax__c.Label}"/>
+                            <apex:outputText value="{!translations[taxKey]}" rendered="{!NOT(ISNULL(taxKey))}"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:inputField value="{!consolBuying.Suryo__c}"/>
+                        <apex:inputField value="{!consolBuying.BuyTaxInitial__c}"/>
+                        <apex:inputField value="{!consolBuying.BuyTankaJPY__c}"/>
+                        <apex:inputField value="{!consolBuying.BuyTankaUSD__c}"/>
+                        <apex:inputField value="{!consolBuying.Bikou__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+
+                    <!--for creation-->
+                    <apex:pageBlockSection columns="2" title="---" rendered="{!isCreation = true}">
+                        <apex:inputField value="{!consolBuying.SerchSyubetu__c}"/>
+                        <apex:inputField value="{!consolBuying.Cost_Allocation_Catetory__c}"/>
+                        <apex:inputField value="{!consolBuying.MTariff__c}"/>
+                        <apex:inputField value="{!consolBuying.KawaseBay__c}"/>
+                        <apex:inputField value="{!consolBuying.Suryo__c}"/>
+                        <apex:inputField value="{!consolBuying.curr__c}"/>
+                        <apex:inputField value="{!consolBuying.BuyTankaJPY__c}"/>
+                        <apex:inputField value="{!consolBuying.BuyTaxInitial__c}"/>                                                                                            
+                        <apex:inputField value="{!consolBuying.Bikou__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!consolBuying.BuyTankaUSD__c}"/>
+                        
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--INVOICING VAT-->
+            <apex:outputPanel rendered="{!(isInvoicingVAT = true)}">
+                <apex:repeat value="{!invoicingVATList}" var="invoicingVAT">
+                    <!--for creation-->
+                    <apex:pageBlockSection columns="2" title="---" rendered="{!isCreation = true}">
+                        <apex:inputField value="{!invoicingVAT.INVOICING__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--FORWARDING VAT-->
+            <apex:outputPanel rendered="{!(isShipmentVAT = true)}">
+                <apex:repeat value="{!shipmentVATList}" var="shipmentVAT">
+                    <!--for creation-->
+                    <apex:pageBlockSection columns="2" title="---" rendered="{!isCreation = true}">
+                        <apex:inputField value="{!shipmentVAT.FORWARDING__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <!--EXCHANGE RATE update-->
+            <apex:outputPanel rendered="{!(isExchangeRate = true)}">
+                <apex:repeat value="{!exchangeRateList}" var="exchangeRate">
+                    <apex:pageBlockSection columns="2" title="{!exchangeRate.Name}">
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_Start_Date__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_End_Date__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Master_type__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_Validity__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_fromto__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_ExRate_referto__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_FowardingtoDomesticCustomer__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_SellingtoPartner__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_CCtoDomesticCustomer__c}"/>
+                        <apex:inputField value="{!exchangeRate.Mgmt_Exrate_BuyingfromPartner__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+            </apex:outputPanel>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="{!translations['SAVE_TITLE']}" action="{!updateRecords}"/>
+                <apex:commandButton value="{!translations['Cancel']}" action="{!cancel}" immediate="true" html-formnovalidate="formnovalidate"/>
+                <apex:commandButton value="{!translations['COPY_DATA_BTN']}" action="{!populateDeliveryDestinationInfos}" rendered="{!isCargoDelivery == true}" reRender="information_panel"/>
+                <apex:commandButton value="{!translations['COPY_CONTAINER_ID_BTN']}" action="{!populateContainerIDForCargoDelivery}" rendered="{!isCargoDelivery == true}" reRender="information_panel"/>
+                <apex:commandButton value="{!translations['Reset']}" action="{!resetCargoDeliveries}" rendered="{!isCargoDelivery == true}" reRender="information_panel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

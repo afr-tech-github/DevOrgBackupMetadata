@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>BB作業依頼を転送する時にこのテンプレートを使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[AIR]BB依頼メールテンプレート</name>
+    <style>none</style>
+    <subject>案件番号{!CustomObject1__c.Name}航空-BB依頼</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

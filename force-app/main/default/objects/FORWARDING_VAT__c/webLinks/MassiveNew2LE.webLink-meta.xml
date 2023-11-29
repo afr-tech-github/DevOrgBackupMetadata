@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassiveNew2LE</fullName>
+    <availability>online</availability>
+    <description>Massive New Button for LE</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Massive New2(LE)</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/apex/clofor_com_cfs__MassiveNew?}&amp;type=FMS&amp;Id={!VAT_INVOICE__c.Id}</url>
+</WebLink>

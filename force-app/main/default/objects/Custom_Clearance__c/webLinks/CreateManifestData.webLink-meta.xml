@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CreateManifestData</fullName>
+    <availability>online</availability>
+    <description>same as https://afrs-dev-ed.my.salesforce.com/00b28000001ZR5A?type=01I280000011C15&amp;setupid=CustomObjects&amp;retURL=%2F01I280000011C15%3Fsetupid%3DCustomObjects</description>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>CREATE MANIFEST DATA</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}&quot;; 
+var attachmentId = sforce.apex.execute(&apos;clofor_com_cfs.HouseBillLadingReportDispatcher&apos;, &apos;createAttachment&apos;, {id:&apos;{!URLENCODE(CustomObject1__c.Id)}&apos;,wkid:&apos;{!URLENCODE(CustomObject1__c.Name)}&apos;,version:&apos;{!CustomObject1__c.QuotationVer__c}&apos;});
+
+// Open download popup 
+window.open(&apos;/servlet/servlet.FileDownload?file=&apos; + attachmentId); 
+
+// refresh the page detail 
+location.href = &apos;/{!URLENCODE(CustomObject1__c.Id)}&apos;;</url>
+</WebLink>

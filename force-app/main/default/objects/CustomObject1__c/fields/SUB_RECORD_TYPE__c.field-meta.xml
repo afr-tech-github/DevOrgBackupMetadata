@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SUB_RECORD_TYPE__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>SUB RECORD TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DOOR-TO-DOOR</fullName>
+                <default>false</default>
+                <label>DOOR-TO-DOOR</label>
+            </value>
+            <value>
+                <fullName>TRUCKING</fullName>
+                <default>false</default>
+                <label>TRUCKING</label>
+            </value>
+            <value>
+                <fullName>BARGING</fullName>
+                <default>false</default>
+                <label>BARGING</label>
+            </value>
+            <value>
+                <fullName>TRUCKING &amp; BARGING</fullName>
+                <default>false</default>
+                <label>TRUCKING &amp; BARGING</label>
+            </value>
+            <value>
+                <fullName>TRANSIT</fullName>
+                <default>false</default>
+                <label>TRANSIT</label>
+            </value>
+            <value>
+                <fullName>MTY REPO</fullName>
+                <default>false</default>
+                <label>MTY REPO</label>
+            </value>
+            <value>
+                <fullName>Express</fullName>
+                <default>false</default>
+                <label>Express</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

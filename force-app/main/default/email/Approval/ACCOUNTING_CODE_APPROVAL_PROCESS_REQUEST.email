@@ -1,0 +1,22 @@
+Dear Account Team Managers 
+
+{!Accounting_Code__c.CreatedBy} has requested your approval for the new Accounting Code as below.
+
+Please click this link to aprove or reject this record.
+
+◎ACCOUNTING CODE ID：[{!Accounting_Code__c.ACCOUNTING_CODE_ID__c}] Link to CloFor:{!Accounting_Code__c.Link} 
+◎ACCOUNTING CODE : {!Accounting_Code__c.Name}
+◎ACCOUNTING SUB CODE：[{!Accounting_Code__c.ACCOUNTING_SUB_CODE__c}] 
+◎DESCRIPTION-1：[{!Accounting_Code__c.Description_1__c}] 
+◎DESCRIPTION-2：[{!Accounting_Code__c.Description_2__c}] 
+
+You can also approve, reject and comment on this request from your feed.
+
+Best regards.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QUOTE_LINE_Summary__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>Name  +&apos; | &apos;+ ServicePricingID__r.Name +&apos; | &apos;+  TEXT(ServicePricingID__r.SellAmountUSD__c) +&apos; USD | &apos;+ 	TEXT(ServicePricingID__r.SellKingakuJPY__c)  +&apos; &apos;+  $Setup.Site_Custom_Settings__c.Local_Currency__c+ &apos; | &apos;+  TEXT(Quantity__c)  +&apos; | &apos;+  ChargeUnitInPrint__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>QUOTE LINE Summary</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

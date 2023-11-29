@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_No_of_Days_after_Payment_Request</fullName>
+    <active>false</active>
+    <errorConditionFormula>and(LiquidationTargetMaxNoDays__c   &lt;  0,  RecordType.DeveloperName =&quot;AdvancePayRequestLocal&quot;)</errorConditionFormula>
+    <errorDisplayField>CashAdvanceID__c</errorDisplayField>
+    <errorMessage>There is a previous advanced request which is not processed liquidation more than Liquidation target date.</errorMessage>
+</ValidationRule>

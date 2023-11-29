@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này để nhắc nhở bộ phận Operation kiểm tra nếu A/N chưa được gửi trước một ngày.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Một ngày trước khi hàng đến</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-1Day Ahead of ETA</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

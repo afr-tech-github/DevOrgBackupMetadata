@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Relationship__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>WRITTEN AGREEMENT WITH NEW ACCOUNT</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>原本</fullName>
+                <color>#006600</color>
+                <default>false</default>
+                <label>原本</label>
+            </value>
+            <value>
+                <fullName>コピー</fullName>
+                <color>#78C953</color>
+                <default>false</default>
+                <label>コピー</label>
+            </value>
+            <value>
+                <fullName>不要（取引しない）</fullName>
+                <color>#FF0000</color>
+                <default>false</default>
+                <label>不要（取引しない）</label>
+            </value>
+            <value>
+                <fullName>不要（パートナーとの清算）</fullName>
+                <color>#A845DC</color>
+                <default>false</default>
+                <label>不要（パートナーとの清算）</label>
+            </value>
+            <value>
+                <fullName>不要（現時点で取引がない=&gt;新規案件の対応の際には必要になる）</fullName>
+                <color>#F3D904</color>
+                <default>false</default>
+                <label>不要（現時点で取引がない=&gt;新規案件の対応の際には必要になる）</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

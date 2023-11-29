@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Approval_Status_Employee_Approved</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approval Status Employee-Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_Employee_Initial</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Approval Status Employee-Initial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_Employee_Rejected</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Approval Status Employee-Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EmployeeApprovalFieldUpdate</fullName>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>EMPLOYEE APPROVAL FIELD UPDATE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_remaining_annual_leave_for_last_y</fullName>
+        <description>Update remaining annual leave for last year</description>
+        <field>Remainingannualleaveoflast_year__c</field>
+        <formula>defaultpreviousyearannualleave__c -PRIORVALUE( Totalannualleaveusedincurrentyear__c )</formula>
+        <name>Update remaining annual leave for last y</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_total_used</fullName>
+        <field>totalannualleaveusedinthelastyear__c</field>
+        <formula>PRIORVALUE( Totalannualleaveusedincurrentyear__c )</formula>
+        <name>Update total used</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>emaining_annual_leave_for_last_year</fullName>
+        <field>Remainingannualleaveoflast_year__c</field>
+        <formula>IF(
+MONTH(TODAY())&gt;3, 0, defaultpreviousyearannualleave__c - totalannualleaveusedinthelastyear__c )</formula>
+        <name>Update remaining annual leave for last y</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

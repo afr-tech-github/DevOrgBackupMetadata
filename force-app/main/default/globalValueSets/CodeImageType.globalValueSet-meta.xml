@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Barcode</fullName>
+        <default>false</default>
+        <label>Barcode</label>
+    </customValue>
+    <customValue>
+        <fullName>QR code</fullName>
+        <default>false</default>
+        <label>QR code</label>
+    </customValue>
+    <masterLabel>Code Image Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

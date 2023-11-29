@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SalesAccountedDate__c</fullName>
+    <deprecated>false</deprecated>
+    <description>SALES ACCOUNTED DATE</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When any of following date is input, the latest date is selected as sales accounted date. 
+Import – Shipment Order: ETA, C.Clearance:Permit Date, Delivery:Delivery Date. 
+Export- Delivery:Delivery Date, C.Clearance:Permit Date, Shipment Order:ETD.</inlineHelpText>
+    <label>SALES ACCOUNTED DATE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

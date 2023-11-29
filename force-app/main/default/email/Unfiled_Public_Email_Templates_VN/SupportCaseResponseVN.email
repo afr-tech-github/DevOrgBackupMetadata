@@ -1,0 +1,16 @@
+Kính gửi {!Contact.FirstName},
+
+{!Case.Solution_Description}
+
+Trân Trọng,
+
+{!User.Name}
+{!Organization.Name}
+
+Ý kiến của quí vị:
+
+{!Case.Description}
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************

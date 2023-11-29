@@ -1,0 +1,24 @@
+Kính gửi Quản lý khách hàng
+
+{!Tax_Ratio__c.CreatedBy} Đã yêu cầu duyệt cho tỉ xuất thuế mới.
+
+Vui lòng nhấp vào đường link thể đồng ý hay không.
+
+◎Mã số Tỉ xuất thuế：[{!Tax_Ratio__c.TAX_RATIO_ID__c}]  
+Đường dẫn tới SF:{!Tax_Ratio__c.Link} 
+◎Loại tiền tệ : {!Tax_Ratio__c.Currency__c}
+◎Ngày hiệu lực : {!Tax_Ratio__c.Start_Date__c}
+◎Ngày hết hạn : {!Tax_Ratio__c.End_Date__c}
+◎Tỉ xuất thuế bán ra : {!Tax_Ratio__c.Selling_Tax_Ratio__c}%
+◎Tỉ xuất thuế mua vào : {!Tax_Ratio__c.Buying_Tax_Ratio__c}%
+
+Bạn có thể duyệt hoặc từ chối và nêu ý kiến cho yêu cầu này từ trình duyệt của bạn.
+
+Trân Trọng.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}  
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

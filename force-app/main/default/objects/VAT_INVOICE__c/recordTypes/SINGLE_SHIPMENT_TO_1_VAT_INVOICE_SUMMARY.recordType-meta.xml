@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SINGLE_SHIPMENT_TO_1_VAT_INVOICE_SUMMARY</fullName>
+    <active>false</active>
+    <description>Choose this record type when the VAT INVOICE involve with 1 shipment with Summary.</description>
+    <label>SINGLE SHIPMENT TO 1 VAT INVOICE-SUMMARY</label>
+</RecordType>

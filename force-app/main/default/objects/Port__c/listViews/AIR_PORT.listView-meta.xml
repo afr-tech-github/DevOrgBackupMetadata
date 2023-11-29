@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AIR_PORT</fullName>
+    <columns>NAME</columns>
+    <columns>CodeOfPort__c</columns>
+    <columns>City_Name__c</columns>
+    <columns>Country_Code__c</columns>
+    <columns>Country_Name__c</columns>
+    <columns>Fullname__c</columns>
+    <columns>Port_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Port_Type__c</field>
+        <operation>equals</operation>
+        <value>AIR</value>
+    </filters>
+    <label>AIR PORT</label>
+    <language>en_US</language>
+</ListView>

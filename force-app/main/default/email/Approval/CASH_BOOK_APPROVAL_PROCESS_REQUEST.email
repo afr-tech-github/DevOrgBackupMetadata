@@ -1,0 +1,26 @@
+Dear Account Team Managers 
+
+{!CASH_BOOK__c.CreatedBy} has requested your approval for the new Cash Book as below.
+
+Please click this link to aprove or reject this record.
+
+◎CASH BOOK ID：[{!CASH_BOOK__c.Name}] Link to CloFor:{!CASH_BOOK__c.Link} 
+◎CASH CARRIER STAFF：{!CASH_BOOK__c.00N2800000EGbfm}
+◎STATUS：{!CASH_BOOK__c.CASH_STATUS__c}
+
+◎DIFFERENCES(EXPECTED-ACTUAL)：{!CASH_BOOK__c.DIFFERENCE_LEFT__c} 
+◎REASON FOR DIFFERENCES(EXPECTED-ACTUAL):{!CASH_BOOK__c.REASON_FOR_DIFFERENCE_ER__c}
+
+◎DIFFERENCES(TOTAL AMOUNT- ACTUAL PAID) ：{!CASH_BOOK__c.DIFFERENCE_AMOUNT_ACTUAL_PAID__c} 
+◎REASON FOR DIFFERENCES(TOTAL AMOUNT- ACTUAL PAID):：{!CASH_BOOK__c.REASON_FOR_DIFFERENCE_TA__c}
+
+You can also approve, reject and comment on this request from your feed.
+
+Best regards.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

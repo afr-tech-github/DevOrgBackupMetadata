@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Free-hand</fullName>
+        <default>false</default>
+        <label>Free-hand</label>
+    </customValue>
+    <customValue>
+        <fullName>Nominated</fullName>
+        <default>false</default>
+        <label>Nominated</label>
+    </customValue>
+    <customValue>
+        <fullName>Co-sales</fullName>
+        <default>false</default>
+        <label>Co-sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Joint Sales</fullName>
+        <default>false</default>
+        <label>Joint Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>CARGO OWNERSHIP TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

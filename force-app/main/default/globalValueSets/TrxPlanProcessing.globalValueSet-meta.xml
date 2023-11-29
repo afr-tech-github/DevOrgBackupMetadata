@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Trx Plan-Payment Request</fullName>
+        <default>false</default>
+        <label>Trx Plan-Payment Request</label>
+    </customValue>
+    <customValue>
+        <fullName>Trx Plan-Collection Plan</fullName>
+        <default>false</default>
+        <label>Trx Plan-Collection Plan</label>
+    </customValue>
+    <masterLabel>Trx Plan Processing</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

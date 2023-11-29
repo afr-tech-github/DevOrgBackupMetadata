@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Selling_Buyging_Standard</fullName>
+    <active>true</active>
+    <description>Choose this record type to create Invoicing to customers and payment to vendors.</description>
+    <label>Selling/Buyging Standard</label>
+</RecordType>

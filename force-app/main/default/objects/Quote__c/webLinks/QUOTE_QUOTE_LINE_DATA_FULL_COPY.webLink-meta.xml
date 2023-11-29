@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QUOTE_QUOTE_LINE_DATA_FULL_COPY</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>QUOTE &amp; QUOTE LINE DATA FULL COPY</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/45.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/45.0/apex.js&apos;)} 
+
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}&quot;; 
+var lang = sforce.connection.getUserInfo().userLanguage; 
+var confirmMsg = &apos;&apos;; 
+var informMsg = &apos;&apos;; 
+console.log(&quot;aaaaa&quot; + confirmMsg);
+
+if (&apos;vi&apos; === lang) { 
+confirmMsg = &apos;Bạn có muốn sao chép Quotation này không?&apos;; 
+informMsg = &apos;Sao chép Quotation đã hoàn tất.&apos;; 
+} else { 
+confirmMsg = &apos;Do you want to copy this Quotation?&apos;; 
+informMsg = &apos;Copying Quotation completed successfully.&apos;; 
+}
+if(window.confirm(confirmMsg)) { 
+
+
+var clonedShipmentId = sforce.apex.execute(&apos;clofor_com_cfs.CopyQuotationController&apos;, &apos;cloneFullQuotation&apos;, {quoteIdSource:&apos;{!URLENCODE(Quote__c.Id)}&apos;});
+ 
+location.href= &apos;/&apos; + clonedShipmentId; 
+
+
+console.log(&quot;bbbbb&quot; + confirmMsg);
+alert(informMsg);
+}</url>
+</WebLink>

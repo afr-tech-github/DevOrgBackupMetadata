@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupFMSAmountOfTaxSellingFCY__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Rollup FMS Amount of Tax-Selling(FCY)</label>
+    <summarizedField>INVOICING_VAT__c.AmountOfTaxSellingFCYForVAT__c</summarizedField>
+    <summaryForeignKey>INVOICING_VAT__c.VAT_INVOICE__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

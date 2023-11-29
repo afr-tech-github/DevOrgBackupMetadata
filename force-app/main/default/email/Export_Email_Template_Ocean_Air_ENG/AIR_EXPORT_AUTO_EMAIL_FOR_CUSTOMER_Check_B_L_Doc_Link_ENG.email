@@ -1,0 +1,311 @@
+Dear {!CustomObject1__c.Field1__c}
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 
+<br>
+<br>
+Thank you for using our shipping service.
+<br>
+<br>
+The current status of the dedicated shipment is 「{!CustomObject1__c.status__c}」. 
+<br>
+<br>
+###################################################################################################################
+<br>
+CHECK B/L LINK：{!CustomObject1__c.CHECK_B_L_LINK__c}  <br>
+CHECK B/L PASSWORD：{!CustomObject1__c.CHECK_B_L_PASSWORD__c}  <br>
+###################################################################################################################
+<br>
+<br>
+Please see the details at below table.<br>
+<br>
+※This email automatically has been sent from CloTra(Cloud Cargo Tracking Service)  whenever there is an updates on status.
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				COMMON INFORMATION
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th width="200">
+				ID
+			</th>
+			<td width="400">
+				{!CustomObject1__c.ID__c}
+			</td >
+			<th width="200">
+				STATUS
+			</th>
+			<td width="400">
+				{!CustomObject1__c.status__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				EXPORTER
+			</th>
+			<td colspan="1">
+				{!CustomObject1__c.Field1__c}
+			</td>
+                        <th>
+				PIC OF EXPORTER
+                        </th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}
+			</td>
+		</tr>
+  		<tr>
+<thead>
+			<th colspan="4">
+				CARGO BASIC INFORMATION
+			</th>
+</thead>
+		</tr>
+		<tr>
+			<th>
+				HAWB NO.
+			</th>
+			<td>
+				{!CustomObject1__c.HAWB__c}
+			</td>
+<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				MAWB NO.
+			</th>
+			<td>
+				{!CustomObject1__c.MAWB__c}
+			</td>
+
+<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}
+			</td>
+
+
+		</tr>
+<tr>
+<th>
+				FLIGHT NO.
+			</th>
+			<td>
+				{!CustomObject1__c.FlightNo__c}
+			</td>
+
+			<th>
+				CUT DATE
+			</th>
+			<td>
+				{!CustomObject1__c.CutDay__c}
+			</td>
+　　　　　　　　</tr>
+	
+　　<tr>
+<th>
+			GOODS
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>			<th>
+				A.O.D
+			</th>
+			<td>
+                               {!CustomObject1__c.POL__c} 
+				{!CustomObject1__c.POL_Country_Name__c}
+			</td>
+		</tr>
+		　　　　　　　　　　　　　　<tr>
+			<th>
+				WEIGHT
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+			<th>
+				E.T.D
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				QUANTITY/MEASUREMENT
+			</th>
+			<td>
+				{!CustomObject1__c.carton__c}                            {!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM
+			</td>
+			<th>
+				A.O.A
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} 
+			{!CustomObject1__c.POD_Country_Name__c}  
+			</td>
+		</tr>
+		<tr>
+			<th>
+				INCOTERMS
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+			<th>
+				E.T.A
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>  
+　　　　　　　　<tr>
+			<th>
+				INSURANCE
+			</th>
+			<td>
+				{!CustomObject1__c.Insurance__c}
+			</td>
+			<th>
+				
+			</th>
+			<td>
+				
+			</td>
+		</tr>
+		
+
+		<tr>
+<thead>
+			<th colspan="4">
+	              TRIANGLE TRADE & TRANSIT
+			</th>
+</thead>
+<tr>
+			<th>
+				TRANSIT AIRPORT
+			</th>
+			<td>
+				{!CustomObject1__c.TS__c}	</td>
+<th>
+				TRANSIT FLIGHT
+			</th>
+			<td>
+				{!CustomObject1__c.TransitV__c}
+			</td>
+</tr>
+<tr>
+			<th>
+				FIRST SHIPPER
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WElD}	
+	</td>
+
+ 　　 <th>
+                           TRANSIT ETD
+	</th>
+	<td>
+	{!CustomObject1__c.T_ETD__c}	
+	</td>
+		</tr>
+
+
+		
+		<tr>
+<thead>
+			<th colspan="4">
+				PICKUP			</th>
+</thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				NUMBER OF PICKUP LOCATION
+			</th>
+			<td colspan="3" rowspan="2">
+{!CustomObject1__c.DeliveryService_required__c} Pickup Locations.
+In case the pickup locations are greater than 0, detail information will be provided by a different email.
+
+			</td>
+
+		</tr>
+<tr>
+</tr>
+<tr>
+<thead>
+			<th colspan="4">
+				CUSTOMS CLEARANCE 
+			</th>
+</thead>
+		</tr>
+		<tr>
+			<th >
+				CUSTOMS CLEARANCE SERVICE REQUIRED
+			</th>
+			<td colspan="3" >
+					Customs clearance service required is '{!CustomObject1__c.Custom__c}'. In case customs clearance service required is 'YES', detail information will be provided by a different email.
+			</td>
+		
+		</tr>
+<tr>
+</tr>
+		<tr>
+			
+			<tr>
+<thead>
+			<th colspan="4">
+				REMARK
+			</th>
+</thead>
+		</tr>
+		<tr>
+			<th rowspan="1">
+				REMARK
+			</th>
+			<td colspan="3">
+				{!CustomObject1__c.Remark__c}
+			</td>
+		</tr>
+					</tbody>
+</table>
+
+<br>
+If you have any inquiries or questions, please feel free to contact to us.
+<br>
+
+We are looking forward to serving you again in the near future.<br><br>
+Best regards.<br><br>
+{!CustomObject1__c.PersonInCharge__c}<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

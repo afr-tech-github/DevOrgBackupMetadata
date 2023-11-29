@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>CASH/TRANSFER</fullName>
+        <default>true</default>
+        <label>CASH/TRANSFER</label>
+    </customValue>
+    <customValue>
+        <fullName>CASH</fullName>
+        <default>false</default>
+        <label>CASH</label>
+    </customValue>
+    <customValue>
+        <fullName>TRANSFER</fullName>
+        <default>false</default>
+        <label>TRANSFER</label>
+    </customValue>
+    <masterLabel>VAT-TERMS OF PAYMENT</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

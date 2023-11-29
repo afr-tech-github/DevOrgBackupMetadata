@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuyAmountUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>ROUND(Suryo__c * BuyTankaUSD__c,3) +TotalAmountofBuyingFCYAdjust__c
+/*
+clofor_com_cfs__Suryo__c * if( ISNULL(clofor_com_cfs__BuyTankaUSD__c), 0, clofor_com_cfs__BuyTankaUSD__c ) + clofor_com_cfs__Cost_Allocation_Margin_USD__c
+*/</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total Amount of Selling(FCY)=Unit Price of Selling(Local)*Charge Unit (Total).</inlineHelpText>
+    <label>TOTAL AMOUNT OF BUYING(USD)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsSOProductAmount</fullName>
+    <fields>GoodSalesOrderID__c</fields>
+    <fields>TrsBill__c</fields>
+    <fields>Name</fields>
+    <fields>ListPriceAfterDiscountLocal__c</fields>
+    <fields>TotalAmountOfSelling__c</fields>
+    <fields>AmountOfSellingTax__c</fields>
+    <fields>SellingAmountInclTax__c</fields>
+    <label>Goods S/O+Product Amount</label>
+</CompactLayout>

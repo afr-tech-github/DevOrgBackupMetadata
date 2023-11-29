@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CapacityKG_can_not_greater_than_parents</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT(ISBLANK(ParentLocator__c)),
+OR(
+AND(CapacityKG__c &gt;  ( ParentLocator__r.CapacityKG__c -  (ParentLocator__r.SharedCapacityKG__c )),
+OR(ISNEW(), ISCHANGED(ParentLocator__c))),
+
+AND(OR(CapacityKG__c &gt;  ( ParentLocator__r.CapacityKG__c -  (ParentLocator__r.SharedCapacityKG__c - CapacityKG__c)), CapacityKG__c &gt; ParentLocator__r.CapacityKG__c), ISCHANGED(CapacityKG__c))
+))</errorConditionFormula>
+    <errorMessage>Capacity KG can not greater than Capacity KG can be shared of parent locator.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BadDebtAmountGreaterThan0</fullName>
+    <active>true</active>
+    <errorConditionFormula>((RequesterCompany__r.BadDebtAmountLocalBadDebtRollup__c  &gt; 0)   || (RequesterCompany__r.BadDebtAmountFCYBadDebtRollup__c  &gt; 0) )  &amp;&amp;    INCLUDES( RequesterCompany__r.ControlBadDebt__c , &quot;Not allow to create Quote&quot;) &amp;&amp;  DATEvalue(CreatedDate)= TODAY()</errorConditionFormula>
+    <errorMessage>You cannot create new Quote because this client is having Overdue Bad Debt.</errorMessage>
+</ValidationRule>

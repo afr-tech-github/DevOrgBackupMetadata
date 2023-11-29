@@ -1,0 +1,186 @@
+<apex:page controller="MasterAnkenLookupController" showHeader="false" sidebar="false" docType="html-5.0" title="Search">
+    <style>
+        .labelStyle {
+        color: #4a4a56;
+        font-size: 0.9em;
+        margin: 0 5px 0 0;
+        font-weight: bold;
+        }
+        .myBody {
+        background: #fff url('/img/alohaSkin/lookup_bg.png') repeat-x scroll 0 0;
+        padding: 0;
+        }
+        .lookupDiv {
+        background-color: transparent;
+        color: #000;padding: 0;
+        }
+        .myH1 {
+        font-size: 1.8em;
+        margin: 8px 0 4px;    
+        }
+        .searchResult {
+        font-family: "Arial","Helvetica",sans-serif;
+        font-size: 118%;
+        font-weight: bold;
+        padding: 4px 3px;    
+        }
+        
+        .headerRow {
+        background: #f2f3f3;
+        border-width: 0 0 1px 1px;
+        border-color: #e0e3e5;
+        color: #000;
+        font-size: .9em;
+        font-weight: bold;
+        padding: 5px 2px 4px 5px;
+        }
+        .tableClass {
+        width:100%;
+        border: 1px solid #e0e3e5;
+        vertical-align: middle;
+        }
+    </style>
+    <script>
+    function copyAndClose(confirmMsg) {
+        if (window.confirm(confirmMsg)) {
+            copyData();
+        }
+    }
+    function closeMyWind() {
+        window.opener.location.href="/{!$CurrentPage.parameters.id}";
+        window.top.close();    
+        
+    }
+    </script>
+    <body class="myBody">
+        <div class="lookupDiv">
+            <H1 class="myH1">
+                Lookup
+            </H1>
+        </div>
+        <apex:form >
+            <apex:pageMessages /> 
+            <apex:actionFunction action="{!copyFromMasterAnken}" name="copyData" oncomplete="closeMyWind();"/>
+            
+            <table>
+                <tr>
+                    <td colspan="2"><apex:input value="{!strSearchValue}"/><apex:commandButton action="{!doSearch}" value="Go"/></td>
+                </tr>        
+                <tr>
+                    <td ><label class="labelStyle">Search:</label></td>
+                    <td>    
+                        <apex:selectRadio value="{!radioValue}">
+                            <apex:selectOptions value="{!radioType}" />
+                        </apex:selectRadio>
+                        
+                    </td>
+                </tr>
+            </table>
+            <div class="searchResult">
+                Search Results
+            </div>
+            <apex:pageBlock >
+                <div style="height: 300px; overflow: scroll">
+                    <table class="tableClass" bordercolor="#e0e3e5">
+                        <tr >
+                            <th colspan="19"><span style="font-size: 1.3em;">M B/L-SHIPMENTS [{!listSize}]</span></th>
+                        </tr>
+                        <tr class="headerRow">
+                            <th class="headerRow">マスター案件(Master Ship)</th>
+                        </tr>
+                        <tr>
+                                <th>Name</th>
+                                <th>POL-COUNTRY</th>
+                                <th>POL-PORT</th>
+                                <th>PLACE OF RECEIPT</th>
+                                <th>ETD</th>
+                                <th>POD-COUNTRY</th>
+                                <th>POD-PORT</th>
+                                <th>PLACE OF DELIVERY</th>
+                                <th>ETA</th>
+                                <th>VESSEL/FLIGHT</th>
+                                <th>VOYAGE</th>
+                                <th>CONTAINER NO/SEAL NO</th>
+                                <th>DEVAN OPERATION COMPANY</th>
+                                <th>PIC OF DEVAN</th>
+                                <th>DEVAN DATE</th>
+                                <th>TRANSIT VESSEL</th>
+                                <th>TRANSIT PORT</th>
+                                <th>ETD AT TRANSIT PORT</th>
+                            </tr>
+                        <apex:repeat value="{!lstMasterAnkens}" var="item">
+                            
+                            <tr>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    <apex:commandLink oncomplete="copyAndClose('{!translations['HBL_MBL_CONFIRMATION_MSG']}');" >{!item.Name}
+                                        <apex:param name="param1" assignTo="{!strMasterAnkenID}" value="{!item.id}"/>                                       
+                                    </apex:commandLink>
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPOL__r.Country_Name__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPOL__r.Name}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPlace_of_Receipt__r.Name}                                
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                        <apex:param value="{!item.METD__c}"/>
+                                    </apex:outputText>
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPOD__r.Country_Name__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPOD__r.Name}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MPlace_of_Delivery__r.Name}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                        <apex:param value="{!item.META__c}"/>
+                                    </apex:outputText>
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MVessel__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MVoy_No__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MContainer_No__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MDevan__r.Name}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MDevanRep__r.Name}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                        <apex:param value="{!item.MDevanningDate__c}"/>
+                                    </apex:outputText>
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MTRANSIT_VESSEL__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    {!item.MTRANSIT_PORT__c}
+                                </th>
+                                <th style="font-size:100%;font-weight:normal;background-color:white;">
+                                    <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                        <apex:param value="{!item.MTRANSIT_T_ETD__c}"/>
+                                    </apex:outputText>
+                                </th>
+                            </tr>    
+                        </apex:repeat>
+                    </table>
+                </div>
+            </apex:pageBlock>
+            
+        </apex:form>
+    </body>
+</apex:page>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>transporter_type__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>When you choose the Record Type Charter or  drayage Truck&amp;Driver Detail can be input.</inlineHelpText>
+    <label>TRUCK TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>20&apos;DC</fullName>
+                <default>false</default>
+                <label>20&apos;DC</label>
+            </value>
+            <value>
+                <fullName>40&apos;DC</fullName>
+                <default>false</default>
+                <label>40&apos;DC</label>
+            </value>
+            <value>
+                <fullName>40&apos;HC</fullName>
+                <default>false</default>
+                <label>40&apos;HC</label>
+            </value>
+            <value>
+                <fullName>20&apos;REF</fullName>
+                <default>false</default>
+                <label>20&apos;REF</label>
+            </value>
+            <value>
+                <fullName>40&apos;REF</fullName>
+                <default>false</default>
+                <label>40&apos;REF</label>
+            </value>
+            <value>
+                <fullName>20&apos;FT</fullName>
+                <default>false</default>
+                <label>20&apos;FT</label>
+            </value>
+            <value>
+                <fullName>40&apos;FT</fullName>
+                <default>false</default>
+                <label>40&apos;FT</label>
+            </value>
+            <value>
+                <fullName>20&apos;OT</fullName>
+                <default>false</default>
+                <label>20&apos;OT</label>
+            </value>
+            <value>
+                <fullName>40&apos;OT</fullName>
+                <default>false</default>
+                <label>40&apos;OT</label>
+            </value>
+            <value>
+                <fullName>20&apos;PF</fullName>
+                <default>false</default>
+                <label>20&apos;PF</label>
+            </value>
+            <value>
+                <fullName>40&apos;PF</fullName>
+                <default>false</default>
+                <label>40&apos;PF</label>
+            </value>
+            <value>
+                <fullName>ISO</fullName>
+                <default>false</default>
+                <label>ISO</label>
+            </value>
+            <value>
+                <fullName>20&apos;DC-Flexi</fullName>
+                <default>false</default>
+                <label>20&apos;DC-Flexi</label>
+            </value>
+            <value>
+                <fullName>2Ton</fullName>
+                <default>false</default>
+                <label>2Ton</label>
+            </value>
+            <value>
+                <fullName>2Ton Long</fullName>
+                <default>false</default>
+                <label>2Ton Long</label>
+            </value>
+            <value>
+                <fullName>4Ton</fullName>
+                <default>false</default>
+                <label>4Ton</label>
+            </value>
+            <value>
+                <fullName>10Ton</fullName>
+                <default>false</default>
+                <label>10Ton</label>
+            </value>
+            <value>
+                <fullName>2Ton Powergate</fullName>
+                <default>false</default>
+                <label>2Ton Powergate</label>
+            </value>
+            <value>
+                <fullName>2Ton Air Suspension</fullName>
+                <default>false</default>
+                <label>2Ton Air Suspension</label>
+            </value>
+            <value>
+                <fullName>2Ton Long Powergate</fullName>
+                <default>false</default>
+                <label>2Ton Long Powergate</label>
+            </value>
+            <value>
+                <fullName>2Ton Long Air Suspension</fullName>
+                <default>false</default>
+                <label>2Ton Long Air Suspension</label>
+            </value>
+            <value>
+                <fullName>4Ton Powergate</fullName>
+                <default>false</default>
+                <label>4Ton Powergate</label>
+            </value>
+            <value>
+                <fullName>4Ton Air Suspension</fullName>
+                <default>false</default>
+                <label>4Ton Air Suspension</label>
+            </value>
+            <value>
+                <fullName>10Ton Powergate</fullName>
+                <default>false</default>
+                <label>10Ton Powergate</label>
+            </value>
+            <value>
+                <fullName>10Ton Air Suspension</fullName>
+                <default>false</default>
+                <label>10Ton Air Suspension</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

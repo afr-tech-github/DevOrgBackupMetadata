@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassEditQLineOceanBuying</fullName>
+    <columns>NAME</columns>
+    <columns>QuoteLineNumber__c</columns>
+    <columns>LineItemName__c</columns>
+    <columns>ServicePricingID__c</columns>
+    <columns>CarrierAirlinerVendor__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Unit__c</columns>
+    <columns>ContainerType__c</columns>
+    <columns>CurrencyBuying__c</columns>
+    <columns>ExchangeRateBuying__c</columns>
+    <columns>BuyingListPriceLocal__c</columns>
+    <columns>BuyingListPriceUSD__c</columns>
+    <columns>TotalAmountBuyingLocal__c</columns>
+    <columns>AmountOfBuyingTaxLocal__c</columns>
+    <columns>BuyingAmountInclTaxLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>QuoteLine__c.ServiceQuoteLine</value>
+    </filters>
+    <label>Mass Edit Q.Line-Ocean Buying</label>
+    <language>en_US</language>
+</ListView>

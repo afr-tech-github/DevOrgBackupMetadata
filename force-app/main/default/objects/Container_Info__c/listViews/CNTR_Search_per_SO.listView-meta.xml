@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNTR_Search_per_SO</fullName>
+    <columns>NAME</columns>
+    <columns>HBL_SHIPMENT__c</columns>
+    <columns>Container_NO__c</columns>
+    <columns>Seal_No__c</columns>
+    <columns>QUANTITY_PACKAGES__c</columns>
+    <columns>MEASUREMENT_CBM__c</columns>
+    <columns>NET_WEIGHT__c</columns>
+    <columns>GROSS_WEIGHT__c</columns>
+    <columns>CustomerRequest__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>HBL_SHIPMENT__c</field>
+        <operation>contains</operation>
+        <value>065280</value>
+    </filters>
+    <label>1.CNTR Search per SO</label>
+    <language>en_US</language>
+</ListView>

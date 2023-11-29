@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MPOD_And_MPOL_Must_Different</fullName>
+    <active>true</active>
+    <description>MPOL and MPOL must be different from each other.</description>
+    <errorConditionFormula>IF( 
+AND( NOT( ISBLANK(MPOD__c) ), 
+NOT( ISBLANK(MPOL__c) ), 
+MPOD__c = MPOL__c) , 
+true, 
+false)</errorConditionFormula>
+    <errorMessage>出港地と入港地は一致してはいけません。ご確認の上、正しく再入力してください。 
+POD-CITY must be different from POL-CITY. Please re-enter the correct data.</errorMessage>
+</ValidationRule>

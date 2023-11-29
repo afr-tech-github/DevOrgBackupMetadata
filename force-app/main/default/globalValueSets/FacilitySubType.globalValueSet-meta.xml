@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Warehouse</fullName>
+        <default>false</default>
+        <label>Warehouse</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobile Warehouse</fullName>
+        <default>false</default>
+        <label>Mobile Warehouse</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobile Warehouse(Bike)</fullName>
+        <default>false</default>
+        <label>Mobile Warehouse(Bike)</label>
+    </customValue>
+    <customValue>
+        <fullName>Distribution Center</fullName>
+        <default>false</default>
+        <label>Distribution Center</label>
+    </customValue>
+    <customValue>
+        <fullName>Container Terminal</fullName>
+        <default>false</default>
+        <label>Container Terminal</label>
+    </customValue>
+    <customValue>
+        <fullName>Passenger Terminal</fullName>
+        <default>false</default>
+        <label>Passenger Terminal</label>
+    </customValue>
+    <customValue>
+        <fullName>International Port</fullName>
+        <default>false</default>
+        <label>International Port</label>
+    </customValue>
+    <customValue>
+        <fullName>Domestic Port</fullName>
+        <default>false</default>
+        <label>Domestic Port</label>
+    </customValue>
+    <customValue>
+        <fullName>Yard</fullName>
+        <default>false</default>
+        <label>Yard</label>
+    </customValue>
+    <customValue>
+        <fullName>ICD</fullName>
+        <default>false</default>
+        <label>ICD</label>
+    </customValue>
+    <customValue>
+        <fullName>Store</fullName>
+        <default>false</default>
+        <label>Store</label>
+    </customValue>
+    <customValue>
+        <fullName>Department</fullName>
+        <default>false</default>
+        <label>Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Shopping Mall</fullName>
+        <default>false</default>
+        <label>Shopping Mall</label>
+    </customValue>
+    <customValue>
+        <fullName>Supermarket</fullName>
+        <default>false</default>
+        <label>Supermarket</label>
+    </customValue>
+    <customValue>
+        <fullName>Office Building</fullName>
+        <default>false</default>
+        <label>Office Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Facility Sub-Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

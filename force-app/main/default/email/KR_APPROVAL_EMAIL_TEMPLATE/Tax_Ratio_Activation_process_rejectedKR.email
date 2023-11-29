@@ -1,0 +1,23 @@
+회계 담당자님
+
+{! Tax_Ratio__c.TAX_RATIO_ID__c}
+은 기각되었습니다. 댓글을 확인하고 수정후에 다시 신청 부탁드립니다.
+
+기각된 레코드 내용은 링크를 클릭하십시오.
+
+◎ TAX RATIO ID : {! Tax_Ratio__c.TAX_RATIO_ID__c}] Link to SF : {! Tax_Ratio__c.Link}
+◎ Currency : {! Tax_Ratio__c.Currency__c}
+◎ Start Date : {! Tax_Ratio__c.Start_Date__c}
+◎ End Date : {! Tax_Ratio__c.End_Date__c}
+◎ Selling Tax Ratio : {! Tax_Ratio__c.Selling_Tax_Ratio__c} %
+◎ Buying Tax Ratio : {! Tax_Ratio__c.Buying_Tax_Ratio__c} %
+
+
+잘 부탁드립니다.
+
+************************************************** *******
+{!Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c}
+ ************************************************** *******
+Powered by AFR Solutions Co., LTD 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

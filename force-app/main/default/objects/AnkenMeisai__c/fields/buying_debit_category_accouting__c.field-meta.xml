@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>buying_debit_category_accouting__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>BUYING-THE DEBIT</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>仕入高</fullName>
+                <default>false</default>
+                <label>COSTS</label>
+            </value>
+            <value>
+                <fullName>買掛</fullName>
+                <default>false</default>
+                <label>ACCOUNTS PAYABLE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

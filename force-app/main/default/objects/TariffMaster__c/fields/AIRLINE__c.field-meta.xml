@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AIRLINE__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Airline</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Add Airline list here</fullName>
+                <default>false</default>
+                <label>Add Airline list here</label>
+            </value>
+            <value>
+                <fullName>LD-152-AHK AIR HONG KONG</fullName>
+                <default>false</default>
+                <label>LD-152-AHK AIR HONG KONG</label>
+            </value>
+            <value>
+                <fullName>FD-900-AIR ASIA</fullName>
+                <default>false</default>
+                <label>FD-900-AIR ASIA</label>
+            </value>
+            <value>
+                <fullName>RU-912-AIR BRIDGE CARGO</fullName>
+                <default>false</default>
+                <label>RU-912-AIR BRIDGE CARGO</label>
+            </value>
+            <value>
+                <fullName>BX--AIR BUSAN</fullName>
+                <default>false</default>
+                <label>BX--AIR BUSAN</label>
+            </value>
+            <value>
+                <fullName>AC-014-AIR CANADA</fullName>
+                <default>false</default>
+                <label>AC-014-AIR CANADA</label>
+            </value>
+            <value>
+                <fullName>CA-999-AIR CHINA</fullName>
+                <default>false</default>
+                <label>CA-999-AIR CHINA</label>
+            </value>
+            <value>
+                <fullName>AF-057-AIR FRANCE</fullName>
+                <default>false</default>
+                <label>AF-057-AIR FRANCE</label>
+            </value>
+            <value>
+                <fullName>AI-098- AIR INDIA</fullName>
+                <default>false</default>
+                <label>AI-098- AIR INDIA</label>
+            </value>
+            <value>
+                <fullName>NQ- - AIR JAPAN</fullName>
+                <default>false</default>
+                <label>NQ- - AIR JAPAN</label>
+            </value>
+            <value>
+                <fullName>NX-675-AIR MACAU</fullName>
+                <default>false</default>
+                <label>NX-675-AIR MACAU</label>
+            </value>
+            <value>
+                <fullName>NH-205-ALL NIPPON AIRWAYS</fullName>
+                <default>false</default>
+                <label>NH-205-ALL NIPPON AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>AA-001-AMERICAN</fullName>
+                <default>false</default>
+                <label>AA-001-AMERICAN</label>
+            </value>
+            <value>
+                <fullName>OZ-988-ASIANA</fullName>
+                <default>false</default>
+                <label>OZ-988-ASIANA</label>
+            </value>
+            <value>
+                <fullName>OS--AUSTRIAN  AG</fullName>
+                <default>false</default>
+                <label>OS--AUSTRIAN  AG</label>
+            </value>
+            <value>
+                <fullName>BA-125-BRITISH AIRWAYS PLC</fullName>
+                <default>false</default>
+                <label>BA-125-BRITISH AIRWAYS PLC</label>
+            </value>
+            <value>
+                <fullName>CV-172-CARGOLUX  INT&apos;L SA</fullName>
+                <default>false</default>
+                <label>CV-172-CARGOLUX  INT&apos;L SA</label>
+            </value>
+            <value>
+                <fullName>C8-356-CARGOLUX ITALIA SPA</fullName>
+                <default>false</default>
+                <label>C8-356-CARGOLUX ITALIA SPA</label>
+            </value>
+            <value>
+                <fullName>CX-160-CATHAY PACIFIC AIRWAYS</fullName>
+                <default>false</default>
+                <label>CX-160-CATHAY PACIFIC AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>OK-064-CZECH</fullName>
+                <default>false</default>
+                <label>OK-064-CZECH</label>
+            </value>
+            <value>
+                <fullName>SC--CHANGDONG</fullName>
+                <default>false</default>
+                <label>SC--CHANGDONG</label>
+            </value>
+            <value>
+                <fullName>CI-297-CHINA</fullName>
+                <default>false</default>
+                <label>CI-297-CHINA</label>
+            </value>
+            <value>
+                <fullName>CK-112-CHINA CARGO</fullName>
+                <default>false</default>
+                <label>CK-112-CHINA CARGO</label>
+            </value>
+            <value>
+                <fullName>MU-112-CHINA EASTERN</fullName>
+                <default>false</default>
+                <label>MU-112-CHINA EASTERN</label>
+            </value>
+            <value>
+                <fullName>8Y-804-CHINA POSTAL</fullName>
+                <default>false</default>
+                <label>8Y-804-CHINA POSTAL</label>
+            </value>
+            <value>
+                <fullName>CZ-784-CHINA SOUTHERN</fullName>
+                <default>false</default>
+                <label>CZ-784-CHINA SOUTHERN</label>
+            </value>
+            <value>
+                <fullName>KA-043-DRAGON AIR</fullName>
+                <default>false</default>
+                <label>KA-043-DRAGON AIR</label>
+            </value>
+            <value>
+                <fullName>DL-006-DELTA ,</fullName>
+                <default>false</default>
+                <label>DL-006-DELTA ,</label>
+            </value>
+            <value>
+                <fullName>ZE--EASTAR JET</fullName>
+                <default>false</default>
+                <label>ZE--EASTAR JET</label>
+            </value>
+            <value>
+                <fullName>MS-077-EGYPTAIR</fullName>
+                <default>false</default>
+                <label>MS-077-EGYPTAIR</label>
+            </value>
+            <value>
+                <fullName>EK-176-EMIRATES</fullName>
+                <default>false</default>
+                <label>EK-176-EMIRATES</label>
+            </value>
+            <value>
+                <fullName>EY-607-ETHIHAD AIRWAYS</fullName>
+                <default>false</default>
+                <label>EY-607-ETHIHAD AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>BR-695-EVA AIRWAYS CORP</fullName>
+                <default>false</default>
+                <label>BR-695-EVA AIRWAYS CORP</label>
+            </value>
+            <value>
+                <fullName>FX-023-FEDEX</fullName>
+                <default>false</default>
+                <label>FX-023-FEDEX</label>
+            </value>
+            <value>
+                <fullName>AY-105-FINNAIR OYJ</fullName>
+                <default>false</default>
+                <label>AY-105-FINNAIR OYJ</label>
+            </value>
+            <value>
+                <fullName>GA-126-GARUDA INDONESIA</fullName>
+                <default>false</default>
+                <label>GA-126-GARUDA INDONESIA</label>
+            </value>
+            <value>
+                <fullName>HX-851-HONG KONG AIRINES</fullName>
+                <default>false</default>
+                <label>HX-851-HONG KONG AIRINES</label>
+            </value>
+            <value>
+                <fullName>KA-043-HONG KONG DRAGON</fullName>
+                <default>false</default>
+                <label>KA-043-HONG KONG DRAGON</label>
+            </value>
+            <value>
+                <fullName>UO-128-HONG KONG EXPRESS AIRWAYS</fullName>
+                <default>false</default>
+                <label>UO-128-HONG KONG EXPRESS AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>JL-131-JAPAN</fullName>
+                <default>false</default>
+                <label>JL-131-JAPAN</label>
+            </value>
+            <value>
+                <fullName>7C-806-JEJU AIR</fullName>
+                <default>false</default>
+                <label>7C-806-JEJU AIR</label>
+            </value>
+            <value>
+                <fullName>LJ--JIN AIR</fullName>
+                <default>false</default>
+                <label>LJ--JIN AIR</label>
+            </value>
+            <value>
+                <fullName>KL-074-KLM ROYAL DUTCH</fullName>
+                <default>false</default>
+                <label>KL-074-KLM ROYAL DUTCH</label>
+            </value>
+            <value>
+                <fullName>KE-180-KOREAN AIR LINES</fullName>
+                <default>false</default>
+                <label>KE-180-KOREAN AIR LINES</label>
+            </value>
+            <value>
+                <fullName>LA-045-LAN</fullName>
+                <default>false</default>
+                <label>LA-045-LAN</label>
+            </value>
+            <value>
+                <fullName>LH-020-LUFTHANSA CARGO AG</fullName>
+                <default>false</default>
+                <label>LH-020-LUFTHANSA CARGO AG</label>
+            </value>
+            <value>
+                <fullName>MH-232-MALAYSIA  SYSTEM BERHAD</fullName>
+                <default>false</default>
+                <label>MH-232-MALAYSIA  SYSTEM BERHAD</label>
+            </value>
+            <value>
+                <fullName>KZ-933-NIPPON CARGO</fullName>
+                <default>false</default>
+                <label>KZ-933-NIPPON CARGO</label>
+            </value>
+            <value>
+                <fullName>PK--PAKISTAN INT&apos;L</fullName>
+                <default>false</default>
+                <label>PK--PAKISTAN INT&apos;L</label>
+            </value>
+            <value>
+                <fullName>MM- -PEACH AVIATION</fullName>
+                <default>false</default>
+                <label>MM- -PEACH AVIATION</label>
+            </value>
+            <value>
+                <fullName>PR-079-PHILIPPINE ,</fullName>
+                <default>false</default>
+                <label>PR-079-PHILIPPINE ,</label>
+            </value>
+            <value>
+                <fullName>PO-403-POLAR AIR CARGO WORLDWIDE</fullName>
+                <default>false</default>
+                <label>PO-403-POLAR AIR CARGO WORLDWIDE</label>
+            </value>
+            <value>
+                <fullName>QF-081-QANTAS AIRWAYS</fullName>
+                <default>false</default>
+                <label>QF-081-QANTAS AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>QR-157-QATAR AIRWAYS</fullName>
+                <default>false</default>
+                <label>QR-157-QATAR AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>MI-629-SILK</fullName>
+                <default>false</default>
+                <label>MI-629-SILK</label>
+            </value>
+            <value>
+                <fullName>HZ--SAKHALINSKIE AVIATRASSY</fullName>
+                <default>false</default>
+                <label>HZ--SAKHALINSKIE AVIATRASSY</label>
+            </value>
+            <value>
+                <fullName>TZ--SCOOT PRIVATE</fullName>
+                <default>false</default>
+                <label>TZ--SCOOT PRIVATE</label>
+            </value>
+            <value>
+                <fullName>FM-112-SHANGHAI</fullName>
+                <default>false</default>
+                <label>FM-112-SHANGHAI</label>
+            </value>
+            <value>
+                <fullName>ZH--SHENZHEN</fullName>
+                <default>false</default>
+                <label>ZH--SHENZHEN</label>
+            </value>
+            <value>
+                <fullName>SQ-618-SINGAPORE</fullName>
+                <default>false</default>
+                <label>SQ-618-SINGAPORE</label>
+            </value>
+            <value>
+                <fullName>9C--SPRING   CORP</fullName>
+                <default>false</default>
+                <label>9C--SPRING   CORP</label>
+            </value>
+            <value>
+                <fullName>UL-603-SRILANKAN</fullName>
+                <default>false</default>
+                <label>UL-603-SRILANKAN</label>
+            </value>
+            <value>
+                <fullName>7G--STAR FLYER</fullName>
+                <default>false</default>
+                <label>7G--STAR FLYER</label>
+            </value>
+            <value>
+                <fullName>TG-217-THAI AIRWAYS INT&apos;L PUBLIC</fullName>
+                <default>false</default>
+                <label>TG-217-THAI AIRWAYS INT&apos;L PUBLIC</label>
+            </value>
+            <value>
+                <fullName>GE- -TRANS ASIA AIRWAYS COR</fullName>
+                <default>false</default>
+                <label>GE- -TRANS ASIA AIRWAYS COR</label>
+            </value>
+            <value>
+                <fullName>TK-235-TURKISH</fullName>
+                <default>false</default>
+                <label>TK-235-TURKISH</label>
+            </value>
+            <value>
+                <fullName>TW- -T’WAY AIR</fullName>
+                <default>false</default>
+                <label>TW- -T’WAY AIR</label>
+            </value>
+            <value>
+                <fullName>UA-016-UNITED</fullName>
+                <default>false</default>
+                <label>UA-016-UNITED</label>
+            </value>
+            <value>
+                <fullName>5X-406-UPS</fullName>
+                <default>false</default>
+                <label>5X-406-UPS</label>
+            </value>
+            <value>
+                <fullName>VN-738-VIETNAM  CORP</fullName>
+                <default>false</default>
+                <label>VN-738-VIETNAM  CORP</label>
+            </value>
+            <value>
+                <fullName>VS-932-VIRGIN ATLANTIC AIRWAYS</fullName>
+                <default>false</default>
+                <label>VS-932-VIRGIN ATLANTIC AIRWAYS</label>
+            </value>
+            <value>
+                <fullName>MF-731-XIAMEN</fullName>
+                <default>false</default>
+                <label>MF-731-XIAMEN</label>
+            </value>
+            <value>
+                <fullName>Y8-871-YANGZIJIANG RIVER EXPRESS</fullName>
+                <default>false</default>
+                <label>Y8-871-YANGZIJIANG RIVER EXPRESS</label>
+            </value>
+            <value>
+                <fullName>SU-507-AEROFLOT RUSSIAN</fullName>
+                <default>false</default>
+                <label>SU-507-AEROFLOT RUSSIAN</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

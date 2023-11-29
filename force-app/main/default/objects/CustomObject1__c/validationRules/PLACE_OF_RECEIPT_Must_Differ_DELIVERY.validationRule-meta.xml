@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PLACE_OF_RECEIPT_Must_Differ_DELIVERY</fullName>
+    <active>true</active>
+    <description>PLACE OF RECEIPT and PLACE OF DELIVERY must be different from each other.</description>
+    <errorConditionFormula>IF( 
+  AND( NOT( ISBLANK(Place_Of_Receipt__c ) ), 
+     NOT( ISBLANK(Place_Of_Delivery__c ) ),
+     Place_Of_Receipt__c =  Place_Of_Delivery__c) , 
+true, 
+false)</errorConditionFormula>
+    <errorMessage>PLACE OF RECEIPTとPLACE OF DELIVERYは一致してはいけません。ご確認の上、正しく再入力してください。 
+PLACE OF RECEIPT must be different from PLACE OF DELIVERY. Please re-enter the correct data</errorMessage>
+</ValidationRule>

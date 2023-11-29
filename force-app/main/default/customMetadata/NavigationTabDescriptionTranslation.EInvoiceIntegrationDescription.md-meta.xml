@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>E-Invoice Integration Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">API to integrate CloSCM with E-Invoice. Please contact AFR Sales Representative for more details if want to integrate with E-Invoice.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">CloSCMとE-Invoiceを統合のためのAPI.　御社のご利用のE-Invoiceとの統合をご希望の場合はAFR営業担当までご連絡ください。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">CloSCM과 전자세금계산서를 통합하기 위한 API. 귀사가 사용하고 계신 전자세금계산서와 통합을 원하시면 AFR영업담당에게 문의하여 주시기 바랍니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">E-Invoice Integration</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Tích hợp API giữa CloSCM và Hóa đơn điện tử E-Invoice. Vui lòng liên hệ BPKD của AFR để có thêm chi tiết nếu công ty bạn có nhu tích hợp với hệ thống E-Invoice.</value>
+    </values>
+</CustomMetadata>

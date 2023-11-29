@@ -1,0 +1,328 @@
+<apex:page controller="DeliveryLetterController" contentType="text-html" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: 210mm 300mm;
+                margin-top:50px;
+                margin-bottom:20px;
+                margin-left:20px;
+                margin-right:0px;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+            }
+
+            .f5 {
+                font-size: 5pt;
+            }
+            
+            .f7 {
+                font-size: 7pt;
+            }
+            
+            .f8 {
+                font-size: 8pt;
+            }
+            
+            .f9 {
+                font-size: 9pt;
+            }
+            
+            .f10 {
+                font-size: 10pt;
+            }
+            
+            .f11 {
+                font-size: 11pt;
+            }
+            
+            .f12 {
+                font-size: 12pt;
+            }
+            
+            .f14 {
+                font-size: 14pt;
+            }
+            
+            .f16 {
+                font-size: 16pt;
+            }
+            
+            .f18 {
+                font-size: 18pt;
+            }
+            
+            .f20 {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+            
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+            
+            .f30 {
+                font-size: 30pt;
+                font-weight: bold;
+            }
+            
+            .table-td {
+                padding: 0 5px;
+                text-align: left;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+            }
+            
+            .table-header-td {
+                padding: 0 5px;
+                text-align: center;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+                font-weight: bold;
+            }
+            
+            .table-1 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .table-2 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .section {
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!--heading-->
+        <div style="z-index:-2; width: 100%; margin-left:20px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div class="f18 section" style="width:100%; text-align:center;">
+            配送依頼書（トラック用）
+
+        </div>
+        
+        <div class="f12 section" style="text-align:left; width:100%;">
+            <apex:outputLabel value=" {!deliveryCompany} 御中"/>
+        </div>
+        <div class="f9 section" style="left:20px; width:100%;  text-align:left;">
+            いつもご協力をいただき、誠にありがとうございます。<br/> 
+            以下の貨物の配送をお願いいたします。連絡は<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>までお願いします。
+        </div>
+
+        <div class="f10, section" style="width: 80%; margin-left: auto; margin-right: auto;">
+            <table class="table-1">
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">SHIPPER</td>
+                    <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.Shipper__r.Name}"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isAir}">種類</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isOcean}">種類</apex:outputPanel>
+                    </td>
+                    <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.UnitType__c}"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">個数</td>
+                    <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.carton__c}"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isAir}">コンテナ/量積</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isOcean}">量積</apex:outputPanel>
+                    </td>
+                    <td style="width: 70%;" class="table-td">
+                        <apex:outputText value="{!shipment.Container__c}" rendered="{!(isOcean && shipment.Container__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container2__c}" rendered="{!(isOcean && shipment.Container2__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container3__c}" rendered="{!(isOcean && shipment.Container3__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container4__c}" rendered="{!(isOcean && shipment.Container4__c != null)}"/>
+                        <apex:outputText value=" {0, number, ###,##0.###} CBM"  rendered="{!shipment.CBM__c != null}">
+                            <apex:param value="{!shipment.CBM__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isAir}">CC PIC</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isOcean}">CUT</apex:outputPanel>
+                    </td>
+                    <td style="width: 70%;" class="table-td">
+                        <apex:outputText value="{!shipment.Custom_Clearance_Broker__r.Name}" rendered="{!isAir}"/>
+                        <apex:outputText value="{0,date,yyyy/MM/dd}" rendered="{!isOcean}"> 
+                            <apex:param value="{!shipment.CutDay__c}"/>
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isAir}">GROSS重量</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isOcean}">GROSS重量</apex:outputPanel>
+                    </td>
+                    <td style="width: 70%;" class="table-td">
+                        <apex:outputText value="{0, number, ###,##0} KGS" rendered="{!shipment.weight__c != null}">
+                            <apex:param value="{!shipment.weight__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isAir}">HAWB NO.</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isOcean}">BOOKING番号</apex:outputPanel>
+                    </td>
+                    <td style="width: 70%;" class="table-td">
+                        <apex:outputText value="{!shipment.HAWB__c}" rendered="{!isAir}"/>
+                        <apex:outputText value="{!shipment.MASTER_BOOKINGNO__c}" rendered="{!isOcean}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%;" class="table-header-td">MARKS AND NUMBERS</td>
+                    <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.Marks_and_Numbers__c}"/></td>
+                </tr>
+             </table>
+        </div>
+        
+        <apex:repeat value="{!cargoDeliveries}" var="cargoDelivery">
+            <div class="f10, section" style="width: 100%;">
+                <div style="width: 45%; display: inline-block; vertical-align: top;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">コンテナID</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Name}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">配送タイプ</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryType__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%; font-weight: bold;">引取日</td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                    <apex:param value="{!cargoDelivery.Pickupdate__c}"/>
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">引取先</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Receiver__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">引取住所</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.AddressForAccept__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">引取先電話番号</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverContact__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">引取先担当者</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.PersonInChargeForAccept__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="width: 45%; display: inline-block; vertical-align: top; margin-left: 35px;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">コンテナ番号</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Container_NO__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">
+                                <apex:outputPanel rendered="{!isAir}">配送予定日</apex:outputPanel>
+                                <apex:outputPanel rendered="{!isOcean}">搬入予定日</apex:outputPanel>
+                            </td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}" rendered="{!isAir}"> 
+                                    <apex:param value="{!cargoDelivery.DeliveryDate__c}"/>
+                                </apex:outputText>
+                                <apex:outputText value="{0,date,yyyy/MM/dd}" rendered="{!isOcean}"> 
+                                    <apex:param value="{!shipment.LoadingTime__c}"/>
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">
+                                <apex:outputPanel rendered="{!isAir}">配送先</apex:outputPanel>
+                                <apex:outputPanel rendered="{!isOcean}">貨物搬入場所</apex:outputPanel>
+                            </td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{!cargoDelivery.Destination__c}" rendered="{!isAir}"/>
+                                <apex:outputText value="{!shipment.LoadLocation__r.Name}" rendered="{!isOcean}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">
+                                <apex:outputPanel rendered="{!isAir}">配送先住所</apex:outputPanel>
+                                <apex:outputPanel rendered="{!isOcean}">搬入先住所及び連絡先</apex:outputPanel>
+                                
+                            </td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{!cargoDelivery.Destinationaddress__c}" rendered="{!isAir}"/>
+                                <apex:outputText value="{!shipment.LoadAddressContact__c}" rendered="{!isOcean}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">配送先電話番号</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryPhone__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">配送先担当者</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverRep__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">配送時の注意事項</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryNote__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:repeat>        
+        <div style="width: 100%;" class="section">
+            備考
+            <ul>
+                <li>本依頼書を受領しましたら、ご連絡ください。（お電話、メール等）</li>
+                <li>ドライバーが決まりましたら、連絡先をご連絡ください。（お電話、メール等）</li>
+                <li>倉庫を出発しましたら、ご連絡ください。（お電話）</li>
+                <li>納品完了時、ご連絡ください。（お電話）</li>
+                <li>REF NOを請求書に記載してご送付ください。</li>
+                <li>貨物の集荷時ダメージがあった場合は、ダメージ状態がわかる写真を撮って弊社にご送付ください。</li>
+                <li>お手数をおかけしますがどうぞよろしくお願いいたします。</li>
+            </ul>
+        </div>
+
+        <div style="width: 100%; margin-top:5px;"  class="section">
+            <div style="display:inline-block; margin-left: 0px; width: 45%;">
+                <apex:outputText value="業務担当者: {!shipment.PersonInCharge__r.Name}"/>
+                <br/>
+                <apex:outputText value="発行日: {0,date,yyyy/MM/dd}"> 
+                    <apex:param value="{!shipment.PrintDate__c}"/>
+                </apex:outputText> <br/>
+                <apex:outputText value="REF NO: S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"/>                
+            </div>              
+        </div>
+        <div STYLE="position:absolute; margin-left:540px;  margin-top:-7px; width:760px; font-size:10pt;">
+                Powered by AFR Solutions co.,ltd
+            </div>
+    </body>
+    
+</apex:page>

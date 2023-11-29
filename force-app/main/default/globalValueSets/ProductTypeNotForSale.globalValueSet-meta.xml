@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Point of Sales Material for Promotion(POSM)</fullName>
+        <default>false</default>
+        <label>Point of Sales Material for Promotion(POSM)</label>
+    </customValue>
+    <customValue>
+        <fullName>Trial</fullName>
+        <default>false</default>
+        <label>Trial</label>
+    </customValue>
+    <customValue>
+        <fullName>Sample</fullName>
+        <default>false</default>
+        <label>Sample</label>
+    </customValue>
+    <customValue>
+        <fullName>Gift</fullName>
+        <default>false</default>
+        <label>Gift</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Product Type Not For Sale</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>POS Integration Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">API to integrate CloSCM with POS. Please contact AFR Sales Representative for more details if want to integrate CloSCM with POS in use.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">CloSCMとPOSの統合ためのAPI.　現在ご利用中のPOSとCloSCMと統合をご希望の場合はAFR営業担当までご連絡ください。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">CloSCM과 POS를 통합하기 위한 API. 현재 이용하게 계신 POS와 CloSCM의 통합을 원하시면 AFR영업담당자에게 문의하여 주시기 바랍니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">POS Integration</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Tích hợp API giữa CloSCM và ứng dụng POS. Vui lòng liên hệ BPKD của AFR để có thêm chi tiết nếu công ty bạn có nhu tích hợp với hệ thống POS đang sử dụng.</value>
+    </values>
+</CustomMetadata>

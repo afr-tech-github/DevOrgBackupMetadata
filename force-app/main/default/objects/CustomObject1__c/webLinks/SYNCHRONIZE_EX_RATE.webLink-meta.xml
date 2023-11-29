@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SYNCHRONIZE_EX_RATE</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>SYNCHRONIZE EX-RATE</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}&quot;;
+var lang = sforce.connection.getUserInfo().userLanguage;
+var confirmMsg = &apos;&apos;;
+var informMsg = &apos;&apos;;
+
+if (&apos;ja&apos; === lang) {
+    confirmMsg = &apos;為替レートを同期しますか？&apos;;
+    informMsg = &apos;為替レートの同期が正常に完了しました。&apos;;
+} else if (&apos;vi&apos; === lang) {
+    confirmMsg = &apos;Bạn có muốn đồng bộ hoá tỉ giá không?&apos;;
+    informMsg = &apos;Tỉ giá đã được đồng bộ hoá thành công.&apos;;
+} else {
+    confirmMsg = &apos;Do you want to synchronize Exchange Rate?&apos;;
+    informMsg = &apos;Synchronizing Exchange Rate completed successfully.&apos;;
+} 
+
+if(window.confirm(confirmMsg)) {
+    sforce.apex.execute(&apos;clofor_com_cfs.ExchangeRateSynchronizationService&apos;, &apos;syncHBLShipmentAndSellingBuyings&apos;, {shipmentId:&apos;{!URLENCODE(CustomObject1__c.Id)}&apos;}); 
+    location.href= &apos;/&apos; + &apos;{!URLENCODE(CustomObject1__c.Id)}&apos;; 
+    alert(informMsg);
+}</url>
+</WebLink>

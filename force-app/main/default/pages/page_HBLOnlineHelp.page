@@ -1,0 +1,578 @@
+<apex:page showHeader="false">
+<head>
+    <title>HBL SHIPMENT</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        H B/L Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+<div class="help-container">
+    <!-- Introduction of the page -->
+    <div class="intro">
+        <h2>Trợ giúp trực tuyến cho Object VẬN ĐƠN THỨ CẤP.</h2>
+        <p>            
+            Đây là phần để quản lý thông  tin House bill of loading và  để vận hành hệ thống chứng từ.
+            Mỗi lô hàng phải có thông tin của nó cho dù đó là loại hàng nào. Và dữ liệu này được sử dụng cho  các hoạt động điều hành trong cùng một công ty.
+             Trong phần này, có rất nhiều chương trình kiểm tra tính logic (về lĩnh vực forwarding) của  thông tin được nhập vào để ngăn chặn sai sót khi nhập
+              liệu hay thao tác sai các thông tin liên quan        </p>
+    </div>
+
+    <!-- More information -->
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>Account Object</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>Document Operation Perspective</h3>
+                TÀI KHOẢN là phần để quản lý tất cả vấn đề liên quan về công ty, như là : Người nhận hàng, 
+                Người gửi hàng,Đối tác, Bên thong báo,Đại lý giao nhận, Nhà xe vận chuyển,Kho hàng, Sân bay.
+                 Tất cả các thông tin về công ty phải được đăng ký trước khi tạo chứng từ cho các phần khác
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>Các trường chính</h3>
+                <div>
+                    <table>
+                        <thead>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Loại</td>
+                            <td>Được dùng để lọc báo cáo và xem, vì vậy nó phải được nhập chính xác</td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ</td>
+                            <td>Được dùng để gửi email theo nhóm dùng để phân loại nơi nhận email. Tên quốc gia phải được nhập vào </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+
+            <!-- Third item -->
+            <li>
+                <h3>Sales Monitoring</h3>
+                Dùng để tạo ra các loại email cảnh báo thông báo đến bộ phận chuyên trách để có hành động kịp thời về:                <ul>
+                    <li>Đăng ký khách hàng mới</li>
+                    <li>Đăng ký đối tác mới</li>
+                    <li>Đăng ký lô hàng mới dưới 4 lần</li>
+                </ul>
+            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>Contact Object</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>Contact Object</h3>
+                Object NGƯỜI LIÊN HỆ dùng để quản lý các kênh thông tin liên lạc về nhân sự của một công ty
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>Trigger</h3>
+                Để tạo ra một email kiểm tra tình trạng hàng hóa tự động gửi đến các email đã được đăng ký            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For notes. The background is greyed -->
+    <h2>Notes</h2>
+    <div class="notes">
+        <p>
+            Chức năng khóa truy cập được kích hoạt để bảo vệ dữ liệu sau khi qui trình chứng từ đã được nhập.
+            Có bốn loại trường thông tin tương tác với bốn loại hình : Ocean  import, Ocean export, Air Import, Air Export.
+            Nếu thỏa mãn ba điều kiện dưới đây , bốn trường dữ liệu trên sẽ chuyển sang : Ocean Import(Lock), Ocean
+            Export(Lock), Air Import(Lock), Air Export(Lock)<br></br>
+
+            
+            Điều kiện 1: Trạng thái lô hàng là “ hoàn thành”.<br></br>
+            Điều kiện 2: Đã thanh toán hết giá bán .<br></br>
+            Điều kiện 3 Đã trả hết tiền mua hàng/dịch vụ<br></br>
+        </p>
+
+        <p>
+            Có nhiều thuật toán cho việc kiểm tra nhập thông tin để ngăn chặn thao tác sai khi nhập liệu.<br></br>
+            1. Air cargo Weight -NET Weight Gross Weight Chargeable Weight<br></br>
+            2.Loại container và số lượng container phải được nhập đầy đủ.<br></br>
+            Nếu có thiếu một trong hai loại container hay số lượng, hệ thống sẽ báo lỗi.Container loại 1 + Số lượng loại container 1, Container loại 2 + Số lượng container loại 2<br></br>
+            3.Tính chính xác của qui trình hàng nhập, ETD, ETA, Ngày đưa hàng vào kho CFS,Ngày thông quan,<br></br>
+             Ngày giao hàng,Ngày phát hành hóa đơn<br></br> 
+            4.Tính chính xác của qui trình hàng xuất, ngày thông quan hàng xuất, Hạn chót nhận load hàng xuất.<br></br>
+            5.Qui trình xác nhận kiểm tra tình trạng hàng hóa  bằng email tự động<br></br>
+            -Bất cứ khi nào  trạng thái thay đổi theo như thiết lập, email kiểm tra thong tin hàng hóa tự động sẽ được gửi đến khách hàng bằng hai thứ tiêng.<br></br>
+            Tiếng LOCAL: sẽ email tới: PIC của customer, email(1/2/3/4) của khách hàng.<br></br>
+            Tiếng Anh: sẽ gửi mail tới PIC của đối tác, email(1/2/3/4) của đối tác<br></br>
+            <br></br>
+
+            ### Nếu không đánh dấu chọn vào các email thong báo, thì các email sẽ không được gửi đến,
+            hay khi có yêu cầu của khách hàng, đối tác yêu cầu không nhận mail, thì ta đánh dấu vào
+            ô Không muốn thông báo qua E-mail Clotra###<br></br>             
+                    </p>
+    </div>
+</div>
+</body>
+  
+-----------------------------------------------------------------------------------------------------------<br></br>
+
+
+
+<body>
+<div class="help-container">
+    <!-- Introduction of the page -->
+    <div class="intro">
+        <h2>Online Help for HBL SHIPMENT Object</h2>
+        <p>            
+            This is an Object to manage H B/L information and process document operation.
+            Every shipment must have H B/L Shipment record regardless of type of shipment.
+            and the data are used for document operation and email notification to involved companies.
+            In this Object, there are a dozens of data input validation check in order to prevent wrong data input and
+            mis-operation.
+            Related Object
+        </p>
+    </div>
+
+    <!-- More information -->
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>Account Object</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>Document Operation Perspective</h3>
+                Account object is the one of the key object to manage all the involved companies, such as Consignee,
+                Shipper, Partner, Notify Party, Custom Clearance Agent, Trucking Agent, Warehouse Agent, Airport BB agent, etc.
+                The involved company must be registered before creating document on other objects.
+
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>Key Field</h3>
+                <div>
+                    <table>
+                        <thead>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Type</td>
+                            <td>Being used for filtering reports and view. so this must be entered correctly</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>Being used for massive email to sort the email destination. the county must be entered. </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+
+            <!-- Third item -->
+            <li>
+                <h3>Sales Monitoring</h3>
+                To generate different types of alert email to notify responsible team team to take immediate action
+                <ul>
+                    <li>New client registration</li>
+                    <li>New Partner registration</li>
+                    <li>New shipment registration less than 4 times</li>
+                </ul>
+            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>Contact Object</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>Contact Object</h3>
+                Contact Object is to manage the contacts of the involved compaies.
+
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>Trigger</h3>
+                Trigger to generate an Automatic Cargo Tracking email to registered contacts
+            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For notes. The background is greyed -->
+    <h2>Notes</h2>
+    <div class="notes">
+        <p>
+            Record Lock function is activated to protect data after the document process is completed.
+            There are 4 types of Record responding to 4 cargo type; Ocean Import, Ocean Export, Air Import, Air Export
+            Below 3 conditions are met, the above 4 record type will be changed to Ocean Import(Lock), Ocean
+            Export(Lock), Air Import(Lock), Air Export(Lock)<br></br>
+
+
+            1st condition: Status is "Completed"<br></br>
+            2nd condition: UNPAID BALANCE OF SELLING is 0<br></br>
+            3rd condition: UNPAID BALANCE OF BUYING is 0<br></br>
+        </p>
+
+        <p>
+            There are a number of INPUT VALIDATION RULES in order to prevent operation input error.<br></br>
+            1. Air cargo Weight -NET Weight Gross Weight Chargeable Weight<br></br>
+            2.Container Type and QNTY -Container Type and Container QNTY must be entered together.<br></br>
+            If there is missing either Container Type or Container QNTY, it shows error. -CONTAINER TYPE-1 + CONTAINER
+            QNTY-1, CONTAINER TYPE-1+CONTAINER QNTY-2<br></br>
+            3.Timeline of Import Proedures ETD-TETD-ETA-Devanning Date-Custom
+            Declared(Permission)-Delivery Date-Invoice Issuance Date<br></br> 
+            4.Timeline of Export Procedures Custom Declared
+            Date(Permission Date)-CUT Date-ETD-ETA APPROVAL PROCESS<br></br>
+            5.AUTOMATIC CARGO TRACKING EMAIL<br></br>
+            -Whenever the status is changed to the predifined status, the automatic cargo tracking email is sent to two
+            group of people.<br></br>
+            Local email template: PIC OF CUSTOMER, CUSTOMER EMAIL ADDRESS-1, CUSTOMER EMAIL ADDRESS-2, CUSTOMER EMAIL
+            ADDRESS-3, CUSTOMER EMAIL ADDRESS-4<br></br>
+            English email template: PIC OF PARTNER, PARTNER EMAIL ADDRESS-1, PARTNER EMAIL ADDRESS-2, PARTNER EMAIL
+            ADDRESS-3, PARTNER EMAIL ADDRESS-4<br></br>
+
+            ### if Check box of DO NOT WANT CARGO TRACKING EMAIL SERVICE in Contact Object is checked, the contact will be excluded
+            from the emailing lists.<br></br>
+            If there is a request from Customers or Partner who do not want to release email, check on the Check box of
+            DO NOT WANT CARGO TRACKING EMAIL SERVICE###
+        </p>
+    </div>
+</div>
+</body>
+-----------------------------------------------------------------------------------------------------------<br></br>
+<body>
+<div class="help-container">
+    <!-- Introduction of the page -->
+    <div class="intro">
+        <h2>HBL案件に関するオンラインヘルプ</h2>
+        <p>            
+            ハウスB/L情報や書類業務のプロセスを管理するオブジェクトです。
+              案件のタイプに関わらず、全ての案件はHBL案件レコードを持っていなければなりません。  
+              この中のデータは書類業務や、関連する会社へのメール通知に使用されます。   
+              このオブジェクトの中では、誤ったデータ入力や業務ミスを防ぐために、多くの入力規則があります。   
+         </p>
+    </div>
+
+    <!-- More information -->
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>取引先オブジェクト</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>書類業務の視点から</h3>
+                <br></br>
+                取引先オブジェクトは、関連する全ての会社を管理するための主要なオブジェクトであり、中にはコンサイニー、
+                シッパー、パートナーやノーティファイ・パーティ、通関業者や倉庫代理店、空港BB業者などが含まれます  。
+                   書類やその他のオブジェクトを作成する前に、関連する会社は登録されていなければなりません。
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>重要なフィールド</h3>
+                <div>
+                    <table>
+                        <thead>
+                        <th>フィールド名</th>
+                        <th>説明</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>タイプ</td>
+                            <td>レポートやビューでのフィルタリングの際に使用されるので、正確に入力しなければなりません。</td>
+                        </tr>
+                        <tr>
+                            <td>住所</td>
+                            <td>一斉メールでメールの宛て先を分類する際使用されます。国名は必ず入力してください。</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+
+            <!-- Third item -->
+            <li>
+                <h3>セールスモニタリング</h3>
+                <br></br>
+                関係のあるチームが迅速な行動を起こせるよう、様々な種類の通知メールを送信します。  
+                　 <ul>
+                    <li>新規顧客登録</li>
+                    <li>新規パートナー登録</li>
+                    <li>4回目以下の新規案件登録</li>
+                </ul>
+            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>取引先責任者オブジェクト</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>取引先責任者オブジェクト</h3>
+                取引先責任者オブジェクトは関係する会社の取引担当者を管理します。
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>トリガー</h3>
+                自動カーゴトラッキングメールを登録された取引先責任者に送信するトリガーです。            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For notes. The background is greyed -->
+    <h2>メモ</h2>
+    <div class="notes">
+        <p>
+            書類業務が終了した後は、データを保護するために案件ロック機能が働きます。
+              4つの輸送タイプに対応した、4つのレコードタイプがあります(海上輸入、海上輸出、航空輸入、航空輸出   )
+              以下の3つの条件が満たされると、上の4つのレコードはそれぞれ海上輸入(ロック)、海上輸出(ロック)、航空輸入(ロック)、航空輸出(ロック)に変更されます。<br></br>
+
+
+            1.ステータスが"完了(Completed)"<br></br>
+            2.入金残高が0<br></br>
+            3.支払い残高が0<br></br>
+        </p>
+
+        <p>
+            業務の中での誤りを防ぐために、多くの入力規則が設定されています。<br></br>
+            1. 航空貨物の重量-ネット重量、グロス重量、チャージャブル重量<br></br>
+            2. コンテナタイプとコンテナ本数-コンテナタイプとコンテナ本数は両方が入力されなければなりません。<br></br>
+            コンテナタイプかコンテナ本数のどちらかが未入力だとエラーが表示されます。<br></br>
+            コンテナタイプ1-コンテナ本数1、コンテナタイプ2-コンテナ本数2<br></br>
+            3.輸入の手続きの流れ-出港日-トランジット出港日-入港日-デバン日-通関申告(許可)日-配送日-請求書発行日<br></br> 
+            4.輸出の手続きの流れ-通関申告(許可)日-カット日-出港日-入港日<br></br> 
+            5.自動カーゴトラッキングメール<br></br>
+            -予め定められたステータスに変更して保存すると、二つの方向にメールが送られます。<br></br>
+            ローカル言語テンプレート:-依頼主担当者、お客様向けメール送付先(1)、お客様向けメール送付先(2)<br></br>
+            英語テンプレート:Partner担当者、パートナー向けメール送付先(1)、パートナー向けメール送付先(2)<br></br>
+
+            #### 取引先責任者オブジェクトの” CloTraメールサービス希望しない”にチェックが入っていると、その責任者はメールリストから除外されます。<br></br>
+            顧客やパートナーからメールを送信しないよう依頼を受けた場合は、” CloTraメールサービス希望しない”のチェックボックスにチェックをいれてください。 
+           </p>
+    </div>
+</div>
+</body>
+
+
+
+-----------------------------------------------------------------------------------------------------------<br></br>
+<body>
+<div class="help-container">
+    <!-- Introduction of the page -->
+    <div class="intro">
+        <h2>HBL 안건에 대한 온라인 도움말</h2>
+        <p>            
+            H B/L 정보와 서류 업무 프로세스를 관리하는 오브젝트(객체)입니다.
+              안건의 유형에 관계없이 모든 이슈는 HBL 안건 레코드를 가지고 있지 않으면 안됩니다.  
+              이 중 데이터는 서류 업무와 관련된 회사에 메일 알림에 사용됩니다.   
+              이 개체에서 잘못된 데이터 입력이나 업무 실수를 방지하기 위해 많은 입력 규칙이 있습니다.   
+         </p>
+    </div>
+
+    <!-- More information -->
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>거래처 객체</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>서류 업무의 관점에서</h3>
+                <br></br>
+                거래처 개체는 관련된 모든 회사를 관리하기위한 주요 객체이며, 그 중에는 콘사이니、
+                화주 파트너 및 알림을 제공해야 하는 기관, 관세사 및 창고 대리점 공항 BB업자 등이 포함됩니다.
+                서류 및 기타 개체를 만들기 전에 관련 회사는 등록되어 있지 않으면 안됩니다.
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>중요한 필드</h3>
+                <div>
+                    <table>
+                        <thead>
+                        <th>필드 이름</th>
+                        <th>설명</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>유형</td>
+                            <td>보고서 및 보기에서 필터링시 사용되므로 정확하게 입력해야 합니다.</td>
+                        </tr>
+                        <tr>
+                            <td>주소</td>
+                            <td>메일로 메일받는 사람을 분류할 때 사용됩니다. 국가는 반드시 입력하십시오.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+
+            <!-- Third item -->
+            <li>
+                <h3>판매 모니터링</h3>
+                <br></br>
+                관련 팀이 신속한 행동을 할수 있도록 다양한 종류의 통지 메일을 보냅니다.  
+                　 <ul>
+                    <li>신규 고객 등록</li>
+                    <li>신규 파트너 등록</li>
+                    <li>4 번째 이후의 신규 안건 등록</li>
+                </ul>
+            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For a major section -->
+    <div class="object-details">
+
+        <h2>거래처 책임자 객체</h2>
+
+        <!-- List of items -->
+        <ul>
+            <!-- First item -->
+            <li>
+                <h3>거래처 책임자 객체</h3>
+                거래처 책임자 객체는 관계 회사 거래 담당자를 관리합니다.
+            </li>
+
+            <!-- Second item -->
+            <li>
+                <h3>트리거</h3>
+                자동화물 추적에 등록된 거래처 책임자로 전송하는 트리거입니다.            </li>
+
+            <!-- more items -->
+        </ul>
+    </div>
+
+    <!-- For notes. The background is greyed -->
+    <h2>메모</h2>
+    <div class="notes">
+        <p>
+            서류 업무가 종료 된 후에는 데이터를 보호하기 위해 안건 잠금 기능이 작동합니다.
+              4 개의 수송 유형을 지원하는 4 개의 레코드 유형이 있습니다 (해상 수입, 해상 수출, 항공 수입, 항공 수출  )
+              다음의 세 가지 조건이 충족되면 위의 4 개의 레코드는 각각 해상 수입 (잠금), 해상 수출 (잠금), 항공 수입 (잠금), 항공 수출 (잠금)로 변경됩니다.<br></br>
+
+
+            1.상태가 "완료(Completed)"<br></br>
+            2.입금 잔액이 0<br></br>
+            3.지불 잔액이 0<br></br>
+        </p>
+
+        <p>
+            업무에서의 오류를 방지하기 위해 많은 입력 규칙이 설정되어 있습니다.<br></br>
+            1. 항공화물의 무게 - NET 무게, Gross 무게, Chargeable 무게<br></br>
+            2. 컨테이너 유형과 컨테이너 개수 - 컨테이너 유형과 컨테이너 개수는 모두 입력되어야 합니다.<br></br>
+            컨테이너 형식 또는 컨테이너 개수 중 하나만 입력하는 경우 오류가 나타납니다.<br></br>
+            컨테이너 유형 1- 컨테이너 개수 1 컨테이너 유형 2- 컨테이너 개수 2<br></br>
+            3.수입 절차의 흐름 - 출항일 - 교통 출항일 - 입항일 - 데바닝 일자 - 통관 신고(허가)일 - 배송 날짜 - 인보이스 날짜<br></br>       
+            4.수출 절차의 흐름 - 통관 신고 (허가) 일 - CUT 일 - 출항 일 - 입항 일<br></br> 
+            5.자동화물 추적 메일<br></br>
+            -미리 정해진 상태로 변경하고 저장하면 두 방향으로 메일이 보내집니다.<br></br>
+            현지 언어 템플릿 : - 의뢰인 담당자, 고객을위한 이메일 수신처 (1) 고객을위한 이메일 송 부처(2)<br></br>
+            영어 템플릿 : Partner 담당자, 파트너 이메일 수신처 (1) 파트너 이메일 송부처(2)<br></br>
+
+            #### 거래처 책임자 개체 "CloTra 메일 서비스를 원하지 않는"에 체크가 되어 있으면, 그 책임자는 메일 목록에서 제외됩니다.<br></br>
+            고객 및 파트너에게 메일을 보낼 수 없도록 의뢰를 받은 경우 "CloTra 메일 서비스 원하지 않는"의 체크 박스에 체크를 해주세요. 
+           </p>
+    </div>
+</div>
+</body>
+
+
+
+  
+</apex:page>

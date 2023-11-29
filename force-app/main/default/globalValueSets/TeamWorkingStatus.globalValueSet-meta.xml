@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Customs Finished</fullName>
+        <default>false</default>
+        <label>Customs Finished</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Finished</fullName>
+        <default>false</default>
+        <label>Sales Finished</label>
+    </customValue>
+    <customValue>
+        <fullName>Forwarding Document Finished</fullName>
+        <default>false</default>
+        <label>Forwarding Document Finished</label>
+    </customValue>
+    <customValue>
+        <fullName>Accounting Finished</fullName>
+        <default>false</default>
+        <label>Accounting Finished</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>TEAM WORKING STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

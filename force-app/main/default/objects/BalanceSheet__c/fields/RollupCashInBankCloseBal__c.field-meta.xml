@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupCashInBankCloseBal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLLUP CASH IN BANK-CLOSING BAL</label>
+    <summarizedField>ACBalBS__c.CloseBalBS__c</summarizedField>
+    <summaryFilterItems>
+        <field>ACBalBS__c.BalanceTypeBS__c</field>
+        <operation>equals</operation>
+        <value>Cash In Bank</value>
+    </summaryFilterItems>
+    <summaryForeignKey>ACBalBS__c.BSID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

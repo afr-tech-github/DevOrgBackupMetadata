@@ -1,0 +1,8 @@
+.slds-tabs-mobile__container { overflow: visible; margin: 0 .5rem;}
+.qr-landing .slds-box { padding: .75rem .5rem; background:#fff; }
+.qr-landing .slds-tabs_default__content, .qr-landing .slds-tabs--default__content { padding: 0; }
+.qr-landing .slds-tabs_scoped__content, .qr-landing .slds-tabs--scoped__content { padding: 1px 0 0;}
+.qr-landing-header { margin-bottom: 1rem; padding: .25rem .5rem; background:rgb(0, 112, 210); box-shadow: 0 0 10px 0 #aaa; border-radius: .25rem; }
+.qr-landing-header .slds-button { color: #fff; }
+.qr-landing-header .slds-button svg { fill: #fff; }
+lightning-button.afr-icon-fix svg { vertical-align: -1px; }

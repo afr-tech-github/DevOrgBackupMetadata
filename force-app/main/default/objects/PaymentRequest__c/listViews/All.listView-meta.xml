@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>PaymentRequestStatus__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>PaymentDescription__c</columns>
+    <columns>InternalUser__c</columns>
+    <columns>AmountLocal__c</columns>
+    <columns>AmountUSD__c</columns>
+    <columns>PaymentDueDate__c</columns>
+    <columns>CreditACName__c</columns>
+    <columns>ACCOUNTANT__c</columns>
+    <columns>PaymentType__c</columns>
+    <columns>PlannedProcessingDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

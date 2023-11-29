@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>LineItemName__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>ParentQuoteLine__c</columns>
+    <columns>QuoteID__c</columns>
+    <columns>BuyingListPriceLocal__c</columns>
+    <columns>BuyingAmountInclTaxLocal__c</columns>
+    <columns>SellingListPriceLocal__c</columns>
+    <columns>DiscountRate__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>TotalAmountSellingLocal__c</columns>
+    <columns>TaxRate__c</columns>
+    <columns>AmountOfSellingTaxLocal__c</columns>
+    <columns>SellingAmountInclTaxLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>0.All</label>
+</ListView>

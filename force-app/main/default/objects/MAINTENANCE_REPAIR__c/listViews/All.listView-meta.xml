@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>TRUCK_FLEET__c</columns>
+    <columns>REPAIR_FACTORY__c</columns>
+    <columns>TYPE_REASON__c</columns>
+    <columns>TROUBLE_TYPE__c</columns>
+    <columns>TYPE_OF_REPAIR__c</columns>
+    <columns>DATE_OF_REPAIR__c</columns>
+    <columns>NEXT_REPAIR_SHEDULE__c</columns>
+    <columns>COST_FOR_REPAIR__c</columns>
+    <columns>P_I_C_OF_REPAIR_FACTORY__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

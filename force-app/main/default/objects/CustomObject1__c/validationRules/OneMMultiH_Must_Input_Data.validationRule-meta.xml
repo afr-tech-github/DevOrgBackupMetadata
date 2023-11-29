@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OneMMultiH_Must_Input_Data</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(ISPICKVAL(ConsolidationType__c , &quot;複数BL貨物(Multiple BL Cargo)&quot;) ,  ISBLANK(MasterAnkenName__c), false)</errorConditionFormula>
+    <errorDisplayField>MasterAnkenName__c</errorDisplayField>
+    <errorMessage>マスター案件名を入力してください。
+Please enter Master Ship Name.</errorMessage>
+</ValidationRule>

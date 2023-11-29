@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Combi_MContainerType2N_ContainerNumber2Y</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(NOT(ISBLANK(MContainerNumber2__c)),ISBLANK(TEXT(MContainer2__c)), false)</errorConditionFormula>
+    <errorDisplayField>MContainer2__c</errorDisplayField>
+    <errorMessage>コンテナタイプ2を入力してください。 
+Please enter Container Type 2 if you chosed Container Qnty 2.</errorMessage>
+</ValidationRule>

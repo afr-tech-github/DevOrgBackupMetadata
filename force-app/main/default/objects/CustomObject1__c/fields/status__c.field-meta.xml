@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CARGO STATUS</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>輸出 出荷情報入手(Cargo Info Received)</fullName>
+                <default>false</default>
+                <label>輸出 出荷情報入手(Cargo Info Received)</label>
+            </value>
+            <value>
+                <fullName>輸出 ブッキング情報入手(Booking Info Received)</fullName>
+                <default>false</default>
+                <label>輸出 ブッキング情報入手(Booking Info Received)</label>
+            </value>
+            <value>
+                <fullName>輸出 ブッキング情報変更(Booking Info Changed)</fullName>
+                <default>false</default>
+                <label>輸出 ブッキング情報変更(Booking Info Changed)</label>
+            </value>
+            <value>
+                <fullName>輸出 ブッキング済(Booking Confirmed)</fullName>
+                <default>false</default>
+                <label>輸出 ブッキング済(Booking Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸出 貨物集荷済(Cargo Picked Up)</fullName>
+                <default>false</default>
+                <label>輸出 貨物集荷済(Cargo Picked Up)</label>
+            </value>
+            <value>
+                <fullName>輸出 配送出発済(On Delivery)</fullName>
+                <default>false</default>
+                <label>輸出 配送出発済(On Delivery)</label>
+            </value>
+            <value>
+                <fullName>輸出 入庫済(In Storage)</fullName>
+                <default>false</default>
+                <label>輸出 入庫済(In Storage)</label>
+            </value>
+            <value>
+                <fullName>輸出 通関申告書作成中(Application for Customs Clearance)</fullName>
+                <default>false</default>
+                <label>輸出 通関申告書作成中(Application for Customs Clearance)</label>
+            </value>
+            <value>
+                <fullName>輸出 税関審査中(Customs Examination)</fullName>
+                <default>false</default>
+                <label>輸出 税関審査中(Customs Examination)</label>
+            </value>
+            <value>
+                <fullName>輸出 税関検査予定(Customs Inspection)</fullName>
+                <default>false</default>
+                <label>輸出 税関検査予定(Customs Inspection)</label>
+            </value>
+            <value>
+                <fullName>輸出 輸出許可(Export Permitted)</fullName>
+                <default>false</default>
+                <label>輸出 輸出許可(Export Permitted)</label>
+            </value>
+            <value>
+                <fullName>輸出 船積指示書情報登録済み(SI Data Registered)</fullName>
+                <default>false</default>
+                <label>輸出 船積指示書情報登録済み(SI Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸出 船積指示書(SI Issued)</fullName>
+                <default>false</default>
+                <label>輸出 船積指示書(SI Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 フレイトメモ情報登録済み(Freight Memo Data Registered)</fullName>
+                <default>false</default>
+                <label>輸出 フレイトメモ情報登録済み(Freight Memo Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸出 フレイトメモ送付済(Freight Memo Issued)</fullName>
+                <default>false</default>
+                <label>輸出 フレイトメモ送付済(Freight Memo Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 B/L情報登録済み(B/L Data Registered)</fullName>
+                <default>false</default>
+                <label>輸出 B/L情報登録済み(B/L Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸出 チェックB/L送付済(Check B/L Issued)</fullName>
+                <default>false</default>
+                <label>輸出 チェックB/L送付済(Check B/L Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 船荷証券送付済(B/L Issued)</fullName>
+                <default>false</default>
+                <label>輸出 船荷証券送付済(B/L Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 データファイリング済み(Data Filed)</fullName>
+                <default>false</default>
+                <label>輸出 データファイリング済み(Data Filed)</label>
+            </value>
+            <value>
+                <fullName>輸出 本船/フライト出発済(Departured)</fullName>
+                <default>false</default>
+                <label>輸出 本船/フライト出発済(Departured)</label>
+            </value>
+            <value>
+                <fullName>輸出 本船/フライト遅延(Delayed)</fullName>
+                <default>false</default>
+                <label>輸出 本船/フライト遅延(Delayed)</label>
+            </value>
+            <value>
+                <fullName>Outbound - Selling/Buying Amount Confirmed</fullName>
+                <default>false</default>
+                <label>Outbound - Selling/Buying Amount Confirmed</label>
+            </value>
+            <value>
+                <fullName>輸出  お客様入金処理/業者支払処理済</fullName>
+                <default>false</default>
+                <label>輸出  お客様入金処理/業者支払処理済</label>
+            </value>
+            <value>
+                <fullName>輸出 許可書/請求書メール・ファクス送信済(An Export Permit/Invoice Issued)</fullName>
+                <default>false</default>
+                <label>輸出 許可書/請求書メール・ファクス送信済(An Export Permit/Invoice Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 請求書訂正有メール・ファクス再送信済(Revised Invoice Issued)</fullName>
+                <default>false</default>
+                <label>輸出 請求書訂正有メール・ファクス再送信済(Revised Invoice Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 請求書送付済(Original Invoice Issued)</fullName>
+                <default>false</default>
+                <label>輸出 請求書送付済(Original Invoice Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 入金確認(Receipt of payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸出 入金確認(Receipt of payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸出 支払確認(Payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸出 支払確認(Payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸出 DEBIT/CREDITノート送付済み(Debit/Credit Note Issued)</fullName>
+                <default>false</default>
+                <label>輸出 DEBIT/CREDITノート送付済み(Debit/Credit Note Issued)</label>
+            </value>
+            <value>
+                <fullName>輸出 入金・支払確認(Deposit・Payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸出 入金・支払確認(Deposit・Payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸出 本船/フライト到着済(Arrived)</fullName>
+                <default>false</default>
+                <label>輸出 本船/フライト到着済(Arrived)</label>
+            </value>
+            <value>
+                <fullName>輸入 出荷情報入手(Cargo Info Received)</fullName>
+                <default>false</default>
+                <label>輸入 出荷情報入手(Cargo Info Received)</label>
+            </value>
+            <value>
+                <fullName>輸入 最初メール受付返事済み(First Contact Reply Email Sent to Parnter)</fullName>
+                <default>false</default>
+                <label>輸入 最初メール受付返事済み(First Contact Reply Email Sent to Parnter)</label>
+            </value>
+            <value>
+                <fullName>輸入 Pre-Alertデータ入力済み(Pre-Alert Data Registered)</fullName>
+                <default>false</default>
+                <label>輸入 Pre-Alertデータ入力済み(Pre-Alert Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸入 AFRデータファイリング済み(AFR Data Filed)</fullName>
+                <default>false</default>
+                <label>輸入 AFRデータファイリング済み(AFR Data Filed)</label>
+            </value>
+            <value>
+                <fullName>輸入 B/L情報登録済み(B/L Data Registered)</fullName>
+                <default>false</default>
+                <label>輸入 B/L情報登録済み(B/L Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸入 SWITCH B/L情報待ち(Waiting for Switch B/L Data)</fullName>
+                <default>false</default>
+                <label>輸入 SWITCH B/L情報待ち(Waiting for Switch B/L Data)</label>
+            </value>
+            <value>
+                <fullName>輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)</fullName>
+                <default>false</default>
+                <label>輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸入 ブッキング情報入手(Booking Info Received)</fullName>
+                <default>false</default>
+                <label>輸入 ブッキング情報入手(Booking Info Received)</label>
+            </value>
+            <value>
+                <fullName>輸入 ブッキング情報変更(Booking Info Changed)</fullName>
+                <default>false</default>
+                <label>輸入 ブッキング情報変更(Booking Info Changed)</label>
+            </value>
+            <value>
+                <fullName>輸入 本船/フライト出発済(Departured)</fullName>
+                <default>false</default>
+                <label>輸入 本船/フライト出発済(Departured)</label>
+            </value>
+            <value>
+                <fullName>輸入 本船/フライト運行中(On Voyage)</fullName>
+                <default>false</default>
+                <label>輸入 本船/フライト運行中(On Voyage)</label>
+            </value>
+            <value>
+                <fullName>輸入 本船/フライト遅延(Delayed)</fullName>
+                <default>false</default>
+                <label>輸入 本船/フライト遅延(Delayed)</label>
+            </value>
+            <value>
+                <fullName>輸入 トランジット本船/フライト出発済(Transit Departured)</fullName>
+                <default>false</default>
+                <label>輸入 トランジット本船/フライト出発済(Transit Departured)</label>
+            </value>
+            <value>
+                <fullName>輸入 本船/フライト到着済(Arrived)</fullName>
+                <default>false</default>
+                <label>輸入 本船/フライト到着済(Arrived)</label>
+            </value>
+            <value>
+                <fullName>輸入 A/N情報登録済み(A/N Data Registered)</fullName>
+                <default>false</default>
+                <label>輸入 A/N情報登録済み(A/N Data Registered)</label>
+            </value>
+            <value>
+                <fullName>輸入 到着案内済(A/N Issued)</fullName>
+                <default>false</default>
+                <label>輸入 到着案内済(A/N Issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 BB依頼済み(BB Requested)-航空のみ(For AIR)</fullName>
+                <default>false</default>
+                <label>輸入 BB依頼済み(BB Requested)-航空のみ(For AIR)</label>
+            </value>
+            <value>
+                <fullName>輸入 出荷指図書発行済(D/O Issued)</fullName>
+                <default>false</default>
+                <label>輸入 出荷指図書発行済(D/O Issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 お客様入金処理/業者支払処理済(Deposit Processed)</fullName>
+                <default>false</default>
+                <label>輸入 お客様入金処理/業者支払処理済(Deposit Processed)</label>
+            </value>
+            <value>
+                <fullName>輸入 通関申告書作成中(Application for Customs Clearance)</fullName>
+                <default>false</default>
+                <label>輸入 通関申告書作成中(Application for Customs Clearance)</label>
+            </value>
+            <value>
+                <fullName>輸入 税関審査中(Customs Examination)</fullName>
+                <default>false</default>
+                <label>輸入 税関審査中(Customs Examination)</label>
+            </value>
+            <value>
+                <fullName>輸入 税関審査終了(Cunstoms Declared)</fullName>
+                <default>false</default>
+                <label>輸入 税関審査終了(Cunstoms Declared)</label>
+            </value>
+            <value>
+                <fullName>輸入 税関検査予定(Customs Inspection)</fullName>
+                <default>false</default>
+                <label>輸入 税関検査予定(Customs Inspection)</label>
+            </value>
+            <value>
+                <fullName>輸入 輸入許可(Import Permitted)</fullName>
+                <default>false</default>
+                <label>輸入 輸入許可(Import Permitted)</label>
+            </value>
+            <value>
+                <fullName>輸入 貨物引取済/配送中(On Delivery)</fullName>
+                <default>false</default>
+                <label>輸入 貨物引取済/配送中(On Delivery)</label>
+            </value>
+            <value>
+                <fullName>輸入 納品完了(Delivery Completed)</fullName>
+                <default>false</default>
+                <label>輸入 納品完了(Delivery Completed)</label>
+            </value>
+            <value>
+                <fullName>Inbound - Selling/Buying Amount Confirmed</fullName>
+                <default>false</default>
+                <label>Inbound - Selling/Buying Amount Confirmed</label>
+            </value>
+            <value>
+                <fullName>輸入 許可書/請求書メール・ファクス送信済(An Import Permit/Invoice Issued)</fullName>
+                <default>false</default>
+                <label>輸入 許可書/請求書メール・ファクス送信済(An Import Permit/Invoice Issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 請求書訂正有メール・ファクス再送信済(Revised Invoice Issued)</fullName>
+                <default>false</default>
+                <label>輸入 請求書訂正有メール・ファクス再送信済(Revised Invoice Issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 DEBIT/CREDITノート送付済み(Debit/Credit Note Issued)</fullName>
+                <default>false</default>
+                <label>輸入 DEBIT/CREDITノート送付済み(Debit/Credit Note Issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 請求書/納付書原本送付済(Original Invoice and Statement of Payment issued)</fullName>
+                <default>false</default>
+                <label>輸入 請求書/納付書原本送付済(Original Invoice and Statement of Payment issued)</label>
+            </value>
+            <value>
+                <fullName>輸入 立替金入金確認</fullName>
+                <default>false</default>
+                <label>輸入 立替金入金確認</label>
+            </value>
+            <value>
+                <fullName>輸入 諸請求入金確認(Receipt of payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸入 諸請求入金確認(Receipt of payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸入 支払確認(Payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸入 支払確認(Payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>輸入 入金・支払確認(Deposit・Payment Confirmed)</fullName>
+                <default>false</default>
+                <label>輸入 入金・支払確認(Deposit・Payment Confirmed)</label>
+            </value>
+            <value>
+                <fullName>見積 受付済(Inquiry Received)</fullName>
+                <default>false</default>
+                <label>見積 受付済(Inquiry Received)</label>
+            </value>
+            <value>
+                <fullName>見積 見積書作成中(Under Quotation)</fullName>
+                <default>false</default>
+                <label>見積 見積書作成中(Under Quotation)</label>
+            </value>
+            <value>
+                <fullName>見積 見積書送付完了(Quotation Issued)</fullName>
+                <default>false</default>
+                <label>見積 見積書送付完了(Quotation Issued)</label>
+            </value>
+            <value>
+                <fullName>見積 見積書修正中(Under Quotation Revision)</fullName>
+                <default>false</default>
+                <label>見積 見積書修正中(Under Quotation Revision)</label>
+            </value>
+            <value>
+                <fullName>見積 見積書再送付完了(Quotation Reissued)</fullName>
+                <default>false</default>
+                <label>見積 見積書再送付完了(Quotation Reissued)</label>
+            </value>
+            <value>
+                <fullName>キャンセル(Cancelled)</fullName>
+                <default>false</default>
+                <label>キャンセル(Cancelled)</label>
+            </value>
+            <value>
+                <fullName>完了(Completed)</fullName>
+                <default>false</default>
+                <label>完了(Completed)</label>
+            </value>
+            <value>
+                <fullName>計上のための一時的なロック解除(Temporary Unlock)</fullName>
+                <default>false</default>
+                <label>計上のための一時的なロック解除(Temporary Unlock)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

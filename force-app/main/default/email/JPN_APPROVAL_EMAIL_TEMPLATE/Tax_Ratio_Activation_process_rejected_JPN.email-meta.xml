@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>消費税率の申請が却下された際に使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Tax Ratio Activation process - rejected</name>
+    <style>none</style>
+    <subject>消費税率 -却下 - {!Tax_Ratio__c.TAX_RATIO_ID__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

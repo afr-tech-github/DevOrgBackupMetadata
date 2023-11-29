@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X3_Receiving_S_Process_Standard_ID_tes</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+    <columns>Anken__c</columns>
+    <columns>NAME</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>Payer__c</columns>
+    <columns>SellAmountJPN__c</columns>
+    <columns>SellInTaxAmountJPY__c</columns>
+    <columns>Nyukingaku__c</columns>
+    <columns>SellDifferentiation__c</columns>
+    <columns>NyukinKakuninzumi__c</columns>
+    <columns>ReceivingBank__c</columns>
+    <columns>ReceiptanceDate_del__c</columns>
+    <columns>BANKTRANSITTYPE__c</columns>
+    <columns>SellDetail__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.Selling_Buyging_Standard</value>
+    </filters>
+    <filters>
+        <field>Anken__c</field>
+        <operation>equals</operation>
+        <value>015518</value>
+    </filters>
+    <filters>
+        <field>SellInTaxAmountJPY__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>SellInTaxAmount_USD__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>Receiving(S)Process-Standard(ID)-old</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,33 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" 
+                access="global" controller="WMS_AssignResource" >
+	<aura:attribute name="evListOrderService" type="List"/>
+   
+    <aura:attribute name="evListOrderServiceOfOriginID" type="String[]"/>
+    <aura:attribute name="evListOrderServiceOfDesID" type="String[]"/>
+    <aura:handler event="c:WMS_RegisterConnectWorkerEvent" action="{!c.getValueListOrderService}"/>
+    <aura:handler event="c:WMS_WorkOderDesEvent" action="{!c.getListDesOrder}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler event="force:refreshView" action="{!c.reInit}"/>
+    
+    <aura:method name="addWorker" action="{!c.addWorker}">
+        <aura:attribute name="workerId" type="String" />
+    </aura:method>
+    
+    <!-- Use for reinit after save list  -->
+    <aura:attribute name="newListConnectWorker" type="ConnectWOSWorker__c[]"/>
+    <aura:attribute name="reNewOrderService" type="WorkOrderService__c" 
+                    default="{'SObjectType': 'clofor_com_cfs__WorkOrderService__c','clofor_com_cfs__Status__c': ''}"/>
+    <c:WMS_ALL aura:id="WMSALL" parent="{!this}" recordId="{!v.recordId}"/>
+    
+    <br/>
+    <c:WMS_CONNECT_WORKER aura:id="WMSCONNECTWORKER"/>
+    
+    <br/>
+    <c:WMS_ORIGIN recordId="{!v.recordId}" aura:id="origin" />
+    
+    <br/>
+    <c:WMS_DESNATIONS recordId="{!v.recordId}"  aura:id="Destination"/>
+
+    <br/> 
+	<lightning:button label="Save" onclick="{!c.RegisterConnectWorker}"/>
+</aura:component>

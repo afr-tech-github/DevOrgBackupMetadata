@@ -1,0 +1,680 @@
+<apex:page controller="MassiveNewController" sidebar="false" title="MASSIVE NEW">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <style>
+        body .bPageBlock {
+        border-top-color: #42619f;
+        }
+        body .pbSubheader{
+        background-color: #42619f;
+        }
+        body .bPageBlock .pbBody .opAll .pbSubheader{
+        background-color: #42619f;
+        }
+        body .bPageTitle .ptBody {
+        color: #42619f;
+        }
+        .colLabelRight{
+        margin-left: 70px;
+        }
+        .cellHeader{
+        border: 1px solid black;
+        background-color: #42619f;
+        text-align: center;
+        line-height: 30px;
+        }
+        .cellDetail{
+        border: 1px solid black;
+        padding-left: 3px;
+        line-height: 25px;
+        }
+        .lblHeader{
+        color: #FFFFFF;
+        }
+        .tblDetail{
+        border-collapse: collapse;
+        width: 100%;
+        }
+        .col-1{
+        width: 25px;
+        }
+        .colHeaderBill{
+        border: 1px solid black;
+        background-color: #798799;
+        text-align: center;
+        line-height: 23px;
+        }
+        .colDetailBill{
+        background-color: #d4dadc;;
+        line-height: 23px;
+        border: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript">
+    j$ = jQuery.noConflict();
+    j$(document).ready(function() {
+        j$("#select_language").hide();
+        
+        j$( "input[id$=dateFrom]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            /*dateFormat:"yy/mm/dd"*/
+            dateFormat:"dd/mm/yy"
+        })
+        
+        j$( "input[id$=dateTo]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            /*dateFormat:"yy/mm/dd"*/
+            dateFormat:"dd/mm/yy"
+        })
+        
+        j$("input[id$=inpTaxInit]").on("keypress keyup blur",function (event) {
+            j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        })
+        
+        j$("input[id$=inpBuyTaxInt]").on("keypress keyup blur",function (event) {
+            j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        })
+        j$(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                console.log("enter was pressed");
+                return false;
+            }
+        });
+        
+    });
+    </script>
+    <apex:form >
+        <apex:sectionHeader title="FMS/TMS S/O+VAT"/>
+        <apex:pageBlock title="FMS/TMS S/O+VAT" id="pbSearch">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Search" action="{!doSearch}" reRender="pbResult" />
+                <apex:commandButton value="Clear" action="{!doClear}" reRender="pbSearch" />
+                <apex:commandButton value="Close" action="{!doClose}" reRender="pbSearch" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="S/O - Condition Search" columns="4" >
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="FMS/TMS S/O ID" />
+                    <apex:inputText value="{!objSearch.sName}"  />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="REF.NO" />
+                    <apex:inputField value="{!soSearch.REFNO__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="CONSIGNEE" />
+                    <apex:inputField value="{!soSearch.Cnee__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="TIME" />
+                    <apex:selectList value="{!objSearch.sTimeType}" size="1">
+                        <apex:selectOption itemValue="Accounted Date" itemLabel="Accounted Date" />
+                        <apex:selectOption itemValue="ETD" itemLabel="ETD" />
+                        <apex:selectOption itemValue="ETA" itemLabel="ETA" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="H B/L NUMBER" />
+                    <apex:inputText value="{!soSearch.HBL__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="CUSTOMER" />
+                    <apex:inputText value="{!soSearch.Account_Customer_Eng_name__c}" />
+                    
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="SHIPPER" />
+                    <apex:inputField value="{!soSearch.shipper__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="FROM TIME" />
+                    <apex:inputText value="{!objSearch.sFromTime}" id="dateFrom" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="M B/L NUMBER" />
+                    <apex:inputText value="{!soSearch.MBL_Number_SEA_AIR__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="P.O.L(A.O.D)" />
+                    <apex:inputText value="{!soSearch.A_O_D_CODE__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="P.O.D(A.O.A)" />
+                    <apex:inputText value="{!soSearch.A_O_A_CODE__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:15%" labelStyle="width:10%">
+                    <apex:outputLabel value="TO TIME" />
+                    <apex:inputText value="{!objSearch.sToTime}" id="dateTo" />
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="3" title="BILL - Condition Search" rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}">
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="PAYMENT TO-BUYING" />
+                    <apex:inputText value="{!billSearch.PaymentTo__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="TAX RATE-BUYING" />
+                    <apex:inputText id="inpBuyTaxInt" value="{!objSearch.sBuyTaxInitial}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="CURRENCY" />
+                    <apex:selectList value="{!objSearch.curr}" size="1">
+                        <apex:selectOption itemValue="local" itemLabel="LOCAL" />
+                        <apex:selectOption itemValue="fcy" itemLabel="FCY" />
+                        <apex:selectOption itemValue="both" itemLabel="BOTH" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="3" title="BILL - Condition Search" rendered="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote' || strRTVAT == 'OBInvoiceNote', true, false)}">
+                
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="INVOICE TO" />
+                    <apex:inputText value="{!billSearch.Seikyusaki__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="TAX RATE-SELLING" />
+                    <apex:inputText id="inpTaxInit" value="{!objSearch.sTaxInitial}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="width:23%" labelStyle="width:10%">
+                    <apex:outputLabel value="CURRENCY" />
+                    <apex:selectList value="{!objSearch.curr}" size="1" style="min-width: 150px;">
+                        <apex:selectOption itemValue="local" itemLabel="LOCAL" />
+                        <apex:selectOption itemValue="fcy" itemLabel="FCY" />
+                        <apex:selectOption itemValue="both" itemLabel="BOTH" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pbResult">
+            <br/>
+            <apex:pageMessages ></apex:pageMessages>
+            <br/>
+            <div style=" margin-bottom: 20px;">
+                <apex:outputLabel value="TOTAL: {!lstItem.size} record(s)" style="color: #42619f; font-weight: bold;" />
+            </div>
+            
+            <div style="margin-bottom: 20px; float: right; margin-top: -45px;">
+                <apex:commandButton value="Insert" action="{!doInsert}" style="width: 85px;" />
+            </div>
+            
+            <table class="tblDetail" width="100%">
+                <tr>
+                    <td class="cellHeader col-1">
+                        <apex:inputCheckbox value="{!isCheckAll}" >
+                            <apex:actionSupport action="{!checkAll}" event="onchange" reRender="pbResult" />
+                        </apex:inputCheckbox>
+                    </td>
+                    <td class="cellHeader col-2">
+                        <apex:outputLabel styleClass="lblHeader" value="FMS/TMS S/O ID" />
+                    </td>
+                    <td class="cellHeader">
+                        <apex:outputLabel styleClass="lblHeader" value="REF.NO" />
+                    </td>
+                    <td class="cellHeader">
+                        <apex:outputLabel styleClass="lblHeader" value="M B/L NUMBER" />
+                    </td>
+                    <td class="cellHeader col-3">
+                        <apex:outputLabel styleClass="lblHeader" value="H B/L NUMBER(SEA OR AIR)" />
+                    </td>
+                    <td class="cellHeader col-4">
+                        <apex:outputLabel styleClass="lblHeader" value="CARGO STATUS" />
+                    </td>
+                    <td class="cellHeader">
+                        <apex:outputLabel styleClass="lblHeader" value="CUSTOMER" />
+                    </td>
+                    <td class="cellHeader col-5" colspan="{!IF(objSearch.curr != 'both',2,3)}">
+                        <apex:outputLabel styleClass="lblHeader" value="SHIPPER" />
+                    </td>
+                    <td class="cellHeader col-6">
+                        <apex:outputLabel styleClass="lblHeader" value="CONSIGNEE" />
+                    </td>
+                    <td class="cellHeader col-7" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="VESSEL/<br/>FLIGHT" escape="flase" />
+                    </td>
+                    <td class="cellHeader" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="ACCOUNTED DATE"/>
+                    </td>
+                    <td class="cellHeader col-8" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="ETD" />
+                    </td>
+                    <td class="cellHeader col-9" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="ETA" />
+                    </td>
+                    <td class="cellHeader col-11" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="P.O.L(A.O.D)" />
+                    </td>
+                    <td class="cellHeader col-10" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                        <apex:outputLabel styleClass="lblHeader" value="P.O.D(A.O.A)" />
+                    </td>
+                    
+                </tr>
+                <apex:variable value="{!0}" var="count"/>
+                <apex:repeat value="{!lstItem}" var="item">
+                    <tr style="{!IF(item.isCheck == true, 'background-color: cornflowerblue;',  'background-color: #f8f8f8;')}">
+                        <td class="cellDetail">
+                            <apex:inputCheckbox value="{!item.isCheck}">
+                                <apex:actionSupport event="onchange" reRender="pbResult" />
+                            </apex:inputCheckbox>
+                        </td>
+                        <td class="cellDetail">
+                            <a href="/{!item.objShipment.Anken__c}" target="_top"> S{!item.objShipment.Anken__r.WkInitial__c}{!item.objShipment.Anken__r.Name}</a>
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.REFNO__c}" />
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.MBL_Number_SEA_AIR__c}" />
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.HBL__c}" />
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.status__c}" />
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.Account_Customer_Eng_name__c}" />
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',2,3)}">
+                            <apex:outputText value="{!item.objShipment.Anken__r.shipper__r.Name}" />
+                        </td>
+                        <td class="cellDetail">
+                            <apex:outputText value="{!item.objShipment.Anken__r.Cnee__r.Name}" />
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{!item.objShipment.Anken__r.VESSEL_FLIGHT__c}" />
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!item.objShipment.Anken__r.SalesAccountedDate__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!item.objShipment.Anken__r.ETD__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!item.objShipment.Anken__r.ETA__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{!item.objShipment.Anken__r.A_O_D_CODE__c}" />
+                        </td>
+                        <td class="cellDetail" colspan="{!IF(objSearch.curr != 'both',1,2)}">
+                            <apex:outputText value="{!item.objShipment.Anken__r.A_O_A_CODE__c}" />
+                        </td>
+                        
+                    </tr>
+                    <tr style="{!IF(item.isCheck == false || item.lstBill.size == 0, 'display: none;', '')}">
+                        <td class="colHeaderBill">
+                            <apex:inputCheckbox value="{!item.isCheckAllBill}">
+                                <apex:actionSupport event="onchange" action="{!checkAllBill}" reRender="pbResult" >
+                                    <apex:param name="indexList" value="{!count}"/>
+                                </apex:actionSupport>
+                            </apex:inputCheckbox>
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader" value="FMS/TMS BILL ID" />
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'OUTBOUND VAT INV NO', 'INBOUND VAT INV NO')}" />
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader" value="INVOICE S/B DISPLAY NO" />
+                        </td>
+                        <td class="colHeaderBill" colspan="2">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'INVOICE TO', 'PAYMENT TO')}" />
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'TAX RATE - SELLING', 'TAX RATE - BUYING')}" />
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader" value="ACCOUNTED DATE-INVOICING" />
+                        </td>
+                        
+                        
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader" value="PRICING NAME AT PRINT (LOCAL)" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader" value="PRICING NAME AT PRINT (FCY)" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <apex:outputLabel styleClass="lblHeader" value="PRICING NAME AT PRINT (ENG)"/>
+                        </td>
+                        
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader" value="CHARGE UNIT (TOTAL)" />
+                        </td>
+                        <td class="colHeaderBill">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="UNIT PRICE OF SELLING(LOCAL)" />-->
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNIT PRICE OF SELLING (LOCAL)', 'UNIT PRICE OF BUYING (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}" />
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNIT PRICE OF SELLING (FCY)', 'UNIT PRICE OF BUYING (FCY)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="UNIT PRICE OF SELLING(LOCAL)" />-->
+                            
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNIT PRICE OF SELLING (FCY)', 'UNIT PRICE OF BUYING (FCY)')}"/>
+                        </td>
+                        <td class="colHeaderBill">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="TOTAL AMOUNT OF SELLING(LOCAL)" />-->
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'TOTAL AMOUNT OF SELLING (LOCAL)', 'TOTAL AMOUNT OF BUYING (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'TOTAL AMOUNT OF SELLING (FCY)', 'TOTAL AMOUNT OF BUYING (FCY)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="TOTAL AMOUNT OF SELLING(LOCAL)" />-->
+                            
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'TOTAL AMOUNT OF SELLING (FCY)', 'TOTAL AMOUNT OF BUYING (FCY)')}"/>
+                        </td>
+                        <td class="colHeaderBill">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="AMOUNT OF TAX-SELLING(LOCAL)" />-->
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT OF TAX-SELLING (LOCAL)', 'AMOUNT OF TAX-BUYING (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT OF TAX-SELLING (FCY)', 'AMOUNT OF TAX-BUYING (FCY)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <!--<apex:outputLabel styleClass="lblHeader" value="AMOUNT OF TAX-SELLING(LOCAL)" />-->
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT OF TAX-SELLING (FCY)', 'AMOUNT OF TAX-BUYING (FCY)')}"/>
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT SELLING INCLUDING TAX (LOCAL)', 'AMOUNT BUYING INCLUDING TAX (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT SELLING INCLUDING TAX (FCY)', 'AMOUNT BUYING INCLUDING TAX (FCY)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT SELLING INCLUDING TAX (FCY)', 'AMOUNT BUYING INCLUDING TAX (FCY)')}"/>
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT RECEIVED-SELLING (LOCAL)', 'AMOUNT PAID-BUYING (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT RECEIVED-SELLING (FCY)', 'AMOUNT PAID-BUYING (FCY)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'AMOUNT RECEIVED-SELLING (FCY)', 'AMOUNT PAID-BUYING (FCY)')}"/>
+                        </td>
+                        <td class="colHeaderBill">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNRECEIVED BALANCE OF SELLING (LOCAL)', 'UNPAID BALANCE OF BUYING (LOCAL)')}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNRECEIVED BALANCE OF SELLING (FYC)', 'UNPAID BALANCE OF BUYING (FYC)')}" rendered="{!objSearch.curr =='fcy'}"/>
+                        </td>
+                        <td class="colHeaderBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                            <apex:outputLabel styleClass="lblHeader"
+                                              value="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', 
+                                                     'UNRECEIVED BALANCE OF SELLING (FYC)', 'UNPAID BALANCE OF BUYING (FYC)')}" />
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!item.lstBill}" var="bill" rendered="{!IF(item.isCheck == false, false, true)}">
+                        <tr>
+                            <td class="colDetailBill">
+                                <apex:inputCheckbox value="{!bill.isBillCheck}" />
+                            </td>
+                            <td class="colDetailBill">
+                                <a href="/{!bill.objAnken.Id}" target="_blank">
+                                    <apex:outputText value="{!bill.objAnken.Name}" />
+                                </a>
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputText rendered="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', true, false)}" value="{!bill.objAnken.OutboundVATInvNo__c}" />
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" value="{!bill.objAnken.InboundVATInvNo__c}" />
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputText value="{!bill.objAnken.SeikyuBangou__c}" />
+                            </td>
+                            <td class="colDetailBill" colspan="2">
+                                <apex:outputText rendered="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', true, false)}" value="{!bill.objAnken.Seikyusaki__r.Name}" />
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" value="{!bill.objAnken.PaymentTo__r.Name}" />
+                            </td>
+                            <!-- -->
+                            <td class="colDetailBill">
+                                <apex:outputText rendered="{!IF(strRTVAT == 'MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY' || strRTVAT == 'CloWMSVATInvoice' || strRTVAT == 'OBInvoiceNote', true, false)}" value="{!bill.objAnken.TaxInitial__c}" />
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" value="{0,number,###,###,##0.00}">
+                                    <apex:param value="{!bill.objAnken.BuyTaxInitial__c}"/>
+                                </apex:outputText>
+                            </td>
+                            
+                            <td class="colDetailBill">
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!item.objShipment.Anken__r.ETA__c}"/>
+                                </apex:outputText>
+                            </td>
+                            
+                            <td class="colDetailBill">
+                                <apex:outputText value="{!bill.objAnken.InsatuyouSyohin__c}" rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}"/>
+                                <apex:outputText value="{!bill.objAnken.InsatuyouSyohinEng__c}" rendered="{!objSearch.curr =='fcy'}"/>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText value="{!bill.objAnken.InsatuyouSyohinEng__c}"/>
+                            </td>
+                            
+                            <td class="colDetailBill">
+                                <apex:outputText value="{!bill.objAnken.Suryo__c}" />
+                            </td>
+                            
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.SellTankaJPY__c}" />
+                                        
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.BuyTankaJPY__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.SellTankaUSD__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyTankaUSD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.SellTankaUSD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyTankaUSD__c}" />
+                                    </apex:outputText>
+                                
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.SellAmountJPN__c}" />
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.BuyAmountJPN__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.SellAmountUSD__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyAmountUSD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.SellAmountUSD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyAmountUSD__c}" />
+                                    </apex:outputText>
+                                
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.SellTaxNum__c}" />
+                                    </apex:outputText>
+                                    
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.BuyTaxNum__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+									<apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.SellTaxNum_USD__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyTaxNum_USD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.SellTaxNum_USD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.BuyTaxNum_USD__c}" />
+                                </apex:outputText>
+                                
+                                
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.SellInTaxAmountJPY__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.BuyInTaxAmountJPY__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.SellInTaxAmount_USD__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyInTaxAmountUSD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.SellInTaxAmount_USD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.BuyInTaxAmountUSD__c}" />
+                                    </apex:outputText>
+                                
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.Nyukingaku__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.Siharaigaku__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.AMOUNT_PAID_SELLING_USD__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.AMOUNT_PAID_BUYING_USD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.AMOUNT_PAID_SELLING_USD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.AMOUNT_PAID_BUYING_USD__c}" />
+                                    </apex:outputText>
+                                
+                            </td>
+                            <td class="colDetailBill">
+                                <apex:outputPanel rendered="{!objSearch.curr =='local' || objSearch.curr =='both'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.SellDifferentiation__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!bill.objAnken.BuyDifferentiation__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!objSearch.curr =='fcy'}">
+                                    <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.UNPAID_BALANCE_OF_SELLING_USD__c}" />
+                                </apex:outputText>
+                                    <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.UNPAID_BALANCE_OF_BUYING_USD__c}" />
+                                    </apex:outputText>
+                                </apex:outputPanel>
+                            </td>
+                            <td class="colDetailBill" style="{!IF(objSearch.curr != 'both','display:none','')}">
+                                <apex:outputText rendered="{!IF(strRTVAT != 'VendorVATInvoice' &&  strRTVAT != 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                    <apex:param value="{!bill.objAnken.UNPAID_BALANCE_OF_SELLING_USD__c}" />
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(strRTVAT == 'VendorVATInvoice' || strRTVAT == 'IBInvoiceNote', true, false)}" style="float: right;" value="{0,number,###,###,###.###}">
+                                        <apex:param value="{!bill.objAnken.UNPAID_BALANCE_OF_BUYING_USD__c}" />
+                                    </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <apex:variable var="count" value="{!count + 1}" />
+                </apex:repeat>
+            </table>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

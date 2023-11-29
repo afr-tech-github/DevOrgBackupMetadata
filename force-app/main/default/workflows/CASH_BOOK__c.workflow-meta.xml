@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>CASH_APROVAL_EMAIL_ALERT</fullName>
+        <description>CASH APROVAL EMAIL ALERT</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Approval/CASH_BOOK_APPROVAL_PROCESS_REQUEST</template>
+    </alerts>
+    <alerts>
+        <fullName>CASH_BOOK_APPROVAL_REJECTED</fullName>
+        <description>CASH BOOK APPROVAL REJECTED</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>CASH_CARRIERSTAFF__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Approval/CASH_BOOK_REJECTED_PROCESS_REQUEST</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approval_Status_Cash_Approved</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approval Status Cash-Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_Cash_Initial</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Approval Status Cash-Initial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_Cash_Rejected</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Approval Status Cash-Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

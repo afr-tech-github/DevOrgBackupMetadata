@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>PayrollOrder__c</defaultLandingTab>
+    <description>HRM(Human Resource Module):Module to manage Human Resources; Employee, Payroll, PIT and Insurance.</description>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloHRM-Human Resource Module</label>
+    <logo>AFR_New_Logo/LogisForce_Logo.png</logo>
+    <tabs>standard-Document</tabs>
+    <tabs>HRStandard__c</tabs>
+    <tabs>BonusIncentivesPolicy__c</tabs>
+    <tabs>Employee__c</tabs>
+    <tabs>PayrollOrder__c</tabs>
+    <tabs>PayrollSlip__c</tabs>
+    <tabs>BonusIncentivesCalculation__c</tabs>
+    <tabs>HSUInsurance__c</tabs>
+    <tabs>PersonalIncomeTax__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+</CustomApplication>

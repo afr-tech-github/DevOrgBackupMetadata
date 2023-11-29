@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bank Fee</fullName>
+        <default>false</default>
+        <label>Bank Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>Parking Fee</fullName>
+        <default>false</default>
+        <label>Parking Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>Reimbursement cash Advance</fullName>
+        <default>false</default>
+        <label>Reimbursement cash Advance</label>
+    </customValue>
+    <customValue>
+        <fullName>Charitable Contribution</fullName>
+        <default>false</default>
+        <label>Charitable Contribution</label>
+    </customValue>
+    <customValue>
+        <fullName>Interest Expense</fullName>
+        <default>false</default>
+        <label>Interest Expense</label>
+    </customValue>
+    <customValue>
+        <fullName>Food &amp; Drink</fullName>
+        <default>false</default>
+        <label>Food &amp; Drink</label>
+    </customValue>
+    <customValue>
+        <fullName>Water</fullName>
+        <default>false</default>
+        <label>Water</label>
+    </customValue>
+    <customValue>
+        <fullName>Entertainment</fullName>
+        <default>false</default>
+        <label>Entertainment</label>
+    </customValue>
+    <customValue>
+        <fullName>Newspaper</fullName>
+        <default>false</default>
+        <label>Newspaper</label>
+    </customValue>
+    <customValue>
+        <fullName>Postage</fullName>
+        <default>false</default>
+        <label>Postage</label>
+    </customValue>
+    <customValue>
+        <fullName>Parcel(Mail)</fullName>
+        <default>false</default>
+        <label>Parcel(Mail)</label>
+    </customValue>
+    <customValue>
+        <fullName>Transportation</fullName>
+        <default>false</default>
+        <label>Transportation</label>
+    </customValue>
+    <customValue>
+        <fullName>Communication(Phone)</fullName>
+        <default>false</default>
+        <label>Communication(Phone)</label>
+    </customValue>
+    <customValue>
+        <fullName>Electricity</fullName>
+        <default>false</default>
+        <label>Electricity</label>
+    </customValue>
+    <customValue>
+        <fullName>Travel</fullName>
+        <default>false</default>
+        <label>Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Oversea Travel</fullName>
+        <default>false</default>
+        <label>Oversea Travel</label>
+    </customValue>
+    <customValue>
+        <fullName>Rent</fullName>
+        <default>false</default>
+        <label>Rent</label>
+    </customValue>
+    <customValue>
+        <fullName>Accommodation</fullName>
+        <default>false</default>
+        <label>Accommodation</label>
+    </customValue>
+    <customValue>
+        <fullName>Internet</fullName>
+        <default>false</default>
+        <label>Internet</label>
+    </customValue>
+    <customValue>
+        <fullName>IT System(Computer)</fullName>
+        <default>false</default>
+        <label>IT System(Computer)</label>
+    </customValue>
+    <customValue>
+        <fullName>Conference &amp; Training</fullName>
+        <default>false</default>
+        <label>Conference &amp; Training</label>
+    </customValue>
+    <customValue>
+        <fullName>Advertisement</fullName>
+        <default>false</default>
+        <label>Advertisement</label>
+    </customValue>
+    <customValue>
+        <fullName>Insurance</fullName>
+        <default>false</default>
+        <label>Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Consulting</fullName>
+        <default>false</default>
+        <label>Consulting</label>
+    </customValue>
+    <customValue>
+        <fullName>Accountancy</fullName>
+        <default>false</default>
+        <label>Accountancy</label>
+    </customValue>
+    <customValue>
+        <fullName>Audit</fullName>
+        <default>false</default>
+        <label>Audit</label>
+    </customValue>
+    <customValue>
+        <fullName>Recruiting</fullName>
+        <default>false</default>
+        <label>Recruiting</label>
+    </customValue>
+    <customValue>
+        <fullName>Meeting</fullName>
+        <default>false</default>
+        <label>Meeting</label>
+    </customValue>
+    <customValue>
+        <fullName>Cleaning</fullName>
+        <default>false</default>
+        <label>Cleaning</label>
+    </customValue>
+    <customValue>
+        <fullName>Commission</fullName>
+        <default>false</default>
+        <label>Commission</label>
+    </customValue>
+    <customValue>
+        <fullName>Vehicle Operation</fullName>
+        <default>false</default>
+        <label>Vehicle Operation</label>
+    </customValue>
+    <customValue>
+        <fullName>Repair &amp; Maintenance</fullName>
+        <default>false</default>
+        <label>Repair &amp; Maintenance</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>EXPENSE &amp; OTHER COST</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

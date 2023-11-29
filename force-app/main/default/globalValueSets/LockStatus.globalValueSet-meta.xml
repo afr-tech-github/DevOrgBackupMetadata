@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Locked</fullName>
+        <default>false</default>
+        <label>Locked</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Lock Yet</fullName>
+        <default>false</default>
+        <label>Not Lock Yet</label>
+    </customValue>
+    <customValue>
+        <fullName>Temporary Unlock For Amendment</fullName>
+        <default>false</default>
+        <label>Temporary Unlock For Amendment</label>
+    </customValue>
+    <masterLabel>LOCK STATUS</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

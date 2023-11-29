@@ -1,0 +1,27 @@
+.THIS .slds-spinner_container {
+	position: fixed !important;
+}
+
+.THIS .slds-card_float {
+	display:inline-block;
+	vertical-align: top;
+	max-width: 354px;
+	margin: 0 .2rem .2rem 0;
+}
+
+.THIS .slds-theme_shade {
+	background: #efefef;
+}
+
+.THIS .slds-card__header .slds-form-element__label {
+	display: none
+}
+
+.THIS .tbl-selected {
+    border: 3px solid rgba(27, 82, 151, 1);
+}
+
+.THIS .tbl-selected th {
+    background: rgba(27, 82, 151, 1);
+    color: white;
+}

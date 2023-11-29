@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_Consolidation_Cost_Allocation</fullName>
+    <active>true</active>
+    <description>Choose this Pricing for only Consolidation cost allocation to Forwarding Costs.</description>
+    <label>Consolidation Cost Allocation</label>
+</RecordType>

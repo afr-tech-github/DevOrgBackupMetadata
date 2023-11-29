@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DebitIssueStatus__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>DEBIT ISSUE STATUS TO PARTNER</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No Settlement Required</fullName>
+                <default>true</default>
+                <label>No Settlement Required</label>
+            </value>
+            <value>
+                <fullName>Not issued Yet-Vendor Invoice not recieved</fullName>
+                <default>false</default>
+                <label>Not issued yet-Vendor Invoice not received</label>
+            </value>
+            <value>
+                <fullName>On Progress</fullName>
+                <default>false</default>
+                <label>On Progress</label>
+            </value>
+            <value>
+                <fullName>At Internal Chekcing After Issue</fullName>
+                <default>false</default>
+                <label>At Internal Checking After Issue</label>
+            </value>
+            <value>
+                <fullName>At Internal Checking Confirmed After Issue</fullName>
+                <default>false</default>
+                <label>At Internal Checking Confirmed After Issue</label>
+            </value>
+            <value>
+                <fullName>Waiting for Other Debit for Combine After Issue</fullName>
+                <default>false</default>
+                <label>Waiting for Other Debit for Combine After Issue</label>
+            </value>
+            <value>
+                <fullName>Copy Sent</fullName>
+                <default>false</default>
+                <label>Copy Sent</label>
+            </value>
+            <value>
+                <fullName>Carry Over to Next Month</fullName>
+                <default>false</default>
+                <label>Carry Over to Next Month</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

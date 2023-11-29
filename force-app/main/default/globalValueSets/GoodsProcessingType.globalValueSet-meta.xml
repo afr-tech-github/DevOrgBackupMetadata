@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Raw Material</fullName>
+        <default>false</default>
+        <label>Raw Material</label>
+    </customValue>
+    <customValue>
+        <fullName>Intermediate Goods</fullName>
+        <default>false</default>
+        <label>Intermediate Goods</label>
+    </customValue>
+    <customValue>
+        <fullName>Finished Goods</fullName>
+        <default>false</default>
+        <label>Finished Goods</label>
+    </customValue>
+    <customValue>
+        <fullName>Spare Part</fullName>
+        <default>false</default>
+        <label>Spare Part</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>GOODS PROCESSING TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

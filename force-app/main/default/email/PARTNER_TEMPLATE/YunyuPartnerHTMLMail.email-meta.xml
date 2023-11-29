@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when send cargo information to partner.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>OCEAN IMPORT AUTO EMAIL FOR PARTNER-STANDARD</name>
+    <style>none</style>
+    <subject>Ocean Import Status by CloTra - ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <textOnly>共通部分
+ID   {!CustomObject1__c.Name}    ステータス   {!CustomObject1__c.status__c}
+レコードタイプ   {!CustomObject1__c.RecordType}
+取引先   {!CustomObject1__c.Field1__c}
+依頼主担当者   {!CustomObject1__c.CustmerInCharge__c}
+ドキュメント基礎情報
+House B/L番号(No.)   {!CustomObject1__c.HBL__c}    Shipper   {!CustomObject1__c.00N10000002EvHF}
+船・便名(VESSLE/ FLIGHT)   {!CustomObject1__c.Vessle__c}    Consignee   {!CustomObject1__c.Cnee__c}
+VOY NO   {!CustomObject1__c.Voy_No__c}    出港地(POL)   {!CustomObject1__c.00N10000002EnaM}
+商品(ITEM)   {!CustomObject1__c.Item__c}    出港日(ETD)   {!CustomObject1__c.ETD__c}
+重量(WEIGHT)   {!CustomObject1__c.weight__c}    入港地(POD)   {!CustomObject1__c.00N10000002EnaR}
+個数(QUANTITY)   {!CustomObject1__c.carton__c}    入港日(ETA)   {!CustomObject1__c.ETA__c}
+コンテナサイズ（SIZE）   {!CustomObject1__c.Container__c}    BLtype   {!CustomObject1__c.BLtype__c}
+フリータイム延長(F.DEMURRAGE)   {!CustomObject1__c.FreeDemurrage__c}    保険(INSURANCE)   {!CustomObject1__c.Insurance__c}
+フリータイム(F.DEMURRAGE TIME)   {!CustomObject1__c.FreeDemurrageTime__c}    建値(TERM)   {!CustomObject1__c.PriceTerms__c}
+D/O type   {!CustomObject1__c.D_O_type__c}    HDS   {!CustomObject1__c.HDS__c}
+D/O ID No   {!clofor_com_cfs__CustomObject1__c.00N28000007WECV}    インボイス番号(I/V NO)   {!clofor_com_cfs__CustomObject1__c.00N28000007WEjB}</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SiharaiKakuninzumi__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Only use when full amount is paid. Check box is checked, below updates processed 1.Amount Paid-Buying(Local):Syn with Amount Buying including Tax(Local) 2.Amount Paid-Buying(USD):Syn with Amount Buying including Tax(USD) 3.Unpaid Balance of Buying:&apos;0&apos;</inlineHelpText>
+    <label>PAYMENT CONFIRMED-BUYING</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

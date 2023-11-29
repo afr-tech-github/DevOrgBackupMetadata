@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minusreport</fullName>
+    <columns>NAME</columns>
+    <columns>Ararigaku_sum__c</columns>
+    <columns>Field1__c</columns>
+    <columns>shipper__c</columns>
+    <columns>Cnee__c</columns>
+    <columns>HBL_Number_SEA_AIR__c</columns>
+    <columns>MBL_Number_SEA_AIR__c</columns>
+    <columns>POL__c</columns>
+    <columns>POD__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>carton__c</columns>
+    <columns>PersonInCharge__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Ararigaku_sum__c</field>
+        <operation>lessThan</operation>
+        <value>0</value>
+    </filters>
+    <label>Minus report</label>
+    <language>en_US</language>
+</ListView>

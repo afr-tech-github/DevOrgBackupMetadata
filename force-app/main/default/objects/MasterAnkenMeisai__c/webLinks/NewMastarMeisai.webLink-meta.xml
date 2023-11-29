@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NewMastarMeisai</fullName>
+    <availability>online</availability>
+    <description>/a0C/e?CF00N28000007WE7u={!clofor_com_cfs__MasterAnken__c.Name}&amp;CF00N28000007WE7u_lkid={!clofor_com_cfs__MasterAnken__c.Id}&amp;retURL={!URLENCODE(clofor_com_cfs__MasterAnken__c.Id)}&amp;retURL={!URLENCODE(clofor_com_cfs__MasterAnken__c.Id)}&amp;00N28000007WEoB={!clofor_com_cfs__MasterAnken__c.clofor_com_cfs__Buying__c}&amp; 00N28000007WEoC={!clofor_com_cfs__MasterAnken__c.clofor_com_cfs__MExchangeRate_forwardingselling__c}</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>NEW</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/</url>
+</WebLink>

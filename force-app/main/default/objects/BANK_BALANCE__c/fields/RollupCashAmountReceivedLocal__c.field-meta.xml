@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupCashAmountReceivedLocal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLLUP CASH AMOUNT RECEIVED(LOCAL)</label>
+    <summarizedField>CashBankBal__c.AmountReceivedLocalForBCBal__c</summarizedField>
+    <summaryForeignKey>CashBankBal__c.BankBalanceID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

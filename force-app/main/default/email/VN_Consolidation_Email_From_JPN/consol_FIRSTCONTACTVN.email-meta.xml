@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi gửi các chứng từ tới kho hàng.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Thông báo với kho trường hợp container hàng ghép lần đầu</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-Devan Request Prealert</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

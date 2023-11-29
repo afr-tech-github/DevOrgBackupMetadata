@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FMSBadDebtUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>FMS BAD DEBT(USD)</label>
+    <summarizedField>CustomObject1__c.BadDebtUSD__c</summarizedField>
+    <summaryForeignKey>CustomObject1__c.Field1__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

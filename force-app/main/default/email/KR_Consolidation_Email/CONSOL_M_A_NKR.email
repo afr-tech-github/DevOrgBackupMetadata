@@ -1,0 +1,24 @@
+{! MasterAnken__c.MDevan__c}
+{! MasterAnken__c.MDevanRep__c} 님
+
+Master A / N을 보내드립니다.
+
+◎ M SHIP ID : {! MasterAnken__c.MasterID__c}
+◎ M B / L 번호 (NO) : {! MasterAnken__c.MMaster_B_L_No__c}
+◎ 배 이름 (VESSLE) : {! MasterAnken__c.MVessel__c} {! MasterAnken__c.MVoy_No__c}
+◎ ETA : {! MasterAnken__c.META__c}
+◎ 입항 요일 (ARRIVAL DAY) : {! MasterAnken__c.META_DAY__c}
+◎ H B / L 건수 (Number of H B / L) : {! MasterAnken__c.NO_HOUSE_B_L__c} H B / L
+◎ 컨테이너 (CONTAINER) : {! MasterAnken__c.MContainer__c} * {! MasterAnken__c.MContainerNumber__c} / {! MasterAnken__c.MContainer2__c} * {! MasterAnken__c.MContainerNumber2__c}
+◎ 데반 예정일 (DEVANNING DATE) : {! MasterAnken__c.MDevanningDate__c}
+
+송부 파일 (ATTACHMENT) : M A / N
+
+잘 부탁드립니다.
+
+************************************************** *******
+{! MasterAnken__c.Mail_Merge_Company_Signature__c}
+************************************************** *******
+Powered by AFR Solutions Co., LTD 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

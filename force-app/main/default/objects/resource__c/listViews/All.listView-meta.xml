@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>ResourceName__c</columns>
+    <columns>AccountingCode__c</columns>
+    <columns>Active__c</columns>
+    <columns>Category__c</columns>
+    <columns>SubCategory__c</columns>
+    <columns>Unit__c</columns>
+    <columns>UnitPriceLocal__c</columns>
+    <columns>UnitPrice__c</columns>
+    <columns>Tax__c</columns>
+    <columns>ServiceProviderVendor__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>EndDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

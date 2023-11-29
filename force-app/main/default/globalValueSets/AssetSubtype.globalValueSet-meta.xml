@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Building &amp; Architectonic Model</fullName>
+        <default>false</default>
+        <label>Building &amp; Architectonic Model</label>
+    </customValue>
+    <customValue>
+        <fullName>Equipment &amp; Machine</fullName>
+        <default>false</default>
+        <label>Equipment &amp; Machine</label>
+    </customValue>
+    <customValue>
+        <fullName>Transportation &amp; Transit Instrument</fullName>
+        <default>false</default>
+        <label>Transportation &amp; Transit Instrument</label>
+    </customValue>
+    <customValue>
+        <fullName>Instruments &amp; Tools for Management</fullName>
+        <default>false</default>
+        <label>Instruments &amp; Tools for Management</label>
+    </customValue>
+    <customValue>
+        <fullName>Long Term Trees, Working &amp; Killed Animals</fullName>
+        <default>false</default>
+        <label>Long Term Trees, Working &amp; Killed Animals</label>
+    </customValue>
+    <customValue>
+        <fullName>Fixed Asset Of Financing Leasing</fullName>
+        <default>false</default>
+        <label>Fixed Asset Of Financing Leasing</label>
+    </customValue>
+    <customValue>
+        <fullName>Land Using right</fullName>
+        <default>false</default>
+        <label>Land Using right</label>
+    </customValue>
+    <customValue>
+        <fullName>Establishment &amp; Productive Right</fullName>
+        <default>false</default>
+        <label>Establishment &amp; Productive Right</label>
+    </customValue>
+    <customValue>
+        <fullName>Patents &amp; Creations</fullName>
+        <default>false</default>
+        <label>Patents &amp; Creations</label>
+    </customValue>
+    <customValue>
+        <fullName>Trademark</fullName>
+        <default>false</default>
+        <label>Trademark</label>
+    </customValue>
+    <customValue>
+        <fullName>Software</fullName>
+        <default>false</default>
+        <label>Software</label>
+    </customValue>
+    <customValue>
+        <fullName>License &amp; Concession License</fullName>
+        <default>false</default>
+        <label>License &amp; Concession License</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Intangible Fixed Assets</fullName>
+        <default>false</default>
+        <label>Other Intangible Fixed Assets</label>
+    </customValue>
+    <masterLabel>ASSET SUBTYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

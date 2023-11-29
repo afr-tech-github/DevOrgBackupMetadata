@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Outbound Charter</fullName>
+        <default>false</default>
+        <label>Outbound Charter</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Charter</fullName>
+        <default>false</default>
+        <label>Inbound Charter</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Full Container Truck</fullName>
+        <default>false</default>
+        <label>Outbound Full Container Truck</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Full Container Truck</fullName>
+        <default>false</default>
+        <label>Inbound Full Container Truck</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Consolidation Truck</fullName>
+        <default>false</default>
+        <label>Outbound Consolidation Truck</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Consolidation Truck</fullName>
+        <default>false</default>
+        <label>Inbound Consolidation Truck</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>TRUCKING SERVICE REQUIRED</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

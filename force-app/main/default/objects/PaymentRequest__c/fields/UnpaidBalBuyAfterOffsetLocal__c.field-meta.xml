@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnpaidBalBuyAfterOffsetLocal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>RollupFMSUnpaidBalOfBuyingLocal__c +
+RollupWMSUnpaidBalOfBuyingLocal__c -
+RollupFMSUnreceivedBalOfSellLocal__c - 
+RollupWMSUnreceivedBalOfSellLocal__c +  RollupKickbackUnpaidBalanceLocal__c +
+RollupOtherUnpaidBalance__c +
+RollupPIUnpaidBalanceLocal__c +
+RollupTotalLoanRepayment__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Unpaid Bal of Buying after Offset(Local)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

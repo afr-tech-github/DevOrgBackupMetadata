@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>ETD</fullName>
+        <default>false</default>
+        <label>ETD</label>
+    </customValue>
+    <customValue>
+        <fullName>ETA</fullName>
+        <default>false</default>
+        <label>ETA</label>
+    </customValue>
+    <customValue>
+        <fullName>Original VAT Issue Date</fullName>
+        <default>false</default>
+        <label>Original VAT Issue Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Original VAT Sent Date</fullName>
+        <default>false</default>
+        <label>Original VAT Sent Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Original VAT Arrived Date</fullName>
+        <default>false</default>
+        <label>Original VAT Arrived Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Created Date</fullName>
+        <default>false</default>
+        <label>Created Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Draft VAT Arrived Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Draft VAT Arrived Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Draft VAT Sent Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Draft VAT Sent Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Draft VAT Issue Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Draft VAT Issue Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Debit Arrived Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Debit Arrived Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Debit Sent Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Debit Sent Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Debit Issue Date</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Debit Issue Date</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>PAYMENT BASE DATE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

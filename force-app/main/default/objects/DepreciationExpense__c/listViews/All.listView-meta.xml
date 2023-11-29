@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>DepreciationExpenseName__c</columns>
+    <columns>DepreciationMethod__c</columns>
+    <columns>DeprecationFormula__c</columns>
+    <columns>AssetUsefulLifeYear__c</columns>
+    <columns>AssetCost__c</columns>
+    <columns>SalvageValue__c</columns>
+    <columns>DepreciationBasis__c</columns>
+    <columns>AccumulatedDepreciation__c</columns>
+    <columns>RemainedDepreciation__c</columns>
+    <columns>DepreciationBookBalance__c</columns>
+    <columns>AccumulatedDepreciationFromRecording__c</columns>
+    <columns>FacilityAssetID__c</columns>
+    <columns>TruckFleetAssetID__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

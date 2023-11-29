@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DESCRIPTION_FOR_COMBINE__c</fullName>
+    <defaultValue>&quot;Forwarding service fee&quot;</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Input the service description displayed on invoice when multiple Forwarding is combined and shown as one service description.</inlineHelpText>
+    <label>DESCRIPTION FOR COMBINE</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

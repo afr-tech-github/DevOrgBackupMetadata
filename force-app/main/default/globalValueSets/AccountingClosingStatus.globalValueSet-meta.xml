@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Locked After Monthly Closing</fullName>
+        <default>false</default>
+        <label>Locked After Monthly Closing</label>
+    </customValue>
+    <customValue>
+        <fullName>Locked After Annual Closing</fullName>
+        <default>false</default>
+        <label>Locked After Annual Closing</label>
+    </customValue>
+    <customValue>
+        <fullName>Locked After Quarterly Closing</fullName>
+        <default>false</default>
+        <label>Locked After Quarterly Closing</label>
+    </customValue>
+    <customValue>
+        <fullName>Unlock for Amendment</fullName>
+        <default>false</default>
+        <label>Unlock for Amendment</label>
+    </customValue>
+    <customValue>
+        <fullName>Excluded From Closing</fullName>
+        <default>false</default>
+        <label>Excluded From Closing</label>
+    </customValue>
+    <masterLabel>ACCOUNTING CLOSING STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

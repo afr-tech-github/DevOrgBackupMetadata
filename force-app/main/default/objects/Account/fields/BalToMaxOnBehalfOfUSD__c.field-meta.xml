@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BalToMaxOnBehalfOfUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>MaxAmountOnBehalfOfUSD__c -  UncollectedOnBehalfOfFCY__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>BAL TO MAX ON-BEHALF-OF AMOUNT(USD)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

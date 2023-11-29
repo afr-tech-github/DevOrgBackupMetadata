@@ -1,0 +1,513 @@
+<apex:page controller="cntl_Arrival_Notice" contentType="text-html" showHeader="false" applyHtmlTag="false" renderAs="pdf">
+    <head>
+        <style>
+        </style>
+        <style>
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 7pt;
+            }
+
+            @page {
+                size: 297mm 210mm;
+                margin: 5mm 10mm 10mm 10mm;
+                @bottom-left {
+                    content: element(footer);
+                }
+            }
+            div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+            }
+            .pagenumber:before {
+                content: counter(page);
+            }
+            .pagecount:before {
+                content: counter(pages);
+            }
+            .f5 { font-size: 5pt; }
+            .f6 { font-size: 6pt; }
+            .f7 { font-size: 7pt; }
+            .f8 { font-size: 8pt; }
+            .f9 { font-size: 9pt; }
+            .f10 { font-size: 10pt; }
+            .f11 { font-size: 11pt; }
+            .f12 { font-size: 12pt; }
+            .f14 { font-size: 14pt; }
+            .f16 { font-size: 16pt; }
+            .f18 { font-size: 18pt; }
+            .f20 { font-size: 20pt; font-weight: bold; }
+            .f25 { font-size: 25pt; font-weight: bold; }
+            .f30 { font-size: 30pt; font-weight: bold; }
+            .pnl-logo .f20 { text-transform: uppercase; }
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            table{
+                border-spacing: 0;
+                border-collapse: collapse;
+                width:100%;
+            }
+            table * {
+            }
+            .border_left { border-left: 1px #000 solid; }
+            .border_right { border-left: 1px #000 solid; }
+            .border_top { border-left: 1px #000 solid; }
+            .border_bottom { border-left: 1px #000 solid; }
+            .border_around { border: 1px #000 solid; }
+            .border_none, table.border_none td, table.border_none th { border: none; }
+            .padding_none, table.padding_none td, table.padding_none th { padding: 0; }
+            td, th {
+                border: 1px #000 solid;
+                padding: 1mm 2mm;
+                vertical-align: top;
+            }
+            td {
+                height: 10mm;
+            }
+            .lbl {
+                text-transform: uppercase;
+                font-size: 8pt;
+            }
+            .pull-top {
+                border-top:none;
+            }
+            .pull_left {
+                border-left:none;
+            }
+            .text-align_center { text-align: center; }
+            .text-align_right { text-align: right; }
+            .text-align_left { text-align: left; }
+            table.table-data td {
+                height: auto;
+                border-top: 1px #bbb dotted;
+                border-right: 1px #000 solid;
+                border-bottom: 1px #bbb dotted;
+                border-left: 1px #000 solid;
+            }
+
+            table.table-data tbody tr:first-child td{
+                border-top: 1px #000 solid;
+            }
+
+            table.table-data th{
+            }
+
+            .page {
+                page-break-inside: avoid;
+            }
+            .nowrap {
+                white-space: nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="footer">
+            <table class="border_none f8 padding_none">
+                <tr>
+                    <td style="width:45%">
+                        &nbsp;
+                    </td>
+                    <td class="text-align_center">
+                        <span class="pagenumber"/>
+                    </td>
+                    <td class="text-align_right" style="width:45%">
+                        {!Labels['arrival_notice.powered_by']}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <apex:repeat value="{!PageList}" var="page">
+            <div class="page">
+                <div class="pnl-logo">
+                    <table class="border_none">
+                        <tr>
+                            <td>
+                                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+                            </td>
+                            <td class="text-align_center">
+                                <p class="f20">
+                                    {!Labels['arrival_notice.arrival_notice']}
+                                </p>
+                                <p class="f12">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}" />
+                                </p>
+                                <p class="f7">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}" />
+                                </p>
+                                <p class="f7">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}" />
+                                </p>
+                            </td>
+                            <td class="lbl">
+                                <p>
+                                    {!Labels['arrival_notice.issue_date']}:
+                                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!AnkenList.PrintDate__c}"/>
+                                    </apex:outputText>
+                                </p>
+                                <p>
+                                    {!Labels['arrival_notice.ref_no']}:
+                                    <apex:outputText value="S{!AnkenList.WkInitial__c}{!AnkenList.Name}-{!AnkenList.QuotationVer__c}"></apex:outputText>
+                                </p>
+                                <p>
+                                    {!Labels['arrival_notice.pic']}:
+                                    <apex:outputText value="{!AnkenList.PersonInCharge__r.Name}"></apex:outputText>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="pnl-info pull-top">
+                    <table>
+                        <tr>
+                            <td colspan="4">
+                                <p class="lbl">{!Labels['arrival_notice.consignee']}</p>
+
+                                <apex:outputText value="{!AnkenList.Cnee__r.EnglishCompanyName__c}"></apex:outputText>
+                                <br/>
+                                <apex:outputText value="{!AnkenList.Cnee__r.EnglishAddress__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.vessel']}</p>
+                                <apex:outputText value="{!AnkenList.Vessle__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.voy_no']}</p>
+                                <apex:outputText value="{!AnkenList.Voy_No__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.hbl']}</p>
+                                <apex:outputText value="{!AnkenList.HBL__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.master_b_l']}</p>
+                                <apex:outputText value="{!AnkenList.Master_B_L__c}"></apex:outputText>
+                            </td>
+                        </tr>
+                            <td colspan="4">
+                                <p class="lbl">{!Labels['arrival_notice.notify_party']}</p>
+
+                                <apex:outputText value="{!AnkenList.Notifyparty__r.EnglishCompanyName__c}"></apex:outputText>
+                                <br/>
+                                <apex:outputText value="{!AnkenList.Notifyparty__r.EnglishAddress__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.pol']}</p>
+                                <apex:outputText value="{!AnkenList.POL__r.Name}"></apex:outputText><br/>
+                                <apex:outputText value="{!AnkenList.POL__r.Country_Name__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.po_discharge']}</p>
+                                <apex:outputText value="{!AnkenList.POD__r.Name}"></apex:outputText><br/>
+                                <apex:outputText value="{!AnkenList.POD__r.Country_Name__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.po_delivery']}</p>
+                                <apex:outputText value="{!AnkenList.Place_of_Delivery__r.Name}"></apex:outputText><br/>
+                                <apex:outputText value="{!AnkenList.POD__r.Country_Name__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.eta']}</p>
+                                <apex:outputText value="{0,date,{!dateFormat}}">
+                                    <apex:param value="{!AnkenList.ETA__c}"/>
+                                </apex:outputText>
+                            </td>
+                        <tr>
+                            <td colspan="4">
+                                <p class="lbl">{!Labels['arrival_notice.shipper']}</p>
+
+                                <apex:outputText value="{!AnkenList.shipper__r.EnglishCompanyName__c}"></apex:outputText>
+                                <br/>
+                                <apex:outputText value="{!AnkenList.shipper__r.EnglishAddress__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.package']}</p>
+                                <apex:outputText value="{!AnkenList.carton__c} {!AnkenList.UnitType__c}"></apex:outputText>(s)
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.gross_weight']}</p>
+                                <apex:outputText value="{!AnkenList.weight__c} KGS"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.measurement']}</p>
+                                <apex:outputText value="{!AnkenList.CBM__c} CBM"></apex:outputText>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.ctnr_size_no']}</p>
+                                <div>
+                                    <apex:outputText value="{!AnkenList.Container__c} {!AnkenList.ContainerNumber__c}"/>
+                                    <apex:outputText value=" / {!AnkenList.Container2__c} {!AnkenList.ContainerNumber2__c}"/>
+                                </div>
+                                <div>
+                                    <apex:outputText value="{!AnkenList.Container3__c} {!AnkenList.ContainerNumber3__c}"/>
+                                    <apex:outputText value=" / {!AnkenList.Container4__c} {!AnkenList.ContainerNumber4__c}"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" colspan="2">
+                                <p class="lbl">{!Labels['arrival_notice.mark_number']}</p>
+                                <apex:outputfield value="{!AnkenList.Marks_and_Numbers__c}"/> <br/>
+                                <apex:outputText rendered="{!AnkenList.Marks_and_Numbers__c = null}">
+                                    N/M<br/>
+                                </apex:outputText>
+                            </td>
+                            <td rowspan="3" colspan="2">
+                                <p class="lbl">{!Labels['arrival_notice.description_of_goods']}</p>
+                                <apex:outputfield value="{!AnkenList.Item__c}"/>
+                            </td>
+                            <td rowspan="3" colspan="2">
+                                <p class="lbl">{!Labels['arrival_notice.load_location']}</p>
+                                <apex:outputText value="{!AnkenList.LoadLocation__r.name}"></apex:outputText><br/>
+                                <apex:outputText value="{!AnkenList.LoadLocation__r.LoadAddress__c}"></apex:outputText><br/>
+                                <apex:outputText value="TEL: {!AnkenList.LoadLocation__r.LoadTEL__c} FAX: {!AnkenList.LoadLocation__r.LoadFAX__c}"></apex:outputText><br/>
+                                <apex:outputText value="PIC:　{!AnkenList.LoadLocationPIC__c }" rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}"></apex:outputText> <br/>
+                                <apex:outputField value="{!AnkenList.LoadLocation_Remarks__c}"/>
+                            </td>
+                            <td colspan="2">
+                                <p>
+                                    <span class="lbl">{!Labels['arrival_notice.ctnr_seal_no']}</span>
+                                    <span style="text-indent:8mm;">
+                                        <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                    </span>
+                                </p>
+                                <apex:outputText value="{!truncatedContainerSealNumbers}"></apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p class="lbl">{!Labels['arrival_notice.first_vessel']}</p>
+                                <apex:outputText value="{!AnkenList.TransitV__c}"></apex:outputText>
+                                <apex:outputText value="{! ' / ' }"></apex:outputText>
+                                <apex:outputText value="{!AnkenList.TS__c}"></apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p class="lbl">{!Labels['arrival_notice.confirmation_no']}</p>
+                                <apex:outputText value="{!AnkenList.No_Of_LoadingConfirmation__c}"></apex:outputText>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="pnl-data pull-top">
+                    <table>
+                        <tr>
+                            <td rowspan="2" colspan="2" class="padding_none border_none">
+                                <table class="table-data">
+                                    <col width="" />
+                                    <col width="5%" />
+                                    <col width="10%" />
+                                    <col width="5%" />
+                                    <col width="5%" />
+                                    <!--<apex:outputPanel rendered="{! ShowTaxCol }" layout="none">-->
+                                        <col width="5%" />
+                                        <col width="10%" />
+                                    <!--</apex:outputPanel>-->
+                                    <apex:outputPanel rendered="{!$CurrentPage.parameters.currency != 'USD'}" layout="none">
+                                        <col width="10%" />
+                                    </apex:outputPanel>
+                                    <col width="10%" />
+
+                                    <thead>
+                                        <tr>
+                                            <th class="lbl">{!Labels['arrival_notice.freight_charge']}</th>
+                                            <th class="lbl">{!Labels['arrival_notice.quantity']}</th>
+                                            <th class="lbl">{!Labels['arrival_notice.unit']}</th>
+                                            <th class="lbl">{!Labels['arrival_notice.unit_price']}</th>
+                                            <th class="lbl">{!Labels['arrival_notice.currency']}</th>
+                                            <apex:outputPanel rendered="{! ShowTaxCol }" layout="none">
+                                                <th class="lbl">{!Labels['arrival_notice.tax']}</th>
+                                                <th class="lbl">{!Labels['arrival_notice.amount_no_tax']}</th>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!$CurrentPage.parameters.currency != 'USD'}" layout="none">
+                                                <th class="lbl">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(<apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>)</span></th>
+                                            </apex:outputPanel>
+                                            <th class="lbl">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(USD)</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!itemList2[page]}" var="DetailList">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(DetailList.InsatuyouSyohinEng__c, 'Surcharge Included',''),'Surcharge Excluded','') }" />
+                                                </td>
+                                                <td class="text-align_right">
+                                                    <apex:outputText value="{!VALUE(DetailList.wkSuryo__c)}" />
+                                                </td>
+                                                <td>
+                                                    <apex:outputPanel rendered="{!DetailList.Tariff__r.UNIT__c != null}">
+                                                        <apex:outputText value="{!DetailList.Tariff__r.ContainerSize__c}" rendered="{!(DetailList.Tariff__r.UNIT__c == 'コンテナ' && DetailList.Tariff__r.ContainerSize__c != null)}"/>
+                                                        <apex:variable var="unitKey" value="{!DetailList.Tariff__r.UNIT__c}"/>
+                                                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(DetailList.Tariff__r.UNIT__c != 'コンテナ' || DetailList.Tariff__r.ContainerSize__c == null)}"/>
+                                                    </apex:outputPanel>
+                                                </td>
+                                                <td class="text-align_right">
+                                                    <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!$CurrentPage.parameters.currency != 'USD' && DetailList.SellTankaJPY__c != 0 }">
+                                                        <apex:param value="{!DetailList.SellTankaJPY__c}"/>
+                                                    </apex:outputText>
+                                                    <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!$CurrentPage.parameters.currency == 'USD' && DetailList.SellTankaUSD__c != 0 }">
+                                                        <apex:param value="{!DetailList.SellTankaUSD__c}"/>
+                                                    </apex:outputText>
+                                                </td>
+                                                <td>
+                                                    {! IF(DetailList != null && $CurrentPage.parameters.currency != 'USD', DetailList.curr__c, 'USD') }
+                                                </td>
+                                                <!--<apex:outputPanel rendered="{! ShowTaxCol }" layout="none">-->
+                                                    <td class="text-align_right">
+                                                        <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!$CurrentPage.parameters.currency != 'USD' && DetailList.SellTaxNum__c != 0}">
+                                                            <apex:param value="{!DetailList.SellTaxNum__c}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!$CurrentPage.parameters.currency == 'USD' && DetailList.SellTaxNum_USD__c != 0}">
+                                                            <apex:param value="{!DetailList.SellTaxNum_USD__c}"/>
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td class="text-align_right">
+                                                        <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!$CurrentPage.parameters.currency != 'USD' && DetailList.SellAmountJPN__c != 0}">
+                                                            <apex:param value="{!DetailList.SellAmountJPN__c}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!$CurrentPage.parameters.currency == 'USD' && DetailList.SellAmountUSD__c != 0}">
+                                                            <apex:param value="{!DetailList.SellAmountUSD__c}"/>
+                                                        </apex:outputText>
+                                                    </td>
+                                                <!--</apex:outputPanel>-->
+                                                <apex:outputPanel rendered="{!$CurrentPage.parameters.currency != 'USD'}" layout="none">
+                                                    <td class="text-align_right">
+                                                        <apex:outputText value="{0,number,###,###,###,###}" rendered="{!DetailList.SellAmountJPN__c != 0}">
+                                                            <apex:param value="{!DetailList.SellInTaxAmountJPY__c}"/>
+                                                        </apex:outputText>
+                                                    </td>
+                                                </apex:outputPanel>
+                                                <td class="text-align_right">
+                                                    <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.SellAmountUSD__c != 0}">
+                                                        <apex:param value="{!DetailList.SellInTaxAmount_USD__c}"/>
+                                                    </apex:outputText>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="width:30%" class="pull_left">
+                                <p class="lbl">{!Labels['arrival_notice.damage_remarks']}</p>
+                                <apex:outputText value="{!AnkenList.Remarks__c}"></apex:outputText>&nbsp;
+                                <table class="border_none padding_none">
+                                    <tr>
+                                        <td>
+                                            <apex:outputPanel rendered="{! !ISBLANK(AnkenList.FreeDemurrageTime__c) }">
+                                                <p class="lbl">{!Labels['arrival_notice.free_demurrage']}</p>
+
+                                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                    <apex:param value="{!AnkenList.FreeDemurrageTime__c}"/>
+                                                </apex:outputText>
+                                            </apex:outputPanel>
+                                        </td>
+                                        <td>
+                                            <apex:outputPanel rendered="{! !ISBLANK(AnkenList.FreeDemurrageTime__c) }">
+                                                <p class="lbl">{!Labels['arrival_notice.free_detention']}</p>
+
+                                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                    <apex:param value="{!AnkenList.FreeDemurrageTime__c}"/>
+                                                </apex:outputText>
+                                            </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pull_left" style="height:20mm">
+                                <apex:outputText value="{!Labels['arrival_notice.instruction']}"  />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.bl_type']}</p>
+                                <p class="f14"><apex:outputText value="{!AnkenList.BLtype__c}"></apex:outputText></p>
+                            </td>
+                            <td class="padding_none">
+                                <table class="border_none">
+                                    <tr>
+                                        <td class="lbl">
+                                            {!Labels['arrival_notice.total_amount']} (<apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>) <br/>
+                                            <apex:outputText value="{!Labels['arrival_notice.exchange_rate']}: {!AnkenList.ExchangeRate__c} ({!$Setup.Site_Custom_Settings__c.Local_Currency__c}/USD)"></apex:outputText>
+                                        </td>
+                                        <td class="text-align_right f14">
+                                            <apex:outputText value="{0,number,###,###,###,###}" rendered="{!page == PageList.size}">
+                                                <apex:param value="{!TotalAmount}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="------------" rendered="{!page != PageList.size}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <p class="lbl">{!Labels['arrival_notice.transfer_to']}</p>
+                                <p>
+                                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c} <br />
+                                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}　{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p style="padding:2mm;">
+                        {!Labels['arrival_notice.rton_remarks']}
+                    </p>
+                </div>
+            </div>
+        </apex:repeat>
+        <apex:outputPanel rendered="{!fullContainerSealNumbers != null}">
+            <div class="page">
+                <div class="pnl-logo">
+                    <table class="border_none">
+                        <tr>
+                            <td>
+                                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+                            </td>
+                            <td class="text-align_center">
+                                <p class="f20">
+                                    {!Labels['arrival_notice.arrival_notice']}
+                                </p>
+                                <p class="f12">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}" />
+                                </p>
+                                <p class="f7">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}" />
+                                </p>
+                                <p class="f7">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}" />
+                                </p>
+                            </td>
+                            <td class="lbl">
+                                <p>
+                                    {!Labels['arrival_notice.issue_date']}:
+                                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!AnkenList.PrintDate__c}"/>
+                                    </apex:outputText>
+                                </p>
+                                <p>
+                                    {!Labels['arrival_notice.ref_no']}:
+                                    <apex:outputText value="S{!AnkenList.WkInitial__c}{!AnkenList.Name}-{!AnkenList.QuotationVer__c}"></apex:outputText>
+                                </p>
+                                <p>
+                                    {!Labels['arrival_notice.pic']}:
+                                    <apex:outputText value="{!AnkenList.PersonInCharge__r.Name}"></apex:outputText>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p class="f12">{!Labels['arrival_notice.ctnr_seal_no_full']}</p>
+                <p class="f12"><apex:outputText value="{!AnkenList.CARGO_TYPE__c}" /></p>
+                <p><apex:outputText value="{!fullContainerSealNumbers}" /></p>
+            </div>
+        </apex:outputPanel>
+    </body>
+</apex:page>

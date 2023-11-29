@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VASServiceType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Quality Check&quot; ), &quot;Quality Check; &quot;,null ) &amp; 
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Quality Assurance&quot; ), &quot;Quality Assurance; &quot;,null ) &amp; 
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Split Cargo&quot; ), &quot;Split Cargo; &quot;,null ) &amp; 
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Packing/Packaging&quot; ), &quot;Packing/Packaging; &quot;,null ) &amp; 
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Labelling&quot; ), &quot;Labelling; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Sorting&quot; ), &quot;Sorting; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Measuring&quot; ), &quot;Measuring; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Marking&quot; ), &quot;Marking; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Repairing&quot; ), &quot;Repairing; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Consol&quot; ), &quot;Consol; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;De-Consol&quot; ), &quot;De-Consol; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Fumigation&quot; ), &quot;Fumigation; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Kitting&quot; ), &quot;Kitting; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;	Assembling&quot; ), &quot;Assembling; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Sampling&quot; ), &quot;Sampling; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Testing&quot; ), &quot;Testing; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Inspection&quot; ), &quot;Inspection; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Physical Counting&quot; ), &quot;Physical Counting; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Cyclic Counting&quot; ), &quot;Cyclic Counting; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Elimination of Losts From Stock&quot; ), &quot;Elimination of Losts From Stock; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Inventory Updates&quot; ), &quot;Inventory Updates; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Disposal&quot; ), &quot;Disposal; &quot;,null )&amp;
+IF ( INCLUDES ( WorkOrderService__r.VASServiceType__c  , &quot;Damage Root-cause Analysis&quot; ), &quot;Damage Root-cause Analysis; &quot;,null )</formula>
+    <label>VAS Service Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

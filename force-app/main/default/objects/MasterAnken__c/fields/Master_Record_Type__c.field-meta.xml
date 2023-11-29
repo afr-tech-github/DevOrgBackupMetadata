@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Master_Record_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Master Record Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ocean Import</fullName>
+                <default>false</default>
+                <label>Ocean Import</label>
+            </value>
+            <value>
+                <fullName>Ocean Export</fullName>
+                <default>true</default>
+                <label>Ocean Export</label>
+            </value>
+            <value>
+                <fullName>Air Import</fullName>
+                <default>false</default>
+                <label>Air Import</label>
+            </value>
+            <value>
+                <fullName>Air Export</fullName>
+                <default>false</default>
+                <label>Air Export</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

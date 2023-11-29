@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Dispose by manufacture</fullName>
+        <default>false</default>
+        <label>Dispose by manufacture</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispose by disposal vendor</fullName>
+        <default>false</default>
+        <label>Dispose by disposal vendor</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispose internally</fullName>
+        <default>false</default>
+        <label>Dispose internally</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Disposal Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

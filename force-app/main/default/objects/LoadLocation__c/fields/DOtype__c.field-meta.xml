@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DOtype__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>D/O METHOD</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>D/Oless</fullName>
+                <default>false</default>
+                <label>D/Oless</label>
+            </value>
+            <value>
+                <fullName>D/O ORIGINAL</fullName>
+                <default>false</default>
+                <label>D/O ORIGINAL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này để nhắc nhở riêng từ người chịu trách nhiệm làm khi ‘LOẠI HOUSE BL vẫn là ‘BẢN GỐC’ sau 1 tuần kể từ ngày dự kiến tàu đến.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Thông báo về việc thu hồi bill gốc</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-ORIGINAL B/L COLLECTED?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Withholding_for_Insurance_PR__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This fields is update by workflow rule and used to rollup into payroll</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This fields is update by workflow rule and used to rollup into payroll</inlineHelpText>
+    <label>Total Withholding for Insurance - PR</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

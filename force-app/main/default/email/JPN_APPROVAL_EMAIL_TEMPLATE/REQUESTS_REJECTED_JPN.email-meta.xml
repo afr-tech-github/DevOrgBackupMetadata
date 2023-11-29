@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>案件の申請が却下された際に使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>REJECTED EMAIL</name>
+    <style>none</style>
+    <subject>申請が却下されました-ID:{!CustomObject1__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

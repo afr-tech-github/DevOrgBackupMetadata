@@ -1,0 +1,26 @@
+<template>
+    <div class="qr-landing slds-container_small slds-clearfix" style="margin:auto">
+        <div class="qr-landing-header">
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="slds-col">
+                    <lightning-button icon-name="utility:home" label="Home" variant="base" class="afr-icon-fix" onclick={handleGoHome}></lightning-button>
+                </div>
+                <div class="slds-col" if:true={_hasBtnBack}>
+                    <lightning-button icon-name="utility:back" label="Back" variant="base" onclick={handleGoBack}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={_pageWosSearch}>
+            <c-qr-landing-v2_-wos-search worker-id={_workerId} locator-id={_locatorId} wos-type={_wosType} onsearch={handleWosSearch}></c-qr-landing-v2_-wos-search>
+        </template>
+        
+        <template if:true={_pageWosList}>
+            <c-qr-landing-v2_-wos-list worker-id={_workerId} locator-id={_locatorId} wos-type={_wosType} onselect={handleWosSelect} onback={handleGoBack}></c-qr-landing-v2_-wos-list>
+        </template>
+        
+        <template if:true={_pageQrScan}>
+            <c-qr-landing-v2_-qr-scan worker-id={_workerId} locator-id={_locatorId} wos-id={_wosId} onback={handleGoBack}></c-qr-landing-v2_-qr-scan>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Created</fullName>
+        <default>true</default>
+        <label>Created</label>
+    </customValue>
+    <customValue>
+        <fullName>Planned</fullName>
+        <default>false</default>
+        <label>Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Picked</fullName>
+        <default>false</default>
+        <label>Picked</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled</fullName>
+        <default>false</default>
+        <label>Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Partially Picked</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Partially Picked</label>
+    </customValue>
+    <customValue>
+        <fullName>Fully Picked</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Fully Picked</label>
+    </customValue>
+    <masterLabel>PICKING STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Permission Set generated for access to custom object AFR CloCon-Consolidation Module for the app AFR CloCon</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>AFR CloCon Developer</label>
+    <license>Salesforce</license>
+</PermissionSet>

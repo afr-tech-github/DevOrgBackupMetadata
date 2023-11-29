@@ -1,0 +1,353 @@
+<apex:page controller="MassiveNewInvoiceTRSPlanController" showHeader="true" sidebar="false">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <style>
+        table th{
+            text-align: center;
+        }
+
+        .resulttbl td, .resulttbl th{
+            padding:5px;
+            line-height: 22px;
+            border: 1px solid black;
+        }
+        .resulttbl{
+            border-collapse: collapse;
+        }
+        
+
+    </style>
+    <script type="text/javascript">
+        j$ = jQuery.noConflict();
+        j$(document).ready(function() {
+        j$( "input[id$=shipment__fromTime]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/MM/yyyy"
+            })
+            
+            j$( "input[id$=shipment__toTime]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/MM/yyyy"
+            })
+        });
+    </script>
+    <apex:form >
+    <apex:sectionHeader title="CONNECT FROM VAT INV TO TRX PLAN"/>
+        <apex:pageBlock id="pbSearch" tabStyle="VATPayReq__c">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Search" action="{!doSearch}" reRender="pbResult" />
+                <apex:commandButton value="Clear" action="{!doClear}" reRender="pbSearch" />
+            </apex:pageBlockButtons>
+            <apex:outputPanel styleClass="opAll" layout="block">
+                <apex:pageBlockSection columns="2" title="VAT - Condition Search">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="VAT TYPE" for="invoice__type"/>
+                                <apex:selectList value="{!invoiceType}" multiselect="false" id="invoice__type" size="1">
+                                    <apex:selectOptions value="{!invoiceTypes}"/>
+                                </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="VAT INVOICE ID" for="invoice__id"/>
+                                <apex:inputText value="{!invoiceName}" id="invoice__id"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="VAT INVOICE NO" for="invoice__no"/>
+                                <apex:inputText value="{!objectSearch.RED_INVOICE_NO__c}" id="invoice__no"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="VAT ISSUE FROM " for="invoice__vatissuefrom"/>
+                                <apex:inputField value="{!objectSearch.VatIssueFrom__c}" id="invoice__vatissuefrom"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="VAT INVOICE TO " for="invoice__vatinvoiceto"/>
+                                <apex:inputField value="{!objectSearch.VAT_INVOICE_TO__c}" id="invoice__vatinvoiceto"/> 
+                            </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" title="S/O - Condition Search">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="FMS/TMS S/O ID" for="shipment__id"/>
+                                <apex:inputText value="{!shipmentOrderId}" id="shipment__id"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="REF. NO" for="shipment__refNo"/>
+                                <apex:inputField value="{!shipmentOrderSearch.REFNO__c}" id="shipment__refNo"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="CUSTOMER NAME" for="shipment__customer"/>
+                                <apex:inputText value="{!shipmentCustomerName}" id="shipment__customer"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="TIME" for="shipment__time"/>
+                                <apex:selectList value="{!shipmentTimeType}" size="1" id="shipment__time">
+                                <apex:selectOption itemValue="Accounted Date" itemLabel="Accounted Date" />
+                                <apex:selectOption itemValue="ETD" itemLabel="ETD" />
+                                <apex:selectOption itemValue="ETA" itemLabel="ETA" />
+                            </apex:selectList>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="SHIPPER" for="shipment__shipper"/>
+                                <apex:inputField value="{!shipmentOrderSearch.shipper__c}" id="shipment__shipper"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="CONSIGNEE" for="shipment__consignee"/>
+                                <apex:inputField value="{!shipmentOrderSearch.Cnee__c}" id="shipment__consignee"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="FROM TIME" for="shipment__fromTime"/>
+                                <apex:inputText value="{!shipmentFromTime}" id="shipment__fromTime"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="TO TIME" for="shipment__toTime"/>
+                                <apex:inputText value="{!shipmentToTime}" id="shipment__toTime"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="POL" for="shipment__pol"/>
+                                <apex:inputField value="{!shipmentOrderSearch.POL__c}" id="shipment__pol"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="POD" for="shipment__pod"/>
+                                <apex:inputField value="{!shipmentOrderSearch.POD__c}" id="shipment__pod"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="H B/L NUMBER" for="shipment__hblnumber"/>
+                                <apex:inputField value="{!shipmentOrderSearch.HBL__c}" id="shipment__hblnumber"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="M B/L NUMBER" for="shipment__mblnumber"/>
+                                <apex:inputField value="{!shipmentOrderSearch.Master_B_L__c}" id="shipment__mblnumber"/> 
+                            </apex:pageBlockSectionItem>
+                            
+                            
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" title="BILL - Condition Search">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="CloFMS BILL ID" for="bill__Id"/>
+                                <apex:inputText value="{!fmsBillId}" id="bill__Id"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="INVOICE TO-SELLING" for="bill__invoiceto"/>
+                                <apex:inputField value="{!billSearch.Seikyusaki__c}" id="bill__invoiceto"/> 
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="PAYMENT TO-BUYING" for="bill__paymento"/>
+                                <apex:inputField value="{!billSearch.PaymentTo__c}" id="bill__paymento"/> 
+                            </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:pageBlock id="pbResult" tabStyle="VATPayReq__c">
+            <br/>
+            <apex:pageMessages ></apex:pageMessages>
+            <br/>
+            <apex:tabPanel switchType="client" id="mainTabPanel"
+                        value="{!tabNameSelect}" tabClass="tabStyle">
+            <apex:tab label="INBOUND VAT" name="VATInbound" id="VATInboundTab" 
+                        ontabenter="doChangeTab('VATInbound'); return false;">
+                <div>
+                    <apex:outputLabel value="TOTAL: {!VATListInbound.size} record(s)" style="color: #42619f; font-weight: bold;"/>
+                </div>
+                <div style="margin-bottom: 10px; float: right;">
+                    <apex:commandButton value="Insert" onclick="insertRecord('VATInbound'); return false;" style="width: 85px;" />
+                </div>
+                <apex:outputPanel >
+                    <table width="100%" class="resulttbl">
+                        <tr style="color: white; background-color: #097">
+                            <th>
+                                <input type="checkbox" id="VATInbound" onchange="checkAllRecord('VATInbound');return false" />
+                            </th>
+                            <th>VAT TYPE</th>
+                            <th>VAT INVOICE ID</th>
+                            <th>VAT INVOICE NO</th>
+                            
+                            <th>PAYMENT TO</th>
+                            <th>VAT INVOICE ISSUE STATUS</th>
+                            <th> ACCOUNTED DATE</th>
+                            <th> ISSUE DATE </th>
+                            <th>TOTAL AMOUNT OF BUYING-VAT</th>
+                            <th>AMOUNT OF TAX-BUYING-VAT</th>
+                            <th>AMOUNT BUYING INCLUDING TAX-VAT</th>
+                        </tr>
+                        <apex:variable value="{!0}" var="count"/>
+                        <apex:repeat value="{!VATListInbound}" var="item">
+                        <apex:variable value="{!count + 1}" var="count"/>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="{!item.Id}" class="VATInbound"/>
+                            </td>
+                            <td>{!mapLabelVatType[item.RecordType.DeveloperName]}</td>
+                            <td style="text-align: center;"><a href="/{!item.Id}">{!item.Name}</a></td>
+                            <td style="text-align: center;">
+                                {!item.VATInvoiceNoFromVendor__c}
+                            </td>
+                            
+                            <td><a href="/{!item.VatIssueFrom__c}">{!item.VatIssueFrom__r.Name}</a></td>
+                            <td>{!item.VAT_INVOICE_ISSUE_STATUS__c}</td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}"> 
+                                    <apex:param value="{!item.AccountedDate__c}" /> 
+                                </apex:outputText>
+                            </td>
+                            <td> <apex:outputText value="{0,date,dd/MM/yyyy}"> 
+                                    <apex:param value="{!item.VATInvoicePrintDate__c}" /> 
+                                </apex:outputText> 
+                            </td>
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.TotalAmountOfVATBuying__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.AmountOfTaxVATBuying__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.AmountVATBuyingIncludeVAT__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    </table>
+                </apex:outputPanel>
+            </apex:tab>
+            <apex:tab label="OUTBOUND VAT" name="VATOutbound" id="VATOutboundTab" 
+                        ontabenter="doChangeTab('VATOutbound'); return false;">
+
+            <div>
+                <apex:outputLabel value="TOTAL: {!VATListOutbound.size} record(s)" style="color: #42619f; font-weight: bold;"/>
+            </div>
+            <div style="float: right; margin-bottom: 10px">
+                <apex:commandButton value="Insert" onclick="insertRecord('VATOutbound'); return false;" style="width: 85px;" />
+            </div>
+            <apex:outputPanel >
+                <table width="100%" class="resulttbl">
+                    <tr style="color: white; background-color: #097">
+                        <th>
+                            <input type="checkbox" id="VATOutbound" onchange="checkAllRecord('VATOutbound');return false" />
+                        </th>
+                        <th>VAT TYPE</th>
+                        <th>VAT INVOICE ID</th>
+                        <th>VAT INVOICE NO</th>
+                        <th>VAT INVOICE TO</th>
+                        <th>VAT INVOICE ISSUE STATUS</th>
+                        <th> ACCOUNTED DATE</th>
+                        <th> ISSUE DATE </th>
+                        
+                        <th>TOTAL AMOUNT OF SELLING-VAT</th>
+                        <th>AMOUNT OF TAX-SELLING-VAT</th>
+                        <th>AMOUNT SELLING INCLUDING TAX-VAT</th>
+                    </tr>
+                    <apex:variable value="{!0}" var="countOutbound"/>
+                        <apex:repeat value="{!VATListOutbound}" var="item">
+                        <apex:variable value="{!countOutbound + 1}" var="countOutbound"/>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="{!item.Id}" class="VATOutbound" />
+                            </td>
+                            <td>{!mapLabelVatType[item.RecordType.DeveloperName]}</td>
+                            <td style="text-align: center;"><a href="/{!item.Id}">{!item.Name}</a></td>
+                            <td style="text-align: center;"><a href="/{!item.Id}">{!item.RED_INVOICE_NO__c}</a></td>
+                            <td><a href="/{!item.VAT_INVOICE_TO__c}">{!item.VAT_INVOICE_TO__r.Name}</a></td>
+                            <td>{!item.VAT_INVOICE_ISSUE_STATUS__c}</td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}"> 
+                                    <apex:param value="{!item.AccountedDate__c}" /> 
+                                </apex:outputText>
+                            </td>
+                            <td> <apex:outputText value="{0,date,dd/MM/yyyy}"> 
+                                    <apex:param value="{!item.VATInvoicePrintDate__c}" /> 
+                                </apex:outputText> 
+                            </td>
+                            
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.TotalAmountOfVATSelling__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.AmountOfTaxVATSelling__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right;">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!item.AmountVATSellingIncludeVAT__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </apex:outputPanel>
+        </apex:tab>
+        </apex:tabPanel>
+            <!-- ACTION FUNCTION -->
+            <apex:actionFunction name="af_ChangeTab"
+                                        action="{!actionChangeTab}"
+                                        reRender="pbResult"
+                                        status="Waiting">
+                <apex:param name="tabName" value=""/>
+            </apex:actionFunction>
+            <apex:actionFunction name="af_insertVatPlan"
+                                        action="{!actionCombineVat}"
+                                        reRender="pbResult"
+                                        status="Waiting">
+                <apex:param name="selectedVatIds" value=""/>
+            </apex:actionFunction>
+        </apex:pageBlock>
+        <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        function doChangeTab(element) {
+            af_ChangeTab(element);
+        }
+        function checkAllRecord(value){
+            if(value == 'VATOutbound'){
+                if(j$('#VATOutbound').is(":checked")){
+                    j$('.VATOutbound').prop( "checked", true);
+                }else{
+                    j$('.VATOutbound').prop( "checked", false);
+                }
+            }else{
+                if(j$('#VATInbound').is(":checked")){
+                    j$('.VATInbound').prop( "checked", true);
+                }else{
+                    j$('.VATInbound').prop( "checked", false);
+                }
+            }
+        }
+        function insertRecord(value){
+            var vatcheckeds = j$('.'+ value + ':checkbox:checked');
+            var vatIds = [];
+            for(var i =0; i<vatcheckeds.length; i++){
+               var idVat = vatcheckeds[i].id;
+               vatIds.push(idVat);
+            };
+            var strVATIds = vatIds.join(',');
+            if(!strVATIds){
+                alert('Please select at least 1 VAT to combine.');
+            }else{
+                /*if(vatIds.length > 12){
+                    alert('Maximum 12 records can be handled in once time.');
+                    
+                }else{
+                    af_insertVatPlan(strVATIds);
+                }*/
+                af_insertVatPlan(strVATIds);
+                
+            }
+            
+        }
+    </script>
+    </apex:form>
+
+</apex:page>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Fruits</fullName>
+        <default>false</default>
+        <label>Fruits</label>
+    </customValue>
+    <customValue>
+        <fullName>Vegetables</fullName>
+        <default>false</default>
+        <label>Vegetables</label>
+    </customValue>
+    <customValue>
+        <fullName>Protein</fullName>
+        <default>false</default>
+        <label>Protein</label>
+    </customValue>
+    <customValue>
+        <fullName>Dairy</fullName>
+        <default>false</default>
+        <label>Dairy</label>
+    </customValue>
+    <customValue>
+        <fullName>Grains</fullName>
+        <default>false</default>
+        <label>Grains</label>
+    </customValue>
+    <customValue>
+        <fullName>Oils</fullName>
+        <default>false</default>
+        <label>Oils</label>
+    </customValue>
+    <masterLabel>FOOD CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>chk_lock_test</fullName>
+    <active>false</active>
+    <description>旧）CONTAINS( Recordtype__c ,&quot;ロック&quot;)</description>
+    <errorConditionFormula>AND 
+( 
+ISCHANGED(Suryo__c), 
+CONTAINS(Anken__r.RecordType.DeveloperName,&quot;Lock&quot;) 
+)</errorConditionFormula>
+    <errorMessage>請求済みの明細は編集できません。確認して下さい。</errorMessage>
+</ValidationRule>

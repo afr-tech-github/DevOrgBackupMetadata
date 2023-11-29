@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassiveOffset</fullName>
+    <columns>PaymentRequestID__c</columns>
+    <columns>NAME</columns>
+    <columns>FMSBillID__c</columns>
+    <columns>FMSShipmentOrderID__c</columns>
+    <columns>BillInvToSameTrxPlan__c</columns>
+    <columns>OffsetRemainedSellingAmountLocalFor__c</columns>
+    <columns>OffsetRemainedSellingAmountFCYFor__c</columns>
+    <columns>BillPayToSameTrxPlan__c</columns>
+    <columns>OffsetRemainedBuyingAmountLocalFor__c</columns>
+    <columns>OffsetRemainedBuyingAmountFCYFor__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Massive Offset</label>
+</ListView>

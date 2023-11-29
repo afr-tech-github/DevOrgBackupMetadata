@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Request Received</fullName>
+        <default>false</default>
+        <label>Request Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Request Changed</fullName>
+        <default>false</default>
+        <label>Request Changed</label>
+    </customValue>
+    <customValue>
+        <fullName>Contacted to Driver</fullName>
+        <default>false</default>
+        <label>Contacted to Driver</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver Accepted</fullName>
+        <default>false</default>
+        <label>Driver Accepted</label>
+    </customValue>
+    <customValue>
+        <fullName>EmptyPickupCompleted</fullName>
+        <default>false</default>
+        <label>Empty Pickup Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Empty Transport Completed</fullName>
+        <default>false</default>
+        <label>Empty Transport Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cargo Pickup Completed</fullName>
+        <default>false</default>
+        <label>Cargo Pickup Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cargo Transport Completed</fullName>
+        <default>false</default>
+        <label>Cargo Transport Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled by Customer</fullName>
+        <default>false</default>
+        <label>Cancelled by Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled by Driver</fullName>
+        <default>false</default>
+        <label>Cancelled by Driver</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Transport Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

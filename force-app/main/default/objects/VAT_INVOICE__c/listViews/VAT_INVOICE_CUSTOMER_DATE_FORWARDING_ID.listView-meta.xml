@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VAT_INVOICE_CUSTOMER_DATE_FORWARDING_ID</fullName>
+    <booleanFilter>1 OR 2 OR 3</booleanFilter>
+    <columns>RED_INVOICE_NO__c</columns>
+    <columns>NAME</columns>
+    <columns>VAT_INVOICE_TO__c</columns>
+    <columns>VATInvoicePrintDate__c</columns>
+    <columns>VAT_INVOICE_ISSUED_BY__c</columns>
+    <columns>VAT_INVOICE_USAGE_STATUS__c</columns>
+    <columns>TERMS_OF_PAYMENT__c</columns>
+    <columns>VAT_INVOICE_REMARKS__c</columns>
+    <columns>CLIENTS_NAME_IN_VAT_INVOICE__c</columns>
+    <columns>APPROVED_AND_LOCK__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>VAT_INVOICE_TO__c</field>
+        <operation>contains</operation>
+        <value>XXY LOGISTICS</value>
+    </filters>
+    <filters>
+        <field>VATInvoicePrintDate__c</field>
+        <operation>greaterThan</operation>
+    </filters>
+    <filters>
+        <field>VATInvoicePrintDate__c</field>
+        <operation>lessThan</operation>
+    </filters>
+    <label>VAT INVOICE-CUSTOMER/DATE/FORWARDING ID</label>
+    <language>en_US</language>
+</ListView>

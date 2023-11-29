@@ -1,0 +1,11 @@
+{
+  "cmsSettings" : { },
+  "currentThemeId" : "6cb85c44-8dce-4123-b5c0-8151216a85ac",
+  "headMarkup" : null,
+  "id" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "isLockerServiceEnabled" : true,
+  "isRelaxedCSPLevel" : false,
+  "label" : "main",
+  "templateName" : "CPT Community Template",
+  "type" : "appPage"
+}

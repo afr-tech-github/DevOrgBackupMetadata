@@ -1,0 +1,9 @@
+<apex:page standardController="MasterAnken__c">
+    <apex:includeScript value="/soap/ajax/20.0/connection.js"/>
+    <apex:includeScript value="/soap/ajax/20.0/apex.js"/>
+    <script>
+        sforce.connection.sessionId = "{!$Api.Session_ID}";
+        var clnoppoid = sforce.apex.execute('clofor_com_cfs.cntl_opportunityCopy', 'cloneMBL', {oppoid:'{!MasterAnken__c.Id}'}); 
+        location.href= '/' + clnoppoid ; 
+    </script>
+</apex:page>

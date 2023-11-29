@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TaxInitial__c</fullName>
+    <deprecated>false</deprecated>
+    <description>管理者コメント
+2013/09/02
+本来はレコード作成時にデフォルトで「0.05」の値を持ち、数式「TaxShow__c」に値を渡して金額系の計算をしていた。
+しかし、この項目を普段の運用から手で入力したいとのこと。以下の変更を行う
+・デフォルト値を空にする
+・ワークフローで値を自動代入する（TaxDefaultの値）</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The consumption tax ratio will be input automatically when remain Empty. Input the Tax ratio and the amount of value will be changed to amount that included the Tax. For item that is Tax-free or non-Tax, the Tax Ratio will be set 0%.</inlineHelpText>
+    <label>CONSUMPTION TAX RATIO-SELLING</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

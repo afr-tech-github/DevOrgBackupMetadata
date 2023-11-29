@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi nhiệm vụ phải thu đã quá thời hạn thanh toán.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Đã thu tiền và xác nhận doanh thu chưa ?</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-Đã thu tiền và xác nhận doanh thu chưa ?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

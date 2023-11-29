@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>REST</fullName>
+        <default>false</default>
+        <label>REST</label>
+    </customValue>
+    <customValue>
+        <fullName>GraphQL</fullName>
+        <default>false</default>
+        <label>GraphQL</label>
+    </customValue>
+    <customValue>
+        <fullName>Falcor</fullName>
+        <default>false</default>
+        <label>Falcor</label>
+    </customValue>
+    <customValue>
+        <fullName>RPC</fullName>
+        <default>false</default>
+        <label>RPC</label>
+    </customValue>
+    <customValue>
+        <fullName>SOAP</fullName>
+        <default>false</default>
+        <label>SOAP</label>
+    </customValue>
+    <customValue>
+        <fullName>gRPC</fullName>
+        <default>false</default>
+        <label>gRPC</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>API Architectural Style</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

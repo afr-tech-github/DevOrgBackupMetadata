@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>HomePageCloHRM</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X1814</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>HRM(Human Resource Module):Module to manage Human Resources; Employee, Payroll, PIT and Insurance.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloHRM-LEX</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>HRStandard__c</tabs>
+    <tabs>BonusIncentivesPolicy__c</tabs>
+    <tabs>Employee__c</tabs>
+    <tabs>PayrollOrder__c</tabs>
+    <tabs>PayrollSlip__c</tabs>
+    <tabs>BonusIncentivesCalculation__c</tabs>
+    <tabs>HSUInsurance__c</tabs>
+    <tabs>PersonalIncomeTax__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Today</fullName>
+    <columns>NAME</columns>
+    <columns>Route__c</columns>
+    <columns>clofor_com_cfs__TargetAddressGeolocation__Latitude__s</columns>
+    <columns>clofor_com_cfs__TargetAddressGeolocation__Longitude__s</columns>
+    <columns>clofor_com_cfs__StartAddressGeolocation__Latitude__s</columns>
+    <columns>clofor_com_cfs__StartAddressGeolocation__Longitude__s</columns>
+    <filterScope>Mine</filterScope>
+    <label>Today</label>
+</ListView>

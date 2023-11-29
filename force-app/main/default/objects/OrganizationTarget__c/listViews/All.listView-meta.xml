@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>OrganizationTargetName__c</columns>
+    <columns>ParentOrganizationTargetID__c</columns>
+    <columns>HierarchyLevel__c</columns>
+    <columns>Active__c</columns>
+    <columns>KPIID__c</columns>
+    <columns>KPIName__c</columns>
+    <columns>AnnaulTarget__c</columns>
+    <columns>MonthlyTarget__c</columns>
+    <columns>PerformanceMeasurementUnit__c</columns>
+    <columns>AnnualTargetStartDate__c</columns>
+    <columns>AnnualTargetEndDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

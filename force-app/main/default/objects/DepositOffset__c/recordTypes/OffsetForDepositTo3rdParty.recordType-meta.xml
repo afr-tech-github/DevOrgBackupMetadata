@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OffsetForDepositTo3rdParty</fullName>
+    <active>true</active>
+    <label>Offset For Deposit To 3rd Party</label>
+</RecordType>

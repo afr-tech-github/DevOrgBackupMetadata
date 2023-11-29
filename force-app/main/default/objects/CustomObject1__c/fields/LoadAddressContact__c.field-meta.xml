@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LoadAddressContact__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF (LoadLocation__r.LoadTEL__c = NULL, &quot;&quot;, &apos;TEL: &apos;&amp; LoadLocation__r.LoadTEL__c) &amp; IF (LoadLocation__r.LoadFAX__c = NULL, &quot;&quot;, &apos; FAX: &apos;&amp; LoadLocation__r.LoadFAX__c)
+ 
+
+/*
+&apos;TEL: &apos; &amp;  
+clofor_com_cfs__LoadLocation__r.clofor_com_cfs__LoadTEL__c &amp; &apos; FAX: &apos; &amp; clofor_com_cfs__LoadLocation__r.clofor_com_cfs__LoadFAX__c
+*/</formula>
+    <label>CARGO LOADING WAREHOUSE TEL/FAX(LOCAL)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

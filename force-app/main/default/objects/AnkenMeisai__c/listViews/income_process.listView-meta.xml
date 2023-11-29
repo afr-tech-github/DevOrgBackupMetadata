@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>income_process</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 and 5</booleanFilter>
+    <columns>MASTER_B_L__c</columns>
+    <columns>Anken__c</columns>
+    <columns>SeikyuBangou__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>ReceivingBank__c</columns>
+    <columns>SellAmountJPN__c</columns>
+    <columns>SellAmountUSD__c</columns>
+    <columns>SellInTaxAmountJPY__c</columns>
+    <columns>NyukinKakuninzumi__c</columns>
+    <columns>ReceiptanceDate_del__c</columns>
+    <columns>Nyukingaku__c</columns>
+    <columns>SellDifferentiation__c</columns>
+    <columns>BANKTRANSITTYPE__c</columns>
+    <columns>SellDetail__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Recordtype__c</field>
+        <operation>notEqual</operation>
+        <value>Quotation</value>
+    </filters>
+    <filters>
+        <field>Invoiceto_type__c</field>
+        <operation>notEqual</operation>
+        <value>Oversea</value>
+    </filters>
+    <filters>
+        <field>SellDifferentiation__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Seikyusaki__c</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.Selling_Buyging_Standard</value>
+    </filters>
+    <label>Receivable from Domestic Client</label>
+    <language>ja</language>
+</ListView>

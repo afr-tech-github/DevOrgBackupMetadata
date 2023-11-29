@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountingClose</fullName>
+    <columns>NAME</columns>
+    <columns>AccountingClosingStatus__c</columns>
+    <columns>WorkOrderID__c</columns>
+    <columns>WorkOrderServiceID__c</columns>
+    <columns>SalesAccountedDate__c</columns>
+    <columns>PricingNameAtPrintLocal__c</columns>
+    <columns>AmountSellingIncludeTAXLocal__c</columns>
+    <columns>AmountReceivedFromCustomerLocal__c</columns>
+    <columns>UnreceivedBalanceLocal__c</columns>
+    <columns>AmountBuyingIncludeTAXLocal__c</columns>
+    <columns>AmountPaidBuyingLocal__c</columns>
+    <columns>UnpaidBalanceOfBuyingLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>AccountingClosingStatus__c</field>
+        <operation>notEqual</operation>
+        <value>Locked After Monthly Closing,Locked After Annual Closing</value>
+    </filters>
+    <filters>
+        <field>AccountingClosingStatus__c</field>
+        <operation>notEqual</operation>
+        <value>Locked After Quarterly Closing</value>
+    </filters>
+    <label>6.Accounting Close</label>
+    <language>en_US</language>
+</ListView>

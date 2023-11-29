@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>actualnetincomePR__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This fields is update by workflow rule &amp; used to update to Payroll via rollup function.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This fields is update by workflow rule &amp; used to update to Payroll via rollup function.</inlineHelpText>
+    <label>Actual Net Income - PR</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,19 @@
+Kính gửi {!Custom_Clearance__c.CustomerClearance_broker__c} 
+{!Custom_Clearance__c.CustomeClearanceRep__c} 
+
+Cám ơn Qúi Công ty đã sử dụng dịch vụ giao nhận của chúng tôi
+
+VUI LÒNG XEM FILE ĐÍNH KÈM VỀ VIỆC ĐĂNG KÝ DỊCH VỤ MỚI.
+
+VUI LÒNG LIÊN LẠC VỚI CHÚNG TÔI NẾU CÓ NHU CẦU.
+
+Trân Trọng.
+
+
+{!User.LastName} 
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}  
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

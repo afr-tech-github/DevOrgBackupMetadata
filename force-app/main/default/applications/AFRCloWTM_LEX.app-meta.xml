@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>HomePageCloWTM</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X186</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>WTM(Web Tracking Module): Module to provide cargo status to customers, partners and vendors who need to know the cargo status.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloWTM-LEX</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>EBooking__c</tabs>
+    <tabs>CloTracking</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>HouseBkg__c</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

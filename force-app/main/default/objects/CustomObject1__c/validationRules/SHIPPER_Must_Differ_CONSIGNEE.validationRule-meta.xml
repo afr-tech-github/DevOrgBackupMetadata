@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SHIPPER_Must_Differ_CONSIGNEE</fullName>
+    <active>false</active>
+    <description>SHIPPER and CONSIGNEE must be different from each other.</description>
+    <errorConditionFormula>IF( AND(shipper__c != null, Cnee__c != null, shipper__c =   Cnee__c) , true, false)</errorConditionFormula>
+    <errorDisplayField>shipper__c</errorDisplayField>
+    <errorMessage>ShipperとConsigneeは一致してはいけません。ご確認の上、正しく再入力してください。 
+SHIPPER must be different from CONSIGNEE. Please re-enter the correct data</errorMessage>
+</ValidationRule>

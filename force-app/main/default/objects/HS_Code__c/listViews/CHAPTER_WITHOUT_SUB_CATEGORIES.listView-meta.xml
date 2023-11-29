@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CHAPTER_WITHOUT_SUB_CATEGORIES</fullName>
+    <columns>NAME</columns>
+    <columns>HS_Code__c</columns>
+    <columns>Description__c</columns>
+    <columns>Chapter__c</columns>
+    <columns>Is_Chapter__c</columns>
+    <columns>Has_Subcategory__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Is_Chapter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Has_Subcategory__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>CHAPTER-WITHOUT SUB-CATEGORIES</label>
+    <language>en_US</language>
+</ListView>

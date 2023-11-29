@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuyInTaxAmountJPY__c</fullName>
+    <deprecated>false</deprecated>
+    <description>IF (Tariff__r.wkTaxFlag__c, 
+BuyAmountJPN__c * (1 + BuyTaxInitial__c), 
+BuyAmountJPN__c 
+)</description>
+    <externalId>false</externalId>
+    <formula>BuyAmountJPN__c + BuyTaxNum__c + AmountBuyingLocalAdjustment__c
+/* till Jan 4 , 2019
+clofor_com_cfs__BuyAmountJPN__c * (1 + clofor_com_cfs__BuyTaxInitial__c) + clofor_com_cfs__TAX_ADJUSTMENT__c
+
+
+
+※注意※
+仕入金額に関してはこの計算
+（レート*数量*USD単価）を適用しない
+下記計算を備忘録として残す。
+
+IF( TEXT(curr__c) = &apos;JPY&apos;,
+ROUND(BuyAmountJPN__c * (1 + BuyTaxInitial__c) , 0 ),
+ROUND( BuyTankaUSD__c * Suryo__c * KawaseBay__c , 0)
+)
+
+*/</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The amount will be calculated as Total Amount of Buying(Local)+Total Amount of Buying(Local)*Tax Ratio</inlineHelpText>
+    <label>AMOUNT BUYING INCLUDING TAX(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

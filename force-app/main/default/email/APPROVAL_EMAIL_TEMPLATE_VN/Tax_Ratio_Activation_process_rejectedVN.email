@@ -1,0 +1,22 @@
+Kính gửi kế toán Trưởng
+
+{!Tax_Ratio__c.TAX_RATIO_ID__c} đã không được duyệt. Vui lòng xem lí do rồi nộp lại sao khi điều chỉnh.
+
+Vui lòng nhấp vào link để từ chối dữ liệu.
+
+◎Thuế xuất :[{!Tax_Ratio__c.TAX_RATIO_ID__c}] 
+Đường dẫn tới SF:{!Tax_Ratio__c.Link} 
+◎Đơn vị tiền tệ:{!Tax_Ratio__c.Currency__c} 
+◎Ngày bắt đầu hiệu lực:{!Tax_Ratio__c.Start_Date__c}
+◎Ngày hết hiệu lực:{!Tax_Ratio__c.End_Date__c}
+◎Thuế xuất bán ra:{!Tax_Ratio__c.Selling_Tax_Ratio__c}%
+◎Thuế xuất mua vào:{!Tax_Ratio__c.Buying_Tax_Ratio__c}% 
+
+Trân Trọng.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

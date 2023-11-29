@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NavigationFlowProcessBar</fullName>
+    <columns>NAME</columns>
+    <columns>Active__c</columns>
+    <columns>SETUP_TYPE</columns>
+    <columns>Context__c</columns>
+    <columns>en_US__c</columns>
+    <columns>ja__c</columns>
+    <columns>ko__c</columns>
+    <columns>vi__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>NF_PRB</value>
+    </filters>
+    <label>NAVIGATION FLOW PROCESS BAR</label>
+    <language>en_US</language>
+</ListView>

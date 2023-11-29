@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PersonalIncomeTaxRatio__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>TA=Taxable Amount
+if((((((TA&lt; 5000000),(5%*TA),if(((((TA&lt;=10000000),(10%*TA- 250000),if(((((TA&lt;=18000000),(15%*TA-750000),if ((((TA&lt;=32000000),20%*TA-1650000),if(((TA&lt;=52000000),(25%*TA-3250000),if((TA&lt;=80000000),(30%*TA-5850000), (35%*TA-9850000))))</inlineHelpText>
+    <label>PERSONAL INCOME TAX RATIO</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>No Dangerous Goods</fullName>
+        <default>true</default>
+        <label>No Dangerous Goods</label>
+    </customValue>
+    <customValue>
+        <fullName>1.Explosives</fullName>
+        <default>false</default>
+        <label>1.Explosives</label>
+    </customValue>
+    <customValue>
+        <fullName>2.Gases</fullName>
+        <default>false</default>
+        <label>2.Gases</label>
+    </customValue>
+    <customValue>
+        <fullName>3.Flammable Liquids</fullName>
+        <default>false</default>
+        <label>3.Flammable Liquids</label>
+    </customValue>
+    <customValue>
+        <fullName>4.Flammable Solids</fullName>
+        <default>false</default>
+        <label>4.Flammable Solids</label>
+    </customValue>
+    <customValue>
+        <fullName>5.Oxidizing Substances</fullName>
+        <default>false</default>
+        <label>5.Oxidizing Substances</label>
+    </customValue>
+    <customValue>
+        <fullName>6.Toxic &amp; Infectious Substances</fullName>
+        <default>false</default>
+        <label>6.Toxic &amp; Infectious Substances</label>
+    </customValue>
+    <customValue>
+        <fullName>7.Radioactive Material</fullName>
+        <default>false</default>
+        <label>7.Radioactive Material</label>
+    </customValue>
+    <customValue>
+        <fullName>8.Corrosives</fullName>
+        <default>false</default>
+        <label>8.Corrosives</label>
+    </customValue>
+    <customValue>
+        <fullName>9.Miscellaneous Dangerous Goods</fullName>
+        <default>false</default>
+        <label>9.Miscellaneous Dangerous Goods</label>
+    </customValue>
+    <masterLabel>DANGEROUS CLASSIFICATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

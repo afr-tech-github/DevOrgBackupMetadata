@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này là email nhắc nhở tự động gửi đến bộ phận làm chứng từ nếu đã quá hai ngày kể từ ngày dự kiến tàu đến trên lô hàng H B/L.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Trạng thái hết hiệu lực khi tàu đến</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-Status Out-of-Date after Vessel Arrival</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

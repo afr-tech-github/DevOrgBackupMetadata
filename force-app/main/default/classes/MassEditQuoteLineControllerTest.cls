@@ -1,0 +1,61 @@
+@isTest
+public class MassEditQuoteLineControllerTest {
+    @testSetup
+    static void setup() {
+ 		Quote__c quote = new Quote__c();
+        insert quote;
+        QuoteLine__c quoteLine = new QuoteLine__c(QuoteID__c = quote.Id);
+        insert quoteLine;
+	}
+
+	@isTest
+    static void testReturnFirstRecordId(){
+        String recordTypeId = MassEditQuoteLineController.getRecordTypeId();
+        System.assertNotEquals('', recordTypeId);
+    }
+    
+    @isTest
+    static void testGetAllQuoteLines(){
+        Quote__c quote = [SELECT Id FROM Quote__c LIMIT 1];
+        List<QuoteLine__c> allQuoteLines = MassEditQuoteLineController.getAllQuoteLines(quote.Id);
+        System.assertNotEquals(0, allQuoteLines.size());
+    }
+    @isTest
+    static void testGetAllQuoteLines1(){
+        Quote__c quote1 = [SELECT Id FROM Quote__c LIMIT 1];
+        List<QuoteLine__c> allQuoteLines1 = MassEditQuoteLineController.getAllQuoteLines1(quote1.Id);
+        System.assertNotEquals(0, allQuoteLines1.size());
+    }
+    
+    @isTest
+    static void testUpdateQuoteLines(){
+        List<QuoteLine__c> allQuoteLines = [SELECT Id FROM QuoteLine__c];
+        String jsonRecords = JSON.serialize(allQuoteLines);
+        String res = MassEditQuoteLineController.updateQuoteLines(jsonRecords);
+        System.assertEquals(false, res.contains('The following exception has occurred:'));
+    }
+    @isTest
+    static void testDeleteQuoteLines(){
+
+        QuoteLine__c quoteline = [SELECT Id FROM QuoteLine__c LIMIT 1];
+        Boolean res = MassEditQuoteLineController.deleteQuoteline(quoteLine.Id);
+        System.assertEquals(true, res);
+        Boolean res1 = MassEditQuoteLineController.deleteQuoteline('quoteLine');
+          System.assertEquals(false, res1);
+    }
+    @isTest
+    static void testCloneQuoteLines(){
+
+        QuoteLine__c quoteline = [SELECT Id FROM QuoteLine__c LIMIT 1];
+        Boolean res = MassEditQuoteLineController.cloneQuoteline(quoteLine.Id);
+        System.assertEquals(true, res);
+        Boolean res1 = MassEditQuoteLineController.cloneQuoteline('quoteLine');
+          System.assertEquals(false, res1);
+    }
+
+    @isTest
+    static void testetFieldLabels(){
+        String res = MassEditQuoteLineController.getFieldLabels();
+        System.assertNotEquals(res, '');
+    }
+}

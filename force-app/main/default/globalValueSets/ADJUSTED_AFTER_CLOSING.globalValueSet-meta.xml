@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>No Adjusted</fullName>
+        <default>true</default>
+        <label>No Adjusted</label>
+    </customValue>
+    <customValue>
+        <fullName>Adjusted After Annual Closing</fullName>
+        <default>false</default>
+        <label>Adjusted After Annual Closing</label>
+    </customValue>
+    <customValue>
+        <fullName>Adjusted After Monthly Closing</fullName>
+        <default>false</default>
+        <label>Adjusted After Monthly Closing</label>
+    </customValue>
+    <customValue>
+        <fullName>Adjusted After Quarterly Closing</fullName>
+        <default>false</default>
+        <label>Adjusted After Quarterly Closing</label>
+    </customValue>
+    <masterLabel>ADJUSTED AFTER CLOSING</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

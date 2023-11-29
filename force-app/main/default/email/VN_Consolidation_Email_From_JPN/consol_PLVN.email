@@ -1,0 +1,22 @@
+Kính gửi {!MasterAnken__c.MDevan__c} 
+{!MasterAnken__c.MDevanRep__c}  
+
+Đây là chi tiết đóng hàng của container ghép cho lô hàng dưới đây. 
+
+◎Lô hàng số：
+◎Số House bill：
+◎Số lượng：
+
+CHI TIẾT HÀNG GHÉP
+◎Chi tiết của lô hàng chính (Master)：{!MasterAnken__c.MasterID__c} 
+◎Số bill master：{!MasterAnken__c.MMaster_B_L_No__c} 
+◎Tên tàu / Số chuyến :  {!MasterAnken__c.MVessel__c} / {!MasterAnken__c.MVoy_No__c}　 
+
+Cám ơn sự nhiệt tình của quí vị. 
+
+********************************************************* 
+{!MasterAnken__c.Mail_Merge_Company_Signature__c}  
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

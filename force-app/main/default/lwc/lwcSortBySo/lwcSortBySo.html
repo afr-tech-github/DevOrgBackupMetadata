@@ -1,0 +1,68 @@
+<template>
+    <!--{recordId}<br/>-->
+    <!-- https://live.playg.app/play/picklist-in-lightning-datatable -->
+    <div class="customDT" style="height: 600px;" >
+        <!--{isLoaded}-->
+        <div if:false={isLoaded}>
+            <lightning-spinner
+                    alternative-text="Loading..." variant="brand" size="large">
+            </lightning-spinner>
+        </div>
+        <div if:true={isLoaded}>
+            <lightning-tabset>
+                <lightning-tab label="General">
+                    Imformation general
+                </lightning-tab>
+                <lightning-tab label="Selling">
+                    <div style="height: 500px;" >
+                        <c-custom-datatable-picklist class="wrapped-header-datatable"
+                                                     key-field="id" data={lstAnken}
+                                                     columns={lstAnkenSellingColumns}
+                                                     show-row-number-column="true"
+                                                     onvalueselect={handleSelection}
+                                                     oncustomapply={handleCustomApply}
+                                                     onchangeapply={handleChangeApply}
+                                                     onpicklistchanged={picklistChanged}
+                                                     oncustomapplypicklist={handleCustomApplyPicklist}
+                                                     min-column-width="100"
+                                                     column-widths-mode="auto"
+                                                     draft-values={draftValues}
+                                                     oncellchange={handleCellChange}
+                                                     oncancel={handleCancel}
+                                                     onsave={handleSave}
+                                                     onrowaction={handleRowAction}
+                                                     onrowselection={getSelectedName}>
+                        >
+                        </c-custom-datatable-picklist>
+                    </div>
+                </lightning-tab>
+                <lightning-tab label="Buying">
+                    <div style="height: 500px;" >
+                        <c-custom-datatable-picklist class="wrapped-header-datatable"
+                                                     key-field="id" data={lstAnken}
+                                                     columns={lstAnkenColumns}
+                                                     show-row-number-column="true"
+                                                     onvalueselect={handleSelection}
+                                                     oncustomapply={handleCustomApply}
+                                                     onchangeapply={handleChangeApply}
+                                                     onpicklistchanged={picklistChanged}
+                                                     oncustomapplypicklist={handleCustomApplyPicklist}
+                                                     min-column-width="100"
+                                                     column-widths-mode="auto"
+                                                     draft-values={draftValues}
+                                                     oncellchange={handleCellChange}
+                                                     oncancel={handleCancel}
+                                                     onsave={handleSave}
+                                                     onrowaction={handleRowAction}
+                                                     onrowselection={getSelectedName}>
+                        >
+                        </c-custom-datatable-picklist>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+
+        </div>
+
+    </div>
+
+</template>

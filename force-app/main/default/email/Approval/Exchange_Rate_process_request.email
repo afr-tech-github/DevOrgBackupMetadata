@@ -1,0 +1,24 @@
+Dear Account Team Managers 
+
+{!MgmtMaster__c.CreatedBy} has requested your approval for the new Exchange Rate as below.
+
+Please click this link to aprove or reject this record.
+
+◎EXCHANGE RATE ID：[{!MgmtMaster__c.Name}]  Link to CloFor:{!MgmtMaster__c.Link} 
+You can also approve, reject and comment on this request from your feed.
+◎EXCHANGE CURRENCY (FROM USD) : {!MgmtMaster__c.Mgmt_Exrate_fromto__c}
+◎START DATE : {!MgmtMaster__c.Mgmt_Exrate_Start_Date__c}
+◎END DATE : {!MgmtMaster__c.Mgmt_Exrate_End_Date__c}
+◎SELLING EX-RATE FOR FORWARDING CUSTOMER :{!MgmtMaster__c.Mgmt_Exrate_FowardingtoDomesticCustomer__c}
+◎SELLING EX-RATE FOR CC CUSTOMER :{!MgmtMaster__c.Mgmt_Exrate_CCtoDomesticCustomer__c}
+◎SELLING EX-RATE FOR PARTNER-STANDARD :{!MgmtMaster__c.Mgmt_Exrate_SellingtoPartner__c}
+◎BUYING EX-RATE FROM PARTNER-STANDARD :{!MgmtMaster__c.Mgmt_Exrate_BuyingfromPartner__c}
+
+Thank you.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

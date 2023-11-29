@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CapacityCBM_can_not_greater_than_parents</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(NOT(ISBLANK(ParentLocator__c)),
+OR(
+AND(CapacityCBM__c &gt;  ( ParentLocator__r.CapacityCBM__c -  (ParentLocator__r.SharedCapacityCBM__c )),
+OR(ISNEW(), ISCHANGED(ParentLocator__c))),
+
+AND(OR(CapacityCBM__c &gt;  ( ParentLocator__r.CapacityCBM__c -  (ParentLocator__r.SharedCapacityCBM__c - CapacityCBM__c)), CapacityCBM__c &gt; ParentLocator__r.CapacityCBM__c), ISCHANGED(CapacityCBM__c))
+))</errorConditionFormula>
+    <errorMessage>Capacity CBM can not greater than Capacity CBM can be shared of parent locator.</errorMessage>
+</ValidationRule>

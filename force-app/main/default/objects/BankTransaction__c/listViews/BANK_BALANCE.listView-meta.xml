@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BANK_BALANCE</fullName>
+    <booleanFilter>1 OR 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>AccountedDate__c</columns>
+    <columns>PaymentSettledDateTrxOut__c</columns>
+    <columns>ReceiptSettledDateTrxIn__c</columns>
+    <columns>BankAccountTrxIn__c</columns>
+    <columns>BankAccountTrxOut__c</columns>
+    <columns>OpeningBalanceLocal__c</columns>
+    <columns>OpeningBalanceUSD__c</columns>
+    <columns>TotalAmountOfPayableLocal__c</columns>
+    <columns>TotalAmountOfReceivableLocal__c</columns>
+    <columns>ClosingBalanceLocal__c</columns>
+    <columns>ClosingBalanceUSD__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>BankAccountTrxIn__c</field>
+        <operation>equals</operation>
+        <value>BA-000001</value>
+    </filters>
+    <filters>
+        <field>BankAccountTrxOut__c</field>
+        <operation>equals</operation>
+        <value>BA-000001</value>
+    </filters>
+    <label>BANK BALANCE-BANK1</label>
+    <language>en_US</language>
+</ListView>

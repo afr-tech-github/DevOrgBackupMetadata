@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mail_Merge_Foreign_Bank1__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c &amp; 
+$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c + $Setup.Site_Custom_Settings__c.Foreign_Account_Address_1__c &amp; 
+$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c &amp; 
+$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Mail Merge Foreign Bank1</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

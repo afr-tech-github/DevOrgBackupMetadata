@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>AClass</fullName>
+        <default>false</default>
+        <label>A Class</label>
+    </customValue>
+    <customValue>
+        <fullName>BClass</fullName>
+        <default>false</default>
+        <label>B Class</label>
+    </customValue>
+    <customValue>
+        <fullName>CClass</fullName>
+        <default>false</default>
+        <label>C Class</label>
+    </customValue>
+    <customValue>
+        <fullName>DClass</fullName>
+        <default>false</default>
+        <label>D Class</label>
+    </customValue>
+    <customValue>
+        <fullName>EClass</fullName>
+        <default>false</default>
+        <label>E Class</label>
+    </customValue>
+    <customValue>
+        <fullName>FClass</fullName>
+        <default>false</default>
+        <label>F Class</label>
+    </customValue>
+    <customValue>
+        <fullName>GClass</fullName>
+        <default>false</default>
+        <label>G Class</label>
+    </customValue>
+    <customValue>
+        <fullName>HClass</fullName>
+        <default>false</default>
+        <label>H Class</label>
+    </customValue>
+    <masterLabel>PRICE CLASSIFICATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VAT_INVOICE_ISSUE_STATUS__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>VAT INVOICE ISSUE STATUS</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Draft VAT Sent</fullName>
+                <default>false</default>
+                <label>Draft VAT Sent</label>
+            </value>
+            <value>
+                <fullName>Draft VAT Received</fullName>
+                <default>false</default>
+                <label>Draft VAT Received</label>
+            </value>
+            <value>
+                <fullName>Draft VAT Confirmed</fullName>
+                <default>false</default>
+                <label>Draft VAT Confirmed</label>
+            </value>
+            <value>
+                <fullName>Original VAT Sent</fullName>
+                <default>false</default>
+                <label>Original VAT Sent</label>
+            </value>
+            <value>
+                <fullName>Original VAT Received</fullName>
+                <default>false</default>
+                <label>Original VAT Received</label>
+            </value>
+            <value>
+                <fullName>Original VAT Mistaken</fullName>
+                <default>false</default>
+                <label>Original VAT Mistaken</label>
+            </value>
+            <value>
+                <fullName>Original VAT Returned</fullName>
+                <default>false</default>
+                <label>Original VAT Returned</label>
+            </value>
+            <value>
+                <fullName>Original VAT Cancelled</fullName>
+                <default>false</default>
+                <label>Original VAT Cancelled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

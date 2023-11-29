@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OCEAN_EXPORT_LIST</fullName>
+    <columns>ID__c</columns>
+    <columns>TranporationType__c</columns>
+    <columns>Field1__c</columns>
+    <columns>status__c</columns>
+    <columns>Partner__c</columns>
+    <columns>HBL__c</columns>
+    <columns>ETD__c</columns>
+    <columns>CutDay__c</columns>
+    <columns>Priority_Urgency__c</columns>
+    <columns>Priority_Attenton_Required__c</columns>
+    <columns>Container__c</columns>
+    <columns>Vessle__c</columns>
+    <columns>carton__c</columns>
+    <columns>POD__c</columns>
+    <columns>POL__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CustomObject1__c.RecordType</value>
+    </filters>
+    <filters>
+        <field>TranporationType__c</field>
+        <operation>equals</operation>
+        <value>FCL</value>
+    </filters>
+    <label>2.1 Ocean Export-FCL</label>
+</ListView>

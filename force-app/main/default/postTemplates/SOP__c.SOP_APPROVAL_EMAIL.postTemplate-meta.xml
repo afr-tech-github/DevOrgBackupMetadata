@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PostTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <default>false</default>
+    <fields>Name</fields>
+    <fields>DATE_N__c</fields>
+    <fields>CargoClosingTimeline__c</fields>
+    <fields>ProformaInvoiceIssueTimeline__c</fields>
+    <label>SOP APPROVAL EMAIL</label>
+</PostTemplate>

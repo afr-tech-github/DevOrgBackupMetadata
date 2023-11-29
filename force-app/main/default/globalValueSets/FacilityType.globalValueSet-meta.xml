@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Warehouse</fullName>
+        <default>false</default>
+        <label>Warehouse</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobile Warehouse</fullName>
+        <default>false</default>
+        <label>Mobile Warehouse</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobile Warehouse(Bike)</fullName>
+        <default>false</default>
+        <label>Mobile Warehouse(Bike)</label>
+    </customValue>
+    <customValue>
+        <fullName>Distribution Center</fullName>
+        <default>false</default>
+        <label>Distribution Center</label>
+    </customValue>
+    <customValue>
+        <fullName>Terminal</fullName>
+        <default>false</default>
+        <label>Terminal</label>
+    </customValue>
+    <customValue>
+        <fullName>Port</fullName>
+        <default>false</default>
+        <label>Port</label>
+    </customValue>
+    <customValue>
+        <fullName>Yard</fullName>
+        <default>false</default>
+        <label>Yard</label>
+    </customValue>
+    <customValue>
+        <fullName>ICD</fullName>
+        <default>false</default>
+        <label>ICD</label>
+    </customValue>
+    <customValue>
+        <fullName>Store</fullName>
+        <default>false</default>
+        <label>Store</label>
+    </customValue>
+    <customValue>
+        <fullName>Office Building</fullName>
+        <default>false</default>
+        <label>Office Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>FACILITY TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

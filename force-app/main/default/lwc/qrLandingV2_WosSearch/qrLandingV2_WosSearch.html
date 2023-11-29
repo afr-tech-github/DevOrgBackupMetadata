@@ -1,0 +1,33 @@
+<template>
+
+    <div class="slds-box slds-m-top_x-small">
+        <c-cmp_lookup class="input"
+            required data-name="_workerId"
+            label="Operator" 
+            object-type="clofor_com_cfs__WORKER__c" 
+            search-field="Name" 
+            subtitle-field="clofor_com_cfs__FULL_NAME__c" 
+            show-recent-records="true" 
+            value={_workerId}
+            onselect={handleInputChange} ></c-cmp_lookup>
+        <c-cmp_lookup class="input slds-m-top_small"
+            required data-name="_locatorId"
+            label="Locator" 
+            object-type="clofor_com_cfs__Locator__c" 
+            search-field="Name" 
+            subtitle-field="clofor_com_cfs__Summary__c" 
+            show-recent-records="true" 
+            value={_locatorId}
+            onselect={handleInputChange} ></c-cmp_lookup>
+        <lightning-combobox class="input slds-m-vertical_small"
+            data-name="_wosType"
+            label="Task type"
+            options={_wosTypeOpts}
+            value={_wosType} 
+            onchange={handleInputChange}></lightning-combobox>
+
+        <div class="slds-text-align_right">
+            <lightning-button label="Search" variant="brand" icon-name="utility:search" onclick={handleSearch}></lightning-button>
+        </div>
+    </div>
+</template>

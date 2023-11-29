@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HSUInsurancePaymentProcessing</fullName>
+    <columns>NAME</columns>
+    <columns>EmployeeID__c</columns>
+    <columns>PayrollOrder__c</columns>
+    <columns>PayrollSlip__c</columns>
+    <columns>InsurancePaid__c</columns>
+    <columns>InsurancePaidDate__c</columns>
+    <columns>HSUInsuranceByEmployee__c</columns>
+    <columns>HSUInsuranceByEmployer__c</columns>
+    <columns>HSUInsuranceRatioByEmployee_r__c</columns>
+    <columns>PayPeriodStartDate__c</columns>
+    <columns>PayPeriodEndDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>InsurancePaid__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>H/S/UNEM INSURANCE PAYMENT PROCESSING</label>
+    <language>en_US</language>
+    <sharedTo>
+        <role>HRManager</role>
+        <role>HRStaff</role>
+    </sharedTo>
+</ListView>

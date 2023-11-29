@@ -1,0 +1,51 @@
+<!--/**
+* CLoading
+* @created: 2019/02/16 Chien Truong
+* @modified:
+*/-->
+<apex:component id="WaitComponent">
+	<style>
+		.loadingOuterPanel {
+			position:		fixed;
+			top:			0px;
+			left:			0px;
+			height:			100%;
+			width:			100%;
+			z-index:		998;
+			overflow:		hidden;
+			background-color:	#F0F0F0;
+			filter:			alpha(opacity=55);
+			-moz-opacity:	0.55;
+			-khtml-opacity:	0.55;
+			opacity:		0.55;
+		}
+
+		.loadingMsg {
+			color:			#343434;
+			font-size:		18px;
+			font-weight:	bold;
+		}
+
+		#loadPanel{
+			position: relative;
+			top: 50%;
+			z-index: 999;
+			text-align: center;
+		}
+	</style>
+	<apex:actionStatus id="Waiting">
+		<apex:facet name="start">
+			<apex:outputPanel layout="block" id="loadPage"
+							styleClass="loadingOuterPanel">
+				<div id="loadPanel">
+					<p>
+						<apex:image url="/img/loading.gif" />
+						&nbsp;&nbsp;
+						<apex:outputText value="Waiting ..."
+										styleClass="loadingMsg" />
+					</p>
+				</div>
+			</apex:outputPanel>
+		</apex:facet>
+	</apex:actionStatus>
+</apex:component>

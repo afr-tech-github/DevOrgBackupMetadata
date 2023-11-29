@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Our Company</fullName>
+        <default>false</default>
+        <label>Our Company</label>
+    </customValue>
+    <customValue>
+        <fullName>Counterparty</fullName>
+        <default>false</default>
+        <label>Counterparty</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>FEE PAYER</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

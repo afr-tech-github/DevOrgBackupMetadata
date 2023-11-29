@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Container_Ownership_Code__c</fullName>
+    <deprecated>false</deprecated>
+    <description>UN/EDIFACT8078</description>
+    <externalId>false</externalId>
+    <inlineHelpText>1: Shipper supplied
+2: Carrier supplied
+3: Consolidator supplied
+4: Deconsolidator supplied
+5: Third party supplied</inlineHelpText>
+    <label>Container Ownership Code</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Shipper supplied</fullName>
+                <default>false</default>
+                <label>Shipper supplied</label>
+            </value>
+            <value>
+                <fullName>Carrier supplied</fullName>
+                <default>true</default>
+                <label>Carrier supplied</label>
+            </value>
+            <value>
+                <fullName>Consolidator supplied</fullName>
+                <default>false</default>
+                <label>Consolidator supplied</label>
+            </value>
+            <value>
+                <fullName>Deconsolidator supplied</fullName>
+                <default>false</default>
+                <label>Deconsolidator supplied</label>
+            </value>
+            <value>
+                <fullName>Third party supplied</fullName>
+                <default>false</default>
+                <label>Third party supplied</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,110 @@
+<!--
+ - Created by khanhpham on 6/8/17.
+ -->
+
+<apex:page id="OrderTracking" controller="TrackingController" title="Cargo Tracking" applyHtmlTag="true"
+           docType="html-5.0" sideBar="false" showHeader="false">
+    <div>
+        <!--<apex:image url="{!URLFOR($Resource.Navigation, '/CloApp/cargotracking.png')}"-->
+        <!--style="vertical-align:middle; width:250px;height:100px; padding: 5px;"/>-->
+        <a href="/apex/clofor_com_cfs__NavigationFlow">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+                 width="250px" height="80px"/>
+        </a>
+    </div>
+    <apex:form >
+        <table style="width: 100%; border: 0; min-height: 300px;">
+            <tr>
+                <td style="width: 250px; vertical-align: top;">
+                    <apex:pageBlock title="Criteria" mode="edit" id="criteria">
+                        <table cellpadding="2" cellspacing="2">
+                            <tr>
+                                <td style="font-weight:bold;">Search By</td>
+                                <td>
+                                    <apex:selectList size="1" value="{!searchField}">
+                                        <apex:selectOptions value="{!searchFieldList}"/>
+                                    </apex:selectList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight:bold;">Content</td>
+                                <td>
+                                    <apex:inputText value="{!searchString}"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <apex:commandButton value="Search" action="{!doSearch}"
+                                            rerender="results,debug,errors" status="actionStatus"></apex:commandButton>
+                    </apex:pageBlock>
+                    <p style="color: dodgerblue">
+                        Web CloTracking(Web Cargo Tracking Service) is one of optional module in CloSCM. To provide
+                        Web Cargo Tracking Service to customs, partners and vendors, please contact AFR Sales
+                        Representative.
+                    </p>
+                </td>
+                <td valign="top">
+                    <apex:pageBlock title="Search Result" id="results">
+                        <apex:actionStatus id="actionStatus">
+                            <apex:facet name="start">
+                                <apex:outputText value="Searching...."/>
+                            </apex:facet>
+                        </apex:actionStatus>
+                        <apex:pageMessages id="errors"/>
+                        <apex:repeat value="{!shipmentOrderList}" var="order">
+                            <apex:pageBlock title="{!order.REFNO__c}">
+                                <apex:pageBlockSection columns="2" title="SERVICE REQUIRED">
+                                    <apex:outputField value="{!order.ID__c}"/>
+                                    <apex:outputField value="{!order.HBL_Number_SEA_AIR__c}"/>
+                                    <apex:outputField value="{!order.REFNO__c}"/>
+                                    <apex:outputField value="{!order.MBL_Number_SEA_AIR__c}"/>
+                                    <apex:outputField value="{!order.RecordTypeId}"/>
+                                    <apex:outputField value="{!order.status__c}"/>
+                                </apex:pageBlockSection>
+
+                                <apex:pageBlockSection columns="2" title="FORWARDING INFORMATION">
+                                    <apex:outputField value="{!order.CarrierType__c}"/>
+                                    <apex:outputField value="{!order.NET_NET_Weight__c}"/>
+                                    <apex:outputField value="{!order.TranporationType__c}"/>
+                                    <apex:outputField value="{!order.weight__c}"/>
+                                    <apex:outputField value="{!order.VESSEL_FLIGHT__c}"/>
+                                    <apex:outputField value="{!order.chargable_weight__c}"/>
+                                    <apex:outputField value="{!order.No_Voyage_Flight__c}"/>
+                                    <apex:outputField value="{!order.CBM__c}"/>
+                                    <apex:outputField value="{!order.CONTAINERSEALNO__c}"/>
+                                    <apex:outputField value="{!order.POL__r.Name}"/>
+                                    <apex:outputField value="{!order.Item__c}"/>
+                                    <apex:outputField value="{!order.POD__r.Name}"/>
+                                    <apex:outputField value="{!order.carton__c}"/>
+                                    <apex:outputField value="{!order.ETD__c}"/>
+                                    <apex:outputField value="{!order.UnitType__c}"/>
+                                    <apex:outputField value="{!order.ETA__c}"/>
+                                </apex:pageBlockSection>
+
+                                <apex:pageBlockSection columns="2" title="CONTAINER INFORMATION">
+                                    <apex:outputField value="{!order.Container__c}"/>
+                                    <apex:outputField value="{!order.ContainerNumber__c}"/>
+                                    <apex:outputField value="{!order.Container2__c}"/>
+                                    <apex:outputField value="{!order.ContainerNumber2__c}"/>
+                                    <apex:outputField value="{!order.Container3__c}"/>
+                                    <apex:outputField value="{!order.ContainerNumber3__c}"/>
+                                    <apex:outputField value="{!order.Container4__c}"/>
+                                    <apex:outputField value="{!order.ContainerNumber4__c}"/>
+                                </apex:pageBlockSection>
+
+                                <apex:pageBlockSection columns="2" title="TRANSIT">
+                                    <apex:outputField value="{!order.SwitchB_L__c}"/>
+                                    <apex:outputField value="{!order.T_ETD__c}"/>
+                                    <apex:outputField value="{!order.TransitV__c}"/>
+                                    <apex:outputField value="{!order.TS__c}"/>
+                                </apex:pageBlockSection>
+                            </apex:pageBlock>
+                        </apex:repeat>
+                    </apex:pageBlock>
+                    <apex:image url="{!URLFOR($Resource.Navigation, '/Marketing/signature.jpg')}"
+                                style="vertical-align:middle; width:900px;height:424px; padding: 5px;"/>
+                </td>
+            </tr>
+        </table>
+    </apex:form>
+</apex:page>

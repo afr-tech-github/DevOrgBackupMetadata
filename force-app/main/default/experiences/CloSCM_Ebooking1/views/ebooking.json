@@ -1,0 +1,42 @@
+{
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "componentName" : "siteforce:sldsTwoCol66Layout",
+  "dataProviders" : [ ],
+  "id" : "820230be-8ca2-43b4-8893-be4cb58cdf02",
+  "label" : "ebooking",
+  "regions" : [ {
+    "id" : "1d23d1ed-c758-4048-86ff-9734bc968ae1",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "3387fe2e-d6ce-44d0-8efe-607f94d4c31f",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "8933aa8c-eba9-4d35-a670-99cd05e44e09",
+    "regionName" : "sidebar",
+    "type" : "region"
+  }, {
+    "id" : "ea44e52f-9056-453b-aeb0-636d7526055c",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "947c03df-38c5-4624-9bfc-e926166e4c2b",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "67391c3f-c661-471e-9444-82d6a7a4e14c",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a3H"
+}

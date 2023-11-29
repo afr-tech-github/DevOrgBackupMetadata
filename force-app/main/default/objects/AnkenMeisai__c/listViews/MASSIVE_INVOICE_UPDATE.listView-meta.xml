@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MASSIVE_INVOICE_UPDATE</fullName>
+    <columns>Tariff__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>InsatuyouSyohinEng__c</columns>
+    <columns>NAME</columns>
+    <columns>SellTankaJPY__c</columns>
+    <columns>SellTankaUSD__c</columns>
+    <columns>SellAmountJPN__c</columns>
+    <columns>SellInTaxAmountJPY__c</columns>
+    <columns>SellTaxNum__c</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>VAT_INVOICE_TO__c</columns>
+    <columns>ProductTax__c</columns>
+    <columns>KawaseSel__c</columns>
+    <columns>Ararigaku__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Anken__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>MASSIVE INVOICE UPDATE</label>
+    <language>en_US</language>
+</ListView>

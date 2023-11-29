@@ -1,0 +1,191 @@
+<apex:page showHeader="true" controller="New_NavigationFlowController" lightningStylesheets="true" sidebar="false" docType="html-5.0">
+    <apex:slds />
+    <style type="text/css">
+        body .bPageBlock .pbBody .red .pbSubheader{
+        background-color:#c00000;
+        }
+        body .bPageBlock .pbBody .grey .pbSubheader{
+        background-color:#c0c0c0;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader h3{
+        display: -webkit-inline-box;
+        color: black;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .hideListButton{
+        background-position: 0 -12px;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .showListButton{
+        background-position: 1px 0px;
+        }
+        .availableSpace{
+        background-color: #4bca81;
+        }
+        .fullSpace{
+        background-color: #b0adab;
+        }
+        /*.nav-custom-style-ul .slds-path__item:before{
+        	width: calc(5rem - (3px * 2)) !important;
+			height: calc(5rem - (3px * 2)) !important;
+			left: -2rem !important;
+			
+        }
+        .slds-scope .slds-path__nav .slds-is-incomplete{
+        	background-color: #e0e5ee;
+        }
+        
+        
+
+        .slds-scope .slds-badge{
+        	text-transform: none !important;
+        }*/
+		/*.subtab ul li:nth-child(6):after { 
+		     content: "\A" !important;
+		     white-space: pre !important; 
+		}*/
+		.subtabhide{
+        	display: none !important;
+        }
+        .slds-scope .slds-path__nav .slds-is-incomplete{
+        	    cursor: pointer !important;
+        	    background-color: #e0e5ee;
+        }
+        .slds-scope .slds-path__link {
+    
+		    display: contents !important;
+		}
+		.slds-scope .slds-path__nav .slds-is-incomplete:before, .slds-scope .slds-path__nav .slds-is-incomplete:after {
+		    background: rgb(236, 235, 234);
+		    z-index: -1 !important;
+		}
+        
+		/*.slds-scope .slds-path__item+.slds-is-incomplete:before, .slds-is-incomplete:after{
+        	
+        }
+		.slds-badge{
+			background-color: #e0e5ee !important;
+		}
+		.slds-badge :hover, .slds-is-incomplete:after{
+			background-color: rgb(236, 235, 234) !important;
+		}
+		
+    </style>
+	<apex:pageBlock >
+		<apex:sectionHeader subtitle="AFR CloSCM - NAVIGATION FLOW"/>
+		
+		
+		<div >
+			<div style="width: 100%; float: right; margin-right: 50px; display: block; text-align: right; font-weight: bold;" class="slds-m-bottom_medium">
+		        <a href="{!languageSettingTab.tabSetting.clofor_com_cfs__Tab_Link__c}">
+		        <span>{!languageSettingTab.tabName}</span>
+		            <apex:image url="{!URLFOR($Resource.Navigation, languageSettingTab.tabSetting.Static_Resource_Image_Name__c)}"
+		                        style="vertical-align:middle; width:50px;height:50px; padding: 5px;"/>
+		        </a>
+				              	
+		    </div>
+		</div>
+		<apex:repeat value="{!listFlows}" var="flow">
+		
+		<apex:pageBlockSection title="{!flow.flowName}" columns="1">
+		<apex:outputPanel >
+
+			  <div class="slds-path">
+			    <div class="slds-grid slds-path__track">
+			      <div class="slds-grid slds-path__scroller-container">
+			        <div class="slds-path__scroller" role="application">
+			          <div class="slds-path__scroller_inner">
+			          <apex:outputPanel rendered="{!flow.flowType =='Flow'}">
+				            <ul class="slds-path__nav nav-custom-style-ul" role="listbox" aria-orientation="horizontal">
+				            	<apex:variable var="tabIndex" value="{!0}"/>
+				            	<apex:repeat var="tab" value="{!flow.tabFlows}">
+				              <li class="slds-path__item slds-is-incomplete" role="presentation" >
+				              	<div class="slds-path__link">
+				              		
+				              	<apex:image url="{!URLFOR($Resource.Navigation, tab.tabSetting.Static_Resource_Image_Name__c)}"
+	                                                    style="vertical-align:middle; width:50px;height:50px; padding: 5px; cursor: pointer;" onclick="onclickParentTab('{!tab.tabSetting.Id}','{!tab.subTabs.size}', '{!tab.urlTab}', '{!tab.tabSetting.Tab_Style__c}')"/>
+
+	                               <br/>                 
+				                <a aria-selected="true" href="{!tab.urlTab}" id="path-{!tabIndex}" role="option" tabindex="{!IF(tabIndex = 0, '0', '-1')}">	  
+				                  <span class="slds-path__title">{!tab.tabName}</span>
+				                </a>
+				           
+				            </div>
+				              </li>
+				              <apex:variable var="tabIndex" value="{!tabIndex + 1}"/>
+				          </apex:repeat>
+				              
+				            </ul>
+			            </apex:outputPanel>
+			            <apex:outputPanel rendered="{!flow.flowType =='Setup'}">
+				            <div class="slds-grid slds-wrap" style="width: 100%">
+			            		<apex:variable var="tabIndex" value="{!0}"/>
+				            	<apex:repeat var="tab" value="{!flow.tabFlows}">
+					              <div class="slds-col slds-size_1-of-4">
+					   
+					                <a aria-selected="true" class="slds-path__link" href="{!tab.urlTab}" style="width: min-content; text-align:left"> 	   
+				                  			<span class="slds-badge">{!tab.tabName}</span>
+				               		</a>
+					              </div>
+					              <apex:variable var="tabIndex" value="{!tabIndex + 1}"/>
+					          	</apex:repeat>
+								  
+							</div>
+			            </apex:outputPanel>
+
+			            <div id="subtab{!flow.flowName}" class="subtab-{!flow.flowName} slds-m-top_medium">
+				            <apex:repeat value="{!flow.tabFlows}" var="tab">
+				            	<div class="slds-grid slds-wrap subtabhide subtab subtab-{!flow.flowName}-{!tab.tabSetting.Id}" id="{!tab.tabSetting.Id}" style="width: 100%">
+					            	<apex:variable var="subtabIndex" value="{!0}"/>
+					            		<apex:repeat value="{!tab.subTabs}" var="subTab">
+					            		<apex:variable var="subtabIndex" value="{!subtabIndex + 1}"/>
+					            		<div class="slds-col slds-size_1-of-4">
+										    <a aria-selected="true" class="slds-path__link" href="{!subTab.subTabUrl}" style="width: min-content; text-align:left"> 	   
+					                  			<span class="slds-badge">{!subTab.subTabName}</span>
+					               			</a>
+										</div>
+					            		</apex:repeat>
+								  
+								</div>
+				        	</apex:repeat>
+
+			        	</div>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</apex:outputPanel>
+		</apex:pageBlockSection>
+		</apex:repeat>
+		<script>
+	        var j$ = jQuery.noConflict();
+
+	       	function onclickParentTab(parrentId, sizeSubtab, url, tabStyle){
+	       		// togge class
+	       		//j$('#' + parrentId).addClass( "subtabhide" );
+	       		if(sizeSubtab > 0){
+	       			var isShowSubTab = true;
+	       			if(j$('#' + parrentId).hasClass("subtabhide")){
+	       				isShowSubTab = false;
+
+	       			}
+	       			j$('.subtab').addClass( "subtabhide" );
+
+	       			if(!isShowSubTab){
+	       				j$('#' + parrentId).removeClass("subtabhide");
+	       			}else{
+	       				j$('#' + parrentId).addClass("subtabhide");
+	       			}
+	       			
+	       		}else{
+	       			var newLocation = url;
+	       			if(tabStyle == 'Object'){
+	       				newLocation = url + '/e'
+	       			}
+	       			window.location.href = newLocation;
+	       		}
+	       		
+	       	}
+	        
+	    </script>
+	</apex:pageBlock>
+</apex:page>

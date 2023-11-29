@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>New Registration</fullName>
+        <default>true</default>
+        <label>New Registration</label>
+    </customValue>
+    <customValue>
+        <fullName>Plan Change</fullName>
+        <default>false</default>
+        <label>Plan Change</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Location Change</fullName>
+        <default>false</default>
+        <label>Service Location Change</label>
+    </customValue>
+    <customValue>
+        <fullName>SWAP</fullName>
+        <default>false</default>
+        <label>SWAP</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancel</fullName>
+        <default>false</default>
+        <label>Cancel</label>
+    </customValue>
+    <customValue>
+        <fullName>Terminate</fullName>
+        <default>false</default>
+        <label>Terminate</label>
+    </customValue>
+    <masterLabel>Application Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

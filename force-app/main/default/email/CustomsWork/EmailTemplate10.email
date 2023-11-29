@@ -1,0 +1,16 @@
+{!Cargo_Delivery__c.DeliveryCompany__c}
+{!Cargo_Delivery__c.TRUCKING_COMPANY_PIC__c}様 
+
+いつもお世話になっております。 
+配送依頼書をお送りさせていただきます。 
+不明な点などございましたらご連絡お願い致します。 
+
+宜しくお願い致します。 
+
+{!User.LastName} 
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

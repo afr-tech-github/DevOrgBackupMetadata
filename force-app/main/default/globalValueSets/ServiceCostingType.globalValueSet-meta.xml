@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Costing to Product</fullName>
+        <default>false</default>
+        <label>Costing to Product</label>
+    </customValue>
+    <customValue>
+        <fullName>Costing as Service Charge</fullName>
+        <default>false</default>
+        <label>Costing as Service Charge</label>
+    </customValue>
+    <customValue>
+        <fullName>No Costing</fullName>
+        <default>false</default>
+        <label>No Costing</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>SERVICE COSTING TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

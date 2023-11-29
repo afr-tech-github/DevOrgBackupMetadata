@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreviousTrxPlanID__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Trx Plan meet below two conditions will appear. 1) Approval Status=Approved, 2) Plan Status not equal to Liquidation Request Processed.</inlineHelpText>
+    <label>Previous Trx Plan ID</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>PaymentRequest__c.ApprovalStatus__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </filterItems>
+        <filterItems>
+            <field>PaymentRequest__c.PaymentRequestStatus__c</field>
+            <operation>notEqual</operation>
+            <value>Liquidation Request Processed</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>PaymentRequest__c</referenceTo>
+    <relationshipLabel>NEXT TRX PLAN</relationshipLabel>
+    <relationshipName>TrxPlan</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

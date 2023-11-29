@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when VAT INVOICE submission is requested.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>VAT INVOICE APPROVAL PROCESS - REQUEST</name>
+    <style>none</style>
+    <subject>VAT INVOICE ISSUE READY -ID :{!VAT_INVOICE__c.Name}-RED INVOICE NO : {!VAT_INVOICE__c.RED_INVOICE_NO__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

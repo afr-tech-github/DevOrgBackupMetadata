@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cc_closing_date__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CUT-OFF OF REFERENCE DATE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>納品日</fullName>
+                <default>true</default>
+                <label>納品日</label>
+            </value>
+            <value>
+                <fullName>許可日</fullName>
+                <default>false</default>
+                <label>許可日</label>
+            </value>
+            <value>
+                <fullName>請求書送付日</fullName>
+                <default>false</default>
+                <label>請求書送付日</label>
+            </value>
+            <value>
+                <fullName>申告日</fullName>
+                <default>false</default>
+                <label>申告日</label>
+            </value>
+            <value>
+                <fullName>ETA</fullName>
+                <default>false</default>
+                <label>ETA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

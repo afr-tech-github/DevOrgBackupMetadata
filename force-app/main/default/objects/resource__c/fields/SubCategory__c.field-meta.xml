@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SubCategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>SUB CATEGORY</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Category__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+                <label>Transportation</label>
+            </value>
+            <value>
+                <fullName>Food &amp; Drink</fullName>
+                <default>false</default>
+                <label>Food &amp; Drink</label>
+            </value>
+            <value>
+                <fullName>Water</fullName>
+                <default>false</default>
+                <label>Water</label>
+            </value>
+            <value>
+                <fullName>Parcel(Mail)</fullName>
+                <default>false</default>
+                <label>Parcel(Mail)</label>
+            </value>
+            <value>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+                <label>Entertainment</label>
+            </value>
+            <value>
+                <fullName>Rent</fullName>
+                <default>false</default>
+                <label>Rent</label>
+            </value>
+            <value>
+                <fullName>Electricity</fullName>
+                <default>false</default>
+                <label>Electricity</label>
+            </value>
+            <value>
+                <fullName>Travel</fullName>
+                <default>false</default>
+                <label>Travel</label>
+            </value>
+            <value>
+                <fullName>Oversea Travel</fullName>
+                <default>false</default>
+                <label>Oversea Travel</label>
+            </value>
+            <value>
+                <fullName>Accommodation</fullName>
+                <default>false</default>
+                <label>Accommodation</label>
+            </value>
+            <value>
+                <fullName>Communication(Phone)</fullName>
+                <default>false</default>
+                <label>Communication(Phone)</label>
+            </value>
+            <value>
+                <fullName>Internet</fullName>
+                <default>false</default>
+                <label>Internet</label>
+            </value>
+            <value>
+                <fullName>IT System(Computer)</fullName>
+                <default>false</default>
+                <label>IT System(Computer)</label>
+            </value>
+            <value>
+                <fullName>Conference &amp; Training</fullName>
+                <default>false</default>
+                <label>Conference &amp; Training</label>
+            </value>
+            <value>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+                <label>Advertisement</label>
+            </value>
+            <value>
+                <fullName>Bank Fee</fullName>
+                <default>false</default>
+                <label>Bank Fee</label>
+            </value>
+            <value>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+                <label>Insurance</label>
+            </value>
+            <value>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+                <label>Consulting</label>
+            </value>
+            <value>
+                <fullName>Accountancy</fullName>
+                <default>false</default>
+                <label>Accountancy</label>
+            </value>
+            <value>
+                <fullName>Audit</fullName>
+                <default>false</default>
+                <label>Audit</label>
+            </value>
+            <value>
+                <fullName>Recruiting</fullName>
+                <default>false</default>
+                <label>Recruiting</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>Cleaning</fullName>
+                <default>false</default>
+                <label>Cleaning</label>
+            </value>
+            <value>
+                <fullName>Commission</fullName>
+                <default>false</default>
+                <label>Commission</label>
+            </value>
+            <value>
+                <fullName>Vehicle Operation</fullName>
+                <default>false</default>
+                <label>Vehicle Operation</label>
+            </value>
+            <value>
+                <fullName>Repair &amp; Maintenance</fullName>
+                <default>false</default>
+                <label>Repair &amp; Maintenance</label>
+            </value>
+            <value>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+                <label>Newspaper</label>
+            </value>
+            <value>
+                <fullName>Postage</fullName>
+                <default>false</default>
+                <label>Postage</label>
+            </value>
+            <value>
+                <fullName>Reimbursement cash Advance</fullName>
+                <default>false</default>
+                <label>Reimbursement cash Advance</label>
+            </value>
+            <value>
+                <fullName>Charitable Contribution</fullName>
+                <default>false</default>
+                <label>Charitable Contribution</label>
+            </value>
+            <value>
+                <fullName>Interest Expense</fullName>
+                <default>false</default>
+                <label>Interest Expense</label>
+            </value>
+            <value>
+                <fullName>Parking Fee</fullName>
+                <default>false</default>
+                <label>Parking Fee</label>
+            </value>
+            <value>
+                <fullName>Basic salary</fullName>
+                <default>false</default>
+                <label>Basic salary</label>
+            </value>
+            <value>
+                <fullName>Incentives</fullName>
+                <default>false</default>
+                <label>Incentives</label>
+            </value>
+            <value>
+                <fullName>Bonus</fullName>
+                <default>false</default>
+                <label>Bonus</label>
+            </value>
+            <value>
+                <fullName>H/S/U Insurance</fullName>
+                <default>false</default>
+                <label>H/S/U Insurance</label>
+            </value>
+            <value>
+                <fullName>Personal Income Tax</fullName>
+                <default>false</default>
+                <label>Personal Income Tax</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Transportation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Food &amp; Drink</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Water</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Parcel(Mail)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Entertainment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Rent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Electricity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Travel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Oversea Travel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Accommodation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Communication(Phone)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Internet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>IT System(Computer)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Conference &amp; Training</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Advertisement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Bank Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Insurance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Consulting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Accountancy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Audit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Recruiting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Meeting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Cleaning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Commission</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Vehicle Operation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Repair &amp; Maintenance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Newspaper</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Postage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Reimbursement cash Advance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Charitable Contribution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Interest Expense</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <valueName>Parking Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expense</controllingFieldValue>
+            <controllingFieldValue>Payroll</controllingFieldValue>
+            <controllingFieldValue>Insurance&amp;PIT</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payroll</controllingFieldValue>
+            <valueName>Basic salary</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payroll</controllingFieldValue>
+            <valueName>Incentives</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Payroll</controllingFieldValue>
+            <valueName>Bonus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Insurance&amp;PIT</controllingFieldValue>
+            <valueName>H/S/U Insurance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Insurance&amp;PIT</controllingFieldValue>
+            <valueName>Personal Income Tax</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

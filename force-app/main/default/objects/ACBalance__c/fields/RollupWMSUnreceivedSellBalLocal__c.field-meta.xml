@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupWMSUnreceivedSellBalLocal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLLUP WMS UNRECEIVED SELLING BAL(LOCAL)</label>
+    <summarizedField>WMSBillACBal__c.UnreceivedBalanceOfSellingLocalACBal__c</summarizedField>
+    <summaryForeignKey>WMSBillACBal__c.ACBalanceID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

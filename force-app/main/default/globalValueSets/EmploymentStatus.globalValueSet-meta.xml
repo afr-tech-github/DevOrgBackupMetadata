@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>On Training</fullName>
+        <default>false</default>
+        <label>On Training</label>
+    </customValue>
+    <customValue>
+        <fullName>On Employment</fullName>
+        <default>false</default>
+        <label>On Employment</label>
+    </customValue>
+    <customValue>
+        <fullName>On Vacation</fullName>
+        <default>false</default>
+        <label>On Vacation</label>
+    </customValue>
+    <customValue>
+        <fullName>Retired</fullName>
+        <default>false</default>
+        <label>Retired</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Employment Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

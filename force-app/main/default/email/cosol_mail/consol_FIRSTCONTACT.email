@@ -1,0 +1,25 @@
+{!MasterAnken__c.MDevan__c} 
+{!MasterAnken__c.MDevanRep__c} 様 
+
+いつもお世話になっております。以下の予定に混載コンテナが入港予定ですので、お知らせいたします。
+デバン依頼書は作成次第、お送りいたします。
+
+
+◎M-SHIP ID：{!MasterAnken__c.MasterID__c} 
+◎M B/L番号(NO)：{!MasterAnken__c.MMaster_B_L_No__c} 
+◎船名(VESSEL NAME)：{!MasterAnken__c.MVessel__c} {!MasterAnken__c.MVoy_No__c}　 
+◎ETA ： {!MasterAnken__c.META__c} 
+◎入港曜日(ARRIVAL DAY)：{!MasterAnken__c.META_DAY__c}
+◎H B/L件数(Number of H B/L)：{!MasterAnken__c.NO_HOUSE_B_L__c} H B/L 
+◎コンテナ(CONTAINER)： {!MasterAnken__c.MContainer__c}*{!MasterAnken__c.MContainerNumber__c} / {!MasterAnken__c.MContainer2__c}*{!MasterAnken__c.MContainerNumber2__c} 
+
+◎デバン予定日(DEVANNING DATE)：{!MasterAnken__c.MDevanningDate__c} 
+
+どうぞ宜しくお願いします。
+
+********************************************************* 
+{!MasterAnken__c.Mail_Merge_Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X1818</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>PROC(Procurement Module) is to manage procurement for item or services in order to support core business operation.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloPROC-LEX</label>
+    <navType>Standard</navType>
+    <tabs>standard-Account</tabs>
+    <tabs>resource__c</tabs>
+    <tabs>PurchasingOrder__c</tabs>
+    <tabs>PurchasingInvoice__c</tabs>
+    <tabs>VAT_INVOICE__c</tabs>
+    <tabs>PaymentRequest__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>AFR_CloPROC_LEX_UtilityBar</utilityBar>
+</CustomApplication>

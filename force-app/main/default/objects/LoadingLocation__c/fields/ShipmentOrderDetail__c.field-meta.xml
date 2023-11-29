@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ShipmentOrderDetail__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>&quot;SHIPMENT ORDER ID:&quot; &amp; Delivery__r.HBL_SHIPMENT__r.ID__c &amp;BR() &amp; 
+&quot;TOTAL MEASUREMENT(CBM):&quot;&amp; text(Delivery__r.HBL_SHIPMENT__r.CBM__c)  &amp;BR() &amp; 
+&quot;TOTAL NET/GROSS WEIGHT(KG):&quot;&amp;text(Delivery__r.HBL_SHIPMENT__r.NET_NET_Weight__c) &amp;&quot;/&quot;&amp;text(Delivery__r.HBL_SHIPMENT__r.weight__c)  &amp;BR()&amp; 
+&quot;TOTAL NUMBER OF PACKAGES:&quot;&amp;  text(Delivery__r.HBL_SHIPMENT__r.carton__c)</formula>
+    <label>SHIPMENT ORDER DETAIL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

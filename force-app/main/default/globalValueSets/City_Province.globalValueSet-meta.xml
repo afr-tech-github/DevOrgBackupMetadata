@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>VN_HCM</fullName>
+        <default>false</default>
+        <label>VN_HCM</label>
+    </customValue>
+    <customValue>
+        <fullName>VN_TraVinh</fullName>
+        <default>false</default>
+        <label>VN_TraVinh</label>
+    </customValue>
+    <customValue>
+        <fullName>VN_BRVT</fullName>
+        <default>false</default>
+        <label>VN_BRVT</label>
+    </customValue>
+    <masterLabel>City/Province</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

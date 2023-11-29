@@ -1,0 +1,28 @@
+회계 담당자님
+
+{! MgmtMaster__c.CreatedBy}에 의해서
+다음과 같이 새로운 환율 신청을 했습니다.
+
+
+링크를 클릭하고 승인 또는 거부를 해야합니다.
+
+◎ 환율 ID : {! MgmtMaster__c.Name}] Link to SF : {! MgmtMaster__c.Link}
+
+◎ 환율 통화 (USD 대한) : {! MgmtMaster__c.Mgmt_Exrate_fromto__c}
+◎ Start Date : {! MgmtMaster__c.Mgmt_Exrate_Start_Date__c}
+◎ End Date : {! MgmtMaster__c.Mgmt_Exrate_End_Date__c}
+◎ 국내 고객들 - 포워딩 표준 환율 : {! MgmtMaster__c.Mgmt_Exrate_FowardingtoDomesticCustomer__c}
+◎ 국내 고객들 - 통관 기준 환율 : {! MgmtMaster__c.Mgmt_Exrate_CCtoDomesticCustomer__c}
+◎ 파트너 -Selling 표준 환율 : {! MgmtMaster__c.Mgmt_Exrate_SellingtoPartner__c}
+◎ 파트너 -Buying 표준 환율 : {! MgmtMaster__c.Mgmt_Exrate_BuyingfromPartner__c}
+
+이 신청을 승인, 거부하거나 피드백을 통해 댓글을 작성할 수 있습니다.
+
+잘 부탁드립니다.
+
+************************************************** *******
+{!Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c}
+ ************************************************** *******
+Powered by AFR Solutions Co., LTD 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

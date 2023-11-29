@@ -1,0 +1,218 @@
+Kính gửi  {!CustomObject1__c.Field1__c}　
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 
+<br>
+<br>
+Cám ơn Qúi Công ty đã sử dụng dịch vụ giao nhận của chúng tôi.
+<br>
+<br>
+Tình trạng hiện tại của báo báo giá là  「{!CustomObject1__c.status__c}」.<br><br>
+Để mở hay sao lưu chứng từ thông quan, vui lòng nhấn vào đường link và nhập mật khẩu vào <br>
+################################################################################################################### <br>
+Link báo giá ：{!CustomObject1__c.QUOTATION_LINK__c} <br>
+Mật khẩu xem báo giá：{!CustomObject1__c.QUOTATION_PASSWORD__c} <br>
+###################################################################################################################<br>
+<br>
+Nếu Qúi Công Khách đã đăng ký tài khoản thì có thể kiểm tra chi tiết theo website đã được chỉ định.<br>
+<br>
+※Đây là mail tự động được gửi từ (Hệ thông cập nhật thông tinh bằng thời gian thật) mỗi khi tình trạng của lô hàng được cập nhật<br>
+
+
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr><thead>
+			<th colspan="4">
+				REQUESTER DETAILS
+			</th></thead>
+		</tr>
+	</thead>
+	<thead>
+			</thead>
+　　　　　　　　<thead>
+			</thead>	
+
+
+
+
+
+　　　　　　　　<tbody>
+<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+					{!CustomObject1__c.Name}
+			</td width="400">
+			<th>
+				STATUS
+			</th>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</tdwidth="400">
+		</tr>
+		<tr>
+			<th>
+				TRANSPORTATION TYPE		</th>
+			<td>
+				{!CustomObject1__c.CarrierType__c}
+			</td>
+			
+　　　　　　　　　　　　　　　<th>
+				FREQUENCY			                 </th>
+			<td>
+				{!CustomObject1__c.Frequency__c}
+			</td>
+		</tr>
+
+                                    <tr>
+			<th>
+				 QUOTATION NO
+			</th>
+			<td>
+				{!CustomObject1__c.QuotationNO__c}
+			</td>
+			<th>
+				INCORTERMS
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				REQUESTER
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c}
+			</td>
+			<th>
+				SUBMISSION TARGET DATE
+			</th>
+			<td>
+				{!CustomObject1__c.SubmisionDueDate__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				 PERSON IN CHARGE
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}
+			</td>
+			<th>
+				QUOTATION OWNER
+			</th>
+			<td>
+				{!CustomObject1__c.00N28000007WEj8}
+			</td>
+		</tr>
+		<tr><thead>
+			<th colspan="4">
+				CARGO DETAILS
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				VESSEL / FLIGHT
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c}
+			</td>
+			<th>
+				ITEM
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				E.T.D
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+			<th>
+				P.O.L
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} 
+{!CustomObject1__c.POL_Country_Name__c} 
+			</td>
+		</tr>
+		<tr>
+			<th>
+				E.T.A
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+			<th>
+				P.O.D
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				TYPE
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c}   {!CustomObject1__c.Container__c}    {!CustomObject1__c.Container2__c}
+			</td>
+			<th>
+				WEIGHT(KG)
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+		</tr>
+　　　　　　　　　　　　　　　　</tr>
+			<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				REMARK
+			</th>
+			<td rowspan="2" colspan="3">
+				{!CustomObject1__c.Remark__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<br>
+Nếu có cần thêm thông tin, vui lòng liên hệ với chúng tôi. <br>
+Rất hân hạnh  được tiếp tục phục vụ Qúi Công Ty.<br><br>
+Trân Trọng, <br>
+
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

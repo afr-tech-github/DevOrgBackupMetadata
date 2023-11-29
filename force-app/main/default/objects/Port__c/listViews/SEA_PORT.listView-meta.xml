@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SEA_PORT</fullName>
+    <columns>NAME</columns>
+    <columns>CodeOfPort__c</columns>
+    <columns>City_Name__c</columns>
+    <columns>Country_Code__c</columns>
+    <columns>Country_Name__c</columns>
+    <columns>Fullname__c</columns>
+    <columns>Port_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Port_Type__c</field>
+        <operation>equals</operation>
+        <value>SEA</value>
+    </filters>
+    <filters>
+        <field>Country_Name__c</field>
+        <operation>equals</operation>
+        <value>CAMBODIA</value>
+    </filters>
+    <label>SEA PORT</label>
+</ListView>

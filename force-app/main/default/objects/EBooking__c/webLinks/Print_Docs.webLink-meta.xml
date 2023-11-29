@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Print_Docs</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Print Docs</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://{!$Setup.Site_Custom_Settings__c.My_Domain_Name__c}/mail/mmchoose.jsp?id={!URLENCODE(EBooking__c.Id)}&amp;1={!EBooking__c.Name}&amp;retURL=%2F{!URLENCODE(EBooking__c.Id)}</url>
+</WebLink>

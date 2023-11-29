@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when reminder/alert email is sent automatically to doc operator if two days already passed from ETA of case in H B/L SHIPMENT.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>STATUS OUT-OF-DATE AFTER VESSEL ARRIVAL</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-Status Out-of-Date after Vessel Arrival</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

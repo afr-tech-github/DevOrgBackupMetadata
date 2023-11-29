@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>MTQ</fullName>
+        <default>true</default>
+        <label>MTQ</label>
+    </customValue>
+    <customValue>
+        <fullName>FTQ</fullName>
+        <default>false</default>
+        <label>FTQ</label>
+    </customValue>
+    <customValue>
+        <fullName>BFT</fullName>
+        <default>false</default>
+        <label>BFT</label>
+    </customValue>
+    <masterLabel>Volume Unit</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NumberOfBillingAfterFirst__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Number of Billing After First</label>
+    <summaryFilterItems>
+        <field>SALES_ORDER__c.BillingTypeNewCont__c</field>
+        <operation>notEqual</operation>
+        <value>No Billing</value>
+    </summaryFilterItems>
+    <summaryForeignKey>SALES_ORDER__c.ContractID__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

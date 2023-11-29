@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuoteAttentionPriorityCompact</fullName>
+    <fields>Name</fields>
+    <fields>AttentionPrioritySignal__c</fields>
+    <fields>QuoteName__c</fields>
+    <fields>QuoteStatus__c</fields>
+    <fields>TotalAmountLocal__c</fields>
+    <fields>TotalAmountUSD__c</fields>
+    <label>Quote Attention Priority Compact Layout</label>
+</CompactLayout>

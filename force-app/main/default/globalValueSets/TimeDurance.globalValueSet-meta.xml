@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>1 Time Only</fullName>
+        <default>false</default>
+        <label>1 Time Only</label>
+    </customValue>
+    <customValue>
+        <fullName>30 Minutes</fullName>
+        <default>false</default>
+        <label>30 Minutes</label>
+    </customValue>
+    <customValue>
+        <fullName>1 Hour</fullName>
+        <default>false</default>
+        <label>1 Hour</label>
+    </customValue>
+    <customValue>
+        <fullName>2 Hours</fullName>
+        <default>false</default>
+        <label>2 Hours</label>
+    </customValue>
+    <customValue>
+        <fullName>3 Hours</fullName>
+        <default>false</default>
+        <label>3 Hours</label>
+    </customValue>
+    <customValue>
+        <fullName>4 Hours</fullName>
+        <default>false</default>
+        <label>4 Hours</label>
+    </customValue>
+    <customValue>
+        <fullName>8 Hours</fullName>
+        <default>false</default>
+        <label>8 Hours</label>
+    </customValue>
+    <customValue>
+        <fullName>1 Day</fullName>
+        <default>false</default>
+        <label>1 Day</label>
+    </customValue>
+    <customValue>
+        <fullName>2 Days</fullName>
+        <default>false</default>
+        <label>2 Days</label>
+    </customValue>
+    <customValue>
+        <fullName>3 Days</fullName>
+        <default>false</default>
+        <label>3 Days</label>
+    </customValue>
+    <customValue>
+        <fullName>4 Days</fullName>
+        <default>false</default>
+        <label>4 Days</label>
+    </customValue>
+    <customValue>
+        <fullName>5 Days</fullName>
+        <default>false</default>
+        <label>5 Days</label>
+    </customValue>
+    <customValue>
+        <fullName>6 Days</fullName>
+        <default>false</default>
+        <label>6 Days</label>
+    </customValue>
+    <customValue>
+        <fullName>1 Week</fullName>
+        <default>false</default>
+        <label>1 Week</label>
+    </customValue>
+    <customValue>
+        <fullName>2 Weeks</fullName>
+        <default>false</default>
+        <label>2 Weeks</label>
+    </customValue>
+    <customValue>
+        <fullName>3 Weeks</fullName>
+        <default>false</default>
+        <label>3 Weeks</label>
+    </customValue>
+    <customValue>
+        <fullName>4 Weeks</fullName>
+        <default>false</default>
+        <label>4 Weeks</label>
+    </customValue>
+    <customValue>
+        <fullName>1 Month</fullName>
+        <default>false</default>
+        <label>1 Month</label>
+    </customValue>
+    <customValue>
+        <fullName>2 Months</fullName>
+        <default>false</default>
+        <label>2 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>3 Months</fullName>
+        <default>false</default>
+        <label>3 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>4 Months</fullName>
+        <default>false</default>
+        <label>4 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>5 Months</fullName>
+        <default>false</default>
+        <label>5 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>6 Months</fullName>
+        <default>false</default>
+        <label>6 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>7 Months</fullName>
+        <default>false</default>
+        <label>7 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>8 Months</fullName>
+        <default>false</default>
+        <label>8 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>9 Months</fullName>
+        <default>false</default>
+        <label>9 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>10 Months</fullName>
+        <default>false</default>
+        <label>10 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>11 Months</fullName>
+        <default>false</default>
+        <label>11 Months</label>
+    </customValue>
+    <customValue>
+        <fullName>1 Year</fullName>
+        <default>false</default>
+        <label>1 Year</label>
+    </customValue>
+    <masterLabel>TIME DURANCE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

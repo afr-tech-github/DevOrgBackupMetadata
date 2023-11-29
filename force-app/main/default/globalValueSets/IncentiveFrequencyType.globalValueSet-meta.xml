@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Monthly Incentive</fullName>
+        <default>false</default>
+        <label>Monthly Incentive</label>
+    </customValue>
+    <customValue>
+        <fullName>Annual Incentive</fullName>
+        <default>false</default>
+        <label>Annual Incentive</label>
+    </customValue>
+    <customValue>
+        <fullName>Quarterly Incentive</fullName>
+        <default>false</default>
+        <label>Quarterly Incentive</label>
+    </customValue>
+    <customValue>
+        <fullName>Ad-Hoc</fullName>
+        <default>false</default>
+        <label>Ad-Hoc</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>INCENTIVE FREQUENCY TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LocatorCode__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF(OR(ISBLANK(FloorCode__c),FloorCode__c == &quot;F&quot;),&quot;F00&quot;,FloorCode__c) + &quot;-&quot; +
+IF(OR(ISBLANK(AreaCode__c), AreaCode__c == &quot;A&quot;),&quot;A00&quot;,AreaCode__c) + &quot;-&quot; +
+IF(OR(ISBLANK(SectionCode__c), SectionCode__c == &quot;S&quot;),&quot;S00&quot;,SectionCode__c)+ &quot;-&quot; +
+IF(OR(ISBLANK(Rack__c), Rack__c  == &quot;R&quot;),&quot;R00&quot;,Rack__c)+ &quot;-&quot; +
+IF(OR(ISBLANK(Level__c), Level__c == &quot;L&quot;),&quot;L00&quot;,Level__c)</formula>
+    <label>LOCATOR CODE</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

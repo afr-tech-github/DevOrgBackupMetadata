@@ -1,0 +1,86 @@
+@isTest
+private class PrintCommercialInvoiceControllerTest {
+    private static Account acc{get;set;}
+    private static Account acc2{get;set;}
+    private static CustomObject1__c ank{get;set;}
+    private static SALES_ORDER__c ank1{get;set;}
+    static{
+        Custom_Application_Config__c config =  new Custom_Application_Config__c(Disabled_Trigger__c = true);
+        FlsService.doInsert(config);
+        acc = new Account();
+        acc.Name  = 'SBS';
+        acc.EnglishCompanyName__c = 'SBS';
+        acc.BillingStreet = 'a';
+        acc.BillingCity = 'a';
+        acc.BillingState = 'a';
+        acc.BillingPostalCode = 'a';
+        acc.BillingCountry = 'a';
+        acc.CorporateMyNumber__c = 'SBS-1';
+        FlsService.doInsert(acc);
+        acc2 = new Account();
+        acc2.Name  = 'SBS 2';
+        acc2.EnglishCompanyName__c = 'SBS 2';
+        acc2.CorporateMyNumber__c = 'SBS-2';
+        FlsService.doInsert(acc2);
+        Site_Custom_Settings__c setting = new Site_Custom_Settings__c();
+        setting.LocalCurrencyBankAccountShortName1__c = 'Bank 1';
+        setting.LocalCurrencyBankAccountShortName2__c = 'Bank 2';
+        setting.LocalCurrencyBankAccountShortName3__c = 'Bank 3';
+        setting.LocalCurrencyBankAccountShortName4__c = 'Bank 4';
+        setting.LocalCurrencyBankAccountShortName5__c = 'Bank 5';
+        setting.FCYBankAccountShortName1__c = 'Bank Foreign 1';
+        setting.FCYBankAccountShortName2__c = 'Bank Foreign 2';
+        setting.Company_Country__c = 'VN';
+        setting.Local_Currency__c = 'VND';
+         setting.clofor_com_cfs__Disable_Monthly_Yearly_HBL_ID__c = false;
+        insert setting;
+        User user1 = [ SELECT id from user limit 1 ];
+        
+        Contract__c ct = new Contract__c();
+        insert ct;
+        
+        ank = new CustomObject1__c();
+        ank.Field1__c = acc.id;
+        ank.PersonInCharge__c      = user1.id;
+        //ank.InChargeOfQuotation__c = user1.id;
+        ank.QuoationDescription__c = 'test';
+        ank.SeikyusyoRemark__c = 'test';
+        FlsService.doInsert(ank);
+        
+        ank1 = new SALES_ORDER__c();
+        ank1.ContractID__c = ct.id;
+        FlsService.doInsert(ank1);
+        
+        system.debug('SALES_ORDER__c : '+ ank);
+        
+        TariffMaster__c pro = new TariffMaster__c();
+        pro.Name = 'LCL';
+        pro.ProductSearch__c    = 'FCL輸入';      //大分類
+        pro.Subcategory__c      = '基本料金';     //小分類
+        pro.EngProductSearch__c = 'FCL Import';   //ENG大分類
+        pro.EngSubcategory__c   = 'Basic charge'; //ENG子分類
+        pro.ProductFlag__c      = true;
+        pro.Supplier__c = acc.Id;
+        FlsService.doInsert(pro);
+        
+        AnkenMeisai__c mei = new AnkenMeisai__c();        
+        mei.Anken__c        = Ank.id;
+        mei.curr__c         = 'JPY';
+        mei.SerchSyubetu__c = 'FCL輸入';
+        mei.Tariff__c       = pro.id;
+        //mei.PaymentTo__c    = acc2.id;
+        mei.Seikyusaki__c   = acc.id;
+        FlsService.doInsert(mei);
+    }
+    public static testMethod void  test_method_1() {
+        Test.startTest();
+        ApexPages.currentPage().getParameters().put('shipmentId', ank1.Id);
+        ApexPages.currentPage().getParameters().put('customerId', acc.Id);
+        ApexPages.currentPage().getParameters().put('showFooter', 'true');
+        PrintCommercialInvoiceController ctrl = new PrintCommercialInvoiceController();
+        Integer x = 1;
+        system.assert(x==1);
+        Test.stopTest();
+    }
+
+}

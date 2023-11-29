@@ -1,0 +1,174 @@
+<apex:page standardController="WorkOrder__c"
+    extensions="WMS_WO_PrintLabel"
+    showHeader="false"
+    sidebar="false"
+    standardStylesheets="false"
+    applyBodyTag="false"
+    applyHtmlTag="false"
+    docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <head>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+                <apex:includeScript value="{!URLFOR($Resource.barcode ,'barcode/JsBarcode.all.min.js')}"/>
+            <style>
+                @media print {
+                    .no-print, .no-print * {
+                        display: none !important;
+                    }
+                    .pagination{
+                        display: none;
+                    }
+                }
+
+                @page {
+                    size: 297mm 210mm ;
+                    margin: 10mm;
+                }
+                body {
+                    font-family: Arial Unicode MS;
+                }
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+                table{
+                    border-spacing: 0;
+                    border-collapse: collapse;
+                    width:100%;
+                }
+                table * {
+                }
+                .border_left { border-left: 1px #000 solid; }
+                .border_right { border-left: 1px #000 solid; }
+                .border_top { border-left: 1px #000 solid; }
+                .border_bottom { border-left: 1px #000 solid; }
+                .border_around { border: 1px #000 solid; }
+                .border_none, table.border_none td, table.border_none th { border: none; }
+                .padding_none, table.padding_none td, table.padding_none th { padding: 0; }
+                td, th {
+                    border: 1px #aaa solid;
+                    padding: 5mm;
+                    vertical-align: top;
+                    font-size:15pt;
+                }
+                .lbl {
+                    text-transform: uppercase;
+                }
+                .data {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                }
+                .pnl-label img {
+                    width:60mm;
+                }
+                .button{
+                    padding: 5px;
+                }
+            </style>
+            <script type="text/javascript">
+        
+                j$ = jQuery.noConflict();
+                j$(document).ready(function() {
+        
+                var barcodeItems = j$( ".barcode" );
+                for(var i = 0; i < barcodeItems.length; i++){
+                    var item = barcodeItems[i];
+                    var itemId = item.id;
+                    var itemInfos = itemId.split('__');
+                    j$( "#" + itemId).JsBarcode(itemInfos[1]);
+                }
+                    //j$( ".barcode" ).JsBarcode("Hi!");
+                });
+                </script>
+        </head>
+        <body>
+            <button class="no-print" onclick="window.print();" style="margin:10mm; text-transform: uppercase; padding:3mm 6mm;font-size:20pt;float:right;">
+                {!translations['print_label']}
+            </button>
+            <apex:form >
+            <apex:outputPanel id="pbId">
+                <apex:actionStatus id="fetchStatus">
+                    <apex:facet name="start">
+                        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                            &nbsp;
+                        </div>
+                        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                            <div style="display: inline-block; padding: 2px;width: 125px;">
+                                <span style="display: inline-block; padding: 10px 0px; color:green; font-weight:bold; font-size: 20px;" >Loading...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionStatus>
+                <div class="content">
+                    <div style="width: 100%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                        <div style="float:left; width: 50%; text-align: left;">
+                            {!translations['total']}: {!WosLineItems.size}/{!Records.size} {!translations['records']}
+                        </div>
+                        <div style="float:left; width: 50%; text-align: left;" >
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['first']}" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+        
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['previous']}" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+            
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['next']}" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+            
+                            <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['last']}" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                        </div>
+                    </div>
+                    <apex:repeat value="{!WosLineItems}" var="item">
+                        <div class="pnl-label" style="display:inline-block; margin-bottom:5mm; width:100%; page-break-inside: avoid;">
+                            <table cellpadding="0" cellspacing="0" border="1" style="width:100%; page-break-inside: avoid;">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" rowspan="2" style="text-align:center">
+                                            <div style="font-size: 15pt; padding-left: 10mm; text-align:center">
+                                                {!item.Cargo__r.Name}
+                                            </div>
+                                            <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c != 'Barcode'}">
+                                                <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Cargo__r.Product__r.QR_Code__c}" alt="Create Qr Code for this item" border="0"/>
+
+                                                <br/>
+                                                {!item.Cargo__r.Product__r.QR_Code__c}
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c == 'Barcode'}">
+                                                <img id="{!item.Id + '__' + item.Cargo__r.Product__r.QR_Code__c}" class="barcode"/>
+                                            </apex:outputPanel>
+                                        
+                                        </td>
+
+                                        <td class="lbl">{!translations['description_facility']}</td>
+                                        <td class="data">{!item.WorkOrderService__r.DestinationWarehouse__r.FacilityName__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">{!translations['delivery_address']}</td>
+                                        <td class="data">{!item.Cargo__r.DeliveryAddress__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">{!translations['customer']}</td>
+                                        <td class="data">{!item.WorkOrderService__r.WorkOrder__r.Customer__r.Name}</td>
+                                        <td class="lbl">{!translations['cargo_type']}</td>
+                                        <td class="data">{!item.Cargo__r.Product__r.UnitType__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">{!translations['product']}</td>
+                                        <td class="data">{!item.Cargo__r.Product__r.ProductName__c}</td>
+                                        <td class="lbl">{!translations['quantity_per_unit']}</td>
+                                        <td class="data">{!item.Cargo__r.Product__r.QuantityPerUnit__c}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="lbl">{!translations['measurement_cbm']}</td>
+                                        <td class="data">{!item.Cargo__r.Product__r.Measurement__c}</td>
+                                        <td class="lbl">{!translations['gross_weight_kg']}</td>
+                                        <td class="data">{!item.Cargo__r.Product__r.GrossWeight__c}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </apex:repeat>
+                </div>
+            </apex:outputPanel>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

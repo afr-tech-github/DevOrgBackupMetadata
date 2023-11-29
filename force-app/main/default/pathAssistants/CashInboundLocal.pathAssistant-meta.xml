@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>CASH_BOOK__c</entityName>
+    <fieldName>CASH_STATUS__c</fieldName>
+    <masterLabel>Cash-Inbound Local</masterLabel>
+    <recordTypeName>CashIn</recordTypeName>
+</PathAssistant>

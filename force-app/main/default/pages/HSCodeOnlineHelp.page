@@ -1,0 +1,105 @@
+<apex:page showHeader="false">
+<head>
+    <title>HS Code Online Help</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+
+
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       HS Code Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+
+    <h2>TRỢ GIÚP TRỰC TUYẾN CHO MÃ HS</h2>
+<br></br>
+Object này được dùng để quản trị 6 số của mã HS. 6 số này bắt đầu từ Văn phòng khai báo Hải quan của Nhật Bản.<br></br>
+<br></br>
+6 số này được sử dụng Nhập liệu dữ liệu như phần JP24H Advanced Filing Rule.<br></br>
+Trong trường hợp sai mã, dẫn đến nhập liệu sẽ bị sai.<br></br>
+Nếu bạn thấy bất kì mã Nhà cung cấp nào sai, xin vui lòng thông báo với chúng tôi ( info@afr-solutions.com và văn phòng đại diện của chúng tôi).
+.<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>   
+<h2>Online Help for HS Code</h2>
+<br></br>
+This object is to manage 6 digit HS code. These 6 digits are originally from Japan Customs Office.<br></br>
+<br></br>
+This 6 digit HS code is used for Filing Data as a part of JP24H Advanced Filing Rule.<br></br>
+In case incorrect code, will cause errors on filing and sometime fail filing.<br></br>
+If you find any incorrect HS code, please notify us(info@afr-solutions.com and our sales representative). <br></br>
+
+
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>HSコードに関するオンラインヘルプ</h2><br></br>
+<br></br>
+6桁のHSコードを管理するためのオブジェクトです。<br></br>
+この6桁のコードは日本税関から取得した標準コードです。<br></br>
+<br></br>
+この6桁のHSコードは出港前日本２４時間事前申告制度での申告の際に用いられます。<br></br>
+HSードに誤りがある場合、出港前日本２４時間事前申告の際にエラーが出たり、失敗する場合があります。<br></br>
+HSコードに誤りを見つけた場合は弊社の受付(info@afr-solutions.com)や営業担当までご連絡ください。
+<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>HS코드 온라인 도움말</h2><br></br>
+<br></br>
+6문자의 HS코드를 관리하기 위한 오브젝트(객체)입니다.<br></br>
+해상 HS코드는 일본세관에서 취득한 표준코드입니다.<br></br>
+<br></br>
+HS코드가 틀릴 경우 출항전일본24시간사전신고에 에러가 발생할수 있으며, 파일링이 실패할 수도  있습니다, <br></br>
+틀린 HS코드를 발견하셨을 경우 당사의 대표메일(info@afr-solutions.com) 및 영업 담당자에게 연락주시기 바랍니다.<br></br>
+
+</body>
+
+</apex:page>

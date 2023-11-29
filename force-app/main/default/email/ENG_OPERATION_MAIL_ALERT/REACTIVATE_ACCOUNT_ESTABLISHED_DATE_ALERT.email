@@ -1,0 +1,12 @@
+Dear Account Owner 
+
+This mail is from auto mail alert. 
+
+The {!Account.Name}'s established date has already passed. Please check the box in the "REMIND ESTABLISHED DATE" field in this Link: {!Account.Link} to be alerted in the next year.
+
+ACCOUNT INFORMATION: 
+
+Account ID: {!Account.Id} 
+Account Name: {!Account.Name} 
+Established Date: {!Account.Field2__c} 
+Link: {!Account.Link}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Allocation_Catetory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Input the allocation category which corresponds with the category of this buying</inlineHelpText>
+    <label>Cost Allocation Catetory</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Partner Cost allocation</fullName>
+                <default>false</default>
+                <label>Partner Cost allocation</label>
+            </value>
+            <value>
+                <fullName>Carrier Cost Allocation</fullName>
+                <default>false</default>
+                <label>Carrier Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Warehouse Cost Allocation</fullName>
+                <default>false</default>
+                <label>Warehouse Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Carrier Cost Allocation(TAX)</fullName>
+                <default>false</default>
+                <label>Carrier Cost Allocation(TAX)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when VAT Invoice is rejected by an approver.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>VAT INVOICE ISSUE READY - REJECTED</name>
+    <style>none</style>
+    <subject>VAT INVOICE ISSUE READY-REJECTED-ID:{!CustomObject1__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

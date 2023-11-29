@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FreightForwardingExport</fullName>
+    <active>true</active>
+    <description>Record type to manage Standard Operation Process and Timeline of freight forwarding export involving 2 countries.</description>
+    <label>Freight Forwarding Export</label>
+</RecordType>

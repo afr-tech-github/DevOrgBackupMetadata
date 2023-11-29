@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>status_check5</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4 )</booleanFilter>
+    <columns>NAME</columns>
+    <columns>status__c</columns>
+    <columns>Field1__c</columns>
+    <columns>Partner__c</columns>
+    <columns>NyukinzandakaJPY__c</columns>
+    <columns>BuyDifferentiation_sum2__c</columns>
+    <columns>ETA__c</columns>
+    <columns>DeadlineForPaymentOfInvoices__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CustomObject1__c.InAir,CustomObject1__c.OutAir,CustomObject1__c.RecordType,CustomObject1__c.RecordType1</value>
+    </filters>
+    <filters>
+        <field>ETA__c</field>
+        <operation>greaterThan</operation>
+        <value>9/1/2013</value>
+    </filters>
+    <filters>
+        <field>NyukinzandakaJPY__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>BuyDifferentiation_sum2__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>AR &amp; AP remained</label>
+</ListView>

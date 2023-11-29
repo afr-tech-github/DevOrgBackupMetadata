@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Internet Banking</fullName>
+        <default>false</default>
+        <label>Internet Banking</label>
+    </customValue>
+    <customValue>
+        <fullName>Phone Banking</fullName>
+        <default>false</default>
+        <label>Phone Banking</label>
+    </customValue>
+    <customValue>
+        <fullName>ATM</fullName>
+        <default>false</default>
+        <label>ATM</label>
+    </customValue>
+    <customValue>
+        <fullName>Bank Counter</fullName>
+        <default>false</default>
+        <label>Bank Counter</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>BANK SUBMISSION TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

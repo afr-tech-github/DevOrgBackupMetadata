@@ -1,0 +1,23 @@
+회계 담당자님 
+
+{!Tax_Ratio__c.CreatedBy} 새로운 소비세율의 승인이 요처되었습니다. 
+
+아래의 정보를 확인 후 레코드의 승인, 기각을 요청합니다.
+
+◎TAX RATIO ID：[{!Tax_Ratio__c.TAX_RATIO_ID__c}]  Link to SF:{!Tax_Ratio__c.Link} 
+◎CURRENCY : {!Tax_Ratio__c.Currency__c}
+◎START DATE : {!Tax_Ratio__c.Start_Date__c}
+◎END DATE : {!Tax_Ratio__c.End_Date__c}
+◎SELLING CONSUMPTION TAX RATE : {!Tax_Ratio__c.Selling_Tax_Ratio__c}%
+◎BUYING CONSUMPTION TAX RATE : {!Tax_Ratio__c.Buying_Tax_Ratio__c}%
+
+You can also approve, reject and comment on this request from your feed.
+
+잘 부탁드립니다. 
+
+*********************************************************
+{!Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

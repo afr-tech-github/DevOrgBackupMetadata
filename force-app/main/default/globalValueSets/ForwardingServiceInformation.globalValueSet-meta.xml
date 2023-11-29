@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ocean Freight Rate</fullName>
+        <default>false</default>
+        <label>Ocean Freight Rate</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Freight Rate</fullName>
+        <default>false</default>
+        <label>Air Freight Rate</label>
+    </customValue>
+    <customValue>
+        <fullName>Local Charge</fullName>
+        <default>false</default>
+        <label>Local Charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Handling Charge</fullName>
+        <default>false</default>
+        <label>Handling Charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Commission</fullName>
+        <default>false</default>
+        <label>Commission</label>
+    </customValue>
+    <customValue>
+        <fullName>Frequency</fullName>
+        <default>false</default>
+        <label>Frequency</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct Or Transit</fullName>
+        <default>false</default>
+        <label>Direct Or Transit</label>
+    </customValue>
+    <customValue>
+        <fullName>Transit Time</fullName>
+        <default>false</default>
+        <label>Transit Time</label>
+    </customValue>
+    <masterLabel>FORWARDING SERVICE INFORMATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

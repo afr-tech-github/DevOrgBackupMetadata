@@ -1,0 +1,65 @@
+<apex:page controller="DeliveryLetterSelectionController" showHeader="false" sidebar="false" docType="html-5.0" title="Cargo Delivery">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+        <script>
+        j$ = jQuery.noConflict();
+        j$(document).ready(function() {});
+        
+        function showReport() {
+            var el = j$('span[id$=openUrlPlaceholder]');
+            
+            var openUrl = el.text();
+            window.open(openUrl);
+            window.opener.location.href = "/{!$CurrentPage.parameters.id}";
+            window.top.close();
+        }
+        
+        function closePopupDialog() {
+            window.top.close();
+        }
+        </script>        
+    </head>
+    <body>
+        <apex:outputPanel style="display:none;" id="openUrlPlaceholder">
+            <apex:outputText value="{!openUrl}" id="afr_PageOpenUrl"></apex:outputText>
+        </apex:outputPanel>
+        <apex:form >
+            <apex:sectionHeader subtitle="{!translations['DELIVERY_REPORT_TITLE']}"/>
+            <apex:pageBlock >
+                <apex:pageBlockButtons >                
+                    <apex:commandButton value="{!translations['btn_generate']}" action="{!showDeliveryLetter}" rendered="{!locations.size > 0}" oncomplete="showReport()" reRender="openUrlPlaceholder"/>
+                    <apex:commandButton value="{!translations['btn_close']}" onclick="closePopupDialog()"/>
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection title="{!translations['DELIVERY_REPORT_SELECTION']}" columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!translations['language']}</apex:outputLabel>
+                        <apex:selectList size="1" value="{!selectedLanguage}">
+                            <apex:actionSupport event="onchange" action="{!refreshLettersList}" reRender="available_letter"/>
+                            <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!translations['invoice']}</apex:outputLabel>
+                        <apex:selectList size="1" value="{!selectedLetter}" id="available_letter">
+                            <apex:selectOptions value="{!letters}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!translations['location']}</apex:outputLabel>
+                        <apex:selectList size="1" value="{!selectedLocation}">
+                            <apex:selectOptions value="{!locations}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="{!translations['section_2_title']}" columns="1">
+                    <apex:pageBlockSectionItem >
+                        <apex:inputCheckbox value="{!requiredAttachmentCreation}"/> 
+                        <apex:outputLabel >{!translations['chk_attachment']}</apex:outputLabel>         
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+</apex:page>

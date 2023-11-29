@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATE_VALI_MCYBONDED_Must_LaterThan_META</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Master_Record_Type__c)=&quot;Ocean Import&quot;,DATEVALUE(CYBONDEDTIME__c) &lt; META__c)</errorConditionFormula>
+    <errorDisplayField>CYBONDEDTIME__c</errorDisplayField>
+    <errorMessage>コンテナ搬入日は入港日より遅い日付を選択してください。 
+M CY BONDED DATE must be later than META. Please re-enter the correct data.</errorMessage>
+</ValidationRule>

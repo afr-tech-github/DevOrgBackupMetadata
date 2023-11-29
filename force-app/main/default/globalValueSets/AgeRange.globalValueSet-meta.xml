@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>1-10</fullName>
+        <default>false</default>
+        <label>1-10</label>
+    </customValue>
+    <customValue>
+        <fullName>11-20</fullName>
+        <default>false</default>
+        <label>11-20</label>
+    </customValue>
+    <customValue>
+        <fullName>21-30</fullName>
+        <default>false</default>
+        <label>21-30</label>
+    </customValue>
+    <customValue>
+        <fullName>31-40</fullName>
+        <default>false</default>
+        <label>31-40</label>
+    </customValue>
+    <customValue>
+        <fullName>41-50</fullName>
+        <default>false</default>
+        <label>41-50</label>
+    </customValue>
+    <customValue>
+        <fullName>51-60</fullName>
+        <default>false</default>
+        <label>51-60</label>
+    </customValue>
+    <customValue>
+        <fullName>61-70</fullName>
+        <default>false</default>
+        <label>61-70</label>
+    </customValue>
+    <customValue>
+        <fullName>71-80</fullName>
+        <default>false</default>
+        <label>71-80</label>
+    </customValue>
+    <customValue>
+        <fullName>81-90</fullName>
+        <default>false</default>
+        <label>81-90</label>
+    </customValue>
+    <customValue>
+        <fullName>91-100</fullName>
+        <default>false</default>
+        <label>91-100</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 100</fullName>
+        <default>false</default>
+        <label>Over 100</label>
+    </customValue>
+    <masterLabel>AGE RANGE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

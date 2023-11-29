@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi muốn gửi đường dẫn chứng từ khai quan tới khách hàng.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>OCEAN IMPORT AUTO EMAIL FOR CUSTOMER-CUSTOM CLEARANCE DOC LINK-VN</name>
+    <style>none</style>
+    <subject>Ocean Import Status by CloTra - **Customs Clearance DOC LINK**-ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

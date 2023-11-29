@@ -1,0 +1,15 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>General Journal</h1>
+ 
+ General Journal is under development.
+ General Journal: A book of original entry that requires that both the account being debited and the account being credited be listed 
+ along with the respective amounts. 
+
+Estimated Completetion Date of Development: End of Octobor, 2018
+ 
+ 
+ 
+ 
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

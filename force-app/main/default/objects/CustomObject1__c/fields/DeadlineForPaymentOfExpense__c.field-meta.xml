@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeadlineForPaymentOfExpense__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Please enter deadline of Duty Payment. The input date will be shown in 立替請求書 Only. Duty Payment includes Import Tax, Export Tax, and costs paid in advance.</inlineHelpText>
+    <label>DUE DATE OF DUTY PAYMENT-TAX</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

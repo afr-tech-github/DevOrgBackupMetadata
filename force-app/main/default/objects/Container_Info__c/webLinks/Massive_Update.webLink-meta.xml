@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Massive_Update</fullName>
+    <availability>online</availability>
+    <description>To Update Container Info from Container Detail Section in FORWARDING Object.</description>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Massive Updates</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+
+var currentLocation = location.href;
+var lastSlashIndex = currentLocation.lastIndexOf(&quot;/&quot;);
+var parentId = currentLocation.substring(lastSlashIndex + 1, currentLocation.length);
+
+location.href= &apos;/apex/clofor_com_cfs__page_SetupContainerInfo?parentId=&apos; + parentId;</url>
+</WebLink>

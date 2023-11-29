@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WMSBadDebtUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>WMS BAD DEBT(USD)</label>
+    <summarizedField>WorkOrder__c.BadDebtUSD__c</summarizedField>
+    <summaryForeignKey>WorkOrder__c.Customer__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

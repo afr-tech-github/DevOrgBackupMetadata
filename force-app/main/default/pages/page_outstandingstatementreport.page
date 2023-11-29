@@ -1,0 +1,1179 @@
+<apex:page controller="OutstandingStatementReportController" sidebar="false" applyBodyTag="false" docType="html-5.0" id="thepage" title="OutStanding Statement Report">
+    <head>
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+        <style type="text/css">
+            body {
+                font-family: Arial,Helvetica,sans-serif;
+            }
+            
+            table {
+                border-collapse: collapse;
+                width:100%;
+            }
+            
+            .error_message {
+                color: red;
+            }
+            
+            .cell_border { 
+                border: 1px solid black;
+            }
+            
+            .title {
+                text-transform: uppercase;
+                font-size: 200%;       
+            }
+            
+            .tableHeader {
+                background-color: #bfc4d4;  
+                text-align:right;
+            }
+            
+            .tableBody1 {
+                background-color: #bfc4d4; 
+                width: 8%; 
+                border:1px solid black;
+            }
+            
+            .tableBodyDetail3 {
+                background-color: #6699CC; 
+                border:1px solid black;
+            }
+            
+            .tableBodyDetail4 {
+                background-color: #6699CC; 
+                border:1px solid black;
+                text-align: right;
+            }
+            
+            .tableBodyHDetail3 {
+                background-color: #336699; 
+                border:1px solid black;
+            }
+            
+            .tableBodyHDetail4 {
+                background-color: #336699; 
+                border:1px solid black;
+                text-align: right;
+            }
+            
+            .tableBody2 {
+                background-color: #bfc4d4; 
+                width: 10%; 
+                border:1px solid black;
+            }
+            
+            .tableBody3 {
+                background-color: #d4dadc; 
+                border:1px solid black;
+            }
+            
+            .tableBody4 {
+                background-color: #d4dadc; 
+                border:1px solid black;
+                text-align: right;
+            }
+            
+            .tableFoot1 {
+                width:50%;
+                background-color: grey;
+                font-weight: bold;
+                color: white;
+            }
+            
+            .tableFoot2 {
+                background-color: grey;
+                font-weight: bold;
+                text-align: right;
+                color: white;
+            }
+            
+            .tableClass {
+                width:100%;
+                border: 1px solid #e0e3e5;
+                vertical-align: middle;
+                font-size: 16px;
+            }
+            
+            .tableClass th {
+                border: 1px solid black;
+                border-collapse: collapse;
+                background-color: #bfc4d4; 
+            }
+            
+            .tableClass td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                white-space: nowrap;
+                background-color: #d4dadc;
+            }
+        </style>
+    </head>
+    
+    
+    <script type="text/javascript">
+    function setFocus() {
+        document.getElementById("dummy_hidden_input").focus();
+    }
+    
+    j$ = jQuery.noConflict();
+    j$(document).ready(function() {
+        j$("#select_language").hide();
+    
+        j$( "input[id$=fromDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        })
+        j$( "input[id$=toDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        })
+
+        j$( "select[id$=reportSelect]" ).change(function() {
+            var selectedOption = this.value;
+
+            if ("Outstanding" === selectedOption) {
+                j$("span[id$=report_date]").html(j$("span[id$=etd]").html());
+                j$("#select_language").hide();
+            } else if ("DOMESTIC" === selectedOption) {
+                j$("span[id$=report_date]").html(j$("span[id$=sales_accounted_date]").html());
+                j$("#select_language").show();
+            }
+        });
+    });
+    </script>
+    
+    <!--*************************************************************************-->
+    <body>
+        <input type="hidden" id="dummy_hidden_input"/>
+        <div>
+            <a style="position: absolute; right: 50px; padding: 10px" href="/apex/clofor_com_cfs__page_OutstandingStatementOnlineHelp" target="_blank">
+                Help for this page <img src="/s.gif" alt="" class="helpIcon"/>
+            </a>
+        </div>
+        
+        <apex:form id="frm">
+            <apex:pageBlock title="{!translations['Select_Report']}">
+                <div>
+                    <apex:outputPanel >{!translations['Report']}: </apex:outputPanel>
+                    <apex:selectList size="1" value="{!reportType}" id="reportSelect">
+                        <apex:selectOptions value="{!reportTypes}"></apex:selectOptions>
+                        <apex:actionSupport event="onchange" action="{!onChangeType}" reRender="idTblName, idCusName, thepageblock" />
+                    </apex:selectList>
+                </div>
+                
+            </apex:pageBlock>
+            <apex:pageBlock title="{!translations['Time_Frame']}">
+                <span id="report_date">
+                    <apex:selectList size="1" value="{!searchType}" >
+                        <apex:selectOptions value="{!SearchConditions}"></apex:selectOptions>
+                    </apex:selectList>
+                </span>
+                <br />
+                <apex:outputPanel id="error">
+                    <apex:outputText value="{!message}" styleClass="error_message"></apex:outputText>
+                </apex:outputPanel>
+                <br />
+                <apex:outputLabel ><span>{!translations['From']} : </span></apex:outputLabel>
+                <apex:inputText id="fromDate" value="{!sFromDate}">
+                	<apex:actionSupport event="onchange" action="{!onChangeDate}" reRender="idCusName, thepageblock" />
+                </apex:inputText>
+                <apex:outputLabel ><span> {!translations['To']} </span></apex:outputLabel>
+                <apex:inputText id="toDate" value="{!sToDate}">
+                	<apex:actionSupport event="onchange" action="{!onChangeDate}" reRender="idCusName, thepageblock" />
+                </apex:inputText>
+                <br/>
+                <br/>
+                <apex:outputLabel ><span>Show : </span></apex:outputLabel>
+                <span id="report_currency">
+                    <apex:selectList size="1" value="{!showType}" >
+                        <apex:selectOptions value="{!ShowTypes}"></apex:selectOptions>
+                    </apex:selectList>
+                </span>
+                <br/><br/>
+                <apex:outputLabel id="idTblName" ><span>{!strTblName} : </span></apex:outputLabel>
+                <span id="report_tablename">
+                    <apex:selectList size="1" value="{!strNameId}" id="idCusName" >
+                        <apex:selectOptions value="{!lstName}"></apex:selectOptions>
+                    </apex:selectList>
+                </span>
+                
+                <br /> <br />
+                <div id="select_language">
+                    <apex:outputPanel >{!translations['language']}: </apex:outputPanel>
+                    <apex:selectList size="1" value="{!selectedLanguage}" id="reportSelect">
+                        <apex:actionSupport event="onchange" action="{!updateLanguage}" reRender="reportSelect"/>
+                        <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                    </apex:selectList>
+                </div>
+                <br /><br />
+                <apex:commandButton value="{!translations['Generate_Report']}" action="{!generateReport}" rerender="frm" status="actionStatus"/>
+                <apex:actionStatus id="actionStatus">
+                    <apex:facet name="start">
+                        <apex:outputText value="Generating...."/>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:pageBlock>
+
+            <apex:pageBlock id="thepageblock">
+                <div class="title" id="report_name">
+                    {!reportName}
+                </div>
+                <p />
+                <!-- ========================= CUSTOMER INVOICE ============================= -->
+                <apex:outputPanel rendered="{!IF(reportType='DOMESTIC' , true, false)}">
+                    <table cellPadding="4" border="0" width="100%">
+                        <apex:repeat value="{!dcbReportWrapper.customerReports}" var="record">
+                            <tr>
+                                <td colspan="11"></td>
+                                <td colspan="4">
+                                    <apex:commandLink value="Excel" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                                      target="_blank" style="text-decoration:none;">
+                                        <apex:param name="param1" assignTo="{!pageType}" value="excel" />
+                                        <apex:param name="param2" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                                        <apex:param name="param3" assignTo="{!reportOption}" value="1" />
+                                        <apex:param name="param4" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                                        <apex:param name="param5" assignTo="{!customerENName}" value="{!URLEncode(record.customerEnglishName)}" />
+                                    </apex:commandLink>
+                                    <apex:commandLink value="Pdf" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                                      target="_blank" style="text-decoration:none;">
+                                        <apex:param name="param1" assignTo="{!pageType}" value="pdf" />
+                                        <apex:param name="param2" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                                        <apex:param name="param3" assignTo="{!reportOption}" value="1" />
+                                        <apex:param name="param4" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                                        <apex:param name="param5" assignTo="{!customerENName}" value="{!URLEncode(record.customerEnglishName)}" />
+                                    </apex:commandLink>
+                                </td>
+                            </tr>
+                            <tr >
+                                <td colspan="{!IF(showType <> 'Both', '10', '13')}" bgcolor="#bfc4d4">
+                                    <b>Customer Name</b>: {!record.customerName} <b>({!record.recordCount} records)</b>   
+                                </td>
+                                <td bgcolor="#bfc4d4" ></td>
+                                <td bgcolor="#bfc4d4" ></td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="2" class="tableBody1" style="width: 2% !important; text-align:center;">
+                                    <apex:inputCheckbox value="{!mapShowHideTableCustomer[record.customerName]}">
+                                        <apex:actionSupport action="{!displayDetailTableName}" reRender="thepageblock" event="onchange" />
+                                    </apex:inputCheckbox> 
+                                </td>
+                            	<td rowspan="2" class="tableBody1"><b>SO. NO</b></td>
+                                <td rowspan="2" class="tableBody1"><b>SALES ACCOUNTED DATE</b></td>
+                                <td rowspan="2" class="tableBody1"><b>HBL</b></td>
+                                <td rowspan="2" class="tableBody1"><b>MBL</b></td>
+                                <td rowspan="2" class="tableBody1"><b>ETD</b></td>
+                                <td rowspan="2" class="tableBody1"><b>ETA</b></td>
+                                <td rowspan="2" class="tableBody1"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_PAYMENT_EXCLUDE_TAX']}"></apex:outputLabel></b></td>
+                                <!--<td rowspan="2" class="tableBody2"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_DUTY_PAYMENT_TAX']}"></apex:outputLabel></b></td>
+                                <td rowspan="2" class="tableBody1"><b><apex:outputLabel value="{!translations['F_EXPECTED_DELIVERY_DATE']}"></apex:outputLabel></b></td>-->
+                                <td rowspan="2" class="tableBody2"><b><apex:outputLabel value="{!translations['F_QUANTITY']}"></apex:outputLabel></b></td>
+                                <td colspan="3" class="tableBody1" style="text-align: center; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>LOCAL</b>
+                                </td>
+                                <td colspan="3" class="tableBody1" style="text-align: center; {!IF(showType <> 'VND', '', 'display: none;')}"><b>USD</b></td>
+                            </tr>
+
+                            <tr>
+                                
+                                <!--<td class="tableBody1"><b><apex:outputLabel value="{!translations['F_AMOUNT_SELLING']}"></apex:outputLabel></b></td>
+                                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_UNPAID_BALANCE']}"></apex:outputLabel></b></td>-->
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>DEBIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>CREDIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>BALANCE</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>DEBIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>CREDIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>BALANCE</b>
+                                </td>
+                            </tr>
+                            <apex:repeat value="{!record.lineItems}" var="lineItem">
+                                <tr>
+                                    <td class="tableBody3">
+                                        <apex:inputCheckbox value="{!mapShowHideDetailCustomer[record.customerName + lineItem.wkid]}">
+                                            <apex:actionSupport reRender="thepageblock" event="onchange" />
+                                        </apex:inputCheckbox>
+                                    </td>
+                                    <!--<td class="tableBody3"><a href="/{!lineItem.hblId}" target="_blank">{!lineItem.sisid}</a></td>-->
+                                    <td class="tableBody3">
+                                    	<apex:outputText value="{!lineItem.sisid}" escape="false"></apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                    	<apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.salesAccountDate}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">{!lineItem.hblNo}</td>
+                                    <td class="tableBody3">{!lineItem.mblNo}</td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.etd}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.eta}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deadlinePaymentInvoice}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <!--<td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deadlinePaymentExpense}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deliveryDate}"/>
+                                        </apex:outputText>
+                                    </td>-->
+                                    <td class="tableBody3">{!lineItem.recordCount} INV</td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfDebit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    	<apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfCredit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfBalance}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfDebitUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    	<apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfCreditUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfBalanceUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                
+                                <tr style="{!IF(mapShowHideDetailCustomer[record.customerName + lineItem.wkid], '', 'display: none')}">
+                                    <td class="tableBodyHDetail3">
+                                    </td>
+                                    <td class="tableBodyHDetail3"><b>BILLING-FMS/TMS ID</b></td>
+                                    <td class="tableBodyHDetail3"><b>SALES ACCOUNTED DATE-INVOICING</b></td>
+                                    <td class="tableBodyHDetail3"><b>PRICING NAME AT PRINT(LOCAL)</b></td>
+                                    <td class="tableBodyHDetail3"><b>INVOICE TO</b></td>
+                                    <td class="tableBodyHDetail3"><b>PAYMENT TO-BUYING</b></td>
+                                    <td colspan="2" class="tableBodyHDetail3"><b>DESCRIPTION</b></td>
+                                    <td class="tableBodyHDetail3"><b>CHARGE UNIT (TOTAL)</b></td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>AMOUNT SELLING INCLUDING TAX</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>AMOUNT BUYING INCLUDING TAX</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>UNPAID BALANCE OF SELLING</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>AMOUNT SELLING INCLUDING TAX</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>AMOUNT BUYING INCLUDING TAX</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>UNPAID BALANCE OF SELLING</b>
+                                    </td>
+                                </tr>
+                                <apex:repeat rendered="{!IF(mapShowHideDetailCustomer[record.customerName + lineItem.wkid], '', 'display: none')}" 
+                                             value="{!reportCustomerDetail[record.customerName + lineItem.wkid]}" var="item">
+                                	<tr style="">
+                                        <td class="tableBodyDetail3">
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            <a href="/{!item.id}" target="_blank">{!item.name}</a>
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                                <apex:param value="{!item.salesAccountedDateInvoicing}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                        	{!item.insatuyouSyohin}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.seikyusakiName}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.paymentToName}
+                                        </td>
+                                        <td colspan="2" class="tableBodyDetail3">
+                                            {!item.description}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.suryo}
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.debit}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.credit}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.balance}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.debitUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.creditUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.balanceUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                                
+                            </apex:repeat>
+                            <tr >
+                                <td colspan="{!IF(showType <> 'Both', '12', '15')}" class="tableFoot1" style="color:white;">Subtotal</td>
+                            </tr>
+                            <tr>
+                                <td class="tableFoot2" colspan="9" border="1" width="70%"></td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfDebit}" />
+                                    </apex:outputText>
+                                </td>
+								<td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfCredit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfBalance}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfDebitUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfCreditUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfBalanceUSD}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                        
+                        <tr >
+                            <td colspan="{!IF(showType <> 'Both', '12', '15')}" class="tableFoot1" style="color:white;">Grand Totals</td>
+                        </tr>
+                        <tr >
+                            <td colspan="9" class="tableFoot1"></td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfDebit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfCredit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfBalance}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfDebitUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfCreditUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfBalanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+                <!--=======================================DOMESTIC_CREDIT_DEBIT=========================-->
+                <apex:outputPanel rendered="{!IF(reportType='DOMESTIC_CREDIT_DEBIT' , true, false)}">
+                    <table cellPadding="4" border="0" width="100%">
+                        <apex:repeat value="{!dcbReportWrapper.customerReports}" var="record">
+                            <tr>
+                                <td colspan="7"></td>
+                                <td colspan="2">
+                                    <apex:commandLink value="Excel" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                                      target="_blank" style="text-decoration:none;">
+                                        <apex:param name="param1" assignTo="{!pageType}" value="excel" />
+                                        <apex:param name="param2" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                                        <apex:param name="param3" assignTo="{!reportOption}" value="1" />
+                                        <apex:param name="param4" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                                        <apex:param name="param5" assignTo="{!customerENName}" value="{!URLEncode(record.customerEnglishName)}" />
+                                        <apex:param name="param6" assignTo="{!reportPrintType}" value="{!URLEncode(reportType)}" />
+                                    </apex:commandLink>
+                                    <apex:commandLink value="Pdf" action="{!generateCustomerReport}" styleClass="btn" immediate="true"
+                                                      target="_blank" style="text-decoration:none;">
+                                        <apex:param name="param1" assignTo="{!pageType}" value="pdf" />
+                                        <apex:param name="param2" assignTo="{!customerId}" value="{!URLEncode(record.customerId)}" />
+                                        <apex:param name="param3" assignTo="{!reportOption}" value="1" />
+                                        <apex:param name="param4" assignTo="{!customerName}" value="{!URLEncode(record.customerName)}" />
+                                        <apex:param name="param5" assignTo="{!customerENName}" value="{!URLEncode(record.customerEnglishName)}" />
+                                        <apex:param name="param6" assignTo="{!reportPrintType}" value="{!URLEncode(reportType)}" />
+                                    </apex:commandLink>
+                                </td>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr >
+                                <td colspan="{!IF(showType <> 'Both', '10', '13')}" bgcolor="#bfc4d4">
+                                    <b>Customer Name</b>: {!record.customerName} <b>({!record.recordCount} records)</b>   
+                                </td>
+                                <td bgcolor="#bfc4d4" ></td>
+                                <td bgcolor="#bfc4d4" ></td>
+                            </tr>
+                            
+                            <tr>
+                                <td rowspan="2" class="tableBody1" style="width: 2% !important; text-align:center;">
+                                    <apex:inputCheckbox value="{!mapShowHideTableCustomer[record.customerName]}">
+                                        <apex:actionSupport action="{!displayDetailTableName}" reRender="thepageblock" event="onchange" />
+                                    </apex:inputCheckbox> 
+                                </td>
+                                <td rowspan="2" class="tableBody1"><b>SO. NO</b></td>
+                                <td rowspan="2" class="tableBody1"><b>SALES ACCOUNTED DATE</b></td>
+                                <td rowspan="2" class="tableBody1"><b>HBL</b></td>
+                                <td rowspan="2" class="tableBody1"><b>MBL</b></td>
+                                <td rowspan="2" class="tableBody1"><b>ETD</b></td>
+                                <td rowspan="2" class="tableBody1"><b>ETA</b></td>
+                                <td rowspan="2" class="tableBody1"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_PAYMENT_EXCLUDE_TAX']}"></apex:outputLabel></b></td>
+                                <!--<td rowspan="2" class="tableBody2"><b><apex:outputLabel value="{!translations['F_DUE_DATE_OF_DUTY_PAYMENT_TAX']}"></apex:outputLabel></b></td>
+                                <td rowspan="2" class="tableBody1"><b><apex:outputLabel value="{!translations['F_EXPECTED_DELIVERY_DATE']}"></apex:outputLabel></b></td>-->
+                                <td rowspan="2" class="tableBody2"><b><apex:outputLabel value="{!translations['F_QUANTITY']}"></apex:outputLabel></b></td>
+                                <td colspan="3" class="tableBody1" style="text-align: center; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>LOCAL</b>
+                                </td>
+                                <td colspan="3" class="tableBody1" style="text-align: center; {!IF(showType <> 'VND', '', 'display: none;')}"><b>USD</b></td>
+                            </tr>
+
+                            <tr>
+                                
+                                <!--<td class="tableBody1"><b><apex:outputLabel value="{!translations['F_AMOUNT_SELLING']}"></apex:outputLabel></b></td>
+                                <td class="tableBody1"><b><apex:outputLabel value="{!translations['F_UNPAID_BALANCE']}"></apex:outputLabel></b></td>-->
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>DEBIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>CREDIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>BALANCE</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>DEBIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>CREDIT</b>
+                                </td>
+                                <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>BALANCE</b>
+                                </td>
+                            </tr>
+                            <apex:repeat value="{!record.lineItems}" var="lineItem">
+                                <tr>
+                                    <td class="tableBody3">
+                                        <apex:inputCheckbox value="{!mapShowHideDetailCustomer[record.customerName + lineItem.wkid]}">
+                                            <apex:actionSupport reRender="thepageblock" event="onchange" />
+                                        </apex:inputCheckbox>
+                                    </td>
+                                    <!--<td class="tableBody3"><a href="/{!lineItem.hblId}" target="_blank">{!lineItem.sisid}</a></td>-->
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{!lineItem.sisid}" escape="false"></apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.salesAccountDate}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">{!lineItem.hblNo}</td>
+                                    <td class="tableBody3">{!lineItem.mblNo}</td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.etd}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.eta}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deadlinePaymentInvoice}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <!--<td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deadlinePaymentExpense}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!lineItem.deliveryDate}"/>
+                                        </apex:outputText>
+                                    </td>-->
+                                    <td class="tableBody3">{!lineItem.recordCount} INV</td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfDebit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfCredit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###}">
+                                            <apex:param value="{!lineItem.sumOfBalance}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfDebitUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfCreditUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBody3" align="right" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.##}">
+                                            <apex:param value="{!lineItem.sumOfBalanceUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                                
+                                <tr style="{!IF(mapShowHideDetailCustomer[record.customerName + lineItem.wkid], '', 'display: none')}">
+                                    <td class="tableBodyHDetail3">
+                                    </td>
+                                    <td class="tableBodyHDetail3"><b>BILLING-FMS/TMS ID</b></td>
+                                    <td class="tableBodyHDetail3"><b>SALES ACCOUNTED DATE-INVOICING</b></td>
+                                    <td class="tableBodyHDetail3"><b>PRICING NAME AT PRINT(LOCAL)</b></td>
+                                    <td class="tableBodyHDetail3"><b>INVOICE TO</b></td>
+                                    <td class="tableBodyHDetail3"><b>PAYMENT TO-BUYING</b></td>
+                                    <td colspan="2" class="tableBodyHDetail3"><b>DESCRIPTION</b></td>
+                                    <td class="tableBodyHDetail3"><b>CHARGE UNIT (TOTAL)</b></td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>UNRECEIVED BALANCE OF SELLING</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>UNPAID BALANCE OF BUYING</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <b>BALANCE</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>UNRECEIVED BALANCE OF SELLING</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>UNPAID BALANCE OF BUYING</b>
+                                    </td>
+                                    <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <b>BALANCE</b>
+                                    </td>
+                                </tr>
+                                <apex:repeat rendered="{!IF(mapShowHideDetailCustomer[record.customerName + lineItem.wkid], '', 'display: none')}" 
+                                             value="{!reportCustomerDetail[record.customerName + lineItem.wkid]}" var="item">
+                                    <tr style="">
+                                        <td class="tableBodyDetail3">
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            <a href="/{!item.id}" target="_blank">{!item.name}</a>
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                                <apex:param value="{!item.salesAccountedDateInvoicing}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.insatuyouSyohin}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.seikyusakiName}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.paymentToName}
+                                        </td>
+                                        <td colspan="2" class="tableBodyDetail3">
+                                            {!item.description}
+                                        </td>
+                                        <td class="tableBodyDetail3">
+                                            {!item.suryo}
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.debit}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.credit}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###}">
+                                                <apex:param value="{!item.balance}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.debitUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.creditUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                                <apex:param value="{!item.balanceUSD}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                                
+                            </apex:repeat>
+                            <tr >
+                                <td colspan="{!IF(showType <> 'Both', '12', '15')}" class="tableFoot1" style="color:white;">Subtotal</td>
+                            </tr>
+                            <tr>
+                                <td class="tableFoot2" colspan="9" border="1" width="70%"></td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfDebit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfCredit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###}">
+                                        <apex:param value="{!record.sumOfBalance}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfDebitUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfCreditUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!record.sumOfBalanceUSD}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </apex:repeat>
+                        
+                        <tr >
+                            <td colspan="{!IF(showType <> 'Both', '12', '15')}" class="tableFoot1" style="color:white;">Grand Totals</td>
+                        </tr>
+                        <tr >
+                            <td colspan="9" class="tableFoot1"></td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfDebit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfCredit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfBalance}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfDebitUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfCreditUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}" align="right">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!dcbReportWrapper.sumOfBalanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+                
+                <!--  ============================== PARTNER REPORT =================================== -->
+                <apex:outputPanel rendered="{!IF(OR(reportType='Outstanding', reportType='BBCC', reportType='VENDOR'), true, false)}">
+                <table cellPadding="4" border="0" width="100%">
+                    <apex:repeat value="{!lstReportWrapper}" var="data">
+                        <tr>
+                            <td colspan="{!IF(showType == 'Both', '11', '8')}">   
+                            </td>
+                            <td >
+                                <apex:inputHidden id="myHidden" value="{!data.partnerName}"/>
+                                <apex:commandLink value="Excel" action="{!generateDetailReport}" styleClass="btn" immediate="true"
+                                                  target="_blank" style="text-decoration:none">
+                                    <apex:param name="param2" assignTo="{!pageType}" value="excel" />
+                                    <apex:param name="param3" assignTo="{!partnerName}" value="{!URLEncode(data.partnerName)}" />
+                                    <apex:param name="param4" assignTo="{!partnerENName}" value="{!URLEncode(data.partnerEnglishName)}" />
+                                </apex:commandLink>
+                                <apex:commandLink value="Pdf" action="{!generateDetailReport}" styleClass="btn" immediate="true"
+                                                  target="_blank" style="text-decoration:none">
+                                    <apex:param name="param2" assignTo="{!pageType}" value="pdf" />
+                                    <apex:param name="param3" assignTo="{!partnerName}" value="{!URLEncode(data.partnerName)}" />
+                                    <apex:param name="param4" assignTo="{!partnerENName}" value="{!URLEncode(data.partnerEnglishName)}" />
+                                </apex:commandLink>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td bgcolor="#bfc4d4" ></td>
+                            <td colspan="7" bgcolor="#bfc4d4">
+                                <b>{!tableDisplay}</b>: {!data.partnerName} <b>({!data.partnerQuantity} records)</b>   
+                            </td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                            <td bgcolor="#bfc4d4" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="tableBody1" style="width: 2% !important;">
+                                <apex:inputCheckbox value="{!mapShowHideTable[reportType + data.partnerName]}">
+                                    <apex:actionSupport action="{!displayDetailTableName}" reRender="thepageblock" event="onchange" />
+                                </apex:inputCheckbox>
+                            </td>
+                            <td rowspan="2" class="tableBody1"><b>SO. NO</b></td>
+                            <td rowspan="2" class="tableBody1"><b>SALES ACCOUNTED DATE</b></td>
+                            <td rowspan="2" class="tableBody1"><b>HBL</b></td>
+                            <td rowspan="2" class="tableBody1"><b>MBL</b></td>
+                            <td rowspan="2" class="tableBody1"><b>ETD</b></td>
+                            <td rowspan="2" class="tableBody1"><b>ETA</b></td>
+                            <td rowspan="2" class="tableBody1"><b><apex:outputLabel value="{!translations['F_QUANTITY']}"></apex:outputLabel></b></td>
+                            <td colspan="3" class="tableBody1" style = "text-align: center; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                <b>LOCAL</b>
+                            </td>
+                            <td colspan="3" class="tableBody1" style = "text-align: center; {!IF(showType <> 'VND', '', 'display: none;')}">
+                                <b>USD</b>
+                            </td>
+                            <td  border="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                <b>DEBIT</b>
+                            </td>
+                            <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                <b>CREDIT</b>
+                            </td>
+                            <td class="tableBody2" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                <b>BALANCE</b>
+                            </td>
+                            <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                <b>DEBIT</b>
+                            </td>
+                            <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                <b>CREDIT</b>
+                            </td>
+                            <td class="tableBody2" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                <b>BALANCE</b>
+                            </td>
+                            <td  border="0"></td>
+                        </tr>
+                        <apex:repeat value="{!data.lstSTID}" var="stidDetail">
+                            <tr>
+                                <td class="tableBody3" style = "text-align: center;">
+                                    <apex:inputCheckbox value="{!mapShowHideDetail[reportType + data.partnerName + stidDetail.wkid]}">
+                                        <apex:actionSupport reRender="thepageblock" event="onchange" />
+                                    </apex:inputCheckbox>
+                                </td>
+                                <!--<td class="tableBody3"><a href="/{!stidDetail.hblId}" target="_blank">{!stidDetail.sisid}</a></td>-->
+                                <td class="tableBody3">
+                                    <apex:outputText value="{!stidDetail.sisid}"  escape="false"/>
+                                </td>
+                                <td class="tableBody3">{!mapLocal[reportType + data.partnerName + stidDetail.wkid].salesAccountedDate}</td>
+                                <td class="tableBody3">{!stidDetail.hbl}</td>
+                                <td class="tableBody3">{!stidDetail.mbl}</td>
+                                <td class="tableBody3">
+                                    {!stidDetail.etd}
+                                </td>
+                                <td class="tableBody3">{!stidDetail.eta}</td>
+                                <td class="tableBody3"><b>{!stidDetail.myQuantity} INV</b></td>
+                                <td class="tableBody4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.###}">
+                                        <apex:param value="{!mapLocal[reportType + data.partnerName + stidDetail.wkid].debitLocal}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableBody4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.###}">
+                                        <apex:param value="{!mapLocal[reportType + data.partnerName + stidDetail.wkid].creditLocal}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableBody4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.###}">
+                                        <apex:param value="{!mapLocal[reportType + data.partnerName + stidDetail.wkid].balanceLocal}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableBody4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!stidDetail.debit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableBody4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!stidDetail.credit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="tableBody4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <apex:outputText value="{0,number,###,###,###,###.##}">
+                                        <apex:param value="{!stidDetail.balance}" />
+                                    </apex:outputText>
+                                </td>
+                                <td border="0"></td>
+                            </tr>
+                           
+                            <!-- ------------------------- -->
+                            <tr style="{!IF(mapShowHideDetail[reportType + data.partnerName + stidDetail.wkid], '', 'display: none')}">
+                                <td class="tableBodyHDetail3">
+                                </td>
+                                <td class="tableBodyHDetail3"><b>BILLING-FMS/TMS ID</b></td>
+                                <td class="tableBodyHDetail3"><b>SALES ACCOUNTED DATE-INVOICING</b></td>
+                                <td class="tableBodyHDetail3"><b>PRICING NAME AT PRINT(LOCAL)</b></td>
+                                <td class="tableBodyHDetail3"><b>INVOICE TO</b></td>
+                                <td class="tableBodyHDetail3"><b>PAYMENT TO-BUYING</b></td>
+                                <td class="tableBodyHDetail3"><b>DESCRIPTION</b></td>
+                                <td class="tableBodyHDetail3"><b>CHARGE UNIT (TOTAL)</b></td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>AMOUNT SELLING INCLUDING TAX</b>
+                                </td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>AMOUNT BUYING INCLUDING TAX</b>
+                                </td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                    <b>UNPAID BALANCE OF SELLING</b>
+                                </td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>AMOUNT SELLING INCLUDING TAX</b>
+                                </td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>AMOUNT BUYING INCLUDING TAX</b>
+                                </td>
+                                <td class="tableBodyHDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                    <b>UNPAID BALANCE OF SELLING</b>
+                                </td>
+                                <td border="0"></td>
+                            </tr>
+                            <apex:repeat rendered="{!mapShowHideDetail[reportType + data.partnerName + stidDetail.wkid]}" value="{!mapAnkenDetail[reportType + data.partnerName + stidDetail.wkid]}" var="itemAnken">
+                                <tr>
+                                    <td class="tableBodyDetail3" bgcolor="#3366FF" style = "text-align: center;">
+                                    </td>
+                                    <td class="tableBodyDetail3"><a href="/{!itemAnken.anken.Id}" target="_blank">{!itemAnken.anken.Name}</a></td>
+                                    <td class="tableBodyDetail3">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!itemAnken.anken.SalesAccountedDateInvoicing__c}" /> 
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail3">{!itemAnken.anken.InsatuyouSyohin__c}</td>
+                                    <td class="tableBodyDetail3">{!itemAnken.anken.Seikyusaki__r.Name}</td>
+                                    <td class="tableBodyDetail3">{!itemAnken.anken.PaymentTo__r.Name}</td>
+                                    <td class="tableBodyDetail3">{!itemAnken.anken.Description__c}</td>
+                                    <td class="tableBodyDetail3"><b>{!itemAnken.anken.Suryo__c}</b></td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.debitLocal}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.creditLocal}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'USD', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.balanceLocal}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.debitUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.creditUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="tableBodyDetail4" style="{!IF(showType <> 'VND', '', 'display: none;')}">
+                                        <apex:outputText value="{0,number,###,###,###,###.###}">
+                                            <apex:param value="{!itemAnken.balanceUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td border="0"></td>
+                                </tr>
+                            </apex:repeat>
+                            
+                            <!-- --------------------------------------------- -->
+                            
+                        </apex:repeat>
+                        <tr>
+                            <td  colspan="{!IF(showType == 'Both', '14', '11')}" class="tableFoot1" style="color:white;">
+                                Subtotal
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  colspan="8" class="tableFoot1" style="color:white;"></td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!mapSubTotalLocal[reportType + data.partnerName].debitLocal}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!mapSubTotalLocal[reportType + data.partnerName].creditLocal}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!mapSubTotalLocal[reportType + data.partnerName].balanceLocal}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!data.totalDebit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!data.totalCredit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="tableHeader tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!data.totalBalance}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        
+                    </apex:repeat>
+                    
+                    <tr >
+                        <td colspan="8" class="tableFoot1" style="color:white;">Grand Totals</td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'USD', '', 'display: none;')}"></td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                        <td bgcolor="grey" style="{!IF(showType <> 'VND', '', 'display: none;')}"></td>
+                        <td border="0"></td>
+                    </tr>
+                    <tr >
+                        <td colspan="8" class="tableFoot1"></td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="VND {0,number,###,###,###,###.###}">
+                                <apex:param value="{!grandTotalLocal.debitLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="VND {0,number,###,###,###,###.###}">
+                                <apex:param value="{!grandTotalLocal.creditLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="VND {0,number,###,###,###,###.###}">
+                                <apex:param value="{!grandTotalLocal.balanceLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{!money} {0,number,###,###,###,###.##}">
+                                <apex:param value="{!grandDebit}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{!money} {0,number,###,###,###,###.##}">
+                                <apex:param value="{!grandCredit}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="tableFoot2" style="color:white; {!IF(showType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{!money} {0,number,###,###,###,###.##}">
+                                <apex:param value="{!grandBalance}" />
+                            </apex:outputText>
+                        </td>
+                        <td border="0"></td>
+                    </tr>
+                </table>
+                </apex:outputPanel>
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+</apex:page>

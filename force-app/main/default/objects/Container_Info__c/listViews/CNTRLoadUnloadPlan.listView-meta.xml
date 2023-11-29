@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNTRLoadUnloadPlan</fullName>
+    <booleanFilter>1 AND (2 or 3)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>HBL_SHIPMENT__c</columns>
+    <columns>POL__c</columns>
+    <columns>POD__c</columns>
+    <columns>Container_NO__c</columns>
+    <columns>TEU__c</columns>
+    <columns>Container__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Route__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>POL__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>POD__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>CNTR Load/Unload Plan</label>
+</ListView>

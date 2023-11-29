@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReorderPoint__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>AverageUnitSalesPerDay__c *  AverageLeadTime__c +  SafetyStock__c</formula>
+    <inlineHelpText>Average Daily Unit Sales*Average Delivery Lead Time+Safety Stock
+The level of inventory which triggers an action to replenish that particular inventory stock</inlineHelpText>
+    <label>Reorder Point</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Industry__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Custom Industry</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>海運</fullName>
+                <default>false</default>
+                <label>MARINE TRANSPORTATION</label>
+            </value>
+            <value>
+                <fullName>空運</fullName>
+                <default>false</default>
+                <label>AIR TRANSPORTATION</label>
+            </value>
+            <value>
+                <fullName>運輸関連</fullName>
+                <default>false</default>
+                <label>RELATED TO TRANSPORT</label>
+            </value>
+            <value>
+                <fullName>商社</fullName>
+                <default>false</default>
+                <label>TRADING COMPANY</label>
+            </value>
+            <value>
+                <fullName>アパレル</fullName>
+                <default>false</default>
+                <label>APPAREL</label>
+            </value>
+            <value>
+                <fullName>消費財</fullName>
+                <default>false</default>
+                <label>CONSUMER PRODUCT</label>
+            </value>
+            <value>
+                <fullName>軽工業</fullName>
+                <default>false</default>
+                <label>LIGHT INDUSTRY</label>
+            </value>
+            <value>
+                <fullName>原材料</fullName>
+                <default>false</default>
+                <label>RAW MATERIAL</label>
+            </value>
+            <value>
+                <fullName>食品</fullName>
+                <default>false</default>
+                <label>FOOD</label>
+            </value>
+            <value>
+                <fullName>機械</fullName>
+                <default>false</default>
+                <label>MACHINERY</label>
+            </value>
+            <value>
+                <fullName>化学製品</fullName>
+                <default>false</default>
+                <label>CHEMICAL PRODUCTS</label>
+            </value>
+            <value>
+                <fullName>その他</fullName>
+                <default>false</default>
+                <label>OTHER</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

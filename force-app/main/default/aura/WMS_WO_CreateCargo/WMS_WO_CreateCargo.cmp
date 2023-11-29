@@ -1,0 +1,91 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" access="global" controller="WMS_WO_CreateCargo">
+    <aura:attribute name="entWorkOrder" type="Object" />
+    <!--<aura:attribute name="mapRecordTypes" type="Object" />-->
+    <aura:attribute name="isLoading" type="Boolean" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="listDestinations" type="Object[]" default="[]" />
+    <aura:attribute name="listWoProducts" type="Object[]" default="[]" />
+    <aura:attribute name="picklistUnit" type="Object[]" default="[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler event="force:refreshView" action="{!c.onInit}" />
+
+    <div>
+        <div>
+        </div>
+
+        <aura:iteration items="{!v.listDestinations}" var="dest" indexVar="destIdx">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium" style="box-shadow: 0 0 2px #aaa;">
+                <thead>
+                    <tr>
+                        <th>
+                            <lightning:buttonIcon name="{!destIdx}" iconName="utility:add" size="small" onclick="{!c.doAddCargo}" />
+                        </th>
+                        <th class="slds-text-title_caps" colspan="4">
+                            {!dest.destination.Name} - {!dest.destination.clofor_com_cfs__FacilityName__c}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="slds-text-title_caps">
+                            Product
+                        </th>
+                        <th class="slds-text-title_caps" >
+                            Unit
+                        </th>
+                        <th class="slds-text-title_caps" width="10%">
+                            Weight
+                        </th>
+                        <th class="slds-text-title_caps" width="10%">
+                            Quantity
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!dest.cargos}" var="item" indexVar="idx">
+                        <tr>
+                            <td>
+                                <lightning:buttonIcon name="{!destIdx + '_' + idx}" iconName="utility:delete" size="small" onclick="{!c.doRemoveCargo}" />
+                            </td>
+                            <td>
+                                <c:cmp_lookup
+                                    showRecentRecords="true"
+                                    objectType="clofor_com_cfs__PRODUCT__c"
+                                    searchField="clofor_com_cfs__Summary__c"
+                                    placeholder="Select a Product"
+                                    subtitleField="Name"
+                                    optionalFields="clofor_com_cfs__BillingType__c,clofor_com_cfs__WeightUnit__c,clofor_com_cfs__UnitType__c" 
+                                    order="clofor_com_cfs__ProductName__c"
+                                    value="{!item.productId}"
+                                    ref="{!destIdx + '_' + idx}"
+                                    onselect="{!c.handleProductChange}"/>
+                            </td>
+                            <td>
+                                <lightning:select disabled="{! item.productId == null }" variant="label-hidden" label="Cargo Type" value="{!item.unit}">
+                                    <aura:iteration items="{!v.picklistUnit}" var="ct">
+                                        <option value="{!ct.value}">{!ct.label}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </td>
+                            <td>
+                                <lightning:input disabled="{! item.productId == null || item.product.BillingType__c == 'Unit' }" type="number" variant="label-hidden" label="Weight" value="{!item.weight}" step="any" min="0"/>
+                            </td>
+                            <td>
+                                <lightning:input disabled="{! item.productId == null }" type="number" variant="label-hidden" label="Cargo Qty" value="{!item.cargoQty}"/>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </aura:iteration>
+
+		<div class="slds-text-align_right slds-p-around_small">
+            <lightning:button iconName="utility:save" variant="brand" label="Save" onclick="{!c.doSave}" />
+		</div>
+
+    	<aura:if isTrue="{!v.isLoading}">
+    		<lightning:spinner variant="brand" size="large" alternativeText="Loading..."/>
+    	</aura:if>
+
+    </div>
+</aura:component>

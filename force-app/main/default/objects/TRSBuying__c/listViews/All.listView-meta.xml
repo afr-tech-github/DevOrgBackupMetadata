@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Service__c</columns>
+    <columns>Paymentto__c</columns>
+    <columns>Chargequantity__c</columns>
+    <columns>ChargeUnit__c</columns>
+    <columns>ContainerInformation__c</columns>
+    <columns>UnitBuyingPrice__c</columns>
+    <columns>TruckingCost__c</columns>
+    <columns>LiftOnCost__c</columns>
+    <columns>LiftOffCost__c</columns>
+    <columns>AmountBuyinginclTaxfor__c</columns>
+    <columns>PaymentConfirmedBuying__c</columns>
+    <columns>PaymentSettledDateBuying__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>0. All</label>
+</ListView>

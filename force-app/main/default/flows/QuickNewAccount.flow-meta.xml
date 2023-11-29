@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>49.0</apiVersion>
+    <dynamicChoiceSets>
+        <name>BusinessRelationship</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Business_Relationship__c</picklistField>
+        <picklistObject>Account</picklistObject>
+        <sortOrder>Asc</sortOrder>
+    </dynamicChoiceSets>
+    <interviewLabel>Quick New Account {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Quick New Account-V2</label>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>CreateNewAccount</name>
+        <label>Create New Account</label>
+        <locationX>167</locationX>
+        <locationY>287</locationY>
+        <inputAssignments>
+            <field>Business_Relationship__c</field>
+            <value>
+                <elementReference>BusinessRelationshipChoice</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>CompanyShortName__c</field>
+            <value>
+                <elementReference>AccountShortName</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EnglishCompanyName__c</field>
+            <value>
+                <elementReference>AccountNameEng</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>AccountName</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordCreates>
+    <screens>
+        <name>NewAccount</name>
+        <label>New Account</label>
+        <locationX>171</locationX>
+        <locationY>127</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>CreateNewAccount</targetReference>
+        </connector>
+        <fields>
+            <name>Header</name>
+            <fieldText>Please search carefully before create new account</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>AccountNameUnique</name>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>AccountName</name>
+            <dataType>String</dataType>
+            <fieldText>Account Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>AccountNameEng</name>
+            <dataType>String</dataType>
+            <fieldText>ACCOUNT NAME(ENG)</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>AccountShortName</name>
+            <dataType>String</dataType>
+            <fieldText>ACCOUNT SHORT NAME</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>BusinessRelationshipChoice</name>
+            <choiceReferences>BusinessRelationship</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>BUSINESS RELATIONSHIP</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>NewAccount</startElementReference>
+    <status>Active</status>
+</Flow>

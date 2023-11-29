@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MaxNoOfDaysAfterCreated__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Take the biggest date of No of Days after Created in Trx Plan+Cash Advance</inlineHelpText>
+    <label>Max No of Days after Created</label>
+    <summarizedField>TrxPlanCashAdvance__c.NoOfDaysAfterCreated__c</summarizedField>
+    <summaryFilterItems>
+        <field>TrxPlanCashAdvance__c.AmountAdvancedPaidLocalCA__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </summaryFilterItems>
+    <summaryForeignKey>TrxPlanCashAdvance__c.CashAdvanceID__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

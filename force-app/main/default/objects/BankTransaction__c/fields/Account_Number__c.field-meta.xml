@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Number__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>CASE(RecordType.DeveloperName
+, &apos;InboundTransactionLocalCurrency&apos;, ApplicantTrxIn__r.AccountNumber
+, &apos;InboundTransactionUSDCurrency&apos;, ApplicantTrxIn__r.AccountNumber
+, &apos;OutboundTransactionLocalCurrency&apos;, BeneficiaryTrxOut__r.AccountNumber
+, &apos;OutboundTransactionUSDCurrency&apos;, BeneficiaryTrxOut__r.AccountNumber
+, &apos;&apos;)</formula>
+    <label>Account Number</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

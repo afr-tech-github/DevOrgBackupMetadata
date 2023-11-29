@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>CustomObject1__c</entityName>
+    <fieldName>status__c</fieldName>
+    <masterLabel>Ocean Import</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Field1__c</fieldNames>
+        <fieldNames>carton__c</fieldNames>
+        <fieldNames>weight__c</fieldNames>
+        <fieldNames>CBM__c</fieldNames>
+        <fieldNames>POL__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;In Cargo Info Received Phase, please make sure to register critical information for sales team and operation team to process booking.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>輸入 出荷情報入手(Cargo Info Received)</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>RecordType1</recordTypeName>
+</PathAssistant>

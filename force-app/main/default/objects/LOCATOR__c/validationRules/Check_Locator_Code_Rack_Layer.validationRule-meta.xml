@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Locator_Code_Rack_Layer</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(LocatorLayer__c,&apos;Rack Layer&apos;)&amp;&amp;(OR(FloorCode__c== &apos;F00&apos;, FloorCode__c== &apos;F&apos;,
+ISBLANK(FloorCode__c),
+AreaCode__c == &apos;A00&apos;, AreaCode__c == &apos;A&apos;,
+ISBLANK(AreaCode__c),
+SectionCode__c  == &apos;S00&apos;,
+SectionCode__c  == &apos;S&apos;,
+ISBLANK(SectionCode__c),
+Rack__c == &apos;R00&apos;,
+Rack__c == &apos;R&apos;,
+ISBLANK(Rack__c ),
+(Level__c != &apos;L00&apos;&amp;&amp;Level__c != &apos;L&apos;&amp;&amp; NOT(ISBLANK(Level__c )))))</errorConditionFormula>
+    <errorMessage>Rack layer must have only Floor Code and Area Code and Section Code and Rack Code</errorMessage>
+</ValidationRule>

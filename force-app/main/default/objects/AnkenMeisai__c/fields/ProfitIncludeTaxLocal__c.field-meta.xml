@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProfitIncludeTaxLocal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>ROUND(SellInTaxAmountJPY__c,0) - ROUND(BuyInTaxAmountJPY__c,0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Profit Include Tax(Local)=Amount Selling including Tax(Local)-Amount Buying including Tax(Local)</inlineHelpText>
+    <label>PROFIT INCLUDE TAX(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

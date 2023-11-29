@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Delaminated Flooring</fullName>
+        <default>false</default>
+        <label>Delaminated Flooring</label>
+    </customValue>
+    <customValue>
+        <fullName>Dented Walls and Ceilings</fullName>
+        <default>false</default>
+        <label>Dented Walls and Ceilings</label>
+    </customValue>
+    <customValue>
+        <fullName>Rust and Corrosion</fullName>
+        <default>false</default>
+        <label>Rust and Corrosion</label>
+    </customValue>
+    <customValue>
+        <fullName>Damaged Door Mechanical</fullName>
+        <default>false</default>
+        <label>Damaged Door Mechanical</label>
+    </customValue>
+    <customValue>
+        <fullName>Punctures and Gouges</fullName>
+        <default>false</default>
+        <label>Punctures and Gouges</label>
+    </customValue>
+    <customValue>
+        <fullName>Exterior Paint</fullName>
+        <default>false</default>
+        <label>Exterior Paint</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Container Damage Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

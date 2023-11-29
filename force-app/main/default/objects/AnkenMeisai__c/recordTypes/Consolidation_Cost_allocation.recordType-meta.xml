@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consolidation_Cost_allocation</fullName>
+    <active>true</active>
+    <description>Choose this record type to create a cost which is allocated from Consolidation Costs.</description>
+    <label>Consolidation Cost allocation</label>
+</RecordType>

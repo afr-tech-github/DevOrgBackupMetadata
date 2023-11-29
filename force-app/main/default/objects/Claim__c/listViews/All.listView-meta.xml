@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>ClaimerCompanyName__c</columns>
+    <columns>ClaimStatus__c</columns>
+    <columns>Claimer__c</columns>
+    <columns>ClaimerType__c</columns>
+    <columns>ClaimResponsible__c</columns>
+    <columns>ClaimSummary__c</columns>
+    <columns>RequestSummary__c</columns>
+    <columns>RootCause__c</columns>
+    <columns>ActionPlanSummary__c</columns>
+    <columns>ResolutionActionOwner__c</columns>
+    <columns>ShipmentOrderID__c</columns>
+    <columns>WorkOrderID__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

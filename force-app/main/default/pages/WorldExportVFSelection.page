@@ -1,0 +1,45 @@
+<apex:page controller="WorldExportVFSelectionController">
+
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}" />
+        <script>
+            function closePopupDialog() {
+                window.open('/{!JSENCODE(id)}', '_self');
+            }
+        </script>
+    </head>
+    <apex:form id="theform">
+        <apex:sectionHeader subtitle="{!translations['invoice_selection_title_v2']}" />
+        <apex:pageBlock tabStyle="CustomObject1__c">
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandButton value="Generate" onclick="af_generateReportDoc(); return false;" />
+                    <apex:commandButton value="close" action="{!closePopupDialog}" />
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Select Information" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Show Footer" />
+                    <apex:inputCheckbox value="{!showFooter}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:actionFunction action="{!generateAttachmentFile}" name="af_generateReportDoc" reRender="jsPanel" oncomplete="generateReportDoc('{!fileType}'); return false;">
+            </apex:actionFunction>
+        </apex:pageBlock>
+        <apex:outputPanel id="jsPanel">
+            <script type="text/javascript">
+                function generateReportDoc(docType) {
+                    var url;
+                    console.log('docType' + docType);
+                    if (docType === 'pdf') {
+                        url = '/apex/WorldExportVF?'
+                    }
+                    url += 'id=' + '{!JSENCODE(id)}';
+                    url += '&showFooter=' + '{!showFooter}';
+                    window.location.href = url;
+                }
+            </script>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Rollup Completed</fullName>
+        <default>false</default>
+        <label>Rollup Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Rollup Not Completed</fullName>
+        <default>false</default>
+        <label>Rollup Not Completed</label>
+    </customValue>
+    <masterLabel>STOCK ROLLUP STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,4 @@
+<aura:event type="Component" description="Event template" >
+    <aura:attribute name="isBlur" type="boolean"/>
+    <aura:attribute name="selectedId" type="String"/>
+</aura:event>

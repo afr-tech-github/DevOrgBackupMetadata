@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TaxCategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>TAX CATEGORY</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>ObiligationType__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>TaxCategory</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Value Added Tax(VAT)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Special Duty Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Import Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Export Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Corporate Income Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Capital Use Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Natural Resource Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Land Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Personal Income Tax</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Late Payment Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Tax</controllingFieldValue>
+            <valueName>Other Tax</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

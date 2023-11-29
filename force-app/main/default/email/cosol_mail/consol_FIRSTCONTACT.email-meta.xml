@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>デバン倉庫へ自社混載案件があることを通知する時にこのテンプレートを使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>CONSOLIDATION-1ST NOTIFY TO WAREHOUSE:自社混載-倉庫へのお知らせ</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-デバン事前お知らせ</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

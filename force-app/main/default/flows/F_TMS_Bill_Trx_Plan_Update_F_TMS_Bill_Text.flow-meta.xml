@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <environments>Default</environments>
+    <formulas>
+        <name>TextinFMSBill</name>
+        <dataType>String</dataType>
+        <expression>TEXT({!$Record.clofor_com_cfs__PaymentRequestID__r.clofor_com_cfs__TrxPlanType__c}) +&apos;-&apos;+ {!$Record.clofor_com_cfs__FMSBillID__r.Name}</expression>
+    </formulas>
+    <interviewLabel>F/TMS Bill+Trx Plan| Update F/TMS Bill-Text {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>F/TMS Bill+Trx Plan| Update F/TMS Bill-Text</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_F_TMS_Bill_Text</name>
+        <label>Update F/TMS Bill Text</label>
+        <locationX>671</locationX>
+        <locationY>293</locationY>
+        <inputAssignments>
+            <field>FTMSBillText__c</field>
+            <value>
+                <elementReference>TextinFMSBill</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>543</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>Update_F_TMS_Bill_Text</targetReference>
+        </connector>
+        <object>FMSBillPayReq__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

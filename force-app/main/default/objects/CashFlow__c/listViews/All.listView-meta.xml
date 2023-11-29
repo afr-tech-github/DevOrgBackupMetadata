@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>CashFlowName__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>EndDate__c</columns>
+    <columns>CPNetCFFromOpeActivity__c</columns>
+    <columns>CPNetCFFromInvActivity__c</columns>
+    <columns>CPNetCFFromFinanceActivity__c</columns>
+    <columns>CPNetCFDuringPeriod__c</columns>
+    <columns>CPBeginCash__c</columns>
+    <columns>CPEndCash__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

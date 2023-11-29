@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <assignments>
+        <name>Assign_Delivery_agent_info</name>
+        <label>Assign Delivery agent</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>record_for_update.QuotationPaymentCondition__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.DeliveryAgentCompanyName__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Consignee_information_on_B_L</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_record_for_update</name>
+        <label>Assign record for update</label>
+        <locationX>182</locationX>
+        <locationY>323</locationY>
+        <assignmentItems>
+            <assignToReference>record_for_update</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Delivery_Agent</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Company_Information_Assignment</name>
+        <label>Company Information Assignment</label>
+        <locationX>50</locationX>
+        <locationY>1139</locationY>
+        <assignmentItems>
+            <assignToReference>record_for_update.ADDRESS_ON_B_L__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Company_information_formula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Notify_Party</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Cosignee_Information_Assignment</name>
+        <label>Cosignee Information Assignment</label>
+        <locationX>50</locationX>
+        <locationY>839</locationY>
+        <assignmentItems>
+            <assignToReference>record_for_update.CNEE_ADDRESS_ON_B_L__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Consignee_information_formula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Company_Information_on_B_L</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Notify_Party_information_Assignment</name>
+        <label>Notify Party information Assignment</label>
+        <locationX>50</locationX>
+        <locationY>1439</locationY>
+        <assignmentItems>
+            <assignToReference>record_for_update.NOTIFY_ADDRESS_ON_B_L__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Notify_information_formula</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_F_tms_S_o</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Company_Information_on_B_L</name>
+        <label>Company Information on B/L</label>
+        <locationX>182</locationX>
+        <locationY>1031</locationY>
+        <defaultConnector>
+            <targetReference>Notify_Party</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_2</name>
+            <conditionLogic>(1 AND 2) OR 3</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__ADDRESS_ON_B_L__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__shipper__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__shipper__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Company_Information_Assignment</targetReference>
+            </connector>
+            <label>True 2</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Consignee_information_on_B_L</name>
+        <label>Consignee information on B/L</label>
+        <locationX>182</locationX>
+        <locationY>731</locationY>
+        <defaultConnector>
+            <targetReference>Company_Information_on_B_L</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_1</name>
+            <conditionLogic>1 OR (2 AND 3)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Cnee__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__CNEE_ADDRESS_ON_B_L__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Cnee__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Cosignee_Information_Assignment</targetReference>
+            </connector>
+            <label>True_1</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Delivery_Agent</name>
+        <label>Delivery Agent</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <defaultConnector>
+            <targetReference>Consignee_information_on_B_L</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True</name>
+            <conditionLogic>(1 AND 3) OR 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__DeliveryAgent__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__DeliveryAgent__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__QuotationPaymentCondition__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Delivery_agent_info</targetReference>
+            </connector>
+            <label>True</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Notify_Party</name>
+        <label>Notify Party information</label>
+        <locationX>182</locationX>
+        <locationY>1331</locationY>
+        <defaultConnector>
+            <targetReference>Update_F_tms_S_o</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>True_3</name>
+            <conditionLogic>(1 AND 3) OR 2</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Notifyparty__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Notifyparty__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__NOTIFY_ADDRESS_ON_B_L__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Notify_Party_information_Assignment</targetReference>
+            </connector>
+            <label>True 3</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <name>Company_information_formula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishCompanyName__c}
+&amp; BR() &amp;
+{!$Record.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishAddress__c}
+&amp; BR() &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__shipper__r.Phone}), NULL,&apos;TEL: &apos;&amp; {!$Record.clofor_com_cfs__shipper__r.Phone}) &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__shipper__r.Fax}), NULL, &apos; - FAX: &apos; &amp; {!$Record.clofor_com_cfs__shipper__r.Fax})</expression>
+    </formulas>
+    <formulas>
+        <name>Consignee_information_formula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishCompanyName__c}
+&amp; BR() &amp;
+{!$Record.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishAddress__c}
+&amp; BR() &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__Cnee__r.Phone}), NULL,&apos;TEL: &apos;&amp; {!$Record.clofor_com_cfs__Cnee__r.Phone}) &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__Cnee__r.Fax}), NULL, &apos; - FAX: &apos; &amp; {!$Record.clofor_com_cfs__Cnee__r.Fax})</expression>
+    </formulas>
+    <formulas>
+        <name>Notify_information_formula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.clofor_com_cfs__Notifyparty__r.clofor_com_cfs__EnglishCompanyName__c}
+&amp; BR() &amp;
+{!$Record.clofor_com_cfs__Notifyparty__r.clofor_com_cfs__EnglishAddress__c}
+&amp; BR() &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__Notifyparty__r.Phone}), NULL,&apos;TEL: &apos;&amp; {!$Record.clofor_com_cfs__Notifyparty__r.Phone}) &amp;
+IF(
+ISBLANK({!$Record.clofor_com_cfs__Notifyparty__r.Fax}), NULL, &apos; - FAX: &apos; &amp; {!$Record.clofor_com_cfs__Notifyparty__r.Fax})</expression>
+    </formulas>
+    <interviewLabel>F/TMS S/O| Auto update missing Account Related Information (Update Only) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>F/TMS S/O| Auto update missing Account Related Information (Update Only)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_F_tms_S_o</name>
+        <label>Update F/tms S/o</label>
+        <locationX>182</locationX>
+        <locationY>1631</locationY>
+        <inputReference>record_for_update</inputReference>
+    </recordUpdates>
+    <sourceTemplate>F_TMS_S_O_Auto_update_missing_Account_Related_Information</sourceTemplate>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_record_for_update</targetReference>
+        </connector>
+        <filterLogic>((1 AND 2) OR 3) OR ((4 AND 5) OR 6) OR ((7 AND 8) OR 9) OR ((10 AND 11) OR 12)</filterLogic>
+        <filters>
+            <field>DeliveryAgent__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>QuotationPaymentCondition__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeliveryAgent__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>shipper__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ADDRESS_ON_B_L__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>shipper__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Cnee__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>CNEE_ADDRESS_ON_B_L__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Cnee__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Notifyparty__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>NOTIFY_ADDRESS_ON_B_L__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Notifyparty__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>CustomObject1__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>record_for_update</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>CustomObject1__c</objectType>
+    </variables>
+</Flow>

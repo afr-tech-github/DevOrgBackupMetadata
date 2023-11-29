@@ -1,0 +1,11 @@
+{
+  "activeViewId" : "aea22539-e1cb-4759-8a5e-23f880af87c3",
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "configurationTags" : [ ],
+  "id" : "a08405fe-c96e-49f1-a780-837336b26841",
+  "label" : "Tracking",
+  "pageAccess" : "UseParent",
+  "routeType" : "custom-tracking",
+  "type" : "route",
+  "urlPrefix" : "tracking"
+}

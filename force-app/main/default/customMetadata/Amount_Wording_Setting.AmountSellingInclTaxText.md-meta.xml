@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Amount Selling incl Tax(Text)</label>
+    <protected>false</protected>
+    <values>
+        <field>API_Amount_Field_Name__c</field>
+        <value xsi:type="xsd:string">clofor_com_cfs__AmountVATSellingIncludeVAT__c</value>
+    </values>
+    <values>
+        <field>API_En_Wording_Field_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>API_Object_Name__c</field>
+        <value xsi:type="xsd:string">clofor_com_cfs__VAT_INVOICE__c</value>
+    </values>
+    <values>
+        <field>API_Wording_Field_Name__c</field>
+        <value xsi:type="xsd:string">clofor_com_cfs__AmountVATSellingInclVATText__c</value>
+    </values>
+    <values>
+        <field>Currency_Type__c</field>
+        <value xsi:type="xsd:string">VND</value>
+    </values>
+</CustomMetadata>

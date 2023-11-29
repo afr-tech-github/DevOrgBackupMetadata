@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Direct Sales</fullName>
+        <default>false</default>
+        <label>Direct Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Distributors</fullName>
+        <default>false</default>
+        <label>Distributors</label>
+    </customValue>
+    <customValue>
+        <fullName>Affiliate Sales</fullName>
+        <default>false</default>
+        <label>Affiliate Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Outsourced Sales</fullName>
+        <default>false</default>
+        <label>Outsourced Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Value-Added Resellers (VARs)</fullName>
+        <default>false</default>
+        <label>Value-Added Resellers (VARs)</label>
+    </customValue>
+    <customValue>
+        <fullName>Online Marketplaces</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Online Marketplaces</label>
+    </customValue>
+    <customValue>
+        <fullName>Offline Marketplaces</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Offline Marketplaces</label>
+    </customValue>
+    <description>A means of selling to customers</description>
+    <masterLabel>Sales Channel Category</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

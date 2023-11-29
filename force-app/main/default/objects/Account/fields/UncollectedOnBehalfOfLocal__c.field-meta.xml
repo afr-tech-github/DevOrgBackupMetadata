@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UncollectedOnBehalfOfLocal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>UNCOLLECTED ON-BEHALF-OF AMOUNT(LOCAL)</label>
+    <summarizedField>CustomObject1__c.OnBehalfOfUnreceivedLocal__c</summarizedField>
+    <summaryFilterItems>
+        <field>CustomObject1__c.RecordTypeId</field>
+        <operation>notEqual</operation>
+        <value>Quotation</value>
+    </summaryFilterItems>
+    <summaryForeignKey>CustomObject1__c.Field1__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

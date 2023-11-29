@@ -1,0 +1,116 @@
+<apex:page showHeader="false">
+
+<head>
+    <title>Tax ratio Online Help</title>
+
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+ 
+
+
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Tax ratio Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+  <!-- Begin Default Content REMOVE THIS -->
+  <h2>Trợ giúp trực tuyến cho Thuế suất</h2>
+  
+<br></br><br></br>
+Object này để quản lý thuế suất tại quốc gia của bạn trong một giai đoạn nhất định.<br></br>
+Các thiết lập thuế suất sẽ được kết nối tới mục Vận đơn thứ cấp-Bán/Mua có Quản lý Dịch Vụ với <br></br>
+Các loại THUẾ ( với THUẾ) và tự động áp dụng số thuế suất tới Vận đơn thứ cấp-Bán/Mua<br></br>
+<br></br> 
+*Tiền tệ chỉ định đầu tiên trong Tài khoản Hóa đơn Đến/ Thanh toán Đến phải phù hợp với tiền tệ thuế suất<br></br>
+*Đối với vận đơn thứ cấp Nhập Khẩu , ngày đến dự kiến phải nằm trong thời hạn hiệu lực của thuế suất.<br></br> 
+*Đối với Vận đơn thứ cấp Xuất khẩu, ngày khởi hành dự kiến phải nằm trong thời hạn hiệu lực của thuế suất<br></br>
+
+ ------------------------------------------------------------------------------------------------<br></br> 
+ <h2>Online Help for Tax Ratio</h2>  
+<br></br><br></br>
+This object is to manage Tax ratio in your local country in the certain period of time.<br></br>
+The tax ratio set will be connected to the HB/L selling/buying item which has service master with<br></br>
+type TAX(with TAX) and automatically apply the tax ratio number to the HB/L selling/buying.<br></br>
+<br></br> 
+*PRIMARY PREFERED INVOICE CURRENCY in Accounts of Invoice To/Payment To must match Tax Ratio currency.<br></br>
+*For Import H B/L, ETA must be within Tax Ratio valid period.<br></br> 
+*For Export H B/L, ETD must be within Tax Ratio valid period.<br></br>
+
+ ------------------------------------------------------------------------------------------------<br></br>  
+<h2>消費税率管理に関するオンラインヘルプ</h2><br></br>
+<br></br><br></br>
+貴社の国でのある期間内の消費税率を管理するためのオブジェクトです。<br></br>
+設定された消費税率は、税分類が課税(”TAX(課税)”) のサービスマスターを持つHB/L請求・仕入明細アイテムと関連付けられ、<br></br>
+自動的に消費税率をHB/L請求・仕入明細に挿入します。<br></br>
+<br></br>
+*H B/L請求・仕入明細の請求先、支払先に選択された取引先の第1指定為替が、消費税率管理の中の通貨(Currency)と一致していなければなりません。<br></br>
+*輸入H B/L案件の場合、ETAが消費税率管理の有効期間内になければなりません。<br></br> 
+*輸出H B/L案件の場合、ETDが消費税率管理の有効期間内になければなりません。<br></br>
+
+ 
+  ------------------------------------------------------------------------------------------------<br></br>  
+<h2>소비세율에 관한 온라인 도움말</h2><br></br>
+<br></br>
+귀사의 국가에서 일정 기간 동안의 소비 세율을 관리하는 오브젝트(객체)입니다.<br></br>
+설정된 소비 세율은 세금 분류 과세 ( "TAX (세금)")의 서비스 마스터를 가진 H B/L 청구/지불 내역 항목과 관련된,<br></br>
+자동으로 소비 세율을 H B/L-청구/지불 명세서에 삽입합니다.<br></br>
+<br></br>
+*H B/L-청구/지불 명세서의 청구처에 선택된 거래처의 1차 지정통화(청구서 및 세율용)가 소비세율의 통화(Currency)와 일치해야 합니다.<br></br>
+*수입 H B/L 안건의 경우, ETA가 소비세율의 유효 기간내에 있어야 합니다.<br></br>
+*수출 H B/L 안건의 경우, ETD가 소비세율의 유효 기간내에 있어야 합니다.<br></br>
+
+ 
+ </body>
+ 
+ 
+ 
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

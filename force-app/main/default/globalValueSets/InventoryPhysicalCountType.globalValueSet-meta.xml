@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Full Count</fullName>
+        <default>false</default>
+        <label>Full Count</label>
+    </customValue>
+    <customValue>
+        <fullName>Cycle Count</fullName>
+        <default>false</default>
+        <label>Cycle Count</label>
+    </customValue>
+    <customValue>
+        <fullName>Sample Count</fullName>
+        <default>false</default>
+        <label>Sample Count</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Inventory Physical Counting Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

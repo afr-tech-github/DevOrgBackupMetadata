@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Container_NO__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Seal_No__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Empty_Full_Container_Identification__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Container_Size_Code__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Container__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Container_Type_Code__c</field>
+    </columns>
+    <columns>
+        <field>Account.HTqj__r.Container_Info__r$Container_Ownership_Code__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>CONTAINER VOLUME PERFORMANCE MONTHLY</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>container_analysis__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Account.HTqj__r$SalesAccountedDate__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

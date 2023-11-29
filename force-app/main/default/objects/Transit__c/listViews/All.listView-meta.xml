@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>ShipmentOrder__c</columns>
+    <columns>Consolidation__c</columns>
+    <columns>InOrderOfTransit__c</columns>
+    <columns>TransitPort__c</columns>
+    <columns>ETAAtTransitPort__c</columns>
+    <columns>ETDAtTransitPort__c</columns>
+    <columns>TransitVesselFlight__c</columns>
+    <columns>LengthOfStaysForTransitPort__c</columns>
+    <columns>CONTAINER_MODE__c</columns>
+    <columns>HandlingAgentAtTransit__c</columns>
+    <columns>MasterCarrierConsolidator__c</columns>
+    <columns>CarrierCode__c</columns>
+    <columns>SwitchHBL__c</columns>
+    <columns>SwitchMBLNumber__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

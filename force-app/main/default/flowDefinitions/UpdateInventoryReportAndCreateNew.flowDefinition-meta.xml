@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>this is flow in dev. yeah flow has to be created manually in each client environment.</description>
+    <masterLabel>Update Inventory Report and Create New</masterLabel>
+</FlowDefinition>

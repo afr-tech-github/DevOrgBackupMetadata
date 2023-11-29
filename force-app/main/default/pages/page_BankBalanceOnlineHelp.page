@@ -1,0 +1,159 @@
+<apex:page showHeader="false">
+<head>
+    <title>BANK BALANCE Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       BANK BALANCE Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+    <h2>HỔ TRỢ TRỰC TUYẾN BẢNG CÂN ĐỐI QUĨ TRONG NGÂN HÀNG</h2>
+<br></br><br></br>
+Đây là mục quản lý cân đối quĩ trong ngân hàng cho mỗi tài khoản kế toán <br></br>
+<ul>
+1.Cân đối lúc phát sinh/ Cân đối lúc kết sổ <br></br>
+2.Số tiền đã thu từ khách hàng của các dịch vụ thuộc các H B/L và không thuộc các H B/L <br></br>
+3.Số tiền chi cho các nhà cung cấp dịch vụ thuộc các H B/L và không thuộc các H B/L  <br></br>
+</ul>
+<br></br>
+
+Loại dữ liệu<br></br>
+Có hai loại dữ liệu được sử dụng<br></br>
+1.Tài khoản ngân hàng địa phương.Đơn vị tiền tệ là của địa phương đó<br></br>
+2.Tài khoản ngân hàng bằng dollar.Đơn vị tiền tệ là USD <br></br>
+<br></br>
+Cách kiểm tra chi tiết số tiền thu từ các khách hàng và từ các nhà cung cấp dịch vụ. <br></br>
+Chọn Report Tab/ Chọn Accounting Management Folder-> có 4 báo cáo như tên bên dưới<br></br>
+1.Thu từ các khách hàng-Đơn vị tiền tệ trong nước:BANK BALANCE-RECEIVED-LOCAL CUR <br></br>
+2.Thu từ khách hàng-USD- BANK BALANCE-RECEIVED-USD <br></br>
+3.Chi trả cho các nhà cung cấp – Đơn vị tiền tệ trong nước: BANK BALANCE-PAID TO VENDER-LOACAL CUR<br></br>
+4.Chi trả cho các nhà cung cấp-USD: BANK BALANCE-PAID TO VENDOR -USD<br></br>
+......................<br></br>
+
+----------------------------------------------------------------------------------------------<br></br>
+
+<h2>Online Help for BANK BALANCE Object</h2>
+<br></br> <br></br>    
+This is an Object to manage Bank Balance for each Bank Account at accounting team.<br></br>
+<ul>
+1. Balance At Start/Balance At Closing<br></br> 
+2. Amount received from customer in H B/L Shipment and not in H B/L Shipment related<br></br>
+3. Amount paid to vendor in H B/L shipment and not in H B/L Shipment related <br></br>
+</ul>
+<br></br>
+
+Record Types<br></br>
+There are two record types in use.<br></br>
+1.Local Currency Bank Account: Currency is local currency<br></br>
+2.USD Bank Account: Currency is USD<br></br>
+<br></br>
+How to Check the detail receiptance from customers and payment to vendors.<br></br>
+Go to Report Tab-->go to Accounting Management Folder->there are 4 reports as below name.<br></br>
+1.Receiptance from customers-Local currency:BANK BALANCE-RECEIVED-LOCAL CUR<br></br>
+2.Receiptance from customers-USD currency:BANK BALANCE-RECEIVED-USD<br></br>
+3.Payment to vendors-Local currency:BANK BALANCE-PAID TO VENDOR-LOCAL CUR<br></br>
+4.Payment to vendors-USD:BANK BALANCE-PAID TO VENDOR-USD<br></br>
+
+ <br></br>
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>口座残高に関するオンラインヘルプ</h2><br></br>
+<br></br>
+ここでは各銀行口座での口座残高を管理します<br></br>
+<ul>
+1.開始時点の残高/クロージング時点の残高<br></br>
+2.HB/L案件およびHB/L案件以外で顧客から受け取った金額<br></br>
+3.HB/L案件およびHB/L案件以外で業者に支払った金額<br></br>
+</ul>
+<br></br>
+
+レコードタイプ<br></br>
+2種類のレコードタイプがあります。<br></br>
+1.ローカル口座: 通貨はローカル通貨です。<br></br>
+2.ドル口座: 通貨はUSDです。<br></br>
+<br></br>
+顧客からの入金と業者への支払いの確認方法<br></br>
+レポートタブ--> Accounting Managementフォルダ-->以下の名前で4つのレポートが用意されています。<br></br>
+1.顧客からの入金-ローカル通貨: BANK BALANCE-RECEIVED-LOCAL CUR<br></br>
+2.顧客からの入金-USD: BANK BALANCE-RECEIVED-USD<br></br>
+3.業者への支払い-ローカル通貨: BANK BALANCE-PAID TO VENDOR-LOCAL CUR<br></br>
+4.業者への支払い-USD: BANK BALANCE-PAID TO VENDOR-USD <br></br>
+<br></br> 
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>통장잔액 온라인 도움말</h2><br></br>
+<br></br>
+여기에서는 다음의 3 가지 데이터를 관리합니다.<br></br>
+<ul>
+1.시작일 잔액 및 종료일 잔액<br></br>
+2.H B/L 등록안건 및 등록 안건외의 입금액<br></br>
+3.H B/L 등록안건 및 등록 안건외의 지급액<br></br>
+</ul>
+<br></br>
+
+레코드 타입<br></br>
+두가지의 레코드 파입으로 구성되어 있습니다. <br></br>
+1.표준통화 은행계좌: 로컬 통화 관리<br></br>
+2.USD은행계좌: USD 통화 관리<br></br>
+
+<br></br>
+고객사로부터 받은 입금내역 및 업체에 지불한 지급 내역의 사에 내용은 아래의 4개의 레포트에서 확인 가능합니다.<br></br>
+
+Report Tab을 클릭-->Accounting Management Folder를 클릭->아래의 4개의 레포트가 있으니, 필요한 레포트를 클릭하십시요.<br></br>
+1.입금액-표준통화(H B/L 등록안건):BANK BALANCE-RECEIVED-LOCAL CUR<br></br>
+2.입금액-달러(H B/L 등록안건):BANK BALANCE-RECEIVED-USD<br></br>
+3.지불액-표준통화(H B/L 등록안건):BANK BALANCE-PAID TO VENDOR-LOCAL CUR<br></br>
+4.지불액-달러(H B/L 등록안건):BANK BALANCE-PAID TO VENDOR-USD<br></br>
+
+<br></br>
+
+</body>
+
+</apex:page>

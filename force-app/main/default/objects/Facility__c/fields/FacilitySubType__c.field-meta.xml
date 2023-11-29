@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FacilitySubType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Facility Sub-Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>FacilityType__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>FacilitySubType</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Warehouse</controllingFieldValue>
+            <valueName>Warehouse</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Warehouse</controllingFieldValue>
+            <controllingFieldValue>Distribution Center</controllingFieldValue>
+            <controllingFieldValue>Yard</controllingFieldValue>
+            <controllingFieldValue>ICD</controllingFieldValue>
+            <controllingFieldValue>Office Building</controllingFieldValue>
+            <controllingFieldValue>Store</controllingFieldValue>
+            <controllingFieldValue>Mobile Warehouse</controllingFieldValue>
+            <controllingFieldValue>Mobile Warehouse(Bike)</controllingFieldValue>
+            <controllingFieldValue>Port</controllingFieldValue>
+            <controllingFieldValue>Terminal</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Distribution Center</controllingFieldValue>
+            <valueName>Distribution Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yard</controllingFieldValue>
+            <valueName>Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ICD</controllingFieldValue>
+            <valueName>ICD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Office Building</controllingFieldValue>
+            <valueName>Office Building</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Store</controllingFieldValue>
+            <valueName>Store</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Store</controllingFieldValue>
+            <valueName>Department</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Store</controllingFieldValue>
+            <valueName>Shopping Mall</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Store</controllingFieldValue>
+            <valueName>Supermarket</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mobile Warehouse</controllingFieldValue>
+            <valueName>Mobile Warehouse</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mobile Warehouse(Bike)</controllingFieldValue>
+            <valueName>Mobile Warehouse(Bike)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Port</controllingFieldValue>
+            <valueName>International Port</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Port</controllingFieldValue>
+            <valueName>Domestic Port</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Terminal</controllingFieldValue>
+            <valueName>Container Terminal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Terminal</controllingFieldValue>
+            <valueName>Passenger Terminal</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActualSalary__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>EmployeeID__r.BaseSalaryLocal__c 
++ TotalActualAllowance__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Actual Salary=Base Salary(Local) In Employee+Monthly Total Actual Allowance</inlineHelpText>
+    <label>ACTUAL SALARY</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

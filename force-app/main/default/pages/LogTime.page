@@ -1,0 +1,32 @@
+<apex:page controller="LogTimeController" docType="html-5.0">
+    <apex:form >
+        <apex:pageBlock title="Log Your Time">
+            <apex:outputText value="Working Date: {0,date,dd'/'MM'/'yyyy}">
+                <apex:param value="{!workingDate}" />
+            </apex:outputText>
+            <apex:pageMessages id="messages"/>
+            <br />
+            <apex:outputPanel id="loggedTime">
+                <apex:outputPanel rendered="{!disabledLeaveButton}">
+                    <apex:outputText value="You have logged {!loggedTime} hours"/>
+                </apex:outputPanel>
+            </apex:outputPanel>
+            <apex:pageBlockButtons location="bottom">
+                <apex:actionStatus id="saveStatus">
+                    <apex:facet name="stop">
+                        <apex:outputPanel id="buttonBlock">
+                            <apex:commandButton value="Enter Office" disabled="{!disabledEnterButton}" action="{!enter}" reRender="buttonBlock, messages" status="saveStatus"/>
+                            <apex:commandButton value="Leave Office" disabled="{!disabledLeaveButton}" action="{!leave}" reRender="buttonBlock,loggedTime, messages" status="saveStatus"/>
+                        </apex:outputPanel>
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <apex:outputPanel >
+                            <apex:commandButton value="Saving..." disabled="true" />
+                            <apex:commandButton value="Saving..." disabled="true" />
+                        </apex:outputPanel>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,207 @@
+<apex:page showHeader="false">
+<head>
+    <title>Outstanding Statement Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+
+ 
+ 
+ 
+ 
+ </head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Outstanding Statement Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+
+ <h2>Trợ giúp trực tuyến cho Object OUTSTANDING STATEMENT.</h2>
+<br></br><br></br>
+Đây là một Object tạo và xuất báo cáo ra PDF hoặc biểu mẫu Excel.<br></br>
+Có hai loại báo cáo trong Object này.<br></br>
+<ul>
+1.CUSTOMER INVOICE SUMMARY REPORT(BÁO CÁO TỔNG KẾT HÓA ĐƠN KHÁCH HÀNG)<br></br> 
+(Tài khoản mà người sở hữu loại tài khoản này là khách hàng trong mục Hóa Đơn-Đến, thì được thể hiện trong mục phải nhận)<br></br>
+2.PARTNER OUTSTANDING STATEMENT REPORT(BÁO CÁO OUTSTANDING STATEMENT ĐỐI TÁC)<br></br>
+Tài khoản mà  người sở hữu loại tài khoản này là Đối tác và không có trong mục Hóa đơn-tới hoặc Thanh toán- tới.<br></br>
+Nếu đối tác nằm trong mục Hóa đơn- tới, thì tài khoản này sẽ được thể hiện trong Danh Sách tài khoản Nợ.<br></br>
+Nếu Đối tác nằm trong mục Thanh toán – tới, thì tài khoản này sẽ nằm trong Danh sách tài khoản Có<br></br>
+</ul>
+<br></br>
+<h1>Để tận dụng</h1><br></br> 
+<ul>
+1.Chọn loại báo cáo ( BÁO CÁO TỔNG KẾT HÓA ĐƠN KHÁCH HÀNG/ BÁO CÁO OUTSTANDING STATEMENT ĐỐI TÁC)<br></br>  
+2.Chọn ngôn ngữ của báo cáo<br></br>
+3.Xác nhận ngày bắt đầu và ngày kết thúc trong giai đoạn nhất đinh mà báo cáo sẽ bị phát sinh<br></br>
+4.Nhấn “Xuất báo cáo” và bạn sẽ nhìn thấy lô hàng, tổng phụ của lô hàng, tổng dư nợ của khách hàng có thể thu còn lại hoặc dư nợ còn tồn đọng của các khoản nợ/ tín dụng của đối tác trong thời gian đó<br></br>
+5.Nhấn Excel hoặc PDF bạn có thể xuất báo cáo ra file Excel hoặc PDF<br></br>
+</ul>
+<br></br>
+<h1>### Cho BÁO CÁO TỔNG KẾT HÓA ĐƠN KHÁCH HÀNG</h1><br></br>
+“PDF Tổng” hoặc “EXCEL Tổng” hiển thị tổng THANH TOÁN CHƯA THUẾ và TRẢ TRƯỚC.<br></br>
+“PDF THANH TOÁN CHƯA  THUẾ” hoặc “EXCEL THANH TOÁN CHƯA THUẾ” hiển thị tổng tiền trừ khoản TRẢ TRƯỚC<br></br>
+“PDF TRẢ TRƯỚC ” hoặc “EXCEL TRẢ TRƯỚC” chỉ hiển thị tổng tiền TRẢ TRƯỚC<br></br>
+Để phân biệt TRẢ TRƯỚC từ THANH TOÁN CHƯA THUẾ, đánh dấu vào ô THUẾ BÁN CHO THANH TOÁN TRƯỚC trong Vận đơn thứ cấp Bán/ Mua.<br></br> 
+Ngoài ra, để hiện thị báo cáo đúng,<br></br>
+<ul>
+1.Trạng thái nên ở trước “Phát hành hóa đơn” <br></br>
+2. Còn lại phải thu tiền bán cước không được là 0.<br></br>
+3. Loại hồ sơ không được “Khóa”.<br></br>
+</ul>
+<br></br>
+
+------------------------------------------------------------------------------------------------<br></br> 
+ 
+ <h2>Online Help for OUTSTANDING STATEMENT Object</h2>
+  
+<br></br><br></br>
+This is an Object to create and export report  to PDF or excel template.<br></br>
+There are two types of report in this object.<br></br>
+<ul>
+1.CUSTOMER INVOICE SUMMARY REPORT<br></br> 
+(Account whose Account type is Customer is in invoice-to, shows the receivable)<br></br>
+2.PARTNER OUTSTANDING STATEMENT REPORT<br></br>
+(Account whose Account type is Partner and either in Invoice-To or Payment-To.)
+</ul>
+If the partner is in Invoice-To, it will show in the Debit List. If the patner is in Payment-to, it will show in the Credit List.
+<br></br>
+<br></br>
+<h1>To utilize</h1><br></br> 
+<ul>
+1.Choose the type of report (CUSTOMER INVOICE SUMMARY REPORT/PARTNER OUTSTANDING STATEMENT REPORT)<br></br>  
+2.Choose the Language of the report.<br></br>
+3.Determine the start date and end date for the certain period which report will be generated.<br></br>
+4.Press “Generate Report” and you will see the shipments, subtotal of the shipments, total balance of the Customers who has receivable remaining or the unsettled balance of DEBIT/CREDIT of partners for that period.<br></br>
+5.Press Excel or PDF and you can issue report in Excel file or PDF file.<br></br>
+</ul>
+<br></br>
+<h1>### For CUSTOMER INVOICE SUMMARY REPORT</h1><br></br>
+“PDF Total” or “EXCEL Total” shows the total of PAYENT EXCLUDE TAX and ADVANCE PAYMENT.<br></br>
+“PDF PAYENT EXCLUDE TAX” or “Excel PAYENT EXCLUDE TAX” shows amount exclude the ADVANCE PAYMENT.<br></br>
+“PDF ADVANCE PAYMENT” or “EXCEL ADVANCED PAYMENT” shows amount of ADVANCE PAYMENT only.<br></br>
+To distinguish ADVANCE PAYMENT from PAYMENT EXCLUDE TAX, stick the box of DUTY SELLING FOR ADVANCE PAYMENT  in HB/L Selling/Buying.<br></br>
+ Also, to show report properly,<br></br> 
+<ul> 
+1.Status should be before “Invoice Issued” <br></br>
+2. UNPAID BALANCE OF SELLING(LOCAL) must not be 0.   <br></br>
+3. Record type must not be “Locked”.<br></br>
+</ul>
+<br></br>
+
+------------------------------------------------------------------------------------------------<br></br>
+
+<h2>ステートメントに関するオンラインヘルプ</h2><br></br>
+<br></br>
+レポートを作成し、PDFやエクセルテンプレートにエクスポートするオブジェクトです。<br></br>
+二種類のレポートが用意されています。<br></br>
+<ul>
+1.顧客用集計表レポート<br></br>
+(請求先の取引先タイプが顧客になっており、入金残高があるものを表示します）<br></br>
+2.パートナーステートメントレポート<br></br>
+(請求先あるいは支払先の取引先タイプがパートナーになっているもので、請求先がパートナーの場合はDebitリストを表示します。支払先がパートナーの場合はCreditリストを表示します。)<br></br>
+</ul>
+<br></br>
+
+<h1>レポートの活用方法</h1><br></br>
+<ul>
+1.レポートのタイプを選択します(顧客用集計表レポート/パートナーステートメントレポート)<br></br>
+2.レポートの言語を選択します。<br></br>
+3.レポートを生成する期間の開始日と終了日を選択します。<br></br>
+4."レポートの生成"をクリックすると、その期間内の、入金残高のある顧客の案件、案件毎の小計や全体の入金残高、あるいはパートナーとの未清算のDEBIT/CREDITのバランスが表示されます。<br></br>
+5."Excel"や"PDF"をクリックすると、レポートがExcelやPDF形式で出力されます。<br></br>
+</ul>
+<br></br>
+<h1>### 顧客用集計表レポートに関して</h1><br></br>
+"PDF合計"や"EXCEL合計"は諸請求と立替の合計金額を表示します。<br></br>
+"PDF諸請求"や"EXCEL諸請求"は立替を除いた金額を集計します。<br></br>
+"PDF立替"や"EXCEL立替"は立替のみの金額を集計します。<br></br>
+立替金を諸請求と区別するには、HB/L請求・仕入明細の"販売立替"にチェックを入れてください。また、正しくレポートに反映させるために、以下の条件を確認してください。<br></br>
+<ul>
+1.案件のステータスが"請求書発行済"より前であること　<br></br>
+2.入金残高が0ではないこと　<br></br>
+3.案件のレコードタイプが"ロック"ではないこと<br></br>
+</ul>
+
+------------------------------------------------------------------------------------------------<br></br>
+
+<h2>PDF, EXCEL 템플릿에 대한 온라인 도움말</h2><br></br>
+<br></br>
+보고서를 작성하고 PDF, 엑셀 템플릿에 출력할 수 있는 오브젝트(객체)입니다.<br></br>
+두 종류의 보고서를 인쇄할 수 있습니다.<br></br>
+<ul>
+1. 주문품 일람표 보고서<br></br>
+(청구 대상 거래처 유형이 고객으로 되어 있으며, 입금 잔액이있는 것을 표시합니다）<br></br>
+2. 파트너 보고서<br></br>
+(청구 또는 수취인 거래처 유형이 파트너로 설정되어 있는 것으로, 청구가 파트너의 경우 Debit 목록을 표시합니다. 수취인이 파트너의 경우 Credit 목록을 표시합니다.)<br></br>
+</ul>
+<br></br>
+
+<h1>보고서의 활용 방법</h1><br></br>
+<ul>
+1.보고서 유형을 선택합니다 (고객용 일람표 보고서 / 파트너 보고서)<br></br>
+2.보고서의 언어를 선택하십시오.<br></br>
+3.보고서를 생성할 기간의 시작일과 종료일을 선택합니다.<br></br>
+4."보고서 생성"을 클릭하면 그 기간내에 입금 잔액이 있는 고객의 안건 안건마다 소계나 전체예금잔액 또는 파트너와 미청산의 DEBIT / CREDIT의 밸런스가 표시됩니다.<br></br>
+5."Excel" 또는 "PDF"를 클릭하면 보고서를 Excel 또는 PDF 형식으로 출력됩니다.<br></br>
+</ul>
+<br></br>
+<h1>### 주문품 일람표 보고서에 대해</h1><br></br>
+"PDF 전체금액" 또는 "EXCEL 전체금액"는 모든 청구과 입체의 합계 금액을 표시합니다.<br></br>
+"PDF 청구(세금제외)" 또는 "EXCEL 청구(세금제외)"는 세금을 제외한 금액을 집계합니다.<br></br>
+"PDF 선지급금" 또는 "EXCEL 선지급금"는 선지급 금액을 집계합니다.<br></br>
+대납금을 모든 청구와 구별되는 H B/L-청구/지불 명세서의 "판매 대납"에 체크하십시오. 또한 잘못된 보고서에 반영시키기 위해서는 다음 조건을 확인하십시오.<br></br>
+<ul>
+1.안건의 '화물 진행 사항'이 "인보이스 발행" 이전임을 <br></br>
+2. 입금 잔액이 0이 아님 <br></br>
+3. 안건의 레코드 유형이 "(잠금)"이 아니어야 합니다.<br></br>
+</ul>
+
+</body>
+
+
+<br></br>
+</apex:page>

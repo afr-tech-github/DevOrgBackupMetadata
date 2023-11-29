@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassiveUpdateBuying</fullName>
+    <columns>Anken__c</columns>
+    <columns>NAME</columns>
+    <columns>SeikyuBangou__c</columns>
+    <columns>Tariff__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>Suryo__c</columns>
+    <columns>CurrencyBuying__c</columns>
+    <columns>BuyTankaJPY__c</columns>
+    <columns>BuyTankaUSD__c</columns>
+    <columns>BuyTaxInitial__c</columns>
+    <columns>KawaseBay__c</columns>
+    <columns>PrintFlag__c</columns>
+    <columns>BuyInTaxAmountJPY__c</columns>
+    <columns>CurrencyConversionBuying__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.Selling_Buyging_Standard</value>
+    </filters>
+    <label>8.Massive Update-Buying</label>
+    <language>en_US</language>
+</ListView>

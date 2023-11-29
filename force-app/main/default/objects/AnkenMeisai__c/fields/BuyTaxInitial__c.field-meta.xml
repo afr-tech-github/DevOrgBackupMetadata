@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuyTaxInitial__c</fullName>
+    <defaultValue>0</defaultValue>
+    <deprecated>false</deprecated>
+    <description>管理者コメント 
+2013/09/10
+消費税率に販売用と仕入れ用が必要になるため（例）仕入は免税・販売は課税など
+こちらの項目は仕入用とする。
+【注意】消費税率(販売)のAPI名が
+「SellTaxInitial__c」
+「TaxInitial__c」な点に注意</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The consumption tax ratio will be input automatically when remain empty. Input the Tax ratio and the amount of value will be changed to amount that included the Tax. For item that is Tax-free or non-Tax, the Tax Ratio will be set 0%.</inlineHelpText>
+    <label>CONSUMPTION TAX RATIO-BUYING</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

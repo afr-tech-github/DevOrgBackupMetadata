@@ -1,0 +1,25 @@
+Dear, Doc Operator
+
+We send New Customer registration form.
+Please check whether the content is filled with correct information.
+
+Essential Information
+-Export/Import Company Code（Your company's unique code required for customs declaration）
+-Accounting person in charge in your company（To give inquiry about payment）
+-Bank account number of your company（In case when there were any refund）
+-Bank Information for Real Time Account (Necessary number for payment of taxes, if any）：Delayed payment number for Delayed payment 
+-Capital 
+-Accounting period 
+
+For the other parts of the form, please fill in directly and after finished, please send back to us with your company stamp.
+
+
+Best regards.
+
+{!User.LastName}
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

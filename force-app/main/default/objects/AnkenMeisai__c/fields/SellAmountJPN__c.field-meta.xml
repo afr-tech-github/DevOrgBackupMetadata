@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellAmountJPN__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>ROUND(Suryo__c * SellTankaJPY__c ,0)+ TotalAmountofSellingLocalAdjust__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total Amount of Selling(Local)=Unit Price of Selling(Local)*Charge Unit (Total). This amount is before Tax.If Tax-Free or Non-Tax, Total Amount of Selling(Local) will be equal to Amount Selling including Tax(Local).</inlineHelpText>
+    <label>TOTAL AMOUNT OF SELLING(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

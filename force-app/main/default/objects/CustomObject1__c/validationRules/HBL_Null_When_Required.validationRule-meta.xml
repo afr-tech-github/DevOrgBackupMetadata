@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HBL_Null_When_Required</fullName>
+    <active>false</active>
+    <description>When House B/L is required, and user change House B/L number from a non-blank value to blank, then throw error</description>
+    <errorConditionFormula>ISPICKVAL(  BL_TYPE__c, &apos;H B/L Issue Required&apos; ) &amp;&amp; ISCHANGED( HBL__c ) &amp;&amp; ISBLANK( HBL__c )</errorConditionFormula>
+    <errorMessage>Input H B/L No or Temporary No, or change to B/L Type to &quot;Direct M B/L(H B/L Issue Not Required)&quot;</errorMessage>
+</ValidationRule>

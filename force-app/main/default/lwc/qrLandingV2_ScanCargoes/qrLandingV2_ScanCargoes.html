@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-is-relative">
+            <c-cmp_autocomplete 
+                label="Cargo" 
+                required 
+                auto-search 
+                enable-create={productId}
+                message-when-not-found="Cargo not link to WO" 
+                records={_options}
+                value={_cargoId}
+                onchange={handleChange}
+                onaddnew={handleAddNewWoCargo}></c-cmp_autocomplete>
+
+        <lightning-spinner if:true={_isLoading} alternative-text="Loading..." ></lightning-spinner>
+    </div>    
+</template>

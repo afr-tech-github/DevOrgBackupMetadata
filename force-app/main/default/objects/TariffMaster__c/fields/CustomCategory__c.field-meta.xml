@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomCategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CUSTOMS CLEARANCE CATEGORY</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>一般通関</fullName>
+                <default>true</default>
+                <label>Normal Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>暫定八条</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Special Act. for Tax Reduction</label>
+            </value>
+            <value>
+                <fullName>食品申請</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Food Quarantine</label>
+            </value>
+            <value>
+                <fullName>薬事申請</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Medical Quarantine</label>
+            </value>
+            <value>
+                <fullName>動物申請</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Animal Quarantine</label>
+            </value>
+            <value>
+                <fullName>植物申請</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Plant Quarantine</label>
+            </value>
+            <value>
+                <fullName>小額</fullName>
+                <default>false</default>
+                <label>Custom Clearance - Small Invoice Amount</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

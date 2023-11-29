@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Before Collect:1388 receivable/-</fullName>
+        <default>false</default>
+        <label>Before Collect:1388 receivable/-</label>
+    </customValue>
+    <customValue>
+        <fullName>After Bank Collect:113 Cash in Bank/1388 Receivable</fullName>
+        <default>false</default>
+        <label>After Bank Collect:113 Cash in Bank/1388 Receivable</label>
+    </customValue>
+    <customValue>
+        <fullName>After Cash Collect:111 Cash in Hand/1388 Receivable</fullName>
+        <default>false</default>
+        <label>After Cash Collect:111 Cash in Hand/1388 Receivable</label>
+    </customValue>
+    <customValue>
+        <fullName>After Offset Collect:131 Accounts receivable - trade/1388 Receivable</fullName>
+        <default>false</default>
+        <label>After Offset Collect:131 Accounts receivable - trade/1388 Receivable</label>
+    </customValue>
+    <masterLabel>Selling AC Setting Process</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

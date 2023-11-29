@@ -1,0 +1,14 @@
+Dear, Doc Operator
+
+Please confirm the attached file of New Customer broker registration form.
+If there were any question, please do not hesitate to ask us. 
+
+Best regards.
+
+{!User.LastName} 
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

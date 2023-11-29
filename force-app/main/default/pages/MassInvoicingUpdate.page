@@ -1,0 +1,409 @@
+<apex:page controller="MassInvoicingUpdateController" sidebar="false" tabStyle="AnkenMeisai__c" showHeader="true"
+           title="{!IF(isCreation = true, translations['MASSIVE_CREATION'], translations['MASSIVE_UPDATE'])}">
+    <head>
+        
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        <style>
+            .pbBody input, .pbBody select, .pbBody textarea {
+                width: 300px;
+            }
+        </style>
+    </head>
+
+    <apex:form id="form">
+        <script type="text/javascript">
+            j$ = jQuery.noConflict();
+            j$(document).ready(function () {
+                j$('.dataCol').css('width', '5%');
+            });
+        </script>
+
+        <apex:sectionHeader title="{!translations['MASSIVE_UPDATE']}" rendered="{!isCreation = false}"/>
+        <apex:sectionHeader title="{!translations['MASSIVE_CREATION']}" rendered="{!isCreation = true}"/>
+
+        <!-- RECEIVABLE/PAYABLE -->
+        <apex:outputPanel id="receivable_payable" rendered="{!operation = 'receivable_payable'}">
+            <apex:pageBlock title="{!translations['UPDATE_OPTIONS']}">
+                <table style="width: 400px">
+                    <tr>
+                        <td>{!translations['UPDATE_OPTIONS']}:</td>
+                        <td>
+                            <apex:selectList size="1" value="{!selectedTransactionOption}">
+                                <apex:actionSupport event="onchange" reRender="form"/>
+                                <apex:selectOptions value="{!transactionOptions}"></apex:selectOptions>
+                            </apex:selectList>
+                        </td>
+                    </tr>
+                </table>
+            </apex:pageBlock>
+
+            <!-- RECEIVABLE -->
+            <apex:pageBlock rendered="{!selectedTransactionOption = 'receivable'}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:repeat value="{!wrapper.lstHBLSB}" var="invoicing">
+                    <apex:pageBlockSection columns="2" title="{!invoicing.Name}">
+                        <apex:inputField value="{!invoicing.Seikyusaki__c}"/>
+                        <apex:inputField value="{!invoicing.Tariff__c}"/>
+                        <apex:inputField value="{!invoicing.Payer__c}"/>
+                        <apex:inputField value="{!invoicing.NyukinKakuninzumi__c}"/>
+
+                        <apex:inputField value="{!invoicing.BANKTRANSITTYPE__c}"/>
+                        <apex:inputField value="{!invoicing.BankAccountForReceiving__c}"/>
+                        <apex:inputField value="{!invoicing.SellDetail__c}"/>
+                        <apex:inputField value="{!invoicing.ReceiptanceDate_del__c}"/>
+
+                        <apex:inputField value="{!invoicing.Nyukingaku__c}"/>
+                        <apex:inputField value="{!invoicing.AMOUNT_PAID_SELLING_USD__c}"/>
+                        <apex:outputField value="{!invoicing.SellDifferentiation__c}"/>
+                        <apex:outputField value="{!invoicing.UNPAID_BALANCE_OF_SELLING_USD__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+                <apex:pageBlockSection title="Summary" columns="4">
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_SELLING_INCL_TAX']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountSellingIncludingTaxLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountSellingIncludingTaxLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_SELLING_INCL_TAX']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountSellingIncludingTax}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountSellingIncludingTax}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+
+                    <apex:outputLabel >{!translations['SUM_AMT_RECEIVED_FROM_CUSTOMER']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountReceivedFromCustomerLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountReceivedFromCustomerLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_AMT_RECEIVED_FROM_CUSTOMER']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountReceivedFromCustomer}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountReceivedFromCustomer}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+
+                    <apex:outputLabel >{!translations['SUM_UNRECEIVED_BALANCE_SELLING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfUnreceivedBalanceOfSellingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfUnreceivedBalanceOfSellingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_UNRECEIVED_BALANCE_SELLING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfUnreceivedBalanceOfSelling}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfUnreceivedBalanceOfSelling}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!updateInvoicing}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"
+                                        html-formnovalidate="formnovalidate"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+
+            <!-- PAYABLE section -->
+            <apex:pageBlock rendered="{!selectedTransactionOption = 'payable'}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:repeat value="{!wrapper.lstHBLSB}" var="invoicing">
+                    <apex:pageBlockSection columns="2" title="{!invoicing.Name}">
+                        <apex:inputField value="{!invoicing.PaymentTo__c}"/>
+                        <apex:inputField value="{!invoicing.Tariff__c}"/>
+                        <apex:inputField value="{!invoicing.actual_payer__c}"/>
+                        <apex:inputField value="{!invoicing.SiharaiKakuninzumi__c}"/>
+
+                        <apex:inputField value="{!invoicing.payment_category__c}"/>
+                        <apex:inputField value="{!invoicing.BankAccountForPayment__c}"/>
+                        <apex:inputField value="{!invoicing.BuyDetail__c}"/>
+                        <apex:inputField value="{!invoicing.PaymentDate__c}"/>
+
+                        <apex:inputField value="{!invoicing.Siharaigaku__c}"/>
+                        <apex:inputField value="{!invoicing.AMOUNT_PAID_BUYING_USD__c}"/>
+                        <apex:inputField value="{!invoicing.BuyDifferentiation__c}"/>
+                        <apex:outputField value="{!invoicing.UNPAID_BALANCE_OF_BUYING_USD__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+                <apex:pageBlockSection title="Summary" columns="4">
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_BUYING_INCL_TAX']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountBuyingIncludingTaxLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountBuyingIncludingTaxLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_BUYING_INCL_TAX']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountBuyingIncludingTax}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountBuyingIncludingTax}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+
+                    <apex:outputLabel >{!translations['SUM_AMT_PAID_BUYING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountPaidBuyingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountPaidBuyingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_AMT_PAID_BUYING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountPaidBuying}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountPaidBuying}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+
+                    <apex:outputLabel >{!translations['SUM_UNPAID_BALANCE_BUYING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfUnpaidBalanceOfBuyingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfUnpaidBalanceOfBuyingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_UNPAID_BALANCE_BUYING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfUnpaidBalanceOfBuying}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfUnpaidBalanceOfBuying}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!updateInvoicing}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"
+                                        html-formnovalidate="formnovalidate"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:outputPanel>
+
+        <!-- SELLING/BUYING -->
+        <apex:outputPanel id="selling_buying" rendered="{!operation = 'selling_buying'}">
+            <apex:pageBlock title="{!translations['UPDATE_OPTIONS']}">
+                <apex:outputPanel rendered="{!isCreation = false}">
+                    <table style="width: 400px">
+                        <tr>
+                            <td>{!translations['UPDATE_OPTIONS']}:</td>
+                            <td>
+                                <apex:selectList size="1" value="{!selectedActioningOption}">
+                                    <apex:actionSupport event="onchange" reRender="form"/>
+                                    <apex:selectOptions value="{!actioningOptions}"></apex:selectOptions>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!isCreation = true}">
+                    <table>
+                        <tr>
+                            <td>Number of Records</td>
+                            <td>
+                                <apex:inputText value="{!numberOfRecords}"/>
+                            </td>
+                        </tr>
+                        <tr/>
+                        <tr>
+                            <td>
+                                <apex:commandButton value="Generate" action="{!createNewRecords}" style="width: 100px;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>
+            </apex:pageBlock>
+
+
+            <apex:pageBlock rendered="{!selectedActioningOption = 'selling'}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:repeat value="{!wrapper.lstHBLSB}" var="invoicing">
+                    <apex:variable var="taxKey" value="{!invoicing.ProductTax__c}"/>
+                    <apex:outputPanel rendered="{!isCreation = true}">
+                        <script>
+                            j$ = jQuery.noConflict();
+                            j$(document).ready(function () {
+                                j$("select[id$=currency_field]").val('{!JSINHTMLENCODE($Setup.Site_Custom_Settings__c.BillingDefaultCurrency__c)}');
+                            });
+                        </script>
+                    </apex:outputPanel>
+                    <!-- FIX CHANGE-->
+                    <apex:pageBlockSection columns="2" title="{!IF(ISNULL(invoicing.Name), '---', invoicing.Name)} ">
+                        <apex:inputField value="{!invoicing.SeikyuBangou__c}"/>
+                        <apex:inputField value="{!invoicing.Tariff__c}" required="false"/>
+                        
+                        <apex:inputField value="{!invoicing.Seikyusaki__c}" required="false"/>
+                        <apex:inputField value="{!invoicing.PaymentTo__c}" required="false"/>
+
+                        
+                        <apex:inputField value="{!invoicing.InsatuyouSyohin__c}"/>
+                        <apex:inputField value="{!invoicing.InsatuyouSyohinEng__c}"/>
+                        
+                        <apex:inputField value="{!invoicing.Suryo__c}"/>
+                        <apex:inputField value="{!invoicing.PrintFlag__c}" style="width: 13px"/>
+                        
+                        <apex:inputField value="{!invoicing.curr__c}" required="false" id="currency_field"/>
+                        <apex:outputText value=""/>
+                        
+                        
+                        <apex:inputField value="{!invoicing.SellTankaJPY__c}"/>
+                        <apex:inputField value="{!invoicing.BuyTankaJPY__c}" rendered="{!isCreation = true}"/>
+             
+                        <apex:inputField value="{!invoicing.SellTankaUSD__c}"/>
+                        <apex:inputField value="{!invoicing.BuyTankaUSD__c}" rendered="{!isCreation = true}"/>
+                        
+                        <apex:inputField value="{!invoicing.TaxInitial__c}"/>
+                        <apex:inputField value="{!invoicing.BuyTaxInitial__c}" rendered="{!isCreation = true}"/>
+                        
+                        <apex:inputField value="{!invoicing.KawaseSel__c}"/>
+                        <apex:inputField value="{!invoicing.KawaseBay__c}" rendered="{!isCreation = true}"/>
+
+                        <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap"
+                                                   rendered="{!isCreation = false}">
+                            <apex:outputLabel value="{!$ObjectType.AnkenMeisai__c.fields.ProductTax__c.Label}"></apex:outputLabel>
+                            <apex:outputText value="{!translations[taxKey]}" rendered="{!NOT(ISNULL(taxKey))}"/>
+                        </apex:pageBlockSectionItem>
+                        <!--<apex:outputLabel value="TEST(FIXING)" rendered="{!isCreation = false}"></apex:outputLabel>-->
+                        
+
+                        <apex:outputField value="{!invoicing.SellAmountJPN__c}" rendered="{!isCreation = false}"/>
+                        <apex:outputField value="{!invoicing.SellAmountUSD__c}" rendered="{!isCreation = false}"/>
+                        <apex:outputField value="{!invoicing.SellTaxNum__c}" rendered="{!isCreation = false}"/>
+                        <apex:outputField value="{!invoicing.SellTaxNum_USD__c}" rendered="{!isCreation = false}"/>
+                        <apex:outputField value="{!invoicing.SellInTaxAmountJPY__c}" rendered="{!isCreation = false}"/>
+
+                        <apex:outputField value="{!invoicing.SellInTaxAmount_USD__c}" rendered="{!isCreation = false}"/>
+                        
+                        
+                        
+                        
+                    </apex:pageBlockSection>
+                </apex:repeat>
+                <apex:pageBlockSection title="Summary" columns="4" rendered="{!isCreation = false}">
+                    <apex:outputLabel >{!translations['SUM_OF_TOTAL_AMOUNT_OF_SELLING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfTotalAmountOfSellingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfTotalAmountOfSellingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_TOTAL_AMOUNT_OF_SELLING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfTotalAmountOfSelling}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfTotalAmountOfSelling}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_OF_TAX_SELLING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountOfTaxSellingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountOfTaxSellingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_OF_TAX_SELLING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountOfTaxSelling}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountOfTaxSelling}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_SELLING_INCL_TAX']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountSellingIncludingTaxLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountSellingIncludingTaxLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_SELLING_INCL_TAX']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountSellingIncludingTax}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountSellingIncludingTax}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!updateInvoicing}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"
+                                        html-formnovalidate="formnovalidate"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+
+            <!-- BUYING section -->
+            <apex:pageBlock rendered="{!selectedActioningOption = 'buying'}">
+                <apex:pageMessages ></apex:pageMessages>
+                <apex:repeat value="{!wrapper.lstHBLSB}" var="invoicing">
+                    <apex:variable var="taxKey" value="{!invoicing.ProductTax__c}"/>
+
+                    <apex:pageBlockSection columns="2" title="{!invoicing.Name}">
+                        <apex:inputField value="{!invoicing.SeikyuBangou__c}"/>
+                        <apex:inputField value="{!invoicing.Tariff__c}"/>
+                        
+                        
+                        <apex:inputField value="{!invoicing.PaymentTo__c}"/>
+                        <apex:inputField value="{!invoicing.KawaseBay__c}"/>
+                        
+                        <apex:inputField value="{!invoicing.Suryo__c}"/>
+                        <apex:inputField value="{!invoicing.curr__c}"/>
+                        
+                        <apex:inputField value="{!invoicing.InsatuyouSyohin__c}"/>
+                        <apex:inputField value="{!invoicing.InsatuyouSyohinEng__c}"/>
+                        
+                        
+
+                        <apex:inputField value="{!invoicing.BuyTankaJPY__c}"/>
+                        <apex:inputField value="{!invoicing.BuyTankaUSD__c}"/>
+                        
+                        <apex:inputField value="{!invoicing.BuyTaxInitial__c}"/>
+                        <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap">
+                            <apex:outputLabel value="{!$ObjectType.AnkenMeisai__c.fields.ProductTax__c.Label}"></apex:outputLabel>
+                            <apex:outputText value="{!translations[taxKey]}" rendered="{!NOT(ISNULL(taxKey))}"/>
+                        </apex:pageBlockSectionItem>
+
+                        <apex:outputField value="{!invoicing.BuyAmountJPN__c}"/>
+                        <apex:outputField value="{!invoicing.BuyTaxNum__c}"/>
+                        <apex:outputField value="{!invoicing.BuyAmountUSD__c}"/>
+                        <apex:outputField value="{!invoicing.BuyTaxNum_USD__c}"/>
+
+                        <apex:outputField value="{!invoicing.BuyInTaxAmountJPY__c}"/>
+                        <apex:outputField value="{!invoicing.BuyInTaxAmountUSD__c}"/>
+                    </apex:pageBlockSection>
+                </apex:repeat>
+
+                <apex:pageBlockSection title="Summary" columns="4">
+                    <apex:outputLabel >{!translations['SUM_OF_TOTAL_AMOUNT_OF_BUYING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfTotalAmountOfBuyingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfTotalAmountOfBuyingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_TOTAL_AMOUNT_OF_BUYING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfTotalAmountOfBuying}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfTotalAmountOfBuying}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_OF_TAX_BUYING']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountOfTaxBuyingLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountOfTaxBuyingLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_OF_TAX_BUYING']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountOfTaxBuying}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountOfTaxBuying}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_BUYING_INCL_TAX']}</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountBuyingIncludingTaxLocal}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountBuyingIncludingTaxLocal}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                    <apex:outputLabel >{!translations['SUM_OF_AMOUNT_BUYING_INCL_TAX']} (USD)</apex:outputLabel>
+                    <apex:outputText value="{0, number, ###,###,###,###.###}" rendered="{!userLanguage != 'vi'}">
+                        <apex:param value="{!wrapper.sumOfAmountBuyingIncludingTax}"/>
+                    </apex:outputText>
+                    <c:formattedNumber ValueToFormat="{!wrapper.sumOfAmountBuyingIncludingTax}"
+                                       rendered="{!userLanguage = 'vi'}"/>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Save" action="{!updateInvoicing}"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"
+                                        html-formnovalidate="formnovalidate"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

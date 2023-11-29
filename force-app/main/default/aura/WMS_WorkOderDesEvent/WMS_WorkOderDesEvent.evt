@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event Des" >
+    <aura:attribute name="evWorkOrderDesIdList" type="String[]" />
+</aura:event>

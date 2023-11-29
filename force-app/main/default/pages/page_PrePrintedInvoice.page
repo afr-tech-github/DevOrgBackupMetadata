@@ -1,0 +1,1677 @@
+<apex:page contentType="text-html" renderAs="pdf" controller="VATInvoiceController" showHeader="false" action="{!checkCustomTemplateUsed}" applyHtmlTag="false"> 
+    <head>
+        <style type="text/css">
+            @page {size: 210mm 300mm ;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;}
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+
+            .F08    { font-size: 8px;}
+            .F09    { font-size: 9px;}
+            .F10    { font-size: 10.5px;}
+            .F12    { font-size: 12px;}
+            .FF     { font-size: 16px;color:red;}
+            .F14    { font-size: 14px;}
+            .F14B   { font-size: 14px;font-weight: bold}
+            .F16    { font-size: 16px;}
+            .F18    { font-size: 18px;}
+            .F20    { font-size: 20px;font-weight: bold;}
+            .F25    { font-size: 25px;font-weight: bold;}
+            .F30    { font-size: 30px;font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        <!-- ======================================= -->
+        <!-- SET 1 TEMPLATE: DEMO -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '1'}">
+            <div class="F10" style="position:absolute; left:280px; margin-top:317px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F10" style="position:absolute; left:385px; margin-top:317px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F10" style="position:absolute; left:470px; margin-top:318px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+
+            <div class="F10" style="position:absolute; left:300px; top:350px;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:250px; top:375px;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:250px; top:400px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:180px; top:425px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:300px; top:455px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!--
+            <div class="F10" style="position:absolute; left:550px; top:455px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+             -->
+            <div class="F10" style="position:absolute; left:530px; top:452px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>
+            <div class="F10" style="position:absolute; margin-top:538px; left:25px; font-size:9pt; line-height: 20px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:20px; height:15px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:15px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:8px; height:15px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:45px; padding-left:5px; height:27px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:90px; height:15px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:50px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 60px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 60px;width:250px; line-height:28px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:75px; top:770px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:75px; top:805px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:230px; height:10px; top:805px; float:left; text-align:left;F10 ">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:75px; top:840px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:300px;  margin-top:870px; width:450px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:550px;  margin-top:1050px; width:200px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 2 TEMPLATE  : PRINTING COMPANY NAME(Lien Son)-Client(Goodtrans)  -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '2'}">
+            <div class="F11" style="position:absolute; left:303px; margin-top:243px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F11" style="position:absolute; left:435px; margin-top:243px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F11" style="position:absolute; left:555px; margin-top:243px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+
+            <div class="F10" style="position:absolute; left:260px; top:295px; font-size:9pt">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:240px; top:321px; font-size:9pt">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:210px; top:398px; font-size:9pt">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:175px; top:348px; width:550px; font-size:9pt">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:700px; top:398px; font-size:9pt">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <!--
+            <div class="F10" style="position:absolute; left:400px; top:425px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <div class="F10" style="position:absolute; left:400px; top:425px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F10" style="position:absolute; margin-top:488px; left:30px; font-size:9pt; line-height: 27px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:20px; height:26px; width:27px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:15px; height:27px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:27px; height:27px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:33px; padding-left:5px; height:27px; width:20px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:108px; height:27px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:80px; padding-right:15px; height:27px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 60px; width:300px; line-height:27px; ">
+                    <!-- <apex:outputText value="{!wrapper.NumberSeaAir}" />-->
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 60px; width:250px; line-height:27px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:768px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:795px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:250px; height:10px; top:798px; float:left; text-align:left; font-size:10pt ">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:820px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:210px;  margin-top:847px; width:600px; font-size:10pt; line-height:27px">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:300px;  margin-top:1050px; width:200px; font-size:10pt; text-align:center">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 3 TEMPLATE : PRINTING COMPANY NAME(Lien Son)-Client(Hoang Khoi)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '3'}">
+            <div class="F11" style="position:absolute; left:320px; margin-top:238px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F11" style="position:absolute; left:425px; margin-top:238px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F11" style="position:absolute; left:515px; margin-top:238px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+
+            <div class="F11" style="position:absolute; left:308px; top:280px;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F11" style="position:absolute; left:195px; top:308px;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F11" style="position:absolute; left:200px; top:334px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F11" style="position:absolute; left:170px; top:360px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F11" style="position:absolute; left:295px; top:382px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:110px; top:1084px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>-->
+
+            <div class="F11" style="position:absolute; left:503px; top:385px; width:240px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>
+
+            <div class="F10" style="position:absolute; margin-top:484px; left:27px; font-size:10pt; line-height: 18px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:20px; height:29px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:13px; height:10px; width:240px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:20px; height:10px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:40px; padding-left:5px; height:10px; width:20px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:113px; height:10px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:64px;padding-right:15px; height:10px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 60px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 60px;width:250px; line-height:28px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:52px; top:790px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:52px; top:818px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:225px; height:10px; top:818px; float:left; text-align:left; font-size:10pt ">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:52px; top:845px; height:20px; width:20px; text-align:right; font-size:10pt">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:285px;  margin-top:872px; width:405px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:584px;  margin-top:1050px; width:200px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 4 TEMPLATE : PRINTING COMPANY NAME(Vien Dong)-Client(Goodtrans) -->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '4'}">
+        <div style="position:absolute; z-index:-2; left:10px; margin-top:10px;">
+            <img align="middle"
+                 src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__VAT_Background_Image__c}"
+                 width="773px" height="1100px"/>
+        </div>
+        <apex:variable var="currency" value=""/>
+        <div class="F12" style="position:absolute; left:332px; margin-top:119px;">
+            <apex:outputText value="{0,date,dd}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+        <div class="F12" style="position:absolute; left:432px; margin-top:119px;">
+            <apex:outputText value="{0,date,MM}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+
+            </apex:outputText>
+        </div>
+
+        <div class="F12" style="position:absolute; left:515px; margin-top:119px;">
+            <apex:outputText value="{0,date,yyyy}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+
+            </apex:outputText>
+        <!--</div>
+
+        <div class="F10" style="position:absolute; left:650px; margin-top:232px;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>-->
+        </div>
+        <div class="F12" style="position:absolute; left:280px; top:285px;">
+            <apex:outputText value="{!wrapper.clientName}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:222px; top:311px;">
+            <apex:outputText value="{!wrapper.invoiceTo}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:184px; top:336px;">
+            <apex:outputText value="{!wrapper.taxCode}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:158px; top:362px">
+            <apex:outputText value="{!wrapper.address}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:290px; top:412px;">
+            <apex:outputText value="{!wrapper.termsOfPayment}"/>
+        <!--</div>
+
+            <div class="F10" style="position:absolute; left:582px; top:413px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>-->
+             </div>
+                <div class="F10" style="position:absolute; left:582px; top:413px;">
+            <apex:outputText value="{!wrapper.customerBankAccount}"/>
+        </div>
+
+        <div class="F10" style="position:absolute; margin-top:522px; left:17px; font-size:9pt; line-height: 0px;">
+            <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                <div style="margin-left:19px; height:15px; width:26px; float:left; text-align:center; ">
+                    <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                </div>
+                <div style="margin-left:13px; height:15px; width:260px; float:left; text-align:left;">
+                    <apex:outputText value="{!li.productName}"></apex:outputText>
+                </div>
+                <div style=" margin-left:-35px; height:15px; width:40px; float:left; text-align:center;">
+                    <!--<apex:outputPanel rendered="{!li.unit != null}">
+                        <apex:outputText value="{!li.containerSize}"
+                                         rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}"
+                                         rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                    </apex:outputPanel>-->
+                    <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                </div>
+                <div style=" margin-left:20px; padding-left:5px; height:27px; width:20px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                </div>
+
+                <div style=" margin-left:54px; height:15px; width:50px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:-3px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:-54px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:-28px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.taxSellingAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:-10px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.amountSellingIncludeTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="clear:both"></div>
+            </apex:repeat>
+            <div style="margin-left: 58px; width: 600px;">
+                <apex:outputText value="{!wrapper.WKIDs}"/>
+            </div>
+            <div style="margin-left: 58px;width:250px; line-height:50px;">
+                <apex:outputText value="{!wrapper.remarks}"/>
+            </div>
+        </div>
+        <div style="position:absolute; right:237px; top:759px; height:20px; width:20px; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; right:131px; top:759px; height:20px; width:20px; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; left:574px; height:10px; top:759px; float:left; text-align:left;F10 ">
+            <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+        </div>
+        <div style="position:absolute; right:45px; top:759px; height:20px; width:20px; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div STYLE="position:absolute; left:165px;  margin-top:776px; width:450px; font-size:10pt;">
+            <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+        </div>
+        <div STYLE="position:absolute; left:505px;  margin-top:1030px; width:200px; font-size:10pt;">
+            <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+        </div>
+    </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 5 TEMPLATE  : PRINTING COMPANY NAME(Hong Ha)-Client(LACCO)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '5'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:550px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:12pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:12pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F16">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:393px; font-size:10pt; line-height: 14px;">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 6 TEMPLATE  : PRINTING COMPANY NAME(In Tai Chinh)-Client(VIF)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '6'}">
+            <div class="F10" style="position:absolute; left:420px; top:70px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+                </div>
+            <div class="F14" style="position:absolute; left:345px; margin-top:190px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:450px; margin-top:190px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:550px; margin-top:190px;">
+                <apex:outputText value="{0,date,yy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <div class="F14" style="position:absolute; left:300px; top:235px;">
+            <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:250px; top:260px;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:250px; top:285px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:210px; top:308px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:310px; top:335px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+
+            </div>
+            <div class="F10" style="position:absolute; left:540px; top:335px;width:225px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>
+            <div class="F10" style="position:absolute; margin-top:410px; left:55px; font-size:10pt; line-height: 20px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:20px; height:15px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:25px; height:15px; width:245px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:5px; height:15px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:30px; padding-left:5px; height:27px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:90px; height:15px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:60px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 70px;width:250px">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 70px;width:220px; line-height:28px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:55px; top:665px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:55px; top:690px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:220px; height:10px; top:690px; float:left; text-align:left;F10 ">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:55px; top:715px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:350px;  margin-top:730px; width:450px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:560px;  margin-top:920px; width:200px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 7 TEMPLATE : PRINTING COMPANY NAME(In An Tri Luat)-Client(SHINYO)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '7'}">
+            <div class="F12" style="position:absolute; left:305px; margin-top:141px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F12" style="position:absolute; left:365px; margin-top:141px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F12" style="position:absolute; left:430px; margin-top:141px;">
+                <apex:outputText value="{0,date,yy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+
+            <div class="F12" style="position:absolute; left:180px; top:294px;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:120px; top:322px;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:120px; top:349px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:100px; top:374px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:200px; top:401px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:160px; top:261px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:420px; width:360; top:401px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>
+            <div class="F10" style="position:absolute; margin-top:461px; left:10px; font-size:9pt; line-height: 18px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:27px; height:18px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:10px; height:18px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:0px; height:18px; width:40px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:45px; padding-left:5px; height:18px; width:20px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:70px; height:25px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:80px;padding-right:90px; height:18px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 63px; width:250px; line-height:25px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 63px; width:250px; line-height:25px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:95px; top:727px; height:20px; width:20px; text-align:right; font-size:9pt">
+                <b><c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/></b>
+            </div>
+            <div style="position:absolute; right:95px; top:752px; height:20px; width:20px; text-align:right; font-size:9pt">
+                <b><c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/></b>
+            </div>
+            <div style="position:absolute; left:150px; height:10px; top:752px; float:left; text-align:left; font-size:9pt">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:95px; top:774px; height:20px; width:20px; text-align:right; font-size:9pt">
+                <b><c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/></b>
+            </div>
+            <div STYLE="position:absolute; left:160px;  margin-top:792px; width:450px; font-size:9pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:530px;  margin-top:960px; width:200px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 8 TEMPLATE  : PRINTING COMPANY NAME(Hoang An)-Client(VNFT)-->
+        <!-- ======================================= -->
+
+
+      <apex:outputPanel rendered="{!templateSet = '8'}">
+        <div class="F14" style="position:absolute; left:310px; margin-top:127px;">
+            <apex:outputText value="{0,date,dd}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+        <div class="F14" style="position:absolute; left:390px; margin-top:127px;">
+            <apex:outputText value="{0,date,MM}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+        <div class="F14" style="position:absolute; left:480px; margin-top:127px;">
+            <apex:outputText value="{0,date,yy}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+
+        <div class="F14" style="position:absolute; left:230px; top:305px;">
+            <apex:outputText value="{!wrapper.clientName}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:140px; top:330px;">
+            <apex:outputText value="{!wrapper.invoiceTo}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:140px; top:355px;">
+            <apex:outputText value="{!wrapper.taxCode}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:110px; width:650px; top:377px">
+            <apex:outputText value="{!wrapper.address}"/>
+        </div>
+        <div class="F12" style="position:absolute; left:185px; top:400px;">
+            <apex:outputText value="{!wrapper.termsOfPayment}"/>
+        </div>
+
+        <div class="F12" style="position:absolute; left:360px; top:400px;">
+            <apex:outputText value="{!wrapper.customerBankAccount}"/>
+        </div>
+        <div class="F14" style="position:absolute; margin-top:510px; left:25px; line-height: 30px;">
+            <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                <div style="margin-left:20px; height:30px; width:26px; float:left; text-align:center; ">
+                    <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                </div>
+                <div style="margin-left:20px; height:30px; width:260px; float:left; text-align:left;">
+                    <apex:outputText value="{!li.productName}"></apex:outputText>
+                </div>
+                <div style=" margin-left:17px; height:30px; width:40px; float:left; text-align:center;">
+                    <!--<apex:outputPanel rendered="{!li.unit != null}">
+                        <apex:outputText value="{!li.containerSize}"
+                                         rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}"
+                                         rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                    </apex:outputPanel>-->
+                    <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                </div>
+                <div style=" margin-left:40px; padding-left:5px; height:30px; width:20px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                </div>
+
+                <div style=" margin-left:80px; height:30px; width:30px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:70px;padding-right:15px; height:30px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="clear:both"></div>
+            </apex:repeat>
+            <div style="margin-left: 70px; width:250px;">
+                <apex:outputText value="{!wrapper.WKIDs}"/>
+            </div>
+            <div style="margin-left: 70px; width:250px; line-height:20px;">
+                <apex:outputText value="{!wrapper.remarks}"/>
+            </div>
+        </div>
+        <div style="position:absolute; right:50px; top:792px; height:20px; width:20px; font-size:12pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; right:50px; top:827px; height:20px; width:20px; font-size:12pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; left:255px; height:10px; top:827px; float:left; font-size:12pt; text-align:left;">
+            <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+        </div>
+        <div style="position:absolute; right:50px; top:862px; height:20px; width:20px; font-size:12pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div STYLE="position:absolute; left:205px;  margin-top:895px; width:540px; font-size:11pt;">
+            <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+        </div>
+        <div STYLE="position:absolute; left:535px;  margin-top:1070px; width:200px; font-size:11pt;">
+            <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+        </div>
+    </apex:outputPanel>
+
+
+
+        <!-- ======================================= -->
+        <!-- SET 9 TEMPLATE  : PRINTING COMPANY NAME(Lien Son)-Client(IECE)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '9'}">
+        <div class="F14" style="position:absolute; left:310px; margin-top:82px;">
+            <apex:outputText value="{0,date,dd}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+        <div class="F14" style="position:absolute; left:430px; margin-top:82px;">
+            <apex:outputText value="{0,date,MM}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+
+        <div class="F14" style="position:absolute; left:523px; margin-top:82px;">
+            <apex:outputText value="{0,date,yyyy}">
+                <apex:param value="{!wrapper.issuedDate}"/>
+            </apex:outputText>
+        </div>
+        <div class="F14" style="position:absolute; left:230px; top:207px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:260px; top:240px;">
+            <apex:outputText value="{!wrapper.clientName}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:224px; top:265px;">
+            <apex:outputText value="{!wrapper.invoiceTo}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:189px; top:290px;">
+            <apex:outputText value="{!wrapper.taxCode}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:154px; top:315px">
+            <apex:outputText value="{!wrapper.address}"/>
+        </div>
+        <div class="F14" style="position:absolute; left:305px; top:340px;">
+            <apex:outputText value="{!wrapper.termsOfPayment}"/>
+        </div>
+
+
+        <div class="F10" style="position:absolute; margin-top:420px; left:25px; font-size:10pt; line-height: 26px;">
+            <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                <div style="margin-left:10px; height:26px; width:26px; float:left; text-align:center; ">
+                    <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                </div>
+                <div style="margin-left:10px; height:26px; width:260px; float:left; text-align:left;">
+                    <apex:outputText value="{!li.productName}"></apex:outputText>
+                </div>
+                <div style=" margin-left:30px; height:26px; width:40px; float:left; text-align:center;">
+                    <!--<apex:outputPanel rendered="{!li.unit != null}">
+                        <apex:outputText value="{!li.containerSize}"
+                                         rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}"
+                                         rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                    </apex:outputPanel>-->
+                    <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                </div>
+                <div style=" margin-left:20px; padding-left:10px; height:26px; width:20px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                </div>
+
+                <div style=" margin-left:75px; height:26px; width:30px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="margin-left:95px;padding-right:15px; height:26px; width:80px; float:left; text-align:right;">
+                    <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                </div>
+                <div style="clear:both"></div>
+            </apex:repeat>
+            <div style="margin-left: 50px; width:250px; line-height:26px;">
+                <apex:outputText value="{!wrapper.WKIDs}"/>
+            </div>
+            <div style="margin-left: 50px; width:250px; line-height:26px;">
+                <apex:outputText value="{!wrapper.remarks}"/>
+            </div>
+        </div>
+        <div style="position:absolute; right:55px; top:700px; height:20px; width:20px; font-size:10pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; right:55px; top:725px; height:20px; width:20px; font-size:10pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div style="position:absolute; left:240px; height:10px; top:722px; float:left; font-size:10pt; text-align:left;">
+            <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+        </div>
+        <div style="position:absolute; right:55px; top:750px; height:20px; width:20px; font-size:10pt; text-align:right;">
+            <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+        </div>
+        <div STYLE="position:absolute; left:207px;  margin-top:767px; width:540px; font-size:10pt;">
+            <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+        </div>
+        <div STYLE="position:absolute; left:575px;  margin-top:935px; width:200px; font-size:10pt;">
+            <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+        </div>
+    </apex:outputPanel>
+
+        <!-- ======================================= -->
+        <!-- SET 10 TEMPLATE  :  PRINTING COMPANY NAME(An Trang Huy Hoang)-Client(Won Chang)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '10'}">
+            <div class="F14" style="position:absolute; left:325px; margin-top:180px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:418px; margin-top:180px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:515px; margin-top:180px;">
+                <apex:outputText value="{0,date,yy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+            <div class="F14" style="position:absolute; left:250px; top:275px;">
+            <apex:outputText value="{!wrapper.customerPhoneNumber}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:300px; top:325px;">
+            <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:250px; top:350px;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:250px; top:395px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:210px; top:370px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:310px; top:420px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:540px; top:415px;">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+            <div class="F10" style="position:absolute; left:540px; top:425px;width:170px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>
+            <div class="F10" style="position:absolute; margin-top:505px; left:25px; font-size:10pt; line-height: 20px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:20px; height:15px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:15px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:8px; height:15px; width:40px; float:left; text-align:center;">
+                       <!-- <apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:45px; padding-left:5px; height:27px; width:20px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:90px; height:15px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:50px;padding-right:15px; height:15px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 60px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 60px;width:250px; line-height:28px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:75px; top:775px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:90px; top:800px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:250px; height:10px; top:800px; float:left; text-align:left;F10 ">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:75px; top:830px; height:20px; width:20px; text-align:right;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:350px;  margin-top:845px; width:450px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:550px;  margin-top:1000px; width:200px; font-size:10pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>
+        
+        
+        <!-- ======================================= -->
+        <!-- SET 11 TEMPLATE  : PRINTING COMPANY NAME(11)-Client(11)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '11'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:545px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F14">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:398px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>  
+        
+        <!-- ======================================= -->
+        <!-- SET 12 TEMPLATE  : PRINTING COMPANY NAME(12)-Client(12)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '12'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:545px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F14">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:398px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>  
+        
+        <!-- ======================================= -->
+        <!-- SET 13 TEMPLATE  : PRINTING COMPANY NAME(13)-Client(13)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '13'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:545px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F14">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:398px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>  
+        
+        <!-- ======================================= -->
+        <!-- SET 14 TEMPLATE  : PRINTING COMPANY NAME(14)-Client(14)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '14'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:545px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F14">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:398px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>  
+        
+        
+        <!-- ======================================= -->
+        <!-- SET 15 TEMPLATE  : PRINTING COMPANY NAME(15)-Client(15)-->
+        <!-- ======================================= -->
+        <apex:outputPanel rendered="{!templateSet = '15'}">
+            <div class="F14" style="position:absolute; left:295px; margin-top:308px;">
+                <apex:outputText value="{0,date,dd}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:435px; margin-top:308px;">
+                <apex:outputText value="{0,date,MM}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F14" style="position:absolute; left:545px; margin-top:308px;">
+                <apex:outputText value="{0,date,yyyy}">
+                    <apex:param value="{!wrapper.issuedDate}"/>
+                </apex:outputText>
+            </div>
+
+            <div class="F18" style="position:absolute; left:670px; margin-top:308px; text-align:center; color:red;">
+            <apex:outputText value="{!wrapper.invoiceNo}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:290px; top:343px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.clientName}"/>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:368px; font-size:13pt;">
+                <apex:outputText value="{!wrapper.invoiceTo}"/>
+            </div>
+            <!--
+            <div class="F25" style="position:absolute; left:180px; top:335px;">
+                <apex:outputText value="{!wrapper.taxCode}"/>
+            </div>
+            -->
+            <div class="F14">
+                <apex:variable value="{!170}" var="margin"/>
+                <apex:repeat value="{!wrapper.taxCodeInCharacters}" var="character">
+                    <apex:outputText style="position:absolute; top:420px; left: {!margin}px;" value="{!character}"/>
+                    <apex:variable value="{!margin + 15}" var="margin"/>
+                </apex:repeat>
+            </div>
+            <div class="F14" style="position:absolute; left:170px; top:398px">
+                <apex:outputText value="{!wrapper.address}"/>
+            </div>
+            <div class="F12" style="position:absolute; left:670px; top:423px;">
+                <apex:outputText value="{!wrapper.termsOfPayment}"/>
+            </div>
+
+            <div class="F14" style="position:absolute; left:25px; top:875px; width:300px">
+                <apex:outputText value="{!wrapper.bankAccounts}"/>
+            </div>
+
+            <!--<div class="F10" style="position:absolute; left:430px; top:400px;">
+                <apex:outputText value="{!wrapper.customerBankAccount}"/>
+            </div>-->
+            <div class="F12" style="position:absolute; margin-top:525px; left:14px; font-size:11pt; line-height: 22px;">
+                <apex:repeat value="{!wrapper.invoiceLineItems}" var="li">
+                    <div style="margin-left:-2px; height:22px; width:26px; float:left; text-align:center; ">
+                        <apex:outputLabel value="{!li.index}"></apex:outputLabel>
+                    </div>
+                    <div style="margin-left:20px; height:22px; width:260px; float:left; text-align:left;">
+                        <apex:outputText value="{!li.productName}"></apex:outputText>
+                    </div>
+                    <div style=" margin-left:45px; height:22px; width:50px; float:left; text-align:center;">
+                        <!--<apex:outputPanel rendered="{!li.unit != null}">
+                            <apex:outputText value="{!li.containerSize}" rendered="{!(li.unit == 'コンテナ' && li.containerSize != null)}"/>
+                            <apex:variable var="unitKey" value="{!li.unit}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!(li.unit != 'コンテナ' || li.containerSize == null)}"/>
+                        </apex:outputPanel>-->
+                        <apex:variable var="unitKey" value="{!li.unit}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!(unitKey != 'コンテナ' && unitKey != 'Container' )}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!(unitKey == 'コンテナ' || unitKey == 'Container' )}"/>
+                    </div>
+                    <div style=" margin-left:50px; padding-left:5px; height:22px; width:15px; float:left; text-align:center;">
+                        <c:formattedNumber ValueToFormat="{!li.quantity}" RoundedUp="false" DecimalDigits="3"/>
+                    </div>
+
+                    <div style=" margin-left:115px; height:22px; width:30px; float:left; text-align:right;" >
+                        <c:formattedNumber ValueToFormat="{!li.unitPrice}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="margin-left:70px; padding-right:15px; height:22px; width:80px; float:left; text-align:right;">
+                        <c:formattedNumber ValueToFormat="{!li.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+                    </div>
+                    <div style="clear:both"></div>
+                </apex:repeat>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.WKIDs}"/>
+                </div>
+                <div style="margin-left: 45px; width:250px; line-height:22px;">
+                    <apex:outputText value="{!wrapper.remarks}" />
+                </div>
+            </div>
+            <div style="position:absolute; right:17px; top:845px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; right:17px; top:885px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.taxAmount}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div style="position:absolute; left:478px; height:20px; top:885px; float:left; text-align:left; font-size:12pt;">
+                <!-- <c:formattedNumber ValueToFormat="{!wrapper.tax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/> -->
+            {!wrapper.tax}
+            </div>
+            <div style="position:absolute; right:17px; top:925px; height:20px; width:20px; text-align:right; font-size:12pt;">
+                <c:formattedNumber ValueToFormat="{!wrapper.totalAmoutIncludedTax}" RoundedUp="{!IF('USD' == reportingCurrency, false, true)}" DecimalDigits="3"/>
+            </div>
+            <div STYLE="position:absolute; left:188px;  margin-top:962px; height:27px; width:600px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.totalAmountText}"></apex:outputLabel>
+            </div>
+            <div STYLE="position:absolute; left:318px;  margin-top:1100px; width:200px; font-size:11pt;">
+                <apex:outputLabel value="{!wrapper.issuedBy}"></apex:outputLabel>
+            </div>
+        </apex:outputPanel>          
+        
+    </body>
+</apex:page>

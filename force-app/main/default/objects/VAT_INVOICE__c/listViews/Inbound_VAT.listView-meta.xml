@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inbound_VAT</fullName>
+    <columns>NAME</columns>
+    <columns>VATInvoiceNoFromVendor__c</columns>
+    <columns>BuyingTaxRatio__c</columns>
+    <columns>VatIssueFrom__c</columns>
+    <columns>TotalAmountOfVATBuying__c</columns>
+    <columns>AmountOfTaxVATBuying__c</columns>
+    <columns>AmountVATBuyingIncludeVAT__c</columns>
+    <columns>VATInvoicePrintDate__c</columns>
+    <columns>VAT_INVOICE_ISSUE_STATUS__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>VAT_INVOICE__c.VendorVATInvoice</value>
+    </filters>
+    <label>Inbound VAT</label>
+    <language>en_US</language>
+</ListView>

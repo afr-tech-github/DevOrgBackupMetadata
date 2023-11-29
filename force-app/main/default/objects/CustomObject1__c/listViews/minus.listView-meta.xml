@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>minus</fullName>
+    <columns>NAME</columns>
+    <columns>Ararigaku_sum__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>status__c</columns>
+    <columns>Field1__c</columns>
+    <columns>Custom__c</columns>
+    <columns>ConsolidationType__c</columns>
+    <columns>Siharaigaku_sum__c</columns>
+    <columns>BuyDifferentiation_sum2__c</columns>
+    <columns>BuyInTaxAmountJPY_sum__c</columns>
+    <columns>SellInTaxAmountJPY_sum__c</columns>
+    <columns>NyukinGoukeigaku__c</columns>
+    <columns>NyukinzandakaJPY__c</columns>
+    <columns>Memo__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Ararigaku_sum__c</field>
+        <operation>lessThan</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>ConsolidationType__c</field>
+        <operation>equals</operation>
+        <value>通常貨物(Normal Cargo)</value>
+    </filters>
+    <filters>
+        <field>SalesAccountedDate__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2020</value>
+    </filters>
+    <filters>
+        <field>Field1__c</field>
+        <operation>notEqual</operation>
+        <value>AFR</value>
+    </filters>
+    <label>9.1 Verification-Minus Profit Shipment</label>
+</ListView>

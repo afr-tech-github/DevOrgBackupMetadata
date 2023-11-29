@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Sales</fullName>
+        <default>false</default>
+        <label>Sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Deductions</fullName>
+        <default>false</default>
+        <label>Deductions</label>
+    </customValue>
+    <customValue>
+        <fullName>Net sales</fullName>
+        <default>false</default>
+        <label>Net sales</label>
+    </customValue>
+    <customValue>
+        <fullName>Cost of goods sold</fullName>
+        <default>false</default>
+        <label>Cost of goods sold</label>
+    </customValue>
+    <customValue>
+        <fullName>Gross profit/ (loss)</fullName>
+        <default>false</default>
+        <label>Gross profit/ (loss)</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial activities income</fullName>
+        <default>false</default>
+        <label>Financial activities income</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial activities expenses</fullName>
+        <default>false</default>
+        <label>Financial activities expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>In which: Loan interest expenses</fullName>
+        <default>false</default>
+        <label>In which: Loan interest expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Selling expense</fullName>
+        <default>false</default>
+        <label>Selling expense</label>
+    </customValue>
+    <customValue>
+        <fullName>General &amp; administration expenses</fullName>
+        <default>false</default>
+        <label>General &amp; administration expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Net operating profit/(loss)</fullName>
+        <default>false</default>
+        <label>Net operating profit/(loss)</label>
+    </customValue>
+    <customValue>
+        <fullName>Other income</fullName>
+        <default>false</default>
+        <label>Other income</label>
+    </customValue>
+    <customValue>
+        <fullName>Other expenses</fullName>
+        <default>false</default>
+        <label>Other expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Other profit/(loss)</fullName>
+        <default>false</default>
+        <label>Other profit/(loss)</label>
+    </customValue>
+    <customValue>
+        <fullName>Profit/(loss) before tax</fullName>
+        <default>false</default>
+        <label>Profit/(loss) before tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Current business Income tax charge</fullName>
+        <default>false</default>
+        <label>Current business Income tax charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Deffered business Income tax charge</fullName>
+        <default>false</default>
+        <label>Deffered business Income tax charge</label>
+    </customValue>
+    <customValue>
+        <fullName>Profit/(loss) after tax</fullName>
+        <default>false</default>
+        <label>Profit/(loss) after tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Earning per Share</fullName>
+        <default>false</default>
+        <label>Earning per Share</label>
+    </customValue>
+    <customValue>
+        <fullName>Diluted earning per share</fullName>
+        <default>false</default>
+        <label>Diluted earning per share</label>
+    </customValue>
+    <masterLabel>INCOME STATEMENT ITEM</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

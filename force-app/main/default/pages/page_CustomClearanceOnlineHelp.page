@@ -1,0 +1,106 @@
+<apex:page showHeader="false">
+<head>
+    <title>Customs Clearance OnlineHelp</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+
+
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       CUSTOMS CLEARANCE Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+
+    <h2>TRỢ GIÚP TRỰC TUYẾN CHO THỦ TỤC HẢI QUAN</h2>
+<br></br>
+Object này để quản trị chương trình liên quan đến Thủ tục Hải quan và thông tin chi tiết giấy phép liên quan.
+Thủ tục hải quan được tạo ra khi DỊCH VỤ KHAI QUAN ĐƯỢC YÊU CẦU là Có.
+.<br></br>
+.<br></br>
+Trật tự đúng cho lịch trình nhập khẩu là Ngày khởi hành dự kiến  Ngày quá cảnh-> Ngày  được cấp phép-> Ngày giao hàng.
+Trật tự đúng cho lịch trình xuất khẩu là Ngày thu gom hàng-> Ngày giao hàng-> Ngày được cấp phép-> Thời hạn cuối cùng mà shipper phải thanh lý container cho cảng để cảng bốc xếp container lên tàu( closing time)-> Ngày khởi hành dự kiến-> Ngày quá cảnh-> Ngày đến dự kiến
+.<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>   
+<h2>CUSTOMS CLEARANCE Online Help</h2>
+<br></br>
+This object is to manage Custom Clearance application and Permit Detail information.<br></br>
+The customs clearance record is created when CUSTOMS CLEARANCE SERVICE REQUIRED is Yes.<br></br>
+<br></br>
+The correct order for import timeline is ETD->Transit ETD->ETA->Permit Date->Pickup Date->Delivery Date.<br></br>
+The correct order for export timeline is Pickup Date->Delivery Date->Permit Date->Cut Date->ETD->Transit ETD->ETA.<br></br>
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>通関に関するオンラインヘルプ</h2><br></br>
+<br></br>
+通関申告および許可の詳細情報を管理するオブジェクトです。<br></br>
+通関有無が「あり」の時、通関レコードが作成されます。<br></br>
+<br></br>
+輸入の流れの正しい順番は　出港日->積替港での出港日->入港日->通関許可日->引取日->配送予定日です。<br></br>
+輸出の流れの正しい順番は　引取日->配送予定日->通関許可日->CUT->出港日->積替港での出港日->入港日です。<br></br>
+
+<br></br>
+
+------------------------------------------------------------------------------------------------------------<br></br>
+<h2>통관에 대한 온라인 도움말</h2><br></br>
+<br></br>
+통관신고, 허가에 대한 상세정보를 관리하는 오브젝트(객체)입니다.<br></br>
+통관유무가 '있음'으로 설정된 경우, 통관 레코드가 생성됩니다.
+<br></br>
+수입의 올바른 업무 프로세스는 출항일/출발일->환승항에서의 출항일->입항일/도착일->통관허가일->픽업일->배송일 입니다.<br></br>
+수출의 올바른 업무 프로세스는 픽업일->배송일->통관허가일->CUT일->출항일/출발일->환승항에서의 출항일->입항일/도착일 입니다.
+
+
+
+</body>
+
+</apex:page>

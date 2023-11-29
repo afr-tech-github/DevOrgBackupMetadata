@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Main Body</fullName>
+        <default>false</default>
+        <label>Main Body</label>
+    </customValue>
+    <customValue>
+        <fullName>Part</fullName>
+        <default>false</default>
+        <label>Part</label>
+    </customValue>
+    <description>Classification to identify the main body or parts</description>
+    <masterLabel>Body &amp; Part Classification</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

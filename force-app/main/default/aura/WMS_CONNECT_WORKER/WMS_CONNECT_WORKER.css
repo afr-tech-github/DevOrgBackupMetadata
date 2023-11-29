@@ -1,0 +1,7 @@
+.THIS label.slds-form-element__label.slds-no-flex{
+    	display: none;
+}
+
+.THIS .slds-form-element label {
+    display: none;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outbound</fullName>
+    <columns>NAME</columns>
+    <columns>Customer__c</columns>
+    <columns>ProductID__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Measurement__c</columns>
+    <columns>GrossWeight__c</columns>
+    <columns>UnitType__c</columns>
+    <columns>ContainerType1__c</columns>
+    <columns>ContainerQNTY1__c</columns>
+    <columns>ContainerType2__c</columns>
+    <columns>ContainerQNTY2__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>WorkOrder__c.Outbound</value>
+    </filters>
+    <label>2.Outbound</label>
+    <language>en_US</language>
+</ListView>

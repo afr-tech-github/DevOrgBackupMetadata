@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sừ dụng mẫu này khi House shipment mới được đăng kí.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Email đăng ký cho House shipment</name>
+    <style>none</style>
+    <subject>Status Report-ID:{!CustomObject1__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

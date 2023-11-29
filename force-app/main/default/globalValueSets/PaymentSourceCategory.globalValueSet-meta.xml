@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Payment Request</fullName>
+        <default>false</default>
+        <label>Payment Request</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Invoice for Shipment Order</fullName>
+        <default>false</default>
+        <label>Inbound Invoice for Shipment Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Invoice for Work Order</fullName>
+        <default>false</default>
+        <label>Inbound Invoice for Work Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Inbound Invoice for Expense</fullName>
+        <default>false</default>
+        <label>Inbound Invoice for Expense</label>
+    </customValue>
+    <customValue>
+        <fullName>Advance payment to staff payment</fullName>
+        <default>false</default>
+        <label>Advance payment to staff payment</label>
+    </customValue>
+    <customValue>
+        <fullName>Container Deposit</fullName>
+        <default>false</default>
+        <label>Container Deposit</label>
+    </customValue>
+    <customValue>
+        <fullName>Reimbursement</fullName>
+        <default>false</default>
+        <label>Reimbursement</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Invoice for Shipment Order</fullName>
+        <default>false</default>
+        <label>Outbound Invoice for Shipment Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Invoice for Work Order</fullName>
+        <default>false</default>
+        <label>Outbound Invoice for Work Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>PAYMENT SOURCE CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,14 @@
+.THIS .centered {
+    color: #999999;
+    font-size: 0.9rem;
+    text-align: center;
+	align-self: center;
+    padding: 0 12px;
+}
+.THIS .slds-table_cell-buffer tr>td:first-child{
+    padding: .25rem .5rem;
+}
+.THIS .slds-form-element_horizontal .slds-form-element__control{
+    padding-left: 2px !important;
+    display: flow-root;
+}

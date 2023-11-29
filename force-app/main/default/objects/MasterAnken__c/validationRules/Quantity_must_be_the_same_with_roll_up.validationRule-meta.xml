@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quantity_must_be_the_same_with_roll_up</fullName>
+    <active>false</active>
+    <description>Check rollup information, is that the same with manual or not.
+Check fields: cargo quantity</description>
+    <errorConditionFormula>AND(NOT(ISBLANK( rollupcargoquantity__c )), rollupcargoquantity__c &gt; Mcarton_c__c )</errorConditionFormula>
+    <errorDisplayField>Mcarton_c__c</errorDisplayField>
+    <errorMessage>We&apos;re sorry, we noticed that the &quot;Quantity of Goods&quot; you entered is less than the total rollup from the F/TMS S/O. Please check a gain, thanks!</errorMessage>
+</ValidationRule>

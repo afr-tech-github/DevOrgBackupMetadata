@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Created</fullName>
+        <default>true</default>
+        <label>Created</label>
+    </customValue>
+    <customValue>
+        <fullName>Planned</fullName>
+        <default>false</default>
+        <label>Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Resource Assigned</fullName>
+        <default>false</default>
+        <label>Resource Assigned</label>
+    </customValue>
+    <customValue>
+        <fullName>Accept Cargo Assignment</fullName>
+        <default>false</default>
+        <label>Accept Cargo Assignment</label>
+    </customValue>
+    <customValue>
+        <fullName>On Progress</fullName>
+        <default>false</default>
+        <label>On Progress</label>
+    </customValue>
+    <customValue>
+        <fullName>Rescheduled</fullName>
+        <default>false</default>
+        <label>Rescheduled</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled</fullName>
+        <default>false</default>
+        <label>Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Transfer To Next Process</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Data Transfer To Next Process</label>
+    </customValue>
+    <masterLabel>WORK STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

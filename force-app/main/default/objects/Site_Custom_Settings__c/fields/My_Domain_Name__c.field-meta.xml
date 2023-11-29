@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Domain_Name__c</fullName>
+    <defaultValue>&quot;XXX-CloFor.my.salesforce.com&quot;</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the Log-In URL.
+-no need https://
+-My Domain Name can be confirmed at Quick Search at Setup Menu by searching My Domain</inlineHelpText>
+    <label>My Domain Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

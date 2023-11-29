@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DataPull__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If want to automatic data updates from other process 
+-Select the process want to be copied from
+*Automatic in Data Updates Method must be selected to automatic data updates</inlineHelpText>
+    <label>DATA PULL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>DataUpdateMethod__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>DataPull</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From PREVIOUS WORK ORDER SERVICE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From Work Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From SHIPMENT ORDER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From Stock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From Purchasing Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From Sales Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Automatic</controllingFieldValue>
+            <valueName>Data Pull From Contract</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

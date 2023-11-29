@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>chk_lock</fullName>
+    <active>false</active>
+    <description>旧）CONTAINS( Recordtype__c ,&quot;ロック&quot;)</description>
+    <errorConditionFormula>AND(CONTAINS( Recordtype__c ,&quot;ロック&quot;), ISBLANK(Anken__r.FlgCopy__c ), NOT(BY_PASS_VALIDATION_RULE__c) )</errorConditionFormula>
+    <errorMessage>請求済みの明細は編集できません。確認して下さい。</errorMessage>
+</ValidationRule>

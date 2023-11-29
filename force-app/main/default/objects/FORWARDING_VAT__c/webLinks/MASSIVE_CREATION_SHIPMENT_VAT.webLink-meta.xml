@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MASSIVE_CREATION_SHIPMENT_VAT</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>MASSIVE CREATION</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+
+var currentLocation = location.href; 
+
+location.href= &apos;/apex/clofor_com_cfs__MassiveEdit?id={!URLENCODE(VAT_INVOICE__c.Id)}&amp;obj=shipmentvat&amp;action=new&apos;;</url>
+</WebLink>

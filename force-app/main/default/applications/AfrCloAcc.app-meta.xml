@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>AnkenMeisai__c</defaultLandingTab>
+    <description>ACM(Accounting Module): Module to manage Accounting Function that Accounting Team involved.</description>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloACM-Accounting Module</label>
+    <logo>AFR_New_Logo/LogisForce_Logo.png</logo>
+    <tabs>standard-Document</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>TariffMaster__c</tabs>
+    <tabs>CustomObject1__c</tabs>
+    <tabs>AnkenMeisai__c</tabs>
+    <tabs>Billing__c</tabs>
+    <tabs>TRSBill__c</tabs>
+    <tabs>SOANew</tabs>
+    <tabs>VAT_INVOICE__c</tabs>
+    <tabs>PaymentRequest__c</tabs>
+    <tabs>BankTransaction__c</tabs>
+    <tabs>CASH_BOOK__c</tabs>
+    <tabs>CashAdvance__c</tabs>
+    <tabs>Loan__c</tabs>
+    <tabs>LoanRepayment__c</tabs>
+    <tabs>OtherRevenueCost__c</tabs>
+    <tabs>resource__c</tabs>
+    <tabs>PurchasingOrder__c</tabs>
+    <tabs>PurchasingInvoice__c</tabs>
+    <tabs>MgmtMaster__c</tabs>
+    <tabs>Tax_Ratio__c</tabs>
+    <tabs>BankAccount__c</tabs>
+    <tabs>Accounting_Code__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+</CustomApplication>

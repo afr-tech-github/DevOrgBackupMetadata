@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Mobile harbour crane</fullName>
+        <default>false</default>
+        <label>Mobile harbour crane</label>
+    </customValue>
+    <customValue>
+        <fullName>Permanently-installed crane</fullName>
+        <default>false</default>
+        <label>Permanently-installed crane</label>
+    </customValue>
+    <customValue>
+        <fullName>Portal crane</fullName>
+        <default>false</default>
+        <label>Portal crane</label>
+    </customValue>
+    <customValue>
+        <fullName>Rail-mounted stacking crane</fullName>
+        <default>false</default>
+        <label>Rail-mounted stacking crane</label>
+    </customValue>
+    <customValue>
+        <fullName>Rubber tyre stacking crane</fullName>
+        <default>false</default>
+        <label>Rubber tyre stacking crane</label>
+    </customValue>
+    <customValue>
+        <fullName>Straddle carrier</fullName>
+        <default>false</default>
+        <label>Straddle carrier</label>
+    </customValue>
+    <customValue>
+        <fullName>Reachstacker</fullName>
+        <default>false</default>
+        <label>Reachstacker</label>
+    </customValue>
+    <customValue>
+        <fullName>Dockyard crane</fullName>
+        <default>false</default>
+        <label>Dockyard crane</label>
+    </customValue>
+    <masterLabel>Container Handler Sub Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

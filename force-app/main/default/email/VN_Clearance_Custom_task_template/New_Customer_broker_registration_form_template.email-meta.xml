@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi muốn gửi Đơn Đăng Ký Nhà Môi Giới Hải Quan Mới.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>ĐƠN ĐĂNG KÝ NHÀ MÔI GIỚI HẢI QUAN MỚI</name>
+    <style>none</style>
+    <subject>About New Customer broker registration form</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

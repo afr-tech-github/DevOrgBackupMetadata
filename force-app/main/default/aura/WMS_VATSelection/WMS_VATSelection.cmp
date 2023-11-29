@@ -1,0 +1,55 @@
+<aura:component controller ="WMS_VATSelectionController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<aura:attribute name="language" type="String"/>
+	<aura:attribute name="invoiceType" type="String" default="DRAFT_INVOICE"/>
+	<aura:attribute name="groupingType"  type="String" default="SINGLE_INVOICE"/>
+	<aura:attribute name="currencyType"  type="String" default="VND"/>
+	<aura:attribute name="selectedDisplay" type="Object"/>
+	<aura:attribute name="generalTranslation" type="Map"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<div>
+		<div class="slds-card">
+		    <div class="slds-p-around_medium">
+		    	
+		    	<div class="slds-section slds-is-open">
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="languageSelect" name="select" label="{!v.generalTranslation.language_option}" value="{!v.language}" onchange="{!c.onchangeLanguage}">
+				       	<aura:iteration items="{!v.selectedDisplay.languageOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}" selected="{!option.selected}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="invoiceTypeSelect" name="select" label="Invoice" value="{!v.invoiceType}" onchange="{!c.onchangeInvoiceType}">
+				       	<aura:iteration items="{!v.selectedDisplay.invoiceTypeOptions}" var="option">
+				            <option text="{!option.label + '-' + v.selectedDisplay.companyShortName}" value="{!option.value}" selected="{!option.selected}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="groupingTypeSelect" name="select" label="Grouping Option" value="{!v.groupingType}" onchange="{!onchangeGroupingType}">
+				       	<aura:iteration items="{!v.selectedDisplay.groupingTypeOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				   <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="currencyTypeSelect" name="select" label="Currency" value="{!v.currencyType}" onchange="{!onchangeCurrencyType}">
+				       	<aura:iteration items="{!v.selectedDisplay.currencyTypeOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				  	{!v.generalTranslation.create_attachment_label}
+				    <ui:inputCheckbox aura:id="checkboxAttachment" label="{!v.generalTranslation.create_attachment_label}" value="{!v.isCreateAttachment}"/>
+				  </div>
+				  
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:button variant="brand" label="{!v.generalTranslation.generate}" title="{!v.generalTranslation.generate}" onclick="{!c.handleGenerate}" />
+				  </div>
+				</div>
+				
+		    </div>
+		</div>
+	</div>
+</aura:component>

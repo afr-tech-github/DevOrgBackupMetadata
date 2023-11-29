@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApprovedTotalAmountBuyingInclTax__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Approved-Total Amount of Buying With Tax</label>
+    <summarizedField>AnkenMeisai__c.BuyInTaxAmountJPY__c</summarizedField>
+    <summaryFilterItems>
+        <field>AnkenMeisai__c.ApprovaStatusForBuying__c</field>
+        <operation>equals</operation>
+        <value>Approved</value>
+    </summaryFilterItems>
+    <summaryForeignKey>AnkenMeisai__c.Anken__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

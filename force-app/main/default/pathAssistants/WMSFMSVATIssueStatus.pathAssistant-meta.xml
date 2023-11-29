@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>VAT_INVOICE__c</entityName>
+    <fieldName>VAT_INVOICE_ISSUE_STATUS__c</fieldName>
+    <masterLabel>WMS+FMS VAT Issue Status</masterLabel>
+    <recordTypeName>FMSTMSWMSVATInvoice</recordTypeName>
+</PathAssistant>

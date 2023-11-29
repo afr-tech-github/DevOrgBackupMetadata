@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>標準為替レートの承認申請が行われた際に使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>標準為替 プロセス - 申請済み</name>
+    <style>none</style>
+    <subject>為替レート-承認申請-{!MgmtMaster__c.Name}-{!MgmtMaster__c.Mgmt_Exrate_fromto__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

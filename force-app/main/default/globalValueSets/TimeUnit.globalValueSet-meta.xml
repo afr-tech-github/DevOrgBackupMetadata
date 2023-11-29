@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Day</fullName>
+        <default>false</default>
+        <label>Day</label>
+    </customValue>
+    <customValue>
+        <fullName>Week</fullName>
+        <default>false</default>
+        <label>Week</label>
+    </customValue>
+    <customValue>
+        <fullName>Month</fullName>
+        <default>false</default>
+        <label>Month</label>
+    </customValue>
+    <customValue>
+        <fullName>Quarter</fullName>
+        <default>false</default>
+        <label>Quarter</label>
+    </customValue>
+    <customValue>
+        <fullName>Year</fullName>
+        <default>false</default>
+        <label>Year</label>
+    </customValue>
+    <customValue>
+        <fullName>Hour</fullName>
+        <default>false</default>
+        <label>Hour</label>
+    </customValue>
+    <customValue>
+        <fullName>Minute</fullName>
+        <default>false</default>
+        <label>Minute</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>TIME UNIT</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

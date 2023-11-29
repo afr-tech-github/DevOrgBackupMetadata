@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SerchSyubetu__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>SERVICE CATEGORY FOR SEARCH ENGINE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FCL輸入</fullName>
+                <default>false</default>
+                <label>FCL Import</label>
+            </value>
+            <value>
+                <fullName>FCL輸出</fullName>
+                <default>false</default>
+                <label>FCL Export</label>
+            </value>
+            <value>
+                <fullName>LCL輸入</fullName>
+                <default>false</default>
+                <label>LCL Import</label>
+            </value>
+            <value>
+                <fullName>LCL輸出</fullName>
+                <default>false</default>
+                <label>LCL Export</label>
+            </value>
+            <value>
+                <fullName>エア</fullName>
+                <default>false</default>
+                <label>AIR</label>
+            </value>
+            <value>
+                <fullName>通関輸入</fullName>
+                <default>false</default>
+                <label>Import Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>通関輸出</fullName>
+                <default>false</default>
+                <label>Export Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>海外現地費用</fullName>
+                <default>false</default>
+                <label>Oversea Local Charges</label>
+            </value>
+            <value>
+                <fullName>マスター按分</fullName>
+                <default>false</default>
+                <label>Master Charges Allocation</label>
+            </value>
+            <value>
+                <fullName>ドレー</fullName>
+                <default>false</default>
+                <label>Drayage</label>
+            </value>
+            <value>
+                <fullName>配送</fullName>
+                <default>false</default>
+                <label>Delivery</label>
+            </value>
+            <value>
+                <fullName>倉庫</fullName>
+                <default>false</default>
+                <label>Warehouse</label>
+            </value>
+            <value>
+                <fullName>実費</fullName>
+                <default>false</default>
+                <label>At Cost</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

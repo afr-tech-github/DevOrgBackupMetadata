@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>TaxCategory__c</columns>
+    <columns>Active__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>EndDate__c</columns>
+    <columns>OpeingBalance__c</columns>
+    <columns>TransactionBalanceDebit__c</columns>
+    <columns>TransactionBalanceCredit__c</columns>
+    <columns>PayableForPeriod__c</columns>
+    <columns>ClosingBalance__c</columns>
+    <columns>ClosingBalanceCredit__c</columns>
+    <columns>PaidForThePeriod__c</columns>
+    <columns>PaymentSettledDate__c</columns>
+    <columns>PaymentType__c</columns>
+    <columns>RemainedBalance__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

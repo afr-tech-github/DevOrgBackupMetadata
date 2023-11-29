@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Servicename__c</columns>
+    <columns>ServiceProviderVender__c</columns>
+    <columns>Unitpriceofbuyingusd__c</columns>
+    <columns>ChargeUnit__c</columns>
+    <columns>ContainerType__c</columns>
+    <columns>pol__c</columns>
+    <columns>ExportCountry__c</columns>
+    <columns>pod__c</columns>
+    <columns>ImportCountry__c</columns>
+    <columns>ApplicationDate__c</columns>
+    <columns>Applicationduedate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Servicename__c</field>
+        <operation>contains</operation>
+        <value>Ocean</value>
+    </filters>
+    <filters>
+        <field>pol__c</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>pod__c</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>ChargeUnit__c</field>
+        <operation>equals</operation>
+        <value>CBM,Container</value>
+    </filters>
+    <label>All</label>
+</ListView>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Charter_Truck_Export</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>LCLCargoTransportStatus</compactLayoutAssignment>
+    <description>Arrange exclusive use of a vehicle for Outbound cargo</description>
+    <label>Charter Truck-Outbound</label>
+</RecordType>

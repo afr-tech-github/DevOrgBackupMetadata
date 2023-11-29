@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPageWebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>☘Click-&gt;Enter a search String☘</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://{!$Setup.Site_Custom_Settings__c.My_Domain_Name__c}/search/SearchResults</url>
+</CustomPageWebLink>

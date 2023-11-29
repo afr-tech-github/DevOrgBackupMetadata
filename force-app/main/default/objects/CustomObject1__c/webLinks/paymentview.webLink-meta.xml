@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>paymentview</fullName>
+    <availability>online</availability>
+    <description>Buying Detail</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>true</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>true</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>BUYING DETAIL REPORT</masterLabel>
+    <openType>newWindow</openType>
+    <position>fullScreen</position>
+    <protected>false</protected>
+    <showsLocation>true</showsLocation>
+    <showsStatus>true</showsStatus>
+    <url>/{!$Setup.Report_Mappings__c.HBL_Buying_Detail__c}?pv0={!URLENCODE(CustomObject1__c.Id)}</url>
+</WebLink>

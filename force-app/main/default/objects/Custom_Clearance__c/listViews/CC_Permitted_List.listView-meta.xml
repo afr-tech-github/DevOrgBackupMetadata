@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CC_Permitted_List</fullName>
+    <columns>HBL_SHIPMENT__c</columns>
+    <columns>NAME</columns>
+    <columns>Customs_Release_Day__c</columns>
+    <columns>DeclarationNo__c</columns>
+    <columns>CustomJudgment__c</columns>
+    <columns>CCDescription__c</columns>
+    <columns>PLACE_OF_ORIGIN__c</columns>
+    <columns>CustomCategory__c</columns>
+    <columns>NO_OF_LINES_ON_PERMIT_NOTICE__c</columns>
+    <columns>NO_OF_PAGES_ON_PERMIT_NOTICE__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Customs_Release_Day__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>CC Permitted List</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when shipment submission is rejected.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>REJECTED EMAIL</name>
+    <style>none</style>
+    <subject>REJECTED-ID:{!CustomObject1__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

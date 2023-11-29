@@ -1,0 +1,353 @@
+<apex:page controller="OutStandingStatementDetailController" applyBodyTag="false"  renderAs="pdf" cache="true" title="OutStanding Statement Detail" showHeader="false">
+    <head>
+        <style>
+            @page{
+                size:landscape;
+            }
+            .companyInfo {
+                text-align: center;
+                font-size: 12px;
+            }
+            body {
+                font-size: 12px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            }
+            .title {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .dataTable {
+                width: 100%;
+                border-collapse: collapse;
+                border: thin solid ;
+            }
+            .dataTable tr {
+                border: thin solid ;
+                border-collapse: collapse;
+            }
+            
+            .dataTable td {
+                font-size: 12px;
+                text-align:center;
+                border-collapse: collapse;
+                border: thin solid ;
+                line-height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        
+        <apex:form >
+            <div align="center">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="300" height="80"/>
+            </div>
+            <div class='title'>
+                <span><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/></span>
+            </div>
+            <div class='companyInfo'>
+                <span><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/></span>
+            </div>
+            <div class='companyInfo'>
+                <span><apex:outputLabel value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c} 　　FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/></span>
+            </div>
+            <p/>
+            <p/>
+            <div class='title'>
+                OUTSTANDING STATEMENT
+            </div>
+            <p/>
+            <p/>
+            <table style="font-size: 12px;">
+                <tr>
+                    <td width="70%">TO: {!partnerEnglishName} </td>
+                    <td ></td>
+                    <td></td>
+                    <td></td>
+                </tr>  
+                               <tr>
+                    <td width="70%">ATTN:  To whom it may concern</td>
+                    <td width="20%"></td>
+                    <td>DATE:</td>
+                    <td>{!currentDate}</td>
+                </tr>
+              
+                <tr>
+                    <td width="70%">PERIOD: {!period}</td>
+                    <td ></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>          
+            <p/>
+            
+            <p/>
+            <table class='dataTable' border="1">
+                <tr>
+                    <td rowspan="2"><b>NO</b></td>
+                    <td colspan="7"><b>SHIPMENT's DETAILS</b></td>
+                    <td colspan="3" style="{!IF(currencyType <> 'USD', '', 'display: none;')}"><b>LOCAL</b></td>
+                    <td colspan="3" style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>USD</b></td>
+                </tr>
+                <tr>
+                    <td><b>WKID</b></td>
+                    <td><b>SALES <br/>ACCOUNTED <br/> DATE</b></td>
+                    <td><b>HBL</b></td>
+                    <td><b>MBL</b></td>
+                    <td><b>ETD</b></td>
+                    <td><b>ETA</b></td>
+                    <td><b>QUANTITY</b></td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}"><b>DEBIT</b></td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}"><b>CREDIT</b></td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}"><b>BALANCE</b></td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>DEBIT</b></td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>CREDIT</b></td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>BALANCE</b></td>
+                </tr>
+                <apex:repeat value="{!lstSTID}" var="item">
+                    <tr>
+                        <td>{!item.index}</td>
+                        <td>{!item.wkid}</td>
+                        <td>{!mapLocal[item.wkid].salesAccountedDate}</td>
+                        <td>
+                            <apex:outputText value="{!item.hbl}" style="white-space:pre-wrap;" ></apex:outputText>
+                        </td>
+                        <td>{!item.mbl}</td>
+                        <td>{!item.etd}</td>
+                        <td>{!item.eta}</td>
+                        <td>{!item.myQuantity}</td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!mapLocal[item.wkid].debitLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!mapLocal[item.wkid].creditLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!mapLocal[item.wkid].balanceLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.##}">
+                                <apex:param value="{!item.debit}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.##}">
+                                <apex:param value="{!item.credit}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###.##}">
+                                <apex:param value="{!item.balance}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td colspan="8"><b>TOTAL</b></td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!totalDebitLocal}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!totalCreditLocal}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>
+                            <apex:outputText value="{0,number,###,###,###.###}">
+                                <apex:param value="{!totalBalanceLocal}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>
+                        <apex:outputText value="{0,number,###,###,###.##}">
+                            <apex:param value="{!totalDebit}" />
+                        </apex:outputText>
+                    </b></td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>
+                        <apex:outputText value="{0,number,###,###,###.##}">
+                            <apex:param value="{!totalCredit}" />
+                        </apex:outputText>
+                    </b></td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>
+                        <apex:outputText value="{0,number,###,###,###.##}">
+                            <apex:param value="{!totalBalance}" />
+                        </apex:outputText>
+                    </b></td>
+                </tr>
+                
+            </table>
+            <p/>
+            <div style="font-size: 12px;">
+                <b>TOTAL BALANCE DUE TO {!$Setup.Site_Custom_Settings__c.Company_Name__c} : </b> 
+                <span>
+                    <b>VND
+                        <apex:outputText value="{0,number,###,###,##0.##}">
+                            <apex:param value="{!totalBalanceLocal}" />
+                        </apex:outputText>
+                    </b>
+                </span>
+                <span style="margin-left: 30px;">
+                    <b>USD 
+                        <apex:outputText value="{0,number,###,###,##0.##}">
+                            <apex:param value="{!totalBalance}" />
+                        </apex:outputText>
+                    </b>
+                </span>
+            </div>  
+            <br/>
+            <br/>
+            <apex:outputPanel rendered="{!lstAKMDetail.size > 0}">
+            <div style="page-break-before: always; ">
+                <table class='dataTable' border="1">
+                <tr>
+                    <td rowspan="2"><b>NO</b></td>
+                    <td colspan="7"><b>SHIPMENT's DETAILS</b></td>
+                    <td colspan="3" style="{!IF(currencyType <> 'USD', '', 'display: none;')}"><b>LOCAL</b></td>
+                    <td colspan="3" style="{!IF(currencyType <> 'VND', '', 'display: none;')}"><b>USD</b></td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>BILLING-<br/>FMS/TMS ID</b>
+                    </td>
+                    <td>
+                        <b>SALES ACCOUNTED DATE-<br/>INVOICING</b>
+                    </td>
+                    <td>
+                        <b>PRICING <br/>NAME AT <br/>PRINT(LOCAL)</b>
+                    </td>
+                    <td>
+                        <b>INVOICE TO</b>
+                    </td>
+                    <td>
+                        <b>PAYMENT TO-BUYING</b>
+                    </td>
+                    <td>
+                        <b>DESCRIPTION</b>
+                    </td>
+                    <td>
+                        <b>CHARGE UNIT (TOTAL)</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>AMOUNT <br/>SELLING <br/>INCLUDING TAX</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>AMOUNT <br/>BUYING <br/>INCLUDING TAX</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                        <b>UNPAID <br/>BALANCE OF SELLING</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                        <b>AMOUNT <br/>SELLING <br/>INCLUDING TAX</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                        <b>AMOUNT <br/>BUYING <br/>INCLUDING TAX</b>
+                    </td>
+                    <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                        <b>UNPAID <br/>BALANCE OF <br/>SELLING</b>
+                    </td>
+                </tr>
+                <apex:variable var="rowNum" value="1" />
+                <apex:repeat value="{!lstAKMDetail}" var="anken">
+                    <tr>
+                        <td>
+                            {!rowNum}
+                        </td>
+                        <td>
+                            {!anken.anken.Name}
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!anken.anken.SalesAccountedDateInvoicing__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            {!anken.anken.InsatuyouSyohin__c}
+                        </td>
+                        <td>
+                            <apex:outputText value="{!anken.anken.Seikyusaki__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!anken.anken.PaymentTo__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            {!anken.anken.Description__c}
+                        </td>
+                        <td>
+                            {!anken.anken.Suryo__c}
+                        </td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.debitLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.creditLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'USD', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.balanceLocal}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.debitUSD}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.creditUSD}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="{!IF(currencyType <> 'VND', '', 'display: none;')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!anken.balanceUSD}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <apex:variable var="rowNum" value="{!VALUE(rowNum) + 1}" />
+                </apex:repeat>
+            </table>
+            </div>
+            </apex:outputPanel>
+            <div>
+                -------------------------------------------------------------------------------------
+            </div>
+            <div style="font-size: 12px;">
+                <p>
+                    REMARK: Please kindly check and send us back with your signature and your company's seal.<br/>
+                    Bank details for payment by bank transfer<br/>
+                    <br/>
+                    ACCOUNT NAME:   <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}"/><br/>
+                    ADDRESS:        <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Account_Address_1__c}"/><br/>
+                    BANK NAME:      <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}"/><br/>
+                    ACCOUNT NUMBER: <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}"/><br/>
+                    SWIFT CODE:     <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}"/><br/>
+                    BANK ADDRESS:   <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}"/><br/>
+                    <br/>
+                    Please remit the proceeds to BENEFICIARY DIRECTLY.<br/>
+                    For futher information, if required, can be obtained contact.<br/>{!$Setup.Site_Custom_Settings__c.Company_Signature__c}<br/>
+                </p>
+            </div>     
+            
+<div style="font-size:12px; margin-left:500px;">
+                Powered by AFR Solutions Co., Ltd.
+            </div>
+        </apex:form>
+    </body>
+</apex:page>

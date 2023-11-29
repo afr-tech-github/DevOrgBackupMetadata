@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>wkTaxFlag__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF( OR(TEXT(Zeibunrui__c) = &apos;課税&apos;,TEXT(Zeibunrui__c) = &apos;TAX(課税)&apos;,TEXT(Zeibunrui__c) = &apos;TAX&apos;), true , false )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>wkTAX-FLAG</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

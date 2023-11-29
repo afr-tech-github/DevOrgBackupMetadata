@@ -1,0 +1,67 @@
+<aura:component access="global" controller="WMS_AssignResource">
+	
+	<aura:attribute name="connectWorkerList" type="List"/>
+    <aura:attribute name="WorkerRoleList" type="String[]" />
+    <aura:attribute name="WorkerList" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:method name="reInit" action="{!c.doInit}" />
+    <aura:method name="addWorker" action="{!c.addWorker}">
+        <aura:attribute name="workerId" type="String" />
+    </aura:method>
+    <div class="container-fluid">
+        <div class="slds-float_right slds-p-bottom_small">
+            <h1 class="slds-page-header__title">Add Worker
+                <lightning:buttonIcon iconName="utility:add" 
+                                      size="large" 
+                                      variant="bare" 
+                                      alternativeText="Add" 
+                                      onclick="{!c.addRow}"/>
+            </h1>
+        </div>
+		<aura:if isTrue="{!not(empty(v.connectWorkerList))}">
+			<div class="container-fluid">        
+				<table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+					<thead>
+						<tr class="slds-text-title_caps">
+							<th scope="col">
+								<div class="slds-truncate"></div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate" title="Worker Name">Worker Name</div>
+							</th>
+							<th scope="col">
+								<div class="slds-truncate" title="Role">Role</div>
+							</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>   
+					<tbody>
+                    
+						<aura:iteration items="{!v.connectWorkerList}" var="itemWorker" indexVar="index">
+							<tr>
+								<td style="width:3.25rem;"> 
+									{!index + 1}
+								</td>
+								<td>
+            						<lightning:combobox value="{!itemWorker.clofor_com_cfs__Worker__c}" options="{!v.WorkerList}" />
+								</td>
+								<td>
+								   <lightning:select label="" aura:id="workerRole" value="{!itemWorker.clofor_com_cfs__WorkRole__c}">
+										<aura:iteration items="{!v.WorkerRoleList}" var="option">
+											<option value="{!option.value}">{!option.label}</option>
+										</aura:iteration>
+									</lightning:select>
+								</td>
+								<td style="width:3.25rem;">
+									<a onclick="{!c.removeRow}" data-record="{!index}">
+										<span >Del</span>
+									</a>
+								</td> 
+							</tr>
+						</aura:iteration>
+					</tbody>
+				</table>
+			</div>
+		</aura:if>
+	</div>
+</aura:component>

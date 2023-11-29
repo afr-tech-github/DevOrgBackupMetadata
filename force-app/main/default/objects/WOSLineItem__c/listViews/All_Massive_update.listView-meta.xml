@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Massive_update</fullName>
+    <columns>WorkOrderID__c</columns>
+    <columns>WorkOrderService__c</columns>
+    <columns>WOSRecordType__c</columns>
+    <columns>NAME</columns>
+    <columns>CargoStatus__c</columns>
+    <columns>Cargo__c</columns>
+    <columns>IsCargoScanned__c</columns>
+    <columns>Locator__c</columns>
+    <columns>ScanTime__c</columns>
+    <columns>Worker__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>WorkOrderService__c</field>
+        <operation>equals</operation>
+        <value>WOS-006050</value>
+    </filters>
+    <label>All-Massive update</label>
+</ListView>

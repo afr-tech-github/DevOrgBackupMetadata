@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>shimebi__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>shimebi</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>末締め</fullName>
+                <default>false</default>
+                <label>末締め</label>
+            </value>
+            <value>
+                <fullName>20日締め</fullName>
+                <default>false</default>
+                <label>20日締め</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

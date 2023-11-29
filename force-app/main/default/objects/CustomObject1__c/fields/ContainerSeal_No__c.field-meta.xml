@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContainerSeal_No__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Changed Label name from CONTAINER &amp; SEAL NO to CONTAINER INFORMATION, so as client will not input container &amp; seal number directly in the field
+
+Aoki</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please Entry Container Number and Seal Number in Container Detail Section at bottom. Also allow for directly input Container Number and Seal Number only when need to be amended manually.</inlineHelpText>
+    <label>CONTAINER NO/SEAL NO-OLD</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

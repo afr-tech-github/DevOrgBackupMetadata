@@ -1,0 +1,495 @@
+<!--
+ * PageName:      page_QuotationPrintPdf
+ * Description:   page Quotation Print Pdf
+ * @created:      2022/10/10 Truong Lai
+ * @modified:
+-->
+<apex:page controller="page_QuotationPrintPdfCtrl" contentType="text/html" sidebar="false"  applyBodyTag="false" cache="true" title="{!quote.Name}" showHeader="true" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    </html>
+    <head>
+        <style type="text/css">
+            @page {
+                margin-left: 10px;
+                margin-right: 10px;
+                size:  A4 portrait;   /* auto is the initial value */
+                margin: 0mm;   /* this affects the margin in the printer settings */
+            }
+            body {
+                font-size: 13px;
+                /* font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic",'Khmer', sans-serif; */
+                font-family: "Calibri", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic",'Khmer', sans-serif;
+                margin: 10mm 10mm 10mm 10mm !important; /* margin you want for the content */
+            }
+            .fontBold { 
+                font-weight: bold;
+            }
+            table td {
+                line-height: 15px;
+                padding: 3px;
+            }
+            table th {
+                padding: 3px;
+                line-height: 15px;
+            }
+            table th {
+                text-align: center;
+            }
+            table tr {
+                min-height: 25px;
+            }
+            .report-header {
+                width: 100%
+            }
+            .logo-company {
+                float: left;
+                width: 27%;
+                position: absolute;
+                padding-left: 20px;
+            }
+            .info-company {
+                float: left;
+                margin-left:60px;
+                position: absolute;
+                left:150px;
+                width:550px;
+                text-align:center;
+            }
+            .name-company {
+                font-weight: bold;
+                font-size: 26px;
+                white-space: nowrap;
+            }
+            .address-company {
+                font-size: 16px;
+                white-space: nowrap;
+            }
+            .infor-company {
+                font-size: 16px;
+                white-space: nowrap;
+            }
+            .report-tittle {
+                font-size: 24px;
+                /* padding-left: -100px; */
+                padding-top: 100px;
+                clear: both;
+                font-weight: bold;
+                text-align: center;
+            }
+            .quotation-info, .client-customer-info {
+                width: 100%;
+                clear: both;
+                page-break-inside: avoid;
+            }
+            .client-customer-info-table {
+                border-collapse: collapse;
+            }
+            .client-customer-info-table td {
+                border-left: solid black;
+                border-width: thin;
+                padding-left: 5px;
+            }
+            .border-bottom {
+                border-bottom: solid black;
+                border-width: thin;
+            }
+            .border-right {
+                border-right: solid black;
+                border-width: thin;
+            }
+            .border-top {
+                border-top: solid black;
+                border-width: thin;
+            }
+            .note-info, .quote-detail-info, .quotation-info {
+                padding-top: 10px
+            }
+            .note-info, .note-info-table, .quote-detail-info, .quote-detail-table, .quoteLine-section1-table, .quoteLine-section2-table {
+                width: 100%;
+                border-collapse: collapse
+            }
+            .note-info-table td,.quote-detail-info td,.note-info-table th,.quote-detail-info th, .quoteLine-section1-table th, .quoteLine-section2-table th {
+                border: 0.5px solid black;
+                padding-left: 5px;
+            }
+            .quoteLine-section1-table td,.quoteLine-section2-table td {
+                border-left: 0.5px solid black;
+                border-right: 0.5px solid black;
+                padding-left: 5px;
+            }
+            .hideColumn {
+                display: none;
+            }
+            
+            table { overflow: visible !important;}
+            thead { display: table-header-group }
+            tfoot { display: table-row-group }
+            tr { page-break-inside: avoid }
+
+            .pagenumber:before {
+                content: counter(page);
+            }
+            .pagecount:before {
+                content: counter(pages);
+            }
+            .report-info {
+                /* padding-top: 15px; */
+                clear: both;
+                width:100%;
+            }
+            .non-box-border {
+                border-left: none;
+                border-right: none;
+                border-top: none;
+                border-bottom: none;
+            }
+            .non-box-border td {
+                border: none;
+                /* font-weight: bold !important; */
+                /* text-transform: uppercase; */
+                padding-left: 0px;
+            }
+
+            .slds-table-signature td {
+                line-height: 15px;
+            }
+
+            .info-label {
+                width: 5%;
+                vertical-align: top;
+            }
+            .info-verical-top {
+                vertical-align: top;
+            }
+            .info-seperate {
+                width: 1px;
+            }
+            .report-letter-header {
+                padding-top: 10px;
+            }
+            .quotation-label {
+                font-weight: bold;
+                /* padding-bottom: 10px; */
+            }
+            .report-body-container {
+                padding-bottom: 10px;
+            }
+            .slds-table_bordered {
+                border-collapse: separate;
+                clear: both;
+            }
+            .slds-table_bordered th {
+                border-top: 1px solid #090000;
+                border-bottom: 1px solid #090000;
+                border-left: 1px solid #090000;
+                text-align: center;
+                font-size: 11px;
+            }
+            /* .slds-table_bordered.fixed {
+                table-layout: fixed;
+            } */
+
+            .slds-table_bordered th:first-child {
+                width: 20px !important;
+            }
+            .slds-table_bordered th:last-child {
+                width: 100px !important;
+            }
+            .slds-table_bordered th:nth-child(2) {
+                width: 300px !important;
+            }
+            
+            th.slds-fixed-size {
+                width: 76px;
+            }
+
+            .slds-table_bordered tbody td {
+                border-top: 1px solid #090000;
+                border-bottom: 1px solid #090000;
+                border-left: 1px solid #090000;
+                font-size: 11px;
+            }
+
+            .slds-text-align_right {
+                text-align: right;
+            }
+            
+            .slds-text-align_left {
+                text-align: left;
+            }
+
+            .slds-text-align_center {
+                text-align: center;
+            }
+
+            .slds-none-border-left {
+                border-left: none !important;
+            }
+
+            .slds-border-right {
+                border-right: 1px solid #090000;
+            }
+
+            .report-tittle-underline {
+                border-bottom: 3px solid #090000;
+                line-height: 48px;
+            }
+
+            .text-bold {
+                font-weight: bold;
+            }
+
+            .remark-label {
+                width: 10%;
+                float: left;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+            .remark-content {
+                width: 97%;
+                float: right;
+                clear: both;
+            }
+
+            .padding-content {
+                padding-top: 4px;
+                page-break-inside: avoid;
+                clear: both;
+            }
+            
+            .table-expand {
+                margin-top: 15px;
+            }
+            .slds-trunsize {
+                font-size: 11px;
+            }
+            .signature{
+                display: flex;
+                justify-content: center;
+            }
+            .signature p{
+                display: flex;
+                justify-content: center;
+            }
+            .signature img{
+                width: auto !important;
+                height: 100px !important;
+            }
+        </style>
+        <script type="text/javascript">
+                  
+            window.onload = function() {
+                //window.top.document.title = "Your Title";
+                window.print();
+                return false; 
+            }
+        </script>
+    </head>
+    <body>
+        <div class="report-header">
+            <div class="logo-company">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="100" height="100" />
+            </div>
+            <div class="info-company">
+                <!-- <div class="name-company">
+                    <strong>{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}</strong>
+                </div> -->
+                <!-- <br/> -->
+                <div class="name-company">
+                    <strong>{!$Setup.Site_Custom_Settings__c.Company_Name__c}</strong>
+                </div>
+                <div class="address-company">
+                    <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/>
+                </div>
+                <div class="infor-company">
+                    <apex:outputText value="Tel: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}"/>
+                    <apex:outputText style="margin-left: 30px;" value="Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/>
+                    <!-- <strong>Tel: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}</strong>
+                    <strong style="margin-left: 30px;">Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}</strong> -->
+                </div>
+                <br/>
+                <br/>
+                
+            </div>
+        </div>
+        <div class="report-tittle">
+            <span class="report-tittle-underline"><strong>QUOTATION</strong></span>
+        </div>
+        <br/>
+        <div class="report-info">
+            <table class="non-box-border" style="border-collapse:collapse; width: 100%; font-size: 11px">
+                <col style="width: 14%"/>
+                <col style="width: 1%"/>
+                <col style="width: 61%"/>
+                <col style="width: 8%"/>
+                <col style="width: 1%"/>
+                <col style="width: 15%"/>
+                <tbody>
+                    <tr style="vertical-align: top;">
+                        <td class="info-label" style="font-weight: bold;">QUOTE NO</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td style="font-weight: bold;">
+                            <apex:outputText value="{!quote.QuoteName__c}"/>
+                        </td>
+                        <div>
+                            <td class="info-label" style="font-weight: bold;">DATE</td>
+                            <td class="info-seperate" style="font-weight: bold;">
+                                <apex:outputText value=":"/>
+                            </td>
+                            <td style="font-weight: bold;">
+                                <apex:outputText value="{0,date,dd-MMM-yyyy}">
+                                    <apex:param value="{!quote.QuoteIssueDate__c}"/>
+                                </apex:outputText>
+                            </td>
+                        </div>
+                        
+                    </tr>
+                    <tr>
+                        <td class="info-label" style="font-weight: bold;">TO</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td colspan="4" style="font-weight: bold;">
+                            <apex:outputText value="{!quote.clofor_com_cfs__RequesterCompany__r.Name}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="info-label" style="font-weight: bold;">ATTN</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td colspan="4" style="font-weight: bold;">
+                            <apex:outputText value="{!quote.clofor_com_cfs__PICOfRequesterCompany__r.Salutation} {!quote.clofor_com_cfs__PICOfRequesterCompany__r.Name}"/>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td class="info-label" style="font-weight: bold;">FROM</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>
+                        </td>
+                    </tr> -->
+                    <tr style="vertical-align: top;">
+                        <td class="info-label" style="font-weight: bold;">SUBJECT</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td colspan="4">
+                            <b><apex:outputField value="{!quote.Subject__c}"/></b><br/>
+                            <b><apex:outputText value="({!readSubject})" rendered="{!readSubject != ''}"/></b>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align: top;">
+                        <td class="info-label" style="font-weight: bold;">SCOPE OF WORK</td>
+                        <td class="info-seperate" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td colspan="4" style="vertical-align: top;">
+                            <b><apex:outputField value="{!quote.Scope_of_Work__c}"/></b><br/>
+                        </td>
+                    </tr>
+                    <apex:outputPanel rendered="{!IF((quote.Location__c != null), true, false)}"> 
+                        <tr>
+                            <td class="info-label info-verical-top" style="font-weight: bold;">CARGO INFORMATION</td>
+                            <td class="info-seperate info-verical-top" style="font-weight: bold;">
+                                <apex:outputText value=":"/>
+                            </td>
+                            <td colspan="4" style="vertical-align: top; font-weight: bold;">
+                                <apex:outputText value="{!HTMLENCODE(quote.Location__c)}" style="white-space:pre;" escape="false"/>
+                            </td>
+                        </tr>
+                    </apex:outputPanel>
+                    <tr>
+                        <td class="info-label info-verical-top" style="font-weight: bold;">COMMODITY</td>
+                        <td class="info-seperate info-verical-top" style="font-weight: bold;">
+                            <apex:outputText value=":"/>
+                        </td>
+                        <td colspan="4" style="font-weight: bold;">
+                            <apex:outputText value="{!HTMLENCODE(quote.DescriptionOfGoods__c)}" style="white-space:pre;" escape="false"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <apex:form >
+            <div class="report-letter-header">
+                <apex:outputText value="{!HTMLENCODE(quote.QuotationOpening__c)}" style="white-space:pre;" escape="false"/>
+            </div>
+            
+            <div class="report-body-container">
+                <apex:repeat value="{!mapDynamicReferences}" var="router">
+                    <div class="quotation-info">
+                        <div class="quotation-label">
+                            <apex:outputText value="{!mapDynamicReferences[router].routerTitle}"/>
+                        </div>
+                        <apex:outputText value="{!mapDynamicReferences[router].section1st}" escape="false"/>
+                        <apex:outputText value="{!mapDynamicReferences[router].section2nd}" escape="false"/>
+                    </div>
+
+                    <apex:outputPanel rendered="{!IF((mapDynamicReferences[router].routerRemark != null), true, false)}">
+                        <div class="remark-us padding-content" width="100%">
+                            <div class="remark-label">
+                                <apex:outputText value="**"/>
+                                <apex:outputText value="Remark: " style="text-decoration: underline;"/>
+                            </div>
+                            <div class="remark-content">
+                                <apex:outputText value="{!HTMLENCODE(mapDynamicReferences[router].routerRemark)}" style="white-space:pre;" escape="false"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                </apex:repeat>
+            </div>
+
+            <apex:outputPanel rendered="{!IF((quote.Remarks__c != null), true, false)}"> 
+                <div class="remark-us padding-content" width="100%">
+                    <div class="remark-label">
+                        <!-- <apex:outputText value="**"/> -->
+                        <apex:outputText value="TERMS and CONDITIONS: " style="text-decoration: underline;"/>
+                    </div>
+                    <div class="remark-content">
+                        <apex:outputText value="{!HTMLENCODE(quote.Remarks__c)}" style="white-space:pre;" escape="false"/>
+                    </div>
+                </div>
+            </apex:outputPanel>
+
+            <div class="note-us padding-content" width="60%">
+                <div class="slds-truncate">
+                    <apex:outputText value="{!HTMLENCODE(quote.QuotationClosing__c)}" style="white-space:pre;" escape="false"/>
+                </div>
+            </div>
+        </apex:form>
+
+        <div class="info-signature padding-content" style="margin-top: 25px;" width="100%">
+            <table class="slds-table-signature" width="100%">
+                <tr>
+                    <td width="60%">
+                    </td>
+                    <td width="40%" style="padding-right: 10px">
+                        <div class="slds-trunsize slds-text-align_center text-bold"><apex:outputText value="Sincerely Yours"/></div>
+                        <div class="slds-trunsize slds-text-align_center text-bold"><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/></div>
+                        <div>
+                            <apex:outputText styleClass="signature" escape="false" value="{!IF(quote.ApprovalStatus__c == 'Approved', quote.clofor_com_cfs__QuotePIC__r.Signature__c,'<br><br><br><br><br>')}" ></apex:outputText>
+                            <!--  -->
+                        </div>
+                        <div class="slds-trunsize slds-text-align_center text-bold"><apex:outputText value="{!quote.clofor_com_cfs__QuotePIC__r.Name}"/></div>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="padding-top:80px">
+                <tr>
+                    <td width="50%">
+                    </td>
+                    <td width="50%">
+                        <div class="slds-trunsize slds-text-align_center text-bold"><apex:outputText value="{!quote.SignandSignature__c}"/></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

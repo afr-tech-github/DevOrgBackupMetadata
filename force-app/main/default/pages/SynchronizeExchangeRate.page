@@ -1,0 +1,157 @@
+<!--
+ - Created by khanhpham on 3/14/18.
+ -->
+
+<apex:page id="SynchronizeExchangeRate" controller="SyncExRateController">
+    <apex:form >
+        <apex:pageBlock Title="SEARCH SHIPMENT ORDER">
+            <table cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>
+                        <apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.Name.Label}"/>
+                    </td>
+                    <td>
+                        <apex:inputText value="{!searchCriteria.shipmentName}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.HBL_Number_SEA_AIR__c.Label}"/>
+                    </td>
+                    <td>
+                        <apex:inputText value="{!searchCriteria.hblNo}"/>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="list" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="headerRow">
+                    <th scope="col" class=" zen-deemphasize">
+                        <apex:inputCheckbox onClick="checkAll(this)">
+                        </apex:inputCheckbox>
+                    </th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.Name.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.REFNO__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.status__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.shipper__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.Cnee__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.ETA__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.ETD__c.Label}"/></th>
+                </tr>
+                <apex:repeat value="{!shipmentOrderWrappers}" var="wrapper">
+                    <tr class="dataRow">
+                        <td class=" dataCell  ">
+                            <apex:inputCheckbox value="{!wrapper.checked}" id="checkedone"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.REFNO__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.status__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.shipper__r.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.Cnee__r.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.ETA__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!wrapper.shipmentOrder.ETD__c}"/>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                </tbody>
+            </table>
+            <apex:panelGrid columns="4">
+                <apex:commandLink action="{!first}">First</apex:commandlink>
+                <apex:commandLink action="{!previous}" rendered="{!hasPrevious}">Previous |</apex:commandlink>
+                <apex:commandLink action="{!next}" rendered="{!hasNext}">Next |</apex:commandlink>
+                <apex:commandLink action="{!last}">Last</apex:commandlink>
+            </apex:panelGrid>
+
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Search" action="{!searchShipmentOrders}"/>
+                <apex:commandButton value="Add To List" action="{!addToList}" reRender="selected_list"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock Title="SELECTED SHIPMENT ORDERS" id="selected_list">
+            <!--<table cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>
+                        <apex:outputLabel value="{!$ObjectType.MgmtMaster__c.fields.Name.Label}"/>
+                    </td>
+                    <td>
+                        <apex:inputField value="{!dummyNonExRate.EXCHANGE_RATE__c}" required="false"/>
+                    </td>
+                </tr>
+            </table>-->
+            <table class="list" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr class="headerRow">
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.Name.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.REFNO__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.status__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.shipper__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.ConsigneeRep__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.ETA__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"><apex:outputLabel value="{!$ObjectType.CustomObject1__c.fields.ETD__c.Label}"/></th>
+                    <th scope="col" class=" zen-deemphasize"></th>
+                </tr>
+                <apex:repeat value="{!selectedShipmentOrders}" var="shipmentOrder">
+                    <tr class="dataRow">
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.REFNO__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.status__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.shipper__r.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.Cnee__r.Name}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.ETA__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:outputLabel value="{!shipmentOrder.ETD__c}"/>
+                        </td>
+                        <td class=" dataCell  ">
+                            <apex:commandLink value="Remove" action="{!removeFromList}" reRender="selected_list">
+                                <apex:param name="shipmentOrderId"
+                                            value="{!shipmentOrder.Id}">
+                                </apex:param>
+                            </apex:commandLink>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                </tbody>
+            </table>
+
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Synchronize Exchange Rate" action="{!synchronizeExchangeRate}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+        function checkAll(cb) {
+            var inputElem = document.getElementsByTagName("input");
+            for (var i = 0; i < inputElem.length; i++) {
+                if (inputElem[i].id.indexOf("checkedone") != -1)
+                    inputElem[i].checked = cb.checked;
+            }
+        }
+    </script>
+</apex:page>

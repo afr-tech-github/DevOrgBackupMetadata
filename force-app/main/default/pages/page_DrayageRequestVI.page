@@ -1,0 +1,307 @@
+<apex:page controller="DeliveryLetterController" contentType="text-html" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: 210mm 300mm;
+                margin-top:50px;
+                margin-bottom:20px;
+                margin-left:20px;
+                margin-right:0px;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+            }
+
+            .f5 {
+                font-size: 5pt;
+            }
+            
+            .f7 {
+                font-size: 7pt;
+            }
+            
+            .f8 {
+                font-size: 8pt;
+            }
+            
+            .f9 {
+                font-size: 9pt;
+            }
+            
+            .f10 {
+                font-size: 10pt;
+            }
+            
+            .f11 {
+                font-size: 11pt;
+            }
+            
+            .f12 {
+                font-size: 12pt;
+            }
+            
+            .f14 {
+                font-size: 14pt;
+            }
+            
+            .f16 {
+                font-size: 16pt;
+            }
+            
+            .f18 {
+                font-size: 18pt;
+            }
+            
+            .f20 {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+            
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+            
+            .f30 {
+                font-size: 30pt;
+                font-weight: bold;
+            }
+            
+            .table-td {
+                padding: 0 5px;
+                text-align: left;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+            }
+            
+            .table-header-td {
+                padding: 0 5px;
+                text-align: center;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+                font-weight: bold;
+            }
+            
+            .table-1 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .table-2 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .section {
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <apex:variable var="index" value="{!0}"/>
+        <apex:repeat value="{!cargoDeliveries}" var="cargoDelivery">
+            <!--heading-->
+            <div style="z-index:-2; width: 100%; margin-left:20px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+            </div>
+            <div class="f18 section" style="width:95%; text-align:center;">
+                Mẫu yêu cầu giao hàng cho Container Drayage
+                            </div>
+            
+            <div class="f12 section" style="text-align:left; width:100%;">
+                <apex:outputLabel value="Dear {!deliveryCompany}"/>
+            </div>
+            <div class="f9 section" style="left:20px; width:100%;  text-align:left;">
+            Vui lòng vận chuyển lô hàng bên dưới.<br/> 
+             Nếu quý công ty có bất kì yêu cầu nào vui lòng liên hệ  &nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>.
+            </div>
+            
+            <div class="f10, section" style="width: 80%; margin-left: auto; margin-right: auto;">
+                <table class="table-1">
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Tên chuyến tàu</td>
+                        <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.Vessle__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Số chuyến</td>
+                        <td style="width: 70%;" class="table-td"><apex:outputText value="{!shipment.Voy_No__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Ngày đến dự kiến</td>
+                        <td style="width: 70%;" class="table-td">
+                            <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                <apex:param value="{!shipment.ETA__c}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Loại container</td>
+                        <td style="width: 70%;" class="table-td">
+                            <apex:outputText value="{!shipment.Container__c}" rendered="{!shipment.Container__c != null}"/>
+                            <apex:outputText value="/{!shipment.Container2__c}" rendered="{!shipment.Container2__c != null}"/>
+                            <apex:outputText value="/{!shipment.Container3__c}" rendered="{!shipment.Container3__c != null}"/>
+                            <apex:outputText value="/{!shipment.Container4__c}" rendered="{!shipment.Container4__c != null}"/>
+                            <apex:outputText value="/{0, number, ###,##0.###} CBM"  rendered="{!shipment.CBM__c != null}">
+                            <apex:param value="{!shipment.CBM__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Trọng lượng cả bì</td>
+                        <td style="width: 70%;" class="table-td">
+                            <apex:outputText value="{0, number, ###,##0}">
+                            <apex:param value="{!shipment.weight__c}" />
+                        </apex:outputText>
+                        KGS
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">
+                            <apex:outputPanel rendered="{!isImport}">Số vận đơn chủ (M B/L)</apex:outputPanel>
+                            <apex:outputPanel rendered="{!isExport}">Hạn chót</apex:outputPanel>
+                        </td>
+                        <td style="width: 70%;" class="table-td">
+                            <apex:outputText value="{!shipment.Master_B_L__c}" rendered="{!isImport}"/>
+                            <apex:outputText value="{0,date,yyyy/MM/dd}" rendered="{!isExport}"> 
+                                <apex:param value="{!shipment.CutDay__c}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 15%;" class="table-header-td">
+                            <apex:outputPanel rendered="{!isImport}">Số container, số seal</apex:outputPanel>
+                            <apex:outputPanel rendered="{!isExport}">Số booking</apex:outputPanel>
+                        </td>
+                        <td style="width: 70%;" class="table-td">
+                            <apex:outputText value="{!shipment.ContainerSeal_No__c}" rendered="{!isImport}"/>
+                            <apex:outputText value="{!shipment.MASTER_BOOKINGNO__c}" rendered="{!isExport}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" class="table-header-td">Ghi chú giao hàng</td>
+                        <td style="width: 70%;" class="table-td"><apex:outputText value="{!cargoDelivery.DeliveryNote__c}"/></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="f10, section" style="width: 100%;">
+                <div style="width: 45%; display: inline-block; vertical-align: top;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Mã Số Container</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Name}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%; font-weight: bold;">Ngày nhận hàng</td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                    <apex:param value="{!cargoDelivery.Pickupdate__c}"/>
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Nhận hàng từ</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Receiver__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Địa chỉ người nhận hàng</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.AddressForAccept__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Thông tin liên lạc của người nhận hàng</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverContact__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Người phụ trách của chủ hàng</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.PersonInChargeForAccept__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="width: 45%; display: inline-block; vertical-align: top; margin-left: 35px;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Số Container</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Container_NO__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Dự kiến ngày giao hàng</td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                    <apex:param value="{!cargoDelivery.DeliveryDate__c}"/>
+                                </apex:outputText>
+                                
+                                <apex:outputPanel rendered="{!(isImport && cargoDelivery.DeliveryTime__c != null)}">
+                                    <div style="border-left:solid 1px rgb(0,0,0); height:100%; display: inline; margin-left: 10px; margin-right: 10px"></div>
+                                    <apex:outputText value="{!cargoDelivery.DeliveryTime__c}"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Nơi giao hàng đến</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Destination__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Địa chỉ nơi giao hàng đến</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Destinationaddress__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Số điện thoại nơi giao hàng đến</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryPhone__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">Người liên lạc của nơi giao hàng đến</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverRep__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div style="width: 100%;" class="section">
+                Ghi chú
+                <ul>
+                
+ <li>Vui lòng thông báo cho chúng tôi khi quý công ty nhận được mẫu đề nghị. ( Bằng điện thoại hoặc email)</li>
+ <li>Khi tài xế xác nhận, vui lòng liên lạc với chúng tôi.( Bằng điện thoại hoặc email)</li>
+ <li>Khi hàng hóa khởi hành từ kho, vui lòng liên hệ chúng tôi.( Bằng điện thoại)</li>
+ <li>Khi giao hàng xong, vui lòng liên hệ chúng tôi.( Bằng điện thoại)</li>
+ <li>Vui lòng gửi hóa đơn và số tham chiếu. </li>
+ <li>Nếu phát hiện hàng hóa bị hư hỏng, vui lòng chụp lại hình ảnh chứng minh tình trạng hư hỏng.</li>
+ <li>Chúng tôi luôn luôn đánh giá cao những sự hỗ trợ của quý công ty.</li></ul>
+            </div>
+            
+            <div style="width: 100%; margin-top:-10px;" class="section">
+                <div style="display:inline-block; margin-left: 0px; width: 45%;">
+                    <apex:outputText value="Nhân viên phụ trách: {!shipment.PersonInCharge__r.Name}"/>
+                    <br/>
+                    <apex:outputText value="Ngày phát hành hóa đơn: {0,date,yyyy/ MM/dd}"> 
+                        <apex:param value="{!shipment.PrintDate__c}"/>
+                    </apex:outputText> <br/>   
+                    <apex:outputText value="số tham chiếu: S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"/>              
+                </div>                   
+            </div>
+            <div STYLE="position:absolute; margin-left:540px;  margin-top:6px; width:760px; font-size:10pt;">
+                Powered by AFR Solutions co.,ltd
+            </div>
+            <apex:variable var="index" value="{!index + 1}"/>
+            <apex:outputPanel rendered="{!index < totalCargoes}">
+                <div style="page-break-after: always"/>
+            </apex:outputPanel>
+        </apex:repeat>        
+    </body>
+    
+</apex:page>

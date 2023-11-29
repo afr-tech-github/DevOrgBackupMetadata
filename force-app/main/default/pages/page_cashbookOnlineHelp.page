@@ -1,0 +1,125 @@
+<apex:page showHeader="false">
+<head>
+    <title> CASH BOOK Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       CASH BOOK Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+    <h2>Hổ trợ trực tuyến sổ tiền mặt</h2>
+<br></br><br></br>
+Đây là nơi quản lý quỹ tiền mặt tại bộ phận kế toán.<br></br>
+<ul>
+1.Nhân viên nào nhận  tiền mặt thanh toán cho nhà cung cấp và đã hoàn trả lại bao nhiêu<br></br>
+2.Thực chi theo hóa đơn của nhà cung cấp hay các chứng từ hợp lệ từ nhà cung cấp<br></br>
+3.Cân đối sau khi thực thanh toán tiền mặt<br></br>
+</ul>
+<br></br>
+
+Liên quan đến các mục<br></br>
+Khi các mục mua bán dịch vụ của H B/L phát sinh tiền mặt,<br></br>
+số tiền mua dịch vụ bao gồm thuế (Trong nước) tại mục mua bán dịch vụ của H B/L cùng mã của H B/L và số H B/L , Hawb thì tự động liên kết.<br></br>
+
+<br></br>
+----------------------------------------------------------------------------------------------<br></br>
+
+<h2>Online Help for CASH BOOK Object</h2>
+<br></br> <br></br>    
+This is an Object to manage Cash handling at accounting team.<br></br>
+<ul>
+1. Staff who bring cash to the vendor and how much handed over to the staff<br></br> 
+2. Actual paid to vendor against invoice received and evidences from the vendor<br></br>
+3. Balance collected after actual cash payment<br></br>
+</ul>
+<br></br>
+
+Relation with other objects<br></br>
+When the H B/L SELLING・BUYING is chosen for cash settlement, <br></br>
+AMOUNT BUYING INCLUDING TAX(LOCAL) in H B/L Selling/Buying and H B/L Shipment ID and H B/L Number or HAWB Number is automatically refered.<br></br>
+
+ <br></br>
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>現金ブックに関するオンラインヘルプ</h2><br></br>
+<br></br>
+ここでは以下の3つのデータを管理します。<br></br>
+<ul>
+1.業者に現金を差し入れするスタッフ名およびスタッフに渡された金額<br></br>
+2.請求書に対して実際に支払った金額と業者からの証明書類<br></br>
+3.現金支払後の残金回収<br></br>
+</ul>
+<br></br>
+
+他のオブジェクトとの関連<br></br>
+H B/L請求・仕入が現金による支払として選択されると、<br></br>
+H B/L請求・仕入の中の消費税込み仕入金額(標準通貨)、HB/L案件番号およびH B/L番号又はHAWBL番号が自動的に参照されます。<br></br>
+
+<br></br> 
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>현금관리장 온라인 도움말</h2><br></br>
+<br></br>
+여기에서는 다음의 3 가지 데이터를 관리합니다.<br></br>
+<ul>
+1.현금을 업체에 운반하는 담당자와 담당자에게 넘겨준 인수 금액<br></br>
+2.업체에 실제 지불한 금액 및 그와 관련된 증거서류<br></br>
+3.실제 잔액 회수 금액<br></br>
+</ul>
+<br></br>
+
+다른 객체와의 관계<br></br>
+현금 결제가 필요한 H B/L청구 · 매입을 선택하면, <br></br>
+H B/L 청구/지불-지불대상 합계 금액, H B/L 또는 HAWB의 관리ID 및 번호가 자동으로 입력 됩니다.<br></br>
+<br></br>
+
+</body>
+
+</apex:page>

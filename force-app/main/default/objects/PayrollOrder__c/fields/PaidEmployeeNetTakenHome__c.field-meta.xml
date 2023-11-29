@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaidEmployeeNetTakenHome__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>PAID EMPLOYEE NET TAKEN HOME</label>
+    <summarizedField>PayrollSlip__c.EmployeeNetTakenHome__c</summarizedField>
+    <summaryFilterItems>
+        <field>PayrollSlip__c.PayrollPaid__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>PayrollSlip__c.PayrollOrder__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

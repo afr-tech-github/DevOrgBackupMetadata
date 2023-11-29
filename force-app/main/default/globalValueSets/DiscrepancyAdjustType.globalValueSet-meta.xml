@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Purchase replenishment</fullName>
+        <default>false</default>
+        <label>Purchase replenishment</label>
+    </customValue>
+    <customValue>
+        <fullName>Update On-hand Quantity in System</fullName>
+        <default>false</default>
+        <label>Update On-hand Quantity in System</label>
+    </customValue>
+    <customValue>
+        <fullName>Ignore</fullName>
+        <default>false</default>
+        <label>Ignore</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Discrepancy Adjustment Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

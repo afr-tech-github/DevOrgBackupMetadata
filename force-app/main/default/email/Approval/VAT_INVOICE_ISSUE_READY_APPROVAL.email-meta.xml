@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when VAT Invoice is ready for Accounting Team Review.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>VAT INVOICE ISSUE READY - APPROVAL</name>
+    <style>none</style>
+    <subject>VAT INVOICE ISSUE READY-APPROVAL-ID:{!CustomObject1__c.Name}</subject>
+    <textOnly>Dear Approver
+{!CustomObject1__c.Name}-{!CustomObject1__c.Ship_number__c} is ready for VAT Invoice Issue.
+Please have rereview and approve it if all information are correct.
+
+VAT INFORMATION
+ID   {!CustomObject1__c.ID__c}
+Link to CloFor : {!CustomObject1__c.Link}    STATUS   {!CustomObject1__c.status__c}
+TOTAL AMOUT OF SELLING WITH TAX(LOCAL)   {!CustomObject1__c.SellInTaxAmountJPY_sum__c}　    PROFITS   {!CustomObject1__c.Ararigaku_sum__c}
+CARGO BASIC INFORMATION
+CONSIGNEE   {!CustomObject1__c.Cnee__c}    SHIPPER   {!CustomObject1__c.shipper__c}
+HOUSE B/L NO. / HAWB NO.   {!CustomObject1__c.HBL__c}{!CustomObject1__c.HAWB__c}    SHIPMENT ID   {!CustomObject1__c.Name} {!CustomObject1__c.Ship_number__c}
+E.T.D   {!CustomObject1__c.ETD__c}    ETA   {!CustomObject1__c.ETA__c}
+CONTAINER INFORMATION   {!CustomObject1__c.TranporationType__c} {!CustomObject1__c.Container__c} * {!CustomObject1__c.ContainerNumber__c} / {!CustomObject1__c.Container2__c} * {!CustomObject1__c.ContainerNumber2__c}    B/L TYPE   {!CustomObject1__c.BLtype__c}
+REMARK
+INTERNAL MEMO FOR INFORMATION SHARING   {!CustomObject1__c.Memo__c}
+
+
+Best Regards,
+
+{!CustomObject1__c.PersonInCharge__c}
+*********************************************************
+{!CustomObject1__c.Mail_Merge_Company_Signature__c}
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

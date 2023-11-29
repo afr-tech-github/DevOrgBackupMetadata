@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OutAir</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>FMSSOCompactLayout</compactLayoutAssignment>
+    <description>Choose this record type to create a new shipment record for Air Export Shipment.</description>
+    <label>Air Export</label>
+</RecordType>

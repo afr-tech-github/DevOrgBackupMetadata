@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when send Loading and unloading Request Form.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>LOADING AND UNLOADING REQUEST FORM TEMPLATE</name>
+    <style>none</style>
+    <subject>Trucking Request</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

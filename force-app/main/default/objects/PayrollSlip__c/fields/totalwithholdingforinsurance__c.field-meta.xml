@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>totalwithholdingforinsurance__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>withholdingcompulsorysocialinsurance__c + withholdingcompulsoryhealthInsurance__c + Withholdingcompulsoryunemployeeinsurance__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total amount of insurance that employee must to pay</inlineHelpText>
+    <label>Total Withholding for Insurance</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

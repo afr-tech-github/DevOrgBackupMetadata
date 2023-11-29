@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>POD_And_POL_Must_Differ</fullName>
+    <active>true</active>
+    <description>POL-COUNTRY and POL-COUNTRY must be different from each other.</description>
+    <errorConditionFormula>IF( 
+AND( NOT( ISBLANK(POD__c) ), NOT( ISBLANK(POL__c) ), POD__c = POL__c), 
+true, 
+false)</errorConditionFormula>
+    <errorMessage>出港国と入港国は一致してはいけません。ご確認の上、正しく再入力してください。
+POD-COUNTRY must be different from POL-COUNTRY. Please re-enter the correct data.</errorMessage>
+</ValidationRule>

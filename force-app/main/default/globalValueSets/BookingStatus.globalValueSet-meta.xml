@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Info received</fullName>
+        <default>false</default>
+        <label>Info received</label>
+    </customValue>
+    <customValue>
+        <fullName>Info created</fullName>
+        <default>false</default>
+        <label>Info created</label>
+    </customValue>
+    <customValue>
+        <fullName>Info changed</fullName>
+        <default>false</default>
+        <label>Info changed</label>
+    </customValue>
+    <customValue>
+        <fullName>Confirmed</fullName>
+        <default>false</default>
+        <label>Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Released</fullName>
+        <default>false</default>
+        <label>Released</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay</fullName>
+        <default>false</default>
+        <label>Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled</fullName>
+        <default>false</default>
+        <label>Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Booking Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

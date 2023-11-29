@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ServiceType__c</fullName>
+    <deprecated>false</deprecated>
+    <description>当社のどのようなサービスをご利用いただいているかを記入してください。</description>
+    <externalId>false</externalId>
+    <label>SERVICE IN USE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Custom_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>取引なし</fullName>
+                <default>false</default>
+                <label>取引なし</label>
+            </value>
+            <value>
+                <fullName>Forwarding</fullName>
+                <default>false</default>
+                <label>Forwarding</label>
+            </value>
+            <value>
+                <fullName>Custom Clearance</fullName>
+                <default>false</default>
+                <label>Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>Forwarding/Custom Clearance</fullName>
+                <default>false</default>
+                <label>Forwarding/Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>過去取引有 - Forwarding</fullName>
+                <default>false</default>
+                <label>過去取引有 - Forwarding</label>
+            </value>
+            <value>
+                <fullName>過去取引有 - Custom Clearance</fullName>
+                <default>false</default>
+                <label>過去取引有 - Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>過去取引有 - Forwarding/Custom Clearance</fullName>
+                <default>false</default>
+                <label>過去取引有 - Forwarding/Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>FlexiTank</fullName>
+                <default>false</default>
+                <label>FlexiTank</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>海外パートナー - 営業不要</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 営業不要</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 既存</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>取引なし</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 既存</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 既存</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <valueName>Forwarding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 既存</controllingFieldValue>
+            <valueName>Custom Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 既存</controllingFieldValue>
+            <valueName>Forwarding/Custom Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 既存</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 既存</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>FlexiTank</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 既存</controllingFieldValue>
+            <valueName>過去取引有 - Forwarding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <valueName>過去取引有 - Custom Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <valueName>過去取引有 - Forwarding/Custom Clearance</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

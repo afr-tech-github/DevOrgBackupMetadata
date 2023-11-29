@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Print_VAT_Excel</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Print VAT Excel</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var left = (screen.width/2)-300;
+var top = (screen.height/2)-300;
+
+var url = &apos;/apex/VATInvoiceSelect?id={!URLENCODE(VAT_INVOICE__c.Id)}&apos;;
+window.open(url, &apos;&apos;, &apos;width=650, height=450, top=&apos; + top + &apos;, left=&apos; + left);</url>
+</WebLink>

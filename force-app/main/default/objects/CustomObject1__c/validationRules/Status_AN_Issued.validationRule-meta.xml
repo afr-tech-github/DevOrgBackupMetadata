@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_AN_Issued</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISPICKVAL(status__c, &quot;輸入 到着案内済(A/N Issued)&quot;), OR(ISBLANK(HBL_Number_SEA_AIR__c),ISBLANK(MBL_Number_SEA_AIR__c),ISBLANK(Item__c),ISBLANK(weight__c),ISBLANK(LoadLocation__c),ISBLANK(POL__c),ISBLANK(POD__c),ISBLANK(ETD__c),ISBLANK(ETA__c),ISBLANK(carton__c)), false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>H B/L番号及びM B/L番号、商品、重量、デバン場所、出港地、入港地、数量を必ず入れてください。
+Please enter the H B/L NO,M B/L NO, Item, Gross Weight, Load Location, POD, POL, Quantity.</errorMessage>
+</ValidationRule>

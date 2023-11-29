@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATE_VALI_META_Must_LaterThan_MTETD</fullName>
+    <active>true</active>
+    <errorConditionFormula>META__c &lt; MTRANSIT_T_ETD__c</errorConditionFormula>
+    <errorDisplayField>MTRANSIT_T_ETD__c</errorDisplayField>
+    <errorMessage>入港日はTransit出港日より遅い日付を選択してください。
+META must be later than ETD AT TRANSIT PORT. Please re-enter the correct data.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,3 @@
+<design:component>
+    <design:attribute name="isSelling" label="Is Selling?" />
+</design:component>

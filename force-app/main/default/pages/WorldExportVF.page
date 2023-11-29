@@ -1,0 +1,460 @@
+<apex:page controller="WorldExportController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false"
+    applyHtmlTag="false" docType="html-5.0">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <head>
+        <style>
+            @media print {
+                body {
+                    counter-reset: page;
+                }
+                .no-print,
+                .no-print * {
+                    display: none !important;
+                }
+
+                div.footer {
+                    counter-increment: page;
+                    display: block;
+                    text-align: center;
+                    position: running(footer);
+                }
+                @page {
+                    padding-bottom: 10mm;
+                    @bottom-center {
+                        content: element(footer);
+                    }
+                }
+                table {
+                    overflow: visible !important;
+                }
+                thead {
+                    display: table-header-group
+                }
+                tfoot {
+                    display: table-row-group
+                }
+                tr {
+                    page-break-inside: avoid
+                }
+
+                div.divFooter :first {
+                    font-size: 15px;
+                    position: fixed !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    display: block !important;
+                }
+            }
+
+            @page {
+                size: A4;
+                margin: 5mm;
+            }
+
+            .content {
+                max-height: calc(100% - 100px);
+            }
+
+            body {
+                font-family: "Times New Roman", Times, serif;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .footer {
+                width: -webkit-fill-available;
+                position: fixed;
+                bottom: 0;
+                display: none;
+            }
+
+            .hideColumn {
+                display: none;
+            }
+
+            .showColumn {
+                /*display: none;*/
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                vertical-align: text-top;
+                padding: 2px;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            .clsheader {
+                background-color: #42619f;
+                color: #FFFFFF;
+                font-weight: bold;
+            }
+
+            div.divFooter {
+                text-align: center !important;
+                font-size: 15px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+            PRINT
+            <!-- {!translations['print_note']} -->
+        </button>
+        <!--<div style="text-align:center;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" height="70px"
+            />
+        </div>-->
+        <div style="height: 10px"></div>
+        <div style="margin: 5px; display: block">
+            <table style="width: 100%; border: 1px solid black; font-size: 15px; height: 960px;">
+                <tr>
+                    <td colspan="3" style="text-align:center; font-size: 19.5px;">
+                        <b>PACKING LIST</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Seller</td>
+                    <td style="width: 22.5%;">Invoice No.:</td>
+                    <td style="width: 22.5%;">
+                        Date:
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!so.ContractID__r.SellerCompany__r.Name}" />
+                        </b>
+                        <br />
+                        <apex:outputText style="white-space:pre-wrap;" value="{!so.ContractID__r.SellerCompany__r.EnglishAddress__c}" escape="false"
+                        />
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{!so.CommercialInvoiceNo__c}" />
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0,date,dd-MMM-yy}">
+                                <apex:param value="{!so.InvoiceDate__c}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Contract No.:
+                    </td>
+                    <td>
+                        Date:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>
+                            <apex:outputText value=" {!so.ContractID__r.ContractNumber__c}" />
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0,date,dd-MMM-yy}">
+                                <apex:param value="{!so.ContractID__r.ContractSignedDate__c}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Buyer</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>
+                            <apex:outputText value="{!so.CustomerCompanyName__r.Name}"></apex:outputText>
+                        </b>
+                        <br/>
+                        <apex:outputText style="white-space:pre-wrap;" value="{!so.CustomerAddress__c}" escape="false"></apex:outputText>
+                    </td>
+                    <td colspan="2" rowspan="7">
+                        <apex:outputText rendered="{!or(so.ReceiptancePaymentType__c == 'T/T', so.ReceiptancePaymentType__c == 'D/P')}" style="white-space:pre-wrap;"
+                            value="Payment: {!so.PaymentCondition__c}" escape="false"></apex:outputText>
+                        <apex:outputText rendered="{!and(so.ReceiptancePaymentType__c != 'T/T', so.ReceiptancePaymentType__c != 'D/P')}" value="LC No: {!so.LCNo__c}"></apex:outputText>
+                        <br/>
+                        <apex:outputText rendered="{!and(so.ReceiptancePaymentType__c != 'T/T', so.ReceiptancePaymentType__c != 'D/P')}" value="Date of Issue: {0,date,dd-MMM-yyyy}">
+                            <apex:param value="{!so.LCDate__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Notify Party</td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>
+                            <apex:outputText value="{!so.NotifyParty__r.Name}"></apex:outputText>
+                        </b>
+                        <br/>
+                        <apex:outputText style="white-space:pre-wrap;" value="{!so.NotifyPartysAddress__c}" escape="false"></apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Port of loading</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!so.PortofLoading__r.Name + ', ' + so.PortofLoading__r.Country_Name__c}"></apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Port of Discharging</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-transform: uppercase;">
+                        <b>
+                            <apex:outputText value="{!so.PortofDischarge__r.Name + ', ' + so.PortofDischarge__r.Country_Name__c}"></apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>
+                        <b>DESCRIPTION OF GOODS</b>
+                    </td>
+                    <td>
+                        <b>N.W (MT)</b>
+                    </td>
+                    <td>
+                        <b>G.W (MT)</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputtext style="white-space:pre-wrap;" value="{!so.CommodityDescriptionofGoods__c}" escape="false" />
+                    </td>
+                    <td colspan='2'></td>
+                </tr>
+                <apex:repeat value="{!so.TRSBill__r}" var="bill">
+                    <tr>
+                        <td>
+                            <apex:outputText style="white-space:pre-wrap;" value="{!bill.ProductNamedetailatprintEng__c}" escape="false" />
+                        </td>
+                        <td style="text-align:right; vertical-align: middle;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(bill.NetWeightMT__c != null, bill.NetWeightMT__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align:right; vertical-align: middle;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(bill.GrossWeightMT__c != null, bill.GrossWeightMT__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td>
+                        <b>TOTAL:</b>
+                    </td>
+                    <td style="text-align:right;">
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!IF(so.RollupNWMTfromTRSBill__c != null, so.RollupNWMTfromTRSBill__c, 0)}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="text-align:right;">
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!IF(so.RollupGWMTfromTRSBill__c != null, so.RollupGWMTfromTRSBill__c, 0)}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="height: 100%;">
+                        <b>
+                            <apex:outputText value="SAY: {!so.NumberofContainer_inwords__c}"></apex:outputText>
+                            <br/>
+                            <apex:outputText value="PACKING: {!so.Packing__c}"></apex:outputText>
+                            <br/>
+                            <div style="text-align: right; width:95%;">
+                                <apex:outputText value="{!so.ContractID__r.SellerCompany__r.Name}"></apex:outputText>
+                            </div>
+                        </b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <apex:outputPanel rendered="{!showFooter}">
+            <div class="divFooter">
+                <!-- <span>
+                    <b>Head Office:</b> No.21 Street 10, Song Da Zone, Hiep Binh Chanh Ward, Thu Duc District, HCMC, Vietnam</span>
+                <br/>
+                <span>
+                    <b>Factory:</b> Dong Nai Province | Binh Duong Province | Binh Phuoc Province</span> -->
+                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Footer__c}" escape="false"  style="white-space:pre-wrap"/>
+            </div>
+        </apex:outputPanel>
+
+        <div style="page-break-before: always;"></div>
+        <div style="text-align:center; margin-vertical:10px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" height="70px" />
+        </div>
+        <table style="width: 98%;border: none; margin: 10px; font-size: 15px;">
+            <tr>
+                <td colspan="2" style="text-align:center;border: none; font-size: 19.5px;">
+                    <b>DETAIL PACKING LIST</b>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center;border: none;">
+                    <b>
+                        <apex:outputText value="INVOICE NO.: {!so.CommercialInvoiceNo__c}"></apex:outputText>
+                    </b>
+                </td>
+                <td style="text-align:center;border: none;">
+                    <b>DATE:
+                        <apex:outputText value=" {0,date,dd-MMM-yy}">
+                            <apex:param value="{!so.InvoiceDate__c}" />
+                        </apex:outputText>
+                    </b>
+                </td>
+            </tr>
+        </table>
+
+        <apex:variable value="1" var="index" />
+        <div style="margin: 5px; display: block">
+            <table style="width: 100%; border: 1px solid black; font-size: 15px;">
+                <tr>
+                    <td>
+                        <b>No.</b>
+                    </td>
+                    <td>
+                        <b>CONTAINER No.</b>
+                    </td>
+                    <td>
+                        <b>SEAL No.</b>
+                    </td>
+                    <td>
+                        <b>N.WEIGHT</b>
+                    </td>
+                    <td>
+                        <b>G.WEIGHT</b>
+                    </td>
+                </tr>
+                <apex:repeat value="{!billWrappers}" var="bill">
+                    <tr>
+                        <td style="border:none;text-align:center;">
+                            <b>
+                                <apex:outputText value="{!bill.romanNumber}"></apex:outputText>
+                            </b>
+                        </td>
+                        <td style="border:none;">
+                            <b>
+                                <apex:outputText value="{!bill.productNameonPackingList}"></apex:outputText>
+                            </b>
+                        </td>
+                    </tr>
+                    <apex:variable var="index" value="1" />
+                    <apex:repeat value="{!bill.containerGoodSOs}" var="container">
+                        <tr>
+                            <td style="text-align:center;">
+                                {!index}
+                                <apex:variable var="index" value="{!VALUE(index) + 1}" />
+                            </td>
+                            <td>
+                                <apex:outputText value="{!container.ContainerNumber__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!container.SealNumber__c}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!IF(container.NetWeightMT__c != null, container.NetWeightMT__c, 0)}" />
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!IF(container.GrossWeightMT__c != null, container.GrossWeightMT__c, 0)}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td colspan="3" style="text-align: center;">
+                            <b>TOTAL (MT)</b>
+                        </td>
+                        <td>
+                            <b>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!bill.totalNetWeightMT}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td>
+                            <b>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!bill.totalGrossWeightMT}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <b>TOTAL SHIPMENT (MT)</b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!totalShipmentNetWeightMT}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!totalShipmentGrossWeightMT}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <b>TOTAL SHIPMENT (KGS)</b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!totalShipmentNetWeightMT * 1000}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                    <td>
+                        <b>
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!totalShipmentGrossWeightMT * 1000}" />
+                            </apex:outputText>
+                        </b>
+                    </td>
+                </tr>
+            </table>
+            <div style="height: 20px;"></div>
+        </div>
+    </body>
+
+    </html>
+</apex:page>

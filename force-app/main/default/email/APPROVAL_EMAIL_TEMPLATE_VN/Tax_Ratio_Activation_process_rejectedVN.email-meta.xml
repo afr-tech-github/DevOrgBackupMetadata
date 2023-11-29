@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi xem xét thuế suất và bị từ chối.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Kích hoạt và từ chối qui trình về tỉ xuất thuế</name>
+    <style>none</style>
+    <subject>TAX RATIO Approval Rejected - {!Tax_Ratio__c.TAX_RATIO_ID__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

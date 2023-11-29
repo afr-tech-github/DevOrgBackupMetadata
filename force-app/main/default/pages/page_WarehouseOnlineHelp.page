@@ -1,0 +1,111 @@
+<apex:page showHeader="false">
+
+<head>
+    <title>Warehouse Online Help</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Warehouse Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+ <h2>Trợ giúp trực tuyến cho Object kho hàng</h2>
+<br></br> 
+Đây là phần dùng để quản lý thông tin CY và kho CFS nơi mà hàng hóa được xếp lên hay nhận về.<br></br>
+<br></br>
+Mỗi Vận đơn thứ cấp(lô hàng H B/L) phải có thông tin về kho hàng này để nó được thể hiện trên A/N, D/O, S/I…<br></br>
+Kho hàng của các nhà vận chuyển và co-loader sẽ khác nhau (cho dù chúng có cùng tên, nhưng nếu khác nhà<br></br>
+vận chuyển, co-loader, thì cũng phải đăng ký độc lập)<br></br>
+<br></br> 
+ 
+---------------------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>Online Help for WAREHOUSE Object</h2>
+This is an Object to manage the Container Yard or CFS warehouse where the cargo are loaded to be pickup.<br></br>
+-Each H B/L Shipment must have a Warehouse information.<br></br>
+<br></br>
+Warehouse information will be shown on A/N, D/O, S/I etc.<br></br>
+Warehouse is meant to be created by each carrier/co-loader ownership. (even if a CY/warehouse has same name,<br></br>
+ if the carrier/co-loader is different, it should be registered separately)<br></br>
+ <br></br>
+ ---------------------------------------------------------------------------------------------------------<br></br>
+<br></br> 
+<h2>搬入先に関するオンラインヘルプ</h2><br></br>
+<br></br>
+貨物が搬入され、引き取りされるCYターミナルやCFS倉庫を管理するオブジェクトです。<br></br>
+全てのHB/L案件には搬入先情報が入力されていなければなりません。<br></br>
+<br></br> 
+搬入先の情報はA/N, D/O, S/Iなどに表示されます。<br></br>
+搬入先はオペレーションを行う船社やCo-Loader毎に作成する必要があります。<br></br>
+(あるCYターミナルやCFS倉庫が同じ名前を持っていても、船社やCo-Loaderが異なる場合は別々に登録してください)<br></br>
+ 
+ 
+ 
+ ---------------------------------------------------------------------------------------------------------<br></br>
+<br></br> 
+<h2>반입처에 대한 온라인 도움말</h2><br></br>
+<br></br>
+화물이 반입되고 인수되는 CY 터미널 및 CFS 창고를 관리하는 오브젝트(객체)입니다.<br></br>
+모든 H B/L 안건에 반입처 정보가 입력되어 있지 않으면 안됩니다.<br></br>
+<br></br> 
+반입처 정보는 A/N, D/O, S/I 등으로 나타납니다.<br></br>
+반입처는 작업을 수행하는 선사와 Co-Loader마다 작성해야 합니다.<br></br>
+(CY 터미널 및 CFS 창고가 같으나 선사와 Co-Loader가 다를 경우 별도로 등록하십시오)<br></br>
+
+</body>
+ 
+ 
+
+
+ 
+    
+</apex:page>

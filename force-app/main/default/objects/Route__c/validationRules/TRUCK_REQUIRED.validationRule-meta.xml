@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TRUCK_REQUIRED</fullName>
+    <active>true</active>
+    <description>TRUCK FLEET is required for ROUTE/LOAD</description>
+    <errorConditionFormula>ISBLANK(Truck__c)</errorConditionFormula>
+    <errorDisplayField>Truck__c</errorDisplayField>
+    <errorMessage>TRUCK is required for ROUTE/LOAD</errorMessage>
+</ValidationRule>

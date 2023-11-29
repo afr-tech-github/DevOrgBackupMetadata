@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AFRtype__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>STATUS OF JP24H ADVANCED FILING SERVICE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Custom_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AFRサービス既存顧客</fullName>
+                <default>false</default>
+                <label>AFRサービス既存顧客</label>
+            </value>
+            <value>
+                <fullName>AFRサービス見込み顧客</fullName>
+                <default>false</default>
+                <label>AFRサービス見込み顧客</label>
+            </value>
+            <value>
+                <fullName>AFRサービス営業不要</fullName>
+                <default>false</default>
+                <label>AFRサービス営業不要</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>業者 - Co-Loader</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>AFRサービス既存顧客</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - Co-Loader</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>AFRサービス見込み顧客</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - Co-Loader</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 既存</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>AFRサービス営業不要</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tax_Ratio_Account_Team_Tax_Ratio</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Tax Ratio-Account Team</label>
+    <queue>Tax_Ratio_Account_Team</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

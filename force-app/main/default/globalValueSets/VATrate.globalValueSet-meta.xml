@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>0%</fullName>
+        <default>false</default>
+        <label>0%</label>
+    </customValue>
+    <customValue>
+        <fullName>5%</fullName>
+        <default>false</default>
+        <label>5%</label>
+    </customValue>
+    <customValue>
+        <fullName>5.26...%</fullName>
+        <default>false</default>
+        <label>5.26...%</label>
+    </customValue>
+    <customValue>
+        <fullName>10%</fullName>
+        <default>false</default>
+        <label>10%</label>
+    </customValue>
+    <customValue>
+        <fullName>NT</fullName>
+        <default>false</default>
+        <label>NT</label>
+    </customValue>
+    <masterLabel>VAT rate</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

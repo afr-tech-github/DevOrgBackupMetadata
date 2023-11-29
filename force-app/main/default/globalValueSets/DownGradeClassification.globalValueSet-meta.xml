@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>No Price Rating Applied</fullName>
+        <default>false</default>
+        <label>No Price Rating Applied</label>
+    </customValue>
+    <customValue>
+        <fullName>Equivalent Value Downgrade Per Rating(Price Classification)</fullName>
+        <default>false</default>
+        <label>Equivalent Value Downgrade Per Rating(Price Classification)</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-Equivalent Value Downgrade Per Rating(Price Classification)</fullName>
+        <default>false</default>
+        <label>Non-Equivalent Value Downgrade Per Rating(Price Classification)</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>DOWNGRADE CLASSIFICATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

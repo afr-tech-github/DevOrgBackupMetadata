@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PurchasingInvoiceMassUpdate</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>MASSIVE UPDATE</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>var currentLocation = location.href; 
+
+location.href= &apos;/apex/clofor_com_cfs__MassiveEdit?id={!URLENCODE(PurchasingOrder__c.Id)}&amp;obj=purchasinginvoice&apos;;</url>
+</WebLink>

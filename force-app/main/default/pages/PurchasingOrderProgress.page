@@ -1,0 +1,7 @@
+<!--
+ - Created by khanhpham on 5/21/17.
+ -->
+
+<apex:page id="PurchasingOrderProgress" standardController="PurchasingOrder__c" extensions="PurchasingOrderExt">
+    <c:WorkProgress WorkProgressList="{!workProgressItems}"></c:WorkProgress>
+</apex:page>

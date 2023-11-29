@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>VAT INVOICE</fullName>
+        <default>false</default>
+        <label>VAT INVOICE</label>
+    </customValue>
+    <customValue>
+        <fullName>FMS/TMS BILL</fullName>
+        <default>false</default>
+        <label>FMS/TMS BILL</label>
+    </customValue>
+    <customValue>
+        <fullName>WMS BILL</fullName>
+        <default>false</default>
+        <label>WMS BILL</label>
+    </customValue>
+    <customValue>
+        <fullName>KICKBACK</fullName>
+        <default>false</default>
+        <label>KICKBACK</label>
+    </customValue>
+    <customValue>
+        <fullName>PURCHASING INVOICE</fullName>
+        <default>false</default>
+        <label>PURCHASING INVOICE</label>
+    </customValue>
+    <customValue>
+        <fullName>OTHER</fullName>
+        <default>false</default>
+        <label>OTHER</label>
+    </customValue>
+    <customValue>
+        <fullName>OBLIGATION DECLARATION</fullName>
+        <default>false</default>
+        <label>OBLIGATION DECLARATION</label>
+    </customValue>
+    <customValue>
+        <fullName>PAYSLIP</fullName>
+        <default>false</default>
+        <label>PAYSLIP</label>
+    </customValue>
+    <customValue>
+        <fullName>PIT</fullName>
+        <default>false</default>
+        <label>PIT</label>
+    </customValue>
+    <customValue>
+        <fullName>H/S/U INSURANCE</fullName>
+        <default>false</default>
+        <label>H/S/U INSURANCE</label>
+    </customValue>
+    <customValue>
+        <fullName>RETURNS</fullName>
+        <default>false</default>
+        <label>RETURNS</label>
+    </customValue>
+    <customValue>
+        <fullName>INTERNAL TRANSACTION FROM BANK</fullName>
+        <default>false</default>
+        <label>INTERNAL TRANSACTION FROM BANK</label>
+    </customValue>
+    <customValue>
+        <fullName>INTERNAL TRANSACTION FROM CASH</fullName>
+        <default>false</default>
+        <label>INTERNAL TRANSACTION FROM CASH</label>
+    </customValue>
+    <masterLabel>SOURCE ACTIVITY TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

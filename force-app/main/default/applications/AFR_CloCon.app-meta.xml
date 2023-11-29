@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>MasterAnken__c</defaultLandingTab>
+    <description>CSM(Consolidation Module):Module to manage Consolidation for consolidator who consolidate LCL cargo to FCL.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloCSM-Consolidation Module</label>
+    <logo>AFR_New_Logo/LogisForce_Logo.png</logo>
+    <tabs>standard-Document</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>MasterAnken__c</tabs>
+    <tabs>MasterAnkenMeisai__c</tabs>
+    <tabs>Transit__c</tabs>
+    <tabs>Carrier</tabs>
+    <tabs>LoadLocation__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+</CustomApplication>

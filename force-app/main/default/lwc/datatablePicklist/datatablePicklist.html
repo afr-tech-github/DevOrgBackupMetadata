@@ -1,0 +1,17 @@
+<template>
+    <div class="picklist-container">
+        <lightning-combobox name="picklist" label={label} value={value}
+                            placeholder={placeholder} options={options}
+                            onchange={handleChange} ></lightning-combobox>
+        <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+            <lightning-input type="checkbox" label="Update selected items."
+                             onchange={changeApply} ></lightning-input>
+            <br/>
+            <lightning-button label="Apply"
+                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                              onclick={apply}></lightning-button>
+            <lightning-button class="slds-float_right" label="Cancel" onclick={cancel}></lightning-button>
+            <br/>
+        </div>
+    </div>
+</template>

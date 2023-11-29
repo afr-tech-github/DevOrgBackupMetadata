@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SubLayer</fullName>
+    <active>true</active>
+    <description>Sub Layer is the layer has a parent layer.</description>
+    <label>Sub Layer</label>
+</RecordType>

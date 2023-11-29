@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Combi_ContainerType3N_ContainerNumber3Y</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(NOT(ISBLANK(ContainerNumber3__c)),ISBLANK(TEXT(Container3__c)), false)</errorConditionFormula>
+    <errorDisplayField>Container3__c</errorDisplayField>
+    <errorMessage>Please enter the Type of Container 3 if you chosed the Container Number 3.</errorMessage>
+</ValidationRule>

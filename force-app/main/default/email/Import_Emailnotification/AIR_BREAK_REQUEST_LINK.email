@@ -1,0 +1,33 @@
+{!CustomObject1__c.00N28000007WEBs} 
+{!CustomObject1__c.00N28000007WEBr} 様 
+
+いつもお世話になっております。 
+
+◎URLにアクセスしてパスワードを入力してください。
+航空貨物取扱い及び代行回収依頼書類をダウンロードできます。 
+###################################################################################################################
+航空貨物取扱い及び代行回収依頼書類 LINK ：{!CustomObject1__c.BREAK_BULK_INVOICE_LINK__c} 
+PASSWORD：{!CustomObject1__c.BREAL_BULK_INVOICE_PASSWORD__c} 
+###################################################################################################################
+
+◎下記の案件のBBをお願いします。 
+-HAWB NO.: {!CustomObject1__c.HAWB__c} 
+-MAWB NO.: {!CustomObject1__c.MAWB__c} 
+-CNEE: {!CustomObject1__c.Cnee__c}様 
+-FLIGHT NO.: {!CustomObject1__c.FlightNo__c} 
+-重量: {!CustomObject1__c.weight__c} KG 
+-数量: {!CustomObject1__c.carton__c} Carton 
+-到着日: {!CustomObject1__c.ETA__c} 
+
+◎指定通関業者様： {!CustomObject1__c.Custom_Clearance_Broker__c} 
+
+BLも添付いたしますので、詳細をご確認ください。 
+
+今後ともどうぞよろしくお願い申し上げます。
+
+********************************************************* 
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

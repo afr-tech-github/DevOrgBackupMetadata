@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_of_3_Logistics_Service_Quote_Line</fullName>
+    <columns>NAME</columns>
+    <columns>LineItemName__c</columns>
+    <columns>QuoteLineNumber__c</columns>
+    <columns>Unit__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>SellingListPriceLocal__c</columns>
+    <columns>TotalAmountSellingLocal__c</columns>
+    <columns>SellingAmountInclTaxLocal__c</columns>
+    <columns>BuyingListPriceLocal__c</columns>
+    <columns>TotalAmountBuyingLocal__c</columns>
+    <columns>BuyingAmountInclTaxLocal__c</columns>
+    <columns>ProfitNICTaxLocal__c</columns>
+    <columns>ProfitRatioNICTaxLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>QuoteLine__c.DomesticLogisticsServiceQuote</value>
+    </filters>
+    <label>Barging Service</label>
+</ListView>

@@ -1,0 +1,7 @@
+<apex:component controller="FormattingController" access="global">
+    <apex:attribute name="ValueToFormat" type="Decimal" description="Value to be formatted" assignTo="{!value}" access="global"/>
+    <apex:attribute name="RoundedUp" type="Boolean" description="Whether decimal number to be round up" assignTo="{!roundUp}" access="global"/>
+    <apex:attribute name="Country" type="String" description="To decide dot or comma for decimal separator" assignTo="{!locale}" access="global"/>
+    <apex:attribute name="DecimalDigits" type="Integer" description="Number of digits after decimal mark" assignTo="{!decimalPlaces}" access="global" />
+    <apex:outputText value="{!formattedValue}"></apex:outputText>
+</apex:component>

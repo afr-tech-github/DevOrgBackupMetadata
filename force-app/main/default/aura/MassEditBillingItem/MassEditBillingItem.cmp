@@ -1,0 +1,298 @@
+<aura:component controller="MassEditBillingController">
+  <aura:attribute name="id" type="String" />
+  <aura:attribute name="isShow" type="Boolean" default="true" />
+  <aura:attribute name="isFirstRecord" type="Boolean" default="false" />
+  <aura:attribute
+    name="recordLabelClass"
+    type="String"
+    default="slds-form-element__label slds-hide"
+  />
+  <aura:attribute name="isSelected" type="Boolean" default="false" />
+  <aura:attribute name="isSelling" type="Boolean" default="true" />
+  <aura:attribute name="isVATRateSelling" type="Boolean" default="true" />
+  <aura:attribute name="isExchangeRateIDDebitCredit" type="Boolean" default="true" />
+  <aura:attribute name="isCurrencyConversionForSelling" type="Boolean" default="true" />
+  <aura:attribute name="isExchangeRateSellingDebit" type="Boolean" default="true" />
+  <aura:attribute name="isVATRateBuying" type="Boolean" default="true" />
+  <aura:attribute name="isExchangeRateBuyingCredit" type="Boolean" default="true" />
+  <aura:attribute name="isCurrencyConversionForBuying" type="Boolean" default="true" />
+  <aura:attribute name="isAdvancePaymentonbehalfofOurCompany" type="Boolean" default="true" />
+  <aura:attribute name="parent" type="Aura.Component" required="true"/>
+  <aura:attribute name="firstTimeRecordLoad" type="Boolean" default="true" />
+  <aura:attribute name="isMultiCurrency" type="Boolean" default="false"/>
+  <aura:attribute name="count" type="Integer" default="3"/>
+
+  
+  <aura:attribute
+    name="labels"
+    type="List"
+    default="[
+  {name: 'F/TMS Bill ID', style: 'width: 110px'},
+  {name: 'Invoice S/B Display No', style: 'width: 90px'},
+  {name: 'Service Name', style: 'width: 190px'},
+  {name: 'Invoice to', style: 'width: 190px'},
+  {name: 'Payment to-Buying', style: 'width: 210px'},
+  {name: 'Charge Quantity', style: 'width: 130px'},
+  {name: 'Charge Unit in Print', style: 'width: 110px'},
+  {name: 'Charge Unit(Override)', style: 'width: 130px'},
+  {name: 'Container Size(Override)', style: 'width: 130px'},
+  {name: 'Print', style: 'width: 60px;'},
+  {name: 'Currency-Selling', style: 'width: 160px;', isSelling: true},
+  {name: 'Advance Payment on-behalf-of Customer', style: 'width: 110px;', isSelling: true},
+  {name: 'Bill Name at Print(ENG)', style: 'width: 160px',isSelling: true},
+  {name: 'Unit Price of Selling(Local)', style: 'width: 130px;', isSelling: true},
+  {name: 'Unit Price of Selling(FCY)', style: 'width: 110px', isSelling: true},
+  {name: 'Unit Price of Selling(3rd Currency)', style: 'width: 110px', isSelling: true, isMultiCurrency: true},
+  {name: 'Tax Rate-Selling(%)', style: 'width: 110px', isSelling: true},
+  {name: 'VAT Rate-selling', style: 'width: 110px', isSelling: true, isVATRateSelling: true},
+  {name: 'Exchange Rate ID-Debit/Credit', style: 'width: 190px', isSelling: true, isExchangeRateIDDebitCredit: true},
+  {name: 'Exchange Rate-Selling(Debit)', style: 'width: 130px', isSelling: true, isExchangeRateSellingDebit: true},
+  {name: 'Fxrate-Selling(3rd Currency-FCY)', style: 'width: 130px', isSelling: true, isMultiCurrency: true},
+  {name: 'Fxrate-Selling(3rd Currency-Local)', style: 'width: 130px', isSelling: true, isMultiCurrency: true},
+  {name: 'Currency Conversion for Selling', style: 'min-width: 350px !important;', isSelling: true, isCurrencyConversionForSelling: true},
+  {name: 'Currency-Buying', style: 'width: 160px', isBuying: true},
+  {name: 'Bill Name at Print(ENG)', style: 'width: 160px',isBuying: true},
+  {name: 'Unit Price of Buying(Local)', style: 'width: 130px', isBuying: true},
+  {name: 'Unit Price of Buying(FCY)', style: 'width: 110px', isBuying: true},
+  {name: 'Unit Price of Buying(3rd Currency)', style: 'width: 110px', isBuying: true, isMultiCurrency: true},
+  {name: 'Tax Rate-Buying(%)', style: 'width: 110px', isBuying: true},
+  {name: 'VAT Rate-buying', style: 'width: 110px', isBuying: true, isVATRateBuying: true},
+  {name: 'Advance Payment on-behalf-of Our Company', style: 'width: 110px', isBuying: true, isAdvancePaymentonbehalfofOurCompany: true},
+  {name: 'Amount Buying Incl Tax(Local)-Input', style: 'width: 140px', isBuying: true},
+  {name: 'Amount Buying Incl Tax(FCY)-Input', style: 'width: 140px', isBuying: true},
+  {name: 'Exchange Rate-Buying(Credit)', style: 'width: 130px', isBuying: true, isExchangeRateBuyingCredit: true},
+  {name: 'Fxrate-Buying(3rd Currency-FCY)', style: 'width: 130px', isBuying: true, isMultiCurrency: true},
+  {name: 'Fxrate-Buying(3rd Currency-Local)', style: 'width: 130px', isBuying: true, isMultiCurrency: true},
+  {name: 'Currency Conversion for Buying', style: 'min-width: 350px !important;', isBuying: true, isCurrencyConversionForBuying: true},
+  ]"
+  />
+
+  <aura:attribute
+    name="fields"
+    type="List"
+    default="[
+  {name: 'Name', style: 'width: 110px'},
+  {name: 'clofor_com_cfs__SeikyuBangou__c', style: 'width: 90px'},
+  {name: 'clofor_com_cfs__Tariff__c', style: 'min-width: 190px'},
+  {name: 'clofor_com_cfs__Seikyusaki__c', style: 'min-width: 190px'},
+  {name: 'clofor_com_cfs__PaymentTo__c', style: 'min-width: 210px'},
+  {name: 'clofor_com_cfs__Suryo__c', style: 'width: 130px'},
+  {name: 'clofor_com_cfs__ChargeUnitInPrint__c', style: 'min-width: 110px'},
+  {name: 'clofor_com_cfs__ChargeUnit__c', style: 'min-width: 130px'},
+  {name: 'clofor_com_cfs__ContainerSize__c', style: 'min-width: 130px'},
+  {name: 'clofor_com_cfs__PrintFlag__c', style: 'min-width: 60px'},
+  {name: 'clofor_com_cfs__curr__c', style: 'min-width: 180px;', isSelling: true},
+  {name: 'clofor_com_cfs__ADVANCE_PAYMENT_ON_BEHALF_OF__c', style: 'width: 110px;', isSelling: true},
+  {name: 'clofor_com_cfs__InsatuyouSyohinEng__c', style: 'width: 160px',isSelling: true},
+  {name: 'clofor_com_cfs__SellTankaJPY__c', style: 'width: 130px', isSelling: true},
+  {name: 'clofor_com_cfs__SellTankaUSD__c', style: 'width: 110px', isSelling: true},
+  {name: 'clofor_com_cfs__UnitPriceofSelling3rdCurrency__c', style: 'width: 110px', isSelling: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__TaxInitial__c', style: 'width: 110px', isSelling: true},
+  {name: 'clofor_com_cfs__VATrateselling__c', style: 'width: 110px', isSelling: true, isVATRateSelling: true},
+  {name: 'clofor_com_cfs__ExchangeRateID__c', style: 'width: 190px', isSelling: true, isExchangeRateIDDebitCredit: true},
+  {name: 'clofor_com_cfs__KawaseSel__c', style: 'width: 130px', isSelling: true, isExchangeRateSellingDebit: true},
+  {name: 'clofor_com_cfs__FxrateSelling3rdCurrencyFCY__c', style: 'width: 130px', isSelling: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__FxrateSelling3rdCurrencyLocal__c', style: 'width: 130px', isSelling: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__CurrencyConversionSelling__c', style: 'min-width: 350px !important;', isSelling: true, isCurrencyConversionForSelling: true},
+  {name: 'clofor_com_cfs__CurrencyBuying__c', style: 'width: 160px', isBuying: true},
+  {name: 'clofor_com_cfs__InsatuyouSyohinEng__c', style: 'width: 160px',isBuying: true},
+  {name: 'clofor_com_cfs__BuyTankaJPY__c', style: 'width: 130px', isBuying: true},
+  {name: 'clofor_com_cfs__BuyTankaUSD__c', style: 'width: 110px', isBuying: true},
+  {name: 'clofor_com_cfs__UnitPriceofBuying3rdCurrency__c', style: 'width: 110px', isBuying: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__BuyTaxInitial__c', style: 'width: 110px', isBuying: true},
+  {name: 'clofor_com_cfs__VATratebuying__c', style: 'width: 110px', isBuying: true, isVATRateBuying: true},
+  {name: 'clofor_com_cfs__AdvancePaymentOnBehalfOfOurCompany__c', style: 'width: 110px', isBuying: true, isAdvancePaymentonbehalfofOurCompany: true},
+  {name: 'clofor_com_cfs__AmountBuyingIncTaxLocalInput__c', style: 'width: 140px', isBuying: true},
+  {name: 'clofor_com_cfs__AmountBuyingIncTaxFCYInput__c', style: 'width: 140px', isBuying: true},
+  {name: 'clofor_com_cfs__KawaseBay__c', style: 'width: 130px', isBuying: true, isExchangeRateBuyingCredit: true},
+  {name: 'clofor_com_cfs__FxrateBuying3rdCurrencyFCY__c', style: 'width: 130px', isBuying: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__FxrateBuying3rdCurrencyLocal__c', style: 'width: 130px', isBuying: true, isMultiCurrency: true},
+  {name: 'clofor_com_cfs__CurrencyConversionBuying__c', style: 'min-width: 350px !important;', isBuying: true, isCurrencyConversionForBuying: true},
+  ]"
+  />
+
+  <aura:attribute name="isUpdateable" type="Boolean" default="true" />
+  <aura:attribute name="isAccessible" type="Boolean" default="true" />
+  <aura:attribute name="isDeletable" type="Boolean" default="true" />
+
+  <aura:method name="updateFields" action="{! c.updateFields}">
+    <aura:attribute name="fields" type="List" />
+  </aura:method>
+  <aura:method name="getFields" action="{! c.getFields}"> </aura:method>
+  <aura:method name="refresh" action="{! c.refresh}"> </aura:method>
+  <aura:method name="onToggleSelect" action="{! c.onToggleSelect}">
+    <aura:attribute name="isSelected" type="Boolean" />
+  </aura:method>
+  <aura:method name="onToggleMultiCurrency" action="{! c.onToggleMultiCurrency}">
+    <aura:attribute name="isMultiCurrency" type="Boolean"/>
+  </aura:method>
+
+  <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+  <lightning:spinner aura:id="spinner" class="slds-hide" />
+  <aura:if isTrue="{!and(v.isShow, v.isUpdateable)}">
+    <lightning:recordEditForm
+      aura:id="recordEditForm"
+      recordId="{!v.id}"
+      onsubmit="{!c.onSubmit}"
+      onsuccess="{!c.onSuccess}"
+      onerror="{!c.onError}"
+      onload="{!c.onLoad}"
+      objectApiName="clofor_com_cfs__AnkenMeisai__c"
+    >
+      <lightning:messages />
+      <table id="testID">
+        <aura:if isTrue="{!v.isFirstRecord}">
+          <tr>
+            <td style="width: 40px"></td>
+            <aura:iteration items="{!v.labels}" var="label">
+              <aura:if isTrue="{! v.isSelling &amp;&amp; not(label.isBuying) &amp;&amp;
+                                  or(not(label.isVATRateSelling), and(label.isVATRateSelling != null, label.isVATRateSelling == v.isVATRateSelling)) &amp;&amp;
+                                  or(not(label.isExchangeRateIDDebitCredit), and(label.isExchangeRateIDDebitCredit != null, label.isExchangeRateIDDebitCredit == v.isExchangeRateIDDebitCredit)) &amp;&amp;
+                                  or(not(label.isCurrencyConversionForSelling), and(label.isCurrencyConversionForSelling != null, label.isCurrencyConversionForSelling == v.isCurrencyConversionForSelling)) &amp;&amp;
+                                  or(not(label.isExchangeRateSellingDebit), and(label.isExchangeRateSellingDebit != null, label.isExchangeRateSellingDebit == v.isExchangeRateSellingDebit)) &amp;&amp;
+                                  or(not(label.isMultiCurrency), and(label.isMultiCurrency != null, label.isMultiCurrency == v.isMultiCurrency))}">
+                <!-- <aura:set attribute="newStyle" value="{!label.style}" to="" save="" the="" record=""></aura:set>                    -->
+                <td style="{!label.style}">
+                  <label class="slds-form-element__label"> {!label.name} </label>
+                </td>
+              </aura:if>
+              <aura:if isTrue="{! not(v.isSelling) &amp;&amp; not(label.isSelling) &amp;&amp;
+                                  or(not(label.isVATRateBuying), and(label.isVATRateBuying != null, label.isVATRateBuying == v.isVATRateBuying)) &amp;&amp; 
+                                  or(not(label.isExchangeRateBuyingCredit), and(label.isExchangeRateBuyingCredit != null, label.isExchangeRateBuyingCredit == v.isExchangeRateBuyingCredit)) &amp;&amp;
+                                  or(not(label.isCurrencyConversionForBuying), and(label.isCurrencyConversionForBuying != null, label.isCurrencyConversionForBuying == v.isCurrencyConversionForBuying)) &amp;&amp;
+                                  or(not(label.isAdvancePaymentonbehalfofOurCompany), and(label.isAdvancePaymentonbehalfofOurCompany != null, label.isAdvancePaymentonbehalfofOurCompany == v.isAdvancePaymentonbehalfofOurCompany)) &amp;&amp; 
+                                  or(not(label.isMultiCurrency), and(label.isMultiCurrency != null, label.isMultiCurrency == v.isMultiCurrency))}">
+                <td style="{!label.style}">
+                  <label class="slds-form-element__label"> {!label.name} </label>
+                </td>
+              </aura:if>
+            </aura:iteration>
+            <!-- <td style="width: 78px"></td>
+            <td style="width: 88px"></td> -->
+          </tr>
+        </aura:if>
+        <tr>
+          <td style="width: 40px">
+            <lightning:input type="checkbox" checked="{!v.isSelected}" />
+          </td>
+          <aura:iteration items="{!v.fields}" var="field">
+            <aura:if isTrue="{! v.isSelling &amp;&amp; not(field.isBuying) &amp;&amp;
+                                or(not(field.isVATRateSelling), and(field.isVATRateSelling != null, field.isVATRateSelling == v.isVATRateSelling)) &amp;&amp; 
+                                or(not(field.isExchangeRateIDDebitCredit), and(field.isExchangeRateIDDebitCredit != null, field.isExchangeRateIDDebitCredit == v.isExchangeRateIDDebitCredit)) &amp;&amp;
+                                or(not(field.isCurrencyConversionForSelling), and(field.isCurrencyConversionForSelling != null, field.isCurrencyConversionForSelling == v.isCurrencyConversionForSelling)) &amp;&amp; 
+                                or(not(field.isExchangeRateSellingDebit), and(field.isExchangeRateSellingDebit != null, field.isExchangeRateSellingDebit == v.isExchangeRateSellingDebit)) &amp;&amp; 
+                                or(not(field.isMultiCurrency), and(field.isMultiCurrency != null, field.isMultiCurrency == v.isMultiCurrency))}">
+              <td style="{!field.style}">
+                <lightning:inputField
+                  aura:id="field"
+                  disabled="{! not(v.isUpdateable)}"
+                  variant="label-hidden"
+                  fieldName="{!field.name}"
+                />
+              </td>
+            </aura:if>
+            <aura:if isTrue="{! not(v.isSelling) &amp;&amp; not(field.isSelling) &amp;&amp;
+                                or(not(field.isVATRateBuying), and(field.isVATRateBuying != null, field.isVATRateBuying == v.isVATRateBuying)) &amp;&amp; 
+                                or(not(field.isExchangeRateBuyingCredit), and(field.isExchangeRateBuyingCredit != null, field.isExchangeRateBuyingCredit == v.isExchangeRateBuyingCredit)) &amp;&amp;
+                                or(not(field.isCurrencyConversionForBuying), and(field.isCurrencyConversionForBuying != null, field.isCurrencyConversionForBuying == v.isCurrencyConversionForBuying)) &amp;&amp;  
+                                or(not(field.isAdvancePaymentonbehalfofOurCompany), and(field.isAdvancePaymentonbehalfofOurCompany != null, field.isAdvancePaymentonbehalfofOurCompany == v.isAdvancePaymentonbehalfofOurCompany)) &amp;&amp; 
+                                or(not(field.isMultiCurrency), and(field.isMultiCurrency != null, field.isMultiCurrency == v.isMultiCurrency))}">
+              <td style="{!field.style}">
+                <lightning:inputField
+                  aura:id="field"
+                  disabled="{! not(v.isUpdateable)}"
+                  variant="label-hidden"
+                  fieldName="{!field.name}"
+                />
+              </td>
+            </aura:if>
+          </aura:iteration>
+          <td>
+            <lightning:button
+              variant="brand"
+              disabled="{! not(v.isUpdateable)}"
+              type="submit"
+              name="Save"
+              label="Save"
+            />
+          </td>
+          <td>
+            <lightning:button
+              variant="brand"
+              disabled="{! not(v.isDeletable)}"
+              onclick="{!c.onDelete}"
+              name="Delete"
+              label="Delete"
+            />
+          </td>
+          <!-- <td>
+            <lightning:button
+              variant="brand"
+              disabled="{! not(v.isDeletable)}"
+              onclick="{!c.onClone}"
+              name="Clone"
+              label="Clone"
+            />
+          </td> -->
+        </tr>
+      </table>
+    </lightning:recordEditForm>
+    <div class="slds-p-top_x-small"></div>
+  </aura:if>
+  <aura:if isTrue="{! v.isShow &amp;&amp; v.isAccessible &amp;&amp;	not(v.isUpdateable) }">
+    <lightning:recordViewForm
+      recordId="{!v.id}"
+      objectApiName="clofor_com_cfs__AnkenMeisai__c"
+    >
+      <lightning:messages />
+        <tr>
+          <td style="width: 40px">
+            <lightning:input type="checkbox" checked="{!v.isSelected}" />
+          </td>
+          <aura:iteration items="{!v.fields}" var="field">
+            <aura:if isTrue="{! v.isSelling &amp;&amp; not(field.isBuying) &amp;&amp; 
+                                or(not(field.isVATRateSelling), and(field.isVATRateSelling != null, field.isVATRateSelling == v.isVATRateSelling)) &amp;&amp; 
+                                or(not(field.isExchangeRateIDDebitCredit), and(field.isExchangeRateIDDebitCredit != null, field.isExchangeRateIDDebitCredit == v.isExchangeRateIDDebitCredit)) &amp;&amp;
+                                or(not(field.isCurrencyConversionForSelling), and(field.isCurrencyConversionForSelling != null, field.isCurrencyConversionForSelling == v.isCurrencyConversionForSelling)) &amp;&amp; 
+                                or(not(field.isExchangeRateSellingDebit), and(field.isExchangeRateSellingDebit != null, field.isExchangeRateSellingDebit == v.isExchangeRateSellingDebit)) &amp;&amp; 
+                                or(not(field.isMultiCurrency), and(field.isMultiCurrency != null, field.isMultiCurrency == v.isMultiCurrency))}">
+              <td style="{!field.style}">
+                <lightning:outputField
+                  variant="label-hidden"
+                  fieldName="{!field.name}"
+                />
+              </td>
+            </aura:if>
+            <aura:if isTrue="{! not(v.isSelling) &amp;&amp; not(field.isSelling) &amp;&amp; 
+                                or(not(field.isVATRateBuying), and(field.isVATRateBuying != null, field.isVATRateBuying == v.isVATRateBuying)) &amp;&amp; 
+                                or(not(field.isExchangeRateBuyingCredit), and(field.isExchangeRateBuyingCredit != null, field.isExchangeRateBuyingCredit == v.isExchangeRateBuyingCredit)) &amp;&amp;
+                                or(not(field.isCurrencyConversionForBuying), and(field.isCurrencyConversionForBuying != null, field.isCurrencyConversionForBuying == v.isCurrencyConversionForBuying)) &amp;&amp;  
+                                or(not(field.isAdvancePaymentonbehalfofOurCompany), and(field.isAdvancePaymentonbehalfofOurCompany != null, field.isAdvancePaymentonbehalfofOurCompany == v.isAdvancePaymentonbehalfofOurCompany)) &amp;&amp;
+                                or(not(field.isMultiCurrency), and(field.isMultiCurrency != null, field.isMultiCurrency == v.isMultiCurrency))}">
+              <td style="{!field.style}">
+                <lightning:outputField
+                  variant="label-hidden"
+                  fieldName="{!field.name}"
+                />
+              </td>
+            </aura:if>
+          </aura:iteration>
+          <td>
+            <lightning:button
+              disabled="true"
+              label="Save"
+            />
+          </td>
+          <td>
+            <lightning:button
+              disabled="true"
+              label="Delete"
+            />
+          </td>
+        </tr>
+    </lightning:recordViewForm>
+    <div class="slds-p-top_x-small"></div>
+  </aura:if>
+
+</aura:component>

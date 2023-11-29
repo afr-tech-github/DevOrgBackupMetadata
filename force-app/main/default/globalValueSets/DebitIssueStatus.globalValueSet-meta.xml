@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>On Progress</fullName>
+        <default>false</default>
+        <label>On Progress</label>
+    </customValue>
+    <customValue>
+        <fullName>Not issued yet-Vendor Invoice not received</fullName>
+        <default>false</default>
+        <label>Not issued yet-Vendor Invoice not received</label>
+    </customValue>
+    <customValue>
+        <fullName>At Internal Checking After Issue</fullName>
+        <default>false</default>
+        <label>At Internal Checking After Issue</label>
+    </customValue>
+    <customValue>
+        <fullName>At Internal Checking Confirmed After Issue</fullName>
+        <default>false</default>
+        <label>At Internal Checking Confirmed After Issue</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting for Other Invoice for Combine</fullName>
+        <default>false</default>
+        <label>Waiting for Other Invoice for Combine</label>
+    </customValue>
+    <customValue>
+        <fullName>Debit Copy Sent</fullName>
+        <default>false</default>
+        <label>Debit Copy Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>Debit Original Sent</fullName>
+        <default>false</default>
+        <label>Debit Original Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>No Settlement Required(Collect from Partner)</fullName>
+        <default>false</default>
+        <label>No Settlement Required(Collect from Partner)</label>
+    </customValue>
+    <customValue>
+        <fullName>Carry Over to Next Month</fullName>
+        <default>false</default>
+        <label>Carry Over to Next Month</label>
+    </customValue>
+    <masterLabel>DEBIT ISSUE STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

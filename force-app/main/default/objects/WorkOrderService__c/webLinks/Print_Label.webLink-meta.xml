@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Print_Label</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Print Label</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/clofor_com_cfs__PrintWOSReport?wosId={! WorkOrderService__c.Id}&amp;rtype={! WorkOrderService__c.RecordTypeId}</url>
+</WebLink>

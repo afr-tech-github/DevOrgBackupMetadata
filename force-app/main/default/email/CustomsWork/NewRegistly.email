@@ -1,0 +1,28 @@
+{!Account.Name}
+{!CustomObject1__c.CustmerInCharge__c}様
+
+いつもお世話になっております。
+今回新規取引登録書の書類をお送りさせていただきます。
+正しく作成されているかご確認をお願い致します。
+
+必須情報
+-輸出入者符号番号（申告の際に必要な御社の識別番号）
+-経理のご担当者様（支払などの問い合わせ先）
+-御社の口座番号（返金などがあった場合の振込先）
+-Realtime口座がある場合は口座番号（納税の際に必要な口座番号）：延納の場合は延納番号
+-資本金
+-決算期
+
+他のところはお手数ですが直接ご記入し、
+問題がないようでしたら押印の上、
+ご返信お願い致します。
+
+宜しくお願い致します。
+
+{!User.LastName}
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

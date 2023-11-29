@@ -1,0 +1,530 @@
+<apex:page controller="DCBDetailReportController" applyBodyTag="false" applyHtmlTag="false"  showHeader="false" contentType="application/vnd.ms-excel#DCBReport.xls" cache="true">
+    <head>
+        <style type="text/css">
+            h1 {
+                font-size: 300%;
+            }
+            body {
+                font-size: 12px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            }
+
+            .detail_table {
+                border-collapse: collapse;
+                border: 1px thin solid;
+                margin-left: auto;
+                margin-right: auto;
+                width:100%;
+            }
+
+            .detail_table_td_th {
+                border-collapse: collapse;
+                border: thin solid;
+                text-align: center;
+            }
+
+            .footInfor {
+                border-width: 1px;
+                border-collapse: collapse;
+            }
+
+            .big_text {
+                font-size: 30px;
+            }
+
+            .medium_text {
+                font-size: 14px;
+            }
+
+            .box {
+                border: 1px solid black;
+                padding: 5px;
+            }
+            
+            .amount-box-top {
+                text-align: left !important;
+                padding-left: 50px !important;
+                width: 92% !important;
+                height: 50px !important;
+                vertical-align: middle !important;
+                border-top: 1px black solid !important;
+                border-left: 1px black solid !important;
+                border-right: 1px black solid !important;
+            }
+    
+            .amount-box-bottom {
+                text-align: left !important;
+                padding-left: 50px !important;
+                width: 92% !important;
+                height: 50px !important;
+                vertical-align: top !important;
+                border-bottom: 1px black solid !important;
+                border-left: 1px black solid !important;
+                border-right: 1px black solid !important;
+            }
+        </style>
+        <meta http-equiv="Content-Type" content="text/HTML;charset=UTF-8" />
+    </head>
+    <body>
+    <br />
+    <div align="center">
+        <apex:outputPanel rendered="{!IF(OR(reportOption = '1', reportOption = '2'), true, false)}">
+            <h1>BẢNG TỔNG KẾT</h1>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(reportOption = '3', true, false)}">
+            <h1>THANH TOÁN TRƯỚC BẢNG TỔNG KẾT</h1>
+        </apex:outputPanel>
+    </div>
+    <br />
+    <table width="100%">
+        <tr>
+            <td colspan="7" style="width:70%;"></td>
+            <td colspan="4" style="width:30%;" align="right">
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{!reportDate}"/>
+                </apex:outputText>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" style="width:62%;vertical-align:top">
+                THÂN MẾN {!customerReport.customerName}<br />
+                NGÀY THAM CHIẾU &nbsp;&nbsp;
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{!fromDate}"/>
+                </apex:outputText>
+                &nbsp;- &nbsp;
+                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param value="{!toDate}"/>
+                </apex:outputText>
+            </td>
+            <td colspan="4" style="width:38%"><apex:image url="{!$Setup.Site_Custom_Settings__c.Logo_URL__c}" width="300" height="80"/></td>
+        </tr>
+        <tr />
+        <tr />
+        <tr />
+        <tr />
+        <!--<tr>
+            <td colspan="6" class="amount-box-top">Tổng số</td>
+            <td colspan="1"></td>
+            <td colspan="2"  style="width:13%; vertical-align: top; height: 40px;">Thanh toán ngày</td>
+            <td colspan="2"  style="width:22%; vertical-align: top; height: 40px;">
+                <apex:outputPanel rendered="{!IF(OR(reportOption = '1', reportOption = '2'), true, false)}">
+                    <apex:outputText value="{0,date,yyyy.M.d}">
+                        <apex:param value="{!customerReport.deadlinePaymentInvoice}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(reportOption = '3', true, false)}">
+                    <apex:outputText value="{0,date,yyyy.M.d}">
+                        <apex:param value="{!customerReport.deadlinePaymentExpense}"/>
+                    </apex:outputText>
+                </apex:outputPanel>
+            </td>
+        </tr>-->
+        <tr>
+            <td colspan="6" class="amount-box-bottom">
+                <span class="big_text">
+                    <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,#,###,###,###}">
+                        <apex:param value="{!customerReport.sumOfAmountSelling}"/>
+                    </apex:outputText>
+                </span>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    <!--<table style="width:100%" class="detail_table">
+        <tr>
+            <th class="detail_table_td_th" style="width: 6%">Số</th>
+            <th class="detail_table_td_th"  colspan="2" style="width:24%">Số hóa đơn</th>
+            <th class="detail_table_td_th"  colspan="3" style="width:18%">Số vận đơn</th>
+            <th class="detail_table_td_th"  style="width:6%">Tiền tệ</th>
+            <th class="detail_table_td_th"  colspan="2" style="width:24%">Số tiền</th>
+            <th class="detail_table_td_th"  colspan="2" style="width:24%">LƯU Ý</th>
+        </tr>
+        <apex:variable var="rowNum" value="{!0}"/>
+        <apex:repeat value="{!customerReport.lineItems}" var="lineItem">
+            <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+            <tr>
+                <td class="detail_table_td_th" style="width: 6%">{!rowNum}</td>
+                <td class="detail_table_td_th"  colspan="2" style="width:24%">{!lineItem.invoiceNo}</td>
+                <td class="detail_table_td_th"  colspan="3" style="width:18%">{!lineItem.hblNo}</td>
+                <td class="detail_table_td_th"  style="width:6%"><apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Currency__c}"/></td>
+                <td class="detail_table_td_th"  colspan="2" style="width:24%">
+                    <apex:outputText value="{0,number,#,###,###,###}">
+                        <apex:param value="{!lineItem.sumOfAmountSelling}"/>
+                    </apex:outputText>
+                </td>
+                <td class="detail_table_td_th"  colspan="2" style="width:24%"><apex:outputText value="{!lineItem.remarks}"></apex:outputText></td>
+            </tr>
+        </apex:repeat>
+        <tr>
+            <td class="detail_table_td_th" style="width: 6%"></td>
+            <td class="detail_table_td_th"  colspan="5" style="width:48%" align="center">Tổng số trước thuế</td>
+            <td class="detail_table_td_th"  style="width:6%"></td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%">
+                <apex:outputText value="{0,number,#,###,###,###}">
+                    <apex:param value="{!customerReport.sumOfAmountSelling}"/>
+                </apex:outputText>
+            </td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%"></td>
+        </tr>
+        <tr>
+            <td class="detail_table_td_th" style="width: 6%">&nbsp;</td>
+            <td class="detail_table_td_th"  colspan="5" style="width:48%">&nbsp;</td>
+            <td class="detail_table_td_th"  style="width:6%">&nbsp;</td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%">&nbsp;</td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="detail_table_td_th" style="width: 6%"></td>
+            <td class="detail_table_td_th"  colspan="5" style="width:48%" align="center">Tổng số</td>
+            <td class="detail_table_td_th"  style="width:6%"></td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%">
+                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,#,###,###,###}">
+                    <apex:param value="{!customerReport.sumOfAmountSelling}"/>
+                </apex:outputText>
+            </td>
+            <td class="detail_table_td_th"  colspan="2" style="width:24%"></td>
+        </tr>
+    </table>-->
+        <table style="width:100%" class="detail_table">
+            <tr>
+                    <th class="detail_table_td_th" rowspan="2"><b>NO</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>WKID</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>SALES ACCOUNTED DATE</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>HBL</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>MBL</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>ETD</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>ETA</b></th>
+                    <th class="detail_table_td_th" rowspan="2">
+                        <b>DUE DATE OF PAYMENT -EXCLUDE TAX</b>
+                    </th>
+                    <!--<th  class="detail_table_td_th" rowspan="2">
+                        <b>DUE DATE OF DUTY PAYMENT-TAX</b>
+                    </th>
+                    <th  class="detail_table_td_th" rowspan="2">
+                        <b>EXPECTED DELIVERY DATE</b>
+                    </th>-->
+                    <th  class="detail_table_td_th" rowspan="2"><b>QUANTITY</b></th>
+                    <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                        <th  class="detail_table_td_th" colspan="3"><b>LOCAL</b></th>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                        <th  class="detail_table_td_th" colspan="3"><b>USD</b></th>
+                    </apex:outputText>
+                </tr>
+                <tr>
+                    <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                        <th  class="detail_table_td_th"><b>DEBIT</b></th>
+                        <th  class="detail_table_td_th"><b>CREDIT</b></th>
+                        <th  class="detail_table_td_th"><b>BALANCE</b></th>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                        <th  class="detail_table_td_th"><b>DEBIT</b></th>
+                        <th  class="detail_table_td_th"><b>CREDIT</b></th>
+                        <th  class="detail_table_td_th"><b>BALANCE</b></th>
+                    </apex:outputText>
+                </tr>
+                <apex:variable var="rowNum" value="{!0}"/>
+                <apex:repeat value="{!customerReport.lineItems}" var="lineItem">
+                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                    <tr>
+                        <td  class="detail_table_td_th">
+                            {!rowNum}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.wkid}
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}" >
+                                <apex:param value="{!lineItem.salesAccountDate}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{!lineItem.hblNo}"></apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{!lineItem.mblNo}" ></apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.etd}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.eta}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.deadlinePaymentInvoice}"/>
+                            </apex:outputText>
+                        </td>
+                        <!--<td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.deadlinePaymentExpense}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.deliveryDate}"/>
+                            </apex:outputText>
+                        </td>-->
+                        <td class="detail_table_td_th">
+                            {!lineItem.recordCount} INV
+                        </td>
+                        <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.sumOfDebit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.sumOfCredit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.sumOfBalance}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!lineItem.sumOfDebitUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!lineItem.sumOfCreditUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.##}">
+                                    <apex:param value="{!lineItem.sumOfBalanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:outputText>
+                    </tr>
+                </apex:repeat>
+                <tr>
+                    <td class="detail_table_td_th" colspan="9" align="center">TOTAL</td>
+                    <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###}">
+                                <apex:param value="{!customerReport.sumOfdebit}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###}">
+                                <apex:param value="{!customerReport.sumOfcredit}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###}">
+                                <apex:param value="{!customerReport.sumOfbalance}"/>
+                            </apex:outputText>
+                        </td>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###.##}">
+                                <apex:param value="{!customerReport.sumOfdebitUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###.##}">
+                                <apex:param value="{!customerReport.sumOfcreditUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,number,#,###,###,###.##}">
+                                <apex:param value="{!customerReport.sumOfbalanceUSD}"/>
+                            </apex:outputText>
+                        </td>
+                    </apex:outputText>
+                </tr>
+        </table>
+        <br/>
+        <br/>
+        <apex:panelGroup rendered="{!lineItems.size > 0}">
+        <table style="width:100%" class="detail_table">
+                <tr>
+                    <th class="detail_table_td_th" rowspan="2"><b>NO</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>BILLING-FMS/TMS ID</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>SALES ACCOUNTED DATE-INVOICING</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>PRICING NAME AT PRINT(LOCAL)</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>INVOICE TO</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>PAYMENT TO-BUYING</b></th>
+                    <th class="detail_table_td_th" rowspan="2"><b>DESCRIPTION</b></th>
+                    <th class="detail_table_td_th" rowspan="2">CHARGE UNIT(TOTAL)</th>
+                    <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                        <th class="detail_table_td_th" colspan="3"><b>LOCAL</b></th>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                        <th class="detail_table_td_th" colspan="3"><b>USD</b></th>
+                    </apex:outputText>
+                </tr>
+                <tr>
+                    <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                        <th class="detail_table_td_th">
+                            <b>AMOUNT SELLING INCLUDING TAX</b>
+                        </th>
+                        <th class="detail_table_td_th">
+                            <b>AMOUNT BUYING INCLUDING TAX</b>
+                        </th>
+                        <th class="detail_table_td_th">
+                            <b>UNPAID BALANCE OF SELLING</b>
+                        </th>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                        <th class="detail_table_td_th">
+                            <b>AMOUNT SELLING INCLUDING TAX</b>
+                        </th>
+                        <th class="detail_table_td_th">
+                            <b>AMOUNT BUYING INCLUDING TAX</b>
+                        </th>
+                        <th class="detail_table_td_th">
+                            <b>UNPAID BALANCE OF SELLING</b>
+                        </th>
+                    </apex:outputText>
+                </tr>
+                <apex:variable var="rowNum" value="{!0}"/>
+                <apex:repeat value="{!lineItems}" var="lineItem">
+                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+                    <tr>
+                        <td class="detail_table_td_th">
+                            {!rowNum}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.name}
+                        </td>
+                        <td class="detail_table_td_th">
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                <apex:param value="{!lineItem.salesAccountedDateInvoicing}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.insatuyouSyohin}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.seikyusakiName}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.paymentToName}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.description}
+                        </td>
+                        <td class="detail_table_td_th">
+                            {!lineItem.suryo}
+                        </td>
+                        <apex:outputText rendered="{!IF(currencyType <> 'USD', true, false)}">
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.debit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.credit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###}">
+                                    <apex:param value="{!lineItem.balance}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!IF(currencyType <> 'VND', true, false)}">
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!lineItem.debitUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!lineItem.creditUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="detail_table_td_th">
+                                <apex:outputText value="{0,number,###,###,###,###.###}">
+                                    <apex:param value="{!lineItem.balanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:outputText>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </apex:panelGroup>
+    <br/>
+    <br/>
+    <hr/>
+    <br/>
+    <br/>
+    <table>
+        <tr>
+            <td style="width: 6%">&nbsp;</td>
+            <td colspan="10" style="width: 94%">Chi tiết giao dịch ngân hàng được thanh toán bởi chuyển khoản.</td>
+        </tr>
+        <tr>
+            <td style="width: 6%">&nbsp;</td>
+            <td colspan="10" style="width: 94%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 6%">&nbsp;</td>
+            <td colspan="10" style="width: 94%">Vui lòng chịu phí ngân hàng chuyển chứng từ.</td>
+        </tr>
+        <tr>
+            <td style="width: 6%">&nbsp;</td>
+            <td colspan="10" style="width: 94%"></td>
+        </tr>
+        <tr>
+            <td style="width: 6%">&nbsp;</td>
+            <td colspan="10" style="width: 94%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 12%">&nbsp;</td>
+            <td colspan="9" style="width: 88%"><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 12%">&nbsp;</td>
+            <td colspan="9" style="width: 88%">
+               <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}"/>&nbsp; 
+               <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 12%">&nbsp;</td>
+            <td colspan="9" style="width: 88%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 12%">&nbsp;</td>
+            <td colspan="9" style="width: 88%"><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}"/></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width: 12%">&nbsp;</td>
+            <td colspan="9" style="width: 88%">
+               <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}"/>&nbsp; 
+               <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Powered by AFR solutions co.,ltd</td>      
+        </tr>
+    </table>
+        </body>
+</apex:page>

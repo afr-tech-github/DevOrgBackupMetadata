@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Tab_Link</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(Tab_Style__c , &apos;Link&apos;) &amp;&amp;  ISBLANK( Tab_Link__c)</errorConditionFormula>
+    <errorDisplayField>Tab_Link__c</errorDisplayField>
+    <errorMessage>Tab Link is required</errorMessage>
+</ValidationRule>

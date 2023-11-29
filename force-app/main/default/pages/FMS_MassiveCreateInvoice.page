@@ -1,0 +1,1121 @@
+<!--
+ * PageName:  FMS_MassiveCreateInvoice
+ * Description: Massive Create Invoice
+ * @created:  2022/09/14 Truong Lai
+ * @modified:
+-->
+<apex:page standardController="INVOICING_VAT__c" extensions="FMS_MassiveCreateInvoiceController" action="{!init}" recordSetVar="ankenMeisais" showHeader="true" sidebar="false" title="Massive Create Beta">
+	<apex:includeScript value="{!URLFOR($Resource.CommonResource, 
+								'/CommonResource/Jquery/jquery.min.js')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.CommonResource, '/CommonResource/Jquery-UI/jquery-ui.min.css')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.CommonResource, 
+								'/CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/datatables.min.css')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/select.dataTables.min.css')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/datatables.min.js')}"/>
+	<apex:includeScript value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/moment.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/dataTables.fixedColumns.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource, '/CommonResource/DataTables/dataTables.select.js')}"/>
+	
+	<!-- CSS -->
+	<style type="text/css">
+		.clsNone, .dateFormat{ display: none; }
+		.clsNumber {text-align: right;}
+		.clsCenter {text-align: center;}
+		.clsTotal {
+			text-align: right !important;
+			color: red !important;
+			font-weight: bold;
+			padding-right: 10px !important;
+		}
+		.clsTitle {
+			font-weight: bold;
+			font-size: 16px;
+			margin: 20px 0px 20px 0px;
+		}
+		.clsTitleFilter {padding-right: 20px; font-weight: bold;}
+		.dataTables_scrollHead {margin-top: 5px !important;}
+		.clsTable {
+			border-collapse: collapse !important;
+			border-spacing: 0 !important;
+			width: 100%;
+			background: #F1F1F1;
+		}
+		.clsWrapper {width: 1900px !important; margin-top: 15px;}
+		.clsFilter {
+			font-weight: bold;
+			font-size: 16px;
+			padding-right: 20px;
+		}
+
+		.clsTable th {text-align: center;}
+		.clsTable th, .clsTable td {
+			border-width: 1px;
+			border-style: solid;
+			border-color: #c5c5c5 !important;
+			padding: 5px;
+		}
+
+		#tbInputData td {
+			padding: 5px;
+		}
+
+		.clsLabel {font-weight: bold;}
+		.clsCustomer {width: 210px;}
+		.dataTables_scrollBody {border-bottom: none !important;}
+		.dataTables_length {margin-bottom: 10PX;}
+		.clsSelected {background-color: #e6f2ff !important;}
+		.clsAccountedDate {margin: 0px 20px 0px 20px;}
+
+		.DTFC_LeftHeadWrapper, .DTFC_LeftBodyWrapper {
+			border-right: 1px solid #c5c5c5 !important;
+		}
+		.DTFC_LeftBodyWrapper {
+			border-top: 1px solid #c5c5c5 !important;
+		}
+		.DTFC_LeftBodyLiner {
+			overflow: hidden;
+		}
+		.dataTables_paginate, .dataTables_info {
+			margin-top: 20px !important;
+		}
+	</style>
+
+	<apex:form id="frmMain" styleClass="clsMainForm">
+		<c:CLoading />
+		<apex:pageMessages id="mainMessages"/>
+
+		<apex:pageBlock id="mainPageBlock">
+			<apex:tabPanel switchType="client" id="mainTabPanel"
+						value="{!tabNameSelect}" tabClass="tabStyle">
+		        <apex:tab label="RECEIVABLE" name="receivableTab" id="receivableTab" 
+		        		ontabenter="doChangeTab(true); return false;">
+		        	<apex:outputPanel id="panelReceivable" layout="block" rendered="{!isShowReceivable}">
+			    		<apex:outputPanel id="panelFilterR" layout="block">
+							<table>
+								<tr>
+									<td class="clsFilter">FILTER</td>
+									<td class="clsTitleFilter">AMOUNT SELLING</td>
+									<td>greater than</td>
+									<td class="clsNumber">
+										<apex:inputField styleClass="clsNumber"
+											value="{!objAnkenMeisaiFilter.Nyukingaku__c}"
+											onchange="doChangeAccount(); return false;"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">UNRECEIVED</td>
+									<td>greater than</td>
+									<td class="clsNumber">
+										<apex:inputField styleClass="clsNumber"
+											value="{!objAnkenMeisaiFilter.AmountSellingLocalAdjustment__c}"
+											onchange="doChangeAccount(); return false;"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ORDER ID</td>
+									<td colspan="2">
+										<apex:inputText onchange="doChangeAccount(); return false;"
+												styleClass="clsCustomer clsOrderNo"
+												value="{!orderNo}"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">INVOICE TO</td>
+									<td colspan="2">
+										<apex:inputField onchange="doChangeAccount(); return false;"
+												styleClass="clsCustomer"
+												value="{!objAnkenMeisaiFilter.Seikyusaki__c}"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ADVANCE PAYMENT ON-BEHALF-OF CUSTOMER</td>
+									<td colspan="2">
+										<apex:selectList styleClass="clsAdvance"
+														multiselect="false" size="1"
+														onchange="doChangeAccount(); return false;">
+											<apex:selectOptions value="{!items}"/>
+										</apex:selectList>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">LANGUAGE OPTION</td> 
+									<td colspan="2">
+										<apex:selectList styleClass="clsLanguage"
+														multiselect="false" size="1"
+														onchange="doChangeLanguage(); return false;">
+											<apex:selectOptions value="{!itemsLanguage}"/>
+										</apex:selectList>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ACCOUNTED DATE</td> 
+									<td colspan="2">
+										From
+										<apex:inputField onchange="doChangeAccount(); return false;"
+												styleClass="clsAccountedDate clsDateFrom"
+												html-autocomplete="off"
+												value="{!objAnkenMeisaiFilter.SalesAccountedDateInvoicing__c}"/>
+										To
+										<apex:inputField onchange="doChangeAccount(); return false;"
+												styleClass="clsAccountedDate clsDateTo"
+												html-autocomplete="off"
+												value="{!objAnkenMeisaiFilterTo.SalesAccountedDateInvoicing__c}"/>
+									</td>
+								</tr>
+							</table>
+						</apex:outputPanel>
+												
+						<p class="clsTitle">RECEIVABLE</p>
+						<apex:outputPanel id="panelReceivableData" layout="block" styleClass="clsWrapper">
+							<table id="tbReceivable" class="clsTable">
+								<thead>
+									<tr>															
+										<th colspan="6">BILL INFORMATION</th>
+										<th>AMOUNT PROCESSING</th>
+										<th colspan="3">LOCAL</th>
+										<th colspan="3">USD</th>
+										<th colspan="6">DETAIL PROCESSING</th>
+									</tr>
+									<tr>
+										<th rowspan="2">
+											<input type="checkbox" class="clsCheckAll" onclick="doControlCheckAll(this, 'clsCheck');"/>
+										</th>							
+										<th rowspan="2" style = "position: relative;">BILL ID</th>
+										<th rowspan="2">ORDER ID</th>
+										<th rowspan="2">ACCOUNTED DATE</th>
+										<th rowspan="2">INVOICE TO</th>
+										<th rowspan="2">BILL NAME</th>
+										<th rowspan="2">RECEIPTANCE CONFIRMATION</th>
+										<th>AMOUNT SELLING INCL TAX</th>
+										<th>AMOUNT RECEIVED</th>
+										<th>UNRECEIVED BALANCE</th>
+										<th>AMOUNT SELLING INCL TAX</th>
+										<th>AMOUNT RECEIVED</th>
+										<th>UNRECEIVED BALANCE</th>
+										<th rowspan="2">APPLICANT-SELLING</th>
+										<th rowspan="2">TYPE</th>
+										<th rowspan="2">SETTLED DATE</th>
+										<th rowspan="2">BANK ACCOUNT</th>
+										<th rowspan="2">NOTE</th>
+										<th rowspan="2">ADVANCE PAYMENT ON-BEHALF-OF CUSTOMER</th>
+									</tr>
+									<tr class="clsRowTotal">	
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+									</tr>
+								</thead>
+                                <tbody class="clsData"></tbody>
+							</table>
+						</apex:outputPanel>
+					</apex:outputPanel>
+		    	</apex:tab>
+
+		        <apex:tab label="PAYABLE" name="payableTab" id="payableTab"
+		        		ontabenter="doChangeTab(false); return false;">
+		        	<apex:outputPanel id="panelPayable" layout="block" rendered="{!NOT(isShowReceivable)}">
+						<apex:outputPanel id="panelFilterP" layout="block">
+							<table>
+								<tr>
+									<td class="clsFilter">FILTER</td>
+									<td class="clsTitleFilter">AMOUNT BUYING</td>
+									<td>greater than</td>
+									<td class="clsNumber">
+										<apex:inputField styleClass="clsNumber"
+											value="{!objAnkenMeisaiFilter.Siharaigaku__c}"
+											onchange="doChangeAccount(); return false;"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">UNPAID</td>
+									<td>greater than</td>
+									<td class="clsNumber">
+										<apex:inputField styleClass="clsNumber"
+											value="{!objAnkenMeisaiFilter.AmountBuyingLocalAdjustment__c}"
+											onchange="doChangeAccount(); return false;"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ORDER ID</td>
+									<td colspan="2">
+										<apex:inputText onchange="doChangeAccount(); return false;"
+												styleClass="clsCustomer clsOrderNo"
+												value="{!orderNo}"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">PAYMENT TO</td>
+									<td colspan="2">
+										<apex:inputField onchange="doChangeAccount(); return false;"
+											styleClass="clsCustomer"
+											value="{!objAnkenMeisaiFilter.PaymentTo__c}"/>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ADVANCE PAYMENT ON-BEHALF-OF OUR COMPANY</td>
+									<td colspan="2">
+										<apex:selectList styleClass="clsAdvance"
+														multiselect="false" size="1"
+														onchange="doChangeAccount(); return false;">
+											<apex:selectOptions value="{!items}"/>
+										</apex:selectList>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">LANGUAGE OPTION</td> 
+									<td colspan="2">
+										<apex:selectList styleClass="clsLanguage"
+														multiselect="false" size="1"
+														onchange="doChangeLanguage(); return false;">
+											<apex:selectOptions value="{!itemsLanguage}"/>
+										</apex:selectList>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="clsTitleFilter">ACCOUNTED DATE</td>
+									<td colspan="2">
+										From
+										<apex:inputField onchange="doChangeAccount(); return false;"
+												styleClass="clsAccountedDate clsDateFrom"
+												value="{!objAnkenMeisaiFilter.SalesAccountedDateInvoicing__c}"/>
+										To
+										<apex:inputField onchange="doChangeAccount(); return false;"
+												styleClass="	 clsDateTo"
+												value="{!objAnkenMeisaiFilterTo.SalesAccountedDateInvoicing__c}"/>
+									</td>
+								</tr>
+							</table>
+						</apex:outputPanel>
+						
+						<p class="clsTitle">PAYABLE</p>
+						<apex:outputPanel id="panelPayableData" layout="block" styleClass="clsWrapper">
+							<table id="tbPayable" class="clsTable">
+								<thead>
+									<tr>						
+										<th colspan="6"></th>
+										<th>AMOUNT PROCESSING</th>
+										<th colspan="3">LOCAL</th>
+										<th colspan="3">USD</th>
+										<th colspan="6">DETAIL PROCESSING</th>
+									</tr>
+									<tr>										
+										<th rowspan="2">
+											<input type="checkbox" class="clsCheckAll" onclick="doControlCheckAll(this, 'clsCheck');"/>
+										</th>
+										<th rowspan="2">BILL ID</th>
+										<th rowspan="2">ORDER ID</th>
+										<th rowspan="2">ACCOUNTED DATE</th>
+										<th rowspan="2">PAYMENT TO</th>
+										<th rowspan="2">BILL NAME</th>
+										<th rowspan="2">PAYMENT CONFIRMATION</th>
+										<th>AMOUNT BUYING INCL TAX</th>
+										<th>AMOUNT PAID</th>
+										<th>UNPAID BALANCE</th>
+										<th>AMOUNT BUYING INCL TAX</th>
+										<th>AMOUNT PAID</th>
+										<th>UNPAID BALANCE</th>
+										<th rowspan="2">BENEFICIARY-BUYING</th>
+										<th rowspan="2">TYPE</th>
+										<th rowspan="2">SETTLED DATE</th>
+										<th rowspan="2">BANK ACCOUNT</th>
+										<th rowspan="2">NOTE</th>
+										<th rowspan="2">ADVANCE PAYMENT ON-BEHALF-OF OUR COMPANY</th>
+									</tr>
+									<tr class="clsRowTotal">	
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+										<th class="clsTotal"></th>
+									</tr>
+								</thead>
+                                <tbody class="clsData"></tbody>
+							</table>
+						</apex:outputPanel>
+					</apex:outputPanel>
+		    	</apex:tab>
+		    </apex:tabPanel>
+
+			<!-- POPUP -->
+			<apex:outputPanel id="panelPopup" layout="block" styleClass="clsNone">
+				<apex:pageMessages id="mainMessagesPopup"/>
+
+				<table id="tbInputData">
+					<tr>
+						<td class="clsLabel">AMOUNT PROCESSING</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+								value="{!objAnkenMeisaiInput.NyukinKakuninzumi__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+								value="{!objAnkenMeisaiInput.SiharaiKakuninzumi__c}"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="clsLabel">
+							<apex:outputText value="APPLICANT-SELLING" rendered="{!isShowReceivable}"/>
+							<apex:outputText value="BENEFICIARY-BUYING" rendered="{!NOT(isShowReceivable)}"/>
+						</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+								value="{!objAnkenMeisaiInput.Payer__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+								value="{!objAnkenMeisaiInput.actual_payer__c}"/>
+						</td>
+					</tr>	
+					<tr>
+						<td class="clsLabel">TYPE</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+								value="{!objAnkenMeisaiInput.BANKTRANSITTYPE__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+								value="{!objAnkenMeisaiInput.payment_category__c}"/>
+						</td>
+					</tr>	
+					<tr>
+						<td class="clsLabel">SETTLED DATE</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+							value="{!objAnkenMeisaiInput.ReceiptanceDate_del__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+							value="{!objAnkenMeisaiInput.PaymentDate__c}"/>
+						</td>
+					</tr>	
+					<tr>
+						<td class="clsLabel">BANK ACCOUNT</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+							value="{!objAnkenMeisaiInput.BankAccountForReceiving__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+							value="{!objAnkenMeisaiInput.BankAccountForPayment__c}"/>
+						</td>
+					</tr>	
+					<tr>
+						<td class="clsLabel">NOTE</td>
+						<td>
+							<apex:inputField rendered="{!isShowReceivable}"
+								value="{!objAnkenMeisaiInput.SellDetail__c}"/>
+							<apex:inputField rendered="{!NOT(isShowReceivable)}"
+								value="{!objAnkenMeisaiInput.BuyDetail__c}"/>
+						</td>
+					</tr>	
+				</table>
+			</apex:outputPanel>
+
+			<apex:pageBlockButtons location="bottom">
+				<apex:commandButton id="btnSave" value="Create Invoice"
+									status="Waiting"
+									onclick="doCreateInvoice(); return false;"
+									reRender="mainMessages"/>
+
+				<!-- <apex:commandButton id="btnProcessing" value="Processing"
+									status="Waiting"
+									onclick="doProcessing(); return false;"
+									reRender="mainMessages"/> -->
+				
+				<apex:commandButton id="btnCancel" value="Cancel"
+									onclick="doCancel(); return false;"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+
+		<!-- ACTION FUNCTION -->
+		<apex:actionFunction name="afChangeTab"
+									action="{!actionChangeTab}"
+									reRender="mainMessages, mainTabPanel, panelPopup, refreshJs">
+			<apex:param name="isTabShow" value=""/>
+		</apex:actionFunction>
+
+		<apex:actionFunction name="afFilter"
+									action="{!actionFilter}"
+									reRender="mainMessages, panelFilterR, panelFilterP, refreshJs"/>
+
+		<apex:actionFunction name="afProcessing"
+								action="{!actionProcessing}"
+								reRender="mainMessagesPopup, refreshJs"
+								oncomplete="doProcessingComplete();">
+			<apex:param name="meisaiIds" value=""/>
+		</apex:actionFunction>
+
+		<apex:actionFunction name="afCancel"
+								action="{!actionCancel}"
+								immediate="true"
+								reRender="panelPopup"/>	
+
+			<apex:actionFunction name="afCreateInvoice"
+				action="{!actionCreateInvoice}"
+				reRender="mainMessagesPopup, refreshJs"
+				oncomplete="doProcessingComplete();">
+			<apex:param name="meisaiIds" value=""/>
+		</apex:actionFunction>
+		
+	</apex:form>
+
+	<!-- JAVASCRIPT -->
+	<script type="text/javascript">
+		var $j = jQuery.noConflict();
+
+		var USD_CURRENCY = "USD";
+		var SHOW_ALL = 'Show all';
+		var LOCAL = 'Local';
+		var localCurrency = "{!localCurrency}";
+		var tableData;
+		var arrMeisaiId = [];
+		var isReceivable = true;
+		var isChangePageSize = false;
+
+		var amountSellingInclTaxLocal = 0;
+		var amountReceivedLocal = 0;
+		var unreceivedBalanceLocal = 0;
+		var amountSellingInclTax = 0;
+		var amountReceived = 0;
+		var unreceivedBalance = 0;
+
+		function doCreateInvoice() {
+			if (arrMeisaiId.length > 0) {
+				showLoading();
+				var arrMeisaiIds = arrMeisaiId.join(',');
+				afCreateInvoice(arrMeisaiIds); 
+			}
+		}
+
+		function doProcessing() {			
+			if (isMsgError() == false && arrMeisaiId.length > 0) {
+				doShowPopupInputDataUpdate();
+			}
+		}
+
+		function doProcessingComplete() {			
+			if (isMsgError() == false) {
+				$j("[id$='panelPopup']").dialog("close");
+				$j("[id$='frmMain'] .ui-dialog").remove();      			
+			} else {
+				hideLoading();
+			}
+		}
+		
+		function doChangeTab(isTabShow) {
+			showLoading();
+			isChangePageSize = false;
+			arrMeisaiId = [];
+			amountSellingInclTaxLocal = 0;
+			amountReceivedLocal = 0;
+			unreceivedBalanceLocal = 0;
+			amountSellingInclTax = 0;
+			amountReceived = 0;
+			unreceivedBalance = 0;
+			isReceivable = isTabShow;
+			$j('.clsAdvance').val(SHOW_ALL);
+			$j('.clsLanguage').val(LOCAL);	
+			afChangeTab(isTabShow);
+		}		
+
+		function doCancel() {
+			window.close();
+		}
+
+		function doChangeAccount() {
+			$j('.clsCheckAll').prop('checked', true);
+			$j('.clsCheckAll').trigger('click');
+			afFilter();
+		}
+
+		function doChangeLanguage() {
+			$j('.clsCheckAll').prop('checked', true);
+			$j('.clsCheckAll').trigger('click');
+			afFilter();
+		}		
+
+		function isMsgError(){
+			if ($j("[id$='mainMessages'], [id$='mainMessagesPopup']").children().length == 0) {
+				return false;
+			}
+			return true;
+		}
+
+
+		function doShowPopupInputDataUpdate() {
+			var dlg = $j("[id$='panelPopup'");
+			dlg.dialog({
+				modal: true
+				,autoOpen: false
+				,resizable: false
+				,width: 500
+				// ,height: 350
+				,height: 250
+				,buttons: [
+					{
+						text: "Update"
+						,click: function() {
+							if (arrMeisaiId.length > 0) {
+								showLoading();
+								var arrMeisaiIds = arrMeisaiId.join(',');
+								afProcessing(arrMeisaiIds); 
+							}							   		
+						}
+					}
+					,{
+						text: "Cancel"
+						,click: function() {
+							$j(this).dialog("close");	      		
+						}
+					}
+				]
+				,close: function() {
+					$j("[id$='frmMain'] .ui-dialog").remove();
+					afCancel();        
+				}
+			});
+
+			dlg.parent().appendTo($j("[id$='frmMain']"));
+			dlg.dialog('open');
+		}
+
+		function doSum(isChecked, obj) {
+			if (isReceivable) {
+				if (isChecked) {
+					amountSellingInclTaxLocal += intVal(obj.clofor_com_cfs__SellInTaxAmountJPY__c);
+					amountReceivedLocal += intVal(obj.clofor_com_cfs__Nyukingaku__c);
+					unreceivedBalanceLocal += intVal(obj.clofor_com_cfs__SellDifferentiation__c);
+					amountSellingInclTax += intVal(obj.clofor_com_cfs__SellInTaxAmount_USD__c);
+					amountReceived += intVal(obj.clofor_com_cfs__AMOUNT_PAID_SELLING_USD__c);
+					unreceivedBalance += intVal(obj.clofor_com_cfs__UNPAID_BALANCE_OF_SELLING_USD__c);
+				} else {
+					amountSellingInclTaxLocal -= intVal(obj.clofor_com_cfs__SellInTaxAmountJPY__c);
+					amountReceivedLocal -= intVal(obj.clofor_com_cfs__Nyukingaku__c);
+					unreceivedBalanceLocal -= intVal(obj.clofor_com_cfs__SellDifferentiation__c);
+					amountSellingInclTax -= intVal(obj.clofor_com_cfs__SellInTaxAmount_USD__c);
+					amountReceived -= intVal(obj.clofor_com_cfs__AMOUNT_PAID_SELLING_USD__c);
+					unreceivedBalance -= intVal(obj.clofor_com_cfs__UNPAID_BALANCE_OF_SELLING_USD__c);
+				}
+			} else {
+				if (isChecked) {
+					amountSellingInclTaxLocal += intVal(obj.clofor_com_cfs__BuyInTaxAmountJPY__c);
+					amountReceivedLocal += intVal(obj.clofor_com_cfs__Siharaigaku__c);
+					unreceivedBalanceLocal += intVal(obj.clofor_com_cfs__BuyDifferentiation__c);
+					amountSellingInclTax += intVal(obj.clofor_com_cfs__BuyInTaxAmountUSD__c);
+					amountReceived += intVal(obj.clofor_com_cfs__AMOUNT_PAID_BUYING_USD__);
+					unreceivedBalance += intVal(obj.clofor_com_cfs__UNPAID_BALANCE_OF_BUYING_USD__c);
+				} else {
+					amountSellingInclTaxLocal -= intVal(obj.clofor_com_cfs__BuyInTaxAmountJPY__c);
+					amountReceivedLocal -= intVal(obj.clofor_com_cfs__Siharaigaku__c);
+					unreceivedBalanceLocal -= intVal(obj.clofor_com_cfs__BuyDifferentiation__c);
+					amountSellingInclTax -= intVal(obj.clofor_com_cfs__BuyInTaxAmountUSD__c);
+					amountReceived -= intVal(obj.	clofor_com_cfs__AMOUNT_PAID_BUYING_USD__);
+					unreceivedBalance -= intVal(obj.clofor_com_cfs__UNPAID_BALANCE_OF_BUYING_USD__c);
+				}
+			}
+		}
+
+		function doSumAll(isChecked, arrObj) {
+			amountSellingInclTaxLocal = 0;
+		    amountReceivedLocal = 0;
+		    unreceivedBalanceLocal = 0;
+		    amountSellingInclTax = 0;
+		    amountReceived = 0;
+		    unreceivedBalance = 0;
+		    arrMeisaiId = [];
+
+			if (isChecked) {
+				arrObj.each(function(obj) {
+				    doSum(true, obj);
+
+				 	var meisaiId = obj.Id;
+		      		var index = $j.inArray(meisaiId, arrMeisaiId);
+
+			        if (index === -1){
+			        	arrMeisaiId.push(meisaiId);
+			        }
+				});				
+			}
+		}
+
+		function doShowSum() {
+			var tr = $j('.clsRowTotal').find('th');
+		    tr.eq(0).html(formatCurrency(amountSellingInclTaxLocal, 0) + ' ' + localCurrency);
+		    tr.eq(1).html(formatCurrency(amountReceivedLocal, 0) + ' ' + localCurrency);
+		    tr.eq(2).html(formatCurrency(unreceivedBalanceLocal, 0) + ' ' + localCurrency);
+		    tr.eq(3).html(formatCurrency(amountSellingInclTax, 2));
+		    tr.eq(4).html(formatCurrency(amountReceived, 2));
+		    tr.eq(5).html(formatCurrency(unreceivedBalance, 2));
+		}
+
+		function intVal(num) {
+            return typeof num === 'string' ?
+                num.replace(/[\$,]/g, '')*1 :
+                typeof num === 'number' ?
+                    num : 0;
+        };
+
+		function doSetCheckAll(classNameCheckAll, classNameCheck){
+			var totalCheckbox = $j('table.DTFC_Cloned .' + classNameCheck).length;           
+			if (totalCheckbox > 0 && totalCheckbox == $j('table.DTFC_Cloned .' + classNameCheck + ':checked').length) {
+				$j('table.DTFC_Cloned .' + classNameCheckAll).prop('checked', true);
+			} else {
+				$j('table.DTFC_Cloned .' + classNameCheckAll).prop('checked', false);
+			}									
+		}
+    
+		function doControlCheckAll(element, classNameCheck){
+            if (tableData != null) {
+				var rows = tableData
+		        .column(0)
+		        .nodes()
+		        .to$()
+		        .find('.' + classNameCheck);
+				
+                var isChecked = element.checked;
+				$j(".clsData tr td ." + classNameCheck).prop('checked', isChecked);
+                
+		        if (isChecked) {
+		        	rows.parent().parent().addClass('clsSelected');
+					$j(".clsData tr").addClass('clsSelected');
+		    	} else {
+		    		rows.parent().parent().removeClass('clsSelected');
+					$j(".clsData tr").removeClass('clsSelected');
+		    	}
+
+				doSumAll(isChecked, tableData.data());
+				doShowSum();           
+             }
+        }
+
+		function doControlCheckbox(classNameCheckAll, classNameCheck){
+			$j('.' + classNameCheck).click(function () {
+				doSetCheckAll(classNameCheckAll, classNameCheck);
+
+				var row = $j(this).closest('tr');
+		      	var dataRow = tableData.row(row).data();			
+				
+		      	var meisaiId = dataRow.Id;
+		      	var index = $j.inArray(meisaiId, arrMeisaiId);
+
+		        if (this.checked && index === -1){
+		        	arrMeisaiId.push(meisaiId);
+		        	row.addClass('clsSelected');
+					$j(".clsData tr:eq(" + row.index() + ")").addClass('clsSelected');
+		        } else if (!this.checked && index !== -1) {
+		        	arrMeisaiId.splice(index, 1);
+		        	row.removeClass('clsSelected');
+					$j(".clsData tr:eq(" + row.index() + ")").removeClass('clsSelected');
+		      	}
+
+		      	doSum(this.checked, dataRow);
+ 				doShowSum();
+			});
+		}
+
+		function formatCurrency(decimalValue, lenFix) {
+			if (decimalValue == null) {
+				return '';
+			}
+
+			if (lenFix > 0) {
+				return decimalValue.toFixed(lenFix).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			} else {
+				return decimalValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+		}
+
+		function getDataTable(isReceivable, amount, upaid, customerId, advance, strDateFrom, strDateTo, orderNo) {
+			$j('[id$="Waiting.start"]').show();
+
+			Visualforce.remoting.Manager.invokeAction(
+				'{!$RemoteAction.FMS_MassiveCreateInvoiceController.getData}'
+				,isReceivable
+				,amount
+				,upaid
+				,customerId
+				,advance
+				,strDateFrom
+				,strDateTo
+				,orderNo
+				,function(data, event) {
+					if (event.status && data) {
+						if (isReceivable) {
+							tableData = initTableReceivable(data);
+						} else {
+							tableData = initTablePayable(data);
+						}	
+					} else {
+						hideLoading();
+					}
+				} 
+				,{escape: true}
+			);
+		}
+
+
+		function initTableReceivable(dataInput) {
+			var tableData = $j('#tbReceivable').DataTable({
+				data: dataInput
+				,scrollY: 250
+				,scrollX: true
+				,deferRender: true
+				,searching: false
+				,order: [[1, "DESC"]]
+				,orderCellsTop: true
+				,info: true
+				,destroy: true
+				,lengthMenu: [10, 50, 100, 200, 500]
+				,pageLength: 100
+				,pagingType: "full_numbers"
+				,fixedColumns: {
+					leftColumns: 6
+				}
+				,columns: [
+				    {data: "", defaultContent: ""}
+				    ,{data: "Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Anken__r.Name", defaultContent: ""}
+					,{data: "clofor_com_cfs__Anken__r.clofor_com_cfs__SalesAccountedDate__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Seikyusaki__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__InsatuyouSyohin__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__NyukinKakuninzumi__c", defaultContent: false}
+				    ,{data: "clofor_com_cfs__SellInTaxAmountJPY__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Nyukingaku__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__SellDifferentiation__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__SellInTaxAmount_USD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__AMOUNT_PAID_SELLING_USD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__UNPAID_BALANCE_OF_SELLING_USD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Payer__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BANKTRANSITTYPE__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__ReceiptanceDate_del__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BankAccountForReceiving__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__SellDetail__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__ADVANCE_PAYMENT_ON_BEHALF_OF__c", defaultContent: false}
+				]
+				,columnDefs: [
+					 {
+						targets: 0
+				    	,orderable: false
+				    	,className: "clsCenter"
+				        ,checkboxes: {
+	                        seletRow: true
+	                    }
+	                    ,render: function (data, type, row, meta) {
+	                        return '<input type="checkbox" class="clsCheck"/>';
+	                    }
+			     	}
+			     	,{
+						targets: 1
+	                    ,render: function (data, type, row, meta) {
+	                        return '<a href="/' + row.Id + '" target="_blabk">' + data + '</a>';
+	                    }
+			     	}
+			     	,{
+						targets: 2
+	                    ,render: function (data, type, row, meta) {
+	                        return '<a href="/' + row.clofor_com_cfs__Anken__c + '" target="_blabk">' + data + '</a>';
+	                    }
+					}
+					,{
+				    	targets: 3
+				    	,className: "clsCenter"
+				    	,render: function(data, type, row, meta) {			    		
+				    		if (!data || type === 'sort') {
+				    			return data;
+				    		}
+
+				    		return moment(data).format("DD/MM/YYYY");
+				    	}
+			     	}
+					,{
+				    	targets: 5
+				    	,render: function (data, type, row, meta) {
+							var language = $j('.clsLanguage').val();
+							if (language == LOCAL) {
+								return row.clofor_com_cfs__InsatuyouSyohin__c;
+							} else {
+								return row.clofor_com_cfs__InsatuyouSyohinEng__c;
+							}			            	
+			        	}
+			     	}
+				    ,{
+				    	orderable: false
+				    	,targets: 6
+				    	,className: "clsCenter"
+				    	,render: function (data, type, row, meta) {
+			            	return '<input type="checkbox" class="clsNyukinKakuninzumi" disabled />';
+			        	}
+			     	}
+			     	,
+					{
+				    	targets:  [7, 8, 9]
+				    	,type: "num-fmt"
+				    	,className: "clsNumber"
+				    	,render: function(data, type, row, meta) {
+							return formatCurrency(data, 0);
+				    	}
+			     	}
+			     	,{
+				    	targets:  [10, 11, 12]
+				    	,type: "num-fmt"
+				    	,className: "clsNumber"
+				    	,render: function(data, type, row, meta) {
+							return formatCurrency(data, 2);
+				    	}
+			     	}
+			     	,{
+				    	targets: 15
+				    	,className: "clsCenter"
+				    	,render: function(data, type, row, meta) {			    		
+				    		if (!data || type === 'sort') {
+				    			return data;
+				    		}
+				    		return moment(data).format("DD/MM/YYYY");
+				    	}
+			     	}
+			     	,{
+				    	orderable: false
+				    	,targets: 18
+				    	,className: "clsCenter"
+				    	,render: function (data, type, row, meta) {
+			            	return '<input type="checkbox" class="clsAdvanceCustomer" disabled />';
+			        	}
+			     	}
+				]
+				,drawCallback: function() {
+					$j(".clsCheckAll, .clsCheck").unbind();
+                    doControlCheckbox('clsCheckAll', 'clsCheck');
+
+					if (isChangePageSize) {
+						$j('.clsCheckAll').prop('checked', true);
+                        $j('.clsCheckAll').trigger('click');
+						isChangePageSize = false;
+					}
+			    }
+			    ,rowCallback: function (row, data) {
+		         	$j('.clsNyukinKakuninzumi', row).prop('checked', data.clofor_com_cfs__NyukinKakuninzumi__c == true);
+
+		         	$j('.clsAdvanceCustomer', row).prop('checked', data.clofor_com_cfs__ADVANCE_PAYMENT_ON_BEHALF_OF__c == true);		         	
+
+				    if ($j.inArray(data.Id, arrMeisaiId) !== -1) {
+				      	$j(row).find('.clsCheck').prop('checked', true);
+				      	$j(row).addClass('clsSelected');
+				    }
+		        }
+		        ,initComplete: function() {
+		        	hideLoading();				    
+				}
+			});	
+
+			doShowSum();
+			return tableData;
+		}
+
+		function initTablePayable(dataInput) {
+			var tableData = $j('#tbPayable').DataTable({
+				data: dataInput
+				,scrollY: 250
+				,scrollX: true
+				,deferRender: true
+				,searching: false
+				,order: [[1, "DESC"]]
+				,orderCellsTop: true
+				,info: true
+				,destroy: true
+				,lengthMenu: [10, 50, 100, 200, 500]
+				,pageLength: 100
+				,pagingType: "full_numbers"
+				,fixedColumns: {
+					leftColumns: 6
+				}
+				,columns: [
+				    {data: "", defaultContent: ""}
+				    ,{data: "Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Anken__r.Name", defaultContent: ""}
+					,{data: "clofor_com_cfs__Anken__r.clofor_com_cfs__SalesAccountedDate__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__PaymentTo__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__InsatuyouSyohin__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__SiharaiKakuninzumi__c", defaultContent: false}
+				    ,{data: "clofor_com_cfs__BuyInTaxAmountJPY__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__Siharaigaku__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BuyDifferentiation__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BuyInTaxAmountUSD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__AMOUNT_PAID_BUYING_USD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__UNPAID_BALANCE_OF_BUYING_USD__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__actual_payer__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__payment_category__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__PaymentDate__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BankAccountForPayment__r.Name", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__BuyDetail__c", defaultContent: ""}
+				    ,{data: "clofor_com_cfs__AdvancePaymentOnBehalfOfOurCompany__c", defaultContent: false}
+				]
+				,columnDefs: [
+					 {
+						targets: 0
+				    	,orderable: false
+				    	,className: "clsCenter"
+				        ,checkboxes: {
+	                        seletRow: true
+	                    }
+	                    ,render: function (data, type, row, meta) {
+	                        return '<input type="checkbox" class="clsCheck"/>';
+	                    }
+			     	}
+			     	,{
+						targets: 1
+	                    ,render: function (data, type, row, meta) {
+	                        return '<a href="/' + row.Id + '" target="_blabk">' + data + '</a>';
+	                    }
+			     	}
+			     	,{
+						targets: 2
+	                    ,render: function (data, type, row, meta) {
+	                        return '<a href="/' + row.clofor_com_cfs__Anken__c + '" target="_blabk">' + data + '</a>';
+	                    }
+					}
+					,{
+						targets: 3
+				    	,className: "clsCenter"
+				    	,render: function(data, type, full, meta) {
+				    		if (!data || type === 'sort') {
+				    			return data;
+				    		}
+				    		return moment(data).format("DD/MM/YYYY");
+				    	}
+			     	}
+					,{
+				    	targets: 5
+				    	,render: function (data, type, row, meta) {
+							var language = $j('.clsLanguage').val();
+							if (language == LOCAL) {
+								return row.clofor_com_cfs__InsatuyouSyohin__c;
+							} else {
+								return row.clofor_com_cfs__InsatuyouSyohinEng__c;
+							}			            	
+			        	}
+			     	}
+				    ,{
+				    	orderable: false
+				    	,targets: 6
+				    	,className: "clsCenter"
+				    	,render: function (data, type, full, meta) {
+			            	return '<input type="checkbox" class="clsSiharaiKakuninzumi" disabled />';
+			        	}
+			     	}
+			     	,{
+				    	targets:  [7, 8, 9]
+				    	,type: "num-fmt"
+				    	,className: "clsNumber"
+				    	,render: function(data, type, row, meta) {
+							return formatCurrency(data, 0);
+				    	}
+			     	}
+			     	,{
+				    	targets:  [10, 11, 12]
+				    	,type: "num-fmt"
+				    	,className: "clsNumber"
+				    	,render: function(data, type, row, meta) {
+							return formatCurrency(data, 2);
+				    	}
+			     	}
+			     	,{
+				    	targets: 15
+				    	,className: "clsCenter"
+				    	,render: function(data, type, full, meta) {
+				    		if (!data || type === 'sort') {
+				    			return data;
+				    		}
+				    		return moment(data).format("DD/MM/YYYY");
+				    	}
+			     	}
+			     	,{
+				    	orderable: false
+				    	,targets: 18
+				    	,className: "clsCenter"
+				    	,render: function (data, type, row, meta) {
+			            	return '<input type="checkbox" class="clsAdvanceCompany" disabled />';
+			        	}
+			     	}
+				]
+				,drawCallback: function() {
+					$j(".clsCheckAll, .clsCheck").unbind();
+					doControlCheckbox('clsCheckAll', 'clsCheck');
+
+					if (isChangePageSize) {
+						$j('.clsCheckAll').prop('checked', true);
+						$j('.clsCheckAll').trigger('click');
+						isChangePageSize = false;
+					}
+			    }
+			    ,rowCallback: function (row, data) {
+		         	$j('.clsSiharaiKakuninzumi', row).prop('checked', data.clofor_com_cfs__SiharaiKakuninzumi__c == true);
+
+		         	$j('.clsAdvanceCompany', row).prop('checked', data.clofor_com_cfs__AdvancePaymentOnBehalfOfOurCompany__c == true);	
+
+				    if ($j.inArray(data.Id, arrMeisaiId) !== -1) {
+				    	$j(row).find('.clsCheck').prop('checked', true);
+				    	$j(row).addClass('clsSelected');
+				    }					
+		        }
+		        ,initComplete: function() {					
+					hideLoading();
+				}
+			});	
+
+			doShowSum();
+			return tableData;
+		}
+
+		function showLoading() {
+			$j('[id$="Waiting.start"]').show();
+		}
+
+		function hideLoading() {
+			$j('[id$="Waiting.start"]').hide();
+		}
+
+		$j("[id$='panelReceivableData'] .dataTables_scrollBody").scroll(function(e) {
+			$j('#tbReceivable').DataTable();
+		});
+
+		$j("[id$='panelPayableData'] .dataTables_scrollBody").scroll(function(e) {
+			$j('#tbPayable').DataTable();
+		});
+	</script>
+	
+	<apex:outputPanel id="refreshJs" layout="block">
+		<script type="text/javascript">
+			$j(document).ready(function () {
+				$j('#tbReceivable, #tbPayable').on('length.dt', function (e, settings, len) {
+					isChangePageSize = true;
+					tableData.page(0);
+				});
+				
+				if (isMsgError() == false) {
+					isShowReceivable = {!isShowReceivable}
+					var amount = {!amount};
+					var unpaid = {!unpaid};
+					var customerId = '{!JSINHTMLENCODE(objAnkenMeisaiFilter.clofor_com_cfs__Seikyusaki__c)}';
+					var advance = $j('.clsAdvance').val();
+
+					if (isShowReceivable == false) {						
+						customerId = '{!JSINHTMLENCODE(objAnkenMeisaiFilter.clofor_com_cfs__PaymentTo__c)}';
+					}
+
+					var strDateFrom = $j('.clsDateFrom').val();
+					var strDateTo = $j('.clsDateTo').val();
+					var orderNo = $j('.clsOrderNo').val();
+					
+					getDataTable(isShowReceivable, amount, unpaid, customerId, advance, strDateFrom, strDateTo, orderNo);
+				}
+			});
+		</script>
+	</apex:outputPanel>
+</apex:page>

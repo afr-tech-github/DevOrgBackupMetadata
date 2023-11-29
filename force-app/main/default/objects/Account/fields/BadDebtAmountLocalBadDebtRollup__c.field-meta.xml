@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BadDebtAmountLocalBadDebtRollup__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Bad Debt Amount(Local)-Bad Debt Rollup</label>
+    <summarizedField>BadDebt__c.BadDebtAmountLocal__c</summarizedField>
+    <summaryForeignKey>BadDebt__c.Debtor__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>totalannualleaveusedinthelastyear__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Meaning:
+This is the number of leave days that will be counted towards the leave of the previous year. Depending on personnel policy, this number may include holidays taken during the previous year, but may also include holidays for this year (before April of the fiscal year).</inlineHelpText>
+    <label>Total annual leave used in the last year</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

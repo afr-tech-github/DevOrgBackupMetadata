@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BadDebtCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>FMSSO__c</fields>
+    <fields>FMSBill__c</fields>
+    <fields>Debtor__c</fields>
+    <fields>BadDebtAmountLocal__c</fields>
+    <fields>BadDebtAmountFCY__c</fields>
+    <label>Bad Debt Compact Layout</label>
+</CompactLayout>

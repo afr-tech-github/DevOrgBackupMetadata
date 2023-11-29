@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>FromCurrency__c</columns>
+    <columns>ToCurrency__c</columns>
+    <columns>Mgmt_Exrate_Start_Date__c</columns>
+    <columns>Mgmt_Exrate_End_Date__c</columns>
+    <columns>Mgmt_Exrate_FowardingtoDomesticCustomer__c</columns>
+    <columns>Mgmt_Exrate_BuyingfromDomstic3rdvendor__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

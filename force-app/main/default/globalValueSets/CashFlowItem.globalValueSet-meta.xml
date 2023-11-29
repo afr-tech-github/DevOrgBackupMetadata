@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>I. Cash flows from operating activities</fullName>
+        <default>false</default>
+        <label>I. Cash flows from operating activities</label>
+    </customValue>
+    <customValue>
+        <fullName>Gains from sales of goods and service provisons and other gains</fullName>
+        <default>false</default>
+        <label>Gains from sales of goods and service provisons and other gains</label>
+    </customValue>
+    <customValue>
+        <fullName>Payments to suppliers</fullName>
+        <default>false</default>
+        <label>Payments to suppliers</label>
+    </customValue>
+    <customValue>
+        <fullName>Payments to employees</fullName>
+        <default>false</default>
+        <label>Payments to employees</label>
+    </customValue>
+    <customValue>
+        <fullName>Loan interests already paid</fullName>
+        <default>false</default>
+        <label>Loan interests already paid</label>
+    </customValue>
+    <customValue>
+        <fullName>Payments for corporate income tax</fullName>
+        <default>false</default>
+        <label>Payments for corporate income tax</label>
+    </customValue>
+    <customValue>
+        <fullName>Other gains</fullName>
+        <default>false</default>
+        <label>Other gains</label>
+    </customValue>
+    <customValue>
+        <fullName>Other disbursements</fullName>
+        <default>false</default>
+        <label>Other disbursements</label>
+    </customValue>
+    <customValue>
+        <fullName>Net cash flows from operating activities</fullName>
+        <default>false</default>
+        <label>Net cash flows from operating activities</label>
+    </customValue>
+    <customValue>
+        <fullName>II. Cash flows from investing activities</fullName>
+        <default>false</default>
+        <label>II. Cash flows from investing activities</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchases and construction of fixed assets and other long-term assets</fullName>
+        <default>false</default>
+        <label>Purchases and construction of fixed assets and other long-term assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Gains from disposal and liquidation of fixed assets and other long-term assets</fullName>
+        <default>false</default>
+        <label>Gains from disposal and liquidation of fixed assets and other long-term assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Loans given and purchases of debt instruments of other entities</fullName>
+        <default>false</default>
+        <label>Loans given and purchases of debt instruments of other entities</label>
+    </customValue>
+    <customValue>
+        <fullName>Recovery of loan given and disposals of debt instruments of other entities</fullName>
+        <default>false</default>
+        <label>Recovery of loan given and disposals of debt instruments of other entities</label>
+    </customValue>
+    <customValue>
+        <fullName>Investments in other entities</fullName>
+        <default>false</default>
+        <label>Investments in other entities</label>
+    </customValue>
+    <customValue>
+        <fullName>Withdrawals of investments in other entities</fullName>
+        <default>false</default>
+        <label>Withdrawals of investments in other entities</label>
+    </customValue>
+    <customValue>
+        <fullName>Receipts of loans given, dividends and profit shared</fullName>
+        <default>false</default>
+        <label>Receipts of loans given, dividends and profit shared</label>
+    </customValue>
+    <customValue>
+        <fullName>Net cash flows from investing activities</fullName>
+        <default>false</default>
+        <label>Net cash flows from investing activities</label>
+    </customValue>
+    <customValue>
+        <fullName>III. Cash flows from financing activities</fullName>
+        <default>false</default>
+        <label>III. Cash flows from financing activities</label>
+    </customValue>
+    <customValue>
+        <fullName>Gains from stock issuance and capital contributions from shareholders</fullName>
+        <default>false</default>
+        <label>Gains from stock issuance and capital contributions from shareholders</label>
+    </customValue>
+    <customValue>
+        <fullName>Repayments of capital contributions to owners and re-purchases of stocks already issued</fullName>
+        <default>false</default>
+        <label>Repayments of capital contributions to owners and re-purchases of stocks already issued</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term and long-term loans received</fullName>
+        <default>false</default>
+        <label>Short-term and long-term loans received</label>
+    </customValue>
+    <customValue>
+        <fullName>Loan principal amounts repaid</fullName>
+        <default>false</default>
+        <label>Loan principal amounts repaid</label>
+    </customValue>
+    <customValue>
+        <fullName>Payments for financial leasehold assets</fullName>
+        <default>false</default>
+        <label>Payments for financial leasehold assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Dividends and profit shared to the owners</fullName>
+        <default>false</default>
+        <label>Dividends and profit shared to the owners</label>
+    </customValue>
+    <customValue>
+        <fullName>Net cash flows from financing activities</fullName>
+        <default>false</default>
+        <label>Net cash flows from financing activities</label>
+    </customValue>
+    <customValue>
+        <fullName>Net cash flows during the period</fullName>
+        <default>false</default>
+        <label>Net cash flows during the period</label>
+    </customValue>
+    <customValue>
+        <fullName>Beginning cash and cash equivalents</fullName>
+        <default>false</default>
+        <label>Beginning cash and cash equivalents</label>
+    </customValue>
+    <customValue>
+        <fullName>Effects of fluctuations in foreign exchange rates</fullName>
+        <default>false</default>
+        <label>Effects of fluctuations in foreign exchange rates</label>
+    </customValue>
+    <customValue>
+        <fullName>Ending cash and cash equivalents</fullName>
+        <default>false</default>
+        <label>Ending cash and cash equivalents</label>
+    </customValue>
+    <masterLabel>CASH FLOW ITEM</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

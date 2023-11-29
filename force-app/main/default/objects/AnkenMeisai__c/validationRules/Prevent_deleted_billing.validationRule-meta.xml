@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_deleted_billing</fullName>
+    <active>true</active>
+    <description>f trx plan is approved already</description>
+    <errorConditionFormula>Billingisdeleted__c =TRUE</errorConditionFormula>
+    <errorMessage>This F/TMS Bill is connected to approved Trx Plan already. You cannot delete it!</errorMessage>
+</ValidationRule>

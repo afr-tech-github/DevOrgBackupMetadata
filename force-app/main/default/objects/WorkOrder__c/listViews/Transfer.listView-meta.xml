@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transfer</fullName>
+    <columns>NAME</columns>
+    <columns>Customer__c</columns>
+    <columns>WarehouseName__c</columns>
+    <columns>DestinationWarehouseName__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Quantity__c</columns>
+    <columns>Measurement__c</columns>
+    <columns>GrossWeight__c</columns>
+    <columns>UnitType__c</columns>
+    <columns>ScheduleDate__c</columns>
+    <columns>ActualDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>WorkOrder__c.Transfer</value>
+    </filters>
+    <label>4.Transfer</label>
+    <language>en_US</language>
+</ListView>

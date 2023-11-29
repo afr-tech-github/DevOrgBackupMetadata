@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_BL_Data_Registered_Ocean</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(AND(ISPICKVAL(status__c , &quot;輸入 B/L情報登録済み(B/L Data Registered)&quot;),ISPICKVAL(CarrierType__c, &quot;海上(SEA)&quot;)) ,  OR(ISBLANK(HBL__c),ISBLANK(Master_B_L__c))  , false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>H B/L番号及びM B/L番号を必ず入れてください。
+Please enter the H B/L NO AND M B/L NO.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,504 @@
+<!-- <apex:page controller="ManifestController" applyBodyTag="false" applyHtmlTag="false"  showHeader="false" contentType="application/vnd.ms-excel#MNFReport-{!jobRequestId}_{!hbl}.xls" cache="true"> -->
+<apex:page controller="ManifestController" applyBodyTag="false" applyHtmlTag="false"  showHeader="false" contentType="application/vnd.ms-excel#List of House bill of lading.xls" cache="true">
+    <head>
+        <style type="text/css">
+            @page{
+                margin-left: 15px;
+                margin-right: 15;
+            }
+            h1 {
+                font-size: 300%;
+            }
+            body {
+                font-size: 12px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            }
+            .detail_table {
+                border-collapse: collapse;
+                border: 1px thin solid;
+                margin-left: auto;
+                margin-right: auto;
+                width:100%;
+            }
+            .detail_table_td_th {
+                border-collapse: collapse;
+                border: thin solid;
+                text-align: center;
+            }
+            .footInfor {
+                border-width: 1px;
+                border-collapse: collapse;
+            }
+            .big_text {
+                font-size: 30px;
+            }
+            .medium_text {
+                font-size: 14px;
+            }
+            .box {
+                border: 1px solid black;
+                padding: 5px;
+            }           
+            .amount-box-top {
+                text-align: left !important;
+                padding-left: 50px !important;
+                width: 92% !important;
+                height: 50px !important;
+                vertical-align: middle !important;
+                border-top: 1px black solid !important;
+                border-left: 1px black solid !important;
+                border-right: 1px black solid !important;
+            }
+            .amount-box-bottom {
+                text-align: left !important;
+                padding-left: 50px !important;
+                width: 92% !important;
+                height: 50px !important;
+                vertical-align: top !important;
+                border-bottom: 1px black solid !important;
+                border-left: 1px black solid !important;
+                border-right: 1px black solid !important;
+            }
+            .title {
+                text-align: center;
+                font-weight: bold;
+            }
+            
+            .dataTable {
+                width: 100%;
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            .dataTable th, .dataTable td{
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            .dataTable tr {
+                border: thin solid ;
+                border-collapse: collapse;
+            }
+            .dataTable td {
+                font-size: 12px;
+                text-align:center;
+                border-collapse: collapse;
+                border: thin solid ;
+                line-height: 20px;
+            }
+            .hideColumn{
+                display: none;
+            }
+            .showColumn{
+                display: table-cell;
+            }
+            .fontBold{
+                font-weight: bold
+            }
+            .cell_border { 
+                border: thin solid black;
+                text-align: left;
+                float: left;
+            }
+            br {mso-data-placement:same-cell;}
+        </style>
+        <meta http-equiv="Content-Type" content="text/HTML;charset=UTF-8" />
+    </head>
+    <body>
+        <apex:outputPanel rendered="{!displayReportTable}">
+            <table border="0" >
+                <tr>
+                    <td colspan="8" class='title'>
+                        DANH SÁCH VẬN ĐƠN GOM HÀNG
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="8" class='title'>
+                        (List of House bill of lading)
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <apex:variable var="index" value="{!0}" />
+                <apex:repeat value="{!arrResult}" var="item">
+                <tr style="padding-bottom: 10px;">
+                    <td class="cell_border" width="2%">
+                        <apex:outputText value="STT (*)" style="color:red;"/>
+                        <br/>
+                        <apex:outputText value="No" />
+                    </td>
+                    <td class="cell_border" width="4%" style="width: 100px;">
+                        <apex:outputText value="Số hồ sơ" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Document's No" />
+                    </td>
+                    <td class="cell_border" width="4%" style="width: 130px;">
+                        <apex:outputText value="Năm đăng ký hồ sơ" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Document's Year" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Chức năng của chứng từ" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Document's function" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Người gửi hàng*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Shipper" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Người nhận hàng*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Consignee" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Người được thông báo 1" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Notify Party 1" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Người được thông báo 2" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Notify Party 2" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Mã Cảng chuyển tải/quá cảnh" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Code of Port of transhipment/transit" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Mã Cảng giao hàng/cảng đích" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Final destination" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Mã Cảng xếp hàng" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Code of Port of Loading" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Mã Cảng dỡ hàng" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Port of unloading/discharging" />
+                    </td>
+                    <td class="cell_border" style="width: 120px; height:40px;">
+                        <apex:outputText value="Địa điểm giao hàng*" style="color:red;"/>
+                        <br/>
+                        <apex:outputText value="Place of Delivery" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Loại hàng*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Cargo Type/Terms of Shipment" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Số vận đơn *" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Bill of lading number" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Ngày phát hành vận đơn*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Date of house bill of lading" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Số vận đơn gốc*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Master bill of lading number"/>
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Ngày phát hành vận đơn gốc*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Date of master bill of lading" />
+                    </td>
+                    <td class="cell_border" style="width: 120px;">
+                        <apex:outputText value="Ngày khởi hành*" style="color:red;"/>
+                        <br/>
+                        <apex:outputText value="Departure date" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Tổng số kiện*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Number of packages"/>
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Loại kiện*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Kind of packages" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Tổng trọng lượng*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Total gross weight" />
+                    </td>
+                    <td class="cell_border" width="4%">
+                        <apex:outputText value="Đơn vị tính trọng lượng*" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Total gross weight unit" />
+                    </td>
+                    <td class="cell_border">
+                        <apex:outputText value="Ghi chú" style="color:red;" />
+                        <br/>
+                        <apex:outputText value="Remark" />
+                    </td>
+                </tr>
+                
+                
+                    <apex:variable var="index" value="{!index + 1}" />
+                    <tr>
+                        <td class="cell_border" style="text-align: right;">
+                            <apex:outputLabel value="{!index}" />
+                        </td>
+                        <td class="cell_border" ></td>
+                        <td class="cell_border" >{!Year(Today())}</td>
+                        <td class="cell_border" >CN01</td>
+                        <td class="cell_border" >{!if(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__TAX_CODE__c != null,item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__TAX_CODE__c,'')}{!if(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__TAX_CODE__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishCompanyName__c != null,UPPER(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishCompanyName__c),'')}{!if(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishCompanyName__c == null || item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishAddress__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishAddress__c != null,item.shipment.clofor_com_cfs__shipper__r.clofor_com_cfs__EnglishAddress__c,'')}
+                            <!-- <apex:outputLabel value="{!UPPER(item.shipment.ADDRESS_ON_B_L__c)}" escape="false" /> -->
+                        </td>
+                        <td class="cell_border" style="text-align: center;">{!if(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__TAX_CODE__c != null,item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__TAX_CODE__c,'')}{!if(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__TAX_CODE__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishCompanyName__c != null,UPPER(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishCompanyName__c),'')}{!if(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishCompanyName__c == null || item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishAddress__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishAddress__c != null,item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishAddress__c,'')}
+                        <!-- <td class="cell_border" >{!item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__TAX_CODE__c}#{!UPPER(item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishCompanyName__c)}#{!item.shipment.clofor_com_cfs__Cnee__r.clofor_com_cfs__EnglishAddress__c} -->
+                            <!-- <apex:outputLabel value="{!UPPER(item.shipment.CNEE_ADDRESS_ON_B_L__c)}" escape="false" /> -->
+                        </td>
+                        <td class="cell_border" >
+                            <!-- <apex:outputLabel value="{!UPPER(item.notifyPart1)}" escape="false" /> -->
+                            <apex:outputLabel value="{!UPPER(item.notifyPart1)}" rendered="{!item.notifyPart1 == 'SAME AS CONSIGNEE'}"/>
+                            <apex:outputLabel value="{!if(item.shipment.clofor_com_cfs__Notifyparty__r.TAX_CODE__c != null,item.shipment.clofor_com_cfs__Notifyparty__r.TAX_CODE__c,'')}{!if(item.shipment.clofor_com_cfs__Notifyparty__r.TAX_CODE__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__Notifyparty__r.EnglishCompanyName__c != null,UPPER(item.shipment.clofor_com_cfs__Notifyparty__r.EnglishCompanyName__c),'')}{!if(item.shipment.clofor_com_cfs__Notifyparty__r.EnglishCompanyName__c == null || item.shipment.clofor_com_cfs__Notifyparty__r.EnglishAddress__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__Notifyparty__r.EnglishAddress__c != null,item.shipment.clofor_com_cfs__Notifyparty__r.EnglishAddress__c,'')}" rendered="{!item.notifyPart1 != 'SAME AS CONSIGNEE'}" />
+                        </td>
+                        <td class="cell_border" >
+                            <!-- <apex:outputLabel value="{!UPPER(item.notifyPart2)}" escape="false" /> -->
+                            <apex:outputLabel value="{!UPPER(item.notifyPart2)}" rendered="{!item.notifyPart2 == 'SAME AS CONSIGNEE'}"/>
+                            <apex:outputLabel value="{!if(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.TAX_CODE__c != null,item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.TAX_CODE__c,'')}{!if(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.TAX_CODE__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishCompanyName__c != null,UPPER(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishCompanyName__c),'')}{!if(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishCompanyName__c == null || item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishAddress__c == null,'','#')}{!if(item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishAddress__c != null,item.shipment.clofor_com_cfs__X2nd_Notify_Party__r.EnglishAddress__c,'')}" rendered="{!item.notifyPart2 != 'SAME AS CONSIGNEE'}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.TransitPortCode__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.clofor_com_cfs__FinalDestination__r.CodeOfPort__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.clofor_com_cfs__POL__r.CodeOfPort__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.clofor_com_cfs__POD__r.CodeOfPort__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.Place_Of_Delivery__r.Name)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.CARGO_TYPE__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.HBL__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}" >
+                                <apex:param value="{!item.shipment.DATE_OF_HOUSE_BL_ISSUED__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.Master_B_L__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}" >
+                                <apex:param value="{!item.shipment.DATE_OF_MASTER_BL_ISSUED__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}" >
+                                <apex:param value="{!item.shipment.ETD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <!-- <td class="cell_border"> -->
+                            <!-- <apex:outputLabel value="{!DAY(item.shipment.ETD__c)}/{!MONTH(item.shipment.ETD__c)}/{!YEAR(item.shipment.ETD__c)}" /> -->
+                        <!-- </td> -->
+                        <!-- <td class="cell_border" > -->
+                            <!-- <apex:outputLabel value="{!item.shipment.ETD_Formula__c}" /> -->
+                        <!-- </td> -->
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!item.shipment.carton__c}" />
+                        </td>
+                        <td class="cell_border">
+                            <apex:outputLabel value="{!UPPER(item.shipment.PackageUnitCode__c)}" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputText value="{!item.shipment.weight__c}" />
+                            <!--<apex:panelGroup rendered="{!item.shipment.weight__c <> null}">
+                                <apex:outputText value="{0,number, ###,###,###}" rendered="{!MOD(item.shipment.weight__c, 10) = 0}" >
+                                    <apex:param value="{!item.shipment.weight__c}" />
+                                </apex:outputText>
+                                <apex:outputText value="{0,number, ###,###,##0.000}" rendered="{!MOD(item.shipment.weight__c, 10) > 0}" >
+                                    <apex:param value="{!item.shipment.weight__c}" />
+                                </apex:outputText>
+                            </apex:panelGroup>-->
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="KGM" />
+                        </td>
+                        <td class="cell_border" >
+                            <apex:outputLabel value="{!UPPER(item.shipment.RemarkonManifest__c)}" escape="false" />
+                        </td>
+                    </tr>
+                    <tr style="{!IF(item.arrConInfo.size > 0, '', 'display: none;')}">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="hideRow {!item.shipmentId} billingItem" style="{!IF(item.arrConInfo.size > 0, '', 'display: none;')}" >
+                        <td></td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Mã hàng" />
+                            <br/>
+                            <apex:outputText value="HS code if avail" />
+                        </td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Mô tả hàng hóa*" />
+                            <br/>
+                            <apex:outputText value="Description of Goods" />
+                        </td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Tổng trọng lượng*" />
+                            <br/>
+                            <apex:outputText value="Gross weight" />
+                        </td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Kích thước/thể tích *" />
+                            <br/>
+                            <apex:outputText value="Demension/tonnage" />
+                        </td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Số hiệu cont" />
+                            <br/>
+                            <apex:outputText value="Cont. number" />
+                        </td>
+                        <td class="cell_border" style="text-align: center;">
+                            <apex:outputText style="color:red;" value="Số seal cont" />
+                            <br/>
+                            <apex:outputText value="Seal number" />
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <apex:repeat value="{!item.arrConInfo}" var="con" rendered="{!IF(item.arrConInfo.size > 0, true, false)}">
+                        <tr class="hideRow {!item.shipmentId} billingItem">
+                            <td></td>
+                            <td class="cell_border" style="text-align: center;">
+                                <!--<apex:outputText value="{!UPPER(item.shipment.clofor_com_cfs__HSCode__r.Name)}" escape="false" />-->
+                            </td>
+                            <td class="cell_border" style="text-align: center;">
+                                <apex:outputText value="{!UPPER(item.shipment.Item__c)}" escape="false" />
+                                <apex:outputText value="{!UPPER(item.shipment.GOODS_ATTACHMENT__c)}" escape="false" />
+                            </td>
+                            <td class="cell_border" style="text-align: center;">
+                                <apex:outputText value="{!con.GROSS_WEIGHT__c}" />
+                                <!--<apex:panelGroup rendered="{!con.GROSS_WEIGHT__c <> null}">
+                                    <apex:outputText value="{0,number, ###,###,###}" rendered="{!MOD(con.GROSS_WEIGHT__c, 10) = 0}" >
+                                        <apex:param value="{!con.GROSS_WEIGHT__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText value="{0,number, ###,###,##0.000}" rendered="{!MOD(con.GROSS_WEIGHT__c, 10) > 0}" >
+                                        <apex:param value="{!con.GROSS_WEIGHT__c}" />
+                                    </apex:outputText>
+                                </apex:panelGroup>-->
+                            </td>
+                            <td class="cell_border" style="text-align: center;">
+                                <apex:outputText value="{!con.MEASUREMENT_CBM__c}" />
+                            </td>
+                            <td class="cell_border" style="text-align: center;">
+                                <apex:outputText value="{!UPPER(con.Container_NO__c)}" />
+                            </td>
+                            <td class="cell_border" style="text-align: center;">
+                                <apex:outputText value="{!UPPER(con.Seal_No__c)}" />
+                            </td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                            <td class="" style="text-align: center;"></td>
+                        </tr>
+                    </apex:repeat>
+                    <tr style="{!IF(item.arrConInfo.size > 0, '', 'display: none;')}">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </apex:repeat>
+            </table>    
+        </apex:outputPanel>
+    </body>
+</apex:page>

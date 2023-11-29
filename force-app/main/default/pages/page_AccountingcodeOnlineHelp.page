@@ -1,0 +1,127 @@
+<apex:page showHeader="false">
+<head>
+    <title>ACCOUNTING CODE Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       ACCOUNTING CODE Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+    <h2>HỔ TRỢ TRỰC TUYẾN BẢNG CÂN ĐỐI QUĨ TRONG NGÂN HÀNG</h2>
+<br></br><br></br>
+Đây là ứng dụng để quản lý mã số tài khoản kế toán và tên gọi của nó và được sử dụng vào  mục đích thao tác kế toán tại bộ phân kế toán.<br></br>
+<ul>
+1.Mã số tài khoản kế toán/ Mã số tài khoản kế toán phụ/ Tên tài khoản kế toán<br></br>
+2.Diễn giải 1 và diễn giải 2 để thêm thông tin chi tiết  <br></br>
+
+</ul>
+<br></br>
+
+Liên quan đến các ứng dụng khác<br></br>
+Khi chọn mã số tài khoản kế toán bằng cách tìm kiếm ở mục của mã dịch vụ mua bán , mã số tài khoản kế toán sẽ liên kết với dữ liệu của các mã dịch vụ mua bán <br></br>
+Liên kết này có thể sử dụng để tạo báo cáo của bộ phân kế toán<br></br>
+<br></br>
+<br></br>
+
+----------------------------------------------------------------------------------------------<br></br>
+
+<h2>Online Help for ACCOUNTING CODE Object</h2>
+<br></br> <br></br>    
+This is an Object to manage ACCOUNTING CODE AND NAME which is used for Accounting process purpose at the Accounting team.<br></br>
+<ul>
+1. Accounting Code/Sub-code and Accounting Name<br></br> 
+2. Description 1 and Description 2 for more detail information<br></br>
+</ul>
+<br></br>
+
+Relation with other objects<br></br>
+By choosing the accounting code by Lookup on Service Master Record, the Accounting code is linked with Service Master Record.<br></br>
+This linkage could be used for generating reports for accounting purpose.
+<br></br>
+
+ <br></br>
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>会計コードに関するオンラインヘルプ</h2><br></br>
+<br></br>
+ここでは会計コード及びその詳細を管理します<br></br>
+<ul>
+1.会計コード/サブコード、会計項目名など<br></br>
+2.より詳細な情報を管理するための、詳細-1および詳細-2<br></br>
+
+</ul>
+<br></br>
+
+関連オブジェクト<br></br>
+サービスマスターにある会計コードLookup検索により、会計コードを選択できます。<br></br>
+会計コードを選択すると、会計コードとサービスマスターがつながり、会計関連レポート作成に活用できます。
+<br></br>
+<br></br> 
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>회계코드 온라인 도움말</h2><br></br>
+<br></br>
+여기에서는 다음의 2 가지 데이터를 관리합니다.<br></br>
+<ul>
+1.회계코드/서브코드, 회계 항목명<br></br>
+2.상세 내용 관리를 위한 상세-1과 상세-2<br></br>
+
+</ul>
+<br></br>
+
+관련 오브젝트<br></br>
+서비스마스터에 있는 회계 코드 LookUp검색을 사용하여 회계코드를 선택하실 수 있습니다. <br></br>
+회계코드와 서비스마스터가 연결함으로서, 다양한 회계 목적용 레포트 생성에 활용 하실 수 있습니다.<br></br>
+
+<br></br>
+
+</body>
+
+</apex:page>

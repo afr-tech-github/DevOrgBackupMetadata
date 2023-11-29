@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Drayage_Import</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>FCLCargoTransportStatus</compactLayoutAssignment>
+    <description>Arrange a Full Container Truck for an inbound full container</description>
+    <label>Full Container Truck-Inbound</label>
+</RecordType>

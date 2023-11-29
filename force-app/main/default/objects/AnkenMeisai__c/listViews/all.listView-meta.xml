@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>all</fullName>
+    <columns>Anken__c</columns>
+    <columns>NAME</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>SellInTaxAmountJPY__c</columns>
+    <columns>SellAmountJPN__c</columns>
+    <columns>SellAmountUSD__c</columns>
+    <columns>BuyAmountJPN__c</columns>
+    <columns>Ararigaku__c</columns>
+    <columns>RiekirituMisei__c</columns>
+    <columns>BuyTankaUSD__c</columns>
+    <columns>SellTankaUSD__c</columns>
+    <columns>Suryo__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.Selling_Buyging_Standard</value>
+    </filters>
+    <filters>
+        <field>Anken__c</field>
+        <operation>contains</operation>
+    </filters>
+    <label>1.All LISTS</label>
+</ListView>

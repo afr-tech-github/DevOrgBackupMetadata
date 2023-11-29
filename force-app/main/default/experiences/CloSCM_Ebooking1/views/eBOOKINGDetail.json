@@ -1,0 +1,94 @@
+{
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "33157ef5-f093-443c-9fc2-c7b425ac286e",
+  "label" : "E-BOOKING Detail",
+  "regions" : [ {
+    "id" : "b811cea1-9401-411b-b314-1c2ed1501e06",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "tabsetConfig" : {
+          "UUID" : "0867135a-a1bf-49f8-a8f2-b4b0779d8b18",
+          "activeTab" : "",
+          "tabs" : [ {
+            "UUID" : "95d114f6-6450-4635-8743-93cbbd529f02",
+            "allowGuestUser" : true,
+            "locked" : false,
+            "seedComponents" : [ ],
+            "tabKey" : "2",
+            "tabName" : "Input E-Booking Detail"
+          } ],
+          "useOverflowMenu" : false
+        }
+      },
+      "componentName" : "forceCommunity:tabset",
+      "id" : "0867135a-a1bf-49f8-a8f2-b4b0779d8b18",
+      "regions" : [ {
+        "components" : [ {
+          "componentAttributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "componentName" : "forceCommunity:recordHeadline",
+          "id" : "85128e59-4c2e-48c2-9516-34c8d894c36f",
+          "renditionMap" : { },
+          "type" : "component"
+        }, {
+          "componentAttributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "componentName" : "forceCommunity:pathAssistant",
+          "id" : "6721b802-dcae-4ad9-94d5-ff35482a4d0c",
+          "renditionMap" : { },
+          "type" : "component"
+        } ],
+        "id" : "95d114f6-6450-4635-8743-93cbbd529f02",
+        "regionLabel" : "Input E-Booking Detail",
+        "regionName" : "2",
+        "renditionMap" : { },
+        "type" : "region"
+      } ],
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "aec7af46-b6a1-4023-bca2-3e3f2fb7f4f4",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "recordId" : "{!recordId}"
+      },
+      "componentName" : "forceCommunity:recordDetail",
+      "id" : "1346487b-4971-4a9c-90a5-0e15b3431ed3",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "8035a8d9-8f9e-43f3-8c2b-3f7f5b172b9c",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "{!Record._Object}: {!Record._Title}"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "9f125fba-71d7-4601-b181-883c6677c0a0",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "bc79680b-15cf-453a-86ef-a19fda184167",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "detail-a3H"
+}

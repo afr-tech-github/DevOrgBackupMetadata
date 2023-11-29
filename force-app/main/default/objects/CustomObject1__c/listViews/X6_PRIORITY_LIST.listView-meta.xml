@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X6_PRIORITY_LIST</fullName>
+    <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5 AND 6 AND 7</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Field1__c</columns>
+    <columns>Priority_Urgency__c</columns>
+    <columns>Priority_Attenton_Required__c</columns>
+    <columns>ConsigneeEnglishCompanyName__c</columns>
+    <columns>status__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>CarrierType__c</columns>
+    <columns>TranporationType__c</columns>
+    <columns>ContainerNumber__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Priority_Attenton_Required__c</field>
+        <operation>greaterThan</operation>
+        <value>2</value>
+    </filters>
+    <filters>
+        <field>Priority_Urgency__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>status__c</field>
+        <operation>notEqual</operation>
+        <value>キャンセル(Cancelled),完了(Completed),輸入 納品完了(Delivery Completed)</value>
+    </filters>
+    <filters>
+        <field>status__c</field>
+        <operation>notEqual</operation>
+        <value>輸入 BB依頼済み(BB Requested)-航空のみ(For AIR)</value>
+    </filters>
+    <filters>
+        <field>Custom__c</field>
+        <operation>equals</operation>
+        <value>×(NO)</value>
+    </filters>
+    <filters>
+        <field>status__c</field>
+        <operation>notEqual</operation>
+        <value>輸出 請求書訂正有メール・ファクス再送信済(Revised Invoice Issued)</value>
+    </filters>
+    <filters>
+        <field>status__c</field>
+        <operation>notEqual</operation>
+        <value>輸出 請求書送付済(Original Invoice Issued)</value>
+    </filters>
+    <label>6. Priority List(Forwarding)</label>
+</ListView>

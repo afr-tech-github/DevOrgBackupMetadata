@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupWMSUnpaidBalOfBuyingUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLLUP WMS UNPAID BAL OF BUYING(USD)</label>
+    <summarizedField>CloWMSBillBank__c.WMSUnpaidBalOfBuyingUSD__c</summarizedField>
+    <summaryForeignKey>CloWMSBillBank__c.BankTransactionID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

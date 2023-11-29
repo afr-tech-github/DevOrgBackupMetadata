@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>For sales</fullName>
+        <default>true</default>
+        <label>For sales</label>
+    </customValue>
+    <customValue>
+        <fullName>For processing</fullName>
+        <default>false</default>
+        <label>For processing</label>
+    </customValue>
+    <customValue>
+        <fullName>Under quality check</fullName>
+        <default>false</default>
+        <label>Under quality check</label>
+    </customValue>
+    <customValue>
+        <fullName>Picking Planned</fullName>
+        <default>false</default>
+        <label>Picking Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Return to supplier</fullName>
+        <default>false</default>
+        <label>Return to supplier</label>
+    </customValue>
+    <customValue>
+        <fullName>Returned from customer</fullName>
+        <default>false</default>
+        <label>Returned from customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Missing</fullName>
+        <default>false</default>
+        <label>Missing</label>
+    </customValue>
+    <customValue>
+        <fullName>Damaged</fullName>
+        <default>false</default>
+        <label>Damaged</label>
+    </customValue>
+    <customValue>
+        <fullName>Replaced</fullName>
+        <default>false</default>
+        <label>Replaced</label>
+    </customValue>
+    <customValue>
+        <fullName>Disposed</fullName>
+        <default>false</default>
+        <label>Disposed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled</fullName>
+        <default>false</default>
+        <label>Cancelled</label>
+    </customValue>
+    <customValue>
+        <fullName>Wet</fullName>
+        <default>false</default>
+        <label>Wet</label>
+    </customValue>
+    <customValue>
+        <fullName>Expired</fullName>
+        <default>false</default>
+        <label>Expired</label>
+    </customValue>
+    <customValue>
+        <fullName>No longer exists</fullName>
+        <default>false</default>
+        <label>No longer exists</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Lease</fullName>
+        <default>false</default>
+        <label>Under Lease</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Rent</fullName>
+        <default>false</default>
+        <label>Under Rent</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting for Last Mile Delivery</fullName>
+        <default>false</default>
+        <label>Waiting for Last Mile Delivery</label>
+    </customValue>
+    <masterLabel>CARGO LIFE CYCLE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

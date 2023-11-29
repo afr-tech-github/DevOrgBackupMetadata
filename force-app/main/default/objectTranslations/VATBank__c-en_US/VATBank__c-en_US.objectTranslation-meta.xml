@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>VAT+Bank</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>VAT+Bank</value>
+    </caseValues>
+    <nameFieldLabel>VAT+Bank ID</nameFieldLabel>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>View37</fullName>
+    <columns>Field1__c</columns>
+    <columns>status__c</columns>
+    <columns>NAME</columns>
+    <columns>NyukinzandakaJPY__c</columns>
+    <columns>BuyDifferentiation_sum2__c</columns>
+    <columns>ETA__c</columns>
+    <columns>Custom__c</columns>
+    <columns>Ararigaku_sum__c</columns>
+    <columns>SellInTaxAmountJPY_sum__c</columns>
+    <columns>NyukinGoukeigaku__c</columns>
+    <columns>BuyInTaxAmountJPY_sum__c</columns>
+    <columns>Siharaigaku_sum__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CustomObject1__c.InAir,CustomObject1__c.OutAir,CustomObject1__c.RecordType,CustomObject1__c.RecordType1</value>
+    </filters>
+    <filters>
+        <field>NyukinzandakaJPY__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>BuyDifferentiation_sum2__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Ararigaku_sum__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>AR &amp; AP = 0</label>
+</ListView>

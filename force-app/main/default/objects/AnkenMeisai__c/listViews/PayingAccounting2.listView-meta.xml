@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PayingAccounting2</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>Anken__c</columns>
+    <columns>NAME</columns>
+    <columns>Tariff__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>actual_payer__c</columns>
+    <columns>BuyAmountJPN__c</columns>
+    <columns>Siharaigaku__c</columns>
+    <columns>BuyDifferentiation__c</columns>
+    <columns>SiharaiKakuninzumi__c</columns>
+    <columns>PaymentDate__c</columns>
+    <columns>payment_category__c</columns>
+    <columns>PayingBank__c</columns>
+    <columns>BuyDetail__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Recordtype__c</field>
+        <operation>notEqual</operation>
+        <value>Quotation</value>
+    </filters>
+    <filters>
+        <field>Anken__c</field>
+        <operation>contains</operation>
+    </filters>
+    <label>Payment Process-Payable to vendor-H BL</label>
+    <language>ja</language>
+</ListView>

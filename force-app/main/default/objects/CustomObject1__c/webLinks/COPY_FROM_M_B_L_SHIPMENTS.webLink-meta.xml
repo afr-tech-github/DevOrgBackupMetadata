@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>COPY_FROM_M_B_L_SHIPMENTS</fullName>
+    <availability>online</availability>
+    <description>Copy necessary data from M B/L - Shipment object</description>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>DATA COPY FROM M B/L SHIPMENTS</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var left = (screen.width/2)-(400);
+var top = (screen.height/2)-(200);
+
+var url = &apos;{!URLFOR(&quot;/apex/clofor_com_cfs__page_MasterAnkenLookup?id=&quot; + URLENCODE(CustomObject1__c.Id))}&apos;;
+
+window.open(url,&apos;&apos;,&apos;width=800,height=400,top=&apos; + top + &apos;,left=&apos; + left);</url>
+</WebLink>

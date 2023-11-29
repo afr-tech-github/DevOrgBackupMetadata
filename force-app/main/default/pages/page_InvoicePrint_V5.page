@@ -1,0 +1,1191 @@
+<apex:page controller="InvoicePrintNewController_V5"  renderAs="advanced_pdf"  contentType="text-html" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <!-- renderAs="advanced_pdf"  -->
+    <head>
+        
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        
+        <style type="text/css" media="print">
+            @page {
+            size: 210mm 310mm ;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 12px;
+            
+            /* @top-center {
+            
+            content: element(header);
+            
+            } */
+            @bottom-center{
+            content: element(footer);
+            }
+            }
+            body {
+            font-family: Times-Roman, Arial Unicode MS, Courier, Helvetica, sans-serif;
+            font-size: 7.5pt;
+            line-height: 15px; 
+            }
+            
+            .invoice-logo {
+            background-image: "{!URLFOR($Resource.invoice_logo_FMS, 'invoice_logo_FMS.png')}";
+            }
+            /* div.header {
+            padding-top: 30px;
+            position: running(header);
+            
+            } */
+            
+            div.footer {
+            
+            display: block;
+            
+            position: running(footer);
+            
+            }
+            
+            .pagenumber:before {
+            
+            content: counter(page);
+            
+            }
+            
+            .pagecount:before {
+            
+            content: counter(pages);
+            
+            }
+            /* table td, table th{
+            padding: 5px;
+            } */
+            .content-table,  .content-table tr{
+            border: 0.5px solid black !important;
+            border-collapse: collapse;
+            
+            }
+            .content-table th{
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+            }
+            .content-table td{
+            padding: 5px;
+            line-height: 22px;
+            min-height: 22px;
+            }
+            .border{
+            border: 0.5px solid black !important;
+            }
+            .border-left{
+            border-left: 0.5px solid black !important;
+            }
+            .border-right{
+            border-right: 0.5px solid black !important;
+            }
+            .invoice-debit-info td, .shipment-detail td{
+            padding: 0px !important;
+            }
+            .hide{
+            display: none;
+            }
+            
+            
+        </style>
+    </head>
+    <body>
+        <div class="header" style="padding-left: 10px; padding-right: 10px;">
+            <div style="padding-left: 0px; padding-right: 0px;">
+                <apex:outputPanel rendered="{!templateType == 'official'}">
+                    <div style="width: 30%; float: left; " width="200px" height="100px">
+                        <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="200px" style="max-height: 100px;"/>
+                    </div>
+                    <!-- Company Info -->
+                    <div style="width: 65%; float: left; padding-left: 15px; padding-right: 15px">
+                        <apex:outputPanel rendered="{!language == 'en'}">
+                            <div style="font-weight:bold; font-size:20px;" >
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>
+                            </div>
+                            <div style="font-size: 10.5px; padding-top: 10px;">
+                                <apex:outputLabel style="white-space:pre-wrap;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine1__c}"/>
+                                <apex:outputLabel style="white-space:pre-wrap;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine2__c}"/>
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!language != 'en'}">
+                            <div style="padding-top: 10px; font-size: 20px; line-height: 20px" >
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/>
+                            </div>
+                            <div style="font-size: 10.5px; padding-top: 10px;">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.LocalCompanyAddressLine1__c}"/>
+                            </div>
+                            <div style="font-size: 10.5px;;">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.LocalCompanyAddressLine2__c}"/>
+                            </div>
+                        </apex:outputPanel>
+                        <div style="font-size: 10.5px;">
+                            <span><apex:outputLabel value="{!translations['tel']}/{!translations['fax']}: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}/{!$Setup.Site_Custom_Settings__c.Company_Fax__c} 　　{!translations['tax_code']}: {!$Setup.Site_Custom_Settings__c.Tax_Code__c}"/></span>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+            </div>
+            <div style="text-align: center; font-size: 25px; clear: both">
+                <apex:outputText value="{!translations[typeDoc]}"/>
+                
+            </div>
+        </div>
+        <div class="footer" style="clear:both; width: 760px">
+            <div class="footerleft" style="float:left; width: 45%; text-align: right;"><span class="pagenumber"/>/<span class="pagecount"/></div>
+            <div class="footerright" style="float:right; width: 40%; text-align: right;"><span>{!userName}</span> - <span>{!today}</span></div>
+        </div>
+        <div class="content" style="clear: both; padding-top: 30px;">
+            <table class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                <!-- shipment general info -->
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="7" width="60%" style="vertical-align:top; padding-top: 10px; max-width:75%; border-width: 0.5px 0px 0.5px 0.5px; border-style: solid; border-right:none">
+                        
+                        <apex:outputText value="{!translations['to']}: {!customer.EnglishCompanyName__c}" rendered="{!language == 'en'}"/>
+                        <apex:outputText value="{!translations['to']}: {!customer.Name}" rendered="{!language != 'en'}"/>
+                        <br/>
+                        <apex:outputText value="{!translations['address']}: {!customer.EnglishAddress__c}" rendered="{!language == 'en'}"/>
+                        <apex:outputText value="{!translations['address']} {!customerAddress}" rendered="{!language != 'en'}"/>
+                        <br/>
+                        <apex:outputLabel value="{!translations['tel']}/{!translations['fax']}: {!customer.Phone}/{!customer.Fax} 　　{!translations['tax_code']} {!customer.TAX_CODE__c}"/>
+                        
+                    </td>
+                    <td colspan="3" style="vertical-align:top; padding-top: 10px; border-width: 0px 0.5px 0.5px 0.5px; border-style: solid; border-left:none">
+                        <table class="invoice-debit-info">
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['invoice_no']}" rendered="{!typeDoc == 'invoice'}"/>
+                                    <apex:outputText value="{!translations['debit_no']}" rendered="{!typeDoc == 'debit'}"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/><apex:outputText value="{!shipment.ID__c}-{!shipment.QuotationVer__c}" escape="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['job_no']}"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/><apex:outputText value="{!shipment.JobRequestID__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['ref_no']}"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/><apex:outputText value="{!shipment.REFNO__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    
+                                    <apex:outputText value="{!translations['book_date']}"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/><apex:outputText value="{!bookDateFormatted}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['payment_due_date']}"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/><apex:outputText value="{!paymentDueDateFormatted}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Shipment Detail Info -->
+                <tr style="border: 0.5px solid black !important;">
+                    <td colspan="10" width="100%" style="padding-top: 10px; border-width: 0.5px; border-style: solid;">
+                        <table width="100%" class="{! if(houseBookingNos == '', 'shipment-detail', 'hide')}">
+                            <col width="20%" />
+                            <col width="35%" />
+                            <col width="20%" />
+                            <col width="25%" />
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['hbl_hawb_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.HBL_Number_SEA_AIR__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['customs_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.CustomsClearanceDeclarationNo__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['mbl_hawb_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.MBL_Number_SEA_AIR__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['cargo_mode']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputPanel rendered="{!shipment.TranporationType__c == 'LCL' || shipment.TranporationType__c == 'AIR' || shipment.TranporationType__c == 'BULK'}">
+
+                                        <apex:outputField value="{!shipment.TranporationType__c}" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!shipment.TranporationType__c == 'FCL' || shipment.TranporationType__c == 'MTY' || shipment.TranporationType__c == 'MTY & FCL'}">
+                                        {!shipment.TranporationType__c + ' : '}
+                                        <apex:outputPanel rendered="{!shipment.Container__c != null && shipment.ContainerNumber__c!= null}">
+                                            {!shipment.Container__c} * {!shipment.ContainerNumber__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container2__c != null && shipment.ContainerNumber2__c!= null}">
+                                            /{!shipment.Container2__c} * {!shipment.ContainerNumber2__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container3__c != null && shipment.ContainerNumber3__c!= null}">
+                                            /{!shipment.Container3__c} * {!shipment.ContainerNumber3__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container4__c != null && shipment.ContainerNumber4__c!= null}">
+                                            /{!shipment.Container4__c} * {!shipment.ContainerNumber4__c }
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['flight_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.Vessle__c}/{!shipment.No_Voyage_Flight__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['package']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.carton__c} {!translations[shipment.UnitType__c]}" />
+                                    <apex:outputText value="(s)" rendered="{!language != 'vi'}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['pol_aod']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.POL__r.Name}, {!shipment.POL__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['weight']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <!--<apex:outputText value="{!shipment.weight__c} KGS" rendered="{!shipment.weight__c != null}"/> -->
+                                    <apex:outputText value="{!formatStringUSDTotal} KGS" rendered="{!shipment.weight__c != null && !showChargeableWeight}">
+                                        <apex:param value="{!shipment.weight__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText value="{!formatStringUSDTotal} KGS" rendered="{!shipment.chargable_weight__c != null && showChargeableWeight}">
+                                        <apex:param value="{!shipment.chargable_weight__c}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['pod_aoa']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.POD__r.Name}, {!shipment.POD__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['meas']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.CBM__c} CBM" rendered="{!shipment.CBM__c != null}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['delivery']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.Place_Of_Delivery__r.Name}, {!shipment.Place_Of_Delivery__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['incoterms']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.PriceTerms__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['etd_eta']}" /> </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!etdFormattedDate}">
+                                    </apex:outputText>
+                                    <apex:outputText value=" & " />
+                                    <apex:outputText value="{!etaFormattedDate}">
+                                    </apex:outputText>
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['ex_rate']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="0" rendered="{!listBillWrapper != null && listBillWrapper.size > 0 && (listBillWrapper[0].exchangeRate == 0 || listBillWrapper[0].exchangeRate == null)}" />
+                                    <apex:outputText value="{!formatStringVND}" rendered="{!listBillWrapper != null && listBillWrapper.size > 0 && (listBillWrapper[0].exchangeRate != 0 && listBillWrapper[0].exchangeRate != null)}">
+                                        <apex:param value="{!listBillWrapper[0].exchangeRate}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="{! IF(deliveryFormattedDate == null,'hide','')}">
+                                    <apex:outputText value="Delivery Date"/>
+                                </td>
+                                <td class="{! IF(deliveryFormattedDate == null,'hide','')}">
+                                    <apex:outputText value=": "/>
+                                    <apex:outputText value="{!deliveryFormattedDate}"/>
+                                </td>
+                                <td colspan="2" class="{! IF(deliveryFormattedDate != null,'hide','')}"></td>
+                                <td colspan="2">
+                                    <apex:outputText style="font-size: 8px" value="(This is reference exchange rate. The official one will be applied at the time issuing invoice)" />
+                                </td>
+                            </tr>
+                            <!-- Container no.& Type -->
+                            <apex:outputPanel layout="none" rendered="{! showContainer && containerNosandtypes != ''}">
+                                <tr style="vertical-align: top; border-width: 0px 0.5px 0.5px 0.5px; border-style: solid;">
+                                    <td style="vertical-align: top;" colspan="1" width="15%">
+                                        <apex:outputText value="{!translations['container_no_type']}" /> </td>
+                                    <td style="vertical-align: top;" colspan="9">
+                                        <apex:outputText value=": " />
+                                        <apex:outputText value="{!containerNosandtypes}" />
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </table>
+                        <table width="100%" class="{! if(houseBookingNos != '', 'shipment-detail', 'hide')}">
+                            <col width="20%" />
+                            <col width="35%" />
+                            <col width="20%" />
+                            <col width="25%" />
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['booking_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!houseBookingNos}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['customs_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.CustomsClearanceDeclarationNo__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['hbl_hawb_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.HBL_Number_SEA_AIR__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['cargo_mode']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputPanel rendered="{!shipment.TranporationType__c == 'LCL' || shipment.TranporationType__c == 'AIR' || shipment.TranporationType__c == 'BULK'}">
+
+                                        <apex:outputField value="{!shipment.TranporationType__c}" />
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!shipment.TranporationType__c == 'FCL' || shipment.TranporationType__c == 'MTY' || shipment.TranporationType__c == 'MTY & FCL'}">
+                                        {!shipment.TranporationType__c + ' : '}
+                                        <apex:outputPanel rendered="{!shipment.Container__c != null && shipment.ContainerNumber__c!= null}">
+                                            {!shipment.Container__c} * {!shipment.ContainerNumber__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container2__c != null && shipment.ContainerNumber2__c!= null}">
+                                            /{!shipment.Container2__c} * {!shipment.ContainerNumber2__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container3__c != null && shipment.ContainerNumber3__c!= null}">
+                                            /{!shipment.Container3__c} * {!shipment.ContainerNumber3__c }
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!shipment.Container4__c != null && shipment.ContainerNumber4__c!= null}">
+                                            /{!shipment.Container4__c} * {!shipment.ContainerNumber4__c }
+                                        </apex:outputPanel>
+
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['mbl_hawb_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.MBL_Number_SEA_AIR__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['package']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.carton__c} {!translations[shipment.UnitType__c]}" />
+                                    <apex:outputText value="(s)" rendered="{!language != 'vi'}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['flight_no']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.Vessle__c}/{!shipment.No_Voyage_Flight__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['weight']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <!--<apex:outputText value="{!shipment.weight__c} KGS" rendered="{!shipment.weight__c != null}"/> -->
+                                    <apex:outputText value="{!formatStringUSDTotal} KGS" rendered="{!shipment.weight__c != null && !showChargeableWeight}">
+                                        <apex:param value="{!shipment.weight__c}" />
+                                    </apex:outputText>
+                                    <apex:outputText value="{!formatStringUSDTotal} KGS" rendered="{!shipment.chargable_weight__c != null && showChargeableWeight}">
+                                        <apex:param value="{!shipment.chargable_weight__c}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['pol_aod']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.POL__r.Name}, {!shipment.POL__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['meas']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.CBM__c} CBM" rendered="{!shipment.CBM__c != null}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['pod_aoa']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.POD__r.Name}, {!shipment.POD__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['incoterms']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.PriceTerms__c}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['delivery']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!shipment.Place_Of_Delivery__r.Name}, {!shipment.Place_Of_Delivery__r.Country_Name__c}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value="{!translations['ex_rate']}" />
+                                </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="0" rendered="{!listBillWrapper != null && listBillWrapper.size > 0 && (listBillWrapper[0].exchangeRate == 0 || listBillWrapper[0].exchangeRate == null)}" />
+                                    <apex:outputText value="{!formatStringVND}" rendered="{!listBillWrapper != null && listBillWrapper.size > 0 && (listBillWrapper[0].exchangeRate != 0 && listBillWrapper[0].exchangeRate != null)}">
+                                        <apex:param value="{!listBillWrapper[0].exchangeRate}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{!translations['etd_eta']}" /> </td>
+                                <td>
+                                    <apex:outputText value=": " />
+                                    <apex:outputText value="{!etdFormattedDate}">
+                                    </apex:outputText>
+                                    <apex:outputText value=" & " />
+                                    <apex:outputText value="{!etaFormattedDate}">
+                                    </apex:outputText>
+                                </td>
+                                <td colspan="2">
+                                    <apex:outputText style="font-size: 8px" value="(This is reference exchange rate. The official one will be applied at the time issuing invoice)" />
+                                </td>
+                            </tr>
+                            <tr  class="{! IF(deliveryFormattedDate == null,'hide','')}">
+                                <td>
+                                    <apex:outputText value="Delivery Date"/>
+                                </td>
+                                <td>
+                                    <apex:outputText value=": "/>
+                                    <apex:outputText value="{!deliveryFormattedDate}"/>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <!-- Container no.& Type -->
+                            <apex:outputPanel layout="none" rendered="{! showContainer && containerNosandtypes != ''}">
+                                <tr style="vertical-align: top; border-width: 0px 0.5px 0.5px 0.5px; border-style: solid;">
+                                    <td style="vertical-align: top;" colspan="1" width="15%">
+                                        <apex:outputText value="{!translations['container_no_type']}" /> </td>
+                                    <td style="vertical-align: top;" colspan="9">
+                                        <apex:outputText value=": " />
+                                        <apex:outputText value="{!containerNosandtypes}" />
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <apex:outputPanel rendered="{!curr == 'USD'}">
+                <table  class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                    <tr>
+                        <th class="border" ><apex:outputText value="{!translations['no']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['description']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['qty']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['unit']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['unit_price']}"/></th>
+                        <th class="border" width="15%"><apex:outputText value="{!translations['amount']}"/></th>
+                        <th class="border" width="10%"><apex:outputText value="{!translations['tax']}"/></th>
+                        <th colspan="2" class="border" width="15%"><apex:outputText value="{!translations['total_amount']}"/></th>
+                        <th class="border" width="10%"><apex:outputText value="{!translations['note']}"/></th>
+                    </tr>
+                    <tr style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="10" style="font-size: 12px" class="border"> <apex:outputText value="{!translations['freight_charge_surcharge']}"/> </td>
+                    </tr>
+                    <apex:variable var="indexBillWrapper" value="{!1}" />
+                    <apex:repeat value="{!listBillWrapper}" var="billWrapper">
+                        <tr>
+                            <td class="border-left border-right" style="text-align:center">
+                                <apex:outputText value="{!indexBillWrapper}"/>
+                                <apex:variable var="indexBillWrapper" value="{!indexBillWrapper + 1}" />
+                            </td>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapper.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapper.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.unitPriceUSD == 0 || billWrapper.unitPriceUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.unitPriceUSD != 0 && billWrapper.unitPriceUSD != null}">
+                                    <apex:param value="{!billWrapper.unitPriceUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.amountUSD == 0 || billWrapper.amountUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.amountUSD != 0 && billWrapper.amountUSD != null}">
+                                    <apex:param value="{!billWrapper.amountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapper.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapper.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapper.tax != 0 && billWrapper.tax != null}">
+                                    <apex:param value="{!billWrapper.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td colspan="2" class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.totalAmountUSD == 0 || billWrapper.totalAmountUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.totalAmountUSD != 0 && billWrapper.totalAmountUSD != null}">
+                                    <apex:param value="{!billWrapper.totalAmountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapper.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr  style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="10" style="font-size: 12px" class="border"> <apex:outputText value="{!translations['pay_on_behalf']}"/> </td>
+                    </tr>
+                    <apex:variable var="indexBillWrapperOnBehalf" value="{!1}" />
+                    <apex:repeat value="{!listBillWrapperOnBehalf}" var="billWrapperOnBehalf">
+                        <tr>
+                            <td class="border-left border-right" style="text-align:center">
+                                <apex:outputText value="{!indexBillWrapperOnBehalf}"/>
+                                <apex:variable var="indexBillWrapperOnBehalf" value="{!indexBillWrapperOnBehalf + 1}" />
+                            </td>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapperOnBehalf.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapperOnBehalf.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.unitPriceUSD == 0 || billWrapperOnBehalf.unitPriceUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.unitPriceUSD != 0 && billWrapperOnBehalf.unitPriceUSD != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.unitPriceUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.amountUSD == 0 || billWrapperOnBehalf.amountUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.amountUSD != 0 && billWrapperOnBehalf.amountUSD != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.amountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapperOnBehalf.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapperOnBehalf.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapperOnBehalf.tax != 0 && billWrapperOnBehalf.tax != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td colspan="2" class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.totalAmountUSD == 0 || billWrapperOnBehalf.totalAmountUSD == null}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.totalAmountUSD != 0 && billWrapperOnBehalf.totalAmountUSD != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.totalAmountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapperOnBehalf.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <th colspan="{!IF(curr == 'Both', 5,7)}" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['sub_total_excl_tax']}"/> 
+                        </th>
+                        <td colspan="2" class="{!IF(curr == 'Both', '','hide')} border" style="font-size: 12px; text-align:right"> 
+                            <apex:outputText value="{!formatStringUSDTotal}">
+                                <apex:param value="{!subTotalUSD}" />
+                            </apex:outputText>
+                            <apex:outputText value=" USD"/>
+                        </td>
+                        <td colspan="3" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel rendered="{!curr == 'USD'}">
+                                <apex:outputText value="{!formatStringUSDTotal}">
+                                    <apex:param value="{!subTotalUSD}" />
+                                </apex:outputText>
+                                <apex:outputText value=" USD"/>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!curr != 'USD'}">
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!subTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="{!IF(curr == 'Both', 5,7)}" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['grand_total']}"/> 
+                        </th>
+                        <td colspan="2" class="{!IF(curr == 'Both', '','hide')} border" style="font-size: 12px; text-align:right"> 
+                            
+                            <apex:outputText value="{!formatStringUSDTotal}">
+                                <apex:param value="{!grandTotalUSD}" />
+                            </apex:outputText>
+                            <apex:outputText value=" USD"/>
+                        </td>
+                        <td colspan="3" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel rendered="{!curr == 'USD'}">
+                                <apex:outputText value="{!formatStringUSDTotal}">
+                                    <apex:param value="{!grandTotalUSD}" />
+                                </apex:outputText>
+                                <apex:outputText value=" USD"/>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!curr != 'USD'}">
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!grandTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!curr == 'Local'}">
+                <table  class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                    <tr>
+                        <th class="border" ><apex:outputText value="{!translations['no']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['description']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['qty']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['unit']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['unit_price']}"/></th>
+                        <th class="border" width="15%"><apex:outputText value="{!translations['amount']}"/></th>
+                        <th class="border" width="10%"><apex:outputText value="{!translations['tax']}"/></th>
+                        <th colspan="2" class="border" width="15%"><apex:outputText value="{!translations['total_amount']}"/></th>
+                        <th class="border" width="10%"><apex:outputText value="{!translations['note']}"/></th>
+                    </tr>
+                    <tr style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="10" style="font-size: 12px" class="border"> <apex:outputText value="{!translations['freight_charge_surcharge']}"/> </td>
+                    </tr>
+                    <apex:variable var="indexBillWrapper" value="{!1}" />
+                    <apex:repeat value="{!listBillWrapper}" var="billWrapper">
+                        <tr>
+                            <td class="border-left border-right" style="text-align:center">
+                                <apex:outputText value="{!indexBillWrapper}"/>
+                                <apex:variable var="indexBillWrapper" value="{!indexBillWrapper + 1}" />
+                            </td>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapper.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapper.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.unitPriceVND == 0 || billWrapper.unitPriceVND == null}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.unitPriceVND != 0 && billWrapper.unitPriceVND != null}">
+                                    <apex:param value="{!billWrapper.unitPriceVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.amountVND == 0 || billWrapper.amountVND == null}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.amountVND != 0 && billWrapper.amountVND != null}">
+                                    <apex:param value="{!billWrapper.amountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapper.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapper.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapper.tax != 0 && billWrapper.tax != null}">
+                                    <apex:param value="{!billWrapper.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td colspan="2" class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.totalAmountVND == 0 || billWrapper.totalAmountVND == null}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.totalAmountVND != 0 && billWrapper.totalAmountVND != null}">
+                                    <apex:param value="{!billWrapper.totalAmountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapper.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr  style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="10" style="font-size: 12px" class="border"> <apex:outputText value="{!translations['pay_on_behalf']}"/> </td>
+                    </tr>
+                    <apex:variable var="indexBillWrapperOnBehalf" value="{!1}" />
+                    <apex:repeat value="{!listBillWrapperOnBehalf}" var="billWrapperOnBehalf">
+                        <tr>
+                            <td class="border-left border-right" style="text-align:center">
+                                <apex:outputText value="{!indexBillWrapperOnBehalf}"/>
+                                <apex:variable var="indexBillWrapperOnBehalf" value="{!indexBillWrapperOnBehalf + 1}" />
+                            </td>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapperOnBehalf.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapperOnBehalf.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapperOnBehalf.unitPriceVND == 0 || billWrapperOnBehalf.unitPriceVND == null)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.unitPriceVND != 0 && billWrapperOnBehalf.unitPriceVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.unitPriceVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.amountVND == 0 || billWrapperOnBehalf.amountVND == null}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.amountVND != 0 && billWrapperOnBehalf.amountVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.amountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapperOnBehalf.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapperOnBehalf.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapperOnBehalf.tax != 0 && billWrapperOnBehalf.tax != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td colspan="2" class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.totalAmountVND == 0 || billWrapperOnBehalf.totalAmountVND == null}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.totalAmountVND != 0 && billWrapperOnBehalf.totalAmountVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.totalAmountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapperOnBehalf.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <th colspan="7" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['sub_total_excl_tax']}"/> 
+                        </th>
+                        <td colspan="3" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel >
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!subTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="{!IF(curr == 'Both', 5,7)}" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['grand_total']}"/> 
+                        </th>
+                        <td colspan="2" class="{!IF(curr == 'Both', '','hide')} border" style="font-size: 12px; text-align:right"> 
+                            
+                            <apex:outputText value="{!formatStringUSDTotal}">
+                                <apex:param value="{!grandTotalUSD}" />
+                            </apex:outputText>
+                            <apex:outputText value=" USD"/>
+                        </td>
+                        <td colspan="3" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel rendered="{!curr == 'USD'}">
+                                <apex:outputText value="{!formatStringUSDTotal}">
+                                    <apex:param value="{!grandTotalUSD}" />
+                                </apex:outputText>
+                                <apex:outputText value=" USD"/>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!curr != 'USD'}">
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!grandTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/> 
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!curr == 'Both'}">
+                <table  class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                    <tr>
+                        <th class="border" width="15%"><apex:outputText value="{!translations['description']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['qty']}"/></th>
+                        <th class="border" ><apex:outputText value="{!translations['unit']}"/></th>
+                        <th class="border"><apex:outputText value="{!translations['tax']}"/></th>
+                        <th class="border" width="9%"><apex:outputText value="{!translations['unit_price']}"/><apex:outputText value=" (USD)"/></th>
+                        <th class="border" width="9%"><apex:outputText value="{!translations['amount']}"/><apex:outputText value=" (USD)"/></th>
+                        <th class="border" width="11%"><apex:outputText value="{!translations['total_amount']}"/><apex:outputText value=" (USD)"/></th>
+                        <th class="border" width="9%"><apex:outputText value="{!translations['unit_price']}"/><apex:outputText value=" ({!localCurr})"/></th>
+                        <th class="border" width="9%"><apex:outputText value="{!translations['amount']}"/><apex:outputText value=" ({!localCurr})"/></th>                        
+                        <th class="border" width="11%"><apex:outputText value="{!translations['total_amount']}"/><apex:outputText value=" ({!localCurr})"/></th>
+                        <th class="border"><apex:outputText value="{!translations['note']}"/></th>
+                    </tr>
+                    
+                    <tr style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="11" style="font-size: 12px; border-collapse: collapse;" class="border"> <apex:outputText value="{!translations['freight_charge_surcharge']}"/> </td>
+                    </tr>
+                    
+                    <apex:repeat value="{!listBillWrapper}" var="billWrapper">
+                        <tr>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapper.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapper.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapper.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapper.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapper.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapper.tax != 0 && billWrapper.tax != null}">
+                                    <apex:param value="{!billWrapper.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapper.unitPriceUSD == 0)}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.unitPriceUSD != 0 && billWrapper.unitPriceUSD != null }">
+                                    <apex:param value="{!billWrapper.unitPriceUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapper.amountUSD == 0)}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.amountUSD != 0 && billWrapper.amountUSD != null}">
+                                    <apex:param value="{!billWrapper.amountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.totalAmountUSD == 0}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapper.totalAmountUSD != 0 && billWrapper.totalAmountUSD != null}">
+                                    <apex:param value="{!billWrapper.totalAmountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapper.unitPriceVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.unitPriceVND != 0 && billWrapper.unitPriceVND != null}">
+                                    <apex:param value="{!billWrapper.unitPriceVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapper.amountVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.amountVND != 0 && billWrapper.amountVND != null}">
+                                    <apex:param value="{!billWrapper.amountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapper.totalAmountVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapper.totalAmountVND != 0 && billWrapper.totalAmountVND != null}">
+                                    <apex:param value="{!billWrapper.totalAmountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapper.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    
+                    <tr  style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="11" style="font-size: 12px; border-collapse: collapse;" class="border"> <apex:outputText value="{!translations['pay_on_behalf']}"/> </td>
+                    </tr>
+                    <apex:repeat value="{!listBillWrapperOnBehalf}" var="billWrapperOnBehalf">
+                        <tr>
+                            <td class="border-left border-right">
+                                <apex:outputText value="{!billWrapperOnBehalf.descriptionEng}" rendered="{!language == 'en'}"/>
+                                <apex:outputText value="{!billWrapperOnBehalf.description}" rendered="{!language != 'en'}"/>
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.quantity}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                {!billWrapperOnBehalf.unit}
+                            </td>
+                            <td class="border-left border-right" style="text-align:center;">
+                                <apex:outputText value="NT" rendered="{!billWrapperOnBehalf.tax == null}"/>
+                                <apex:outputText value="0%" rendered="{!billWrapperOnBehalf.tax == 0}"/>
+                                <apex:outputText value="{!formatStringUSDTotal}" rendered="{!billWrapperOnBehalf.tax != 0 && billWrapperOnBehalf.tax != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.tax}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.unitPriceUSD == 0}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.unitPriceUSD != 0 && billWrapperOnBehalf.unitPriceUSD != null }">
+                                    <apex:param value="{!billWrapperOnBehalf.unitPriceUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.amountUSD == 0}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.amountUSD != 0 && billWrapperOnBehalf.amountUSD != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.amountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapperOnBehalf.totalAmountUSD == 0}"/>
+                                <apex:outputText value="{!formatStringUSDDetail}" rendered="{!billWrapperOnBehalf.totalAmountUSD != 0 && billWrapperOnBehalf.totalAmountUSD != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.totalAmountUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapperOnBehalf.unitPriceVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.unitPriceVND != 0 && billWrapperOnBehalf.unitPriceVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.unitPriceVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!(billWrapperOnBehalf.amountVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.amountVND != 0 && billWrapperOnBehalf.amountVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.amountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{! (billWrapperOnBehalf.totalAmountVND == 0)}"/>
+                                <apex:outputText value="{!formatStringVND}" rendered="{!billWrapperOnBehalf.totalAmountVND != 0 && billWrapperOnBehalf.totalAmountVND != null}">
+                                    <apex:param value="{!billWrapperOnBehalf.totalAmountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-right">
+                                {!billWrapperOnBehalf.note}
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                   
+                    <tr>
+                        <th colspan="4" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['sub_total_excl_tax']}"/> 
+                        </th>
+                        <td colspan="3" class="border" style="font-size: 12px; text-align:right"> 
+                            <apex:outputText value="{!formatStringUSDTotal}">
+                                <apex:param value="{!subTotalUSD}" />
+                            </apex:outputText>
+                            <apex:outputText value=" USD"/>
+                        </td>
+                        <td colspan="4" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel rendered="{!curr != 'USD'}">
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!subTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="4" style="font-size: 12px" class="border"> 
+                            <apex:outputText value="{!translations['grand_total']}"/> 
+                        </th>
+                        <td colspan="3" class="border" style="font-size: 12px; text-align:right">
+                            <apex:outputText value="{!formatStringUSDTotal}">
+                                <apex:param value="{!grandTotalUSD}" />
+                            </apex:outputText>
+                            <apex:outputText value=" USD"/>
+                        </td>
+                        <td colspan="4" style="font-size: 12px; text-align:right" class="border">
+                            <apex:outputPanel rendered="{!curr != 'USD'}">
+                                <apex:outputText value="{!formatStringVND}">
+                                    <apex:param value="{!grandTotalVND}" />
+                                </apex:outputText>
+                                <apex:outputLabel value=" {!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/> 
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+            <div style="page-break-inside: avoid;">
+                <div class="amount-in-word" width="100%" style="min-height: 50px; padding-top: 10px;">
+                    <table width="100%">
+                        <tr>
+                            <td style="font-size: 12px; vertical-align:top;"><apex:outputText value="{!sayUppercaseLabel}"/>:</td>
+                            <td>
+                                <apex:outputText value="{!grandTotalUSDInENWording}" rendered="{!language != 'vi' && (curr == 'USD' || curr == 'Both')}"/>
+                                <apex:outputText value="{!grandTotalUSDInVNWording}" rendered="{!language == 'vi' && (curr == 'USD' || curr == 'Both')}"/>
+                                <apex:outputPanel rendered="{!curr == 'Both'}"><br/></apex:outputPanel>
+                                <!-- <apex:outputText value="{!grandTotalVNDInENWording}" rendered="{!language != 'vi' && (curr == 'Local' || curr == 'Both')}"/>
+                                <apex:outputText value="{!grandTotalVNDInVNWording}" rendered="{!language == 'vi' && (curr == 'Local' || curr == 'Both')}"/> -->
+                                <apex:outputText value="{!grandTotalVNDInENWording}" rendered="{!(language != 'vi' && localCurr == 'VND') && (curr == 'Local' || curr == 'Both')}"/>
+                                <apex:outputText value="{!grandTotalVNDInVNWording}" rendered="{!(language == 'vi' && localCurr == 'VND') && (curr == 'Local' || curr == 'Both')}"/>
+                                <apex:outputText value="(JAPAN YEN) {!grandTotalUSDInJPWording}" rendered="{!localCurr == 'JPY' && (curr == 'Local' || curr == 'Both')}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="border" width="100%">
+                </div>
+            </div>
+            
+            <div class="remark" style="min-height: 50px; padding-top: 10px; page-break-inside: avoid;">
+                <apex:outputText value="{!translations['remark']}" style="font-size: 12px"/>:
+                <br/>
+                <apex:outputText value="{!shipment.SeikyusyoRemark__c}"/>
+            </div>
+            <div class="bank-info-signature" width="100%" style="padding-top: 10px; page-break-inside: avoid;">
+                <table width="100%">
+                    <tr>
+                        <td width="75%"><apex:outputPanel rendered="{!templateType == 'official'}"><apex:outputText value="{!translations['bank_account_information']}" style="font-size: 12px"/>:</apex:outputPanel></td>
+                        <td width="25%" style="text-align:left"><apex:outputText value="{!translations['authorized_signature']}" style="font-size: 12px"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputPanel rendered="{!templateType == 'official'}">
+                                <table>
+                                    <tr>
+                                        <td><apex:outputText value="{!translations['account_name']}"/></td>
+                                        <td>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}" rendered="{!bankType == 'local1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}" rendered="{!bankType == 'local2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}" rendered="{!bankType == 'local3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}" rendered="{!bankType == 'local4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}" rendered="{!bankType == 'local5'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><apex:outputText value="{!translations['bank_name']}"/></td>
+                                        <td>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}" rendered="{!bankType == 'local1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}" rendered="{!bankType == 'local2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}" rendered="{!bankType == 'local3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}" rendered="{!bankType == 'local4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}" rendered="{!bankType == 'local5'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><apex:outputText value="{!translations['bank_address']}"/></td>
+                                        <td>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}" rendered="{!bankType == 'local1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}" rendered="{!bankType == 'local2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}" rendered="{!bankType == 'local3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}" rendered="{!bankType == 'local4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}" rendered="{!bankType == 'local5'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><apex:outputText value="{!translations['swift_code']}"/></td>
+                                        <td>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}" rendered="{!bankType == 'local1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}" rendered="{!bankType == 'local2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}" rendered="{!bankType == 'local3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}" rendered="{!bankType == 'local4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}" rendered="{!bankType == 'local5'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}" rendered="{!bankType == 'foreign1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c}" rendered="{!bankType == 'foreign2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_3_Other__c}" rendered="{!bankType == 'foreign3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_4_Other__c}" rendered="{!bankType == 'foreign4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_5_Other__c}" rendered="{!bankType == 'foreign5'}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><apex:outputText value="{!translations['account_no']}"/></td>
+                                        <td>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}" rendered="{!bankType == 'local1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}" rendered="{!bankType == 'local2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}" rendered="{!bankType == 'local3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}" rendered="{!bankType == 'local4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}" rendered="{!bankType == 'local5'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}" rendered="{!bankType == 'foreign1'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c}" rendered="{!bankType == 'foreign2'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_3__c}" rendered="{!bankType == 'foreign3'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_4__c}" rendered="{!bankType == 'foreign4'}"/>
+                                            <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_5__c}" rendered="{!bankType == 'foreign5'}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</apex:page>

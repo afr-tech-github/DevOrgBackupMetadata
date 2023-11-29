@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Information Received</fullName>
+        <default>false</default>
+        <label>Information Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Confirmed</fullName>
+        <default>false</default>
+        <label>Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting for Entry Permission</fullName>
+        <default>false</default>
+        <label>Waiting for Entry Permission</label>
+    </customValue>
+    <customValue>
+        <fullName>Gate Entry</fullName>
+        <default>false</default>
+        <label>Gate Entry</label>
+    </customValue>
+    <customValue>
+        <fullName>Processing</fullName>
+        <default>false</default>
+        <label>Processing</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting for Exit Permission</fullName>
+        <default>false</default>
+        <label>Waiting for Exit Permission</label>
+    </customValue>
+    <customValue>
+        <fullName>Gate Exit</fullName>
+        <default>false</default>
+        <label>Gate Exit</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Returned</fullName>
+        <default>false</default>
+        <label>Returned</label>
+    </customValue>
+    <customValue>
+        <fullName>Rejected</fullName>
+        <default>false</default>
+        <label>Rejected</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting due to Congestion</fullName>
+        <default>false</default>
+        <label>Waiting due to Congestion</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Gate Entry &amp; Exit Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

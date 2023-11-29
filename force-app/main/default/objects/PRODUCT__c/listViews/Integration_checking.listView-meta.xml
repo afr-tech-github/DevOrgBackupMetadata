@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Integration_checking</fullName>
+    <columns>NAME</columns>
+    <columns>ProductName__c</columns>
+    <columns>Active__c</columns>
+    <columns>IntegrationRequired__c</columns>
+    <columns>ProductScaleCode__c</columns>
+    <columns>External_ID__c</columns>
+    <columns>UnitType__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>IntegrationRequired__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Integration checking</label>
+    <language>en_US</language>
+</ListView>

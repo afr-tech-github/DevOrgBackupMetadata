@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GateTrafficToday</fullName>
+    <columns>NAME</columns>
+    <columns>GateEntryExitStatus__c</columns>
+    <columns>EntryPermissionStatus__c</columns>
+    <columns>PlateNumber__c</columns>
+    <columns>CntrInTransport__c</columns>
+    <columns>PlanEntryDateTime__c</columns>
+    <columns>PlanExitDateTime__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PlanEntryDateTime__c</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Gate Traffic-Today Plan</label>
+</ListView>

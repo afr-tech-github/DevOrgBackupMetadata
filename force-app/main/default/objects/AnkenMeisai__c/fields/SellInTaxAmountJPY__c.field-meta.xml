@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellInTaxAmountJPY__c</fullName>
+    <deprecated>false</deprecated>
+    <description>[通貨：JPY]
+「商品」の「課税」にチェックが入っている時のみ消費税込みで計算します。
+
+[通貨：USD]
+販売単価(USD)*数量*為替レート（Selling）の結果を四捨五入しています
+
+IF (Tariff__r.wkTaxFlag__c, 
+     SellAmountJPN__c  *  (1 + TaxInitial__c), 
+     SellAmountJPN__c 
+)
+
+/----------------------------------------------
+
+
+ROUND(SellAmountJPN__c  *  (1 + TaxInitial__c) , 0)</description>
+    <externalId>false</externalId>
+    <formula>SellAmountJPN__c + SellTaxNum__c +AmountSellingLocalAdjustment__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The amount will be calculated as Total Amount of Selling(Local)+Total Amount of Selling(Local)*Tax Ratio</inlineHelpText>
+    <label>AMOUNT SELLING INCLUDING TAX(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

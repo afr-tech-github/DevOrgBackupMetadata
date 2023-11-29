@@ -1,0 +1,1433 @@
+<apex:page controller="ProfitSheetMultiCursCtr" contentType="text-html" showHeader="false" applyHtmlTag="false" applyBodyTag="false"
+    renderAs="pdf">
+
+    <head>
+        <style type="text/css">
+            body { 
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+                height: 681px;
+                width: 100%;
+            }
+
+            @page {
+                size: 297mm 210mm;
+                @bottom-center{
+                    content: element(footer);
+            }
+            }
+
+            .f7 {
+                font-size: 7pt;
+            }
+
+            .f9 {
+                font-size: 9pt;
+            }
+
+            .f15 {
+                font-size: 15pt;
+            }
+
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                vertical-align: text-top;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            .clsheader {
+                background-color: #42619f;
+                color: #FFFFFF;
+                font-weight: bold;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            div.footer {
+                display: block;
+                position: running(footer);
+            }
+            .pagenumber:before {
+            
+            content: counter(page);
+            
+            }
+            
+            .pagecount:before {
+            
+            content: counter(pages);
+            
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <div class="footer" style="clear:both; width: 800px; font-size: 10px">
+            <div class="footerleft" style="float:left; width: 40%; text-align: left; margin-left: 10px">{!leftfooter}</div>
+            <div class="footercenter" style="float:left; width: 10%; text-align: right;"><span class="pagenumber"/>/<span class="pagecount"/></div>
+            
+          
+        </div>
+        <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="130px" height="60px"
+            />
+        </div>
+        <div class="f15" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+            PROFIT SHEET
+        </div>
+        <div class="f7" style="position:absolute; margin-top:25px; left:130px;  width:710px; text-align:center;">
+            <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}" />
+        </div>
+        <div class="f7" style="position:absolute; margin-top:65px; left:200px; width:600px;  text-align:center;">
+            <apex:outputLabel value="TEL:{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX:{!$Setup.Site_Custom_Settings__c.Company_Fax__c}"
+            />
+        </div>
+        <div class="f7" style="position:absolute; margin-top:0px; left:810px;  text-align:left;">
+            ISSUE DATE:
+        </div>
+        <div class="f7" style="position:absolute; margin-top:0px; left:880px; width:110px;  ">
+            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                <apex:param value="{!shipment.PrintDate__c}" />
+            </apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:20px; left:810px;  text-align:left;">
+            <apex:outputText value="WKID : S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:40px; left:810px;  text-align:left;">
+            <apex:outputText value="JOB NO: {!shipment.JobRequestID__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:60px; left:810px;  text-align:left;">
+            <apex:outputText value="REF NO: {!shipment.REFNO__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:80px; left:810px;  text-align:left;">
+            <apex:outputText value="PIC: {!shipment.PersonInCharge__r.Name}"></apex:outputText>
+        </div>
+        <div style="height: 100px"></div>
+        <div style="margin-top: 5px; display: block">
+            <table style="width: 98%; border: 1px solid black;" class="f9">
+                <tr>
+                    <td colspan="4">
+                        CONSIGNEE
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.Cnee__r.EnglishCompanyName__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">VESSEL
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.VESSEL_FLIGHT__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">VOYAGE NO
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.Voy_No__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">H.B/L NO
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.HBL_Number_SEA_AIR__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">M.B/L NO
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.MBL_Number_SEA_AIR__c}"></apex:outputText>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        SHIPPER
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.shipper__r.EnglishCompanyName__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">PORT OF LOADING
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.POL__r.Name} - {!shipment.POL__r.Country_Name__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">PORT OF DISCHARGE
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.POD__r.Name} - {!shipment.POD__r.Country_Name__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">PLACE OF DELIVERY
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.Place_of_Delivery__r.Name} - {!shipment.Place_of_Delivery__r.Country_Name__c}"></apex:outputText>
+                        </span>
+                    </td>
+                    <!-- <td style="width: 13%;">{!IF(shipment.RecordTypeId == '01228000000dT9xAAE' || shipment.RecordTypeId == '01228000000dT9mAAE', 'ETA', '')}{!IF(shipment.RecordTypeId == '01228000000dT9qAAE' || shipment.RecordTypeId == '01228000000dT9nAAE', 'ETD', '')} {!IF((shipment.RecordTypeId != '01228000000dT9xAAE' && shipment.RecordTypeId != '01228000000dT9qAAE' && shipment.RecordTypeId != '01228000000dT9mAAE' && shipment.RecordTypeId != '01228000000dT9nAAE'),'Accounted Date', '')}<br/> -->
+                    <!-- <span class="f7"> -->
+                    <!-- <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId == '01228000000dT9xAAE' || shipment.RecordTypeId == '01228000000dT9mAAE'}"> -->
+                    <!-- <apex:param value="{!shipment.ETA__c}"/> -->
+                    <!-- </apex:outputText> -->
+                    <!-- <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId == '01228000000dT9qAAE' || shipment.RecordTypeId == '01228000000dT9nAAE'}"> -->
+                    <!-- <apex:param value="{!shipment.ETD__c}"/> -->
+                    <!-- </apex:outputText> -->
+                    <!-- <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId != '01228000000dT9xAAE' && shipment.RecordTypeId != '01228000000dT9qAAE' && shipment.RecordTypeId != '01228000000dT9mAAE' && shipment.RecordTypeId != '01228000000dT9nAAE'}"> -->
+                    <!-- <apex:param value="{!shipment.SalesAccountedDate__c}"/> -->
+                    <!-- </apex:outputText> -->
+                    <!-- </span> -->
+                    <!-- </td> -->
+                    <td style="width: 13%;">{!IF(shipment.RecordTypeId == '0125g000001NKBVAA4' || shipment.RecordTypeId == '0125g000001NKBpAAO',
+                        'ETA', '')}{!IF(shipment.RecordTypeId == '0125g000001NKBUAA4' || shipment.RecordTypeId == '0125g000001NKBqAAO',
+                        'ETD', '')} {!IF((shipment.RecordTypeId != '0125g000001NKBVAA4' && shipment.RecordTypeId != '0125g000001NKBUAA4'
+                        && shipment.RecordTypeId != '0125g000001NKBpAAO' && shipment.RecordTypeId != '0125g000001NKBqAAO'),'Accounted
+                        Date', '')}
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId == '0125g000001NKBVAA4' || shipment.RecordTypeId == '0125g000001NKBpAAO'}">
+                                <apex:param value="{!shipment.ETA__c}" />
+                            </apex:outputText>
+                            <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId == '0125g000001NKBUAA4' || shipment.RecordTypeId == '0125g000001NKBqAAO'}">
+                                <apex:param value="{!shipment.ETD__c}" />
+                            </apex:outputText>
+                            <apex:outputText value="{0,date,dd/MM/yyyy}" rendered="{!shipment.RecordTypeId != '0125g000001NKBVAA4' && shipment.RecordTypeId != '0125g000001NKBUAA4' && shipment.RecordTypeId != '0125g000001NKBpAAO' && shipment.RecordTypeId != '0125g000001NKBqAAO'}">
+                                <apex:param value="{!shipment.SalesAccountedDate__c}" />
+                            </apex:outputText>
+                        </span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        DESCRIPTION OF GOODS
+                        <br/>
+                        <span class="f7">
+                            <apex:outputfield value="{!shipment.Item__c}" />
+                        </span>
+                    </td>
+                    <td style="width: 13%;">PACKAGE
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.carton__c} {!shipment.UnitType__c}"></apex:outputText>(s)</span>
+                    </td>
+                    <td style="width: 13%;">GROSS WEIGHT
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.weight__c} KGS"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">MEASUREMENT
+                        <br/>
+                        <span class="f7">
+                            <apex:outputText value="{!shipment.CBM__c} CBM"></apex:outputText>
+                        </span>
+                    </td>
+                    <td style="width: 13%;">CTNR SIZE * NO
+                        <br/>
+                        <span class="f7">
+                            <div class="f7" style="{!IF((shipment.Container__c != null || shipment.ContainerNumber__c != null || shipment.Container2__c != null || shipment.ContainerNumber2__c != null), '', 'display: none;')}">
+                                <apex:outputText value="{!shipment.Container__c} {!shipment.ContainerNumber__c}" />
+                                <apex:outputText value=" / {!shipment.Container2__c} {!shipment.ContainerNumber2__c}" rendered="{!shipment.Container2__c != null || shipment.ContainerNumber2__c != null}"
+                                />
+                            </div>
+                            <div class="f7" style="{!IF((shipment.Container3__c != null || shipment.ContainerNumber3__c != null || shipment.Container4__c != null || shipment.ContainerNumber4__c != null), '', 'display: none;')}">
+                                <apex:outputText value="{!shipment.Container3__c} {!shipment.ContainerNumber3__c}" />
+                                <apex:outputText value=" / {!shipment.Container4__c} {!shipment.ContainerNumber4__c}" rendered="{!shipment.Container4__c != null || shipment.ContainerNumber4__c != null}"
+                                />
+                            </div>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 15px; display: block">
+            <table style="width: 98%; border: 1px solid black; text-align: left;" class="f7">
+                <apex:repeat value="{!referenceLines}" var="ref">
+                    <tr>
+                        <td style="width: 50%; padding-left: 10px;">{!ref.firstReference}</td>
+                        <td style="width: 50%; padding-left: 10px;">{!ref.secondReference}</td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>
+        <div style="margin-top: 15px; display:block; ">
+            <table style="width: 98%; border: 1px solid black; text-align: center; display: block; {!IF(isBreakAll, 'page-break-after: always;', '')}"
+                class="f9">
+                <tr class="clsheader">
+                    <td colspan="3" rowspan="2" style="width: 30%;">
+                        DESCRIPTION
+                    </td>
+                    <td colspan="{!setCurrsSize + 4}">REVENUE</td>
+                    <td colspan="{!setCurrencyBuyingsSize + 4}">COST</td>
+                    <td>PROFIT</td>
+                </tr>
+                <tr class="clsheader">
+                    <td rowspan="2">Invoice to</td>
+                    <td colspan="{!setCurrsSize + 1}">Subtotal</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">Payment To</td>
+                    <td colspan="{!setCurrencyBuyingsSize + 1}">Subtotal</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">(LOCAL)</td>
+                </tr>
+                <tr class="clsheader">
+                    <td style="width: 150px;">Item</td>
+                    <td>Q'ty</td>
+                    <td>Unit</td>
+                    <apex:repeat value="{!setCurrs}" var="curr">
+                        <td>{!curr}</td>
+                    </apex:repeat>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <apex:repeat value="{!setCurrencyBuyings}" var="currBuying">
+                        <td>{!currBuying}</td>
+                    </apex:repeat>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                </tr>
+                <apex:repeat value="{!invoicingListWrappers}" var="invoicingListWrapper">
+                    <apex:repeat value="{!invoicingListWrapper.invoicingList}" var="invoicing">
+                        <tr style="text-align: right; {!IF((invoicing.UnitPriceofSelling3rdCurrency__c != null || invoicing.UnitPriceofBuying3rdCurrency__c != null || invoicing.SellAmountJPN__c != 0 || invoicing.SellTaxNum__c != 0 || invoicing.SellInTaxAmountJPY__c != 0 || invoicing.BuyAmountJPN__c != 0 || invoicing.BuyTaxNum__c != 0 || invoicing.BuyInTaxAmountJPY__c != 0 || invoicing.Ararigaku__c != 0), '', 'display: none;')}"
+                            class="f7">
+                            <td style="text-align: left;">
+                                <span>
+                                    {!SUBSTITUTE(SUBSTITUTE(invoicing.InsatuyouSyohinEng__c,'Surcharge Included' ,''),'Surcharge Excluded','')}
+                                </span>
+                                <br/>
+
+                                <div style="text-align: right; margin-left: 100px; font-style: italic;">ex-rate</div>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.Suryo__c}" />
+                                </apex:outputText>
+                            </td>
+                            <!-- <td> -->
+                            <!-- 
+                                <apex:variable var="unitKey" value="{!invoicing.Tariff__r.UNIT__c}"/> -->
+                            <!-- <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey
+                                 != null}"/> -->
+                            <!-- </td> -->
+                            <td>
+                                <!-- <apex:variable var="unitKey" value="{!invoicing.ChargeUnitInPrint__c}"/> -->
+                                <!-- <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey != null}"/> -->
+                                <apex:outputText value="{!invoicing.ChargeUnitInPrint__c}" rendered="{!invoicing.ChargeUnitInPrint__c != null}" />
+                            </td>
+                            <td style="{!IF((isOnBehalfCustomer && !invoicing.ADVANCE_PAYMENT_ON_BEHALF_OF__c) || 
+                                   (!isOnBehalfCustomer), '', 'display: none;')}">
+                                {!invoicing.Seikyusaki__r.Reference_Number__c}
+                            </td>
+                            <apex:repeat value="{!setCurrs}" var="curr">
+                                <td style="{!IF(((isOnBehalfCustomer && !invoicing.ADVANCE_PAYMENT_ON_BEHALF_OF__c) || 
+                                    (!isOnBehalfCustomer)), '', 'display: none;')}">
+                                    <span style="{!IF((invoicing.curr__c == curr), '', 'display: none;')}">
+                                        <span style="{!IF((invoicing.curr__c != settingFCYCurrency && invoicing.curr__c != settingLocalCurrency), '', 'display: none;')}">
+                                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.UnitPriceofSelling3rdCurrency__c}" />                                           
+                                            </apex:outputText>  
+                                             <br/>
+                                              <apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.FxrateSelling3rdCurrencyLocal__c}" />                                           
+                                            </apex:outputText>                                            
+                                        </span>
+                                        <span style="{!IF((invoicing.curr__c = settingFCYCurrency), '', 'display: none;')}">
+                                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.SellTankaUSD__c}" />                                           
+                                            </apex:outputText>  
+                                             <br/>
+                                              <apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.FxrateSelling3rdCurrencyFCY__c}" />                                           
+                                            </apex:outputText>                                            
+                                        </span>
+                                    </span>                                   
+                                     
+                                    <br/>
+                                    <span style="{!IF((invoicing.curr__c == curr), '', 'display: none;')}">{!invoicing.KawaseSel__c}</span>
+                                </td>
+                            </apex:repeat>
+                            <td style="{!IF((isOnBehalfCustomer && !invoicing.ADVANCE_PAYMENT_ON_BEHALF_OF__c) || 
+                                   (!isOnBehalfCustomer), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0.##}">
+                                    <apex:param value="{!invoicing.SellAmountJPN__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="{!IF((isOnBehalfCustomer && !invoicing.ADVANCE_PAYMENT_ON_BEHALF_OF__c) || 
+                                   (!isOnBehalfCustomer), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.SellTaxNum__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="{!IF((isOnBehalfCustomer && !invoicing.ADVANCE_PAYMENT_ON_BEHALF_OF__c) || 
+                                   (!isOnBehalfCustomer), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.SellInTaxAmountJPY__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                {!invoicing.PaymentTo__r.Reference_Number__c}
+                            </td>
+                            <apex:repeat value="{!setCurrencyBuyings}" var="currBuying">
+                                <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                    (!isOnBehalfCompany), '', 'display: none;')}">
+                                    <span style="{!IF((invoicing.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                        <span style="{!IF((invoicing.CurrencyBuying__c != settingFCYCurrency && invoicing.CurrencyBuying__c != settingLocalCurrency), '', 'display: none;')}">
+                                       		<apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.UnitPriceofBuying3rdCurrency__c}" />                                         
+                                            </apex:outputText>
+                                            <br/>
+                                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                                <apex:param value="{!invoicing.FxrateBuying3rdCurrencyFCY__c}" />                                           
+                                            </apex:outputText>
+                                        </span>
+                                        
+                                    </span>
+                                    <br/>
+                                    <span style="{!IF((invoicing.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                        <apex:outputText value="{0, number, ###,###,##0}">
+                                            <apex:param value="{!invoicing.KawaseBay__c}" />
+                                        </apex:outputText>
+                                    </span>
+                                </td>
+                            </apex:repeat>
+
+                            <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0}">
+                                    <apex:param value="{!invoicing.BuyAmountJPN__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.BuyTaxNum__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0}">
+                                    <apex:param value="{!invoicing.BuyInTaxAmountJPY__c}" />
+                                </apex:outputText>
+                            </td>
+                            <!-- <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.PROFIT_USD__c}" />
+                                </apex:outputText>
+                            </td> -->
+                            <td style="{!IF((isOnBehalfCompany && !invoicing.AdvancePaymentOnBehalfOfOurCompany__c) || 
+                                   (!isOnBehalfCompany), '', 'display: none;')}">
+                                <apex:outputText value="{0, number, ###,###,##0}">
+                                    <apex:param value="{!invoicing.Ararigaku__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </apex:repeat>
+                <apex:outputText >
+                    <tr style="text-align: right;" class="f7">
+                        <td colspan="3" style="text-align: left">SUB TOTAL</td>
+                        <td></td>
+                        <apex:repeat value="{!setCurrs}" var="curr">
+                            <td>
+                                <apex:outputText value="{0, number, ###,###,##0.##}">
+                                    <!--<apex:param value="{!renvenueCostSummary.totalRevenueUSD}"/>-->
+                                    <apex:param value="{!currsMap[curr]}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:repeat>
+
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalRevenue}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalRevenue}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalRevenueTax}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalRevenueTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalRevenueInclTax}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalRevenueInclTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td></td>
+                        <apex:repeat value="{!setCurrencyBuyings}" var="currBuying">
+                            <td>
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <!--<apex:param value="{!renvenueCostSummary.totalCostUSD}"/>-->
+                                    <apex:param value="{!currencyBuyingsMap[currBuying]}" />
+                                </apex:outputText>
+                            </td>
+                        </apex:repeat>
+
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalCost}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalCost}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalCostTax}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalCostTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalCostInclTax}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalCostInclTax}" />
+                            </apex:outputText>
+                        </td>
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <!--<apex:param value="{!renvenueCostSummary.totalProfit}"/>-->
+                                <apex:param value="{!subSumBehaftAll.totalProfit}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:outputText>
+                <!-- <br/> -->
+                <!-- <br/> -->
+            </table>
+
+            <!-- <br/> -->
+            <!-- <br/> -->
+            <!-- <div style = "{!IF(!isOnBehalfCustomer && !isOnBehalfCompany,'none', 'block')}" > -->
+            <!-- <br/> -->
+            <!-- <br/> -->
+            <!-- </div> -->
+            <table style="width: 98%; border: 1px solid black; text-align: center; margin-top: 15px; display: {!IF(!isOnBehalfCustomer && !isOnBehalfCompany ,'none', 'block')};
+                          {!IF(isBreakCustomer, 'page-break-after: always;', '')}" class="f9">
+                <tr class="clsheader">
+                    <td colspan="3" rowspan="2" style="width: 30%;">
+                        On Behalf of
+                    </td>
+                    <td colspan="{!setBehalfCurrsSize+4}">REVENUE</td>
+                    <td colspan="{!setBehalfCurrencyBuyingsSize+4}">COST</td>
+                    <td>PROFIT</td>
+                </tr>
+                <tr class="clsheader">
+                    <td rowspan="2">Invoice to</td>
+                    <td colspan="{!setBehalfCurrsSize+1}">Total</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">Payment To</td>
+                    <td colspan="{!setBehalfCurrencyBuyingsSize+1}">Total</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">(LOCAL)</td>
+                </tr>
+                <tr class="clsheader">
+                    <td style="width: 150px;">Item</td>
+                    <td>Q'ty</td>
+                    <td>Unit</td>
+                    <apex:repeat value="{!setBehalfCurrs}" var="curr">
+                        <td>{!curr}</td>
+                    </apex:repeat>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <apex:repeat value="{!setBehalfCurrencyBuyings}" var="currBuying">
+                        <td>{!currBuying}</td>
+                    </apex:repeat>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                    <td>(LOCAL)</td>
+                </tr>
+                <apex:repeat value="{!customerList}" var="customer">
+                    <tr style="text-align: right;" class="f7">
+                        <td style="text-align: left;">
+                            <span>
+                                {!SUBSTITUTE(SUBSTITUTE(customer.InsatuyouSyohinEng__c,'Surcharge Included' ,''),'Surcharge Excluded','')}
+                            </span>
+                            <br/>
+
+                            <div style="text-align: right; margin-left: 100px; font-style: italic;">ex-rate</div>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.#}">
+                                <apex:param value="{!customer.Suryo__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:variable var="unitKey" value="{!customer.Tariff__r.UNIT__c}" />
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey != null}" />
+                        </td>
+                        <td>
+                            {!customer.Seikyusaki__r.Reference_Number__c}
+                        </td>
+                        <apex:repeat value="{!setBehalfCurrs}" var="curr">
+                            <td>
+                                <span style="{!IF((customer.curr__c == curr), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0.###}">
+                                        <apex:param value="{!customer.SellAmountUSD__c}" />
+                                    </apex:outputText>
+                                </span>
+                                <br/>
+                                <span style="{!IF((customer.curr__c == curr), '', 'display: none;')}">{!customer.KawaseSel__c}</span>
+                            </td>
+                        </apex:repeat>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!customer.SellAmountJPN__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!customer.SellTaxNum__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!customer.SellInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>{!customer.PaymentTo__r.Reference_Number__c}</td>
+                        <apex:repeat value="{!setBehalfCurrencyBuyings}" var="currBuying">
+                            <td>
+                                <span style="{!IF((customer.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0.###}">
+                                        <apex:param value="{!customer.BuyAmountUSD__c}" />
+                                    </apex:outputText>
+                                </span>
+                                <br/>
+                                <span style="{!IF((customer.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0}">
+                                        <apex:param value="{!customer.KawaseBay__c}" />
+                                    </apex:outputText>
+                                </span>
+                            </td>
+                        </apex:repeat>
+
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!customer.BuyAmountJPN__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!customer.BuyTaxNum__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!customer.BuyInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!customer.Ararigaku__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <apex:repeat value="{!ourCompanyList}" var="company">
+                    <tr style="text-align: right;" class="f7">
+                        <td style="text-align: left;">
+                            <span>
+                                {!SUBSTITUTE(SUBSTITUTE(company.InsatuyouSyohinEng__c,'Surcharge Included' ,''),'Surcharge Excluded','')}
+                            </span>
+                            <br/>
+
+                            <div style="text-align: right; margin-left: 100px; font-style: italic;">Ex
+                                <br/>Rate</div>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.#}">
+                                <apex:param value="{!company.Suryo__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:variable var="unitKey" value="{!company.Tariff__r.UNIT__c}" />
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey != null}" />
+                        </td>
+                        <td>
+                            {!company.Seikyusaki__r.Reference_Number__c}
+                        </td>
+                        <apex:repeat value="{!setBehalfCurrs}" var="curr">
+                            <td>
+                                <span style="{!IF((company.curr__c == curr), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0.###}">
+                                        <apex:param value="{!company.SellAmountUSD__c}" />
+                                    </apex:outputText>
+                                </span>
+                                <br/>
+                                <span style="{!IF((company.curr__c == curr), '', 'display: none;')}">{!company.KawaseSel__c}</span>
+                            </td>
+                        </apex:repeat>
+
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!company.SellAmountJPN__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!company.SellTaxNum__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!company.SellInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>{!company.PaymentTo__r.Reference_Number__c}</td>
+
+                        <apex:repeat value="{!setBehalfCurrencyBuyings}" var="currBuying">
+                            <td>
+                                <span style="{!IF((company.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0.###}">
+                                        <apex:param value="{!company.BuyAmountUSD__c}" />
+                                    </apex:outputText>
+                                </span>
+                                <br/>
+                                <span style="{!IF((company.CurrencyBuying__c == currBuying), '', 'display: none;')}">
+                                    <apex:outputText value="{0, number, ###,###,##0}">
+                                        <apex:param value="{!company.KawaseBay__c}" />
+                                    </apex:outputText>
+                                </span>
+                            </td>
+                        </apex:repeat>
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!company.BuyAmountJPN__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!company.BuyTaxNum__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!company.BuyInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!company.Ararigaku__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+                <tr style="text-align: right;" class="f7">
+                    <td colspan="3" style="text-align: left">SUB TOTAL</td>
+                    <td></td>
+                    <apex:repeat value="{!setBehalfCurrs}" var="curr">
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!behalfCurrsMap[curr]}" />
+                            </apex:outputText>
+                        </td>
+                    </apex:repeat>
+
+
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalRevenue}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0.0##}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalRevenueTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalRevenueInclTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td></td>
+                    <apex:repeat value="{!setBehalfCurrencyBuyings}" var="currBuying">
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!behalfCurrencyBuyingsMap[currBuying]}" />
+                            </apex:outputText>
+                        </td>
+                    </apex:repeat>
+
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalCost}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0.0##}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalCostTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalCostInclTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!subSumCustomerAndCompany.totalProfit}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr style="text-align: right;" class="f7">
+                    <td colspan="3" style="text-align: left">Accumulated Total</td>
+                    <td></td>
+                    <apex:repeat value="{!setBehalfCurrs}" var="curr">
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!behalfAccCurrsMap[curr]}" />
+                            </apex:outputText>
+                        </td>
+                    </apex:repeat>
+
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalRevenue}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0.0##}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalRevenueTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalRevenueInclTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td></td>
+                    <apex:repeat value="{!setBehalfCurrencyBuyings}" var="currBuying">
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!behalfAccCurrencyBuyingsMap[currBuying]}" />
+                            </apex:outputText>
+                        </td>
+                    </apex:repeat>
+
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalCost}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0.0##}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalCostTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalCostInclTax}" />
+                        </apex:outputText>
+                    </td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!accSumCustomerAndCompany.totalProfit}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- <br/> -->
+            <!-- <br/> -->
+
+        </div>
+        <table style="width: 98%; border: 1px solid black; text-align: center; margin-top: 15px; display: {!IF(!isKickback ,'none', 'block')}; 
+                      {!IF(isBreakKickback, 'page-break-after: always;', '')}" class="f9">
+            <tr class="clsheader">
+                <td colspan="3" rowspan="2" style="width: 30%;">
+                    KICKBACK COST
+                </td>
+                <td colspan="5">REVENUE</td>
+                <td colspan="5">COST</td>
+                <td colspan="2">PROFIT</td>
+            </tr>
+            <tr class="clsheader">
+                <td rowspan="2">Invoice to</td>
+                <td colspan="2">Total</td>
+                <td>VAT</td>
+                <td>Total</td>
+                <td rowspan="2">Payment To</td>
+                <td colspan="2">Total</td>
+                <td>VAT</td>
+                <td>Total</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td rowspan="2">({!curr})</td>
+                </apex:repeat>
+                <td rowspan="2">(LOCAL)</td>
+            </tr>
+            <tr class="clsheader">
+                <td style="width: 150px;">Item</td>
+                <td>Q'ty</td>
+                <td>Unit</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td>({!curr})</td>
+                </apex:repeat>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td>({!curr})</td>
+                </apex:repeat>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+            </tr>
+            <apex:repeat value="{!lstKickbackDetail}" var="item">
+                <tr style="text-align: right;" class="f7">
+                    <td style="text-align: left !important;">{!item.KickbackName__c}</td>
+                    <td>{!item.ChargeUnit__c}</td>
+                    <td>{!item.ChargeType__c}</td>
+                    <td>-</td>
+                    <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                        <td>-</td>
+                    </apex:repeat>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{!item.KickbackTo__r.Reference_Number__c}</td>
+                    <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!item.TotalKickbackAmountUSD__c}" />
+                            </apex:outputText>
+                            <br/>
+                            <span>
+                                <apex:outputText value="{0, number, ###,###,##0}">
+                                    <apex:param value="{!item.ExchangeRate__c}" />
+                                </apex:outputText>
+                            </span>
+                        </td>
+                    </apex:repeat>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!item.TotalKickbackAmount__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td>0</td>
+                    <td>
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!item.TotalKickbackAmount__c}" />
+                        </apex:outputText>
+                    </td>
+                    <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                        <td>
+                            <apex:outputText value="-" style="{!IF(OR(item.TotalKickbackAmountUSD__c == 0, item.TotalKickbackAmountUSD__c == null),
+                                                              'display: none;', '')}" />
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!item.TotalKickbackAmountUSD__c}" />
+                            </apex:outputText>
+                        </td>
+                    </apex:repeat>
+                    <td>
+                        <apex:outputText value="-" style="{!IF(OR(item.TotalKickbackAmount__c == 0, item.TotalKickbackAmount__c == null),
+                                                              'display: none;', '')}" />
+                        <apex:outputText value="{0, number, ###,###,##0}">
+                            <apex:param value="{!item.TotalKickbackAmount__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </apex:repeat>
+            <tr style="text-align: right;" class="f7">
+                <td colspan="3" style="text-align: left">SUB TOTAL</td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!subSumKickback.totalRevenueUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumKickback.totalRevenue}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!subSumKickback.totalRevenueTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumKickback.totalRevenueInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!subSumKickback.totalCostUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumKickback.totalCost}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!subSumKickback.totalCostTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumKickback.totalCostInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <!--<apex:outputText value="-" style="{!IF(OR(subSumKickback.totalProfitUSD == 0, subSumKickback.totalProfitUSD == null),
+                                                              'display: none;', '')}" />-->
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!subSumKickback.totalProfitUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <!--<apex:outputText value="-" style="{!IF(OR(subSumKickback.totalProfit == 0, subSumKickback.totalProfit == null),
+                                                              'display: none;', '')}" />-->
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumKickback.totalProfit}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr style="text-align: right;" class="f7">
+                <td colspan="3" style="text-align: left">Accumulated Total</td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumKickback.totalRevenueUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalRevenue}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!accSumKickback.totalRevenueTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalRevenueInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumKickback.totalCostUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalCost}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!accSumKickback.totalCostTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalCostInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumKickback.totalProfitUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalProfit}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <!-- <br/> -->
+            <!-- <br/> -->
+        </table>
+        <table style="{!IF(and(percentRevenue == 0, percentProfit == 0), 'display: none;', 'display: block;')}width: 98%; border: 1px solid black; text-align: center; margin-top: 15px;"
+            class="f9">
+            <tr class="clsheader">
+                <td colspan="3" rowspan="2" style="width: 30%;">
+                    OVERHEAD COST
+                </td>
+                <td colspan="5">REVENUE</td>
+                <td colspan="5">COST</td>
+                <td colspan="2">PROFIT</td>
+            </tr>
+            <tr class="clsheader">
+                <td rowspan="2">Invoice to </td>
+                <td colspan="2">Total</td>
+                <td>VAT</td>
+                <td>Total</td>
+                <td rowspan="2">Payment To</td>
+                <td colspan="2">Total</td>
+                <td>VAT</td>
+                <td>Total</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td rowspan="2">{!curr}</td>
+                </apex:repeat>
+                <td rowspan="2">(LOCAL)</td>
+            </tr>
+            <tr class="clsheader">
+                <td style="width: 150px;">Item</td>
+                <td>Q'ty</td>
+                <td>Unit</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td>({!curr})</td>
+                </apex:repeat>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td>({!curr})</td>
+                </apex:repeat>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+                <td>(LOCAL)</td>
+            </tr>
+            <tr style="text-align: right; {!IF(percentRevenue == 0, 'display: none;', '')}" class="f7">
+                <td style="text-align: left; width: 150px;">
+                    Overheadcost base on
+                    <br/>Revenue {!percentRevenue*100}%
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalRevenue}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <!--{!percentRevenue}-->
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!overcostRevenue}" />
+                    </apex:outputText>
+                </td>
+                <td></td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td></td>
+                <td></td>
+                <td></td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td>
+                    <apex:outputText value="-" style="{!IF(overcostRevenue== 0,
+                                                              'display: none;', '')}" />
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!overcostRevenue}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr style="text-align: right; {!IF(percentProfit == 0, 'display: none;', '')}" class="f7">
+                <td style="width: 150px; text-align: left;">
+                    Overheadcost base on
+                    <br/>Profit {!percentProfit*100}%
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumKickback.totalCost}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <!--{!percentProfit}-->
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!overcostCost}" />
+                    </apex:outputText>
+                </td>
+                <apex:repeat value="{!kickBackCurrSet}" var="curr">
+                    <td></td>
+                </apex:repeat>
+                <td>
+                    <apex:outputText value="-" style="{!IF(overcostProfit== 0 || overcostProfit < 0,
+                                                              'display: none;', '')}" />
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!overcostProfit}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr style="text-align: right;" class="f7">
+                <td colspan="3" style="text-align: left">SUB TOTAL</td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!subSumOverheadCost.totalRevenueUSD}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!subSumOverheadCost.totalRevenue}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0.0##}">
+                                <apex:param value="{!subSumOverheadCost.totalRevenueTax}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!subSumOverheadCost.totalRevenueInclTax}"/>
+                            </apex:outputText>-->
+                </td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!subSumOverheadCost.totalCostUSD}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!subSumOverheadCost.totalCost}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--
+                            <apex:outputText value="{0, number, ###,###,##0.0##}">
+                                <apex:param value="{!subSumOverheadCost.totalCostTax}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!subSumOverheadCost.totalCostInclTax}"/>
+                            </apex:outputText>-->
+                </td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    0
+                    <!--<apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!subSumOverheadCost.totalProfitUSD}"/>
+                            </apex:outputText>-->
+                </td>
+                <td>
+                    <apex:outputText value="-" style="{!IF(OR(subSumOverheadCost.totalProfit == 0, subSumOverheadCost.totalProfit < 0),
+                                                              'display: none;', '')}" />
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!subSumOverheadCost.totalProfit}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr style="text-align: right;" class="f7">
+                <td colspan="3" style="text-align: left">Accumulated Total</td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumOverheadcost.totalRevenueUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumOverheadcost.totalRevenue}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!accSumOverheadcost.totalRevenueTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumOverheadcost.totalRevenueInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td></td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumOverheadcost.totalCostUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumOverheadcost.totalCost}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0.0##}">
+                        <apex:param value="{!accSumOverheadcost.totalCostTax}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumOverheadcost.totalCostInclTax}" />
+                    </apex:outputText>
+                </td>
+                <td colspan="{!kickBackCurrSetSize}">
+                    <apex:outputText value="{0, number, ###,###,##0.##}">
+                        <apex:param value="{!accSumOverheadcost.totalProfitUSD}" />
+                    </apex:outputText>
+                </td>
+                <td>
+                    <apex:outputText value="{0, number, ###,###,##0}">
+                        <apex:param value="{!accSumOverheadcost.totalProfit}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+
+        </table>
+        <div style="page-break-before: always;"></div>
+        <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="130px" height="60px"
+            />
+        </div>
+        <div class="f15" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+            PROFIT SHEET
+        </div>
+        <div class="f7" style="position:absolute; margin-top:25px; left:130px;  width:710px; text-align:center;">
+            <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}" />
+        </div>
+        <div class="f7" style="position:absolute; margin-top:65px; left:200px; width:600px;  text-align:center;">
+            <apex:outputLabel value="TEL:{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX:{!$Setup.Site_Custom_Settings__c.Company_Fax__c}"
+            />
+        </div>
+        <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+            ISSUE DATE:
+        </div>
+        <div class="f7" style="position:absolute; margin-top:0px; left:950px; width:110px;  ">
+            <apex:outputText value="{0,date,yyyy/MM/dd}">
+                <apex:param value="{!shipment.PrintDate__c}" />
+            </apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+            <apex:outputText value="WKID : S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+            <apex:outputText value="JOB NO: {!shipment.JobRequestID__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:60px; left:880px;  text-align:left;">
+            <apex:outputText value="REF NO: {!shipment.REFNO__c}"></apex:outputText>
+        </div>
+        <div class="f7" style="position:absolute; margin-top:80px; left:880px;  text-align:left;">
+            <apex:outputText value="PIC: {!shipment.PersonInCharge__r.Name}"></apex:outputText>
+        </div>
+        <div style="height: 100px"></div>
+        <div style="text-align: center">
+            <div style="margin-top: 10px; width: 40%; display: inline-block; float: left;">
+                <table style="width: 98%; border: 1px solid black; text-align: center;" class="f7">
+                    <tr>
+                        <td colspan="3">APPROVAL</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%; padding-right: 20px; padding-left: 20px;">PREPARED</td>
+                        <td style="width: 30%; padding-right: 20px; padding-left: 20px;">1st REVIEWED</td>
+                        <td style="width: 30%; padding-right: 20px; padding-left: 20px;">2nd REVIEWED</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 10px; width: 55%; display: inline-block; float: right; margin-right: 10px">
+                <table style="width: 98%; border: 1px solid black; text-align: center;" class="f7">
+                    <tr>
+                        <td></td>
+                        <td>PROFIT RATIO w/o VAT</td>
+                        <td>PROFIT RATIO w/t VAT</td>
+                    </tr>
+                    <tr>
+                        <td>Billing(s)</td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!billingProfixWithoutTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!billingProfixWithTax}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>On-behalf</td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!onBehalfOfPerProfixWithoutTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!onBehalfOfPerProfixWithTax}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Accumulated Total</td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!percentProfixWithoutTax}" />
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}%">
+                                <apex:param value="{!percentProfixWithTax}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="footer" style="clear:both; width: 800px">
+            <div class="footerleft" style="float:left; width: 45%; text-align: left;">
+                <span>{!userName}</span> -
+                <span>{!today}</span>
+            </div>
+        </div> -->
+    </body>
+</apex:page>

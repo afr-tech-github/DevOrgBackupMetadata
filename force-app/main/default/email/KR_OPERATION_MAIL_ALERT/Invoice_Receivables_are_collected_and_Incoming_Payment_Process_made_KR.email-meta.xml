@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>청구입금기한 이후에도 입금처리가 되지 않았을 경우, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>청구입금기한 이후 미수금 자동확인메일 템플릿</name>
+    <style>none</style>
+    <subject>자동메일알림-ID: {!CustomObject1__c.Name}-청구입금기한 이후 미수금확인</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

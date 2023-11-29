@@ -1,0 +1,53 @@
+<apex:page controller="SetupContainerInfoController" tabStyle="CustomObject1__c" applyBodyTag="false" docType="html-5.0">
+    <head>
+        <style>
+            .error_message {
+            color: red;
+            font-size: 14px;
+            }
+        </style>
+    </head>
+    <apex:sectionHeader title="CONTAINER INFORMATION" subtitle="S{!hblShipment.WkInitial__c}{!hblShipment.Name}"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:variable var="index" value="{!1}"/>
+            <apex:repeat value="{!containers}" var="container">
+                <apex:pageBlockSection title="CONTAINER {!index}" columns="4">
+                    <apex:inputField value="{!container.Container__c}"/>
+                    <apex:inputField value="{!container.GOODS__c}"/>
+                    <apex:inputField value="{!container.Container_NO__c}"/>
+                    <apex:inputField value="{!container.Seal_No__c}"/>    
+                    <apex:inputField id="QUANTITY_PACKAGES__c" value="{!container.QUANTITY_PACKAGES__c}">
+                        <apex:actionSupport event="onchange" action="{!updateTotal}" reRender="summarySection"/>
+                    </apex:inputField>     
+                    <apex:inputField id="MEASUREMENT_CBM__c" value="{!container.MEASUREMENT_CBM__c}">
+                        <apex:actionSupport event="onchange" action="{!updateTotal}" reRender="summarySection"/>
+                    </apex:inputField>  
+                    <apex:inputField id="NET_WEIGHT__c" value="{!container.NET_WEIGHT__c}">
+                        <apex:actionSupport event="onchange" action="{!updateTotal}" reRender="summarySection"/>
+                    </apex:inputField>     
+                    <apex:inputField id="GROSS_WEIGHT__c" value="{!container.GROSS_WEIGHT__c}">
+                        <apex:actionSupport event="onchange" action="{!updateTotal}" reRender="summarySection"/>
+                    </apex:inputField>
+                </apex:pageBlockSection>
+                <apex:variable var="index" value="{!index +1}"/>
+            </apex:repeat>
+            <apex:pageBlockSection title="TOTAL" columns="4" id="summarySection">
+                <apex:outputLabel value="TOTAL QUANTITY"/>
+                <apex:outputText id="totalQuantity" value="{!totalQuantity}"></apex:outputText>
+                <apex:outputLabel value="TOTAL MEASUREMENT(CBM)"/>
+                <apex:outputText id="totalMeasurement" value="{!totalMeasurement}"></apex:outputText>
+                <apex:outputLabel value="TOTAL NET WEIGHT(KG)"/>
+                <apex:outputText id="totalNetWeight" value="{!totalNetWeight}"></apex:outputText>
+                <apex:outputLabel value="TOTAL GROSS WEIGHT(KG)"/>
+                <apex:outputText id="totalGrossWeight" value="{!totalGrossWeight}"></apex:outputText>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}" rendered="{!enabledSave}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}" immediate="true"
+                                    html-formnovalidate="formnovalidate"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

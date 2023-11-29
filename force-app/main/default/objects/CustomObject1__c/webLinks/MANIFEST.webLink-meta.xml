@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MANIFEST</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>MANIFEST</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}&quot;; 
+var attachmentId = sforce.apex.execute(&apos;clofor_com_cfs.HouseBillLadingReportDispatcher&apos;, &apos;createAttachment&apos;, {id:&apos;{!URLENCODE(CustomObject1__c.Id)}&apos;,wkid:&apos;{!URLENCODE(CustomObject1__c.Name)}&apos;,version:&apos;{!CustomObject1__c.QuotationVer__c}&apos;}); 
+
+// Open download popup 
+window.open(&apos;/servlet/servlet.FileDownload?file=&apos; + attachmentId); 
+
+// refresh the page detail 
+location.href = &apos;/{!URLENCODE(CustomObject1__c.Id)}&apos;;</url>
+</WebLink>

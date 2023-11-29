@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>HĐ Vat+Nợ vay</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>HĐ Vat+Nợ vay</value>
+    </caseValues>
+    <nameFieldLabel>ID HĐ Vat+Nợ vay</nameFieldLabel>
+</CustomObjectTranslation>

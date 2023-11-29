@@ -1,0 +1,9 @@
+Số hồ sơ {Case.CaseNumber}: {!Case.Subject} đã được cập nhật.Vui lòng bấm vào đường dẫn bên dưới để xem . 
+<insert the link to your Self-Service portal login page here> 
+
+
+{!Organization.Name} Customer Support /Bộ phận hổ trợ khách hàng
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}  
+*********************************************************

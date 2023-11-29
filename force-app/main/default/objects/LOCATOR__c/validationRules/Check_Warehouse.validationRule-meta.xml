@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Warehouse</fullName>
+    <active>true</active>
+    <description>warehouse must be the same with parents Locator</description>
+    <errorConditionFormula>NOT(ISBLANK(ParentLocator__c))&amp;&amp;  WarehouseID__c !=  ParentLocator__r.WarehouseID__c</errorConditionFormula>
+    <errorMessage>Warehouse must be the same with parents Locator.</errorMessage>
+</ValidationRule>

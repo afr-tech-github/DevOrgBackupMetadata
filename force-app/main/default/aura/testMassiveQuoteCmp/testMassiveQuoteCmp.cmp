@@ -1,0 +1,78 @@
+<aura:component
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global" controller="testMassiveQuoteController">
+    <aura:attribute name="showForm" type="Boolean" default="true" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+
+    <!-- <lightning:spinner alternativeText="Loading" /> -->
+    <div class="slds-grid">
+        <div class="slds-col"> Print Section </div>
+        <div class="slds-col"> Service Pricing </div>
+        <div class="slds-col"> Line Item Name </div>
+        <div class="slds-col"> Print </div>
+        <div class="slds-col"> Quantity </div>
+        <div class="slds-col"> Unit </div>
+        <div class="slds-col"> Container Type </div>
+        <div class="slds-col"> Currency Selling </div>
+        <div class="slds-col"> Selling List Price Local </div>
+        <div class="slds-col"> Selling List Price Local </div>
+        <div class="slds-col"> Selling List Price USD </div>
+        <div class="slds-col"> Remark </div>
+    </div>
+    <h1>Add New Quote</h1>
+    <aura:if isTrue="{! v.showForm}">
+        <lightning:recordEditForm aura:id="recordEditForm" onsuccess="{!c.onSuccess}" onerror="{!c.onError}"
+            objectApiName="clofor_com_cfs__QuoteLine__c">
+            <lightning:messages />
+            <lightning:inputField class="slds-hide" fieldName="RecordTypeId" value="0120K0000019bsRQAQ" />
+            <lightning:inputField class="slds-hide" fieldName="clofor_com_cfs__QuoteID__c" value="{!v.recordId}" />
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__PrintingSection__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ServicePricingID__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__LineItemName__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Print__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Quantity__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Unit__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ContainerType__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__CurrencySelling__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__SellingListPriceLocal__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__SellingListPriceLocal__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__SellingListPriceUSD__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Remarks__c" />
+                </div>
+                <div class="slds-col">
+                    <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="Save"
+                        label="Add New Quote" />
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+    <lightning:button class="slds-m-top_small" variant="brand" onclick="{!c.updateSellingListPriceLocal}" label="Update SellingListPriceLocal" />
+    <lightning:button class="slds-m-top_small" variant="brand" onclick="{!c.saveUpdate}" label="Save Update" />
+    <h1>Edit Quotes</h1>
+    {!v.body}
+</aura:component>

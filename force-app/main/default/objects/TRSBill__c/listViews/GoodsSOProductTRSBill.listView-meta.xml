@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsSOProductTRSBill</fullName>
+    <columns>NAME</columns>
+    <columns>SalesOrderID__c</columns>
+    <columns>GoodsSOProduct__c</columns>
+    <columns>Customer__c</columns>
+    <columns>BillNameAtPrintLocal__c</columns>
+    <columns>ChargeUnitTotal__c</columns>
+    <columns>TaxRatioSell__c</columns>
+    <columns>InvoiceTo__c</columns>
+    <columns>UnitPriceOfSellLocal__c</columns>
+    <columns>TotalAmountOfSellLocal__c</columns>
+    <columns>AmountSelliInclTAXLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>TRSBill__c.GoodsSOPOBilling</value>
+    </filters>
+    <label>Goods S/O+Product&lt;--&gt;TRS Bill</label>
+</ListView>

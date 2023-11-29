@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QR_Image__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF( Text(CodeImageType__c)=&quot;Barcode&quot;,
+IMAGE(&quot;https://www.scandit.com/wp-content/themes/bridge-child/wbq_barcode_gen.php?symbology=code128&amp;value=&quot;+QR_Code__c +&quot;&amp;size=80&amp;ec=L&quot;,QR_Code__c), IMAGE(&apos;https://chart.googleapis.com/chart?chs=100x100&amp;cht=qr&amp;chl=&apos; + QR_Code__c, &apos;Product QR Code&apos; ))</formula>
+    <inlineHelpText>Code Text will be automatically converted to either QR image or Barcode image base on Code Image Type.</inlineHelpText>
+    <label>Code Image in Document</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

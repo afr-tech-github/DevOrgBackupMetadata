@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi xem xét tỉ giá được yêu cầu.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Qui trình điều hành tỉ giá-yêu cầu</name>
+    <style>none</style>
+    <subject>EXCHANGE RATE-Request-{!MgmtMaster__c.Name}-{!MgmtMaster__c.Mgmt_Exrate_fromto__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

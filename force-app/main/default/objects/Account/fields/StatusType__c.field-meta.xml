@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>STATUS TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Custom_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>ACCOUNT_STATUS</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>New</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>Hot</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>Cold</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>Warm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>Qualified</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LOCAL PARTNER - LEAD(APPROACHING)</controllingFieldValue>
+            <controllingFieldValue>国内顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外顧客 - 見込み</controllingFieldValue>
+            <controllingFieldValue>海外パートナー - 見込み</controllingFieldValue>
+            <valueName>Opportunity</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

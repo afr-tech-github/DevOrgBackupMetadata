@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X1817</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>API with external system</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloAPI-LEX</label>
+    <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Terminal/Port Operator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Top Executive</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Warehouse Manager</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Yard/ICD Operator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Accountant</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Doc Operator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Logistics</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Sales Operator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>System Administrator-IP Restricted</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>QuoteProductLEPage</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Quote__c</pageOrSobjectType>
+        <recordType>Quote__c.ProductQuote</recordType>
+        <type>Flexipage</type>
+        <profile>Team Manager</profile>
+    </profileActionOverrides>
+    <tabs>Call_Out_Error__c</tabs>
+    <tabs>APIPerformance__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>AFR_CloAPI_LEX_UtilityBar</utilityBar>
+</CustomApplication>

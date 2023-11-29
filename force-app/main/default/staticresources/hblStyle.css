@@ -1,0 +1,23 @@
+.watermark-rotate{
+	color: red;
+	font-size: 50px;
+  transform: rotate(-30deg);
+
+  /* Legacy vendor prefixes that you probably don't need... */
+
+  /* Safari */
+  -webkit-transform: rotate(-30deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-30deg);
+
+  /* IE */
+  -ms-transform: rotate(-30deg);
+
+  /* Opera */
+  -o-transform: rotate(-30deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}

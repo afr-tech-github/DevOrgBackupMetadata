@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>AFR_Letter_Head</letterhead>
+    <name>Cargo OSD Alert-SKU</name>
+    <style>formalLetter</style>
+    <subject>Cargo OSD Alert-{!WorkOrderService__c.Name}</subject>
+    <textOnly>There is cargo OSD(Overage/Shortage/Damaged) identified.
+W/O/S ID:{!WorkOrderService__c.Name}
+Plan Quantity: {!WorkOrderService__c.PlannedQuantity__c}
+Missing Quantity: {!WorkOrderService__c.MissingQuantity__c}
+Initial Quantity: {!WorkOrderService__c.InitialQuantity__c}
+Returned Quantity:{!WorkOrderService__c.DamagedQuantity__c}
+Final Quantity:{!WorkOrderService__c.FinalQuantityRollUp__c}
+Variance Quantity:{!WorkOrderService__c.VarianceQuantity__c}
+OSD Report:{!WorkOrderService__c.MissingDamageReport__c}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

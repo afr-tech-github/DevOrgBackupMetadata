@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNTRRoute</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>HBL_SHIPMENT__c</columns>
+    <columns>POL__c</columns>
+    <columns>POD__c</columns>
+    <columns>Container_NO__c</columns>
+    <columns>TEU__c</columns>
+    <columns>Container__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Route__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>POL__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>CNTR Route Plan</label>
+</ListView>

@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Resgiter Connect Worker">
+    <aura:attribute name="evWorkOrderList" type="List" />
+    <aura:attribute name="evWorkOrderOriginIdList" type="String[]" />
+</aura:event>

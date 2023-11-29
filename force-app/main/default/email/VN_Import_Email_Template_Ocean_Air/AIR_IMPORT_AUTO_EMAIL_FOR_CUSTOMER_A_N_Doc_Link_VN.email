@@ -1,0 +1,287 @@
+Kính gửi {!CustomObject1__c.Field1__c}
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 
+<br>
+<br>
+Cám ơn Qúi Công ty đã sử dụng dịch vụ giao nhận của chúng tôi.
+<br>
+<br>
+Tình trạng hiện tại của lô hàng này là 「{!CustomObject1__c.status__c}」. 
+<br>
+<br>
+Để mở hay sao lưu thông tin về chứng từ về việc thông quan, vui lòng nhấp vào đường link và điền vào mật khẩu.
+<br>
+################################################################################################################### <br>
+Truy cập vào thông tin thông quan ：{!CustomObject1__c.A_N_LINK__c} <br>
+Mật khẩu：{!CustomObject1__c.A_N_PASSWORD__c} <br>
+################################################################################################################### 
+<br>
+<br>
+Vui lòng xem chi tiết ở bảng bên dưới.<br>
+<br>
+※Đây là mail tự động được gửi từ (Hệ thông cập nhật thông tinh bằng thời gian thật) mỗi khi tình trạng của lô hàng được cập nhật.
+<br>
+
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				COMMON INFORMATION
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.ID__c}
+			</td width="400">
+			<th>
+				STATUS
+			</td>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				IMPORTER
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c}
+			</td>
+			<th>
+				PIC OF IMPORTER
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}
+			</td>
+		</tr>
+            
+
+
+
+		<tr><thead>
+			<th colspan="4">
+				CARGO BASIC INFORMATION
+			</th></thead>
+
+<tr>
+			<th>
+				HAWB NO.
+			</th>
+			<td>
+				{!CustomObject1__c.HAWB__c}
+			</td>
+<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				MAWB NO.
+			</th>
+			<td>
+				{!CustomObject1__c.MAWB__c}
+			</td>
+
+<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}
+			</td>
+
+
+	</tr>
+<tr>
+<th>
+				FLIGHT NO.
+			</th>
+			<td>
+				{!CustomObject1__c.FlightNo__c}
+			</td>
+
+			<th>
+				A.O.D
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}
+			</td>
+
+　　　　　　　　</tr>
+		<tr>
+			<th>
+				GOODS
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+
+			<th>
+				E.T.D
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				WEIGHT
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+
+			<th>
+				A.O.A
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c} 
+			</td>
+		</tr>
+		<tr>
+			<th>
+				QUANTITY / MEASUREMENT
+			</th>
+			<td>
+				{!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM
+			</td>
+
+			<th>
+				E.T.A
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				INCOTERMS
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+
+			<th>
+				INSURANCE
+			</th>
+			<td>
+				{!CustomObject1__c.Insurance__c}
+			</td>
+		</tr>
+		<tr><thead>
+			<th colspan="4">
+	TRIANGLE TRADE & TRANSIT
+			</th></thead>
+<tr>
+			<th>
+				TRANSIT AIRPORT
+			</th>
+			<td>
+				{!CustomObject1__c.TS__c}	</td>
+<th>
+				TRANSIT FLIGHT NO.
+			</th>
+			<td>
+				{!CustomObject1__c.TransitV__c}
+			</td>
+</tr>
+<tr>
+			<th>
+				FIRST SHIPPER 
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WElD}	
+	</td>
+
+ 　　　　　　　　　　 <th>
+                           TRANSIT ETD
+	</th>
+	<td>
+	{!CustomObject1__c.T_ETD__c}	
+	</td>
+		</tr>
+
+
+		<tr><thead>
+			<th colspan="4">
+				CUSTOMS CLEARANCE 
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				CUSTOMS CLEARANCE SERVICE REQUIRED
+			</th>
+			<td colspan="3" rowspan="2">
+				Dịch vụ hải quan được yêu cầu là '{!CustomObject1__c.Custom__c}'. Trong trường hợp Dịch vụ hải quan được yêu cầu là "YES", thì thông tin chi tiết sẽ được cung cấp bởi một email khác
+			</td>
+		
+		</tr>
+
+	<tr><thead>
+			<th colspan="4">
+				DELIVERY			
+                  </th></thead>
+		</tr>
+		<tr>
+			<th>
+				NUMBER OF DELIVERY LOCATIONS 
+			</th>
+			<td colspan="3">
+{!CustomObject1__c.DeliveryService_required__c} 
+Trong trường hợp địa điểm giao hàng nhiều hơn 0, thông tin chi tiết giao hàng sẽ được cung cấp bởi một e-mail khác
+
+			</td>
+
+		</tr>
+
+			<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th >
+				REMARK
+			</th>
+			<td colspan="3">
+				{!CustomObject1__c.Remark__c} 			</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+Nếu có cần thêm thông tin, vui lòng liên hệ với chúng tôi. 
+<br>
+Rất hân hạnh  được tiếp tục phục vụ Qúi Công Ty.
+<br><br>
+{!CustomObject1__c.PersonInCharge__c}<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

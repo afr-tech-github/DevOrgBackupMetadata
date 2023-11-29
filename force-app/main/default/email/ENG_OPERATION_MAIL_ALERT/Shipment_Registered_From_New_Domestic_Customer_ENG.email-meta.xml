@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when shipment from new domestic customer is registered.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>INFORMAION FOR DOC OPERATOR TEAM-SHIPMENT REGISTERED FROM NEW DOMESTIC CUSTOMER</name>
+    <style>none</style>
+    <subject>INFORMAION FOR Doc Operator TEAM - SHIPMENT REGISTERED FROM {!CustomObject1__c.Field1__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

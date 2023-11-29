@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACTUAL_END_TIME_later_than_START_TIME</fullName>
+    <active>true</active>
+    <errorConditionFormula>ActualEndTime__c &lt;  ActualStartTime__c</errorConditionFormula>
+    <errorDisplayField>ActualEndTime__c</errorDisplayField>
+    <errorMessage>ACTUAL END TIME must be later than ACTUAL START TIME.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Name	HTML (HEX)	Red Green　Blue　Hue　Sat　Lum (HSL)</fullName>
+        <default>false</default>
+        <label>Name	HTML (HEX)	Red Green　Blue　Hue　Sat　Lum (HSL)</label>
+    </customValue>
+    <customValue>
+        <fullName>Amaranth#E52B50	229	43	80	348*	73%	53%</fullName>
+        <default>false</default>
+        <label>Amaranth#E52B50	229	43	80	348*	73%	53%</label>
+    </customValue>
+    <customValue>
+        <fullName>Amber	#FFBF00	255	191	0	045*	100%	50%</fullName>
+        <default>false</default>
+        <label>Amber	#FFBF00	255	191	0	045*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Amethyst	#9966CC	153	102	204	270*	50%	60%</fullName>
+        <default>false</default>
+        <label>Amethyst	#9966CC	153	102	204	270*	50%	60%</label>
+    </customValue>
+    <customValue>
+        <fullName>Apricot	#FBCEB1	251	206	177	024*	90%	84%</fullName>
+        <default>false</default>
+        <label>Apricot	#FBCEB1	251	206	177	024*	90%	84%</label>
+    </customValue>
+    <customValue>
+        <fullName>Aquamarine	#7FFFD4	127	255	212	160*	50%	100%</fullName>
+        <default>false</default>
+        <label>Aquamarine	#7FFFD4	127	255	212	160*	50%	100%</label>
+    </customValue>
+    <customValue>
+        <fullName>Azure	#007FFF	0	127	255	210*	100%	50%</fullName>
+        <default>false</default>
+        <label>Azure	#007FFF	0	127	255	210*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Baby blue	#89CFF0	137	207	240	199*	77%	74%</fullName>
+        <default>false</default>
+        <label>Baby blue	#89CFF0	137	207	240	199*	77%	74%</label>
+    </customValue>
+    <customValue>
+        <fullName>Beige	#F5F5DC	245	245	220	060*	56%	91%</fullName>
+        <default>false</default>
+        <label>Beige	#F5F5DC	245	245	220	060*	56%	91%</label>
+    </customValue>
+    <customValue>
+        <fullName>Black	#000000	0	0	0	any	any	0%</fullName>
+        <default>false</default>
+        <label>Black	#000000	0	0	0	any	any	0%</label>
+    </customValue>
+    <customValue>
+        <fullName>Blue	#0000FF	0	0	255	240*	100%	50%</fullName>
+        <default>false</default>
+        <label>Blue	#0000FF	0	0	255	240*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Blue-green	#0095B6	0	149	182	191*	100%	36%</fullName>
+        <default>false</default>
+        <label>Blue-green	#0095B6	0	149	182	191*	100%	36%</label>
+    </customValue>
+    <customValue>
+        <fullName>Blue-violet	#8A2BE2	138	43	226	271*	76%	53%</fullName>
+        <default>false</default>
+        <label>Blue-violet	#8A2BE2	138	43	226	271*	76%	53%</label>
+    </customValue>
+    <customValue>
+        <fullName>Blush	#DE5D83	222	93	131	342*	66%	62%</fullName>
+        <default>false</default>
+        <label>Blush	#DE5D83	222	93	131	342*	66%	62%</label>
+    </customValue>
+    <customValue>
+        <fullName>Bronze	#CD7F32	205	127	50	030*	61%	50%</fullName>
+        <default>false</default>
+        <label>Bronze	#CD7F32	205	127	50	030*	61%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Brown	#964B00	150	75	0	030*	100%	29%</fullName>
+        <default>false</default>
+        <label>Brown	#964B00	150	75	0	030*	100%	29%</label>
+    </customValue>
+    <customValue>
+        <fullName>Burgundy	#800020	128	0	32	345*	100%	25%</fullName>
+        <default>false</default>
+        <label>Burgundy	#800020	128	0	32	345*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Byzantium	#702963	112	41	99	311*	46%	30%</fullName>
+        <default>false</default>
+        <label>Byzantium	#702963	112	41	99	311*	46%	30%</label>
+    </customValue>
+    <customValue>
+        <fullName>Carmine	#960018	150	0	24	350*	100%	29%</fullName>
+        <default>false</default>
+        <label>Carmine	#960018	150	0	24	350*	100%	29%</label>
+    </customValue>
+    <customValue>
+        <fullName>Cerise	#DE3163	222	49	99	343*	72%	53%</fullName>
+        <default>false</default>
+        <label>Cerise	#DE3163	222	49	99	343*	72%	53%</label>
+    </customValue>
+    <customValue>
+        <fullName>Cerulean	#007BA7	0	123	167	196*	100%	33%</fullName>
+        <default>false</default>
+        <label>Cerulean	#007BA7	0	123	167	196*	100%	33%</label>
+    </customValue>
+    <customValue>
+        <fullName>Champagne	#F7E7CE	247	231	206	037*	72%	89%</fullName>
+        <default>false</default>
+        <label>Champagne	#F7E7CE	247	231	206	037*	72%	89%</label>
+    </customValue>
+    <customValue>
+        <fullName>Chartreuse green	#7FFF00	127	255	0	090*	100%	50%</fullName>
+        <default>false</default>
+        <label>Chartreuse green	#7FFF00	127	255	0	090*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Chocolate	#7B3F00	123	63	0	031*	100%	24%</fullName>
+        <default>false</default>
+        <label>Chocolate	#7B3F00	123	63	0	031*	100%	24%</label>
+    </customValue>
+    <customValue>
+        <fullName>Cobalt blue	#0047AB	0	71	171	215*	100%	34%</fullName>
+        <default>false</default>
+        <label>Cobalt blue	#0047AB	0	71	171	215*	100%	34%</label>
+    </customValue>
+    <customValue>
+        <fullName>Coffee	#6F4E37	111	78	55	025*	34%	33%</fullName>
+        <default>false</default>
+        <label>Coffee	#6F4E37	111	78	55	025*	34%	33%</label>
+    </customValue>
+    <customValue>
+        <fullName>Copper	#B87333	184	115	51	029*	57%	46%</fullName>
+        <default>false</default>
+        <label>Copper	#B87333	184	115	51	029*	57%	46%</label>
+    </customValue>
+    <customValue>
+        <fullName>Coral	#F88379	248	131	121	005*	90%	72%</fullName>
+        <default>false</default>
+        <label>Coral	#F88379	248	131	121	005*	90%	72%</label>
+    </customValue>
+    <customValue>
+        <fullName>Crimson	#DC143C	220	20	60	348*	83%	47%</fullName>
+        <default>false</default>
+        <label>Crimson	#DC143C	220	20	60	348*	83%	47%</label>
+    </customValue>
+    <customValue>
+        <fullName>Cyan	#00FFFF	0	255	255	180*	100%	50%</fullName>
+        <default>false</default>
+        <label>Cyan	#00FFFF	0	255	255	180*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Desert sand	#EDC9Af	237	201	175	025*	63%	81%</fullName>
+        <default>false</default>
+        <label>Desert sand	#EDC9Af	237	201	175	025*	63%	81%</label>
+    </customValue>
+    <customValue>
+        <fullName>Electric blue	#7DF9FF	125	249	255	183*	100%	75%</fullName>
+        <default>false</default>
+        <label>Electric blue	#7DF9FF	125	249	255	183*	100%	75%</label>
+    </customValue>
+    <customValue>
+        <fullName>Emerald	#50C878	80	200	120	140*	52%	55%</fullName>
+        <default>false</default>
+        <label>Emerald	#50C878	80	200	120	140*	52%	55%</label>
+    </customValue>
+    <customValue>
+        <fullName>Erin	#00FF3F	0	255	63	135*	100%	50%</fullName>
+        <default>false</default>
+        <label>Erin	#00FF3F	0	255	63	135*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Gold	#FFD700	255	215	0	051*	100%	50%</fullName>
+        <default>false</default>
+        <label>Gold	#FFD700	255	215	0	051*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Gray	#808080	128	128	128	any	0%	50%</fullName>
+        <default>false</default>
+        <label>Gray	#808080	128	128	128	any	0%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Green	#008000	0	128	0	120*	100%	50%</fullName>
+        <default>false</default>
+        <label>Green	#008000	0	128	0	120*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Harlequin	#3FFF00	63	255	0	105*	100%	50%</fullName>
+        <default>false</default>
+        <label>Harlequin	#3FFF00	63	255	0	105*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Indigo	#4B0082	75	0	130	275*	100%	25%</fullName>
+        <default>false</default>
+        <label>Indigo	#4B0082	75	0	130	275*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Ivory	#FFFFF0	255	255	240	060*	100%	97%</fullName>
+        <default>false</default>
+        <label>Ivory	#FFFFF0	255	255	240	060*	100%	97%</label>
+    </customValue>
+    <customValue>
+        <fullName>Jade	#00A86B	0	168	107	158*	100%	33%</fullName>
+        <default>false</default>
+        <label>Jade	#00A86B	0	168	107	158*	100%	33%</label>
+    </customValue>
+    <customValue>
+        <fullName>Jungle green	#29AB87	41	171	135	163*	61%	42%</fullName>
+        <default>false</default>
+        <label>Jungle green	#29AB87	41	171	135	163*	61%	42%</label>
+    </customValue>
+    <customValue>
+        <fullName>Lavender	#B57EDC	181	126	220	275*	57%	68%</fullName>
+        <default>false</default>
+        <label>Lavender	#B57EDC	181	126	220	275*	57%	68%</label>
+    </customValue>
+    <customValue>
+        <fullName>Lemon	#FFF700	255	247	0	058*	100%	50%</fullName>
+        <default>false</default>
+        <label>Lemon	#FFF700	255	247	0	058*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Lilac	#C8A2C8	200	162	200	300*	26%	71%</fullName>
+        <default>false</default>
+        <label>Lilac	#C8A2C8	200	162	200	300*	26%	71%</label>
+    </customValue>
+    <customValue>
+        <fullName>Lime	#BFFF00	191	255	0	075*	100%	50%</fullName>
+        <default>false</default>
+        <label>Lime	#BFFF00	191	255	0	075*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Magenta	#FF00FF	255	0	255	300*	100%	50%</fullName>
+        <default>false</default>
+        <label>Magenta	#FF00FF	255	0	255	300*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Magenta rose	#FF00AF	255	0	175	319*	100%	50%</fullName>
+        <default>false</default>
+        <label>Magenta rose	#FF00AF	255	0	175	319*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Maroon	#800000	128	0	0	000*	100%	25%</fullName>
+        <default>false</default>
+        <label>Maroon	#800000	128	0	0	000*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Mauve	#E0B0FF	224	176	255	276*	100%	85%</fullName>
+        <default>false</default>
+        <label>Mauve	#E0B0FF	224	176	255	276*	100%	85%</label>
+    </customValue>
+    <customValue>
+        <fullName>Navy blue	#000080	0	0	128	240*	100%	25%</fullName>
+        <default>false</default>
+        <label>Navy blue	#000080	0	0	128	240*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocher	#CC7722	204	119	34	030*	71%	47%</fullName>
+        <default>false</default>
+        <label>Ocher	#CC7722	204	119	34	030*	71%	47%</label>
+    </customValue>
+    <customValue>
+        <fullName>Olive	#808000	128	128	0	060*	100%	25%</fullName>
+        <default>false</default>
+        <label>Olive	#808000	128	128	0	060*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Orange	#FF6600	255	102	0	24*	100%	100%</fullName>
+        <default>false</default>
+        <label>Orange	#FF6600	255	102	0	24*	100%	100%</label>
+    </customValue>
+    <customValue>
+        <fullName>Orange-red	#FF4500	255	69	0	16*	100%	50%</fullName>
+        <default>false</default>
+        <label>Orange-red	#FF4500	255	69	0	16*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Orchid	#DA70D6	218	112	214	302*	59%	65%</fullName>
+        <default>false</default>
+        <label>Orchid	#DA70D6	218	112	214	302*	59%	65%</label>
+    </customValue>
+    <customValue>
+        <fullName>Peach	#FFE5B4	255	229	180	039*	100%	85%</fullName>
+        <default>false</default>
+        <label>Peach	#FFE5B4	255	229	180	039*	100%	85%</label>
+    </customValue>
+    <customValue>
+        <fullName>Pear	#D1E231	209	226	49	066*	75%	54%</fullName>
+        <default>false</default>
+        <label>Pear	#D1E231	209	226	49	066*	75%	54%</label>
+    </customValue>
+    <customValue>
+        <fullName>Periwinkle	#CCCCFF	204	204	255	240*	100%	90%</fullName>
+        <default>false</default>
+        <label>Periwinkle	#CCCCFF	204	204	255	240*	100%	90%</label>
+    </customValue>
+    <customValue>
+        <fullName>Persian blue	#1C39BB	28	57	187	229*	74%	42%</fullName>
+        <default>false</default>
+        <label>Persian blue	#1C39BB	28	57	187	229*	74%	42%</label>
+    </customValue>
+    <customValue>
+        <fullName>Pink	#FD6C9E	253	108	158	339*	100%	99%</fullName>
+        <default>false</default>
+        <label>Pink	#FD6C9E	253	108	158	339*	100%	99%</label>
+    </customValue>
+    <customValue>
+        <fullName>Plum	#8E4585	142	69	133	307*	35%	41%</fullName>
+        <default>false</default>
+        <label>Plum	#8E4585	142	69	133	307*	35%	41%</label>
+    </customValue>
+    <customValue>
+        <fullName>Prussian blue	#003153	0	49	83	205*	100%	16%</fullName>
+        <default>false</default>
+        <label>Prussian blue	#003153	0	49	83	205*	100%	16%</label>
+    </customValue>
+    <customValue>
+        <fullName>Puce	#CC8899	204	136	153	345*	40%	67%</fullName>
+        <default>false</default>
+        <label>Puce	#CC8899	204	136	153	345*	40%	67%</label>
+    </customValue>
+    <customValue>
+        <fullName>Purple	#800080	128	0	128	300*	100%	25%</fullName>
+        <default>false</default>
+        <label>Purple	#800080	128	0	128	300*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Raspberry	#E30B5C	227	11	92	339*	91%	47%</fullName>
+        <default>false</default>
+        <label>Raspberry	#E30B5C	227	11	92	339*	91%	47%</label>
+    </customValue>
+    <customValue>
+        <fullName>Red	#FF0000	255	0	0	000*	100%	50%</fullName>
+        <default>false</default>
+        <label>Red	#FF0000	255	0	0	000*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Red-violet	#C71585	199	21	133	322*	81%	43%</fullName>
+        <default>false</default>
+        <label>Red-violet	#C71585	199	21	133	322*	81%	43%</label>
+    </customValue>
+    <customValue>
+        <fullName>Rose	#FF007F	255	0	127	330*	100%	50%</fullName>
+        <default>false</default>
+        <label>Rose	#FF007F	255	0	127	330*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Ruby	#E0115F	224	17	95	343*	77%	44%</fullName>
+        <default>false</default>
+        <label>Ruby	#E0115F	224	17	95	343*	77%	44%</label>
+    </customValue>
+    <customValue>
+        <fullName>Salmon	#FA8072	250	128	114	6*	54%	98%</fullName>
+        <default>false</default>
+        <label>Salmon	#FA8072	250	128	114	6*	54%	98%</label>
+    </customValue>
+    <customValue>
+        <fullName>Sangria	#92000A	146	0	10	356*	100%	29%</fullName>
+        <default>false</default>
+        <label>Sangria	#92000A	146	0	10	356*	100%	29%</label>
+    </customValue>
+    <customValue>
+        <fullName>Sapphire	#0F52BA	15	82	186	216*	85%	39%</fullName>
+        <default>false</default>
+        <label>Sapphire	#0F52BA	15	82	186	216*	85%	39%</label>
+    </customValue>
+    <customValue>
+        <fullName>Scarlet	#FF2400	255	36	0	008*	100%	50%</fullName>
+        <default>false</default>
+        <label>Scarlet	#FF2400	255	36	0	008*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Silver	#C0C0C0	192	192	192	any	0%	75&amp;</fullName>
+        <default>false</default>
+        <label>Silver	#C0C0C0	192	192	192	any	0%	75&amp;</label>
+    </customValue>
+    <customValue>
+        <fullName>Slate gray	#708090	112	128	144	210*	13%	50%</fullName>
+        <default>false</default>
+        <label>Slate gray	#708090	112	128	144	210*	13%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Spring bud	#A7FC00	167	252	0	080*	100%	49%</fullName>
+        <default>false</default>
+        <label>Spring bud	#A7FC00	167	252	0	080*	100%	49%</label>
+    </customValue>
+    <customValue>
+        <fullName>Spring green	#00FF7F	0	255	127	150*	100%	50%</fullName>
+        <default>false</default>
+        <label>Spring green	#00FF7F	0	255	127	150*	100%	50%</label>
+    </customValue>
+    <customValue>
+        <fullName>Tan	#D2B48C	210	191	140	044*	44%	69%</fullName>
+        <default>false</default>
+        <label>Tan	#D2B48C	210	191	140	044*	44%	69%</label>
+    </customValue>
+    <customValue>
+        <fullName>Taupe	#483C32	72	60	50	027*	18%	24%</fullName>
+        <default>false</default>
+        <label>Taupe	#483C32	72	60	50	027*	18%	24%</label>
+    </customValue>
+    <customValue>
+        <fullName>Teal	#008080	0	128	128	180*	100%	25%</fullName>
+        <default>false</default>
+        <label>Teal	#008080	0	128	128	180*	100%	25%</label>
+    </customValue>
+    <customValue>
+        <fullName>Turquoise	#40E0D0	64	224	208	174*	72%	56%</fullName>
+        <default>false</default>
+        <label>Turquoise	#40E0D0	64	224	208	174*	72%	56%</label>
+    </customValue>
+    <customValue>
+        <fullName>Ultramarine	#3F00FF	63	0	255	255*	100%	100%</fullName>
+        <default>false</default>
+        <label>Ultramarine	#3F00FF	63	0	255	255*	100%	100%</label>
+    </customValue>
+    <customValue>
+        <fullName>Violet	#8F00FF	143	0	255	274*	100%	100%</fullName>
+        <default>false</default>
+        <label>Violet	#8F00FF	143	0	255	274*	100%	100%</label>
+    </customValue>
+    <customValue>
+        <fullName>Viridian	#40826D	64	130	109	161*	34%	38%</fullName>
+        <default>false</default>
+        <label>Viridian	#40826D	64	130	109	161*	34%	38%</label>
+    </customValue>
+    <customValue>
+        <fullName>White	#FFFFFF	255	255	255	any	any	100%</fullName>
+        <default>false</default>
+        <label>White	#FFFFFF	255	255	255	any	any	100%</label>
+    </customValue>
+    <customValue>
+        <fullName>Yellow	#FFFF00	255	255	0	060*	100%	50%</fullName>
+        <default>false</default>
+        <label>Yellow	#FFFF00	255	255	0	060*	100%	50%</label>
+    </customValue>
+    <masterLabel>COLOR</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

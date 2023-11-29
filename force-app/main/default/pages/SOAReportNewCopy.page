@@ -1,0 +1,587 @@
+<apex:page showHeader="true" controller="SOAReportNewController" sidebar="false" applyBodyTag="false" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    
+    <style type="text/css">
+        body {
+        font-family: Arial,Helvetica,sans-serif;
+        }
+        
+        table {
+        border-collapse: collapse;
+        width:100%;
+        }
+        th {
+        text-align: center;
+        white-space: initial;
+        }
+        td {
+        white-space: initial;
+        vertical-align: middle !important;
+        }
+        .error_message {
+        color: red;
+        }
+        .cell_border { 
+        border: 1px solid black;
+        }
+        .hideRow{
+        display: none;
+        }
+        .showRow{
+        display: table-row;
+        }
+        .hideColumn{
+        display: none;
+        }
+        .showColumn{
+        display: table-cell;
+        }
+        .boldFont{
+        font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+    function setFocus() {
+        document.getElementById("dummy_hidden_input").focus();
+    }
+    
+    j$ = jQuery.noConflict();
+    function onchangeCheckBox(id){
+        if(j$('.shipment' + id).is(":checked")){
+            j$('.' + id).removeClass('hideRow');
+            j$('.' + id).addClass('showRow');
+        }else{
+            j$('#checkBoxAll').prop( "checked", false);
+            j$('.' + id).addClass('hideRow');
+            j$('.' + id).removeClass('showRow');
+        }
+    };
+    function onchangeCheckBoxAll(){
+        if(j$('#checkBoxAll').is(":checked")){
+            j$('.shipment').prop( "checked", true);
+            j$('.billingItem').removeClass('hideRow');
+            j$('.billingItem').addClass('showRow');
+        }else{
+            j$('.shipment').prop( "checked", false);
+            j$('.billingItem').addClass('hideRow');
+            j$('.billingItem').removeClass('showRow');
+        }
+    }
+    
+    /*j$(document).ready(function() {
+        
+        j$( "input[id$=fromDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        });
+        j$( "input[id$=toDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        });
+    });*/
+    </script>
+    <apex:form >
+        <input type="hidden" id="dummy_hidden_input"/>
+        <!--Select Report Section-->
+        <apex:pageBlock title="{!translations['select_report']}">
+            <div>
+                <apex:outputPanel >{!translations['report']}: </apex:outputPanel>
+                <apex:selectList size="1" value="{!reportType}" id="reportSelect">
+                    <apex:selectOptions value="{!reportTypes}"></apex:selectOptions>
+                    <apex:actionSupport event="onchange" action="{!onChangeType}" reRender="reportResult, error, jsPanel, filterSection" status="status"/>
+                    <apex:actionStatus id="status">
+                        <apex:facet name="start">
+                            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                                &nbsp;
+                            </div>
+                            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                                <div style="display: inline-block; padding: 2px;width: 125px;">
+                                    <span style="display: inline-block; padding: 10px 0px; color:white" >Loading...</span>
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                </apex:selectList>
+            </div>
+            
+        </apex:pageBlock>
+        <!-- Report Filter Section-->
+        <apex:pageBlock title="{!translations['time_frame']}" id="filterSection">
+            <script>
+            j$(document).ready(function() {
+                
+                j$( "input[id$=fromDate]" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1,
+                    dateFormat:"yy/mm/dd"
+                });
+                j$( "input[id$=toDate]" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1,
+                    dateFormat:"yy/mm/dd"
+                });
+            });
+            </script>
+            <apex:selectList size="1" value="{!searchCondition}" >
+                <apex:selectOptions value="{!searchConditions}"></apex:selectOptions>
+            </apex:selectList>
+            <br/>
+            <br/>   
+            <apex:outputLabel ><span>{!translations['from']} : </span></apex:outputLabel>
+            <apex:inputText id="fromDate" value="{!sFromDate}">
+                <apex:actionSupport event="onchange" action="{!onChangeDateFrom}" reRender="idCusName, reportResult, error, jsPanel" />
+            </apex:inputText>
+            <apex:outputLabel ><span> {!translations['to']} </span></apex:outputLabel>
+            <apex:inputText id="toDate" value="{!sToDate}">
+                <apex:actionSupport event="onchange" action="{!onChangeDateTo}" reRender="idCusName, reportResult, error, jsPanel" />
+            </apex:inputText>
+            <br/><br/>
+            
+            <apex:outputLabel ><span>{!translations['currency']} : </span></apex:outputLabel>
+            <span id="report_currency">
+                <apex:selectList size="1" value="{!currencyType}" >
+                    <apex:selectOptions value="{!currencies}"></apex:selectOptions>
+                </apex:selectList>
+            </span>
+            <br/><br/>
+            
+            <apex:outputLabel ><span>Bank Information : </span></apex:outputLabel>
+            <span id="report_bank">
+                <apex:selectList size="1" value="{!bankType}" >
+                    <apex:selectOptions value="{!bankOptions}"></apex:selectOptions>
+                </apex:selectList>
+            </span>
+            <br/><br/>
+            
+            <apex:outputPanel id="customerList">
+                <apex:outputLabel id="idTblName" ><span>{!translations[accountType]} : </span></apex:outputLabel>
+                <span id="report_tablename">
+                    <apex:selectList size="1" value="{!accountId}" id="idCusName" >
+                        <apex:selectOptions value="{!accountList}"></apex:selectOptions>
+                    </apex:selectList>
+                </span>
+            </apex:outputPanel>
+            <br/>
+            <apex:outputPanel id="error">
+                <apex:outputText value="{!message}" styleClass="error_message"></apex:outputText>
+            </apex:outputPanel>
+            
+            <br /> <br />
+            <div id="select_language">
+                <apex:outputPanel >{!translations['language']}: </apex:outputPanel>
+                <apex:selectList size="1" value="{!language}" id="reportSelect">
+                    <!-- <apex:actionSupport event="onchange" action="{!updateLanguage}" reRender="reportSelect"/> -->
+                    <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                </apex:selectList>
+            </div>
+            <br /> <br />
+            <div id="select_advancePaymentType">
+                <apex:outputPanel >{!translations['advance_payment_type']} </apex:outputPanel>
+                <apex:selectList value="{!advancePaymentType}" size="1">
+                    <apex:selectOptions value="{!advancePaymentTypes}"></apex:selectOptions>
+                </apex:selectList>
+            </div>
+            <br /><br />
+            <div id="show_job_id">
+                <apex:outputLabel value="Show Job ID: "/>
+                <apex:inputCheckbox value="{!showJobId}"/>
+            </div>
+            <br /><br />
+
+            <div id="show_wkid">
+                <apex:outputLabel value="Show WKID: "/>
+                <apex:inputCheckbox value="{!showWKID}"/>
+            </div>
+            <br /><br />
+            <apex:commandButton value="{!translations['generate_report']}" action="{!generateReport}" rerender="reportResult, jsPanel" status="actionStatus"/>
+            <apex:actionStatus id="actionStatus">
+                <apex:facet name="start">
+                    <apex:outputText value="{!translations['generating']}"/>
+                </apex:facet>
+            </apex:actionStatus>
+            <apex:outputPanel >
+                <br/>
+                <apex:outputText value="Note: "/>
+                
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <!--Report Section-->
+        <apex:outputPanel id="reportResult"> 
+            <apex:pageBlock title="{!translations[reportType]}">
+                <apex:outputPanel rendered="{!displayReportTable}">
+                    <div style="width: 100%; text-align: center; padding-top: 15px; padding-bottom: 15px ">
+                        <apex:commandButton value="Excel" onclick="generateReportDoc('excel'); return false;">
+                        </apex:commandButton>
+                        
+                        <apex:commandButton value="Pdf" onclick="generateReportDoc('pdf'); return false;" >
+                        </apex:commandButton>
+                    </div>
+                    <table cellPadding="4" border="0" width="100%">
+                        <tr bgcolor="#bfc4d4">
+                            <td width="2%"></td>
+                            <td colspan="{!IF(currencyType <> 'Both', '15', '18')}" >
+                                <b>{!report.clientType}</b>: {!report.clientName} <b>({!report.billingTotal} records)</b>   
+                            </td>
+                        </tr>
+                        
+                        <tr bgcolor="#bfc4d4">
+                            <th class="cell_border" rowspan="2" ><input type="checkbox"  id="checkBoxAll" class="checkBoxAll" onchange="onchangeCheckBoxAll(); return false" /></th>
+                            <th class="cell_border" rowspan="2" width="6%" style="display:{!IF(showWKID, '', 'none')};">SO. NO </th>
+                            <th class="cell_border" rowspan="2" width="6%" style="display:{!IF(showJobId, '', 'none')};">JOB ID </th>
+                            <th class="cell_border" colspan="{!IF(showJobId, 1, 2)}" rowspan="2" width="8%">{!IF(isInvoicing,translations['invoicing_date'],translations['sale_accounted_date'])}</th>
+                            <th class="cell_border" rowspan="2" style="display:{!IF(stringDebitNo != ''&& stringDebitNo != null, '', 'none')};">{!translations['debit_no']}</th>
+                            <th class="cell_border" rowspan="2" style="{!IF(stringCreditDate != '' && stringCreditDate != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">Credit Date</th>
+                            <th class="cell_border" rowspan="2" style="{!IF(stringCreditNo != '' && stringCreditNo != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">Credit No</th>
+                            <th class="cell_border" colspan="{!IF(showWKID, 1, 2)}" rowspan="2">{!translations['HBL']}</th>
+                            <th class="cell_border" rowspan="2">{!translations['MBL']}</th>
+                            <th class="cell_border" rowspan="2" width="8%">{!translations['ETD']}</th>
+                            <th class="cell_border" rowspan="2" width="8%">{!translations['ETA']}</th>
+                            <!-- <th class="{!IF(reportType <> 'partner_report_type','showColumn cell_border','hideColumn')}" rowspan="2" width="8%">CUST INVOICE STATUS</th> -->
+                            <!-- <th class="{!IF(reportType == 'partner_report_type','showColumn cell_border','hideColumn')}" rowspan="2" width="8%">PRTN DEBIT STATUS</th> -->
+                            <th class="{!IF(report.dueDateOfPayment <> null, 'showColumn cell_border', 'hideColumn cell_border')}" rowspan="2" width="8%">{!translations['due_date_of_payment1']}</th>
+                            <th class="cell_border" rowspan="2">{!translations['quantity']}</th>
+                            <th class="{!IF(currencyType <> 'USD'  && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" colspan="3">{!translations['local_title']}</th>
+                            <th colspan="3" class="{!IF(currencyType <> 'VND'  && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">FCY</th>
+                            <th class="cell_border" style="display: none;" rowspan="2"></th>
+                            <!-- {!translations['advance_payment_title']} -->
+                        </tr>
+                        <tr bgcolor="#bfc4d4">
+                            
+                            <th class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" width="7%">{!translations['debit']}</th>
+                            <th class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" width="7%">{!translations['credit']}</th>
+                            <th class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" width="7%">{!translations['balance']}</th>
+                            <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">{!translations['debit']}</th>
+                            <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">{!translations['credit']}</th>
+                            <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">{!translations['balance']}</th>
+                            
+                        </tr>
+                        <apex:repeat value="{!report.listShipment}" var="shipmentItem">
+                            <tr bgcolor="#d4dadc">
+                                <td class="cell_border" style="text-align: center;">
+
+                                    <input type="checkbox" class="shipment{!shipmentItem.shipmentId} shipment" onchange="onchangeCheckBox('{!shipmentItem.shipmentId}'); return false" />
+                                </td>
+                                <td class="cell_border" style="display:{!IF(showWKID, '', 'none')}; text-align: center;">
+                                    <apex:outputText escape="false" value="{!shipmentItem.shipmentNo}"/>
+                                </td>
+                                <td class="cell_border" style="display:{!IF(showJobId, '', 'none')}; text-align: center;">
+                                    <apex:outputText escape="false" value="{!shipmentItem.jobID}"/>
+                                </td>
+                                <td class="cell_border" style="text-align: center;" colspan="{!IF(showJobId, 1, 2)}">
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!shipmentItem.saleAccountedDate}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td class="cell_border" style="{!IF(stringDebitNo != '' && stringDebitNo != null, 'text-align: center;', 'display:none;')}">
+                                    <apex:outputText escape="false" value="{!shipmentItem.debitNo}"/>
+                                </td>
+                                <td class="cell_border" style="{!IF(stringCreditDate != '' && stringCreditDate != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">
+                                    <apex:outputText value="{!shipmentItem.creditIssueDate}"/>
+                                </td>
+                                <td class="cell_border" style="{!IF(stringCreditNo != '' && stringCreditNo != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">
+                                    <apex:outputText escape="false" value="{!shipmentItem.creditNo}"/>
+                                </td>
+                                <td class="cell_border" style="text-align: center;" colspan="{!IF(showWKID, 1, 2)}">{!shipmentItem.noHBL}</td>
+                                <td class="cell_border" style="text-align: center;">{!shipmentItem.noMBL}</td>
+                                <td class="cell_border" style="text-align: center;">
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!shipmentItem.dateETD}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td class="cell_border" style="text-align: center;">
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!shipmentItem.dateETA}"/>
+                                    </apex:outputText>
+                                </td>
+                                <!-- <td class="{!IF(reportType <> 'partner_report_type','showColumn cell_border','hideColumn')}" width="8%">{!shipmentItem.invoiceIssueStatus}</td> -->
+                                <!-- <td class="{!IF(reportType == 'partner_report_type','showColumn cell_border','hideColumn')}" width="8%">{!shipmentItem.debitIssueStatus}</td>  -->
+                                <td class="{!IF(report.dueDateOfPayment <> null, 'showColumn cell_border', 'hideColumn cell_border')}" style="text-align: center;">
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!shipmentItem.dueDateOfPayment}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td class="cell_border boldFont" style="text-align: center;" >{!shipmentItem.quantity} INV</td>
+                                <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" style="text-align: center;">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.debit == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.debit <> 0}">
+                                        <apex:param value="{!shipmentItem.debit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" style="text-align: center;">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.credit == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.credit <> 0}">
+                                        <apex:param value="{!shipmentItem.credit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}" style="text-align: center;">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.balance == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.balance <> 0}">
+                                        <apex:param value="{!shipmentItem.balance}" />
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.debitUSD == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.debitUSD <> 0}">
+                                        <apex:param value="{!shipmentItem.debitUSD}" />
+                                        <!-- <apex:param value="{!shipmentItem.debitUSD}" /> -->
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.creditUSD == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.creditUSD <> 0}">
+                                        <apex:param value="{!shipmentItem.creditUSD}" />
+                                        <!-- <apex:param value="{!shipmentItem.creditUSD}" /> -->
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    <apex:outputText value="-" rendered="{!shipmentItem.balanceUSD == 0}"/>
+                                    
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.balanceUSD <> 0}">
+                                        <apex:param value="{!shipmentItem.balanceUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="display: none;" class="cell_border"></td>
+                            </tr>
+                            <tr bgcolor="#336699" class="hideRow {!shipmentItem.shipmentId} billingItem">
+                                <th class="cell_border" ></th>
+                                <th class="cell_border" colspan="2">{!translations['billing_fms_tms_id']}</th>
+                                <th class="cell_border" >{!translations['sale_accounted_invoicing']}</th>
+                                <th class="cell_border" style="display:{!IF(stringDebitNo != ''&& stringDebitNo != null, '', 'none')};">{!translations['debit_no']}</th>
+                                <th class="cell_border" style="{!IF(stringCreditDate != '' && stringCreditDate != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">Credit Date</th>
+                                <th class="cell_border" style="{!IF(stringCreditNo != '' && stringCreditNo != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">Credit No</th>
+                                <th class="cell_border" >{!translations['pricing_name_at_print_local']}</th>
+                                <th class="cell_border" colspan="2">{!translations['invoice_to']}</th>
+                                <th class="cell_border" >{!inboundVAT}</th>
+                                <th class="cell_border" >{!translations['payment_to']}</th>
+                                <th class="cell_border" >{!outboundVAT}</th>
+                                <th class="cell_border">{!translations['description']}</th>
+                                <th class="cell_border" >{!translations['charge_unit_total']}</th>
+                                <th width="7%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    {!translations['unreceived_balance_of_selling']}
+                                </th>
+                                <th width="7%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    
+                                    {!translations['unpaid_balance_of_buying']}
+                                </th>
+                                <th width="7%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                    {!translations['balance']}
+                                </th>
+                                <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}" >
+                                    {!translations['unreceived_balance_of_selling']}
+                                </th>
+                                <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}" >
+                                    {!translations['unpaid_balance_of_buying']}
+                                </th>
+                                <th width="7%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}" >
+                                    {!translations['balance']}
+                                </th>
+                                <th class="cell_border">ADVANCE PAYMENT</th>
+                            </tr>
+                            <apex:repeat value="{!shipmentItem.listBilling}" var="billingItem">
+                                <tr bgcolor="#6699CC" class="hideRow {!shipmentItem.shipmentId} billingItem">
+                                    <td class="cell_border" style="text-align: center;"></td>
+                                    <td class="cell_border" colspan="2" style="text-align: center;"><a href="/{!billingItem.billingId}">{!billingItem.noBill}</a></td>
+                                    <td class="cell_border" style="text-align: center;">
+                                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param value="{!billingItem.saleAccountedDateInvoicing}"/>
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="cell_border" style="display:{!IF(stringDebitNo != '' && stringDebitNo != null, '', 'none')};">{!billingItem.debitNo}</td>
+                                    <td class="cell_border" style="{!IF(stringCreditDate != '' && stringCreditDate != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">
+                                        <apex:outputText value="{!billingItem.creditIssueDate}"/>
+                                    </td>
+                                    <td class="cell_border" style="{!IF(stringCreditNo != '' && stringCreditNo != null && isInvoicing == true, 'text-align: center;', 'display:none;')}">
+                                        <apex:outputText escape="false" value="{!billingItem.creditNo}"/>
+                                    </td>
+                                    <td class="cell_border" >{!billingItem.pricingName}</td>
+                                    <td class="cell_border" colspan="2" ><a href="/{!billingItem.invoiceToId}">{!billingItem.invoiceToName}</a></td>
+                                    <td class="cell_border" >{!billingItem.inboundInvoiceNo} </td>
+                                    <td class="cell_border" ><a href="/{!billingItem.paymentToId}">{!billingItem.paymentToName}</a></td>
+                                    <td class="cell_border" >{!billingItem.outboundInvoiceNo}</td>
+                                    <td class="cell_border" >{!billingItem.description}</td>
+                                    
+                                    <td class="cell_border" style="text-align: center;">{!billingItem.chargeUnitTotal}</td>
+                                    
+                                    <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.debit == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.debit <> 0}">
+                                            <apex:param value="{!billingItem.debit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.credit == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.credit <> 0}">
+                                            <apex:param value="{!billingItem.credit}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.balance == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.balance <> 0}">
+                                            <apex:param value="{!billingItem.balance}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.debitUSD == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.debitUSD <> 0}">
+                                            <apex:param value="{!billingItem.debitUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.creditUSD == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.creditUSD <> 0}">
+                                            <apex:param value="{!billingItem.creditUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn cell_border', 'hideColumn cell_border')}">
+                                        <apex:outputText value="-" rendered="{!billingItem.balanceUSD == 0}"/>
+                                        <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.balanceUSD <> 0}">
+                                            <apex:param value="{!billingItem.balanceUSD}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td class="cell_border" style="text-align: center;">{!billingItem.advancePayment}</td>
+                                </tr>
+                                
+                            </apex:repeat>
+                        </apex:repeat>
+                        <tr bgcolor="#808080" style="color: white">
+                            <td colspan="{!IF(stringDebitNo != '' && stringDebitNo != null, '11', '10')}">
+                               {!translations['grand_total_title']}
+                            </td>
+                            <td class ="{!IF(report.dueDateOfPayment <> null, 'showColumn', 'hideColumn')}"></td>
+                            <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!report.debit == 0}"/>
+                                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} " rendered="{!report.debit <> 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!report.debit <> 0}">
+                                    <apex:param value="{!report.debit}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!report.credit == 0}"/>
+                                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} " rendered="{!report.credit <> 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!report.credit <> 0}">
+                                    <apex:param value="{!report.credit}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!report.balance == 0}"/>
+                                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} " rendered="{!report.balance <> 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!report.balance <> 0}">
+                                    <apex:param value="{!report.balance}" />
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!report.debitUSD == 0}"/>
+                                <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.debitUSD <> 0}">
+                                    <apex:param value="{!report.debitUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!report.creditUSD == 0}"/>
+                                <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.creditUSD <> 0}">
+                                    <apex:param value="{!report.creditUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                
+                                <apex:outputText value="-" rendered="{!report.balanceUSD == 0}"/>
+                                <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.balanceUSD <> 0}">
+                                    <apex:param value="{!report.balanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                            <td></td>
+                            
+                        </tr>
+                    </table>
+                    
+                </apex:outputPanel>
+                
+                
+            </apex:pageBlock>
+            
+            <!-- <apex:actionFunction action="{!generateReportDoc}" name="af_generateReportDoc" reRender="reportResult">
+<apex:param name="value1" value="" />
+<apex:param name="value2" value=""/>
+</apex:actionFunction> -->
+        </apex:outputPanel>
+        <apex:outputPanel id="jsPanel">
+            <script type="text/javascript">
+            function generateReportDoc(docType){
+                var shipmentcheckeds = j$('.shipment:checkbox:checked');
+                // var shipmentsuncheckeds = j$('.shipment:checkbox');
+                var ankenIds = [];
+                for(var i =0; i<shipmentcheckeds.length; i++){
+                    var idAnken = shipmentcheckeds[i].className.replace(/\s/g, "").replace(/shipment/g, "");
+                    ankenIds.push(idAnken);
+                };
+                // if (idAnken == null){
+                    // for(var i =0; i<shipmentsuncheckeds.length; i++){
+                        // var idAnken = shipmentsuncheckeds[i].className.replace(/\s/g, "").replace(/shipment/g, "");
+                        // ankenIds.push(idAnken);
+                    // };
+                // }
+                var strAkens = ankenIds.join(',');
+                //af_generateReportDoc(docType,strAkens);
+                var url;
+                console.log('{!JSENCODE(reportType)}');
+                console.log('docType' + docType);
+                console.log('strAkens' + strAkens);
+                if(docType ==='pdf'){
+                    url = '/apex/page_SOAReportNewDoc?'
+                }else if(docType !='pdf'
+                         && '{!JSENCODE(reportType)}' != 'partner_report_type'
+                         && ('{!JSENCODE(currencyType)}' === 'USD'||'{!JSENCODE(currencyType)}' === 'All USD')){
+                    url = '/apex/page_SOAReportNewExcelCustomerUSD?'
+                }else if(docType !='pdf'
+                         && '{!JSENCODE(reportType)}' != 'partner_report_type'
+                         && ('{!JSENCODE(currencyType)}' === 'VND'||'{!JSENCODE(currencyType)}' === 'All VND')){
+                    url = '/apex/page_SOAReportNewExcelCustomerLocal?'
+                }else if(docType !='pdf'
+                    && '{!JSENCODE(reportType)}' != 'partner_report_type'
+                    && ('{!JSENCODE(currencyType)}' === 'Both'||'{!JSENCODE(currencyType)}' === 'All Both')){
+                    url = '/apex/page_SOAReportNewExcelCustomer?'
+                }else if(docType !='pdf'
+                         && '{!JSENCODE(reportType)}' === 'partner_report_type'
+                         && ('{!JSENCODE(currencyType)}' === 'USD'||'{!JSENCODE(currencyType)}' === 'All USD')){
+                    url = '/apex/page_SOAReportNewExcelPartnerUSD?'
+                }else if(docType !='pdf'
+                         && '{!JSENCODE(reportType)}' === 'partner_report_type'
+                         && ('{!JSENCODE(currencyType)}' === 'VND'||'{!JSENCODE(currencyType)}' === 'All VND')){
+                    url = '/apex/page_SOAReportNewExcelPartnerLocal?'
+                }else if(docType !='pdf'
+                         && '{!JSENCODE(reportType)}' === 'partner_report_type'
+                         && ('{!JSENCODE(currencyType)}' === 'Both'||'{!JSENCODE(currencyType)}' === 'All Both')){
+                    url = '/apex/page_SOAReportNewExcel?'
+                }
+                url += 'advancePaymentType=' + '{!JSENCODE(advancePaymentType)}';
+                url += '&fromDate=' + '{!JSENCODE(sFromDate)}';
+                url += '&toDate=' + '{!JSENCODE(sToDate)}';
+                url += '&clientId=' + '{!JSENCODE(accountId)}';
+                url += '&reportType=' + '{!JSENCODE(reportType)}';
+                url += '&currency=' + '{!JSENCODE(currencyType)}';
+                url += '&bank=' + '{!JSENCODE(bankType)}';
+                url += '&condition=' + '{!JSENCODE(searchCondition)}';
+                url += '&language=' + '{!JSENCODE(language)}';
+                url += '&ankenIds=' + strAkens;
+                url += '&showWKID=' + '{!showWKID}';
+                url += '&showJobId=' + '{!showJobId}';
+                console.log('url' + url);
+                window.location.href = url;
+                
+            }
+            </script>
+        </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>

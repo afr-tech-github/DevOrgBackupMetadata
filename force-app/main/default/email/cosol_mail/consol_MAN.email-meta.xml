@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>デバン倉庫へ書類を送付する時にこのテンプレートを使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>CONSOL-M A/N:自社混載-MAN</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-Master A/N送付</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalWithholding__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>WithholdingSocialInsurance__c  +  WithholdingPersonalIncomeTax__c  +  OtherWithholding__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total Withholding=Withholding Compulsory Social Insurance+Withholding Personal Income Tax+Other Withholding</inlineHelpText>
+    <label>TOTAL WITHHOLDING</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

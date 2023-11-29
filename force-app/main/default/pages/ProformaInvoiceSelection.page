@@ -1,0 +1,66 @@
+<apex:page controller="ProformaInvoiceSelectionController">
+
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}" />
+        <script>
+            function closePopupDialog() {
+                window.open('/{!JSENCODE(id)}', '_self');
+            }
+        </script>
+    </head>
+    <apex:form id="theform">
+        <apex:sectionHeader subtitle="{!translations['invoice_selection_title_v2']}" />
+        <apex:pageBlock tabStyle="CustomObject1__c">
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandButton value="Generate" onclick="af_generateReportDoc(); return false;" />
+                    <apex:commandButton value="close" action="{!closePopupDialog}" />
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!translations['language_and_type_Header_v2']}" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!translations['bank_option']}" />
+                    <apex:selectList size="1" value="{!bankType}">
+                        <apex:selectOptions value="{!bankOptions}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Show Footer" />
+                    <apex:inputCheckbox value="{!showFooter}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+
+            <!-- <apex:pageBlockSection title="{!translations['attachment_option']}" columns="1">
+                <apex:pageBlockSectionItem>
+                    <apex:inputCheckbox value="{!requiredAttachmentCreation}" />
+                    <apex:outputLabel>{!translations['create_attachment_label']}</apex:outputLabel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> -->
+            <apex:actionFunction action="{!generateAttachmentFile}" name="af_generateReportDoc" reRender="jsPanel" oncomplete="generateReportDoc('{!fileType}'); return false;">
+            </apex:actionFunction>
+        </apex:pageBlock>
+        <apex:outputPanel id="jsPanel">
+            <script type="text/javascript">
+                function generateReportDoc(docType) {
+                    var url;
+                    console.log('docType' + docType);
+                    if (docType === 'pdf') {
+                        url = '/apex/ProformaInvoice?'
+                    } else {
+                        url = '/apex/ProformaInvoice?'
+                    }
+                    url += 'id=' + '{!JSENCODE(id)}';
+                    url += '&bankType=' + '{!JSENCODE(bankType)}';
+                    url += '&showFooter=' + '{!showFooter}';
+                    if (docType != 'pdf') {
+                        url += '&contentType=' + '{!JSENCODE(attachName)}' + '.xls';
+                    }
+                    console.log('url' + url);
+                    window.location.href = url;
+
+                }
+            </script>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Today_arrival</fullName>
+    <columns>ID__c</columns>
+    <columns>status__c</columns>
+    <columns>Cnee__c</columns>
+    <columns>CustmerInCharge__c</columns>
+    <columns>CusMailAutoSent__c</columns>
+    <columns>PartnerRep__c</columns>
+    <columns>ParMailAutoSent__c</columns>
+    <columns>shipper__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>Container__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ETA__c</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>ETD is Today</label>
+</ListView>

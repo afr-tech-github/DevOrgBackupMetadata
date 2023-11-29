@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ApplicationLineCompact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>Application__c</fields>
+    <fields>Product__c</fields>
+    <fields>Quantity__c</fields>
+    <fields>Unit__c</fields>
+    <fields>Plan__c</fields>
+    <label>Application Line Compact Layout</label>
+</CompactLayout>

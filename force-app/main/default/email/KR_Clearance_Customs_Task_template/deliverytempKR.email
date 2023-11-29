@@ -1,0 +1,15 @@
+{! Cargo_Delivery__c.DeliveryCompany__c}
+{! Cargo_Delivery__c.TRUCKING_COMPANY_PIC__c} 님
+
+배송 의뢰서를 보내 드리겠습니다.
+문의 사항이 있으시면 연락 부탁드립니다.
+
+잘 부탁드립니다.
+
+{! User.LastName}
+************************************************** *******
+{!Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c}
+************************************************** *******
+Powered by AFR Solutions Co., LTD 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

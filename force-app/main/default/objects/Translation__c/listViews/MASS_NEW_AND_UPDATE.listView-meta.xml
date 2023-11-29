@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MASS_NEW_AND_UPDATE</fullName>
+    <columns>NAME</columns>
+    <columns>Active__c</columns>
+    <columns>Context__c</columns>
+    <columns>en_US__c</columns>
+    <columns>ja__c</columns>
+    <columns>ko__c</columns>
+    <columns>vi__c</columns>
+    <columns>SETUP_OWNER_NAME</columns>
+    <columns>SETUP_TYPE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>MASS</value>
+    </filters>
+    <label>MASS NEW AND UPDATE</label>
+    <language>ko</language>
+</ListView>

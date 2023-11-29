@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Container_Measurement_Details__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Automatically synchronize with Container No/Seal No/Container Size(Package/Gross/Measurement) from Container Detail section at bottom.
+Also allow for direct input only when need to be amended manually. This Data will be appeared at B/L.</inlineHelpText>
+    <label>CONTAINER DETAIL ON B/L</label>
+    <length>100000</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

@@ -1,0 +1,11 @@
+Tác vụ đã được đưa vào trình tự quan tâm theo dõi cao nhất. 
+
+Công Ty: {!Account.Name} 
+Mức dịch vụ: {!Account_Service_Level} 
+Sảm phẩm: {!Case.00N28000007V66W} 
+số hồ sơ#: {!Case.CaseNumber} 
+Tiêu đề hồ sơc: {!Case.Subject}
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}  
+*********************************************************

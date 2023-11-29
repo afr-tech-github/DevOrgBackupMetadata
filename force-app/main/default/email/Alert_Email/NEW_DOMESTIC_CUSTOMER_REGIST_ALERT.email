@@ -1,0 +1,143 @@
+オペレーションスタッフ様<br>
+<br>
+本メールは自動メールお知らせです。<br>
+<br>
+新しいお客様: {!Account.Name}様が {!Account.CreatedDate}に登録されました。<br>
+速やかに対応をお願いします。
+<br>
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				共通部分
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				取引先名
+			</th>
+			<td width="200">
+				{!Account.Name}<br>
+                                Link to SF: {!CustomObject1__c.Link} 
+			</td width="400">
+			<th>
+				取引先名-英語
+			</th>
+			<td width="200">
+				{!Account.EnglishCompanyName__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				電話
+			</th>
+			<td>
+				{!Account.Phone}
+
+			</td>
+	<th> 
+                                                          FAX
+			</th>
+			<td>
+                                                {!Account.Fax}
+			</td>
+</tr>
+                 <tr>
+			<th>
+			Web サイト
+			</th>
+			<td> 
+{!Account.Website}　	
+                                                               		</td>
+			<th>
+					
+			</th>
+			<td>
+                                           
+ 			                 </td>
+		</tr>
+
+		<tr><thead>
+			<th colspan="4">
+				貨物基礎情報
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				種別
+			</th>
+			<td>
+				{!Account.Custom_Type__c}
+			</td>
+			<th>
+				輸出元
+			</th>
+			<td>
+				{!Account.Outbound__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				所有種別
+			</th>
+			<td>
+				{!Account.Ownership_cat__c}
+			</td>
+			<th>
+				輸入元
+			</th>
+			<td>
+				{!Account.Inbound__c}
+
+			</td>
+		</tr>
+		
+		<tr>
+			<th>
+				利用サービス-ドキュメント
+			</th>
+			<td>
+				{!Account.ServiceType__c}
+			</td>
+			<th>
+				
+			</th>
+<td>
+				
+			</td>
+			</tr>
+	</tbody>
+</table>
+<br>
+よろしくお願いいたします。
+<br>
+*********************************************************<br>
+{!Account.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

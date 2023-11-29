@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Area__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>AREA</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>新宿区・渋谷区周辺</fullName>
+                <default>false</default>
+                <label>SHINJYUKU・SHIBUYA AREA</label>
+            </value>
+            <value>
+                <fullName>台東区・中央区周辺</fullName>
+                <default>false</default>
+                <label>TAITO-KU・CHUO-KU AREA</label>
+            </value>
+            <value>
+                <fullName>その他（東京）</fullName>
+                <default>false</default>
+                <label>OTHER (TOKYO)</label>
+            </value>
+            <value>
+                <fullName>関東（神奈川）</fullName>
+                <default>false</default>
+                <label>KANTO REGION (KANAGAWA PREF.)</label>
+            </value>
+            <value>
+                <fullName>関東（埼玉）</fullName>
+                <default>false</default>
+                <label>KANTO REGION (SAITAMA PREF.)</label>
+            </value>
+            <value>
+                <fullName>関東（その他）</fullName>
+                <default>false</default>
+                <label>KANTO REGION (OTHER)</label>
+            </value>
+            <value>
+                <fullName>大阪・兵庫</fullName>
+                <default>false</default>
+                <label>OSAKA・HYOGO-PREF.</label>
+            </value>
+            <value>
+                <fullName>博多・下関</fullName>
+                <default>false</default>
+                <label>HAKATA・SHIMONOSEKI</label>
+            </value>
+            <value>
+                <fullName>その他（全国）</fullName>
+                <default>false</default>
+                <label>OTHER (JAPAN)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

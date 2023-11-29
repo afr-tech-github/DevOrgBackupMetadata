@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi khách hàng nội địa mới được đăng kí.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Thông báo đăng ký mới khách hàng nội địa</name>
+    <style>none</style>
+    <subject>NEW DOMESTIC CUSTOMER REGIST ALERT({!Account.Name})</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

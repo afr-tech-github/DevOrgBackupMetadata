@@ -1,0 +1,28 @@
+経理担当者 様
+
+{!MgmtMaster__c.CreatedBy} 様が
+以下の通り、新しい為替レートの申請を行いました。 
+
+
+こちらのリンクをクリックし、承認あるいは却下を行ってください。
+
+◎為替レートID：[{!MgmtMaster__c.Name}]  Link to SF:{!MgmtMaster__c.Link} 
+
+◎為替通貨 (USDに対する) : {!MgmtMaster__c.Mgmt_Exrate_fromto__c}
+◎Start Date : {!MgmtMaster__c.Mgmt_Exrate_Start_Date__c}
+◎End Date : {!MgmtMaster__c.Mgmt_Exrate_End_Date__c}
+◎国内顧客向け-フォワーディング標準為替 :{!MgmtMaster__c.Mgmt_Exrate_FowardingtoDomesticCustomer__c}
+◎国内顧客向け-通関標準為替 :{!MgmtMaster__c.Mgmt_Exrate_CCtoDomesticCustomer__c}
+◎パートナー向け-Selling標準為替 :{!MgmtMaster__c.Mgmt_Exrate_SellingtoPartner__c}<br>
+◎パートナー向け-Buying標準為替 :{!MgmtMaster__c.Mgmt_Exrate_BuyingfromPartner__c}
+
+この申請を承認、却下したり、フィードを通じてコメントすることができます。 
+
+よろしくお願いいたします。
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

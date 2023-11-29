@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PayableProcess</fullName>
+    <columns>NAME</columns>
+    <columns>SalesOrderID__c</columns>
+    <columns>GoodsPOID__c</columns>
+    <columns>InvoiceTo__c</columns>
+    <columns>BillNameAtPrintLocal__c</columns>
+    <columns>PayConfirmedBuy__c</columns>
+    <columns>PayTo__c</columns>
+    <columns>PayNotesBuying__c</columns>
+    <columns>PaySettledDateBuying__c</columns>
+    <columns>PayTypeBuying__c</columns>
+    <columns>AmountBuyInclTAX__c</columns>
+    <columns>UnpaidBalBuyLocal__c</columns>
+    <columns>BeneficiaryBuy__c</columns>
+    <columns>BankAccountForPay__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>AmountBuyInclTAX__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>UnpaidBalBuyLocal__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>4.Payable(B) Process-Standard(ID)</label>
+    <language>en_US</language>
+</ListView>

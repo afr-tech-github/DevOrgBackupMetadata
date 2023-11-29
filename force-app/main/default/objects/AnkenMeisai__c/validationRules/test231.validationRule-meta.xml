@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test231</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+ISCHANGED( Seikyusaki__c ),
+ISCHANGED( PaymentTo__c ),
+ISCHANGED( Tariff__c ),
+ISCHANGED( InsatuyouSyohinEng__c ),
+ISCHANGED( InsatuyouSyohin__c ),
+ISCHANGED( Suryo__c ),
+ISCHANGED( ChargeUnit__c ),
+ISCHANGED( ContainerSize__c ),
+ISCHANGED( VATratebuying__c ),
+ISCHANGED( VATrateselling__c ),
+ISCHANGED( BuyTankaUSD__c ),
+ISCHANGED( BuyTankaJPY__c ),
+ISCHANGED( SellTankaJPY__c ),
+ISCHANGED( ADVANCE_PAYMENT_ON_BEHALF_OF__c ),
+ISCHANGED( AdvancePaymentOnBehalfOfOurCompany__c ),
+ISCHANGED( InboundVATInvNo__c ),
+ISCHANGED( OutboundVATInvNo__c ),
+ISCHANGED( BuyInTaxAmountUSD__c ),
+ISCHANGED( BuyInTaxAmountJPY__c ),
+ISCHANGED( SellInTaxAmount_USD__c ),
+ISCHANGED( SellInTaxAmountJPY__c ))</errorConditionFormula>
+    <errorMessage>You can not edit this billing because the Document Process is completed. Please contact the creator to unlock if any. Thanks!</errorMessage>
+</ValidationRule>

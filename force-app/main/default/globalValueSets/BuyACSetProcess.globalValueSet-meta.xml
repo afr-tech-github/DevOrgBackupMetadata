@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Before Payment: -/331 Payable</fullName>
+        <default>false</default>
+        <label>Before Payment: -/331 Payable</label>
+    </customValue>
+    <customValue>
+        <fullName>After Bank Payment:331 Payable/113 cash in Bank</fullName>
+        <default>false</default>
+        <label>After Bank Payment:331 Payable/113 cash in Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>After Cash Payment:331 Payable/111 Cash in Hand</fullName>
+        <default>false</default>
+        <label>After Cash Payment:331 Payable/111 Cash in Hand</label>
+    </customValue>
+    <customValue>
+        <fullName>After Offset Payment:331 Payable/171 Traded purchase and resell government bond</fullName>
+        <default>false</default>
+        <label>After Offset Payment:331 Payable/171 Traded purchase and resell government bond</label>
+    </customValue>
+    <masterLabel>Buying AC Setting Process</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

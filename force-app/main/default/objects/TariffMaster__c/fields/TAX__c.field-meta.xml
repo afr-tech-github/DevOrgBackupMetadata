@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TAX__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>TAX CATEGORY(ENG)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TAX</fullName>
+                <default>false</default>
+                <label>TAX</label>
+            </value>
+            <value>
+                <fullName>TAX-FREE</fullName>
+                <default>false</default>
+                <label>TAX-FREE</label>
+            </value>
+            <value>
+                <fullName>NON-TAX</fullName>
+                <default>false</default>
+                <label>NON-TAX</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OutboundCashTransactionID__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>OUTBOUND CASH TRANSACTION ID</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>CASH_BOOK__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CASH OUT, Outbound Transaction-USD Currency</value>
+        </filterItems>
+        <filterItems>
+            <field>CASH_BOOK__c.Currency__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Currency__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>CASH_BOOK__c</referenceTo>
+    <relationshipLabel>INBOUND CASH TRANSACTION</relationshipLabel>
+    <relationshipName>CASH</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <assignments>
+        <name>UpdateDateofHouseBLIssue</name>
+        <label>Update Date of House B/L Issue</label>
+        <locationX>30</locationX>
+        <locationY>644</locationY>
+        <assignmentItems>
+            <assignToReference>RecordtoUpdate.DATE_OF_HOUSE_BL_ISSUED__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.ETD__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Prepaid_At_is_null</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>UpdatePlaceofHouseBLIssued</name>
+        <label>Update Place of House B/L Issued</label>
+        <locationX>15</locationX>
+        <locationY>429</locationY>
+        <assignmentItems>
+            <assignToReference>RecordtoUpdate.PlaceOfHouseBLIssued__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.PortOfLoadingDetailPrint__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Date_of_House_B_L_Issued_is_null</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>UpdatePrepaidAt</name>
+        <label>Update Prepaid At</label>
+        <locationX>34</locationX>
+        <locationY>844</locationY>
+        <assignmentItems>
+            <assignToReference>RecordtoUpdate.Prepaid_at__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.PortOfLoadingDetailPrint__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Collect_At_is_null</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Collect_At_is_null</name>
+        <label>Collect At is null?</label>
+        <locationX>226</locationX>
+        <locationY>934</locationY>
+        <defaultConnectorLabel>Conditions not met</defaultConnectorLabel>
+        <rules>
+            <name>Collect_At_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Payable_at__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Freight_Collect_Prepaid__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FREIGHT COLLECT</stringValue>
+                </rightValue>
+            </conditions>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Collect At null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Date_of_House_B_L_Issued_is_null</name>
+        <label>Date of House B/L Issued is null?</label>
+        <locationX>224</locationX>
+        <locationY>547</locationY>
+        <defaultConnector>
+            <targetReference>Prepaid_At_is_null</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Conditions not met</defaultConnectorLabel>
+        <rules>
+            <name>Date_of_House_B_L_Issued_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__DATE_OF_HOUSE_BL_ISSUED__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__ETD__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdateDateofHouseBLIssue</targetReference>
+            </connector>
+            <label>Date of House B/L Issued null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Place_of_House_B_L_Issued_is_null</name>
+        <label>Place of House B/L Issued is null?</label>
+        <locationX>226</locationX>
+        <locationY>339</locationY>
+        <defaultConnector>
+            <targetReference>Date_of_House_B_L_Issued_is_null</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Conditions not met</defaultConnectorLabel>
+        <rules>
+            <name>Place_of_House_B_L_Issued_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__PlaceOfHouseBLIssued__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__PortOfLoadingDetailPrint__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdatePlaceofHouseBLIssued</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Place of House B/L Issued null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Prepaid_At_is_null</name>
+        <label>Prepaid At is null?</label>
+        <locationX>226</locationX>
+        <locationY>759</locationY>
+        <defaultConnector>
+            <targetReference>Collect_At_is_null</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Conditions not met</defaultConnectorLabel>
+        <rules>
+            <name>Prepaid_At_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Prepaid_at__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Freight_Collect_Prepaid__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FREIGHT PREPAID</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>UpdatePrepaidAt</targetReference>
+            </connector>
+            <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+            <label>Prepaid At null</label>
+        </rules>
+    </decisions>
+    <interviewLabel>[F/TMS S/O] Fields Update Automation {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>[F/TMS S/O] Fields Update Automation</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>105</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Place_of_House_B_L_Issued_is_null</targetReference>
+        </connector>
+        <object>CustomObject1__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>RecordtoUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>CustomObject1__c</objectType>
+    </variables>
+</Flow>

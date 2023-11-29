@@ -1,0 +1,313 @@
+<apex:page controller="PrintHBLController" showHeader="false" applyHtmlTag="false" renderAs="pdf">
+
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+                text-transform: uppercase;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0mm;
+            }
+
+            .bold-text{
+                font-weight: bold;
+                font-family: Arial,Helvetica,sans-serif;
+            }
+            .bold-text h6{
+                font-size: 8.5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- hbl -->
+        <div style="{! IF(billing != 'hbl','display: none;', 'position:absolute; left:4mm; top: 4mm; right: 4mm;')}">
+            <div style="{! if(shipment.clofor_com_cfs__BLtype__c == null, '', 'display: none; ')}position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HBLTemplateURL__c}" width="202mm"
+                    height="287mm" />
+            </div>
+            <div style="{! if(shipment.clofor_com_cfs__BLtype__c == 'ORIGINAL', '', 'display: none; ')}position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HBLTemplateURLOriginal__c}" width="202mm"
+                    height="287mm" />
+            </div>
+            <div style="{! if(shipment.clofor_com_cfs__BLtype__c == 'SURRENDERED', '', 'display: none; ')}position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HBLTemplateURLSurrendered__c}" width="202mm"
+                    height="287mm" />
+            </div>
+            <div style="{! if(shipment.clofor_com_cfs__BLtype__c == 'WAYBILL', '', 'display: none; ')}position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HBLTemplateURLWaybill__c}" width="202mm"
+                    height="287mm" />
+            </div>
+            <div style="{! if(shipment.clofor_com_cfs__BLtype__c == 'DRAFT', '', 'display: none; ')}position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HBLTemplateURLDraft__c}" width="202mm"
+                    height="287mm" />
+            </div>
+            <!-- Shipment -->
+            <h6 style="position:absolute; left: 3mm; top:5mm; width: 105mm; white-space: pre-line;">{!shipment.clofor_com_cfs__ADDRESS_ON_B_L__c}</h6>
+            <!-- Consignee -->
+            <h6 style="position:absolute; left: 3mm; top:37mm; width: 105mm; white-space: pre-line;">{!shipment.clofor_com_cfs__CNEE_ADDRESS_ON_B_L__c}</h6>
+            <!-- Notify Address  -->
+            <h6 style="position:absolute; left: 3mm; top:72mm; width: 105mm; white-space: pre-line;">{!shipment.clofor_com_cfs__NOTIFY_ADDRESS_ON_B_L__c}</h6>
+            <!-- Ocean vessel -->
+            <h6 style="position:absolute; left: 3mm; top:115mm;">{!shipment.clofor_com_cfs__Vessle__c}</h6>
+            <h6 style="position:absolute; left: 3mm; top:117mm;">{!shipment.clofor_com_cfs__Voy_No__c}</h6>
+            <!-- Port of discharge -->
+            <h6 style="position:absolute; left: 3mm; top:125mm; width:100mm;">{!shipment.clofor_com_cfs__PortOfDischargeDetailPrint__c}</h6>
+            <!-- Place of reciept -->
+            <h6 style="position:absolute; left: 3mm; top:106mm; width:110mm; text-align: center;">{!shipment.clofor_com_cfs__PlaceOfReceiptDetailPrint__c}</h6>
+            <!-- Port of Loading  -->
+            <h6 style="position:absolute; left: 20mm; top:116mm; width:80mm; text-align:center;">{!shipment.clofor_com_cfs__PortOfLoadingDetailPrint__c}</h6>
+            <!-- Place of delivery  -->
+            <h6 style="position:absolute; left: 20mm; top:125mm;width:80mm; text-align:center;">{!shipment.clofor_com_cfs__PlaceOfDeliveryDetailPrint__c}</h6>
+            <!-- Bill of Lagind No. -->
+            <h3 style="position:absolute; left: 152mm;">{!shipment.clofor_com_cfs__HBL__c}</h3>
+            <!-- Delivery Agent  -->
+            <h6 class="bold-text" style="position:absolute; right: 3mm; top:75mm; width:85mm; white-space: pre-line;">DELIVERY AGENT</h6>
+            <h6 style="position:absolute; right: 3mm; top:79mm; width:85mm; white-space: pre-line;">{!shipment.clofor_com_cfs__QuotationPaymentCondition__c}</h6>
+            <!-- Marks and numbers -->
+            <h6 style="position:absolute; left: 3mm; top:136mm; width:30mm;">
+                {! if(and(shipment.clofor_com_cfs__TranporationType__c == 'FCL', shipment.clofor_com_cfs__CARGO_TYPE__c != null), 'FCL/FCL', 'LCL/LCL')} - {!shipment.clofor_com_cfs__CARGO_TYPE__c}
+            </h6>
+            <div style="{! IF(isCreateAttachment, ' display: none;', '')}position:absolute; left: 3mm; top:135mm; width:80mm; white-space: pre-line;">
+                <h6>{! if(and(shipment.clofor_com_cfs__TranporationType__c == 'LCL', shipment.clofor_com_cfs__Container_Measurement_Details__c != null), 'A PART OF ', '')}
+                {!shipment.clofor_com_cfs__Container_Measurement_Details__c}
+                    
+                    {!shipment.clofor_com_cfs__Marks_and_Numbers__c}
+                </h6>
+            </div>
+            <div style="{! IF(isCreateAttachment, '', ' display: none;')}position:absolute; left: 3mm; top:140mm; width:80mm; white-space: pre-line;">
+                <h6>{!shipment.clofor_com_cfs__Marks_and_Numbers__c}</h6>
+            </div>
+             <!-- Number and kind of packages -->
+            <!-- <h6 style="position:absolute; left: 40mm; width: 45mm; text-align: center; top:136mm;">{!shipment.clofor_com_cfs__carton__c} {!shipment.clofor_com_cfs__UnitType__c}S</h6> -->
+            <h6 style="position:absolute; left: 40mm; width: 45mm; text-align: center; top:136mm;">{!shipment.clofor_com_cfs__carton__c} {!shipment.clofor_com_cfs__UnitType__c}{! if(shipment.clofor_com_cfs__carton__c > 1,'S', '')}</h6>
+            <!-- Description of Goods -->
+            <h6 style="position:absolute; left: 100mm; top:136mm; width:30mm; text-align: center; white-space: pre-line;">SHIPPER'S PACK LOAD COUNT AND SEAL</h6>
+            <!-- <h6 style="position:absolute; left: 90mm; top:146mm; width:50mm; white-space: pre-line;">{!shipment.clofor_com_cfs__Item__c}</h6> -->
+            <!-- Gross weight -->
+            <h6 style="position:absolute; right: 28mm; width: 30mm; top:136mm; text-align: center;">{!shipment.clofor_com_cfs__weight__c} KGS</h6>
+            <!-- Measurement -->
+            <h6 style="position:absolute; right: 0mm; width: 28mm; top:136mm; text-align: center;">{!shipment.clofor_com_cfs__CBM__c} CBM</h6>
+            <!-- CODE Block -->
+            <span style="position:absolute; left: 98mm; top: 152mm; font-size: 9.5px;  {! IF(shipment.clofor_com_cfs__GOODS_ATTACHMENT__c != null, '' , ' display: none;')}">PLEASE SEE ATTACHMENT</span>
+            <div style="position:absolute; left: 90mm; top: 148mm; font-size: 9.5px; {! IF(shipment.clofor_com_cfs__GOODS_ATTACHMENT__c == null, '' , ' display: none;')}" >
+                <span style="{! IF(shipment.clofor_com_cfs__Item__c != null, 'white-space: pre-line;', 'display: none; ')}">{!shipment.clofor_com_cfs__Item__c}<br/></span>
+                <span style="{! IF(shipment.clofor_com_cfs__S_I_PASSWORD__c != null, '', 'display: none; ')}">SCAC CODE: {!shipment.clofor_com_cfs__S_I_PASSWORD__c}<br/></span>
+                <span style="{! IF(shipment.clofor_com_cfs__CustomizedShipOrderID__c != null, '', 'display: none; ')}">AMS HBL: {!shipment.clofor_com_cfs__CustomizedShipOrderID__c}<br/></span>
+                <span style="{! IF(shipment.clofor_com_cfs__A_N_PASSWORD__c != null, '', 'display: none; ')}">ACI CCN Code: {!shipment.clofor_com_cfs__A_N_PASSWORD__c}<br/></span>
+                <span>
+                    <apex:outputText style="{! IF(isCreateNumber && shipment.clofor_com_cfs__HBL__c != null, '', 'display: none;')}" value="HBL: {!shipment.HBL__c}"/>
+                </span>
+            </div>
+            <!-- SAY: -->
+            <h6 style="position:absolute; left: 45mm; top:194mm;">SAY:</h6>
+            <h6 style="position:absolute; left: 45mm; top:197mm; width: 60mm; white-space: pre-line;">{!shipment.clofor_com_cfs__NumberOfContainers__c}</h6>
+            <!-- SHIPPED ON BOARD -->
+            <h6 style="position:absolute; left: 150mm; top:194mm;">SHIPPED ON BOARD:</h6>
+            <h6 style="position:absolute; left: 150mm; top:197mm; white-space: pre-line;">
+                <apex:outputText value="{0,date,dd.MMM yyyy}">
+                    <apex:param value="{!shipment.ETD__c}" />
+                </apex:outputText>
+            </h6>
+            <div style="position:absolute; left: 3mm; top:246mm;">
+                <!-- Freight amount -->
+                <h6 style="position:absolute; width: 80mm;">{!shipment.clofor_com_cfs__Freight_Collect_Prepaid__c}</h6>
+                <!-- Freight payable at -->
+                <h6 style="position:absolute; left: 90mm; width:30mm; white-space: pre-line;">{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', shipment.clofor_com_cfs__Prepaid_at__c, shipment.clofor_com_cfs__Payable_at__c)}</h6>
+                <!-- Place and date of issue -->
+                <h6 style="position:absolute; left: 130mm; width: 80mm; white-space: pre-line;">{!shipment.clofor_com_cfs__PlaceOfHouseBLIssued__c},
+                    <apex:outputText value=" {0,date,dd.MMM yyyy}">
+                        <apex:param value="{!shipment.DATE_OF_HOUSE_BL_ISSUED__c}" />
+                    </apex:outputText>
+                </h6>
+                <h6 style="position:absolute; left: 90mm; top:10mm;">{!shipment.clofor_com_cfs__No_of_Original_BL__c}</h6>
+            </div>
+        </div>
+
+        <div style="{! IF(and(billing == 'hbl', isCreateAttachment), '', 'display: none;')} position:absolute; top: 297mm;left: 0mm; right: 0mm; padding: 40px;">
+            <h2 style="padding-top: 10px; text-align: center;">ATTACHMENT</h2>
+            <h3 style="text-align: right; width: 100%; border-bottom: 1px solid black;">HBL No: {!shipment.clofor_com_cfs__HBL__c}</h3>
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 50%;">
+                        <h4>Mark &amp; Number</h4>
+                    </td>
+                    <td style="width: 50%;">
+                        <h4>Description of Goods</h4>
+                    </td>
+                </tr>
+                <tr style="vertical-align:top; font-size: 9.5px;">
+                    <td >
+                        <span style="width:80mm; white-space: pre-line; "> {!shipment.clofor_com_cfs__Container_Measurement_Details__c} 
+
+                            {!shipment.clofor_com_cfs__MARKS_NUMBERS_ATTACHMENT__c}
+                        </span>
+                    </td>
+                    <td>
+                        <div>
+                            <span style="white-space: pre-line;">{!shipment.clofor_com_cfs__GOODS_ATTACHMENT__c} <br/></span>
+                            <span style="{! IF(shipment.clofor_com_cfs__S_I_PASSWORD__c != null, '', 'display: none; ')}">SCAC CODE: {!shipment.clofor_com_cfs__S_I_PASSWORD__c}<br/></span>
+                            <span style="{! IF(shipment.clofor_com_cfs__CustomizedShipOrderID__c != null, '', 'display: none; ')}">AMS HBL: {!shipment.clofor_com_cfs__CustomizedShipOrderID__c}<br/></span>
+                            <span style="{! IF(shipment.clofor_com_cfs__A_N_PASSWORD__c != null, '', 'display: none; ')}">ACI CCN Code: {!shipment.clofor_com_cfs__A_N_PASSWORD__c}<br/></span>
+                            <span style="{! IF(shipment.clofor_com_cfs__HBL__c != null, '', 'display: none; ')}">HBL: {!shipment.HBL__c}</span>
+                                
+                            <!-- {! IF(shipment.clofor_com_cfs__S_I_PASSWORD__c != null,'SCAC CODE:', '')} {! IF(shipment.clofor_com_cfs__S_I_PASSWORD__c != null,shipment.clofor_com_cfs__S_I_PASSWORD__c, '')} -->
+                            <!-- {! IF(shipment.clofor_com_cfs__CustomizedShipOrderID__c != null,'AMS HBL:', '')} {! IF(shipment.clofor_com_cfs__CustomizedShipOrderID__c != null,shipment.clofor_com_cfs__CustomizedShipOrderID__c, '')} -->
+                            <!-- {! IF(shipment.clofor_com_cfs__A_N_PASSWORD__c != null,'ACI CCN Code:', '')} {! IF(shipment.clofor_com_cfs__A_N_PASSWORD__c != null,shipment.clofor_com_cfs__A_N_PASSWORD__c, '')} -->
+                            <!-- {! IF(shipment.clofor_com_cfs__HBL__c != null,'HBL:', '')} {! IF(shipment.clofor_com_cfs__HBL__c != null,shipment.clofor_com_cfs__HBL__c, '')} -->
+                        </div>
+                    </td>
+                </tr>
+                <!-- <tr> -->
+                    <!-- <td> -->
+                        <!-- <h6> {!shipment.clofor_com_cfs__MARKS_NUMBERS_ATTACHMENT__c} </h6> -->
+                    <!-- </td> -->
+                <!-- </tr> -->
+            </table>
+        </div>
+
+        <!-- hawb -->
+        <div style="{! IF(billing != 'hawb','display: none;', '')}" class="bold-text">
+            <div style="position:absolute; z-index:-2; left:0px; top: 0px; right: 0px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__HAWBTemplateURL__c    }" width="210mm"
+                    height="295mm" />
+            </div>
+            <!-- MAWB: -->
+            <h3 style="position:absolute; left: 15mm; top:5mm;">{!shipment.clofor_com_cfs__MAWBNumberonAWB__c}</h3> 
+            <!-- HAWB: -->
+            <h3 style="position:absolute; right: 40mm; top:5mm;">HAWB: {!shipment.clofor_com_cfs__HAWB__c}</h3>
+            <!-- Shipment -->
+            <h6 style="position:absolute; left: 9mm; top:20mm; width: 90mm; white-space: pre-line; ">{!shipment.clofor_com_cfs__ADDRESS_ON_B_L__c}</h6>
+            <!-- Consignee -->
+            <h6 style="position:absolute; left: 9mm; top:45.5mm; width: 90mm; white-space: pre-line;">{!shipment.clofor_com_cfs__CNEE_ADDRESS_ON_B_L__c}</h6>
+            <!-- Airport of Departure -->
+            <h6 style="position:absolute; left: 9mm; top:92mm;">{!shipment.clofor_com_cfs__PortOfLoadingDetailPrint__c}</h6>
+            <!-- Accounting Information  -->
+            <h6 style="position:absolute; left: 105mm; top:77mm; width: 100mm; text-align: center;">{!shipment.clofor_com_cfs__Freight_Collect_Prepaid__c}</h6>
+            <div style="position:absolute; left: 9mm; top: 102mm;">
+                <!-- To  -->
+                <h6 style="position:absolute;">{! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0,
+                    shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__TransitPort__r.clofor_com_cfs__PortCodeOnly__c, 
+                    shipment.clofor_com_cfs__POD__r.clofor_com_cfs__PortCodeOnly__c)}</h6>
+                <!-- By First Carrier  -->
+                <h6 style="position:absolute; left: 10mm;">{! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0,
+                    shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__MasterCarrierConsolidator__r.clofor_com_cfs__Carrier_Code__r.clofor_com_cfs__Carrier_Code__c, 
+                    shipment.clofor_com_cfs__BookingNv__r.clofor_com_cfs__Carrier_Code__r.clofor_com_cfs__Carrier_Code__c)}</h6>
+                <!-- to  -->
+                <h6 style="position:absolute; left: 58mm;">{! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0, shipment.clofor_com_cfs__POD__r.clofor_com_cfs__PortCodeOnly__c, '')}</h6>
+                <!-- by -->
+                <h6 style="position:absolute; left: 67.5mm;">{! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0, shipment.clofor_com_cfs__BookingNv__r.clofor_com_cfs__Carrier_Code__r.clofor_com_cfs__Carrier_Code__c, '')}</h6>
+                <h6 style="position:absolute; left: 95mm;">USD</h6>
+                <h6 style="position:absolute; left: 105.5mm;">{!IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'PP', IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT COLLECT', 'CC', ''))}</h6>
+                <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'left: 113mm;', 'display: none;')}position:absolute;">X</h6>
+                <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'left: 123mm;', 'display: none;')}position:absolute;">X</h6>
+                <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT COLLECT', 'left: 118mm;', 'display: none;')}position:absolute;">X</h6>
+                <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT COLLECT', 'left: 128mm;', 'display: none;')}position:absolute;">X</h6>
+                <h6 style="position:absolute; left: 144mm;">NVD</h6>
+                <h6 style="position:absolute; left: 175mm;">NCV</h6>
+            </div>
+
+            <div style="position:absolute; left: 8mm; top: 110mm;">
+                <!-- Airport of Destination -->
+                <h6 style="position:absolute; width:100mm; white-space: pre-line;">{!shipment.clofor_com_cfs__PortOfDischargeDetailPrint__c}</h6>
+                <!-- Flight/Date For Carrier -->
+                <h6 style="position:absolute; left: 47mm; width: 25mm;">
+                    {!shipment.clofor_com_cfs__FlightNo__c}
+                    {! IF(and(shipment.clofor_com_cfs__FlightNo__c != null, shipment.clofor_com_cfs__ETD__c != null), '/', '')}
+                    <apex:outputText value="{0,date,dd.MMM yyyy}">
+                        <apex:param value="{!shipment.ETD__c}" />
+                    </apex:outputText>
+                </h6>
+                <!-- Flight/Date Use Only  -->
+                <h6 style="position:absolute; left: 71mm; width: 25mm;">
+                    {! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0,
+                        shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__TransitVesselFlight__c 
+                        + IF(and(shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__TransitVesselFlight__c != null, shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__ETDAtTransitPort__c != null), '/', ''), 
+                        '')}
+                    <apex:outputText value="{0,date,dd.MMM yyyy}">
+                        <apex:param value="{! IF(shipment.clofor_com_cfs__TRANSIT__r.size > 0,shipment.clofor_com_cfs__TRANSIT__r[0].clofor_com_cfs__ETDAtTransitPort__c, null)}" />
+                    </apex:outputText>
+                </h6>
+                <h6 style="position:absolute; left: 106mm;">NIL</h6>
+            </div>
+            <!-- Handing Information -->
+            <h6 style="position:absolute; left: 9mm; top:117mm; width:180mm; white-space: pre-line;">{!shipment.clofor_com_cfs__QuotationPaymentCondition__c}</h6>
+
+            <div style="position:absolute; left: 8mm; top:140mm; width: 30mm;font-size: 8.5px;">
+                <!-- No of Pieces RCP  -->
+                <h6>{!shipment.clofor_com_cfs__carton__c}</h6>
+                <h6 style="position:absolute; top: 10mm;">SHIPPING MARK:</h6>
+                <h6 style="position:absolute; top: 14mm;">{!shipment.clofor_com_cfs__Marks_and_Numbers__c}</h6>
+                <!-- Gross Weight -->
+                <h6 style="{! if(shipment.clofor_com_cfs__weight__c != null, '', 'display: none;')}position:absolute; left: 9mm; top: 0mm; width: 18mm; text-align: right;">{!shipment.clofor_com_cfs__weight__c}</h6>
+                <h6 style="{! if(shipment.clofor_com_cfs__weight__c != null, '', 'display: none;')}position:absolute; left: 28.5mm; top: 0mm; text-align: right;">K</h6>
+                <!-- Chargable Weight  -->
+                <h6 style="{! if(shipment.clofor_com_cfs__chargable_weight__c != null, '', 'display: none;')}position:absolute; left: 58mm; top: 0mm; width: 17mm; text-align: right;">{!shipment.clofor_com_cfs__chargable_weight__c} KGS</h6>
+                <h6 style="position:absolute; left: 108mm; top: 0mm; white-space: nowrap;">AS ARRANGED</h6>
+                <!-- Nature and Quality of Goods -->
+                <div style="position:absolute; left: 138mm; top:0; width: 55mm; height: 70mm">
+                    <h6 style="white-space: pre-line;">{!shipment.clofor_com_cfs__Item__c}</h6>
+                    <h6 style="white-space: pre-line;">{!shipment.clofor_com_cfs__GOODS_ATTACHMENT__c}</h6> 
+                </div>
+                <!-- Dimension Detail -->
+                <div style="position:absolute; left: 138mm; top:125px; width: 55mm;height: 300px">
+                    <apex:outputText rendered="{!(shipment.DimensionDetail__c != null)}">DIMENSION:</apex:outputText> <br/>
+                    <apex:outputField value="{!shipment.DimensionDetail__c}"/>
+                </div>
+                <!-- Dimension Dev -->
+                <div style="position:absolute; left: 138mm; top:211px; width: 55mm;">
+                    <!-- <apex:outputText style="{!IF(shipment.C_W_Dimension_dev__c != null,'','display : none;')}" value="VOL: {!shipment.C_W_Dimension_dev__c}"/> -->
+                    <!-- <h6>VOL :{!shipment.clofor_com_cfs__C_W_Dimension_dev__c}</h6> -->
+                    <apex:outputText style="display: flex" value="VOL: {0,number,###,###,###,##0.000}" rendered="{!shipment.C_W_Dimension_dev__c != 0 && shipment.C_W_Dimension_dev__c != null}">
+                        <!-- <apex:outputText value=""/> -->
+                        <apex:param value="{!shipment.C_W_Dimension_dev__c}"/>
+                    </apex:outputText>
+                </div>
+                <!-- CBM -->
+                <div style="position:absolute; left: 170mm; top:211px; width: 55mm;"> 
+                    <apex:outputText style="display: flex" value="CBM: {0,number,###,###,###,##0.000}" rendered="{!shipment.CBM__c != 0 && shipment.CBM__c != null}">
+                        <!-- <apex:outputText value=""/> -->
+                        <apex:param value="{!shipment.CBM__c}"/>
+                    </apex:outputText>
+                   <!-- <apex:outputText style="{!IF(shipment.CBM__c != null,'','display : none;')}" value="CBM: {!shipment.CBM__c}"/> -->
+                    <!-- <h6>CBM :{!shipment.clofor_com_cfs__CBM__c}</h6> -->
+                </div>
+            </div>
+
+
+            <div style="position:absolute; left: 8mm; top:190mm;">
+                <!-- No of Pieces RCP  -->
+                <h6 style="position:absolute; top: 1mm;">{!shipment.clofor_com_cfs__carton__c}</h6>
+                <!-- Gross Weight -->
+                <h6 style="{! if(shipment.clofor_com_cfs__weight__c != null, '', 'display: none;')}position:absolute; left: 9mm; top: 0mm; width: 18mm; text-align: right;">{!shipment.clofor_com_cfs__weight__c}</h6>
+                <h6 style="{! if(shipment.clofor_com_cfs__weight__c != null, '', 'display: none;')}position:absolute; left: 28.5mm; top: 0mm; text-align: right;">K</h6>
+                <h6 style="position:absolute; left: 108mm; top: 2mm; white-space: nowrap;">AS ARRANGED</h6>
+            </div>
+
+            <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'left: 17mm;', 'left: 53mm;')}position:absolute; top:203mm;">AS ARRANGED</h6>
+            <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'left: 17mm;', 'left: 53mm;')}position:absolute; top:228mm;">AS ARRANGED</h6>
+            <h6 style="{! IF(shipment.clofor_com_cfs__Freight_Collect_Prepaid__c == 'FREIGHT PREPAID', 'left: 17mm;', 'left: 53mm;')}position:absolute; top:253mm;">AS ARRANGED</h6>
+            
+            <div>
+                <!-- Executed on (Date)  -->
+                <h6 style="position:absolute; left: 102mm; top:255mm; width: 20mm; text-align: center;">
+                    <apex:outputText value="{0,date,dd.MMM yyyy}">
+                        <apex:param value="{!shipment.ETD__c}" />
+                    </apex:outputText>
+                </h6>
+                <!-- at (Place) -->
+                <h6 style="position:absolute; left: 120mm; top:255mm; width: 55mm; text-align: center;">{!shipment.clofor_com_cfs__PortOfLoadingDetailPrint__c}</h6>
+            </div>
+
+            <div style="color: #105295;">
+                <h6 style="position:absolute; left: 66mm; top:278mm; width: 80mm; text-align: center; font-size: 14px;">
+                    <apex:outputText >{!customer1}</apex:outputText>
+                </h6>
+            </div>
+        </div>
+    </body>
+</apex:page>

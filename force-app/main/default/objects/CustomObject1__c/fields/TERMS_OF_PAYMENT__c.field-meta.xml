@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TERMS_OF_PAYMENT__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose the Payment Type which define how your client pay the invoices.</inlineHelpText>
+    <label>TERMS OF PAYMENT</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CASH/TRANSFER</fullName>
+                <default>true</default>
+                <label>CASH/TRANSFER</label>
+            </value>
+            <value>
+                <fullName>CASH</fullName>
+                <default>false</default>
+                <label>CASH</label>
+            </value>
+            <value>
+                <fullName>TRANSFER</fullName>
+                <default>false</default>
+                <label>TRANSFER</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when Personal Income Tax need to be approved.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>PERSONAL INCOME TAX APPROVAL REQUEST</name>
+    <style>none</style>
+    <subject>PERSONAL INCOME TAX Approval Request - {!PersonalIncomeTax__c.Name}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

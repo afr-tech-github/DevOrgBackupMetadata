@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>No Billing</fullName>
+        <default>false</default>
+        <label>No Billing</label>
+    </customValue>
+    <customValue>
+        <fullName>First Billing</fullName>
+        <default>false</default>
+        <label>First Billing</label>
+    </customValue>
+    <customValue>
+        <fullName>Continuous Billing</fullName>
+        <default>false</default>
+        <label>Continuous Billing</label>
+    </customValue>
+    <customValue>
+        <fullName>Last Billing</fullName>
+        <default>false</default>
+        <label>Last Billing</label>
+    </customValue>
+    <masterLabel>Billing Type-New or Continuous</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

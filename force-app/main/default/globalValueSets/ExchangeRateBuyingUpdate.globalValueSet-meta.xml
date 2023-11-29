@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Exchange Rate-Buying(Credit)</fullName>
+        <default>true</default>
+        <label>Exchange Rate-Buying(Credit)</label>
+    </customValue>
+    <customValue>
+        <fullName>Exchange Rate-Buying(VAT)</fullName>
+        <default>false</default>
+        <label>Exchange Rate-Buying(VAT)</label>
+    </customValue>
+    <customValue>
+        <fullName>Exchange Rate-Quote</fullName>
+        <default>false</default>
+        <label>Exchange Rate-Quote</label>
+    </customValue>
+    <customValue>
+        <fullName>Manual Input</fullName>
+        <default>false</default>
+        <label>Manual Input</label>
+    </customValue>
+    <masterLabel>EXCHANGE RATE BUYING-UPDATE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,272 @@
+<apex:page controller="CopyingMShipDataToHShipController" showHeader="false" sidebar="false" docType="html-5.0" title="Search">
+<head>
+    
+    <style>
+        .mytable td {
+            padding: 0 30px;
+            text-align: center;
+            background-color: white;
+            border: 1px solid #c6c9cc;
+        }
+        
+        .mytable th {
+            padding: 0 30px;
+            text-align: center;
+            border: 1px solid #c6c9cc;
+        }
+        
+        .mytable {
+            border: 1px solid #c6c9cc;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .button_block {
+            text-align:center; 
+            width:100%;
+            padding: 10px 0;
+        }
+    </style>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    
+    <script>
+        function toggleSelectAll(checkbox){
+            var $j = jQuery.noConflict();
+            
+            if(checkbox.checked){
+                $j(".shipment").prop('checked', true);
+            }
+            else{
+                $j(".shipment").prop('checked', false);
+            }
+        }
+        
+        function toggleItem(checkbox){
+            var $j = jQuery.noConflict();
+            var cbs = $j('.shipment');
+            
+            if(cbs.filter(':not(:checked)').length==0){
+                $j("input[id$=select_shipments]").prop('checked', true);
+            }
+            else{
+                $j("input[id$=select_shipments]").prop('checked', false);
+                
+            }
+        }
+        
+        function closePopup() {
+            window.top.close();
+        }
+    </script>
+</head>
+<apex:form >
+    <apex:pageBlock >
+    <apex:pagemessages ></apex:pagemessages>
+        <div style="padding: 10px 0;">
+            <h1>{!translations['MBL_HBL_TITLE']}</h1>
+        </div>
+        
+        <div style="height: 100px; overflow: scroll">
+            <h2>{!translations['MBL_HBL_SUBTITLE1']}</h2>
+            <table class="mytable" bordercolor="#e0e3e5">
+                <tr>
+                    <th>Name</th>
+                    <th>POL-COUNTRY</th>
+                    <th>POL-PORT</th>
+                    <th>PLACE OF RECEIPT</th>
+                    <th>ETD</th>
+                    <th>POD-COUNTRY</th>
+                    <th>POD-PORT</th>
+                    <th>PLACE OF DELIVERY</th>
+                    <th>ETA</th>
+                    <th>VESSEL/FLIGHT</th>
+                    <th>VOYAGE</th>
+                    <th>DEVAN OPERATION COMPANY</th>
+                    <th>PIC OF DEVAN</th>
+                    <th>DEVAN DATE</th>
+                    <th>LCL MANIFEST SUBMISSION TIME</th>
+                    <th>TRANSIT VESSEL</th>
+                    <th>TRANSIT PORT</th>
+                    <th>ETD AT TRANSIT PORT</th>
+                    <th>MASTER B/L NO</th>
+                    <th>CO-LOADER/COURIER</th>
+                    <th>WAREHOUSE</th>
+                    <th>CONTAINER SEAL NO</th>
+                </tr>
+                <apex:repeat value="{!MBLShips}" var="item">
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!item.Name}"> </apex:outputText>
+                        </td>
+                        <td> {!item.MPOL__r.Country_Name__c} </td>
+                        <td> {!item.MPOL__r.City_Name__c} </td>
+                        <td> {!item.MPlace_of_Receipt__r.Name} </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!item.METD__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td> {!item.MPOD__r.Country_Name__c} </td>
+                        <td> {!item.MPOD__r.City_Name__c} </td>
+                        <td> {!item.MPlace_of_Delivery__r.Name} </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!item.META__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td> {!item.MVessel__c} </td>
+                        <td> {!item.MVoy_No__c} </td>
+                        <td> {!item.MDevan__r.Name} </td>
+                        <td> {!item.MDevanRep__r.Name} </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!item.MDevanningDate__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!item.bondedtimetoCFS__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td> {!item.MTRANSIT_VESSEL__c} </td>
+                        <td> {!item.MTRANSIT_PORT__c} </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!item.MTRANSIT_T_ETD__c}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td> {!item.MMaster_B_L_No__c} </td>
+                        <td> {!item.MBookingNv__r.Name} </td>
+                        <td> {!item.MLoadLocation__r.Name} </td>
+                        <td> {!item.MContainer_No__c} </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>
+                    
+        <div class="button_block">
+            <apex:commandButton value=" {!translations['MBL_HBL_COPY_BTN']} " action="{!copy}" onclick="return confirm('{!translations['MBL_HBL_CONFIRMATION_MSG']}');"/>
+            <apex:commandButton value=" {!translations['btn_close']} " oncomplete="closePopup();"/>
+        </div>
+
+        <div style="overflow: scroll">
+            <h2>{!translations['MBL_HBL_SUBTITLE2']}</h2>
+            <table class="mytable">
+                <tr>
+                    <th><apex:inputCheckbox value="{!selectAll}" id="select_shipments" onchange="toggleSelectAllF(this);"/>Select All</th>
+                    <th>WKID</th>
+                    <th>ID</th>
+                    <th>POL-COUNTRY</th>
+                    <th>POL-PORT</th>
+                    <th>PLACE OF RECEIPT</th>
+                    <th>ETD</th>
+                    <th>POD-COUNTRY</th>
+                    <th>POD-PORT</th>
+                    <th>PLACE OF DELIVERY</th>
+                    <th>ETA</th>
+                    <th>VESSEL/FLIGHT</th>
+                    <th>VOYAGE</th>
+                    <th>DEVAN OPERATION COMPANY</th>
+                    <!--<th>PIC OF DEVAN</th>-->
+                    <th>DEVAN DATE</th>
+                    <th>MANIFEST SUBMISSION DATE</th>
+                    <th>TRANSIT VESSEL</th>
+                    <th>TRANSIT PORT</th>
+                    <th>ETD AT TRANSIT PORT</th>
+                    <th>MASTER B/L NO</th>
+                    <th>CO-LOADER/COURIER</th>
+                    <th>WAREHOUSE</th>
+                    <th>CONTAINER SEAL NO</th>
+                </tr>
+                <apex:repeat value="{!shipmentWrappers}" var="row">
+                    <tr>
+                        <td>
+                            <apex:inputCheckbox value="{!row.selected}" styleClass="shipment" onchange="toggleItem();"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="S{!row.shipment.WkInitial__c + row.shipment.Name}"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.POL__r.Country_Name__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.POL__r.City_Name__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Place_of_Receipt__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!row.shipment.ETA__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.POD__r.Country_Name__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.POD__r.City_Name__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Place_of_Delivery__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!row.shipment.ETD__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Vessle__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Voy_No__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Devan__r.Name}"></apex:outputText>
+                        </td>
+                        <!--<td>
+                            <apex:outputText value="{!row.shipment.DevanRep__r.Name}"></apex:outputText>
+                        </td>-->
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!row.shipment.DevanningDate__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!row.shipment.LoadingTime__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.TransitV__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.TS__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date,yyyy'/'MM'/'dd}">
+                                <apex:param value="{!row.shipment.T_ETD__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.Master_B_L__c}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.BookingNv__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.LoadLocation__r.Name}"></apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!row.shipment.ContainerSeal_No__c}"></apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>          
+        </div>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

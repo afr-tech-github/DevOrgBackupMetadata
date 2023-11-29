@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_to_Account__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If accounting team need to check the invoice of the shipment, choose the status of invoice submission to accounting team.</inlineHelpText>
+    <label>INVOICE SUBMISSION TO ACCOUNTING TEAM</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Under Documentation</fullName>
+                <default>true</default>
+                <label>Under Documentation</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Re-Submitted</fullName>
+                <default>false</default>
+                <label>Re-Submitted</label>
+            </value>
+            <value>
+                <fullName>No Need Submit</fullName>
+                <default>false</default>
+                <label>No Need Submit</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

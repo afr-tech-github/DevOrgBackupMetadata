@@ -1,0 +1,53 @@
+<aura:component  controller="QuotationReportController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global">
+	<aura:attribute name="language" type="String"/>
+	<aura:attribute name="isCreateAttachment" type="Boolean" default="false"/>
+	<aura:attribute name="isTax" type="Boolean" default="true"/>
+	<aura:attribute name="isAmount" type="Boolean" default="false"/>
+	<aura:attribute name="isSum" type="Boolean" default="false"/>
+	<aura:attribute name="languageOptions" type="List"/>
+	<aura:attribute name="msg" type="String"/>
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<div>
+		<div class="slds-card">
+		    <div class="slds-p-around_medium">
+		    	
+		    	<div class="slds-section slds-is-open">
+		    		<aura:if isTrue="{!v.msg != ''}" >
+		    			<div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+		    				{!v.msg}
+		    			</div>
+		    			<aura:set attribute="else">
+				    		<!-- <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+							    <lightning:select aura:id="languageSelect" name="select" label="Language: " value="{!v.language}">
+							       	<aura:iteration items="{!v.languageOptions}" var="option">
+							            <option text="{!option.label}" value="{!option.value}" selected="{!option.selected}"/>
+							        </aura:iteration>
+							    </lightning:select>
+							</div> -->
+                            
+                            <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+						    	<ui:inputCheckbox aura:id="checkboxAttachment" label="Create Attatchment?" value="{!v.isCreateAttachment}"/>
+							</div>
+
+							<div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+								<ui:inputCheckbox aura:id="checkboxTax" label="Tax?" value="{!v.isTax}"/>
+							</div>
+
+							<div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+								<ui:inputCheckbox aura:id="checkboxAmount" label="Amount?" value="{!v.isAmount}"/>
+							</div>
+
+							<div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+								<ui:inputCheckbox aura:id="checkboxSum" label="Sum?" value="{!v.isSum}"/>
+							</div>
+
+						  	<div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+							    <lightning:button variant="brand" label="Generate" title="Generate" onclick="{!c.handleGenerate}" />
+							</div>
+						</aura:set>
+					</aura:if>
+		    	</div>
+		    </div>
+		</div>
+	</div>
+</aura:component>

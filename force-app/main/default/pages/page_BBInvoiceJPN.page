@@ -1,0 +1,457 @@
+<apex:page contentType="text-html" renderAs="pdf" controller="cntl_Document" showHeader="false" applyHtmlTag="false"> 
+    <head>
+        <style type="text/css">
+            <!-- 全体 -->
+            @page {size: 210mm 300mm ;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;}
+            body {
+            font-family: Arial Unicode MS;
+            font-size: 10.5pt;
+            }
+            <!-- 属性 -->
+            .F08    { font-size: 8px;}
+            .F09    { font-size: 9px;}
+            .F10    { font-size: 10.5px;}
+            .F12    { font-size: 12px;}
+            .FF     { font-size: 16px;color:red;}
+            .F14    { font-size: 14px;}
+            .F18    { font-size: 18px;}
+            .F20    { font-size: 20px;font-weight: bold;}
+            .F25    { font-size: 25px;font-weight: bold;}
+            .F30    { font-size: 30px;font-weight: bold;}
+            
+            .FutaiNo{
+            width: 120px;
+            table-layout: fixed;
+            text-align:center;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <apex:repeat value="{!WrapdisplayitemList}" var="list">
+            <div STYLE="position:absolute; z-index:-2; left:475px; margin-top:100px;">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="250px" height="80px"/>
+            </div>  
+            <div STYLE="position:absolute; left:400px; margin-top:180px;">
+                <span class="F14"><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}"/></span>
+            </div>
+            <div STYLE="position:absolute; left:400px; margin-top:200px;">
+                <span class="F14"><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Company_Address__c}"/></span>
+            </div>
+            <div STYLE="position:absolute; left:400px; margin-top:260px;">
+                <span class="F14"><apex:outputLabel value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c} 　　FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/></span>
+            </div>
+            <div STYLE="position:absolute; left:10px; margin-top:15px; width:760px; text-align:center">
+                <span class="F25">航空貨物取扱い及び代行回収依頼書</span>
+            </div>    
+            
+            <div STYLE="position:absolute; left:670px; margin-top:70px; font-size:11pt;">
+                <apex:outputText value="{0,date,yyyy年M月d日}">
+                    <apex:param value="{!AnkenList.PrintDate__c}"/>
+                </apex:outputText>
+            </div>
+            
+            <!--<div STYLE="position:absolute; left:10px; margin-top:130px; min-width:350px; border-style:solid; border-bottom-width: 0.5px; border-left-width: 0px; border-right-width: 0px; border-top-width: 0px; height:30px;">
+                <div style="padding-left:30px;  float:left; min-width:240px;">
+                    <apex:outputText value="{!AnkenList.Break_Bulk_Agent__r.Name}" style="font-size:14pt;" rendered="{!LEN(AnkenList.Break_Bulk_Agent__r.Name)<=17}" />
+                    <apex:outputText value="{!AnkenList.Break_Bulk_Agent__r.Name}" style="font-size:12pt;" rendered="{!18<=LEN(AnkenList.Break_Bulk_Agent__r.Name) && LEN(AnkenList.Break_Bulk_Agent__r.Name)<=22}" />
+                    <apex:outputText value="{!AnkenList.Break_Bulk_Agent__r.Name}" style="font-size:10pt;" rendered="{!23<=LEN(AnkenList.Break_Bulk_Agent__r.Name) && LEN(AnkenList.Break_Bulk_Agent__r.Name)<=39}" />
+                    <apex:outputText value="{!AnkenList.Break_Bulk_Agent__r.Name}" style="font-size:8pt;"  rendered="{!40<=LEN(AnkenList.Break_Bulk_Agent__r.Name)}" />
+                </div>
+                <div style="padding-right:30px; width:40px; margin-left:10px; float:left;">
+                    <span class="F18">御中</span>
+                </div>
+            </div>-->    
+            
+            <div STYLE="position:absolute; left:10px; padding-left:30px; width:320px; margin-top:170px; border:solid 0px; border-bottom-width: 0.5px; height:20px;">
+                <span class="F14">請求参照番号</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {!AnkenList.WkInitial__c}{!AnkenList.Name}
+                <apex:outputText value="-{!AnkenList.QuotationVer__c}" />
+            </div>    
+            
+            <div STYLE="position:absolute; left:20px; margin-top:195px;">
+                <span class="F14">平素お世話になっております。</span><br />
+                <span class="F14">下記案件の航空貨物回収を依頼いたします。</span>
+            </div>    
+            
+            <!-- お取引条ボックス -->
+            
+            <div STYLE="position:absolute; margin-left:10px; margin-top:240px; width350px;">
+                <!-- 外枠 -->
+                <div STYLE="position:absolute; left:0px; top:0px; width:350px; height:120px;  border-width:1px; border-style:solid; "></DIV>
+                <!-- 中の線 -->
+                <!-- 横線 -->
+                <div STYLE="position:absolute; left:0px; top:80px; width:350px; border-width:0.5px; border-style:solid;"></DIV>
+                
+                
+                <!-- 文字系 -->
+                <div STYLE="position:absolute; left:10px; top:20px; font-size:12pt;">
+                    ご請求金額
+                </div>       
+                <div STYLE="position:absolute; left:10px; top:90px; font-size:11pt;">
+                    支払期限は取引支払条件による
+                </div>
+            </div>
+            
+            <div STYLE="position:absolute; left:100px; margin-top:265px; padding-right:5px; line-height:30px; text-align:center; height:30px; width:255px; font-size:20pt;">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+                <apex:outputText value="{0,number, #,###,###,###}">
+                    <apex:param value="{!Syokei+Syohizei}" />
+                </apex:outputText>
+            </div>
+            <!--
+            <div style="position:absolute; left:250px; margin-top:330px; width:255px;">
+                <apex:outputText value="{0,date,yyyy年M月d日}" rendered="{!AppearFlag}">
+                    <apex:param value="{!AnkenList.DeadlineForPaymentOfInvoices__c}"/>
+                </apex:outputText>
+                <apex:outputText value="{0,date,yyyy年M月d日}" rendered="{!(!AppearFlag)}">
+                    <apex:param value="{!AnkenList.DeadlineForPaymentOfExpense__c}"/>
+                </apex:outputText>
+            </div>
+            -->
+            
+            <!-- 印鑑スペース -->
+            
+            <div STYLE="position:absolute; margin-left:477px; margin-top:280px;">
+                <!-- 外枠 -->
+                <div STYLE="position:absolute; left:0px; top:0px; width:290px; height:80px;  border-width:1px; border-style:solid; "></DIV>
+                <!-- 中の線 -->
+                <!-- 横線 -->
+                <div STYLE="position:absolute; left:0px; top:30px; width:290px; border-width:0.5px; border-style:solid;"></DIV>
+                <!-- 縦線 -->
+                <div STYLE="position:absolute; left:100px;  top:0px; width:0px; height:80px; border-width:0.5px; border-style:solid;"></DIV>
+                <div STYLE="position:absolute; left:200px; top:0px; width:0px; height:80px; border-width:0.5px; border-style:solid;"></DIV>
+                <!-- 文字系 -->
+                <div STYLE="position:absolute; left:25px; top:5px;">
+                    作成者
+                </div>
+                <div STYLE="position:absolute; left:130px; top:5px;">
+                    確認者
+                </div>       
+                <div STYLE="position:absolute; left:225px; top:5px;">
+                    承認者
+                </div>       
+            </div>
+            
+            <!-- 請求内容 -->
+            
+            <!-- 罫線 -->
+            <div STYLE="position:absolute; left:10px; margin-top:370px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <div STYLE="position:absolute; left:10px; margin-top:455px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            
+            <div style="font-size:9pt;">
+                <!-- 1列目 -->
+                <div STYLE="position:absolute; left:40px; margin-top:375px;">
+                    <div style="float:left; width:80px;">
+                        HAWB NO
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText value="{!AnkenList.HAWB__c}" />
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:40px; margin-top:395px;">
+                    <div style="float:left; width:80px;">
+                        FLIGHT NO
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText >
+                            {!AnkenList.FlightNo__c}
+                        </apex:outputText>
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:40px; margin-top:415px;">
+                    <div style="float:left; width:80px;">
+                        重量
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText >
+                            {!AnkenList.weight__c}
+                        </apex:outputText>   
+                    </div>
+                </div>
+                <div STYLE="position:absolute; left:40px; margin-top:435px;">
+                    <div style="float:left; width:80px;">
+                        個数
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputPanel rendered="{!AnkenList.carton__c != null}">
+                            
+                                    {!AnkenList.carton__c} <span class="F09"> {!AnkenList.UnitType__c}</span>
+                           
+                        </apex:outputPanel>
+                    </div>   
+                </div>
+                <!-- 2列目 -->
+                <div STYLE="position:absolute; left:300px; margin-top:375px;">
+                    <div style="float:left; width:80px;">
+                        MAWB NO
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText value="{!AnkenList.MAWB__c}"  />
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:300px; margin-top:395px;">
+                    <div style="float:left; width:80px;">
+                        出発地
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        {!AnkenList.POL__r.Name}
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:300px; margin-top:415px;">
+                    <div style="float:left; width:80px;">
+                        到着日
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        <apex:outputText value="{0,date,yyyy年M月d日}">
+                            <apex:param value="{!AnkenList.ETA__c}"/>
+                        </apex:outputText>   
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:300px; margin-top:435px;">
+                    <div style="float:left; width:80px;">
+                        量積
+                    </div>
+                    <div style="float:left; margin-left:30px;">
+                        {!AnkenList.CBM__c}
+                    </div>   
+                </div>
+                
+                <!-- 3列目 -->
+                <div STYLE="position:absolute; left:550px; margin-top:375px;">
+                    <div style="float:left; width:80px;">
+                         CNEE 
+                    </div>
+                    <div style="float:left; margin-left:-15px;">
+                          {!AnkenList.Cnee__r.Name}
+                    </div>   
+                </div>
+                <div STYLE="position:absolute; left:550px; margin-top:395px;">
+                    <div style="float:left; width:80px;">
+                        到着地
+                    </div>
+                    <div style="float:left; margin-left:-20px;">
+                       {!AnkenList.POD__r.Name}
+                    </div>   
+                </div>
+            </div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:35px;  margin-top:470px; width:0px  ; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:355px; margin-top:470px; width:0px  ; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:400px; margin-top:470px; width:0px  ; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:475px; margin-top:470px; width:0px  ; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:530px; margin-top:470px; width:0px  ; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:580px; margin-top:470px; width:0px  ; height:400px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:665px; margin-top:470px; width:0px  ; height:475px; border-width:0.3px; border-style:solid;"></div>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:725px; margin-top:470px; width:0px  ; height:475px; border-width:0.3px; border-style:solid;"></div>
+            
+            <!-- 罫線（横）-->
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:470px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:495px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:520px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:545px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:570px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:595px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:620px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:645px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:670px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:695px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:720px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:745px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:770px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:795px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:820px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:845px; width:760px;               border-width:0.1px; border-style:solid;"></DIV>
+            
+            <!-- 濃い線 -->
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:870px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:895px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:920px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            <div class="LINE(0,55)" STYLE="position:absolute; left:10px; margin-top:945px; width:760px;               border-width:0.5px; border-style:solid;"></DIV>
+            
+            <!-- 明細カラム -->
+            <div style="position:absolute; margin-top:475px; font-size:9pt;">
+                <div STYLE="position:absolute; left:14px;">
+                    NO
+                </div>
+                <div STYLE="position:absolute; left:170px;">
+                    請求項目
+                </div>
+                <div STYLE="position:absolute; left:365px;">
+                    通貨
+                </div>
+                <div STYLE="position:absolute; left:430px;">
+                    単価
+                </div>
+                <div STYLE="position:absolute; left:490px;">
+                    単位
+                </div>
+                <div STYLE="position:absolute; left:545px;">
+                    数量
+                </div>
+                <div STYLE="position:absolute; left:610px;">
+                    金額
+                </div>
+                <div STYLE="position:absolute; left:675px;">
+                    消費税
+                </div>    
+                <div STYLE="position:absolute; left:730px;">
+                    税分類
+                </div>        
+            </div>
+            <div style="position:absolute; margin-top:497px; left:0px; font-size:9pt; line-height: 25px;">
+                <apex:repeat value="{!list.objectList}" var="inlist">
+                    <div style="margin-left:10px; height:25px; width:26px; float:left; text-align:center;">
+                        {!inlist.SeikyuBangou__c}
+                    </div>
+                    <div style="padding-left:5px; height:25px; width:315px; float:left; text-align:left;">
+                        <apex:outputText value="
+                                                {!
+                                                SUBSTITUTE(                
+                                                SUBSTITUTE(
+                                                inlist.InsatuyouSyohin__c,
+                                                'Surcharge Included' ,
+                                                ''
+                                                ),
+                                                'Surcharge Excluded',
+                                                ''
+                                                )  
+                                                }"></apex:outputText>
+                    </div>
+                    <!-- 通貨 -->
+                    <div style="margin-left:0px; height:25px; width:45px; float:left; text-align:center;">
+                        {!inlist.curr__c}
+                    </div>
+                    <div style="margin-left:8px; padding-right:5px; height:25px; width:64px; float:left; text-align:right;">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!inlist.SellTankaJPY__c}" />
+                        </apex:outputText>
+                    </div>
+                    <!-- 単位 -->
+                    <div style="margin-left:2px; height:25px; width:45px; float:left; text-align:center;">
+                        <!--{!inlist.Tariff__r.UNIT__c}-->
+                        <apex:variable var="unitPrint" value="{!inlist.ChargeUnitInPrint__c}"/>
+                        <apex:variable var="unitKey" value="{!inlist.ChargeUnitFormula__c}"/>
+                        
+                        <apex:outputText value="{!translations[unitPrint]}" rendered="{!unitPrint != null && unitKey !='コンテナ' && unitKey != 'Container'}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!unitPrint == null && unitKey != 'コンテナ' && unitKey != 'Container'}"/>
+                        <apex:outputText value="{!inlist.ContainerSizeFormula__c}" rendered="{!inlist.ContainerSizeFormula__c != null && (unitKey == 'コンテナ' || unitKey == 'Container')}"/>
+                        <apex:outputText value="{!unitKey}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'Container')}"/>
+                        <apex:outputText value="{!translations[unitKey]}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'コンテナ')}"/>
+                    </div>
+                    <!-- 数量 -->
+                    <div style="margin-left:-10px; padding-right:5px; height:25px; width:60px; float:left; text-align:right;">
+                        {!VALUE(inlist.wkSuryo__c)}
+                    </div>
+                    <!-- 金額 -->
+                    <div style="padding-right:10px; height:25px; width:80px; float:left; text-align:right;">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                            <apex:param value="{!inlist.SellAmountJPN__c}" />
+                        </apex:outputText>
+                    </div>
+                    <!-- 消費税 -->
+                    <div style="padding-right:3px; height:25px; width:55px; float:left; text-align:right;">
+                        <apex:outputText value="{0,number,###,###,###,###}">
+                             <apex:param value="{!inlist.SellTaxNum__c}" />
+                        </apex:outputText>
+                    </div>
+
+                    <!-- 税分類 -->
+                    <div style="margin-left:0px; height:20px; width:45px; float:left; text-align:center;">
+                        <apex:outputPanel rendered="{!(inlist.ProductTax__c != null && (inlist.ProductTax__c != '課税' && inlist.ProductTax__c != 'TAX(課税)'))}">
+                            <apex:variable var="taxKey" value="{!inlist.ProductTax__c}"/>
+                            {!translations[taxKey]}
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!(inlist.ProductTax__c == '課税' || inlist.ProductTax__c == 'TAX(課税)')}">
+                            {!inlist.TaxInitial__c}%
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <div style="clear:both"></div>          
+                </apex:repeat>
+            </div>
+            
+            <!-- 小計・消費税・合計 -->
+            <div STYLE="position:absolute; left:120px; margin-top:875px; ">
+                小計
+            </div>            
+            <div STYLE="position:absolute; left:120px; margin-top:900px; ">
+                消費税
+            </div>            
+            <div STYLE="position:absolute; left:120px; margin-top:925px; ">
+                合計
+            </div>            
+            
+            <div STYLE="position:absolute; left:255px; margin-top:875px; text-align:right; width:400px;">
+                <apex:outputText value="{0,number,#,###,###,###}">
+                    <apex:param value="{!list.pageSyokei}" />
+                </apex:outputText>
+            </div>            
+            <div STYLE="position:absolute; left:255px; margin-top:900px; text-align: right; width:400px;">
+                <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}" />
+                <apex:outputText value="{0,number,#,###,###,###}" rendered="{!list.gyoNo = displayListSize}">
+                    <apex:param value="{!Syohizei}" />
+                </apex:outputText>
+            </div>            
+            <div STYLE="position:absolute; left:255px; margin-top:925px; text-align: right; width:400px;">
+                <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}" />
+                <apex:outputText value="{0,number,#,###,###,###}" rendered="{!list.gyoNo = displayListSize}">
+                    <apex:param value="{!Syokei + Syohizei}" />
+                </apex:outputText>
+            </div>
+            
+           <div STYLE="position:absolute; left:678px; margin-top:875px; ">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+            </div>            
+            <div STYLE="position:absolute; left:678px; margin-top:900px; ">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+            </div>            
+            <div STYLE="position:absolute; left:678px; margin-top:925px; ">
+                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"/>
+            </div>
+            
+            <!-- 請求備考 -->
+            <div STYLE="position:absolute; left:50px;  margin-top:950px; width:760px; font-size:10pt;">
+                <div>
+                    備考
+                </div>
+                <div>
+                    <apex:repeat value="{!SeikyuBikou}" var="Bikou">
+                        <div style="height:15px;">{!Bikou}</div>
+                    </apex:repeat>
+                </div>
+            </div>
+            
+            <!-- 小枠 -->
+            <div STYLE="position:absolute; left:50px;  margin-top:1045px; width:700px; font-size:10pt;">
+                <table  cellspacing="0" cellpadding="0">
+                    <tr height="0px;">
+                        <td colspan="4" height="0px;">
+                            恐れ入りますが、振込手数料は貴社ご負担にて下記口座へお願い申し上げます。
+                        </td>        
+                    </tr>
+                    <tr height="0px;">
+                        <td width="400px;" height="0px;">
+                            ・{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c} {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c} {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}
+                        </td>        
+                                
+                    </tr>
+                    <tr  height="0px;">
+                        <td width="400px;" height="0px;">
+                            ・{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_2__c} {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_2__c} {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_2__c}
+                        </td>
+                                
+                    </tr>        
+                </table>    
+            </div>
+            <div STYLE="position:absolute; left:385px; margin-top:1000px;">
+                <apex:outputText value="{!list.gyoNo}" />
+            </div>
+            <div STYLE="position:absolute; margin-left:580px;  margin-top:1095px; width:760px; font-size:10pt;">
+                Powered by AFR Solutions co.,ltd
+            </div>
+            
+            
+            
+        </apex:repeat>   
+    </body>
+</apex:page>

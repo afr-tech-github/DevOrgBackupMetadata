@@ -1,0 +1,30 @@
+Kính gửi  {!MasterAnken__c.MDevan__c} 
+{!MasterAnken__c.MDevanRep__c} 
+
+Đây là chứng từ hàng  ghép container của chuyến tàu bên dưới. 
+
+◎Mà số lô hàng chính (Master)：{!MasterAnken__c.MasterID__c}
+◎Số bill Master：{!MasterAnken__c.MMaster_B_L_No__c}
+◎Tên tàu / Số chuyến :  {!MasterAnken__c.MVessel__c} / {!MasterAnken__c.MVoy_No__c}　　
+◎Ngày đến dự kiến：{!MasterAnken__c.META__c}
+◎Ngày đến : {!MasterAnken__c.META_DAY__c}
+◎Tổng số bill house của lô hàng ghép này：{!MasterAnken__c.NO_HOUSE_B_L__c} H B/L
+◎Loại container*Số container： {!MasterAnken__c.MContainer__c}*{!MasterAnken__c.MContainerNumber__c} / {!MasterAnken__c.MContainer2__c}*{!MasterAnken__c.MContainerNumber2__c}
+◎Ngày đưa hàng vào kho CFS：{!MasterAnken__c.MDevanningDate__c}
+
+Đính kèm：Mẩu yêu cầu đưa hàng vào kho CFS và các chứng từ liên quan
+◎Mẩu văn bảng yêu cầu đưa hàng vào kho CFS
+◎Chi tiết đóng hàng của cả container hay các ghi chú
+◎House bill 
+◎Lệnh giao hàng 
+
+Ngay khi nhận được Master A/N, chúng tôi sẽ báo cho quí vị ngay. 
+
+Cám ơn sự nhiệt tình của quí vị. 
+
+********************************************************* 
+{!MasterAnken__c.Mail_Merge_Company_Signature__c}  
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

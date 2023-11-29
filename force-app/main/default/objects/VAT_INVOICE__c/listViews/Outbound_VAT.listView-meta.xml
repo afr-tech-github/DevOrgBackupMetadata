@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outbound_VAT</fullName>
+    <columns>NAME</columns>
+    <columns>RED_INVOICE_NO__c</columns>
+    <columns>Selling_Tax_Ratio__c</columns>
+    <columns>VAT_INVOICE_TO__c</columns>
+    <columns>TotalAmountOfVATSelling__c</columns>
+    <columns>AmountOfTaxVATSelling__c</columns>
+    <columns>AmountVATSellingIncludeVAT__c</columns>
+    <columns>VATInvoicePrintDate__c</columns>
+    <columns>VAT_INVOICE_ISSUE_STATUS__c</columns>
+    <columns>RECEIVABLE_RECEIPTANCE_CONFIRMED__c</columns>
+    <columns>RECORDTYPE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>VAT_INVOICE__c.CloWMSVATInvoice,VAT_INVOICE__c.FMSTMSWMSVATInvoice,VAT_INVOICE__c.MULTIPLE_SHIPMENT_TO_1VAT_INVOICE_SUMMARY</value>
+    </filters>
+    <label>Outbound VAT</label>
+    <language>en_US</language>
+</ListView>

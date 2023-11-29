@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CrossBoarder</fullName>
+    <active>true</active>
+    <description>Record type to manage Standard Operation Process and Timeline of Cross-Boarder business involving more than 3 countries.</description>
+    <label>Cross Boarder</label>
+</RecordType>

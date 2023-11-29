@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExchangeRateID__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>EXCHANGE RATE ID-DEBIT/CREDIT</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>MgmtMaster__c.Mgmt_Exrate_Validity__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.CreatedDate</field>
+            <operation>greaterThan</operation>
+            <valueField>MgmtMaster__c.Mgmt_Exrate_Start_Date__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.CreatedDate</field>
+            <operation>lessThan</operation>
+            <valueField>MgmtMaster__c.Mgmt_Exrate_End_Date__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>MgmtMaster__c</referenceTo>
+    <relationshipName>BILLING</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

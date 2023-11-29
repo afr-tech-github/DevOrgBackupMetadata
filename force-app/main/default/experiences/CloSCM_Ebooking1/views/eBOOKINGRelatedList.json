@@ -1,0 +1,39 @@
+{
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "91a5c471-53f2-4e5d-adbf-ceefd625d3f7",
+  "label" : "E-BOOKING Related List",
+  "regions" : [ {
+    "id" : "966a89d7-cfdc-4640-8253-947d4a72d1cb",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customTitle" : "",
+        "parentRecordId" : "{!recordId}",
+        "relatedListName" : "{!relationshipApiName}",
+        "showBreadCrumbs" : true,
+        "showCustomTitle" : false,
+        "showManualRefreshButton" : true,
+        "showRowNumbers" : true
+      },
+      "componentName" : "forceCommunity:relatedList",
+      "id" : "cab8e40e-1257-4470-9055-0711da71bfcf",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "049d5d1e-b56d-4120-ab19-c9854a5c4a33",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "dcb225ae-0d04-4198-899c-19679f50dadb",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "relatedlist-a3H"
+}

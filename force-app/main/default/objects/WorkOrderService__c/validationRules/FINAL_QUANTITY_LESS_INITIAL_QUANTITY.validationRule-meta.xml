@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FINAL_QUANTITY_LESS_INITIAL_QUANTITY</fullName>
+    <active>false</active>
+    <errorConditionFormula>FinalQuantity__c  &gt;  InitialQuantity__c</errorConditionFormula>
+    <errorDisplayField>FinalQuantity__c</errorDisplayField>
+    <errorMessage>Final Quantity must be less than Initial Quantity</errorMessage>
+</ValidationRule>

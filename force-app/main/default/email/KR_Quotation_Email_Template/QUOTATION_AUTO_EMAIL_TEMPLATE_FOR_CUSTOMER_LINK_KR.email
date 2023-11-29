@@ -1,0 +1,218 @@
+{!CustomObject1__c.Field1__c}　
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 님
+<br>
+<br>
+매번 당사의 서비스를 이용 주셔서 대단히 감사합니다. 
+<br>
+<br>
+현재, 견적서의 진척상황은 「{!CustomObject1__c.status__c}」로 되어 있습니다. <br>계정을 보유하고 계신 고객님께서는 전용사이트에서도 상세내역을 확인하실 수 있습니다.<br><br>
+URL에 액세스하여 암호를 입력하십시오. 견적서류를 다운로드 할 수 있습니다.  <br>
+################################################################################################################### <br>
+견적서류 링크 ：{!CustomObject1__c.QUOTATION_LINK__c} <br>
+비밀번호：{!CustomObject1__c.QUOTATION_PASSWORD__c} <br>
+###################################################################################################################<br>
+<br>
+
+<br>
+※ 아래의 메일 CloTra (Cloud Cargo Tracking Service)에 의해 시스템에서 자동 전송되고 있습니다.<br>
+
+
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+			의뢰자 상세정보
+			</th>
+		</tr>
+	</thead>
+	<thead>
+			</thead>
+　　　　　　　　<thead>
+			</thead>	
+
+
+
+
+
+　　　　　　　　<tbody>
+<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.Name}
+			</td width="400">
+			<th width="400">
+				화물 진행 사항              
+			</th>
+			<td >
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th><BR><BR>
+                                운송 타입		　　　　　　　　	　　　　　　　
+                       </th>
+			<td>
+				{!CustomObject1__c.CarrierType__c}
+			</td>
+			
+　　　　　　　　　　　　　　　<th>
+				빈도			                 </th>
+			<td>
+				{!CustomObject1__c.Frequency__c}
+			</td>
+		</tr>
+
+                                    <tr>
+			<th>
+				견적서 번호
+			</th>
+			<td>
+				{!CustomObject1__c.QuotationNO__c}
+			</td>
+			<th>
+				인코텀스
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				거래처
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c} 님
+			</td>
+			<th>
+				유효기한
+			</th>
+			<td>
+				{!CustomObject1__c.SubmisionDueDate__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				고객사담당자
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}様　　
+			</td>
+			<th>
+				업무 담당자              
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WEj8}
+			</td>
+		</tr>
+		<tr><thead>
+			<th colspan="4">
+				예정화물정보
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				선 ・편명
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c} {!CustomObject1__c.FlightNo__c}
+			</td>
+			<th>
+				상품
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				출항일/출발일
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+			<th>
+				P.O.L(A.O.D)
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				입항일/도착일
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+			<th>
+				P.O.D(A.O.A)			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				컨테이너 정보
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c}   {!CustomObject1__c.Container__c}    {!CustomObject1__c.Container2__c}
+			</td>
+			<th>
+				GROSS 중량
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+		</tr>
+　　                        　</tr>
+			<tr><thead>
+			<th colspan="4">
+				기타사항
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				고객송부용 메모
+			</th>
+			<td rowspan="2" colspan="3">
+				{!CustomObject1__c.Remark__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+                                                                                                                                                           
+
+
+
+<br>
+문의 사항이나 문의 사항이 있으시면 언제든지 알려주십시오.<br><br>
+앞으로도 잘 부탁드립니다.<br>
+
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

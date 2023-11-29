@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VATInvNo__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>VATInvoiceID__r.RED_INVOICE_NO__c
+&amp;
+ VATInvoiceID__r.VATInvoiceNoFromVendor__c</formula>
+    <label>VAT INV NO</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

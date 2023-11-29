@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>F/TMS-請求・仕入</value>
+    </caseValues>
+    <nameFieldLabel>F/TMS-請求・仕入</nameFieldLabel>
+</CustomObjectTranslation>

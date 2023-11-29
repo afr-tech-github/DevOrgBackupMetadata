@@ -1,0 +1,23 @@
+{
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "componentName" : "siteforce:sldsOneColLayout",
+  "dataProviders" : [ ],
+  "id" : "5d633e7c-bec8-498c-af03-6d0f8ec9faf9",
+  "label" : "E-BOOKING List",
+  "regions" : [ {
+    "id" : "01c168db-da80-483b-a16c-190796cfe1aa",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "f459ac42-4a65-4673-871a-f646a6dcd61a",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "868d3917-d466-4525-9d6f-e3a4e86ad311",
+    "regionName" : "footer",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Inner",
+  "type" : "view",
+  "viewType" : "list-a3H"
+}

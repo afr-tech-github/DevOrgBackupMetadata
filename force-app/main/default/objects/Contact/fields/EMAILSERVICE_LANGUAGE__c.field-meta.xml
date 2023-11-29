@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EMAILSERVICE_LANGUAGE__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose the language in which the contact person prefer to receive the CloTra automail.</inlineHelpText>
+    <label>CARGO TRACKING EMAIL LANGUAGE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>JAPANESE</fullName>
+                <default>false</default>
+                <label>JAPANESE</label>
+            </value>
+            <value>
+                <fullName>ENGLISH</fullName>
+                <default>true</default>
+                <label>ENGLISH</label>
+            </value>
+            <value>
+                <fullName>VIETNAMESE</fullName>
+                <default>false</default>
+                <label>VIETNAMESE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

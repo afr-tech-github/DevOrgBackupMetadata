@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consol_Must_Input_Data</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(ISPICKVAL(ConsolidationType__c , &quot;自社混載(Consolidation Cargo)&quot;), OR(ISBLANK(MasterAnkenName__c),ISBLANK(BookingNv__c))  , false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>自社混載有無に自社混載を選択された場合は、マスター案件名及びMaster混載業者・船社に御社を入力してください。
+Please enter Master Ship Name and choose your company name for Coloader/Carrer in case of Consolidation Shipment.</errorMessage>
+</ValidationRule>

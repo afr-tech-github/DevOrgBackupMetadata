@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AFR_Letter_Head</letterhead>
+    <name>Parcel Booking Alert Email Template</name>
+    <style>formalLetter</style>
+    <subject>Thông báo in nhãn đơn hàng (Label Notification): {!Cargo__c.CargoName__c}</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

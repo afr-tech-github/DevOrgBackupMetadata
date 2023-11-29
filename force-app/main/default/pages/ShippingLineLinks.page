@@ -1,0 +1,94 @@
+<!--
+ - Created by khanhpham on 4/15/17.
+ -->
+
+<apex:page id="ShippingLineLinks" controller="ShippingLineLinkController" action="{!setUpLinks}">
+    <html>
+    <head>
+        <style>
+            a:link {
+                text-decoration: none;
+            }
+
+            a:visited {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            a:active {
+                text-decoration: underline;
+            }
+
+            .image_box {
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                padding: 5px;
+                border-radius: 50%;
+            }
+
+            .odd {
+                background-color: white;
+            }
+            .even {
+                background-color: whitesmoke;
+            }
+        </style>
+    </head>
+    </html>
+    <apex:sectionHeader title="Shipping Line Vessel Schedule/Cargo Tracking/Rate & Tariff"/>
+
+    <apex:pageBlock >
+        <apex:dataTable value="{!shippingLineLinks}" var="link" columnsWidth="20%, 16%, 16%, 16%, 16%, 16%" rowClasses="odd,even"
+                        styleClass="tableClass" style="width:100%;" border="0">
+            <apex:column >
+                <apex:facet name="header">SHIPPING LINE</apex:facet>
+                <a href="{!link.url}" target="_blank">
+                    <div>
+                        <apex:image url="{!URLFOR($Resource.Logos, '/ShippingLines' + link.iconUrl)}"
+                                    styleClass="image_box" />
+                        <span><apex:outputText value="{!link.companyName}"></apex:outputText></span>
+                    </div>
+                </a>
+            </apex:column>
+
+            <apex:column style="vertical-align:middle; padding: 5px;">
+                <apex:facet name="header">VESSEL SCHEDULE</apex:facet>
+                <apex:outputPanel rendered="{!link.vesselScheduleLink != null}">
+                    <a href="{!link.vesselScheduleLink}" target="_blank">Schedule</a>
+                </apex:outputPanel>
+            </apex:column>
+
+            <apex:column style="vertical-align:middle; padding: 5px;">
+                <apex:facet name="header">TRACKING</apex:facet>
+                <apex:outputPanel rendered="{!link.trackingLink != null}">
+                    <a href="{!link.trackingLink}" target="_blank">Tracking</a>
+                </apex:outputPanel>
+            </apex:column>
+
+            <apex:column style="vertical-align:middle; padding: 5px;">
+                <apex:facet name="header">RATE AND TARIFF</apex:facet>
+                <apex:outputPanel rendered="{!link.priceLink != null}">
+                    <a href="{!link.priceLink}" target="_blank">Rate</a>
+                </apex:outputPanel>
+            </apex:column>
+
+            <apex:column style="vertical-align:middle; padding: 5px;">
+                <apex:facet name="header">CONTACTS</apex:facet>
+                <apex:outputPanel rendered="{!link.contactLink != null}">
+                    <a href="{!link.contactLink}" target="_blank">Contact</a>
+                </apex:outputPanel>
+            </apex:column>
+
+            <apex:column style="vertical-align:middle; padding: 5px;">
+                <apex:facet name="header">BOOKING REQUEST</apex:facet>
+                <apex:outputPanel rendered="{!link.bookingRequestLink != null}">
+                    <a href="{!link.bookingRequestLink}" target="_blank">Booking Request</a>
+                </apex:outputPanel>
+            </apex:column>
+        </apex:dataTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SafetyStock__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>(MaxUnitSalesPerDay__c *  MaxLeadTime__c) -  (AverageUnitSalesPerDay__c * AverageLeadTime__c )</formula>
+    <inlineHelpText>Safety Stock=(Max Unit Sales Per Day * Max Delivery Lead Time)-(Average Unit Sales Per Day * Average Delivery Lead Time)
+Additional quantity of an item held in inventory in order to reduce the risk that the item will be out of stock.</inlineHelpText>
+    <label>Safety Stock</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

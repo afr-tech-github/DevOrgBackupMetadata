@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ocean Outbound</fullName>
+        <default>false</default>
+        <label>Ocean Outbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Ocean Inbound</fullName>
+        <default>false</default>
+        <label>Ocean Inbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Outbound</fullName>
+        <default>false</default>
+        <label>Air Outbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Air Inbound</fullName>
+        <default>false</default>
+        <label>Air Inbound</label>
+    </customValue>
+    <customValue>
+        <fullName>Logistics Service</fullName>
+        <default>false</default>
+        <label>Logistics Service</label>
+    </customValue>
+    <customValue>
+        <fullName>Domestic Transportation</fullName>
+        <default>false</default>
+        <label>Domestic Transportation</label>
+    </customValue>
+    <customValue>
+        <fullName>Cross-Border</fullName>
+        <default>false</default>
+        <label>Cross-Border</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>FORWARDING SERVICE REQUIRED</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

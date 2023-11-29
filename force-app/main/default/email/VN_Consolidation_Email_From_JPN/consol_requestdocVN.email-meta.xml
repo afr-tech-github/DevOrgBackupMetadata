@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi gửi các chứng từ tới kho hàng.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Hàng ghép-Chứng từ- Tất cả</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-Devan(Exclude M A/N）</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_Info__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>$Setup.Site_Custom_Settings__c.Company_Name__c
+&amp; BR() &amp; 
+$Setup.Site_Custom_Settings__c.Company_Address__c
+&amp; BR() &amp; 
+&quot;TEL: &quot;&amp; $Setup.Site_Custom_Settings__c.Company_Phone__c
+&amp; BR() &amp; 
+&quot;FAX: &quot;&amp; $Setup.Site_Custom_Settings__c.Company_Fax__c</formula>
+    <label>WK.COMPANY INFORMATION</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

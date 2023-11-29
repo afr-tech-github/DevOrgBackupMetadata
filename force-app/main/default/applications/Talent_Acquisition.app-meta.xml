@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>Untitled_design_16</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Talent Acquisition</label>
+    <navType>Standard</navType>
+    <tabs>Recruitment_Process__c</tabs>
+    <tabs>Recruitment_CRM__c</tabs>
+    <tabs>Job_Opening__c</tabs>
+    <tabs>Job_Description__c</tabs>
+    <tabs>Interview__c</tabs>
+    <tabs>OFFER_LETTER__c</tabs>
+    <tabs>Assign_Interviewer__c</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Talent_Acquisition_UtilityBar</utilityBar>
+</CustomApplication>

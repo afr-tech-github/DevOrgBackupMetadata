@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>effective_exchange</fullName>
+    <columns>NAME</columns>
+    <columns>Mgmt_Master_type__c</columns>
+    <columns>Mgmt_Exrate_End_Date__c</columns>
+    <columns>Mgmt_Exrate_Start_Date__c</columns>
+    <columns>Mgmt_Exrate_Validity__c</columns>
+    <columns>Mgmt_Exrate_FowardingtoDomesticCustomer__c</columns>
+    <columns>Mgmt_Exrate_CCtoDomesticCustomer__c</columns>
+    <columns>Mgmt_Exrate_SellingtoPartner__c</columns>
+    <columns>Mgmt_Exrate_BuyingfromPartner__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Mgmt_Exrate_Validity__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Effective Exchagne Rate</label>
+    <language>ja</language>
+</ListView>

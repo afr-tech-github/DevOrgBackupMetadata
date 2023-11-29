@@ -1,0 +1,91 @@
+<apex:page controller="PerformanceReportController" applyBodyTag="false" applyHtmlTag="false" showHeader="false" contentType="application/vnd.ms-excel#PerformanceReport.xls" cache="true">
+    <head>
+        <style type="text/css">
+            .report-table-td {
+                padding: 0 5px;
+                text-align: center;
+				border-collapse: collapse;
+                border: thin solid;
+            }
+            
+            .report-table-th {
+                padding: 0 5px;
+                text-align: center;
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            
+            .report-table {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+            	font-size: 10px;
+            }
+            
+            .sla-Neutral {
+	            background-color: #0FE8E8;
+            }
+            
+            .sla-Met {
+    	        background-color: #01E878;
+            }
+            
+            .sla-Not-Met {
+        	    background-color: #FF0000;
+            }
+        </style>
+    </head>  
+    <body>
+        <h2>
+            DATA ENTRY - PERFORMANCE REPORT
+        </h2>
+        <h4>
+            Report Period: {!fromDate} - {!toDate}
+        </h4>
+        <br />
+        Met SLA count: <apex:outputText value="{!slaReport.metSLACount}"/><br />
+        Not Met SLA count: <apex:outputText value="{!slaReport.notMetSLACount}"/><br />
+        Neutral SLA count: <apex:outputText value="{!slaReport.neutralSLACount}"/><br />
+        <br />
+        <table class="report-table">
+            <thead>
+                <th class="report-table-th">Reference</th>
+                <th class="report-table-th">Type</th>
+                <th class="report-table-th">Vessel Type</th>
+                <th class="report-table-th">Transport Type</th>
+                <th class="report-table-th">Received Time</th>
+                <th class="report-table-th">Completed Time</th>
+                <th class="report-table-th">SLA (Minutes)</th>
+                <th class="report-table-th">Spent Time(Minutes)</th>
+                <th class="report-table-th">SLA Status</th>
+                <th class="report-table-th">Team</th>
+                <th class="report-table-th">Completed By</th>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!slaReport.reportLines}" var="reportLine">
+                    <tr class="sla-{!reportLine.slaStatus}">
+                        <td class="report-table-td">{!reportLine.referenceName}</td>
+                        <td class="report-table-td">{!reportLine.reportObject}</td>
+                        <td class="report-table-td">{!reportLine.vesselType}</td>
+                        <td class="report-table-td">{!reportLine.transportType}</td>
+                        <td class="report-table-td">
+                            <apex:outputText value="{0,date,yyyy/MM/dd HH:mm:ss}"> 
+                                <apex:param value="{!reportLine.receivedTime}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="report-table-td">
+                            <apex:outputText value="{0,date,yyyy/MM/dd HH:mm:ss}"> 
+                                <apex:param value="{!reportLine.completedTime}"/>
+                            </apex:outputText>
+                        </td>
+                        <td class="report-table-td">{!reportLine.slaDuration}</td>
+                        <td class="report-table-td">{!reportLine.actualDuration}</td>
+                        <td class="report-table-td">{!reportLine.slaStatus}</td>
+                        <td class="report-table-td">{!reportLine.team}</td>
+                        <td class="report-table-td">{!reportLine.dataEntryUser}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </body>
+</apex:page>

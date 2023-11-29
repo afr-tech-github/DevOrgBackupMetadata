@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TaxAdjustment__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>TA=Taxable Amount
+if((((((TA&lt; 5000000),(0),if(((((TA&lt;=10000000),(250000),if(((((TA&lt;=18000000),(750000),if ((((TA&lt;=32000000),(1650000),if(((TA&lt;=52000000),(3250000),if((TA&lt;=80000000),(5850000), (9850000))))</inlineHelpText>
+    <label>PERSONAL INCOME TAX ADJUSTMENT</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

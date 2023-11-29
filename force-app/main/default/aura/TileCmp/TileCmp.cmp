@@ -1,0 +1,31 @@
+<aura:component >
+    <!-- Required Attributes -->
+    <aura:attribute name="title" required="true" type="String" description="the tile's title"/>
+    
+    <!-- External Attributes -->
+    <aura:attribute name="variant" type="String" default="base" description="Variant of the tile component"/>
+    <aura:attribute name="value" type="String" description="value of the selected option"/>
+    <aura:attribute name="link" type="String" description="link on the tile's title"/>
+    <aura:attribute name="subtitle" type="String" description="the tile's secondary title"/>
+    <aura:attribute name="alternativeText" type="String" description="alternative text for an avatar image"/>
+    <aura:attribute name="destroyable" type="Boolean" default="{!false}" description="Determines whether a remove button is displayed or not"/>
+    <aura:attribute name="checked" type="Boolean" default="{!false}" description="Determines whether the task is checked"/>
+    <aura:attribute name="iconName" type="String" description="icon to be displayed on the tile"/>
+    <aura:attribute name="avatarSource" type="String" description="url of portrait image displayed on the tile" default="http://i.pravatar.cc/300"/>
+    
+    <!-- Events -->
+    <aura:registerEvent name="strike_evt_componentDestroyed" type="c:strike_evt" description="is fired when a tile is destroyed"/>
+    
+    <!-- Methods -->
+    <aura:method name="destroyTile" action="{!c.destroyTile}"/>
+    <span class="slds-pill slds-pill_link">
+        <a href="{!'/' + v.value}" class="slds-pill__action" title="Full pill label verbiage mirrored here">
+            <span class="slds-pill__label" >{!v.title}</span>
+        </a>
+        <aura:if isTrue="{!v.destroyable}">
+            <lightning:buttonIcon iconName="utility:close" variant="bare" alternativeText="Remove" class="slds-button slds-button_icon slds-button_icon slds-pill__remove" onclick="{!c.destroyTile}"/>
+        </aura:if>
+    </span>
+    
+    
+</aura:component>

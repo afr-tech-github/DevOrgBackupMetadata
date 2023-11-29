@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FORWARDING__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The user-entered value must match filter criteria.
+- Record Type equal to Air Import/Export, Ocean Import/Export, Domestic Transportation, Cross-Border, Logistics Service.
+- Cargo Status not equal to Cancelled, Completed.</inlineHelpText>
+    <label>FORWARDING</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>CustomObject1__c.status__c</field>
+            <operation>notEqual</operation>
+            <value>見積 受付済(Inquiry Received), 見積 見積書作成中(Under Quotation), 見積 見積書送付完了(Quotation Issued), 見積 見積書修正中(Under Quotation Revision), 見積 見積書再送付完了 (Quotation Reissued), キャンセル(Cancelled), 完了(Completed)</value>
+        </filterItems>
+        <filterItems>
+            <field>CustomObject1__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Air Import, Air Export, Ocean Export, Ocean Import, Domestic Transportation, Cross-Boarder, Logistics Service</value>
+        </filterItems>
+        <infoMessage>The user-entered value must match filter criteria.
+- Record Type equal to Air Import/Export, Ocean Import/Export, Domestic Transportation, Cross-Border, Logistics Service.
+- Cargo Status not equal to Cancelled, Completed.</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>CustomObject1__c</referenceTo>
+    <relationshipLabel>F/TMS S/O+VAT</relationshipLabel>
+    <relationshipName>Junction_Forwarding_VAT</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

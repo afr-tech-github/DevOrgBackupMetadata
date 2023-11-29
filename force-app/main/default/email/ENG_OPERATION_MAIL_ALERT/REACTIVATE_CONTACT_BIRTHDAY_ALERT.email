@@ -1,0 +1,12 @@
+Dear Contact Owner 
+
+This mail is from auto mail alert. 
+
+The {!Contact.Name}'s birthday has already passed. Please check the box in the "REMIND BIRTHDATE" field to be alerted in the next year. 
+
+CONTACT INFORMATION: 
+
+Contact ID: {!Contact.Id} 
+Contact Name: {!Contact.Name} 
+Birthdate: {!Contact.Birthdate} 
+Link: {!Contact.Link}

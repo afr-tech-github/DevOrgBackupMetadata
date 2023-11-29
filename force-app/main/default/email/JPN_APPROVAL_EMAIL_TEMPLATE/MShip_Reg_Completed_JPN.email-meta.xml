@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>マスター案件が登録された際に使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>混載登録メール</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-M B/L案件が登録されました</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

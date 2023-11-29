@@ -1,0 +1,712 @@
+<aura:component controller="FMS_SortByCurrentSOController" access="global">
+    <aura:registerEvent name="handleMenuSelectEvent" type="c:handleMenuSelectEvent" />
+    <aura:registerEvent name="handleChangeCheckboxEvent" type="c:handleChangeCheckboxEvent" />
+    <aura:registerEvent name="handleApplyEvent" type="c:handleApplyEvent" />
+    <!--<aura:handler name="lookupOnblur_evt" event="c:lookupOnBlurEvt" action="{!c.handleLookupEvent}" />-->
+    <aura:handler name="selected_evt" event="c:lookupOnBlurEvt" action="{!c.handleSelectedEvent}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="record" type="AnkenWrapper" />
+    <aura:attribute name="sNo" type="string" />
+    <aura:attribute name="isChecked" type="Boolean" />
+    <aura:attribute name="showSaveCancelBtn" type="Boolean" />
+    <aura:attribute name="showErrorClass" type="Boolean" default="false" />
+    <aura:attribute name="objInfoForPicklistValues" 
+                    type="sobject" default="{sobjectType : 'AnkenMeisai__c'}" />
+    <aura:attribute name="chargeUnitPicklistOpts" type="String[]" />
+    <aura:attribute name="conSizePicklistOpts" type="String[]" />
+    <aura:attribute name="currSellingPicklistOpts" type="String[]" />
+    <aura:attribute name="currConSellingPicklistOpts" type="String[]" />
+    <!-- Service Name -->
+    <aura:attribute name="serviceNameEditMode" type="Boolean" default="false" />
+    <!-- Bill Name at Print(Local) -->
+    <aura:attribute name="billNameEditMode" type="Boolean" default="false" />
+    <!-- Invoice to -->
+    <aura:attribute name="invoiceToEditMode" type="Boolean" default="false" />
+    <!-- Charge Quantity -->
+    <aura:attribute name="chargeQuantityEditMode" type="Boolean" default="false" />
+    <!-- Charge Unit(Override) -->  
+    <aura:attribute name="chargeUnitEditMode" type="Boolean" default="false" />
+    <!-- Container Size(Override) -->
+    <aura:attribute name="conSizeEditMode" type="Boolean" default="false" />
+    <!-- Currency-Selling -->
+    <aura:attribute name="currSellingEditMode" type="Boolean" default="false" />
+    <!-- Unit Price of Selling(Local) -->
+    <aura:attribute name="unitLocalEditMode" type="Boolean" default="false" />
+    <!-- Unit Price of Selling(FCY) -->
+    <aura:attribute name="unitFCYEditMode" type="Boolean" default="false" />
+    <!-- Tax Rate-Selling(%) -->
+    <aura:attribute name="taxSellingEditMode" type="Boolean" default="false" />
+    <!-- Exchange Rate-Selling(Debit) -->
+    <aura:attribute name="exDebitEditMode" type="Boolean" default="false" />
+    <!-- Currency Conversion for Selling -->
+    <aura:attribute name="currConSellingEditMode" type="Boolean" default="false" />
+    <!-- Invoice S/B Display No -->
+    <aura:attribute name="invSBDisplayNoEditMode" type="Boolean" default="false" />
+    <!-- Payment to-Buying -->
+    <aura:attribute name="paymentToBuyingEditMode" type="Boolean" default="false" />
+    <!-- Currency-Buying -->
+    <!-- Unit Price of Buying(Local) -->
+    <!-- Unit Price of Buying(FCY) -->
+    <!-- Tax Rate-Buying(%) -->
+    <!-- Exchange Rate-Buying(Credit) -->
+    <!-- Print -->
+    <!-- Amount Buying Incl Tax(Local) -->
+    <!-- Currency Conversion for Buying -->
+
+    <tr class="slds-hint-parent" >
+        <!-- STT -->
+        <td>
+            {!v.sNo}
+        </td>
+        <!-- Checkbox -->
+        <td>
+        	<ui:inputCheckbox aura:id="chkEdit" value="{!v.record.isCheck}" change="{!c.handleChangeCheckbox}"/>
+        </td>
+        <!-- F/TMS SO -->
+        <td role="gridcell">
+            <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__Anken__r.Name}">
+                {!v.record.anken.clofor_com_cfs__Anken__r.Name}
+            </div>
+        </td>
+        <!-- F/TMS Bill ID -->
+        <td class="slds-cell-edit" role="gridcell">
+            <span class="slds-grid slds-grid_align-spread" title="{!v.record.anken.Name}">
+                <a onclick="{!c.viewRecord}" id="{!v.record.anken.Id}">{!v.record.anken.Name}</a>
+            </span>
+        </td>
+        <!-- Service Name -->
+        <td ondblclick="{!c.inlineEditServiceName}" role="gridcell" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.serviceNameEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__Tariff__r.Name}">
+                    <a onclick="{!c.viewRecord}" id="{!v.record.anken.clofor_com_cfs__Tariff__c}">
+                        {!v.record.anken.clofor_com_cfs__Tariff__r.Name}
+                    </a>
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                          variant="bare" alternativeText="Edit" 
+                                          onclick="{!c.inlineEditServiceName}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <c:strike_lookup 
+                                            aura:id="serviceId" 
+                                            label="" 
+                                            object="clofor_com_cfs__TariffMaster__c" 
+                                            searchField="Name" 
+                                            placeholder="Select an option" 
+                                            iconName="" subtitleField="" 
+                                            order="Name" limit="5" 
+                                            loadingMessage="Loading..." 
+                                            errorMessage="Invalid input" allowNewRecords="false"
+                                        	showRecentRecords="true" />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                        	<ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyServiceName}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Bill Name at Print(Local) -->
+        <td ondblclick="{!c.inlineEditBillName}" role="gridcell" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.billNameEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__InsatuyouSyohin__c}">
+                    {!v.record.anken.clofor_com_cfs__InsatuyouSyohin__c}
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                          variant="bare" alternativeText="Edit" 
+                                          onclick="{!c.inlineEditBillName}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputBillName" 
+                                                  blur="{!c.closeBillNameBox}" 
+                                                  change="{!c.onBillNameChange}" 
+                                                  required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__InsatuyouSyohin__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                        	<ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyBillName}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Invoice to -->
+        <td ondblclick="{!c.inlineEditInvoiceTo}" role="gridcell" 
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.invoiceToEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__Seikyusaki__r.Name}">
+                    <a onclick="{!c.viewRecord}" id="{!v.record.anken.clofor_com_cfs__Seikyusaki__c}">
+                        {!v.record.anken.clofor_com_cfs__Seikyusaki__r.Name}
+                    </a>
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                          variant="bare" alternativeText="Edit" 
+                                          onclick="{!c.inlineEditInvoiceTo}" />
+                </div> 
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <c:strike_lookup 
+                                            aura:id="invoiceId" 
+                                            label="" 
+                                            object="Account" 
+                                            searchField="Name" 
+                                            placeholder="Select an option" 
+                                            iconName="" subtitleField="" 
+                                            order="Name" limit="5" 
+                                            loadingMessage="Loading..." 
+                                            errorMessage="Invalid input" allowNewRecords="false"
+                                        	showRecentRecords="true" />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                        	<ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyInvoiceTo}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Charge Quantity -->
+        <td ondblclick="{!c.inlineEditChargeQuantity}" role="gridcell" 
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.chargeQuantityEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__Suryo__c}">
+                    <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__Suryo__c}" 
+                                               style="decimal" minimumFractionDigits="3" />
+                	<lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                          variant="bare" alternativeText="Edit" 
+                                          onclick="{!c.inlineEditChargeQuantity}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputChargeQuantity" 
+                                                  blur="{!c.closeChargeQuantityBox}" 
+                                                  change="{!c.onChargeQuantityChange}" required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__Suryo__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                        	<ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyChargeQuantity}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Charge Unit(Override) -->
+        <td ondblclick="{!c.inlineEditChargeUnit}" role="gridcell" 
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.chargeUnitEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__ChargeUnit__c}">
+                    {!v.record.anken.clofor_com_cfs__ChargeUnit__c}
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditChargeUnit}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <!--<ui:inputSelect class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputChargeUnit" 
+                                                  blur="{!c.closeChargeUnitBox}" 
+                                                  change="{!c.onChargeUnitChange}" required="false" label="" 
+                                                  value="{!v.anken.clofor_com_cfs__ChargeUnit__c}"
+                                    />-->
+                                    
+                                    <lightning:recordEditForm  
+                                              recordId="{!v.record.anken.Id}"
+                                              recordTypeId="{!v.record.anken.RecordTypeId}"
+                                              objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                                        <lightning:inputField fieldName="clofor_com_cfs__ChargeUnit__c"
+                                                              aura:id="inputChargeUnit"
+                                                              onchange="{!c.onChargeUnitChange}"
+                                                              />
+                                    </lightning:recordEditForm>
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyChargeUnit}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Container Size(Override) -->
+        <td ondblclick="{!c.inlineEditConSize}" role="gridcell" 
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.conSizeEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__ContainerSize__c}">
+                    {!v.record.anken.clofor_com_cfs__ContainerSize__c}
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditConSize}" />
+                </div>
+            	<aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <!--<ui:inputSelect class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputConSize" 
+                                                  blur="{!c.closeConSizeBox}" 
+                                                  change="{!c.onConSizeChange}" required="false" label="" 
+                                                  value="{!v.anken.clofor_com_cfs__ContainerSize__c}"
+                                    />-->
+                                    <lightning:recordEditForm  
+                                              recordId="{!v.record.anken.Id}"
+                                              recordTypeId="{!v.record.anken.RecordTypeId}"
+                                              objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                                        <lightning:inputField fieldName="clofor_com_cfs__ContainerSize__c"
+                                                              aura:id="inputConSize"
+                                                              onchange="{!c.onConSizeChange}"
+                                                              />
+                                    </lightning:recordEditForm>
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyConSize}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Currency-Selling -->
+        <td ondblclick="{!c.inlineEditCurrSelling}" role="gridcell" 
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.currSellingEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__curr__c}">
+                    {!v.record.anken.clofor_com_cfs__curr__c}
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditCurrSelling}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <!--<ui:inputSelect class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputCurrSelling" 
+                                                  blur="{!c.closeCurrSellingBox}" 
+                                                  change="{!c.onCurrSellingChange}" required="false" label="" 
+                                                  value="{!v.anken.clofor_com_cfs__curr__c}"
+                                    />-->
+                                    <lightning:recordEditForm  
+                                              recordId="{!v.record.anken.Id}"
+                                              recordTypeId="{!v.record.anken.RecordTypeId}"
+                                              objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                                        <lightning:inputField fieldName="clofor_com_cfs__curr__c"
+                                                              aura:id="inputCurrSelling"
+                                                              onchange="{!c.onCurrSellingChange}"
+                                                              />
+                                    </lightning:recordEditForm>
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyCurrSelling}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Unit Price of Selling(Local) -->
+        <td ondblclick="{!c.inlineEditUnitLocal}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.unitLocalEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__SellTankaJPY__c}">
+                    <aura:if isTrue="{!v.record.anken.clofor_com_cfs__SellTankaJPY__c}">
+                        <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__SellTankaJPY__c}" /> đ
+                    </aura:if>
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditUnitLocal}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputUnitLocal" 
+                                                  blur="{!c.closeUnitLocalBox}" 
+                                                  change="{!c.onUnitLocalChange}" required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__SellTankaJPY__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyUnitLocal}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Unit Price of Selling(FCY) -->
+        <td ondblclick="{!c.inlineEditUnitFCY}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.unitFCYEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__SellTankaUSD__c}">
+                    <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__SellTankaUSD__c}" 
+                                               style="decimal" maximumFractionDigits="3" />
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditUnitFCY}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputUnitFCY" 
+                                                  blur="{!c.closeUnitFCYBox}" 
+                                                  change="{!c.onUnitFCYChange}" required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__SellTankaUSD__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyUnitFCY}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Tax Rate-Selling(%) -->
+        <td ondblclick="{!c.inlineEditTaxSelling}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.taxSellingEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__TaxInitial__c}">
+                    <aura:if isTrue="{!v.record.anken.clofor_com_cfs__TaxInitial__c}">
+                        <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__TaxInitial__c}" style="decimal" minimumFractionDigits="2" />%
+                    </aura:if>
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditTaxSelling}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputTaxSelling" 
+                                                  blur="{!c.closeTaxSellingBox}" 
+                                                  change="{!c.onTaxSellingChange}" required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__TaxInitial__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyTaxSelling}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Exchange Rate-Selling(Debit) -->
+        <td ondblclick="{!c.inlineEditExDebit}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.exDebitEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__KawaseSel__c}">
+                    <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__KawaseSel__c}" 
+                                               minimumFractionDigits="2" />
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditExDebit}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" 
+                             role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <ui:inputText class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputExDebit" 
+                                                  blur="{!c.closeExDebitBox}" 
+                                                  change="{!c.onExDebitChange}" required="false" label="" 
+                                                  value="{!v.record.anken.clofor_com_cfs__KawaseSel__c}"
+                                    />
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyExDebit}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Amount Selling Incl Tax(FCY) -->
+        <td role="gridcell">
+            <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__SellInTaxAmount_USD__c}">
+                <lightning:formattedNumber value="{!v.record.anken.clofor_com_cfs__SellInTaxAmount_USD__c}" 
+                                           minimumFractionDigits="3" />
+            </div>
+        </td>
+        <!-- Currency Conversion for Selling -->
+        <td ondblclick="{!c.inlineEditCurrConSelling}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <aura:if isTrue="{!v.currConSellingEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__CurrencyConversionSelling__c}">
+                    {!v.record.anken.clofor_com_cfs__CurrencyConversionSelling__c}
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit" 
+                                              variant="bare" alternativeText="Edit" 
+                                              onclick="{!c.inlineEditCurrConSelling}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <!--<ui:inputSelect class="slds-input inputFieldWidth" 
+                                                  labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex" 
+                                                  aura:id="inputCurrConSelling" 
+                                                  blur="{!c.closeCurrConSellingBox}" 
+                                                  change="{!c.onCurrConSellingChange}" required="false" label="" 
+                                                  value="{!v.anken.clofor_com_cfs__CurrencyConversionSelling__c}"
+                                    />-->
+                                    <lightning:recordEditForm  
+                                              recordId="{!v.record.anken.Id}"
+                                              recordTypeId="{!v.record.anken.RecordTypeId}"
+                                              objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                                        <lightning:inputField fieldName="clofor_com_cfs__CurrencyConversionSelling__c"
+                                                              aura:id="inputCurrConSelling"
+                                                              onchange="{!c.onCurrConSellingChange}"
+                                                              />
+                                    </lightning:recordEditForm>
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"  
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyCurrConSelling}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel" 
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Invoice S/B Display No -->
+        <td></td>
+        <!-- Payment to-Buying -->
+        <td onclick="{!c.inlineEditPaymentToBuyingEditMode}" role="gridcell"
+            class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}" >
+            <aura:if isTrue="{!v.paymentToBuyingEditMode == false}">
+                <div class="slds-truncate" title="{!v.record.anken.clofor_com_cfs__CurrencyConversionSelling__c}">
+                    <a onclick="{!c.viewRecord}" id="{!v.record.anken.clofor_com_cfs__PaymentTo__c}">
+                            {!v.record.anken.clofor_com_cfs__PaymentTo__r.Name}
+                    </a>
+                    <lightning:buttonIcon class="slds-m-left_x-small" iconName="utility:edit"
+                                          variant="bare" alternativeText="Edit"
+                                          onclick="{!c.inlineEditCurrConSelling}" />
+                </div>
+                <aura:set attribute="else">
+                    <section tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                        <div class="slds-popover__body">
+                            <div class="slds-form-element slds-grid slds-wrap">
+                                <div class="slds-form-element__control slds-grow">
+                                    <lightning:recordEditForm
+                                            recordId="{!v.record.anken.Id}"
+                                            recordTypeId="{!v.record.anken.RecordTypeId}"
+                                            objectApiName="clofor_com_cfs__AnkenMeisai__c">
+                                        <lightning:inputField fieldName="clofor_com_cfs__PaymentTo__c"
+                                                              aura:id="inputPaymentToBuying"
+                                                              onchange="{!c.onPaymentToBuyingChange}"
+                                        />
+                                    </lightning:recordEditForm>
+                                    <div class="slds-m-top_small slds-m-left_small slds-m-bottom_small">
+                                        <aura:if isTrue="{!v.record.isCheck}">
+                                            <ui:inputCheckbox aura:id="chkApply" label="Update selected items."
+                                                              class="clsApply"/>
+                                            <lightning:button label="Apply"
+                                                              variant="brand" class="slds-float_right slds-m-left_x-small"
+                                                              onclick="{!c.applyPaymentToBuying}"/>
+                                            <lightning:button class="slds-float_right" label="Cancel"
+                                                              onclick="{!c.cancelEdit}"/>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="form-end" tabindex="0"></span>
+                    </section>
+                </aura:set>
+            </aura:if>
+        </td>
+        <!-- Currency-Buying -->
+        <td></td>
+        <!-- Unit Price of Buying(Local) -->
+        <td></td>
+        <!-- Unit Price of Buying(FCY) -->
+        <td></td>
+        <!-- Tax Rate-Buying(%) -->
+        <td></td>
+        <!-- Exchange Rate-Buying(Credit) -->
+        <td></td>
+        <!-- Print -->
+        <td></td>
+        <!-- Amount Buying Incl Tax(Local) -->
+        <td></td>
+        <!-- Currency Conversion for Buying -->
+        <td></td>
+        <!-- Action -->
+        <td role="gridcell">
+            <div class="slds-p-around_small linkBtn">
+                <lightning:buttonMenu alternativeText="Action" onselect="{!c.handleMenuSelectRecord}">
+                    <lightning:menuItem value="{!'Edit' + v.record.anken.Id}" label="Edit" />
+                    <lightning:menuItem value="{!'Delete' + v.record.anken.Id}" label="Delete" />
+                </lightning:buttonMenu>
+            </div>
+        </td>
+    </tr>
+
+</aura:component>

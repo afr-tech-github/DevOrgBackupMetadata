@@ -1,0 +1,143 @@
+운영 담당자님<br>
+<br>
+본 메일은 자동 이메일입니다.<br>
+<br>
+신규 고객: {!Account.Name}님이 {!Account.CreatedDate}에 등록되었습니다。<br>
+신속하게 대응을 부탁드립니다.
+<br>
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				공통부분
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				거래처명
+			</th>
+			<td width="200">
+				{!Account.Name}<br>
+                                Link to SF: {!CustomObject1__c.Link} 
+			</td width="400">
+			<th>
+				거래처명-영문
+			</th>
+			<td width="200">
+				{!Account.EnglishCompanyName__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				전화
+			</th>
+			<td>
+				{!Account.Phone}
+
+			</td>
+	<th> 
+                                                          FAX
+			</th>
+			<td>
+                                                {!Account.Fax}
+			</td>
+</tr>
+                 <tr>
+			<th>
+			Web 사이트
+			</th>
+			<td> 
+{!Account.Website}　	
+                                                               		</td>
+			<th>
+					
+			</th>
+			<td>
+                                           
+ 			                 </td>
+		</tr>
+
+		<tr><thead>
+			<th colspan="4">
+				화물기초정보
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				종별
+			</th>
+			<td>
+				{!Account.Custom_Type__c}
+			</td>
+			<th>
+				수출업체
+			</th>
+			<td>
+				{!Account.Outbound__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				소유종별
+			</th>
+			<td>
+				{!Account.Ownership_cat__c}
+			</td>
+			<th>
+				수입원
+			</th>
+			<td>
+				{!Account.Inbound__c}
+
+			</td>
+		</tr>
+		
+		<tr>
+			<th>
+				이용 서비스 - 문서
+			</th>
+			<td>
+				{!Account.ServiceType__c}
+			</td>
+			<th>
+				
+			</th>
+<td>
+				
+			</td>
+			</tr>
+	</tbody>
+</table>
+<br>
+잘 부탁드립니다.
+<br>
+*********************************************************<br>
+{!Account.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD<br>
+All-In-One Cloud Freight Forwarding Solution<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

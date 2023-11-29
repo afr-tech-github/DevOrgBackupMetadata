@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FORWARDING_DOCUMENT</fullName>
+    <availability>online</availability>
+    <description>B/L, S/I, Manifest, and many other template are available.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>FORWARDING DOCUMENT</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://{!$Setup.Site_Custom_Settings__c.My_Domain_Name__c}/mail/mmchoose.jsp?id={!URLENCODE(CustomObject1__c.Id)}&amp;1={!CustomObject1__c.Id}&amp;retURL=%2F{!URLENCODE(CustomObject1__c.Id)}</url>
+</WebLink>

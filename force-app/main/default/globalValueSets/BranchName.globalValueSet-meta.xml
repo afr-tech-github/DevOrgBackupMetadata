@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ho Chi Minh</fullName>
+        <default>false</default>
+        <label>Ho Chi Minh</label>
+    </customValue>
+    <customValue>
+        <fullName>Hanoi</fullName>
+        <default>false</default>
+        <label>Hanoi</label>
+    </customValue>
+    <customValue>
+        <fullName>Hai Phong</fullName>
+        <default>false</default>
+        <label>Hai Phong</label>
+    </customValue>
+    <customValue>
+        <fullName>Danang</fullName>
+        <default>false</default>
+        <label>Danang</label>
+    </customValue>
+    <customValue>
+        <fullName>Vung Tau</fullName>
+        <default>false</default>
+        <label>Vung Tau</label>
+    </customValue>
+    <customValue>
+        <fullName>Dong Nai</fullName>
+        <default>false</default>
+        <label>Dong Nai</label>
+    </customValue>
+    <customValue>
+        <fullName>Ba Ngoi</fullName>
+        <default>false</default>
+        <label>Ba Ngoi</label>
+    </customValue>
+    <customValue>
+        <fullName>Binh Duong</fullName>
+        <default>false</default>
+        <label>Binh Duong</label>
+    </customValue>
+    <customValue>
+        <fullName>Cai Mep</fullName>
+        <default>false</default>
+        <label>Cai Mep</label>
+    </customValue>
+    <customValue>
+        <fullName>Campha</fullName>
+        <default>false</default>
+        <label>Campha</label>
+    </customValue>
+    <customValue>
+        <fullName>Can Tho</fullName>
+        <default>false</default>
+        <label>Can Tho</label>
+    </customValue>
+    <customValue>
+        <fullName>Dai Hung</fullName>
+        <default>false</default>
+        <label>Dai Hung</label>
+    </customValue>
+    <customValue>
+        <fullName>Dong Thap</fullName>
+        <default>false</default>
+        <label>Dong Thap</label>
+    </customValue>
+    <customValue>
+        <fullName>Hon Chong</fullName>
+        <default>false</default>
+        <label>Hon Chong</label>
+    </customValue>
+    <customValue>
+        <fullName>Hon Gay</fullName>
+        <default>false</default>
+        <label>Hon Gay</label>
+    </customValue>
+    <customValue>
+        <fullName>Le Mon</fullName>
+        <default>false</default>
+        <label>Le Mon</label>
+    </customValue>
+    <customValue>
+        <fullName>My Tho</fullName>
+        <default>false</default>
+        <label>My Tho</label>
+    </customValue>
+    <customValue>
+        <fullName>Nam Can</fullName>
+        <default>false</default>
+        <label>Nam Can</label>
+    </customValue>
+    <customValue>
+        <fullName>Nghe Tinh</fullName>
+        <default>false</default>
+        <label>Nghe Tinh</label>
+    </customValue>
+    <customValue>
+        <fullName>Phu My</fullName>
+        <default>false</default>
+        <label>Phu My</label>
+    </customValue>
+    <customValue>
+        <fullName>Quy Nhon</fullName>
+        <default>false</default>
+        <label>Quy Nhon</label>
+    </customValue>
+    <customValue>
+        <fullName>Tan Cang</fullName>
+        <default>false</default>
+        <label>Tan Cang</label>
+    </customValue>
+    <customValue>
+        <fullName>Va Phong Vay</fullName>
+        <default>false</default>
+        <label>Va Phong Vay</label>
+    </customValue>
+    <masterLabel>BRANCH NAME</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

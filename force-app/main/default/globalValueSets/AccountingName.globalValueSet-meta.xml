@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>A.ASSET-CURRENT ASSET</fullName>
+        <default>false</default>
+        <label>A.ASSET-CURRENT ASSET</label>
+    </customValue>
+    <customValue>
+        <fullName>I.Cash and cash equivalent</fullName>
+        <default>false</default>
+        <label>I.Cash and cash equivalent</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash</fullName>
+        <default>false</default>
+        <label>Cash</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash equivalent</fullName>
+        <default>false</default>
+        <label>Cash equivalent</label>
+    </customValue>
+    <customValue>
+        <fullName>II.Short-term investments</fullName>
+        <default>false</default>
+        <label>II.Short-term investments</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term investments</fullName>
+        <default>false</default>
+        <label>Short-term investments</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for impairment of short-term investments</fullName>
+        <default>false</default>
+        <label>Provision for impairment of short-term investments</label>
+    </customValue>
+    <customValue>
+        <fullName>Other short-term investment</fullName>
+        <default>false</default>
+        <label>Other short-term investment</label>
+    </customValue>
+    <customValue>
+        <fullName>III.Short-term receivables</fullName>
+        <default>false</default>
+        <label>III.Short-term receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Trade receivables</fullName>
+        <default>false</default>
+        <label>Trade receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Advance to suppliers</fullName>
+        <default>false</default>
+        <label>Advance to suppliers</label>
+    </customValue>
+    <customValue>
+        <fullName>Intercompany receivables</fullName>
+        <default>false</default>
+        <label>Intercompany receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction contract progress receivables</fullName>
+        <default>false</default>
+        <label>Construction contract progress receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term lending receivables</fullName>
+        <default>false</default>
+        <label>Short-term lending receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Other short-term receivables</fullName>
+        <default>false</default>
+        <label>Other short-term receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for short-term doubtful debts</fullName>
+        <default>false</default>
+        <label>Provision for short-term doubtful debts</label>
+    </customValue>
+    <customValue>
+        <fullName>Shortage of assets awaiting resolution</fullName>
+        <default>false</default>
+        <label>Shortage of assets awaiting resolution</label>
+    </customValue>
+    <customValue>
+        <fullName>IV.Inventories</fullName>
+        <default>false</default>
+        <label>IV.Inventories</label>
+    </customValue>
+    <customValue>
+        <fullName>Inventories</fullName>
+        <default>false</default>
+        <label>Inventories</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for decline in inventory</fullName>
+        <default>false</default>
+        <label>Provision for decline in inventory</label>
+    </customValue>
+    <customValue>
+        <fullName>V.Current assets</fullName>
+        <default>false</default>
+        <label>V.Current assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term prepaid expenses</fullName>
+        <default>false</default>
+        <label>Short-term prepaid expenses</label>
+    </customValue>
+    <customValue>
+        <fullName>VAT deducted</fullName>
+        <default>false</default>
+        <label>VAT deducted</label>
+    </customValue>
+    <customValue>
+        <fullName>Government bonds purchased for resale as Investment</fullName>
+        <default>false</default>
+        <label>Government bonds purchased for resale as Investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Current assets</fullName>
+        <default>false</default>
+        <label>Other Current assets</label>
+    </customValue>
+    <customValue>
+        <fullName>B.ASSET-FIXED ASSETS &amp; LONG-TERM INVESTMENTS</fullName>
+        <default>false</default>
+        <label>B.ASSET-FIXED ASSETS &amp; LONG-TERM INVESTMENTS</label>
+    </customValue>
+    <customValue>
+        <fullName>I.Long-term receivables</fullName>
+        <default>false</default>
+        <label>I.Long-term receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term receivable-trade</fullName>
+        <default>false</default>
+        <label>Long-term receivable-trade</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term prepaid to supplier</fullName>
+        <default>false</default>
+        <label>Long-term prepaid to supplier</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment in equity of subsidiaries</fullName>
+        <default>false</default>
+        <label>Investment in equity of subsidiaries</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term intercompany receivables</fullName>
+        <default>false</default>
+        <label>Long-term intercompany receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term lending receivables</fullName>
+        <default>false</default>
+        <label>Long-term lending receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Other long-term receivables</fullName>
+        <default>false</default>
+        <label>Other long-term receivables</label>
+    </customValue>
+    <customValue>
+        <fullName>Provision for long-term doubtful debts</fullName>
+        <default>false</default>
+        <label>Provision for long-term doubtful debts</label>
+    </customValue>
+    <customValue>
+        <fullName>II.Fixed assets</fullName>
+        <default>false</default>
+        <label>II.Fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Tangible fixed assets</fullName>
+        <default>false</default>
+        <label>Tangible fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>-Tangible fixed assets-Original cost</fullName>
+        <default>false</default>
+        <label>-Tangible fixed assets-Original cost</label>
+    </customValue>
+    <customValue>
+        <fullName>-Tangible fixed assets-Accumulated depreciation</fullName>
+        <default>false</default>
+        <label>-Tangible fixed assets-Accumulated depreciation</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial leasing fixed assets</fullName>
+        <default>false</default>
+        <label>Financial leasing fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>-Financial leasing fixed assets-Original cost</fullName>
+        <default>false</default>
+        <label>-Financial leasing fixed assets-Original cost</label>
+    </customValue>
+    <customValue>
+        <fullName>-Financial leasing fixed assets-Accumulated depreciation</fullName>
+        <default>false</default>
+        <label>-Financial leasing fixed assets-Accumulated depreciation</label>
+    </customValue>
+    <customValue>
+        <fullName>Intangible fixed assets</fullName>
+        <default>false</default>
+        <label>Intangible fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>-Intangible fixed assets-Original cost</fullName>
+        <default>false</default>
+        <label>-Intangible fixed assets-Original cost</label>
+    </customValue>
+    <customValue>
+        <fullName>-Intangible fixed assets-Accumulated depreciation</fullName>
+        <default>false</default>
+        <label>-Intangible fixed assets-Accumulated depreciation</label>
+    </customValue>
+    <customValue>
+        <fullName>III.Investment real estate</fullName>
+        <default>false</default>
+        <label>III.Investment real estate</label>
+    </customValue>
+    <customValue>
+        <fullName>-Investment real estate-Original cost</fullName>
+        <default>false</default>
+        <label>-Investment real estate-Original cost</label>
+    </customValue>
+    <customValue>
+        <fullName>-Investment real estate-Accumulated depreciation</fullName>
+        <default>false</default>
+        <label>-Investment real estate-Accumulated depreciation</label>
+    </customValue>
+    <customValue>
+        <fullName>IV.Long-term asset in progress</fullName>
+        <default>false</default>
+        <label>IV.Long-term asset in progress</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term business costs in progress</fullName>
+        <default>false</default>
+        <label>Long-term business costs in progress</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term construction costs in progress</fullName>
+        <default>false</default>
+        <label>Long-term construction costs in progress</label>
+    </customValue>
+    <customValue>
+        <fullName>V.Long- term financial Investments</fullName>
+        <default>false</default>
+        <label>V.Long- term financial Investments</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial Investment in equity of subsidiaries</fullName>
+        <default>false</default>
+        <label>Financial Investment in equity of subsidiaries</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment in joint-venture</fullName>
+        <default>false</default>
+        <label>Investment in joint-venture</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash for long-term stock</fullName>
+        <default>false</default>
+        <label>Cash for long-term stock</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term allowance for financial investment</fullName>
+        <default>false</default>
+        <label>Long-term allowance for financial investment</label>
+    </customValue>
+    <customValue>
+        <fullName>Held to maturity investment</fullName>
+        <default>false</default>
+        <label>Held to maturity investment</label>
+    </customValue>
+    <customValue>
+        <fullName>VI.Other long-term assets</fullName>
+        <default>false</default>
+        <label>VI.Other long-term assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term Prepaid expense</fullName>
+        <default>false</default>
+        <label>Long-term Prepaid expense</label>
+    </customValue>
+    <customValue>
+        <fullName>Deffered income tax assets</fullName>
+        <default>false</default>
+        <label>Deffered income tax assets</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term equipment, spare parts for replacement</fullName>
+        <default>false</default>
+        <label>Long-term equipment, spare parts for replacement</label>
+    </customValue>
+    <customValue>
+        <fullName>Other long-term assets</fullName>
+        <default>false</default>
+        <label>Other long-term assets</label>
+    </customValue>
+    <customValue>
+        <fullName>TOTAL ASSET</fullName>
+        <default>false</default>
+        <label>TOTAL ASSET</label>
+    </customValue>
+    <customValue>
+        <fullName>A.RESOURCE-PAYABLE DEBTS</fullName>
+        <default>false</default>
+        <label>A.RESOURCE-PAYABLE DEBTS</label>
+    </customValue>
+    <customValue>
+        <fullName>I.Short-term liability</fullName>
+        <default>false</default>
+        <label>I.Short-term liability</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term payable to supplier</fullName>
+        <default>false</default>
+        <label>Short-term payable to supplier</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term advances from customers</fullName>
+        <default>false</default>
+        <label>Short-term advances from customers</label>
+    </customValue>
+    <customValue>
+        <fullName>Taxes and payable to state budget</fullName>
+        <default>false</default>
+        <label>Taxes and payable to state budget</label>
+    </customValue>
+    <customValue>
+        <fullName>Payable to employees</fullName>
+        <default>false</default>
+        <label>Payable to employees</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term expense paid</fullName>
+        <default>false</default>
+        <label>Short-term expense paid</label>
+    </customValue>
+    <customValue>
+        <fullName>Intercompany payable</fullName>
+        <default>false</default>
+        <label>Intercompany payable</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction contract progress payment due to customers</fullName>
+        <default>false</default>
+        <label>Construction contract progress payment due to customers</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term unearned revenue</fullName>
+        <default>false</default>
+        <label>Short-term unearned revenue</label>
+    </customValue>
+    <customValue>
+        <fullName>Other short-term payable items</fullName>
+        <default>false</default>
+        <label>Other short-term payable items</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term borrowings and finance lease liabilities</fullName>
+        <default>false</default>
+        <label>Short-term borrowings and finance lease liabilities</label>
+    </customValue>
+    <customValue>
+        <fullName>Short-term provisions for payables</fullName>
+        <default>false</default>
+        <label>Short-term provisions for payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Bonus &amp; welfare funds</fullName>
+        <default>false</default>
+        <label>Bonus &amp; welfare funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Price stabilization fund</fullName>
+        <default>false</default>
+        <label>Price stabilization fund</label>
+    </customValue>
+    <customValue>
+        <fullName>Government bonds purchased for resale</fullName>
+        <default>false</default>
+        <label>Government bonds purchased for resale</label>
+    </customValue>
+    <customValue>
+        <fullName>II.Long-term liability</fullName>
+        <default>false</default>
+        <label>II.Long-term liability</label>
+    </customValue>
+    <customValue>
+        <fullName>Trade payables</fullName>
+        <default>false</default>
+        <label>Trade payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Intercompany long-term payables</fullName>
+        <default>false</default>
+        <label>Intercompany long-term payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term payables</fullName>
+        <default>false</default>
+        <label>Long-term payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Intra-company payables for operating capital received</fullName>
+        <default>false</default>
+        <label>Intra-company payables for operating capital received</label>
+    </customValue>
+    <customValue>
+        <fullName>Intra-company long-term payables</fullName>
+        <default>false</default>
+        <label>Intra-company long-term payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term unearned revenue</fullName>
+        <default>false</default>
+        <label>Long-term unearned revenue</label>
+    </customValue>
+    <customValue>
+        <fullName>Other long-term payables</fullName>
+        <default>false</default>
+        <label>Other long-term payables</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term Financial loan and leasing liabilities</fullName>
+        <default>false</default>
+        <label>Long-term Financial loan and leasing liabilities</label>
+    </customValue>
+    <customValue>
+        <fullName>Convertible bonds</fullName>
+        <default>false</default>
+        <label>Convertible bonds</label>
+    </customValue>
+    <customValue>
+        <fullName>Preference shares</fullName>
+        <default>false</default>
+        <label>Preference shares</label>
+    </customValue>
+    <customValue>
+        <fullName>Deferred income tax liabilitie</fullName>
+        <default>false</default>
+        <label>Deferred income tax liabilitie</label>
+    </customValue>
+    <customValue>
+        <fullName>Long-term provision</fullName>
+        <default>false</default>
+        <label>Long-term provision</label>
+    </customValue>
+    <customValue>
+        <fullName>Development of science and technology fund</fullName>
+        <default>false</default>
+        <label>Development of science and technology fund</label>
+    </customValue>
+    <customValue>
+        <fullName>B.RESOURCE-CAPITAL</fullName>
+        <default>false</default>
+        <label>B.RESOURCE-CAPITAL</label>
+    </customValue>
+    <customValue>
+        <fullName>I.Capital</fullName>
+        <default>false</default>
+        <label>I.Capital</label>
+    </customValue>
+    <customValue>
+        <fullName>Contributed legal capital</fullName>
+        <default>false</default>
+        <label>Contributed legal capital</label>
+    </customValue>
+    <customValue>
+        <fullName>-Ordinary shares with voting rights</fullName>
+        <default>false</default>
+        <label>-Ordinary shares with voting rights</label>
+    </customValue>
+    <customValue>
+        <fullName>-Preference shares</fullName>
+        <default>false</default>
+        <label>-Preference shares</label>
+    </customValue>
+    <customValue>
+        <fullName>Share premium</fullName>
+        <default>false</default>
+        <label>Share premium</label>
+    </customValue>
+    <customValue>
+        <fullName>Conversion options on convertible bonds</fullName>
+        <default>false</default>
+        <label>Conversion options on convertible bonds</label>
+    </customValue>
+    <customValue>
+        <fullName>Other capital</fullName>
+        <default>false</default>
+        <label>Other capital</label>
+    </customValue>
+    <customValue>
+        <fullName>Treasury stock</fullName>
+        <default>false</default>
+        <label>Treasury stock</label>
+    </customValue>
+    <customValue>
+        <fullName>Differences upon asset revaluation</fullName>
+        <default>false</default>
+        <label>Differences upon asset revaluation</label>
+    </customValue>
+    <customValue>
+        <fullName>Foreign exchange differences</fullName>
+        <default>false</default>
+        <label>Foreign exchange differences</label>
+    </customValue>
+    <customValue>
+        <fullName>Investment &amp; development funds</fullName>
+        <default>false</default>
+        <label>Investment &amp; development funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Enterprise reorganization assistance fund</fullName>
+        <default>false</default>
+        <label>Enterprise reorganization assistance fund</label>
+    </customValue>
+    <customValue>
+        <fullName>Other funds</fullName>
+        <default>false</default>
+        <label>Other funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Undistributed earnings</fullName>
+        <default>false</default>
+        <label>Undistributed earnings</label>
+    </customValue>
+    <customValue>
+        <fullName>-Undistributed earnings at the end of the previous period</fullName>
+        <default>false</default>
+        <label>-Undistributed earnings at the end of the previous period</label>
+    </customValue>
+    <customValue>
+        <fullName>-This period undistributed earnings</fullName>
+        <default>false</default>
+        <label>-This period undistributed earnings</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction investment fund</fullName>
+        <default>false</default>
+        <label>Construction investment fund</label>
+    </customValue>
+    <customValue>
+        <fullName>II.Other sources and funds</fullName>
+        <default>false</default>
+        <label>II.Other sources and funds</label>
+    </customValue>
+    <customValue>
+        <fullName>Sources of expenditure</fullName>
+        <default>false</default>
+        <label>Sources of expenditure</label>
+    </customValue>
+    <customValue>
+        <fullName>Budget resources used to acquire fixed assets</fullName>
+        <default>false</default>
+        <label>Budget resources used to acquire fixed assets</label>
+    </customValue>
+    <customValue>
+        <fullName>TOTAL LIABILITIES AND OWNERS&apos; EQUITY</fullName>
+        <default>false</default>
+        <label>TOTAL LIABILITIES AND OWNERS&apos; EQUITY</label>
+    </customValue>
+    <masterLabel>ACCOUNTING NAME</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

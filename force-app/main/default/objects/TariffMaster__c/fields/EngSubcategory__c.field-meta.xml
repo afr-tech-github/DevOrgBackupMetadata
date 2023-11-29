@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EngSubcategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>SUB-CATEGORY(ENG)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Subcategory__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Basic charge</fullName>
+                <default>false</default>
+                <label>Basic charge</label>
+            </value>
+            <value>
+                <fullName>OCEAN FREIGHT Surcharge Excluded</fullName>
+                <default>false</default>
+                <label>OCEAN FREIGHT Surcharge Excluded</label>
+            </value>
+            <value>
+                <fullName>OCEAN FREIGHT Surcharge Included</fullName>
+                <default>false</default>
+                <label>OCEAN FREIGHT Surcharge Included</label>
+            </value>
+            <value>
+                <fullName>CY Charge</fullName>
+                <default>false</default>
+                <label>CY Charge</label>
+            </value>
+            <value>
+                <fullName>B/L FEE</fullName>
+                <default>false</default>
+                <label>B/L FEE</label>
+            </value>
+            <value>
+                <fullName>THC</fullName>
+                <default>false</default>
+                <label>THC</label>
+            </value>
+            <value>
+                <fullName>CFS</fullName>
+                <default>false</default>
+                <label>CFS</label>
+            </value>
+            <value>
+                <fullName>FAF</fullName>
+                <default>false</default>
+                <label>FAF</label>
+            </value>
+            <value>
+                <fullName>BAF</fullName>
+                <default>false</default>
+                <label>BAF</label>
+            </value>
+            <value>
+                <fullName>YAS</fullName>
+                <default>false</default>
+                <label>YAS</label>
+            </value>
+            <value>
+                <fullName>EBS</fullName>
+                <default>false</default>
+                <label>EBS</label>
+            </value>
+            <value>
+                <fullName>CAF</fullName>
+                <default>false</default>
+                <label>CAF</label>
+            </value>
+            <value>
+                <fullName>GBF</fullName>
+                <default>false</default>
+                <label>GBF</label>
+            </value>
+            <value>
+                <fullName>FAF/YAS</fullName>
+                <default>false</default>
+                <label>FAF/YAS</label>
+            </value>
+            <value>
+                <fullName>FAF/BAF</fullName>
+                <default>false</default>
+                <label>FAF/BAF</label>
+            </value>
+            <value>
+                <fullName>FAF/YAS/EBS</fullName>
+                <default>false</default>
+                <label>FAF/YAS/EBS</label>
+            </value>
+            <value>
+                <fullName>CO-LOAD</fullName>
+                <default>false</default>
+                <label>CO-LOAD</label>
+            </value>
+            <value>
+                <fullName>HDS</fullName>
+                <default>false</default>
+                <label>HDS</label>
+            </value>
+            <value>
+                <fullName>D/O FEE</fullName>
+                <default>false</default>
+                <label>D/O FEE</label>
+            </value>
+            <value>
+                <fullName>DOC FEE</fullName>
+                <default>false</default>
+                <label>DOC FEE</label>
+            </value>
+            <value>
+                <fullName>System Charges</fullName>
+                <default>false</default>
+                <label>System Charges</label>
+            </value>
+            <value>
+                <fullName>W/H IN &amp; OUT CHARGE</fullName>
+                <default>false</default>
+                <label>W/H IN &amp; OUT CHARGE</label>
+            </value>
+            <value>
+                <fullName>SEAL</fullName>
+                <default>false</default>
+                <label>SEAL</label>
+            </value>
+            <value>
+                <fullName>PORT CHARGE(OWN COMPANY FORWARDING)</fullName>
+                <default>false</default>
+                <label>PORT CHARGE(OWN COMPANY FORWARDING)</label>
+            </value>
+            <value>
+                <fullName>PORT CHARGE(OTHER&apos;S FORWARDING)</fullName>
+                <default>false</default>
+                <label>PORT CHARGE(OTHER&apos;S FORWARDING)</label>
+            </value>
+            <value>
+                <fullName>Consolidation Allocation</fullName>
+                <default>false</default>
+                <label>Consolidation Allocation</label>
+            </value>
+            <value>
+                <fullName>DETENTION CHARGE</fullName>
+                <default>false</default>
+                <label>DETENTION CHARGE</label>
+            </value>
+            <value>
+                <fullName>TRUCKING FEE</fullName>
+                <default>false</default>
+                <label>TRUCKING FEE</label>
+            </value>
+            <value>
+                <fullName>Triaxial</fullName>
+                <default>false</default>
+                <label>Triaxial</label>
+            </value>
+            <value>
+                <fullName>Wait charge</fullName>
+                <default>false</default>
+                <label>Wait charge</label>
+            </value>
+            <value>
+                <fullName>Fast charge</fullName>
+                <default>false</default>
+                <label>Fast charge</label>
+            </value>
+            <value>
+                <fullName>Holiday</fullName>
+                <default>false</default>
+                <label>Holiday</label>
+            </value>
+            <value>
+                <fullName>Midnight・Early Morning</fullName>
+                <default>false</default>
+                <label>Midnight・Early Morning</label>
+            </value>
+            <value>
+                <fullName>Request application form</fullName>
+                <default>false</default>
+                <label>Request application form</label>
+            </value>
+            <value>
+                <fullName>Customs fee(1sheet)-Big</fullName>
+                <default>false</default>
+                <label>Customs fee(1sheet)-Big</label>
+            </value>
+            <value>
+                <fullName>Customs fee(2sheet～)-Big</fullName>
+                <default>false</default>
+                <label>Customs fee(2sheet～)-Big</label>
+            </value>
+            <value>
+                <fullName>Customs fee(1sheet)-Little</fullName>
+                <default>false</default>
+                <label>Customs fee(1sheet)-Little</label>
+            </value>
+            <value>
+                <fullName>Customs fee(2sheet～)-Little</fullName>
+                <default>false</default>
+                <label>Customs fee(2sheet～)-Little</label>
+            </value>
+            <value>
+                <fullName>Export customs fee(1sheet)-Big</fullName>
+                <default>false</default>
+                <label>Export customs fee(1sheet)-Big</label>
+            </value>
+            <value>
+                <fullName>Export customs fee(2sheet～)-Big</fullName>
+                <default>false</default>
+                <label>Export customs fee(2sheet～)-Big</label>
+            </value>
+            <value>
+                <fullName>Export customs fee(1sheet)-Little</fullName>
+                <default>false</default>
+                <label>Export customs fee(1sheet)-Little</label>
+            </value>
+            <value>
+                <fullName>Export customs fee(2sheet～)-Little</fullName>
+                <default>false</default>
+                <label>Export customs fee(2sheet～)-Little</label>
+            </value>
+            <value>
+                <fullName>Export customs handling fee</fullName>
+                <default>false</default>
+                <label>Export customs handling fee</label>
+            </value>
+            <value>
+                <fullName>Customs handling fee</fullName>
+                <default>false</default>
+                <label>Customs handling fee</label>
+            </value>
+            <value>
+                <fullName>Initial charge inspection fee</fullName>
+                <default>false</default>
+                <label>Initial charge inspection fee</label>
+            </value>
+            <value>
+                <fullName>Tariff (advances)</fullName>
+                <default>false</default>
+                <label>Tariff (advances)</label>
+            </value>
+            <value>
+                <fullName>Import consumption tax (reimbursement)</fullName>
+                <default>false</default>
+                <label>Import consumption tax (reimbursement)</label>
+            </value>
+            <value>
+                <fullName>Vanning</fullName>
+                <default>false</default>
+                <label>Vanning</label>
+            </value>
+            <value>
+                <fullName>Devanning</fullName>
+                <default>false</default>
+                <label>Devanning</label>
+            </value>
+            <value>
+                <fullName>CHARTER</fullName>
+                <default>false</default>
+                <label>CHARTER</label>
+            </value>
+            <value>
+                <fullName>CONSOLIDATION</fullName>
+                <default>false</default>
+                <label>CONSOLIDATION</label>
+            </value>
+            <value>
+                <fullName>Input and storage fee</fullName>
+                <default>false</default>
+                <label>Input and storage fee</label>
+            </value>
+            <value>
+                <fullName>Storage fee</fullName>
+                <default>false</default>
+                <label>Storage fee</label>
+            </value>
+            <value>
+                <fullName>+45KGS</fullName>
+                <default>false</default>
+                <label>+45KGS</label>
+            </value>
+            <value>
+                <fullName>+100KGS</fullName>
+                <default>false</default>
+                <label>+100KGS</label>
+            </value>
+            <value>
+                <fullName>+300KGS</fullName>
+                <default>false</default>
+                <label>+300KGS</label>
+            </value>
+            <value>
+                <fullName>+500KGS</fullName>
+                <default>false</default>
+                <label>+500KGS</label>
+            </value>
+            <value>
+                <fullName>+1000KGS</fullName>
+                <default>false</default>
+                <label>+1000KGS</label>
+            </value>
+            <value>
+                <fullName>Minimum Charge</fullName>
+                <default>false</default>
+                <label>Minimum Charge</label>
+            </value>
+            <value>
+                <fullName>Shed fee</fullName>
+                <default>false</default>
+                <label>Shed fee</label>
+            </value>
+            <value>
+                <fullName>B/B(Break Bulk) Fee</fullName>
+                <default>false</default>
+                <label>B/B(Break Bulk) Fee</label>
+            </value>
+            <value>
+                <fullName>C/C(Charges Collect) FEE</fullName>
+                <default>false</default>
+                <label>C/C(Charges Collect) FEE</label>
+            </value>
+            <value>
+                <fullName>CSC(Container Security SubCharge)</fullName>
+                <default>false</default>
+                <label>CSC(Container Security SubCharge)</label>
+            </value>
+            <value>
+                <fullName>DEBIT(REFUND)</fullName>
+                <default>false</default>
+                <label>DEBIT(REFUND)</label>
+            </value>
+            <value>
+                <fullName>COMMISSION</fullName>
+                <default>false</default>
+                <label>COMMISSION</label>
+            </value>
+            <value>
+                <fullName>Oversea Local Charge</fullName>
+                <default>false</default>
+                <label>Oversea Local Charge</label>
+            </value>
+            <value>
+                <fullName>Industrial waste disposal fee</fullName>
+                <default>false</default>
+                <label>Industrial waste disposal fee</label>
+            </value>
+            <value>
+                <fullName>Journal fee</fullName>
+                <default>false</default>
+                <label>Journal fee</label>
+            </value>
+            <value>
+                <fullName>Carry fee</fullName>
+                <default>false</default>
+                <label>Carry fee</label>
+            </value>
+            <value>
+                <fullName>Divide</fullName>
+                <default>false</default>
+                <label>Divide</label>
+            </value>
+            <value>
+                <fullName>CSMP TAX</fullName>
+                <default>false</default>
+                <label>CSMP TAX</label>
+            </value>
+            <value>
+                <fullName>Partner Cost Allocation</fullName>
+                <default>false</default>
+                <label>Partner Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Carrier Cost Allocation</fullName>
+                <default>false</default>
+                <label>Carrier Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Carrier Cost Allocation(TAX)</fullName>
+                <default>false</default>
+                <label>Carrier Cost Allocation(TAX)</label>
+            </value>
+            <value>
+                <fullName>Wharehouse Cost Allocation</fullName>
+                <default>false</default>
+                <label>Wharehouse Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Short Drage</fullName>
+                <default>false</default>
+                <label>Short Drage</label>
+            </value>
+            <value>
+                <fullName>DOCUMENT DELIVERY SERVICE</fullName>
+                <default>false</default>
+                <label>DOCUMENT DELIVERY SERVICE</label>
+            </value>
+            <value>
+                <fullName>Empty Container Handling Charge</fullName>
+                <default>false</default>
+                <label>Handling Charge</label>
+            </value>
+            <value>
+                <fullName>Empty Container Trucking</fullName>
+                <default>false</default>
+                <label>Empty Container Trucking</label>
+            </value>
+            <value>
+                <fullName>Empty Container Lift On</fullName>
+                <default>false</default>
+                <label>Lift On</label>
+            </value>
+            <value>
+                <fullName>Empty Container Lift Off</fullName>
+                <default>false</default>
+                <label>Lift Off</label>
+            </value>
+            <value>
+                <fullName>Empty Container Lift On/Off</fullName>
+                <default>false</default>
+                <label>LOLO</label>
+            </value>
+            <value>
+                <fullName>Empty Container Detention Charge</fullName>
+                <default>false</default>
+                <label>Empty Container Detention Charge</label>
+            </value>
+            <value>
+                <fullName>Empty Container Demurrage Charge</fullName>
+                <default>false</default>
+                <label>Empty Container Demurrage Charge</label>
+            </value>
+            <value>
+                <fullName>Empty Container Barging Charge</fullName>
+                <default>false</default>
+                <label>Empty Container Barging Charge</label>
+            </value>
+            <value>
+                <fullName>Flexitank</fullName>
+                <default>false</default>
+                <label>Flexitank</label>
+            </value>
+            <value>
+                <fullName>Kick-back</fullName>
+                <default>false</default>
+                <label>Kick-back</label>
+            </value>
+            <value>
+                <fullName>Fumigation</fullName>
+                <default>false</default>
+                <label>Fumigation</label>
+            </value>
+            <value>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+                <label>Insurance</label>
+            </value>
+            <value>
+                <fullName>Service Fee</fullName>
+                <default>false</default>
+                <label>Service Fee</label>
+            </value>
+            <value>
+                <fullName>Cleaning Fee</fullName>
+                <default>false</default>
+                <label>Cleaning Fee</label>
+            </value>
+            <value>
+                <fullName>AFR Filing</fullName>
+                <default>false</default>
+                <label>AFR Filing</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>CIC</fullName>
+                <default>false</default>
+                <label>CIC</label>
+            </value>
+            <value>
+                <fullName>AMS</fullName>
+                <default>false</default>
+                <label>AMS</label>
+            </value>
+            <value>
+                <fullName>TELEX</fullName>
+                <default>false</default>
+                <label>TELEX</label>
+            </value>
+            <value>
+                <fullName>PSS</fullName>
+                <default>false</default>
+                <label>PSS</label>
+            </value>
+            <value>
+                <fullName>AMENDMENT FEE</fullName>
+                <default>false</default>
+                <label>AMENDMENT FEE</label>
+            </value>
+            <value>
+                <fullName>EX-WORK CHARGE</fullName>
+                <default>false</default>
+                <label>EX-WORK CHARGE</label>
+            </value>
+            <value>
+                <fullName>Product</fullName>
+                <default>false</default>
+                <label>Product</label>
+            </value>
+            <value>
+                <fullName>FI(Free in)</fullName>
+                <default>false</default>
+                <label>FI(Free in)</label>
+            </value>
+            <value>
+                <fullName>FIO(Free in and out)</fullName>
+                <default>false</default>
+                <label>FIO(Free in and out)</label>
+            </value>
+            <value>
+                <fullName>FILO(Free in, Liner out)</fullName>
+                <default>false</default>
+                <label>FILO(Free in, Liner out)</label>
+            </value>
+            <value>
+                <fullName>FISLO(Free in Stowed, Liner out)</fullName>
+                <default>false</default>
+                <label>FISLO(Free in Stowed, Liner out)</label>
+            </value>
+            <value>
+                <fullName>FIOS(Free In, Out and Stowed)</fullName>
+                <default>false</default>
+                <label>FIOS(Free In, Out and Stowed)</label>
+            </value>
+            <value>
+                <fullName>FIOST(Free in and out and stowed and trimmed)</fullName>
+                <default>false</default>
+                <label>FIOST(Free in and out and stowed and trimmed)</label>
+            </value>
+            <value>
+                <fullName>FIOST LS(Free in and out and stowed and trimmed, Lashed Secured)</fullName>
+                <default>false</default>
+                <label>FIOST LS(Free in and out and stowed and trimmed, Lashed Secured)</label>
+            </value>
+            <value>
+                <fullName>LIFO(Liner in, free out)</fullName>
+                <default>false</default>
+                <label>LIFO(Liner in, free out)</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Lift Off</controllingFieldValue>
+            <valueName>Empty Container Lift Off</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Lift On/Off</controllingFieldValue>
+            <valueName>Empty Container Lift On/Off</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Detention Charge</controllingFieldValue>
+            <valueName>Empty Container Detention Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Demurrage Charge</controllingFieldValue>
+            <valueName>Empty Container Demurrage Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Barging Charge</controllingFieldValue>
+            <valueName>Empty Container Barging Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Insurance</controllingFieldValue>
+            <valueName>Insurance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Fumigation</controllingFieldValue>
+            <valueName>Fumigation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Service Fee</controllingFieldValue>
+            <valueName>Service Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AFR Filing</controllingFieldValue>
+            <valueName>AFR Filing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Clearing Fee</controllingFieldValue>
+            <valueName>Cleaning Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>YAS</controllingFieldValue>
+            <valueName>YAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CIC</controllingFieldValue>
+            <valueName>CIC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EBS</controllingFieldValue>
+            <valueName>EBS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMS</controllingFieldValue>
+            <valueName>AMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CAF</controllingFieldValue>
+            <valueName>CAF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GBF</controllingFieldValue>
+            <valueName>GBF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FAF/YAS</controllingFieldValue>
+            <valueName>FAF/YAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FAF/BAF</controllingFieldValue>
+            <valueName>FAF/BAF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FAF/YAS/EBS</controllingFieldValue>
+            <valueName>FAF/YAS/EBS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CO-LOAD</controllingFieldValue>
+            <valueName>CO-LOAD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>HDS</controllingFieldValue>
+            <valueName>HDS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>D/O FEE</controllingFieldValue>
+            <valueName>D/O FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Basic Charge</controllingFieldValue>
+            <valueName>Basic charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OCEAN FREIGHT Surcharge Excluded</controllingFieldValue>
+            <valueName>OCEAN FREIGHT Surcharge Excluded</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>OCEAN FREIGHT Surcharge Included</controllingFieldValue>
+            <valueName>OCEAN FREIGHT Surcharge Included</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CY CHARGE</controllingFieldValue>
+            <valueName>CY Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>B/L FEE</controllingFieldValue>
+            <valueName>B/L FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>THC</controllingFieldValue>
+            <valueName>THC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CFS</controllingFieldValue>
+            <valueName>CFS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FAF</controllingFieldValue>
+            <valueName>FAF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BAF</controllingFieldValue>
+            <valueName>BAF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DOC FEE</controllingFieldValue>
+            <valueName>DOC FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>System Charges</controllingFieldValue>
+            <valueName>System Charges</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Detention Charge</controllingFieldValue>
+            <valueName>DETENTION CHARGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>W/H IN &amp; OUT CHARGE</controllingFieldValue>
+            <controllingFieldValue>Short Drayage</controllingFieldValue>
+            <valueName>W/H IN &amp; OUT CHARGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SEAL</controllingFieldValue>
+            <valueName>SEAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ocean Freight including all charges</controllingFieldValue>
+            <valueName>PORT CHARGE(OWN COMPANY FORWARDING)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ocean Freight including all charges(Advance Payment)</controllingFieldValue>
+            <valueName>PORT CHARGE(OTHER&apos;S FORWARDING)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Consolidation Allocation</controllingFieldValue>
+            <valueName>Consolidation Allocation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trucking(20&apos;)</controllingFieldValue>
+            <controllingFieldValue>Trucking(40&apos;)</controllingFieldValue>
+            <valueName>TRUCKING FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Container Drayage(Tri-x chassis)</controllingFieldValue>
+            <valueName>Triaxial</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Waiting Charge</controllingFieldValue>
+            <valueName>Wait charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Highway Toll Gate Fee</controllingFieldValue>
+            <valueName>Fast charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Holiday Charge</controllingFieldValue>
+            <valueName>Holiday</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Late Night/Early Morning Charge</controllingFieldValue>
+            <valueName>Midnight・Early Morning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Short Drayage</controllingFieldValue>
+            <valueName>Short Drage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Documeting Application Charge</controllingFieldValue>
+            <valueName>Request application form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Import C.Clearance Charge</controllingFieldValue>
+            <controllingFieldValue>Customs Clearance Charge</controllingFieldValue>
+            <valueName>Customs fee(1sheet)-Big</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customs Clearance Charge(2 Page) - Big</controllingFieldValue>
+            <valueName>Customs fee(2sheet～)-Big</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customs Clearance Charge - Small</controllingFieldValue>
+            <valueName>Customs fee(1sheet)-Little</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Customs Clearance Charge(2 Page) - Small</controllingFieldValue>
+            <valueName>Customs fee(2sheet～)-Little</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Custom Handling Charge</controllingFieldValue>
+            <valueName>Customs handling fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Inspection Attendance Charge</controllingFieldValue>
+            <valueName>Initial charge inspection fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TAX(Duty Payment)</controllingFieldValue>
+            <valueName>Tariff (advances)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Import Consumption TAX</controllingFieldValue>
+            <valueName>Import consumption tax (reimbursement)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Vanning Charge</controllingFieldValue>
+            <valueName>Vanning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Devanning Charge</controllingFieldValue>
+            <valueName>Devanning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cargo In &amp; Out Charge</controllingFieldValue>
+            <valueName>Input and storage fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trucking(Charter)</controllingFieldValue>
+            <valueName>CHARTER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trucking(Consolidation)</controllingFieldValue>
+            <valueName>CONSOLIDATION</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Carge Storage Charge</controllingFieldValue>
+            <valueName>Storage fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>+45KGS</controllingFieldValue>
+            <valueName>+45KGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>+100KGS</controllingFieldValue>
+            <valueName>+100KGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>+300KGS</controllingFieldValue>
+            <valueName>+300KGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>+500KGS</controllingFieldValue>
+            <valueName>+500KGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>+1000KGS</controllingFieldValue>
+            <valueName>+1000KGS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Minimum Charge</controllingFieldValue>
+            <valueName>Minimum Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Airport Warehouse Charge</controllingFieldValue>
+            <valueName>Shed fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BB(Break Bulk) Fee</controllingFieldValue>
+            <valueName>B/B(Break Bulk) Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>C/C(Charges Collect) Fee</controllingFieldValue>
+            <valueName>C/C(Charges Collect) FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CSC(Container Security SubCharge)</controllingFieldValue>
+            <valueName>CSC(Container Security SubCharge)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>DEBIT(REFUND)</controllingFieldValue>
+            <valueName>DEBIT(REFUND)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>COMMISSION</controllingFieldValue>
+            <valueName>COMMISSION</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Oversea Local Charge</controllingFieldValue>
+            <valueName>Oversea Local Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Disposal Charge</controllingFieldValue>
+            <valueName>Industrial waste disposal fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cargo Sorting Charge</controllingFieldValue>
+            <valueName>Journal fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cargo Out Charge</controllingFieldValue>
+            <valueName>Carry fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CSMP TAX</controllingFieldValue>
+            <valueName>CSMP TAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Partner Master Consolidation Allocation</controllingFieldValue>
+            <valueName>Partner Cost Allocation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Carrier Master Consolidation Allocation</controllingFieldValue>
+            <valueName>Carrier Cost Allocation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Warehouse Master Consolidation Allocation</controllingFieldValue>
+            <valueName>Wharehouse Cost Allocation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TELEX</controllingFieldValue>
+            <valueName>TELEX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>PSS</controllingFieldValue>
+            <valueName>PSS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>AMENDMENT FEE</controllingFieldValue>
+            <valueName>AMENDMENT FEE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>EX-WORK CHARGE</controllingFieldValue>
+            <valueName>EX-WORK CHARGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Flexitank</controllingFieldValue>
+            <valueName>Flexitank</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Others</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Carrier Master Consolidation Allocation(TAX)</controllingFieldValue>
+            <valueName>Carrier Cost Allocation(TAX)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Kickback</controllingFieldValue>
+            <valueName>Kick-back</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Handling Charge</controllingFieldValue>
+            <valueName>Empty Container Handling Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Trucking</controllingFieldValue>
+            <valueName>Empty Container Trucking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container Lift On</controllingFieldValue>
+            <valueName>Empty Container Lift On</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

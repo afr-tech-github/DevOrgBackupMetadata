@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tracking</fullName>
+    <active>true</active>
+    <description>Choose this Pricing when related with Trucking. In case of Full Contrainer Trucking, choose the Full Container Trucking.</description>
+    <label>TRUCKING</label>
+</RecordType>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlaceOfReceiptDetailFormula__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF (ISBLANK(TEXT(Place_Of_Receipt__r.Country_Name__c))= TRUE, Place_Of_Receipt__r.Name ,(Place_Of_Receipt__r.Name &amp; &quot;, &quot;&amp;  text(Place_Of_Receipt__r.Country_Name__c)))</formula>
+    <label>Place of Receipt Detail-Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

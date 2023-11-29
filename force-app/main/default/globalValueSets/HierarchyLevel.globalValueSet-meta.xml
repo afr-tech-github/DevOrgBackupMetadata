@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Corporate Level</fullName>
+        <default>true</default>
+        <label>Corporate Level</label>
+    </customValue>
+    <customValue>
+        <fullName>Branch Level</fullName>
+        <default>false</default>
+        <label>Branch Level</label>
+    </customValue>
+    <customValue>
+        <fullName>Division Level</fullName>
+        <default>false</default>
+        <label>Division Level</label>
+    </customValue>
+    <customValue>
+        <fullName>Team Level</fullName>
+        <default>false</default>
+        <label>Team Level</label>
+    </customValue>
+    <customValue>
+        <fullName>Individual Level</fullName>
+        <default>false</default>
+        <label>Individual Level</label>
+    </customValue>
+    <customValue>
+        <fullName>Sub-Team Level</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sub-Team Level</label>
+    </customValue>
+    <masterLabel>HIERARCHY LEVEL</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

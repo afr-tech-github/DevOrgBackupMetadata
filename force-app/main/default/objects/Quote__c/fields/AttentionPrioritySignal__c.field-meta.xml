@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AttentionPrioritySignal__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IMAGE(
+CASE(AttentionPriorityNumber__c,
+0, &quot;/img/samples/light_green.gif&quot;,
+1, &quot;/img/samples/light_yellow.gif&quot;,
+2, &quot;/img/samples/light_red.gif&quot;,
+&quot;/s.gif&quot;),
+&quot;status color&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>0: Unit Price &gt; Standard Selling Price in Service
+1: Min Selling Price in Service&lt; Unit Price&lt;Standard Selling Price in Service
+2: Min Selling Price in Service&gt; Unit Price
+Approval: 0(Auto Approved), 1(Manual Approved), 2(Auto Rejected)</inlineHelpText>
+    <label>Attention Priority(Signal)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CarrierCost__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>COMPANY PAY FOR CARRIER COST</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Advanced Payment by Subcontractor</fullName>
+                <default>true</default>
+                <label>Advanced Payment by Subcontractor</label>
+            </value>
+            <value>
+                <fullName>Our company</fullName>
+                <default>false</default>
+                <label>Our company</label>
+            </value>
+            <value>
+                <fullName>Customer</fullName>
+                <default>false</default>
+                <label>Customer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

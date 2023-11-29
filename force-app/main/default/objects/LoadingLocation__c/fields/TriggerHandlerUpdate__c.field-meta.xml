@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TriggerHandlerUpdate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Only used from Trigger Handler to control linked record udpate</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Only used from Trigger Handler to control linked record udpate</inlineHelpText>
+    <label>Trigger Handler Update</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,23 @@
+Dear Approver
+
+{!BankAccount__c.CreatedBy} has requested your approval for the new Bank Account as below.
+
+Please click this link to approve or reject this record.
+
+◎BANK ACCOUNT ID：{!BankAccount__c.Name} Link to :{!BankAccount__c.Link} 
+◎BANK ACCOUNT NAME : {!BankAccount__c.BankMaster__c}
+◎BANK OFFICIAL NAME : {!BankAccount__c.BankOfficialName__c}
+◎BANK ACCOUNT NUMBER : {!BankAccount__c.BankAccountNumber__c}
+◎BANK ACCOUNT CURRENCY : {!BankAccount__c.BankAccountCurrency__c}
+◎FULL NAME OF ACCOUNT HOLDER: {!BankAccount__c.FullNameOfAccountHolder__c}
+
+You can also approve, reject and comment on this request from your feed.
+
+Best regards.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

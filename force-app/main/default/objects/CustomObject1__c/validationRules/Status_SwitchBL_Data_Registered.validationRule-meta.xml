@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_SwitchBL_Data_Registered</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISPICKVAL(status__c , &quot;輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)&quot;) ,  ISBLANK(SwitchB_L__c) , false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>Switch BL番号を必ずいれてください。
+Please enter Switch BL No.</errorMessage>
+</ValidationRule>

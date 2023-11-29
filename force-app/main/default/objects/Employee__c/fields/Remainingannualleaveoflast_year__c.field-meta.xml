@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Remainingannualleaveoflast_year__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Meaning: 
+This number is calculated with formula: [ Default previous year&apos;s annual leave - Total annual leave used in the last year ] and it&apos;s automate change to 0 at 1st  April of Finance Year.</description>
+    <externalId>false</externalId>
+    <label>Remaining annual leave of last year</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

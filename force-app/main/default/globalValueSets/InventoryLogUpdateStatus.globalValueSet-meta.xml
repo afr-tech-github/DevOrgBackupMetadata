@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Planned</fullName>
+        <default>false</default>
+        <label>Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending</fullName>
+        <default>false</default>
+        <label>Pending</label>
+    </customValue>
+    <customValue>
+        <fullName>Processed Successfully</fullName>
+        <default>false</default>
+        <label>Processed Successfully</label>
+    </customValue>
+    <customValue>
+        <fullName>Processing Fail</fullName>
+        <default>false</default>
+        <label>Processing Fail</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Inventory Log Update Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Pallet Rental</fullName>
+        <default>false</default>
+        <label>Pallet Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver Salary</fullName>
+        <default>false</default>
+        <label>Driver Salary</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver Compensation</fullName>
+        <default>false</default>
+        <label>Driver Compensation</label>
+    </customValue>
+    <customValue>
+        <fullName>System</fullName>
+        <default>false</default>
+        <label>System</label>
+    </customValue>
+    <customValue>
+        <fullName>Labor Hand Load In/Out per M3</fullName>
+        <default>false</default>
+        <label>Labor Hand Load In/Out per M3</label>
+    </customValue>
+    <customValue>
+        <fullName>Labor Hand Load In/Out per Ton</fullName>
+        <default>false</default>
+        <label>Labor Hand Load In/Out per Ton</label>
+    </customValue>
+    <masterLabel>FACILITY VARIABLE COST</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

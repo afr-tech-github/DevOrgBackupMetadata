@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Massive_Update_Selling_Consol</fullName>
+    <columns>Anken__c</columns>
+    <columns>TextFTMSSOID__c</columns>
+    <columns>NAME</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>Tariff__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>Suryo__c</columns>
+    <columns>ChargeUnitInPrint__c</columns>
+    <columns>ChargeUnit__c</columns>
+    <columns>ContainerSize__c</columns>
+    <columns>curr__c</columns>
+    <columns>SellTankaJPY__c</columns>
+    <columns>TaxInitial__c</columns>
+    <columns>KawaseSel__c</columns>
+    <columns>CurrencyConversionSelling__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.ConsolidationAllocation</value>
+    </filters>
+    <label>Massive Update-Selling(Consol)</label>
+</ListView>

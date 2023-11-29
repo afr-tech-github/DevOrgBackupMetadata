@@ -1,0 +1,14 @@
+<apex:page controller="MassiveQuoteLineController" sidebar="false" tabStyle="Quote__c" showHeader="true" title="{!IF(action!='update', translations['MASSIVE_CREATION'], translations['MASSIVE_UPDATE'])}" >
+
+    <apex:sectionHeader title="{!translations['MASSIVE_UPDATE']}" rendered="{!action=='update'}"/>
+    <apex:sectionHeader title="{!translations['MASSIVE_CREATION']}" rendered="{!action!='update'}"/>
+   
+    <!-- Create Section-->
+    <apex:outputPanel rendered="{!action!='update'}">
+        
+    </apex:outputPanel>
+    <!-- Update Section-->
+    <apex:outputPanel rendered="{!action =='update'}">
+        
+    </apex:outputPanel>
+</apex:page>

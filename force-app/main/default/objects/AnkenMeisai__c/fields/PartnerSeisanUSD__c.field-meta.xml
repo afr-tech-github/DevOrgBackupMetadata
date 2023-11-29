@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PartnerSeisanUSD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF ( AND(CONTAINS(TEXT(Seikyusaki__r.Business_Relationship__c), &apos;Partner&apos;), CONTAINS(TEXT(PaymentTo__r.Business_Relationship__c), &apos;Partner&apos;)), SellAmountUSD__c - BuyAmountUSD__c, IF ( CONTAINS(TEXT(Seikyusaki__r.Business_Relationship__c), &apos;Partner&apos;), SellAmountUSD__c, IF (CONTAINS(TEXT(PaymentTo__r.Business_Relationship__c), &apos;Partner&apos;), -1 * BuyAmountUSD__c, 10 )))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>請求先と支払先の「種別」を見て、海外パートナーとのバランスの金額(USD)を表示します。
+どちらも国内の場合は0で表示されます。</inlineHelpText>
+    <label>BALANCE(USD)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

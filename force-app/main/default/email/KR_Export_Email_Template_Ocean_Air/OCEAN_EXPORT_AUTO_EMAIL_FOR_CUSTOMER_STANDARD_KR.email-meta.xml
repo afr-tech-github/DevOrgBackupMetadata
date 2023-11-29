@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>고객님께 화물관련정보를 보낼 때, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[해상수출] 고객용 자동메일 - 표준양식</name>
+    <style>none</style>
+    <subject>[해상수출] -ID:{!CustomObject1__c.Name}{!CustomObject1__c.Name}, {!CustomObject1__c.status__c},powered by CloTra</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

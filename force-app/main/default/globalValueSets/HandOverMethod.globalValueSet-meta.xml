@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Drop-Off</fullName>
+        <default>false</default>
+        <label>Drop-Off</label>
+    </customValue>
+    <customValue>
+        <fullName>Pickup</fullName>
+        <default>false</default>
+        <label>Pickup</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Hand Over Method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

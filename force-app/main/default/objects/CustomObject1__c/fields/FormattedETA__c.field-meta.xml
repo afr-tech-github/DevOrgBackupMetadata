@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FormattedETA__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( ETA__c ), &apos;&apos;, 
+TEXT(DAY( ETA__c )) + &apos;-&apos;+ CASE( MONTH( ETA__c ) , 
+1, &quot;Jan&quot;, 
+2, &quot;Feb&quot;, 
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;, 
+7, &quot;Jul&quot;, 
+8, &quot;Aug&quot;, 
+9, &quot;Sep&quot;, 
+10, &quot;Oct&quot;, 
+11, &quot;Nov&quot;, 
+12, &quot;Dec&quot;, 
+&quot;None&quot;) + &apos;-&apos; + RIGHT(TEXT(YEAR( ETA__c )), 2) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Formatted ETA</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

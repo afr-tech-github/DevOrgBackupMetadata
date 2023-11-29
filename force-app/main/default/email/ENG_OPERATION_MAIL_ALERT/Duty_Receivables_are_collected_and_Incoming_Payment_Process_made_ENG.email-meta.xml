@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when duty receivable are over due date of payment.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>DUTY RECEIVABLES ARE COLLECTED AND INCOMING PAYMENT PROCESS MADE?</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-DUTY Receivables are collected and Incoming Payment processed?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

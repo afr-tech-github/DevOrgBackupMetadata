@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Receiving</fullName>
+        <default>false</default>
+        <label>Receiving</label>
+    </customValue>
+    <customValue>
+        <fullName>Putaway</fullName>
+        <default>false</default>
+        <label>Putaway</label>
+    </customValue>
+    <customValue>
+        <fullName>Stock-In</fullName>
+        <default>false</default>
+        <label>Stock-In</label>
+    </customValue>
+    <customValue>
+        <fullName>Stock-Out</fullName>
+        <default>false</default>
+        <label>Stock-Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Picking</fullName>
+        <default>false</default>
+        <label>Picking</label>
+    </customValue>
+    <customValue>
+        <fullName>Dispatch</fullName>
+        <default>false</default>
+        <label>Dispatch</label>
+    </customValue>
+    <customValue>
+        <fullName>VAS</fullName>
+        <default>false</default>
+        <label>VAS</label>
+    </customValue>
+    <masterLabel>GOODS STATUS IN WAREHOUSE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

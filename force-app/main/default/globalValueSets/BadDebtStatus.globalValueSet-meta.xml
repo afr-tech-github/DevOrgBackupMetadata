@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bad Debt Created</fullName>
+        <default>false</default>
+        <label>Bad Debt Created</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Internal Review</fullName>
+        <default>false</default>
+        <label>Under Internal Review</label>
+    </customValue>
+    <customValue>
+        <fullName>Contacting</fullName>
+        <default>false</default>
+        <label>Contacting</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Collection</fullName>
+        <default>false</default>
+        <label>Under Collection</label>
+    </customValue>
+    <customValue>
+        <fullName>Collected</fullName>
+        <default>false</default>
+        <label>Collected</label>
+    </customValue>
+    <customValue>
+        <fullName>Uncollected and Waiting for write-off bad debt</fullName>
+        <default>false</default>
+        <label>Uncollected and Waiting for write-off bad debt</label>
+    </customValue>
+    <customValue>
+        <fullName>Uncollected and Wrote-off bad debt</fullName>
+        <default>false</default>
+        <label>Uncollected and Wrote-off bad debt</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Bad Debt Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

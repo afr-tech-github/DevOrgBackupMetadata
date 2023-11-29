@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Cleansing</fullName>
+        <default>false</default>
+        <label>Cleansing</label>
+    </customValue>
+    <customValue>
+        <fullName>Eye</fullName>
+        <default>false</default>
+        <label>Eye</label>
+    </customValue>
+    <customValue>
+        <fullName>Mask</fullName>
+        <default>false</default>
+        <label>Mask</label>
+    </customValue>
+    <customValue>
+        <fullName>Lip</fullName>
+        <default>false</default>
+        <label>Lip</label>
+    </customValue>
+    <customValue>
+        <fullName>Face</fullName>
+        <default>false</default>
+        <label>Face</label>
+    </customValue>
+    <customValue>
+        <fullName>Skin Care</fullName>
+        <default>false</default>
+        <label>Skin Care</label>
+    </customValue>
+    <customValue>
+        <fullName>Lip 2</fullName>
+        <default>false</default>
+        <label>Lip 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Face 2</fullName>
+        <default>false</default>
+        <label>Face 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Skin Care 2</fullName>
+        <default>false</default>
+        <label>Skin Care 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>COSMETIC CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

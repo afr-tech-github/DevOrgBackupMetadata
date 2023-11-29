@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Empty_Full_Container_Identification__c</fullName>
+    <deprecated>false</deprecated>
+    <description>空/実入りコンテナ表示（UN/EDIFACT8169）	
+
+「4」は入力不可	
+5	Full 
+
+
+Empty/Full Container Identification	
+
+4 is not allowed.	
+5	Full</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Empty/Full Container Identification. 4 is not allowed. 5 is Full container.</inlineHelpText>
+    <label>Empty/Full Container Identification</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Full</fullName>
+                <default>true</default>
+                <label>Full</label>
+            </value>
+            <value>
+                <fullName>Empty</fullName>
+                <default>false</default>
+                <label>Empty</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

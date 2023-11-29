@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CancelFromCustomerCompanyLayout</fullName>
+    <fields>Name</fields>
+    <fields>ApplicationName__c</fields>
+    <fields>Customer__c</fields>
+    <fields>ApplicationStatus__c</fields>
+    <fields>ExpectedCancelDate__c</fields>
+    <fields>ActualCancelDate__c</fields>
+    <label>Cancel from Customer Company Layout</label>
+</CompactLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Driver App Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">A Mobile App for driver which driver can check today work to-do and update delivery status. Please contact AFR Sales Representative for more details if want to use this app.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">ドライバーが利用できるドライバーアプリ。本日の配送依頼内容を確認できるとともに、配送後情報を更新できる。ご利用されたい場合はAFR営業担当までご連絡ください。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">운전수가 사용하는 앱으로서 당일 할당된 업무를 확인 가능하며, 배송완료 후 진행사항 업데이트 가능합니다. AFR영업담당에게 문의하여 주시기 바랍니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">Driver App</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Ứng dụng di động giúp các tài xế có thể kiểm tra công việc cần làm, và cập nhật trạng thái các công việc đố. Vui lòng liên hệ BPKD của AFR để có thêm chi tiết nếu công ty bạn có nhu cầu sử dụng.</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Delivery Charge is not included in Product Price. The customers have to pay.</fullName>
+        <default>false</default>
+        <label>Delivery Charge is not included in Product Price. The customers have to pay.</label>
+    </customValue>
+    <customValue>
+        <fullName>Delivery Charge is included in Product Price</fullName>
+        <default>false</default>
+        <label>Delivery Charge is included in Product Price</label>
+    </customValue>
+    <customValue>
+        <fullName>Partial of Delivery charge is included in Product Price. The rest paid by customers</fullName>
+        <default>false</default>
+        <label>Partial of Delivery charge is included in Product Price. The rest paid by customers</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Terms &amp; Conditions of Sales</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

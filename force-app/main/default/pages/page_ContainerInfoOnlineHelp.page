@@ -1,0 +1,151 @@
+<apex:page showHeader="false">
+<head>
+    <title>Container Info Online Help</title>
+
+
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+
+ 
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Container Info Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <body>
+    <h2>Trợ giúp trực tuyến cho Object Thông Tin Container</h2>
+<br></br>
+Object này để quản lý loại container, và số container số seal của mỗi container.<br></br>
+<br></br>
+Liên quan tới những Object khác<br></br>
+Object này tự động tạo ra  hồ sơ cho mỗi container dựa vào dữ liệu đầu vào trong các dữ liệu dưới đây trong các vận đơn thứ cấp  dưới đây<br></br>
+-Loại container-1<br></br>
+-Số lượng loại container-1<br></br>
+-Loại container-2<br></br>
+-Số lượng loại container-2<br></br>
+-Loại container-3<br></br>
+-Số lượng loại container-3<br></br>
+-Loại container-4<br></br>
+-Số lượng loại container-4<br></br>
+
+<br></br>
+Ví dụ, nếu có 2 container 40DC và 1 containers 20DC, thì hồ sơ container sẽ được tạo trong phần THÔNG TIN CONTAINER. <br></br>
+<br></br>
+SỐ CONTAINER/SEAL trong Vận đơn thứ cấp thể hiện Số Container và Số Seal của mỗi conatainer trong Object THÔNG TIN CONTAINER.<br></br>
+(Đầu tiên nhập Loại container, Số lượng loại container trong phần tài liệu và nhập Số Container/Seal từ phần THÔNG TIN CONTAINER )<br></br>
+
+---------------------------------------------------------------------------------------------------<br></br>
+<h2>Online Help for CONTAINER INFO Object</h2>
+<br></br><br></br> 
+This Object is to manage the container type, also container number/seal number for each container.<br></br>
+<br></br>
+Relation with other objects<br></br>
+This Object automatically create records for each container based on the input data in below data in H B/L Shipment.<br></br>
+-CONTAINER TYPE-1<br></br>
+-CONTAINER QNTY-1<br></br>
+-CONTAINER TYPE-2<br></br>
+-CONTAINER QNTY-2<br></br>
+-CONTAINER TYPE-3<br></br>
+-CONTAINER QNTY-3<br></br>
+-CONTAINER TYPE-4<br></br>
+-CONTAINER QNTY-4<br></br>
+
+<br></br>
+For example, if there are containers 40DC*2 and 20DC*1, 3 container records will be created. in CONTAINER INFO section. <br></br>
+<br></br>
+CONTAINER/SEAL NO in H B/L Shipment is showing the each of Container Number and Seal No in CONTAINER INFO Object.<br></br>
+(First input CONTAINER TYPE, CONTAINER QNTY in document section and input Container/Seal No from CONTAINER INFO section.)<br></br>
+<br></br>
+---------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>コンテナ情報に関するオンラインヘルプ</h2><br></br>
+<br></br>
+各コンテナの、コンテナタイプや、コンテナ番号、シール番号を管理するオブジェクトです。<br></br>
+<br></br>
+他のオブジェクトとの関連<br></br>
+HB/L案件に入力されたデータを基に、自動的に各コンテナのレコードを作成します。<br></br>
+-コンテナタイプ<br></br>
+-コンテナ本数<br></br>
+-コンテナタイプ②<br></br>
+-コンテナ本数②<br></br>
+-コンテナタイプ③<br></br>
+-コンテナ本数③<br></br>
+-コンテナタイプ④<br></br>
+-コンテナ本数④<br></br>
+
+
+例として、40DC*2本と20DC*1本の場合、コンテナ情報セクションの中に３つのコンテナレコードが作成されます。<br></br>
+<br></br>
+HB/L案件の中のコンテナ,シール番号はコンテナ情報セクションの中のコンテナ番号およびシール番号を表示します。<br></br>
+最初にHB/L案件の国際輸送情報セクションにコンテナタイプおよびコンテナ本数を入力し、コンテナ情報セクションよりコンテナ,シール番号を入力してください。<br></br>
+
+<br></br>
+---------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>컨테이너관리에 대한 온라인 도움말</h2><br></br>
+<br></br>
+각 컨테이너의 컨테이너 유형 및 컨테이너 번호, SEAL 번호를 관리하는 오브젝트(객체)입니다.<br></br>
+<br></br>
+다른 오브젝트(객체)와의 관계<br></br>
+H B/L 안건에 입력 된 데이터를 바탕으로 자동으로 각 컨테이너의 레코드를 만듭니다.<br></br>
+- 컨테이너 타입(1)<br></br>
+- 컨테이너 개수(1)<br></br>
+- 컨테이너 유형(2)<br></br>
+- 컨테이너 개수(2)<br></br>
+- 컨테이너 유형(3)<br></br>
+- 컨테이너 개수(3)<br></br>
+- 컨테이너 유형(4)<br></br>
+- 컨테이너 개수(4)<br></br>
+<br></br>
+
+예를 들어, 40DC * 2 개와 20DC * 1 개의 경우 컨테이너관리 섹션에 3 개의 컨테이너 레코드가 만들어집니다.<br></br>
+<br></br>
+H B/L 안건 중 컨테이너 봉인 번호는 컨테이너관리 섹션에 있는 컨테이너 번호 및 SEAL 번호를 표시합니다.<br></br>
+먼저 H B/L 안건의 국제 운송 정보 섹션에 컨테이너 타입 및 컨테이너 개수를 입력하고 컨테이너관리 섹션에서 컨테이너 SEAL 번호를 입력하십시오.<br></br>
+    </body>
+   </apex:page>

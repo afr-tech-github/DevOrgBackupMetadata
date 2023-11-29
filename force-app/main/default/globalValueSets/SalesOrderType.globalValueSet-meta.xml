@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>New</fullName>
+        <default>true</default>
+        <label>New</label>
+    </customValue>
+    <customValue>
+        <fullName>Renewal</fullName>
+        <default>false</default>
+        <label>Renewal</label>
+    </customValue>
+    <customValue>
+        <fullName>Replacement</fullName>
+        <default>false</default>
+        <label>Replacement</label>
+    </customValue>
+    <customValue>
+        <fullName>Expansion</fullName>
+        <default>false</default>
+        <label>Expansion</label>
+    </customValue>
+    <customValue>
+        <fullName>Reduction</fullName>
+        <default>false</default>
+        <label>Reduction</label>
+    </customValue>
+    <customValue>
+        <fullName>Replenishment</fullName>
+        <default>false</default>
+        <label>Replenishment</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>SALES ORDER TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

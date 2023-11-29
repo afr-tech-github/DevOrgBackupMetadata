@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BadDebtAgingCustomer1to29</fullName>
+    <columns>NAME</columns>
+    <columns>Anken__c</columns>
+    <columns>CollectionDueDate__c</columns>
+    <columns>BadDebtAging__c</columns>
+    <columns>curr__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>SellInTaxAmountJPY__c</columns>
+    <columns>Nyukingaku__c</columns>
+    <columns>SellDifferentiation__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>BadDebtAging__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <label>Bad Debt Aging From Customer</label>
+    <language>en_US</language>
+</ListView>

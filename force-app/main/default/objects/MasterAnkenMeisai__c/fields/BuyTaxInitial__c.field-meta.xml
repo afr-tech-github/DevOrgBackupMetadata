@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BuyTaxInitial__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>The consumption tax ratio will be input automatically when remain Empty. Input the Tax ratio and the amount of value will be changed to amount that included the Tax. For item that is Tax-free or non-Tax, the Tax Ratio will be set 0%.</inlineHelpText>
+    <label>CONSUMPTION TAX RATIO-BUYING</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

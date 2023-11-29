@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SubType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Sub Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Custom_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>CompanySubType</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>業者 - Co-Loader</controllingFieldValue>
+            <valueName>Master Consolidator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - Co-Loader</controllingFieldValue>
+            <valueName>Consolidation Broker</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 運送</controllingFieldValue>
+            <valueName>Trucker(FCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 運送</controllingFieldValue>
+            <valueName>Trucker(LCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>International Carrier/Shipping Line(FCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>International Carrier/Shipping Line(Bulk)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>Domestic Carrier/Shipping Line(FCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>Domestic Carrier/Shipping Line(Bulk)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>International Barging(FCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>International Barging(Bulk)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>Domestic Barging(FCL)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>業者 - 船社</controllingFieldValue>
+            <valueName>Domestic Barging(Bulk)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <valueName>Forwarder(Courier)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <valueName>Forwarder(Airfreight)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>国内顧客 - フォワーダー</controllingFieldValue>
+            <valueName>Forwarder(FCL/LCL)</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

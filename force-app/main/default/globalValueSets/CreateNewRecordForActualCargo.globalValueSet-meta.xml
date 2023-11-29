@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Create New F/TMS S/O</fullName>
+        <default>false</default>
+        <label>Create New F/TMS S/O</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Create New WMS W/O</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Create New WMS W/O</label>
+    </customValue>
+    <masterLabel>Create New Record for Actual Cargo</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

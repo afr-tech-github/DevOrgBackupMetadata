@@ -1,0 +1,12 @@
+Dear Account Owner
+
+This mail is from auto mail alert.
+
+The {!Account.Name}'s established date is about to come. 
+
+ACCOUNT INFORMATION:
+
+Account ID: {!Account.Id}
+Account Name: {!Account.Name}
+Established Date: {!Account.Field2__c}
+Link: {!Account.Link}

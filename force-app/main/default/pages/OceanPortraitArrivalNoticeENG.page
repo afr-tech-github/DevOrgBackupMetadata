@@ -1,0 +1,742 @@
+<apex:page controller="cntl_Arrival_Notice" contentType="text-html" showHeader="false" applyHtmlTag="false" renderAs="pdf">
+    <head>
+        <style>
+        </style>
+        <style>
+            body {
+            font-family: Arial Unicode MS;
+            font-size: 8pt;
+            text-transform: uppercase;
+            }
+            
+            @page {
+            size: 210mm 297mm;
+            margin: 10mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            }
+            div.footer {
+            display: block;
+            padding: 5px;
+            position: running(footer);
+            }
+            .pagenumber:before {
+            content: counter(page);
+            }
+            .pagecount:before {
+            content: counter(pages);
+            }
+            .f5 { font-size: 5pt; }
+            .f6 { font-size: 6pt; }
+            .f7 { font-size: 7pt; }
+            .f8 { font-size: 8pt; }
+            .f9 { font-size: 9pt; }
+            .f10 { font-size: 10pt; }
+            .f11 { font-size: 11pt; }
+            .f12 { font-size: 12pt; }
+            .f14 { font-size: 14pt; }
+            .f16 { font-size: 16pt; }
+            .f18 { font-size: 18pt; }
+            .f20 { font-size: 20pt; font-weight: bold; }
+            .f25 { font-size: 25pt; font-weight: bold; }
+            .f30 { font-size: 30pt; font-weight: bold; }
+            .pnl-logo .f20 { text-transform: uppercase; }
+            * {
+            margin: 0;
+            padding: 0;
+            }
+            table{
+            border-spacing: 0;
+            border-collapse: collapse;
+            width:100%;
+            }
+            table * {
+            }
+            .border_left { border-left: 1px #000 solid; }
+            .border_right { border-left: 1px #000 solid; }
+            .border_top { border-left: 1px #000 solid; }
+            .border_bottom { border-left: 1px #000 solid; }
+            .border_around { border: 1px #000 solid; }
+            .border_none, table.border_none td, table.border_none th { border: none; }
+            .padding_none, table.padding_none td, table.padding_none th { padding: 0; }
+            td, th {
+            border: 1px #000 solid;
+            padding: 1mm 2mm;
+            vertical-align: top;
+            }
+            td {
+            height: 10mm;
+            }
+            .lbl {
+            text-transform: uppercase;
+            font-size: 8pt;
+            }
+            .pull-top {
+            border-top:none;
+            }
+            .text-align_center { text-align: center; }
+            .text-align_right { text-align: right; }
+            .text-align_left { text-align: left; }
+            table.table-data td {
+            height: auto;
+            border-top: 1px #bbb dotted;
+            border-right: 1px #000 solid;
+            border-bottom: 1px #bbb dotted;
+            border-left: 1px #000 solid;
+            }
+            
+            table.table-data tbody tr:first-child td{
+            border-top: 1px #000 solid;
+            }
+            
+            table.table-data th{
+            }
+            
+            .page {
+            page-break-inside: avoid;
+            }
+            .nowrap {
+            white-space: nowrap;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="footer">
+            <table class="border_none f8 padding_none">
+                <tr>
+                    <td style="width:80%">
+                        {!Labels['arrival_notice.issue_date']}:
+                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                            <apex:param value="{!AnkenList.PrintDate__c}"/>
+                        </apex:outputText>
+                        - 
+                        <apex:outputText style="text-transform: uppercase;" value=" {!Labels['wms_debitcredit.job_no']}"/>:
+                        <apex:outputText value="{!AnkenList.JobRequestID__c}"></apex:outputText>
+                    </td>
+                    <td style="text-align: right; width:20%">
+                        <span class="pagenumber"/>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        <apex:repeat value="{!PageList}" var="page">
+            <div class="page">
+                <div class="pnl-logo">
+                    <table class="border_none">
+                        <tr>
+                            <td>
+                                <img align="middle" src="{!$Setup.Site_Custom_Settings__c.Logo_URL__c}" width="150px"/>
+                            </td>
+                            <td class="text-align_left">
+                                <p class="f20">
+                                    {!Labels['arrival_notice.arrival_notice']}
+                                </p>
+                                <p class="f12">
+                                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}" />
+                                </p>
+                                <p class="f6">
+                                    <apex:outputText style="white-space:pre-wrap; text-align: center;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine1__c}"></apex:outputText>
+                                </p>
+                                <p class="f6">
+                                    <apex:outputText style="white-space:pre-wrap; text-align: center;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine2__c}"></apex:outputText>
+                                </p>
+                                <p class="f6">
+                                    <apex:outputLabel value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}" rendered="{!$Setup.Site_Custom_Settings__c.Company_Phone__c != null}" />
+                                    <apex:outputLabel value="     FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}" rendered="{!$Setup.Site_Custom_Settings__c.Company_Fax__c != null}" />
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <apex:outputPanel rendered="{! page ==1}">
+                    <div class="pnl-info pull-top">
+                        <table>
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.consignee']}</p>
+                                    <apex:outputText style="white-space:pre-wrap;" value="{!AnkenList.CNEE_ADDRESS_ON_B_L__c}"></apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.notify_party']}</p>
+                                    <apex:outputText style="white-space:pre-wrap;" value="{!AnkenList.NOTIFY_ADDRESS_ON_B_L__c}"></apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.shipper']}</p>
+                                    <apex:outputText style="white-space:pre-wrap;" value="{!AnkenList.ADDRESS_ON_B_L__c}"></apex:outputText>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="pull-top">
+                            <col width="25%" />
+                            <col width="25%" />
+                            <col width="25%" />
+                            <col width="25%" />
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.vessel']}</p>
+                                    <apex:outputText value="{!AnkenList.Vessle__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.voy_no']}</p>
+                                    <apex:outputText value="{!AnkenList.Voy_No__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.hbl']}</p>
+                                    <apex:outputText value="{!AnkenList.HBL__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.master_b_l']}</p>
+                                    <apex:outputText value="{!AnkenList.Master_B_L__c}"></apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.pol']}</p>
+                                    <apex:outputText value="{!AnkenList.PortOfLoadingDetailPrint__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.po_discharge']}</p>
+                                    <apex:outputText value="{!AnkenList.PortOfDischargeDetailPrint__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.po_delivery']}</p>
+                                    <apex:outputText value="{!AnkenList.PlaceOfDeliveryDetailPrint__c}"></apex:outputText>
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.eta']}</p>
+                                    <apex:outputText value="{0,date,{!dateFormat}}">
+                                        <apex:param value="{!AnkenList.ETA__c}"/>
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.package']}</p>
+                                    <apex:outputText value="{!AnkenList.carton__c} {!AnkenList.UnitType__c}"></apex:outputText>(s)
+                                </td>
+                                <td>
+                                    <p class="lbl">{!Labels['arrival_notice.gross_weight']}</p>
+                                    <apex:outputText value="{!AnkenList.weight__c} KGS"></apex:outputText>
+                                </td>
+                                <td  style="{! IF(((AnkenList.ContainerNumber__c != null || AnkenList.Container__c != null)||(AnkenList.ContainerNumber2__c != null || AnkenList.Container2__c != null)||(AnkenList.ContainerNumber3__c != null || AnkenList.Container3__c != null)||(AnkenList.ContainerNumber4__c != null || AnkenList.Container4__c != null)), '', 'display:none')}">
+                                    <p class="lbl">{!Labels['arrival_notice.measurement']}</p>
+                                    <apex:outputText value="{!AnkenList.CBM__c} CBM"></apex:outputText>
+                                </td>
+                                <td colspan="2" style="{! IF(((AnkenList.ContainerNumber__c != null || AnkenList.Container__c != null)||(AnkenList.ContainerNumber2__c != null || AnkenList.Container2__c != null)||(AnkenList.ContainerNumber3__c != null || AnkenList.Container3__c != null)||(AnkenList.ContainerNumber4__c != null || AnkenList.Container4__c != null)), 'display:none', '')}">
+                                    <p class="lbl">{!Labels['arrival_notice.measurement']}</p>
+                                    <apex:outputText value="{!AnkenList.CBM__c} CBM"></apex:outputText>
+                                </td>
+                                <td  style="{! IF(((AnkenList.ContainerNumber__c != null || AnkenList.Container__c != null)||(AnkenList.ContainerNumber2__c != null || AnkenList.Container2__c != null)||(AnkenList.ContainerNumber3__c != null || AnkenList.Container3__c != null)||(AnkenList.ContainerNumber4__c != null || AnkenList.Container4__c != null)), '', 'display:none')}">
+                                    <!-- <p style="font-size: 8pt;">{!Labels['arrival_notice.ctnr_size_no']} -->
+                                        <span class="lbl">{!Labels['arrival_notice.ctnr_size_no']}</span>
+                                        <span style="text-indent:8mm;">
+                                            <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                        </span>
+                                    <!-- </p> -->
+                                    <div  style="font-size: 8pt;">
+                                        <apex:outputPanel rendered="{!AnkenList.ContainerNumber__c != null || AnkenList.Container__c != null}">
+                                            <apex:outputText value="{!AnkenList.ContainerNumber__c}x{!AnkenList.Container__c}"/>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!AnkenList.ContainerNumber2__c != null || AnkenList.Container2__c != null}">
+                                            <apex:outputText value=" / {!AnkenList.ContainerNumber2__c}x{!AnkenList.Container2__c}"/>
+                                        </apex:outputPanel>
+                                    </div>
+                                    <div  style="font-size: 8pt;">
+                                        <apex:outputPanel rendered="{!AnkenList.ContainerNumber3__c != null || AnkenList.Container3__c != null}">
+                                            <apex:outputText value="{!AnkenList.ContainerNumber3__c}x{!AnkenList.Container3__c}"/>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!AnkenList.ContainerNumber4__c != null || AnkenList.Container4__c != null}">
+                                            <apex:outputText value=" / {!AnkenList.ContainerNumber4__c}x{!AnkenList.Container4__c}"/>
+                                        </apex:outputPanel>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Handle fide field without value-->
+                            <apex:outputPanel rendered="{!((AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)) == True && AnkenList.Marks_and_Numbers__c != null}">
+                                <tr>
+                                    <td rowspan="2"  width="25%">
+                                        <p class="lbl">{!Labels['arrival_notice.mark_number']}</p>
+                                        <apex:outputfield value="{!AnkenList.Marks_and_Numbers__c}"/>
+                                    </td>
+                                    <td rowspan="2"  width="25%">
+                                        <p class="lbl">{!Labels['arrival_notice.description_of_goods']}</p>
+                                        <apex:outputfield value="{!AnkenList.GoodsDescriptiononAN__c}"/>
+                                    </td>
+                                    
+                                    <td colspan="2"  width="50%">
+                                        <apex:outputPanel rendered="{!(AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}">
+                                            <p class="lbl">{!Labels['arrival_notice.load_location']}</p>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.name != null}">
+                                                <apex:outputText value="{!AnkenList.LoadLocation__r.name}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.LoadAddress__c != null}">
+                                                <apex:outputText value="{!AnkenList.LoadLocation__r.LoadAddress__c}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null}">
+                                                <apex:outputText value="TEL: {!AnkenList.LoadLocation__r.LoadTEL__c} FAX: {!AnkenList.LoadLocation__r.LoadFAX__c}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}">
+                                                <apex:outputText value="PIC:　{!AnkenList.LoadLocationPIC__c }" rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}"></apex:outputText> <br/>
+                                            </apex:outputPanel>
+                                            <apex:outputField value="{!AnkenList.LoadLocation_Remarks__c}"/>
+                                        </apex:outputPanel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" width="50%">
+                                        <p>
+                                            <span class="lbl">{!Labels['arrival_notice.ctnr_seal_no']}</span>
+                                            <span style="text-indent:8mm;">
+                                                <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                            </span>
+                                        </p>
+                                        <apex:outputText escape="false" value="{!fullContainerSealNumbers}"></apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!((AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)) == True && AnkenList.Marks_and_Numbers__c == null}">
+                                <tr>
+                                    <td colspan="2" rowspan="2"  width="50%">
+                                        <p class="lbl">{!Labels['arrival_notice.description_of_goods']}</p>
+                                        <apex:outputfield value="{!AnkenList.GoodsDescriptiononAN__c}"/>
+                                    </td>
+                                    
+                                    <td colspan="2"  width="50%">
+                                        <apex:outputPanel rendered="{!(AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}">
+                                            <p class="lbl">{!Labels['arrival_notice.load_location']}</p>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.name != null}">
+                                                <apex:outputText value="{!AnkenList.LoadLocation__r.name}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.LoadAddress__c != null}">
+                                                <apex:outputText value="{!AnkenList.LoadLocation__r.LoadAddress__c}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null}">
+                                                <apex:outputText value="TEL: {!AnkenList.LoadLocation__r.LoadTEL__c} FAX: {!AnkenList.LoadLocation__r.LoadFAX__c}"></apex:outputText><br/>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}">
+                                                <apex:outputText value="PIC:　{!AnkenList.LoadLocationPIC__c }" rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}"></apex:outputText> <br/>
+                                            </apex:outputPanel>
+                                            <apex:outputField value="{!AnkenList.LoadLocation_Remarks__c}"/>
+                                        </apex:outputPanel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" width="50%">
+                                        <p>
+                                            <span class="lbl">{!Labels['arrival_notice.ctnr_seal_no']}</span>
+                                            <span style="text-indent:8mm;">
+                                                <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                            </span>
+                                        </p>
+                                        <apex:outputText escape="false" value="{!fullContainerSealNumbers}"></apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!((AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)) == False && AnkenList.Marks_and_Numbers__c != null}">
+                                <tr>
+                                    <td width="25%">
+                                        <p class="lbl">{!Labels['arrival_notice.mark_number']}</p>
+                                        <apex:outputfield value="{!AnkenList.Marks_and_Numbers__c}"/>
+                                    </td>
+                                    <td width="25%">
+                                        <p class="lbl">{!Labels['arrival_notice.description_of_goods']}</p>
+                                        <apex:outputfield value="{!AnkenList.GoodsDescriptiononAN__c}"/>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>
+                                            <span class="lbl">{!Labels['arrival_notice.ctnr_seal_no']}</span>
+                                            <span style="text-indent:8mm;">
+                                                <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                            </span>
+                                        </p>
+                                        <apex:outputText escape="false" value="{!fullContainerSealNumbers}"></apex:outputText>
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!((AnkenList.LoadLocation__r.name != null || AnkenList.LoadLocation__r.LoadAddress__c != null || AnkenList.LoadLocation__r.LoadTEL__c != null || AnkenList.LoadLocation__r.LoadFAX__c != null || AnkenList.LoadLocation_Remarks__c != null) || IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)) == False && AnkenList.Marks_and_Numbers__c == null}">
+                                <tr>
+                                    <td colspan="2" width="50%">
+                                        <p class="lbl">{!Labels['arrival_notice.description_of_goods']}</p>
+                                        <apex:outputfield value="{!AnkenList.GoodsDescriptiononAN__c}"/>
+                                    </td>
+                                    <td colspan="2">
+                                        <p>
+                                            <span class="lbl">{!Labels['arrival_notice.ctnr_seal_no']}</span>
+                                            <span style="text-indent:8mm;">
+                                                <apex:outputText value="{!containerAltText}" rendered="{!AnkenList.TranporationType__c == 'LCL'}"></apex:outputText>
+                                            </span>
+                                        </p>
+                                        <apex:outputText escape="false" value="{!fullContainerSealNumbers}"></apex:outputText>
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AnkenList.TransitV__c != null || AnkenList.TS__c != null || AnkenList.No_Of_LoadingConfirmation__c != null}">
+                                <tr>
+                                    <td colspan="4" style="{! IF((AnkenList.TransitV__c != null || AnkenList.TS__c != null) && (AnkenList.No_Of_LoadingConfirmation__c == null), '', 'display:none')}">
+                                        <apex:outputPanel rendered="{!AnkenList.TransitV__c != null || AnkenList.TS__c != null}">
+                                            <p class="lbl">{!Labels['arrival_notice.first_vessel']}</p>
+                                            <apex:outputText value="{!AnkenList.TransitV__c}"></apex:outputText>
+                                            <apex:outputText value="{! ' / ' }"></apex:outputText>
+                                            <apex:outputText value="{!AnkenList.TS__c}"></apex:outputText>
+                                        </apex:outputPanel>
+                                    </td>
+                                    <td colspan="4" style="{! IF((AnkenList.TransitV__c == null && AnkenList.TS__c == null) && (AnkenList.No_Of_LoadingConfirmation__c != null), '', 'display:none')}">
+                                        <apex:outputPanel rendered="{!AnkenList.No_Of_LoadingConfirmation__c != null}">
+                                            <p class="lbl">{!Labels['arrival_notice.confirmation_no']}</p>
+                                            <apex:outputText value="{!AnkenList.No_Of_LoadingConfirmation__c}"></apex:outputText>
+                                        </apex:outputPanel>
+                                    </td>
+                                    <td colspan="2" style="{! IF((AnkenList.TransitV__c != null || AnkenList.TS__c != null) && (AnkenList.No_Of_LoadingConfirmation__c != null), '', 'display:none')}">
+                                        <apex:outputPanel rendered="{!AnkenList.TransitV__c != null || AnkenList.TS__c != null}">
+                                            <p class="lbl">{!Labels['arrival_notice.first_vessel']}</p>
+                                            <apex:outputText value="{!AnkenList.TransitV__c}"></apex:outputText>
+                                            <apex:outputText value="{! ' / ' }"></apex:outputText>
+                                            <apex:outputText value="{!AnkenList.TS__c}"></apex:outputText>
+                                        </apex:outputPanel>
+                                    </td>
+                                    <td colspan="2" style="{! IF((AnkenList.TransitV__c != null || AnkenList.TS__c != null) && (AnkenList.No_Of_LoadingConfirmation__c != null), '', 'display:none')}">
+                                        <apex:outputPanel rendered="{!AnkenList.No_Of_LoadingConfirmation__c != null}">
+                                            <p class="lbl">{!Labels['arrival_notice.confirmation_no']}</p>
+                                            <apex:outputText value="{!AnkenList.No_Of_LoadingConfirmation__c}"></apex:outputText>
+                                        </apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                            
+                        </table>
+                        
+                    </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{! ItemList.size != 0}">
+                    <div class="pnl-data pull-top">
+                        <table class="table-data">
+                            <col width="" />
+                            <col width="5%" />
+                            <col width="10%" />
+                            <col width="5%" />
+                            <col width="5%" />
+                            <col width="5%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            
+                            <thead>
+                                <tr>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.freight_charge']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.quantity']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.unit']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.unit_price']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.currency']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.tax']}</th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.amount_no_tax']}</th>
+                                    <!-- <th class="lbl text-align_center">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(<apex:outputText value="{!foreignCur}" rendered="{!$CurrentPage.parameters.currency != foreignCur}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency == foreignCur}"/>)</span></th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(<apex:outputText value="{!foreignCur}" rendered="{!$CurrentPage.parameters.currency == foreignCur}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != foreignCur}"/>)</span></th> -->
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(<apex:outputText value="{!foreignCur}"/>)</span></th>
+                                    <th class="lbl text-align_center">{!Labels['arrival_notice.amount']} <br/><span class="nowrap">(<apex:outputText value="{!localCur}"/>)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!itemList2[page]}" var="DetailList">
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(DetailList.InsatuyouSyohin__c, 'Surcharge Included',''),'Surcharge Excluded',''),'(TAX)', '') }" rendered="{!$CurrentPage.parameters.language == 'vi'}" />
+                                            <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(DetailList.InsatuyouSyohinEng__c, 'Surcharge Included',''),'Surcharge Excluded',''),'(TAX)','') }" rendered="{!$CurrentPage.parameters.language != 'vi'}" />
+                                        </td>
+                                        <td class="text-align_center">
+                                            <apex:outputText value="{!VALUE(DetailList.wkSuryo__c)}" />
+                                            <apex:outputText rendered="{! DetailList.wkSuryo__c == null }">-</apex:outputText>
+                                        </td>
+                                        <td class="text-align_center">
+                                            <apex:outputText value="{!DetailList.ChargeUnitInPrint__c}" rendered="{! DetailList.ChargeUnitInPrint__c != null }"></apex:outputText>
+                                            <apex:outputText rendered="{! DetailList.ChargeUnitInPrint__c == null }">-</apex:outputText>
+                                        </td>
+                                        <td class="text-align_right">
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c == localCur && DetailList.SellTankaJPY__c != null }">
+                                                <apex:param value="{!DetailList.SellTankaJPY__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.curr__c == foreignCur && DetailList.SellTankaUSD__c != null }">
+                                                <apex:param value="{!DetailList.SellTankaUSD__c}"/>
+                                            </apex:outputText>
+                                            <!-- <apex:outputText rendered="{! IF(DetailList.curr__c == 'USD', DetailList.SellTankaUSD__c == null || DetailList.SellTankaUSD__c == 0, DetailList.SellTankaJPY__c == null || DetailList.SellTankaJPY__c == 0)}">-</apex:outputText> -->
+                                            <apex:outputText value="{0, number, ###,###,###}" rendered="{!DetailList.curr__c != localCur && DetailList.curr__c != foreignCur && DetailList.UnitPriceofSelling3rdCurrency__c != null}">
+                                                <apex:param value="{!DetailList.UnitPriceofSelling3rdCurrency__c}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        <td>
+                                            {!DetailList.curr__c}
+                                            <apex:outputPanel rendered="{! DetailList.InsatuyouSyohin__c == '-' }">-</apex:outputPanel>
+                                        </td>
+                                        <!-- TAX -->
+                                        <td class="text-align_right">
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c != localCur && DetailList.curr__c != foreignCur && DetailList.AmountofTaxSelling3rdCurrency__c != null && DetailList.AmountofTaxSelling3rdCurrency__c != 0}">
+                                                <apex:param value="{!DetailList.AmountofTaxSelling3rdCurrency__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c == localCur && DetailList.SellTaxNum__c != null && DetailList.SellTaxNum__c != 0}">
+                                                <apex:param value="{!DetailList.SellTaxNum__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.curr__c == foreignCur && DetailList.SellTaxNum_USD__c != null && DetailList.SellTaxNum_USD__c != 0}">
+                                                <apex:param value="{!DetailList.SellTaxNum_USD__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{! IF(DetailList.AmountofTaxSelling3rdCurrency__c == null || DetailList.AmountofTaxSelling3rdCurrency__c == 0, DetailList.SellTaxNum__c == null || DetailList.SellTaxNum__c == 0, DetailList.SellTaxNum_USD__c == null || DetailList.SellTaxNum_USD__c == 0)}">-</apex:outputText>
+                                        </td>
+                                        <!-- AMOUNT (W/O Tax) -->
+                                        <td class="text-align_right">
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c != localCur && DetailList.curr__c != foreignCur && DetailList.TotalAmountofSelling3rdCurrency__c != null && DetailList.TotalAmountofSelling3rdCurrency__c != 0}">
+                                                <apex:param value="{!DetailList.TotalAmountofSelling3rdCurrency__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c == localCur && DetailList.SellAmountJPN__c != null && DetailList.SellAmountJPN__c != 0}">
+                                                <apex:param value="{!DetailList.SellAmountJPN__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.curr__c == foreignCur && DetailList.SellAmountUSD__c != null && DetailList.SellAmountUSD__c != 0}">
+                                                <apex:param value="{!DetailList.SellAmountUSD__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{! IF(DetailList.TotalAmountofSelling3rdCurrency__c == null || DetailList.TotalAmountofSelling3rdCurrency__c == 0, DetailList.SellAmountJPN__c == null || DetailList.SellAmountJPN__c == 0, DetailList.SellAmountUSD__c == null || DetailList.SellAmountUSD__c == 0)}">-</apex:outputText>
+                                        </td>
+                                        <!-- Amount (USD) -->
+                                        <td class="text-align_right"> 
+                                            <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.SellInTaxAmount_USD__c != 0 && DetailList.SellInTaxAmount_USD__c != null}">
+                                                <apex:param value="{!DetailList.SellInTaxAmount_USD__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{!DetailList.SellInTaxAmount_USD__c == 0 && DetailList.SellInTaxAmount_USD__c == null}">-</apex:outputText>
+                                        </td>
+                                        <!-- Amount (VND) -->
+                                        <td class="text-align_right">
+                                            <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.SellInTaxAmountJPY__c != null && DetailList.SellInTaxAmountJPY__c != 0}">
+                                                <apex:param value="{!DetailList.SellInTaxAmountJPY__c}"/>
+                                            </apex:outputText>
+                                            <apex:outputText rendered="{DetailList.SellInTaxAmountJPY__c == null && DetailList.SellInTaxAmountJPY__c == 0}">-</apex:outputText>
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+                    <apex:outputPanel rendered="{! page ==PageList.size}">
+                        <div class="pnl-sum pull-top">
+                            <table>
+                                <apex:repeat value="{!lstCurrs}" var="lstTemp">
+                                    <apex:outputPanel rendered="{! lstTemp[0] == lstCurrs[0][0]}">
+                                        <tr>
+                                            <td rowspan = "{!numberOfRowsTotal}" width="25%">
+                                                <p class="lbl">{!Labels['arrival_notice.bl_type']}</p>
+                                                <p class="f14"><apex:outputText value="{!AnkenList.BLtype__c}"></apex:outputText></p>
+                                            </td>
+                                            
+                                            <td style="border-right: none;  text-align: right;"  width="25%">
+                                                <!-- <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}" />)</p>
+                                                <apex:outputText value="{!SumLocal}"/> -->
+                                                <apex:outputPanel >
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!localCur}" />)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <!-- <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[0] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[0] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText> -->
+                                                        <apex:outputText value="{0,number,###,###,###}" rendered="{!localCur == 'VND' || localCur == 'JPY'}">
+                                                            <apex:param value="{!SumLocal}"/>
+                                                            
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!localCur != 'VND' && localCur != 'JPY'}">
+                                                            <apex:param value="{!SumLocal}"/>
+                                                            
+                                                        </apex:outputText>
+                                                        
+                                                    </p>
+                                                </apex:outputPanel>
+                                            </td>
+                                            <td style=" border-left: none;  text-align: right;"  width="25%">
+                                                
+                                                <apex:outputPanel >
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!foreignCur}" />)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <!-- <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[0] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[0] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText> -->
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!foreignCur != 'VND' && foreignCur != 'JPY'}">
+                                                            
+                                                            <apex:param value="{!SumFCY}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,###}" rendered="{!foreignCur == 'VND' || foreignCur == 'JPY'}">
+                                                            
+                                                            <apex:param value="{!SumFCY}"/>
+                                                        </apex:outputText>
+                                                        
+                                                    </p>
+                                                </apex:outputPanel>
+                                                <!-- <apex:outputPanel rendered="{! lstTemp.size > 1}">
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!lstTemp[1]}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != 'USD'}"/>)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[1] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[1]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[1] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[1]]}"/>
+                                                        </apex:outputText>
+                                                    </p>
+                                                </apex:outputPanel> -->
+                                            </td>
+                                            <!-- <td style="border-left: none;  text-align: right;"  width="25%">
+                                                <apex:outputPanel rendered="{! lstTemp.size > 2}">
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!lstTemp[2]}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != 'USD'}"/>)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[2] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[2]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[2] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[2]]}"/>
+                                                        </apex:outputText>
+                                                    </p>
+                                                </apex:outputPanel>
+                                            </td> -->
+                                        </tr>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{! lstTemp[0] != lstCurrs[0][0]}">
+                                        <tr>
+                                            <td style="border-right: none;  text-align: right;"  width="25%">
+                                                <apex:outputPanel rendered="{! lstTemp.size > 0}">
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!lstTemp[0]}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != 'USD'}"/>)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[0] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[0] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[0]]}"/>
+                                                        </apex:outputText>
+                                                    </p>
+                                                </apex:outputPanel>
+                                            </td>
+                                            <td style="border-right: none; border-left: none;  text-align: right;"  width="25%">
+                                                <apex:outputPanel rendered="{! lstTemp.size > 1}">
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!lstTemp[1]}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != 'USD'}"/>)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[1] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[1]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[1] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[1]]}"/>
+                                                        </apex:outputText>
+                                                    </p>
+                                                </apex:outputPanel>
+                                            </td>
+                                            <td style="border-left: none;  text-align: right;"  width="25%">
+                                                <apex:outputPanel rendered="{! lstTemp.size > 2}">
+                                                    <p class="lbl">{!Labels['arrival_notice.total_amount']} (<apex:outputText value="{!lstTemp[2]}"/><apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c}"  rendered="{!$CurrentPage.parameters.currency != 'USD'}"/>)</p>
+                                                    <p class="f14" style="text-indent: 15mm;  text-align: right;">
+                                                        <apex:outputText value="{0,number,###,###,##0}" rendered="{!lstTemp[2] == 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[2]]}"/>
+                                                        </apex:outputText>
+                                                        <apex:outputText value="{0,number,###,###,##0.00}" rendered="{!lstTemp[2] != 'VND'}">
+                                                            <apex:param value="{!mapTotalAmountByCurr[lstTemp[2]]}"/>
+                                                        </apex:outputText>
+                                                    </p>
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:outputPanel>
+                                </apex:repeat>
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <div class="infoBank-Alert"  style="{! IF(isBreakPage, 'page-break-before: always;', '')}">
+                    <div class="pnl-logo"  style="{! IF(isBreakPage, '', 'display: none;')}">
+                        <table class="border_none">
+                            <tr>
+                                <td>
+                                    <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px"/>
+                                </td>
+                                <td class="text-align_left">
+                                    <p class="f20">
+                                        {!Labels['arrival_notice.arrival_notice']}
+                                    </p>
+                                    <p class="f12">
+                                        <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}" />
+                                    </p>
+                                    <p class="f6">
+                                        <apex:outputText style="white-space:pre-wrap; text-align: center;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine1__c}"></apex:outputText>
+                                    </p>
+                                    <p class="f6">
+                                        <apex:outputText style="white-space:pre-wrap; text-align: center;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine2__c}"></apex:outputText>
+                                    </p>
+                                    <p class="f6">
+                                        <apex:outputLabel value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}" rendered="{!$Setup.Site_Custom_Settings__c.Company_Phone__c != null}" />
+                                        <apex:outputLabel value="     FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}" rendered="{!$Setup.Site_Custom_Settings__c.Company_Fax__c != null}" />
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="{! IF(page ==PageList.size, '', 'display: none;')}">
+                        <table>
+                            <tr>
+                                <td colspan= "4">
+                                    <p class="lbl">{!Labels['arrival_notice.transfer_to']}</p>
+                                    <p>
+                                        {!bankName} <br />
+                                        {!bankNumber}　{!bankAccount}
+                                    </p>
+                                    <apex:outputPanel rendered="{!AnkenList.Remarks__c != null}">
+                                        <p class="lbl">{!Labels['arrival_notice.damage_remarks']}</p>
+                                        <apex:outputText value="{!AnkenList.Remarks__c}"></apex:outputText>&nbsp;
+                                        
+                                        <table class="border_none padding_none">
+                                            <tr>
+                                                <td>
+                                                    <apex:outputPanel rendered="{! !ISBLANK(AnkenList.FreeDemurrageTime__c) }">
+                                                        <p class="lbl">{!Labels['arrival_notice.free_demurrage']}</p>
+                                                        
+                                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                            <apex:param value="{!AnkenList.FreeDemurrageTime__c}"/>
+                                                        </apex:outputText>
+                                                    </apex:outputPanel>
+                                                </td>
+                                                <td>
+                                                    <apex:outputPanel rendered="{! !ISBLANK(AnkenList.FreeDemurrageTime__c) }">
+                                                        <p class="lbl">{!Labels['arrival_notice.free_detention']}</p>
+                                                        
+                                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                            <apex:param value="{!AnkenList.FreeDemurrageTime__c}"/>
+                                                        </apex:outputText>
+                                                    </apex:outputPanel>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:outputPanel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan= "4">
+                                    <apex:outputText escape="false" value="{!AnkenList.ANRemark__c}"></apex:outputText>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <p style="padding:2mm;">
+                            {!Labels['arrival_notice.rton_remarks']}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </apex:repeat>
+    </body>
+</apex:page>

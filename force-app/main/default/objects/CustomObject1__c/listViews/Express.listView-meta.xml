@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Express</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>ID__c</columns>
+    <columns>Field1__c</columns>
+    <columns>shipper__c</columns>
+    <columns>status__c</columns>
+    <columns>Partner__c</columns>
+    <columns>POD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>Priority_Urgency__c</columns>
+    <columns>Priority_Attenton_Required_lamp__c</columns>
+    <columns>POL__c</columns>
+    <columns>ETD__c</columns>
+    <columns>FlightNo__c</columns>
+    <columns>carton__c</columns>
+    <columns>HAWB__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CustomObject1__c.Express,CustomObject1__c.ExpressLock</value>
+    </filters>
+    <filters>
+        <field>status__c</field>
+        <operation>notEqual</operation>
+        <value>キャンセル(Cancelled),完了(Completed),輸入 BB依頼済み(BB Requested)-航空のみ(For AIR)</value>
+    </filters>
+    <label>8. Express</label>
+</ListView>

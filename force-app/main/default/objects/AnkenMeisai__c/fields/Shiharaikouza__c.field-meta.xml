@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shiharaikouza__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>BANK ACCOUNT TANSFERED TO(old)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>①銀行口座１（取引先に登録口座①）</fullName>
+                <default>true</default>
+                <label>Pre-registered Bank Account 1</label>
+            </value>
+            <value>
+                <fullName>②銀行口座2（取引先に登録口座②）</fullName>
+                <default>false</default>
+                <label>Pre-registered Bank Account 2</label>
+            </value>
+            <value>
+                <fullName>③銀行口座3（取引先に登録口座③）</fullName>
+                <default>false</default>
+                <label>Pre-registered Bank Account 3</label>
+            </value>
+            <value>
+                <fullName>④銀行口座4（取引先に登録口座④）</fullName>
+                <default>false</default>
+                <label>Pre-registered Bank Account 4</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

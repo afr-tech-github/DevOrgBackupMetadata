@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Certificate of Origin</fullName>
+        <default>false</default>
+        <label>Certificate of Origin</label>
+    </customValue>
+    <customValue>
+        <fullName>Shipping Certificate</fullName>
+        <default>false</default>
+        <label>Shipping Certificate</label>
+    </customValue>
+    <customValue>
+        <fullName>Fumigation</fullName>
+        <default>false</default>
+        <label>Fumigation</label>
+    </customValue>
+    <customValue>
+        <fullName>VGM(Verify Gross Mass)</fullName>
+        <default>false</default>
+        <label>VGM(Verify Gross Mass)</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Documentation Service</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

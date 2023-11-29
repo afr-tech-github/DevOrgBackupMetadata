@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PreviousACBalance__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>PREVIOUS A/C BALANCE ID</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>ACBalance__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <valueField>$Source.RecordTypeId</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>ACBalance__c</referenceTo>
+    <relationshipLabel>NEXT A/C BALANCE</relationshipLabel>
+    <relationshipName>PreviousACBalance</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

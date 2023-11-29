@@ -1,0 +1,173 @@
+Dear Approver
+<br>
+
+{!CustomObject1__c.Name}-{!CustomObject1__c.Ship_number__c} is ready for VAT Invoice Issue.
+<br>
+Please have rereview and approve it if all information are correct.
+
+<br>
+<br>                                                                                                                
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				VAT INFORMATION
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.ID__c}<br>
+                                Link to CloFor
+: {!CustomObject1__c.Link} 
+			</td width="400">
+			<th>
+				STATUS
+			</th>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				TOTAL AMOUT OF SELLING WITH TAX(LOCAL)
+
+			</th>
+			<td>
+				{!CustomObject1__c.SellInTaxAmountJPY_sum__c}　
+
+			</td>
+	<th> 
+            PROFITS
+			</th>
+			<td>
+                                                {!CustomObject1__c.Ararigaku_sum__c}
+			</td>
+</tr>
+             
+
+		<tr><thead>
+			<th colspan="4">
+				CARGO BASIC INFORMATION
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+CONSIGNEE
+
+							</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}
+
+
+							</td>
+			<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				HOUSE B/L NO. / HAWB NO.
+			</th>
+			<td>
+{!CustomObject1__c.HBL__c}{!CustomObject1__c.HAWB__c} 
+
+			</td>
+			<th>
+SHIPMENT ID
+							</th>
+			<td>
+		{!CustomObject1__c.Name}
+{!CustomObject1__c.Ship_number__c}
+
+			</td>
+		</tr>
+		
+		<tr>
+			<th>
+				E.T.D
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+
+			</td>
+			<th>
+				ETA			</th>
+			<td>
+        {!CustomObject1__c.ETA__c}
+              
+
+			</td>
+		</tr>
+
+	<tr>
+			<th>
+				CONTAINER INFORMATION
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c} {!CustomObject1__c.Container__c} * {!CustomObject1__c.ContainerNumber__c} / {!CustomObject1__c.Container2__c} * {!CustomObject1__c.ContainerNumber2__c} 
+
+
+			</td>
+			<th>
+				B/L TYPE
+			</th>
+			<td>
+				{!CustomObject1__c.BLtype__c}
+			</td>
+		</tr>
+	
+<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				INTERNAL MEMO FOR INFORMATION SHARING
+			</th>
+			<td colspan="3" rowspan="2">
+				{!CustomObject1__c.Memo__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<br>
+Best Regards,
+<br><br>
+{!CustomObject1__c.PersonInCharge__c}<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+www.afr-solutions.com

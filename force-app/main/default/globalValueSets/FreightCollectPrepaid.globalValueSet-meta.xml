@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Collect</fullName>
+        <default>false</default>
+        <label>Collect</label>
+    </customValue>
+    <customValue>
+        <fullName>Prepaid</fullName>
+        <default>false</default>
+        <label>Prepaid</label>
+    </customValue>
+    <masterLabel>Freight Collect/Prepaid</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

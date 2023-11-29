@@ -1,0 +1,19 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global" controller="WMS_Cargo_LastWosLine">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="objWosLine" type="String" />
+    <aura:attribute name="isLoading" type="Boolean" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <lightning:recordViewForm recordId="{!v.objWosLine.Id}" objectApiName="clofor_com_cfs__WosLineItem__c">
+        <div class="slds-form-element">
+            <span class="slds-form-element__label">W/O/S LINE ITEM</span>
+            <div class="slds-form-element__control"><a href="{!'/lightning/r/' + v.objWosLine.Id + '/view' }">{!v.objWosLine.Name}</a></div>
+        </div>
+        <lightning:outputField fieldName="clofor_com_cfs__WorkOrderService__c" />
+        <lightning:outputField fieldName="clofor_com_cfs__ScanTime__c" />
+        <lightning:outputField fieldName="clofor_com_cfs__Locator__c" />
+        <lightning:outputField fieldName="clofor_com_cfs__Worker__c" />
+    </lightning:recordViewForm>
+	
+</aura:component>

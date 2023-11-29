@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Exchange_Rate_Currency__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>SECONDARY EXCHANGE RATE CURRENCY</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>JPY - Japanese Yen</fullName>
+                <default>false</default>
+                <label>JPY - Japanese Yen</label>
+            </value>
+            <value>
+                <fullName>USD - U.S. Dollar</fullName>
+                <default>true</default>
+                <label>USD - U.S. Dollar</label>
+            </value>
+            <value>
+                <fullName>VND - Vietnam Dong</fullName>
+                <default>false</default>
+                <label>VND - Vietnam Dong</label>
+            </value>
+            <value>
+                <fullName>KHR - Cambodian Riel</fullName>
+                <default>false</default>
+                <label>KHR - Cambodian Riel</label>
+            </value>
+            <value>
+                <fullName>KRW - Korean Won</fullName>
+                <default>false</default>
+                <label>KRW - Korean Won</label>
+            </value>
+            <value>
+                <fullName>AUD - Australian Dollar</fullName>
+                <default>false</default>
+                <label>AUD - Australian Dollar</label>
+            </value>
+            <value>
+                <fullName>HKD - Hong Kong Dollar</fullName>
+                <default>false</default>
+                <label>HKD - Hong Kong Dollar</label>
+            </value>
+            <value>
+                <fullName>IDR - Indonesian Rupiah</fullName>
+                <default>false</default>
+                <label>IDR - Indonesian Rupiah</label>
+            </value>
+            <value>
+                <fullName>MMK - Myanmar Kyat</fullName>
+                <default>false</default>
+                <label>MMK - Myanmar Kyat</label>
+            </value>
+            <value>
+                <fullName>MYR - Malaysian Ringgit</fullName>
+                <default>false</default>
+                <label>MYR - Malaysian Ringgit</label>
+            </value>
+            <value>
+                <fullName>NZD - New Zealand Dollar</fullName>
+                <default>false</default>
+                <label>NZD - New Zealand Dollar</label>
+            </value>
+            <value>
+                <fullName>PPH - Philippine Peso</fullName>
+                <default>false</default>
+                <label>PPH - Philippine Peso</label>
+            </value>
+            <value>
+                <fullName>THB - Thai Baht</fullName>
+                <default>false</default>
+                <label>THB - Thai Baht</label>
+            </value>
+            <value>
+                <fullName>TWD - Taiwan Dollar</fullName>
+                <default>false</default>
+                <label>TWD - Taiwan Dollar</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

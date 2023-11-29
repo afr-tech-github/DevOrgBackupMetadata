@@ -1,0 +1,317 @@
+{!CustomObject1__c.Field1__c}
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 様
+<br>
+<br>
+毎度　弊社のサービスをご利用くださり、誠にありがとうございます。
+<br>
+<br>
+現在、御社貨物の進捗状況は「{!CustomObject1__c.status__c}」となっております。
+<br>
+<br>
+URLにアクセスしてパスワードを入力してください。Check B/Lをダウンロードできます。
+<br>
+###################################################################################################################
+<br>
+Check B/L LINK ：{!CustomObject1__c.CHECK_B_L_LINK__c}  <br>
+Check B/L  PASSWORD：{!CustomObject1__c.CHECK_B_L_PASSWORD__c}  <br>
+###################################################################################################################
+<br>
+<br>
+※下記のメールはCloTra(Cloud Cargo Tracking Service)によってシステムから自動配信されています。<br>
+※通関や国内配送をご依頼されていないお客様にもすべての項目を送らせていただいておりますので、予めご了承ください。
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				共通部分
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				案件
+			</th>
+			<td width="200">
+				{!CustomObject1__c.ID__c}
+			</td width="400">
+			<th>
+				ステータス
+			</th>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				取引先
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c}様
+			</td>
+			<th>
+				依頼主担当者様
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}様
+			</td>
+		</tr>
+
+    
+		<tr><thead>
+			<th colspan="4">
+				貨物基礎情報
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				HOUSE B/L番号
+			</th>
+			<td>
+				{!CustomObject1__c.HBL__c}
+			</td>
+<th>
+				B/L タイプ
+			</th>
+			<td>
+				{!CustomObject1__c.BLtype__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				船名
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c}
+			</td>
+
+<th>
+				VOY NO
+			</th>
+			<td>
+				{!CustomObject1__c.Voy_No__c}
+			</td>
+
+
+	</tr>
+<tr>
+<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}
+			</td>
+
+			<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}
+			</td>
+
+　　　　　　　　</tr>
+		
+　　　　　　　　　　　　　　　<tr>
+			
+<th>
+				CUT日
+			</th>
+			<td>
+				{!CustomObject1__c.CutDay__c}
+			</td>			<th>
+				出港地
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}
+			</td>
+		</tr>
+		　　　　　　　　　　　　　　<tr>
+			<th>
+				商品
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+			<th>
+				出港日
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				重量
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+			<th>
+				入港地
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}  
+			</td>
+		</tr>
+		<tr>
+			<th>
+				個数/量積
+			</th>
+			<td>
+				{!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM
+			</td>
+			<th>
+				入港日
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				コンテナ情報
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c} {!CustomObject1__c.Container__c} * {!CustomObject1__c.ContainerNumber__c} / {!CustomObject1__c.Container2__c} * {!CustomObject1__c.ContainerNumber2__c} 			
+
+
+			</td>
+<th>
+				HDS
+			</th>
+			<td>
+				{!CustomObject1__c.HDS__c}
+			</td>
+
+		</tr>
+　　　　　　　　　　　　　　　<tr>
+			<th>
+				建値
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+			<th>
+				保険
+			</th>
+			<td>
+				{!CustomObject1__c.Insurance__c}
+			</td>
+		</tr>
+
+		<tr><thead>
+			<th colspan="4">
+	三国間及びTS
+			</th></thead>
+<tr>
+			<th>
+				トランジットポート
+			</th>
+			<td>
+				{!CustomObject1__c.TS__c}	</td>
+<th>
+				トランジット船名
+			</th>
+			<td>
+				{!CustomObject1__c.TransitV__c}
+			</td>
+</tr>
+<tr>
+			<th>
+				トランジットSHIPPER
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WElD}	
+	</td>
+
+ 　　　　　　　　　　 <th>
+                           トランジット出港日
+	</th>
+	<td>
+	{!CustomObject1__c.T_ETD__c}	
+	</td>
+		</tr>
+
+
+		<tr><thead>
+			<th colspan="4">
+				引き取り情報			</th>
+		</tr></thead>
+		<tr>
+			<th "rowspan=2" >
+				引き取り場所の数
+			</th>
+			<td colspan="3", "rowspan=2" >
+引き取り場所の数は{!CustomObject1__c.DeliveryService_required__c}箇所です。
+引き取り場所が0より多い場合は、詳細情報が別のメールで送信されます。
+
+			</td>
+
+
+		</tr>
+
+<tr><thead>
+			<th colspan="4">
+				通関情報 
+			</th></thead>
+		</tr>
+		<tr>
+			<th >
+				通関有無
+			</th>
+			<td colspan="3",  >
+				通関有無は '{!CustomObject1__c.Custom__c}'です。
+                                通関有無が’YES'の場合、詳細情報が別のメールで送信されます。
+			</td>
+		
+		</tr>
+
+ 
+
+		<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th >
+				REMARK
+			</th>
+			<td colspan="6">
+				{!CustomObject1__c.Remark__c}
+			</td>
+		</tr>
+					</tbody>
+</table>
+
+<br>
+ご不明な点やご質問などがございましたら、ご遠慮なくお知らせください。<br>
+
+今後ともどうぞよろしくお願い申し上げます。<br><br>
+{!CustomObject1__c.PersonInCharge__c}<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

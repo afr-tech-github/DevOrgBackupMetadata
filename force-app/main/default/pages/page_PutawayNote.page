@@ -1,0 +1,380 @@
+<apex:page controller="PutawayNoteController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0">
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <head>
+            <style>
+
+
+
+                @media print {
+                    body{
+                        counter-reset: page;
+                    }
+                    .no-print, .no-print * {
+                        display: none !important;
+                    }
+
+                    
+                    
+                    div.footer {
+                        counter-increment: page;
+                        display: block;
+
+                        text-align: center;
+
+                        position: running(footer);
+
+                    }
+                    @page { 
+                        
+                        padding-bottom: 10mm;
+                        @bottom-center { 
+                            content: element(footer);
+                        
+                        }
+                    }
+                    .tblDetail {
+                        overflow: visible !important;
+                    }
+                    
+                    .pagenumber:after {
+                        
+                        content: counter(page);
+                    }
+
+                    .pagecount:before {
+
+                        content: counter(pages);
+
+                    }
+                    table { overflow: visible !important; }
+                    thead { display: table-header-group }
+                    tfoot { display: table-row-group }
+                    tr { page-break-inside: avoid }
+                    .pagination{
+                        display: none;
+                    }
+                }
+
+                @page {
+                    size: A4 landscape;
+                    margin: 10mm;
+
+                }
+                .content {
+                    max-height: calc(100% - 100px);
+                }
+                
+                body {
+                    font-family: "Times New Roman", Times, serif;
+                }
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+                .footer {
+                    width: -webkit-fill-available;
+                    position: fixed;
+                    bottom: 0;
+                    display: none;
+                }
+
+                .divTitle{
+                    font-size: 16pt;
+                    text-align: center;
+                    display: table-cell;
+                    width: 100%;
+                    margin-top: -15px;
+                    position: absolute;
+                }
+                /*.divHeader{
+                    display: table-row;
+                }*/
+                .divToday{
+                    text-align: right;
+                    float: right;
+                    width: 100%;
+                    position: fixed;
+                }
+                .pngInf{
+                    width: 100%;
+                    text-align: center;
+                }
+                .pngInfDetail{
+                    width: 100%;
+                }
+                .tblImf{
+                    width : 100%;
+                }
+                .tblImf .colTitle{
+                    width: 20%;
+                    text-align: left;
+                }
+                .colImf1{
+                    width: 40%;
+                    text-align: left;
+                }
+                .colImf2{
+                    width: 20%;
+                    text-align: left;
+                }
+                .tblTRHeader{
+                    text-align: center;
+                    font-weight: bold;
+
+                }
+                .tblTRHeader th {
+                    padding:5px;
+                    border: 1px solid black;
+                }
+
+                .tblDetail{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 30px;
+                }
+                .tblDetail td{
+                    border: 1px solid black;
+                    padding: 5px;
+                }
+                .tblTRTotal td{
+                    border: none !important;
+                }
+                .hideRow{
+                    display: none;
+                }
+                .button{
+                    padding: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+                {!translations['print_note']}
+            </button>
+            <div class="content">
+                <div class="divHeader" width="100%">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="vertical-align: top">
+                                <apex:image value="{!siteSetting.Logo_URL__c}" />
+                            </td>
+                            <td width="61%" style="text-align: center; vertical-align: top">
+                                <!-- <apex:outputText value="PHIẾU CẤT HÀNG " style="font-weight: bold;" />
+                                <br/> -->
+                                <apex:outputText value="{!translations['put_away_note']}" style="font-style: italic;" />
+                                <br/>
+                                <!-- <apex:outputText value="Số / No: " style="font-style: italic; color:red" />
+                                <apex:outputText value="{!wos.Name}" style="font-style: italic; color:red" /> -->
+                            </td>
+                            <td width="19%">
+                                <div>
+                                    <div style="padding-top: 35px; float: left;">
+                                        <apex:outputText value="{!translations['po_no']}: " style="font-weight: bold;"/>
+                                    </div>
+                                    <div style="float: left; height: 90px;width: 90px;">
+                                    <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!wos.WorkOrder__r.PurchasingOrderID__r.Name}" alt="Create Qr Code for this item" border="0"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                    
+                <table class="tblImf">
+                    <colgroup>
+                        <td class="colTitle" />
+                        <td class="colImf1" />
+                        <td class="colTitle" />
+                        <td class="colImf2" />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['warehouse']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.Warehouse__r.Name}" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!translations['order_date_and_time']}:" style="font-weight: bold;" />                    
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date, dd/MM/yyyy}"> 
+                                <apex:param value="{!wos.WorkOrder__r.PurchasingOrderID__r.GoodsPurchasingOrderDate__c}" /> 
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['po_no']}: " style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.WorkOrder__r.PurchasingOrderID__r.Name}" />
+                            <apex:outputText value=" / {!wos.WorkOrder__r.PurchasingOrderID__r.PurchasingOrderNumber__c}"  rendered="{!wos.WorkOrder__r.PurchasingOrderID__r.PurchasingOrderNumber__c <> null &&wos.WorkOrder__r.PurchasingOrderID__r.PurchasingOrderNumber__c <> ''}"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!translations['supplier_id']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.WorkOrder__r.PurchasingOrderID__r.Supplier__r.AccountNumber}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['po_type']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!PoTypeMap[wos.WorkOrder__r.PurchasingOrderID__r.CSCDType__c]}" rendered="{!wos.GoodsPOID__c != null}" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!translations['supplier_name']}:" style="font-weight: bold;" />                    
+                        </td>
+                        <td>
+                            <apex:outputText value="{!wos.WorkOrder__r.PurchasingOrderID__r.Supplier__r.Name}" />
+                        </td>
+                    </tr>
+                </table>
+                <apex:form >
+                    <apex:outputPanel id="pbId">
+                        <div style="width: 100%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                            <div style="float:left; width: 50%; text-align: left;">
+                                {!translations['total']}: {!Cargos.size}/{!listCargo.size} {!translations['records']}
+                            </div>
+                            <div style="float:left; width: 50%; text-align: left;" >
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['first']}" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+        
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['previous']}" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+                
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['next']}" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+                
+                                <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['last']}" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                            </div>
+                        </div>
+                        <table class="tblDetail" style="clear:both">
+                            <tr class="tblTRHeader">
+                                <th>{!translations['no']}</th>
+                                <th>{!translations['locator_id']}</th>
+                                <th>{!translations['locator_code']} </th>
+                                <th>{!translations['exprire_date_sku_number']} </th>
+                                <th>{!translations['item_code']}</th>
+                                <th>{!translations['barcode']}</th>
+                                <th>{!translations['description']}</th>
+                                <th>{!translations['uom']}</th>
+                                <th>{!translations['expired_date']}</th>
+                                <!-- <th width="5%">PLANED Q'TY</th> -->
+                                <th width="5%">{!translations['order_quantity']} </th>
+                                <th width="5%">{!translations['actual_quantity']}</th>
+                                <th width="5%">{!translations['variance_quantity']}</th>
+                                <th width="5%">{!translations['manu_date']}</th>
+                                
+                                <th width="5%">{!translations['missing_quantity']}</th>
+                                <!-- <th>VAT/PRODUCT</th> -->
+                                <th>{!translations['damaged_quantity']}</th>
+                                <th>{!translations['trouble_note']} </th>
+                                <th> {!translations['wos']}</th>
+                                <th>{!translations['wo']}</th>
+                                <th> {!translations['good_po']}</th>
+                                <th>{!translations['remark']}</th>
+                            </tr>
+                            <apex:variable value="{!(setCon.PageNumber - 1)*setCon.PageSize}" var="indexCount"/>
+                            <apex:repeat value="{!Cargos}" var="item">
+                                <apex:variable value="{!indexCount+1}" var="indexCount"/>
+                                <tr>
+                                    <td style="text-align:center">{!indexCount}</td>
+                                    <td style="text-align:center"><a href="/{!item.LastWosLineItem__r.Locator__c}">{!item.LastWosLineItem__r.Locator__r.Name}</a></td>
+                                    <td style="text-align:center"><a href="/{!item.LastWosLineItem__r.Locator__c}">{!item.LastWosLineItem__r.Locator__r.LocatorCode__c}</a></td>
+                                    <td style="text-align:center">{!item.ExpireDateSKUNumber__c}</td>
+                                    <td style="text-align:center"><a href="/{!item.Id}">{!item.Name}</a></td>
+                                    <td style="text-align:center">
+                                        
+                                        <apex:outputPanel rendered="{!item.Product__r.CodeImageType__c != 'Barcode'}">
+                                            <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Product__r.QR_Code__c}" alt="Product QR Code" border="0"/>
+                                            <br/>
+                                            {!item.Product__r.QR_Code__c}
+                                        </apex:outputPanel>
+                                        
+                                        <apex:outputPanel rendered="{!item.Product__r.CodeImageType__c == 'Barcode'}">
+                                            <img id="{!item.Id + '-' + item.Product__r.QR_Code__c}" class="barcode"/>
+                                        </apex:outputPanel>
+                                    </td>
+                                    <td style="text-align:center">{!item.ProductDetails__c}</td>
+                                    
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        {!translations[item.Product__r.UnitType__c]}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}" >  
+                                            <apex:param value="{!item.ExpiredDate__c}"/>  
+                                        </apex:outputText>
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        {!item.QuantityInUnit__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        {!item.QuantityPerUnit__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                        {!item.QuantityVarianceinUnit__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                        <apex:outputText value="{0,date,dd/MM/yyyy}" >  
+                                            <apex:param value="{!item.ManufacturedDate__c}"/>  
+                                        </apex:outputText>
+                                    </td>
+                                    
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                        {!item.MissingQuantityinUnit__c}
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        {!item.DamagedQuantityInUnit__c}
+                                    </td>            
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        <apex:outputText value="{!item.CargoTroubleNote__c}" >
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                        <a href="/{!item.LastWosLineItem__r.WorkOrderService__c}">{!item.LastWosLineItem__r.WorkOrderService__r.Name}</a>
+                                        
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        <a href="/{!item.LastWosLineItem__r.WorkOrderID__c}">{!item.LastWosLineItem__r.WorkOrderID__r.Name}</a>
+                                    </td>
+                                    <td style="text-align: right; padding-right: 5px;">
+                                        
+                                        <a href="/{!item.LastWosLineItem__r.WorkOrderID__r.PurchasingOrderID__c}">{!item.LastWosLineItem__r.WorkOrderID__r.PurchasingOrderID__r.Name}</a>
+                                    </td>
+                                    <td style="padding: 5px;">{!item.Remark__c}</td>
+                                </tr>
+                            </apex:repeat>
+                            
+                        </table>
+                
+                 
+                    </apex:outputPanel>
+            </apex:form>
+            </div>
+            
+
+            <div class="footer" style="clear:both; width: 100%;vertical-align: text-bottom; ">
+                <div class="footerLeft" style="float:left; text-align: left; width: 50%;">
+                    <apex:outputText value="{!wos.LastModifiedBy.Name}"/> 
+                    - <apex:outputText value=" {!wos.LastModifiedBy.Email}"/> 
+                    - <apex:outputText value=" {0,date, HH:mm:ss dd/MM/yyyy}"> 
+                        <apex:param value="{!NOW()}" /> 
+                    </apex:outputText>
+                </div>
+                <!-- <div class="footerCenter" style="float:left; width: 10%; text-align: right;">
+                    <span class="pagenumber"/>/<span class="pagecount"/></div> -->
+                <div class="footerRight" style="float:left; width: 50%; text-align: right;">
+                 Powered by AFR Solutions Co., Ltd.
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

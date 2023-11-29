@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <logo>X1816</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>KPI(Key Performance Indicator):To manage KPI and set the target and performance measuring</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloKPI-LEX</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>KPI__c</tabs>
+    <tabs>OrganizationTarget__c</tabs>
+    <tabs>IndividualTarget__c</tabs>
+    <tabs>IndividualPerformance__c</tabs>
+    <tabs>OrganizationPerformance__c</tabs>
+    <tabs>Claim__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

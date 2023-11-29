@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SubmittedQuote</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>QuoteName__c</columns>
+    <columns>QuoteNumber__c</columns>
+    <columns>QuoteStatus__c</columns>
+    <columns>ApprovalStatus__c</columns>
+    <columns>RequesterCompany__c</columns>
+    <columns>RequestDetail__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>AmountInclTaxLocal__c</columns>
+    <columns>AmountInclTaxUSD__c</columns>
+    <columns>ProfitNICTaxLocal__c</columns>
+    <columns>ProfitRatioNICTaxLocal__c</columns>
+    <columns>ValidTo__c</columns>
+    <columns>QuoteIssueDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ApprovalStatus__c</field>
+        <operation>equals</operation>
+        <value>Submitted</value>
+    </filters>
+    <label>Submitted Quote</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Worker__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>WORKER ID</label>
+    <referenceTo>WORKER__c</referenceTo>
+    <relationshipLabel>CONNECT WOS &amp; WORKER</relationshipLabel>
+    <relationshipName>WosWorker</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

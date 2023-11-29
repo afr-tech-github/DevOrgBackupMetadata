@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Zeibunrui__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>If &apos;TAX&apos; is chosen when following criteria is met, Tax ratio is automatically inserted. 1.There is valid Tax ratio management 2. Primary Currency(Invoice/Tax Ratio) is set properly for the account in Invoice-to/Payment-to</inlineHelpText>
+    <label>TAX CATEGORY(LOCAL)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Non-Tax(非課税)</fullName>
+                <default>false</default>
+                <label>NON-TAX</label>
+            </value>
+            <value>
+                <fullName>TAX(課税)</fullName>
+                <default>false</default>
+                <label>TAX</label>
+            </value>
+            <value>
+                <fullName>Tax Free(免税)</fullName>
+                <default>false</default>
+                <label>TAX-FREE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

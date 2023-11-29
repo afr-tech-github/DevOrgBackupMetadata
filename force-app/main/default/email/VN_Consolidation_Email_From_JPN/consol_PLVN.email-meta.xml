@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi gửi các chứng từ tới kho hàng.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>HÀNG GHÉP-CHI TIẾT ĐÓNG HÀNG</name>
+    <style>none</style>
+    <subject>{!MasterAnken__c.MasterID__c}-P/L Attached</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Stock_On_hand_less_than_Qty</fullName>
+    <active>true</active>
+    <errorConditionFormula>FinalQuantity__c &gt; TotalStockOnhand__c</errorConditionFormula>
+    <errorMessage>The Stock on-hand of this product is not enough. Please check Inventory report again or Q&apos;ty requested.</errorMessage>
+</ValidationRule>

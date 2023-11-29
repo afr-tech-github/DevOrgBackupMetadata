@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>unpaiedview</fullName>
+    <columns>NAME</columns>
+    <columns>Field1__c</columns>
+    <columns>Custom__c</columns>
+    <columns>DeadlineForPaymentOfInvoices__c</columns>
+    <columns>DeadlineForPaymentOfExpense__c</columns>
+    <columns>DebitNote_duedate__c</columns>
+    <columns>SellInTaxAmountJPY_sum__c</columns>
+    <columns>GoukeiHanbaiKingakuUSD__c</columns>
+    <columns>Partner__c</columns>
+    <columns>NyukinGoukeigaku__c</columns>
+    <columns>NyukinzandakaJPY__c</columns>
+    <columns>Ararigaku_sum__c</columns>
+    <columns>status__c</columns>
+    <columns>DeliveryDate__c</columns>
+    <columns>ETA__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NyukinzandakaJPY__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>DeadlineForPaymentOfInvoices__c</field>
+        <operation>lessThan</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>View AR &amp; AP</label>
+</ListView>

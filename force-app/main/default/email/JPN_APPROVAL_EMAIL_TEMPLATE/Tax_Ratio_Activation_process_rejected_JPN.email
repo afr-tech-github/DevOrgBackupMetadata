@@ -1,0 +1,23 @@
+経理担当者様 
+
+{!Tax_Ratio__c.TAX_RATIO_ID__c} 
+は却下されました。コメントを確認し、訂正の上もう一度申請をお願いします。 
+
+却下されたレコードについては、こちらのリンクをクリックしてください。
+
+◎TAX RATIO ID：[{!Tax_Ratio__c.TAX_RATIO_ID__c}]  Link to SF:{!Tax_Ratio__c.Link} 
+◎Currency : {!Tax_Ratio__c.Currency__c}
+◎Start Date : {!Tax_Ratio__c.Start_Date__c}
+◎End Date : {!Tax_Ratio__c.End_Date__c}
+◎Selling Tax Ratio : {!Tax_Ratio__c.Selling_Tax_Ratio__c}%
+◎Buying Tax Ratio : {!Tax_Ratio__c.Buying_Tax_Ratio__c}%
+
+
+よろしくお願いいたします。
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>From Unit Price per Kg to Unit Price</fullName>
+        <default>false</default>
+        <label>From Unit Price per Kg to Unit Price</label>
+    </customValue>
+    <customValue>
+        <fullName>From Unit Price to Unit Price per Kg</fullName>
+        <default>false</default>
+        <label>From Unit Price to Unit Price per Kg</label>
+    </customValue>
+    <customValue>
+        <fullName>From Unit Price per Gram to Unit Price</fullName>
+        <default>false</default>
+        <label>From Unit Price per Gram to Unit Price</label>
+    </customValue>
+    <customValue>
+        <fullName>From Unit Price to Unit Price per Gram</fullName>
+        <default>false</default>
+        <label>From Unit Price to Unit Price per Gram</label>
+    </customValue>
+    <masterLabel>UNIT PRICE CONVERSION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

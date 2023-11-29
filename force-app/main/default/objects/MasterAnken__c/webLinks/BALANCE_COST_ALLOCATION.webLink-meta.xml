@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BALANCE_COST_ALLOCATION</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>BALANCE COST ALLOCATION</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/soap/ajax/20.0/apex.js&apos;)} 
+var lang = sforce.connection.getUserInfo().userLanguage;
+var confirmMsg = &apos;&apos;;
+var informMsg = &apos;&apos;;
+
+if (&apos;ja&apos; === lang) {
+    confirmMsg = &apos;M B/L(混載)-支払のコンテナ費用を関連案件のH B/L(請求/支払)に按分しますか？&apos;;
+    informMsg = &apos;H B/L案件への費用按分が正常に完了しました。&apos;;
+} else if (&apos;vi&apos; === lang) {
+    confirmMsg = &apos;Bạn có muốn phân bỏ lại chi phí cho M B/L không?&apos;;
+    informMsg = &apos;Phân bổ chi phí đã hoàn tất&apos;;
+} else if (&apos;ko&apos; === lang){
+    confirmMsg = &apos;M B/L(콘솔)-지불의 컨테이너 비용을 관련 안건의 H B/L(청구/지불)에 안분 하시겠습니까?&apos;;
+    informMsg = &apos;비용배분이 성공적으로 완료되었습니다.&apos;;
+} else {
+    confirmMsg = &apos;Do you want to balance cost allocation for this record?&apos;;
+    informMsg = &apos;Cost Allocation has been balanced successfully&apos;
+}
+
+if(window.confirm(confirmMsg)){
+    var infoMessage = sforce.apex.execute(&apos;clofor_com_cfs.CostAllocationService&apos;, &apos;balanceCostAllocation&apos;, {masterShipmentId:&apos;{!URLENCODE(MasterAnken__c.Id)}&apos;}); 
+    location.href= &apos;/&apos; + &apos;{!URLENCODE(MasterAnken__c.Id)}&apos;; 
+    alert(infoMessage);
+}</url>
+</WebLink>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CosmeticCategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>COSMETIC CATEGORY</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ProductCategory__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>CosmeticCategory</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Cleansing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Eye</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Mask</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Lip</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Face</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Skin Care</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Lip 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Face 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Skin Care 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cosmetic</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

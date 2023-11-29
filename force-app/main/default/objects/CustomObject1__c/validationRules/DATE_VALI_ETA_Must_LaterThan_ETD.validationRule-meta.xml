@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATE_VALI_ETA_Must_LaterThan_ETD</fullName>
+    <active>true</active>
+    <description>ETA must be equal or greater than ETD</description>
+    <errorConditionFormula>ETA__c &lt; ETD__c</errorConditionFormula>
+    <errorDisplayField>ETA__c</errorDisplayField>
+    <errorMessage>入港日は出港日より遅い日付を選択してください。
+ETA must be later than ETD. Please re-enter the correct data</errorMessage>
+</ValidationRule>

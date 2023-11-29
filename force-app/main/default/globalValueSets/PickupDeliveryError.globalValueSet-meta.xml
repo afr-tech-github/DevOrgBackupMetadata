@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Vendor setup not correct</fullName>
+        <default>false</default>
+        <label>Vendor setup not correct</label>
+    </customValue>
+    <customValue>
+        <fullName>Consignor – shipper Unknown</fullName>
+        <default>false</default>
+        <label>Consignor – shipper Unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>Loading address Unknown</fullName>
+        <default>false</default>
+        <label>Loading address Unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>Consignee Unknown</fullName>
+        <default>false</default>
+        <label>Consignee Unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>Unloading address/drop-point Unknown</fullName>
+        <default>false</default>
+        <label>Unloading address/drop-point Unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>File not accepted</fullName>
+        <default>false</default>
+        <label>File not accepted</label>
+    </customValue>
+    <customValue>
+        <fullName>Message has been refused</fullName>
+        <default>false</default>
+        <label>Message has been refused</label>
+    </customValue>
+    <customValue>
+        <fullName>Shipment check failed – Connote already exists</fullName>
+        <default>false</default>
+        <label>Shipment check failed – Connote already exists</label>
+    </customValue>
+    <customValue>
+        <fullName>EDI parameter record not found</fullName>
+        <default>false</default>
+        <label>EDI parameter record not found</label>
+    </customValue>
+    <customValue>
+        <fullName>Principal % unknown</fullName>
+        <default>false</default>
+        <label>Principal % unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Pickup &amp; Delivery Error</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

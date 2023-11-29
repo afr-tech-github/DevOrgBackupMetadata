@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Massive_Update_Expire_Date</fullName>
+    <columns>LastWOSRecordType__c</columns>
+    <columns>LastWosLineItem__c</columns>
+    <columns>NAME</columns>
+    <columns>Product__c</columns>
+    <columns>ProductDetails__c</columns>
+    <columns>ExpiredDate__c</columns>
+    <columns>CargoLifeCycle__c</columns>
+    <columns>ItemNumber__c</columns>
+    <columns>SerialNumber__c</columns>
+    <columns>PartNumber__c</columns>
+    <columns>LotNumber__c</columns>
+    <columns>ExpireDateSKUNumber__c</columns>
+    <columns>Summary__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ExpiredDate__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Massive Update Expire Date</label>
+</ListView>

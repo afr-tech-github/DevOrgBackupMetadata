@@ -1,0 +1,381 @@
+<apex:page controller="cntl_Arrival_Notice" applyBodyTag="false" applyHtmlTag="false"  showHeader="false" contentType="application/vnd.ms-excel#ArrivalNotice.xls" cache="true">
+    <head>
+        <style type="text/css">
+            body {
+                font-size: 12px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            }
+            br {
+            	mso-data-placement:same-cell;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!--heading-->
+        <!--
+        <div STYLE="position:absolute; z-index:-2; left:10px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        
+        <div class="f25" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+            ARRIVAL NOTICE
+        </div>
+        <div class="f8" style="position:absolute; margin-top:40px; left:200px;  width:650px; text-align:center;">
+            <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Address__c}"/>
+        </div>
+        <div class="f8" style="position:absolute; margin-top:55px; left:200px; width:600px;  text-align:center;">
+            <apex:outputLabel value="TEL:{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c}     FAX:{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c}"/>
+        </div>
+        <div class="f8" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+            ISSUE DATE:
+        </div>
+        <div class="f8" style="position:absolute; margin-top:0px; left:950px; width:110px;  ">
+            <apex:outputText value="{0,date,yyyy/MM/dd}">
+                <apex:param value="{!AnkenList.PrintDate__c}"/>
+            </apex:outputText>
+        </div>
+        <div class="f8" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+            REF NO :
+        </div>
+        <div class="f8" style="position:absolute; margin-top:20px; left:930px; width:100px;  ">
+            <apex:outputText value="S{!AnkenList.WkInitial__c}{!AnkenList.Name}-{!AnkenList.QuotationVer__c}"></apex:outputText>
+        </div>
+        
+        <div class="f8" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+            PIC:
+        </div>
+        <div class="f7" style="position:absolute; margin-top:40px; left:905px; width:120px;  ">
+            <apex:outputText value="{!AnkenList.PersonInCharge__r.Name}"></apex:outputText>
+        </div>
+        -->
+        <table>
+            <tr>
+                <td colspan="8">
+                    CONSIGNEE<br/>
+                    <apex:variable var="a" value="{!AnkenList.Cnee__r.EnglishCompanyName__c} <br/> {!AnkenList.Cnee__r.EnglishAddress__c}"/>
+                    <!--
+                    <apex:outputText value="{!AnkenList.Cnee__r.EnglishCompanyName__c}"></apex:outputText>
+            		<br/>
+            		<apex:outputText value="{!AnkenList.Cnee__r.EnglishAddress__c}"></apex:outputText>
+-->
+                    {!a}
+                </td>
+                <td colspan="2">
+                    VESSEL <br/>
+                    <apex:outputText value="{!AnkenList.Vessle__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    VOYAGE NO<br/>
+                    <apex:outputText value="{!AnkenList.Voy_No__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    H.B/L NO<br/>
+                    <apex:outputText value="{!AnkenList.HBL__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    M.B/L NO<br/>
+                    <apex:outputText value="{!AnkenList.Master_B_L__c}"></apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    NOTIFY PARTY<br/>
+                    <apex:outputText value="{!AnkenList.Notifyparty__r.EnglishCompanyName__c}"></apex:outputText>
+            		<br/>
+            		<apex:outputText value="{!AnkenList.Notifyparty__r.EnglishAddress__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    PORT OF LOADING <br/>
+                    <apex:outputText value="{!AnkenList.POL__r.Name} - {!AnkenList.POL__r.Country_Name__c}"/>
+                </td>
+                <td colspan="2">
+                    PORT OF DISCHARGE<br/>
+                    <apex:outputText value="{!AnkenList.POD__r.Name} - {!AnkenList.POD__r.Country_Name__c}"/>
+                </td>
+                <td colspan="2">
+                    PLACE OF DELIVERY<br/>
+                    <apex:outputText value="{!AnkenList.Place_of_Delivery__r.Name} - {!AnkenList.POD__r.Country_Name__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    ETA<br/>
+                    <apex:outputText value="{0,date,yyyy/MM/dd}">
+                        <apex:param value="{!AnkenList.ETA__c}"/>
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="8">
+                    SHIPPER<br/>
+                    <apex:outputText value="{!AnkenList.shipper__r.EnglishCompanyName__c}"></apex:outputText>
+                    <br/>
+                    <apex:outputText value="{!AnkenList.shipper__r.EnglishAddress__c}"></apex:outputText>
+                </td>
+                <td colspan="2">
+                    PACKAGE<br/>
+                    <apex:outputText value="{!AnkenList.carton__c} {!AnkenList.UnitType__c}"/>
+                </td>
+                <td colspan="2">
+                    GROSS WEIGHT<br/>
+                    <apex:outputText value="{!AnkenList.weight__c} KGS"/>
+                </td>
+                <td colspan="2">
+                    MEASUREMENT<br/>
+                    <apex:outputText value="{!AnkenList.CBM__c} CBM"/>
+                </td>
+                <td colspan="2">
+                    CTNR SIZE * NO<br/>
+                    <p>
+                        <apex:outputText value="{!AnkenList.Container__c} {!AnkenList.ContainerNumber__c}"/>br/>
+                        <apex:outputText value="{!AnkenList.Container2__c} {!AnkenList.ContainerNumber2__c}"/><br/>
+                        <apex:outputText value="{!AnkenList.Container3__c} {!AnkenList.ContainerNumber3__c}"/><br/>
+                        <apex:outputText value="{!AnkenList.Container4__c} {!AnkenList.ContainerNumber4__c}"/>
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="4" rowspan="3">
+                    MARK &amp; NUMBERS<br/>
+                    <apex:outputText value="{!AnkenList.Marks_and_Numbers__c}"/>
+                    <apex:outputText rendered="{!AnkenList.Marks_and_Numbers__c = null}">
+                		N/M
+            		</apex:outputText>
+                </td>
+                <td colspan="4" rowspan="3">
+                    DESCRIPTION OF GOODS<br/>
+                    <apex:outputText value="{!AnkenList.Item__c}"/>
+                </td>
+                <td colspan="4" rowspan="3">
+                    CARGO LOADING WAREHOUSE<br/>
+                    <apex:outputText value="{!AnkenList.LoadLocation__r.name}"/><br/>
+                    <apex:outputText value="{!AnkenList.LoadLocation__r.LoadAddress__c}"/><br/>
+                    <apex:outputText value="TEL: {!AnkenList.LoadLocation__r.LoadTEL__c} FAX: {!AnkenList.LoadLocation__r.LoadFAX__c}"/><br/>
+                    <apex:outputText value="PIC :　{!AnkenList.LoadLocationPIC__c }" rendered="{!IF(ISBLANK(AnkenList.LoadLocationPIC__c), FALSE, TRUE)}"/><br/>
+                    <apex:outputText value="{!AnkenList.LoadLocation_Remarks__c}"/>
+                </td>
+                <td colspan="4">
+                    CONTAINER NO/SEAL NO<br/>
+                    <apex:outputText value="{!AnkenList.ContainerSeal_No__c}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    FIRST VESSEL/TRANSIT PORT<br/>
+                    <apex:outputText value="{!AnkenList.TransitV__c} / {!AnkenList.TS__c}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    WAREHOUSE CONFIRMATION NO<br/>
+                    <apex:outputText value="{!AnkenList.No_Of_LoadingConfirmation__c}"/>
+                </td>
+            </tr>
+        </table>
+<!--
+        
+        <div class="f10" style="position:absolute; margin-top:418px; width:227px;  left:0px;    text-align:center;">
+            FREIGHT &amp; CHARGE
+        </div>
+        <div class="f10" style="position:absolute; margin-top:418px; width:56px;   left:230px;  text-align:center;">
+            <apex:outputText value="Q'TY"/>
+        </div>
+        <div class="f10" style="position:absolute; margin-top:418px; width:66px;   left:290px;  text-align:center;">
+            UNIT
+        </div>
+        <div class="f10"
+             style="position:absolute; margin-top:418px; width:85px;   left:355px;  text-align:center; border:solid 0px;">
+            UNIT PRICE
+        </div>
+        <div class="f10" style="position:absolute; margin-top:418px; width:66px;   left:426px;   text-align:center;">
+            CUR
+        </div>
+        <div class="f10" style="position:absolute; margin-top:410px; width:106px;   left:475px;  text-align:center;">
+            AMOUNT
+        </div>
+        <div class="f10" style="position:absolute; margin-top:425px; width:106px;   left:475px;  text-align:center;">
+            (<apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Currency__c}"/>)
+        </div>
+        <div class="f10" style="position:absolute; margin-top:410px; width:106px;   left:565px;  text-align:center;">
+            AMOUNT
+        </div>
+        <div class="f10" style="position:absolute; margin-top:425px; width:106px;   left:565px;  text-align:center;">
+            (USD)
+        </div>
+        
+        <div class="f8" style="position:absolute; margin-top:420px; left:665px;  text-align:center;">
+            DAMAGE REMARKS
+        </div>
+        <div class="f8" style="position:absolute; margin-top:440px; left:680px;  text-align:center;">
+            <apex:outputText value="{!AnkenList.Remarks__c}"></apex:outputText>
+        </div>
+        <apex:outputText rendered="{!IF(ISBLANK(AnkenList.FreeDemurrageTime__c), FALSE, TRUE)}">
+            <div class="f8" style="position:absolute; margin-top:460px; left:665px;  text-align:center;">
+                FREE DEMURRAGE TIME
+            </div>
+            <div class="f8" style="position:absolute; margin-top:480px; left:680px;  text-align:center;">
+                <apex:outputText value="{0,date,yyyy/MM/dd}">
+                    <apex:param value="{!AnkenList.FreeDemurrageTime__c}"/>
+                </apex:outputText>
+            </div>
+        </apex:outputText>
+        <apex:outputText rendered="{!IF(ISBLANK(AnkenList.FreeDetentionTime__c), FALSE, TRUE)}">
+            <div class="f8" style="position:absolute; margin-top:460px; left:840px;  text-align:center;">
+                FREE DETENTION TIME
+            </div>
+            <div class="f8" style="position:absolute; margin-top:480px; left:880px;  text-align:center;">
+                <apex:outputText value="{0,date,yyyy/MM/dd}">
+                    <apex:param value="{!AnkenList.FreeDetentionTime__c}"/>
+                </apex:outputText>
+            </div>
+        </apex:outputText>
+        
+        <div class="f8" style="position:absolute; margin-top:520px; left:665px;  text-align:center;">
+            ※Please kindly bear the bank remitting charges concerned with yourself.
+        </div>
+        <div class="f8" style="position:absolute; margin-top:540px; left:665px;  text-align:center;">
+            ※After transfer charges, Please send us A/N and Bank Slip.
+        </div>
+        <div class="f8" style="position:absolute; margin-top:560px; left:665px;  text-align:center;">
+            ※After confirmation of transfer receipt, D/O will be released.
+        </div>
+        <div class="f8" style="position:absolute; margin-top:570px; left:665px;  text-align:center;">
+            
+        </div>
+        
+        <div class="f10" style="position:absolute; margin-top:595px; left:665px; text-align:center;">
+            Transfer to
+        </div>
+        <div class="f8" style="position:absolute; margin-top:610px; left:665px;  text-align:center;">
+            {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Name_1__c}
+        </div>
+        <div class="f8" style="position:absolute; margin-top:625px; left:665px; ">
+            {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Account_No_1__c}　{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Bank_Account_1__c}
+        </div>
+        
+
+        <div style="position:absolute; top:453px; width:660px;">
+            
+            <apex:repeat value="{!itemList}" var="DetailList">
+                <div class="f9" style="margin-top:0px; margin-left:5px; width:220px;  height:15px; float:left; ">
+                    &nbsp;
+                    <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(DetailList.InsatuyouSyohin__c, 'Surcharge Included',''),'Surcharge Excluded','') }"></apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px; margin-left:5px; width:55px;  height:15px; float:left; text-align:right;  border:solid 0px;">
+                    &nbsp;
+                    <apex:outputText value="{!VALUE(DetailList.wkSuryo__c)}"></apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px; margin-left:13px; width:50px;  height:15px; float:left;  text-align:center; ">
+                    &nbsp;
+                    <apex:variable var="unitKey" value="{!DetailList.Tariff__r.UNIT__c}"/>
+                    <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey != null}"></apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px; margin-left:5px; width:82px;  height:15px; float:left; text-align:right; ">
+                    &nbsp;
+                    <apex:outputText value="{0,number,###,###,###,###}"  rendered="{!DetailList.curr__c != 'USD'}">
+                        <apex:param value="{!DetailList.SellTankaJPY__c}"/>
+                    </apex:outputText>
+                    <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!DetailList.curr__c = 'USD'}">
+                        <apex:param value="{!DetailList.SellTankaUSD__c}"/>
+                    </apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px; margin-left:13px; width:23px;  height:15px; float:left; text-align:center; ">
+                    &nbsp;
+                    <apex:outputText value="{!DetailList.curr__c}"></apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px;  margin-left:8px; width:85px; height:15px; float:left; text-align:right;">
+                    &nbsp;
+                    <apex:outputText value="{0,number,###,###,###,###}" rendered="{!DetailList.SellAmountJPN__c != 0}">
+                        <apex:param value="{!DetailList.SellInTaxAmountJPY__c}"/>
+                    </apex:outputText>
+                </div>
+                <div class="f9"
+                     style="margin-top:0px;  margin-left:8px; width:83px; height:15px; float:left; text-align:right;">
+                    <apex:outputText value="{0, number, ###,###,##0.000}" rendered="{!(DetailList.SellAmountUSD__c != 0 && DetailList.curr__c = 'USD')}">
+                        <apex:param value="{!DetailList.SellInTaxAmount_USD__c}"/>
+                    </apex:outputText>
+                </div>
+            </apex:repeat>
+        </div>
+        
+        <div class="f10" style="position:absolute; margin-top:618px; left:10px;  text-align:center;">
+            B/L Type
+        </div>
+        <div class="f14" style="position:absolute; margin-top:630px; left:65px; width:130px;  ">
+            <apex:outputText value="{!AnkenList.BLtype__c}"></apex:outputText>
+        </div>
+        
+        <div class="f10" style="position:absolute; margin-top:618px; left:240px;  text-align:center;">
+            TOTAL AMOUNT(<apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Currency__c}"/>)
+        </div>
+        <div class="f14" style="position:absolute; margin-top:630px; right:390px; width:130px;  ">
+            <apex:outputText value="{0,number,###,###,###,###}">
+                <apex:param value="{!TotalAmount}"/>
+            </apex:outputText>
+        </div>
+        <div class="f8" style="position:absolute; margin-top:640px; left:240px;  text-align:center;">
+            EX-CHANGE
+        </div>
+        <div class="f8" style="position:absolute; margin-top:640px; left:330px; width:130px;  ">
+            <apex:outputText value="{!AnkenList.ExchangeRate__c} ({!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Currency__c}/USD)"></apex:outputText>
+        </div>
+        
+        <div class="f8" style="position:absolute; margin-top:659px; left:10px;  text-align:center; ">
+            <apex:outputText rendered="{!AnkenList.BLtype__c = 'ORIGINAL'}">
+                Please send  ORIGINAL B/L(BANK L/G) to {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Name__c}
+            </apex:outputText>
+        </div>
+        <div class="f8" style="position:absolute; margin-top:658px; left:10px;  text-align:center;">
+            For information about billing item R/ton : R/ton will Be transferred [GROSS WEIGHT (KGS)÷1,000] or  [MEASUREMENT(CBM)] which is bigger. 
+        </div>
+        <div style="font-size:13px; position:absolute; margin-top:657px; margin-left:826px;">
+            Powered by AFR Solutions co.,ltd
+        </div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:100%;     top:80px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:585px; top:80px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:585px; top:80px; right:0px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:340px; top:80px; left:480px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:180px; top:80px; left:618px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:340px; top:80px; left:756px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:180px; top:80px; left:894px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:100%;     top:140px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:100%;     top:200px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:100%;     top:260px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:160px; top:260px;left:230px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:270px;    top:335px; right:0px"></div>
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:270px;    top:375px; right:0px"></div>
+        
+        <div style="position:absolute; border-top:solid 1px     rgb(0,0,0); width:100%;   top:420px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:230px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:290px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:355px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:440px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:480px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:205px; top:420px; left:570px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:245px; top:420px; left:660px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:660px;    top:450px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:366px;    top:510px; right:0px"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:366px;    top:600px; right:0px"></div>
+        
+        <div style="position:absolute; border-top:solid   1px   rgb(0,0,0); width:660px;  top:625px;"></div>
+        <div style="position:absolute; border-left:solid  1px   rgb(0,0,0); height:40px;  top:625px; left:230px;"></div>
+        
+        <div style="position:absolute; border-top:solid 1px   rgb(0,0,0); width:100%;     top:665px;"></div>
+        -->
+    </body>
+    
+</apex:page>

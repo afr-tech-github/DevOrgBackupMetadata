@@ -1,0 +1,154 @@
+<apex:page controller="PerformanceReportController" sidebar="false" showHeader="true" docType="html-5.0">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+        
+        <style type="text/css">
+            .report-table td {
+                padding: 0 5px;
+                text-align: center;
+                border: 1px solid #c6c9cc;
+            }
+            
+            .report-table th {
+                padding: 0 5px;
+                text-align: center;
+                border: 1px solid #c6c9cc;
+            }
+            
+            .report-table {
+                border: 1px solid #c6c9cc;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            .sla-Neutral {
+            	background-color: #0FE8E8;
+            }
+            
+            .sla-Met {
+            	background-color: #01E878;
+            }
+            
+            .sla-Not-Met {
+            background-color: #FF0000;
+            }
+        </style>
+    </head>  
+
+    <script type="text/javascript">
+    // The following code snippet is to prevent jQuery datepicker open automatically on form load
+    function setFocus() {
+        document.getElementById("dummy_hidden_input").focus();
+    }
+    
+    j$ = jQuery.noConflict();
+    j$(document).ready(function() {
+        j$( "input[id$=fromDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        });
+        
+        j$( "input[id$=toDate]" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            changeYear: true,
+            numberOfMonths: 1,
+            dateFormat:"yy/mm/dd"
+        });
+        
+        j$( "select[id$=reportTeam]" ).focus();
+    });
+    </script>
+
+    <apex:form >
+        <input type="hidden" id="dummy_hidden_input"/>
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Criteria" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Team</apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedTeam}" id="reportTeam">
+                        <apex:selectOptions value="{!teams}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >From Date</apex:outputLabel>
+                    <apex:inputText id="fromDate" value="{!fromDate}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >To Date</apex:outputLabel>
+                    <apex:inputText id="toDate" value="{!toDate}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:outputPanel id="messageSection">
+                <apex:pageMessages ></apex:pageMessages>
+            </apex:outputPanel>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!generateReport}" value="Generate" reRender="reportBlock, buttonBlock, messageSection" status="actionStatus"/>
+                <apex:actionStatus id="actionStatus">
+                    <apex:facet name="start">
+                        <apex:outputText value="Generating...."/>
+                    </apex:facet>
+                </apex:actionStatus>
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:4px;" 
+                                      action="{!exportPDF}" value="Export to PDF" 
+                                      rendered="{!slaReport.reportLines.size > 0}" target="_blank"/>
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:4px;" 
+                                      action="{!exportExcel}" value="Export to Excel" 
+                                      rendered="{!slaReport.reportLines.size > 0}"/>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>            
+        </apex:pageBlock>
+
+        <apex:pageBlock title="SLA Details" id="reportBlock">
+            Met SLA count: <apex:outputText value="{!slaReport.metSLACount}"/><br />
+            Not Met SLA count: <apex:outputText value="{!slaReport.notMetSLACount}"/><br />
+            Neutral SLA (not yet completed but on track) count: <apex:outputText value="{!slaReport.neutralSLACount}"/><br />
+            <table class="report-table">
+                <thead>
+                    <th>Reference</th>
+                	<th>Type</th>
+                    <th>Vessel Type</th>
+                    <th>Transport Type</th>
+                    <th>Received Time</th>
+                    <th>Completed Time</th>
+                    <th>SLA (Minutes)</th>
+                    <th>Spent Time(Minutes)</th>
+                    <th>SLA Status</th>
+                    <th>Team</th>
+                    <th>Completed By</th>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!slaReport.reportLines}" var="reportLine">
+                        <tr class="sla-{!reportLine.slaStatus}">
+                            <td><a href="/{!reportLine.referenceId}" target="_blank">{!reportLine.referenceName}</a></td>
+                            <td>{!reportLine.reportObject}</td>
+                            <td>{!reportLine.vesselType}</td>
+                            <td>{!reportLine.transportType}</td>
+                            <td>
+                                <apex:outputText value="{0,date,yyyy/MM/dd HH:mm:ss}"> 
+                                    <apex:param value="{!reportLine.receivedTime}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,yyyy/MM/dd HH:mm:ss}"> 
+                                    <apex:param value="{!reportLine.completedTime}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>{!reportLine.slaDuration}</td>
+                            <td>{!reportLine.actualDuration}</td>
+                            <td>{!reportLine.slaStatus}</td>
+                            <td>{!reportLine.team}</td>
+                            <td>{!reportLine.dataEntryUser}</td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

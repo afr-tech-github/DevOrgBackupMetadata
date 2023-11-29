@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Original</fullName>
+        <default>false</default>
+        <label>Original</label>
+    </customValue>
+    <customValue>
+        <fullName>Waybill</fullName>
+        <default>false</default>
+        <label>Waybill</label>
+    </customValue>
+    <customValue>
+        <fullName>Surrender</fullName>
+        <default>false</default>
+        <label>Surrender</label>
+    </customValue>
+    <customValue>
+        <fullName>Telex Release</fullName>
+        <default>false</default>
+        <label>Telex Release</label>
+    </customValue>
+    <customValue>
+        <fullName>Switch</fullName>
+        <default>false</default>
+        <label>Switch</label>
+    </customValue>
+    <masterLabel>B/L Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

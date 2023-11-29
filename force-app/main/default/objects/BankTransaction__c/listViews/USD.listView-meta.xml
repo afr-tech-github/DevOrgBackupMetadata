@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>USD</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>TransactionDescription__c</columns>
+    <columns>BankTransactionCode__c</columns>
+    <columns>CustomerInformationFileNumber__c</columns>
+    <columns>BankTransactionStatus__c</columns>
+    <columns>BankTransactionType__c</columns>
+    <columns>Currency__c</columns>
+    <columns>AmountReceivedLocal__c</columns>
+    <columns>AmountReceivedUSD__c</columns>
+    <columns>AmountPaidLocal__c</columns>
+    <columns>AmountPaidUSD__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Currency__c</field>
+        <operation>equals</operation>
+        <value>USD</value>
+    </filters>
+    <label>USD</label>
+    <language>en_US</language>
+</ListView>

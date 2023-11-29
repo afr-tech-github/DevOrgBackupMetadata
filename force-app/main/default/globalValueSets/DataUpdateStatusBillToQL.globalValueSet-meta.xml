@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Data Update Not Allowed From Billing To Quote Line</fullName>
+        <default>true</default>
+        <label>Data Update Not Allowed From Billing To Quote Line</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Update Allowed From Billing To Quote Line</fullName>
+        <default>false</default>
+        <label>Data Update Allowed From Billing To Quote Line</label>
+    </customValue>
+    <customValue>
+        <fullName>Billing Data Update Requested</fullName>
+        <default>false</default>
+        <label>Billing Data Update Requested</label>
+    </customValue>
+    <customValue>
+        <fullName>Billing Data Updated</fullName>
+        <default>false</default>
+        <label>Billing Data Updated</label>
+    </customValue>
+    <masterLabel>DATA UPDATE STATUS FROM BILLING TO QUOTE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

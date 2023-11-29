@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TroubleView</fullName>
+    <columns>NAME</columns>
+    <columns>Product__c</columns>
+    <columns>CargoLifeCycle__c</columns>
+    <columns>CargoType__c</columns>
+    <columns>ExpiredDate__c</columns>
+    <columns>QuantityPerUnit__c</columns>
+    <columns>QuantityInUnit__c</columns>
+    <columns>MissingQuantityinUnit__c</columns>
+    <columns>DamagedQuantityInUnit__c</columns>
+    <columns>AcceptedQuantityInUnit__c</columns>
+    <columns>QuantityVarianceinUnit__c</columns>
+    <columns>CargoTroubleNote__c</columns>
+    <columns>LastWOS__c</columns>
+    <columns>LastWosLineItem__c</columns>
+    <columns>Locator__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CargoLifeCycle__c</field>
+        <operation>equals</operation>
+        <value>Missing,Damaged</value>
+    </filters>
+    <label>Trouble View</label>
+    <language>en_US</language>
+</ListView>

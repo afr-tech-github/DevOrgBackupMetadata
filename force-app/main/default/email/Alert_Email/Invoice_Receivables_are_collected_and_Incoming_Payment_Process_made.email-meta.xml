@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>諸請求の入金予定分が支払期限日を過ぎた際に送信</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>NON-DUTY Invoice Receivables are collected and Incoming Payment Process made?</name>
+    <style>none</style>
+    <subject>アラートメール-ID: {!CustomObject1__c.Name}-諸請求を回収し、入金処理を行いましたか?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

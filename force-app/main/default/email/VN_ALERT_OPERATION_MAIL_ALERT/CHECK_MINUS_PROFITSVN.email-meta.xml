@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi lợi nhuận của lô hàng thì âm.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Kiểm tra lô hàng không có lợi nhuận</name>
+    <style>none</style>
+    <subject>CHECK MINUS PROFITS SHIPMENT No {!CustomObject1__c.Name}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

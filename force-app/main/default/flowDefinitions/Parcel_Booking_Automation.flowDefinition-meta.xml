@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>14</activeVersionNumber>
+    <description>Create W/O, W/O product, WOS, WOSL, Cargo, WO Cargo from Parcel</description>
+    <masterLabel>Parcel Booking Automation</masterLabel>
+</FlowDefinition>

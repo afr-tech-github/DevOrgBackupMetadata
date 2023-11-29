@@ -1,0 +1,24 @@
+経理担当者 様 
+
+{!Tax_Ratio__c.CreatedBy} 様が
+以下の通り、新しい消費税率の申請を行いました。
+
+こちらのリンクをクリックし、承認あるいは却下を行ってください。 
+
+◎TAX RATIO ID：[{!Tax_Ratio__c.TAX_RATIO_ID__c}]  Link to SF:{!Tax_Ratio__c.Link} 
+◎Currency : {!Tax_Ratio__c.Currency__c}
+◎Start Date : {!Tax_Ratio__c.Start_Date__c}
+◎End Date : {!Tax_Ratio__c.End_Date__c}
+◎Selling Tax Rate : {!Tax_Ratio__c.Selling_Tax_Ratio__c}%
+◎Buying Tax Rate : {!Tax_Ratio__c.Buying_Tax_Ratio__c}%
+
+この申請を承認、却下したり、フィードを通じてコメントすることができます。
+
+よろしくお願いします。
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+ *********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

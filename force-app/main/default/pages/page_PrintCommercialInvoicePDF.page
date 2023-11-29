@@ -1,0 +1,465 @@
+<apex:page controller="PrintCommercialInvoiceController" contentType="text/html" showHeader="false" applyHtmlTag="false"
+    applyBodyTag="false" docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    </html>
+
+    <head>
+
+        <style>
+            @media print {
+                body {
+                    counter-reset: page;
+                }
+                .no-print,
+                .no-print * {
+                    display: none !important;
+                }
+
+                div.footer {
+                    counter-increment: page;
+                    display: block;
+                    text-align: center;
+                    position: running(footer);
+                }
+                @page {
+                    padding-bottom: 10mm;
+            		padding-top: 50mm;
+                    @bottom-center {
+                        content: element(divfooter);
+                    }
+                    .content {
+                        max-height: calc(100% - 60px);
+                    }
+                }
+                div.divFooter {
+                    font-size: 15px;
+                    position: fixed !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    display: block !important;
+                }
+                .tblDetail {
+                    overflow: visible !important;
+                }
+
+                .pagenumber:after {
+                    content: counter(page);
+                }
+
+                .pagecount:before {
+                    content: counter(pages);
+                }
+                table {
+                    overflow: visible !important;
+                }
+                thead {
+                    display: table-header-group;
+                }
+                tfoot {
+                    display: table-row-group;
+                }
+                tr {
+                    page-break-inside: avoid;
+                }
+                .pagination {
+                    display: none;
+                }
+                .image-padding {
+                    padding-left: -100px;
+                }
+                table {
+                    overflow: visible !important;
+                }
+                thead {
+                    display: table-header-group
+                }
+                tfoot {
+                    display: table-row-group
+                }
+                tr {
+                    page-break-inside: avoid
+                }
+            }
+
+            @page {
+                size: A4;
+                margin: 5mm;
+            }
+
+
+            .divfooter {
+                text-align: center !important;
+                font-size: 15px;
+                display: none;
+            }
+
+            .image-padding {
+                padding-left: 100px;
+            }
+        </style>
+    </head>
+
+    <body style="font-family: Times-Roman">
+        <div class="content">
+            <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right; background: lightgray; border: 1px solid #b5b5b5; font-weight: normal;">
+                PRINT
+                <!-- {!translations['print_note']} -->
+            </button>
+            <!--
+            <div class="header" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px;">
+                <div style="padding-left: 0px; padding-right: 0px;">
+                    <apex:outputPanel rendered="{!templateType == 'official'}">
+                        <div style="width: 100%; text-align: center; " width="200px" height="100px">
+                            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" style="height: 70px;"
+                            />
+                        </div>
+                    </apex:outputPanel>
+                </div>
+            </div>
+            -->
+            <table class="content-table border-right" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; height:1020px; margin-top: 30px;">
+                <!-- title COMMERCIAL INVOICE -->
+                <tr style="border: 0.5px solid black !important; width: 100%">
+                    <th colspan="10" style="text-align: center; border-width: 0.5px 0px 0.5px 0.5px; border-style: solid; border-left:none">
+                        <apex:outputText value="COMMERCIAL INVOICE" style="font-family: Times-Roman; font-size: 18.5px; font-weight: bold;" rendered="{!language == 'en'}"
+                        />
+                    </th>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none;  border-left:none">
+                        <apex:outputText value="Seller" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="3" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+                        <apex:outputText value="Invoice No.:" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="Date:" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" rowspan="3" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none;  border-left:none">
+                        <apex:outputText escape="false" value="{!salesOrder.ContractID__r.SellerCompany__r.Name}" style="font-weight: bold; white-space:pre-wrap;" rendered="{!language == 'en'}"
+                        />
+                        <br/>
+                        <apex:outputText escape="false" style="white-space:pre-wrap;" value="{!salesOrder.ContractID__r.SellerCompany__r.EnglishAddress__c}" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="3" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+                        <apex:outputText value="{!salesOrder.CommercialInvoiceNo__c}" style="font-weight: bold;" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman;border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="{0,date,d-MMM-yy}" style="font-weight: bold;" rendered="{!language == 'en'}">
+                            <apex:param value="{!salesOrder.InvoiceDate__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+
+                    <td colspan="3" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none;">
+                        <apex:outputText value="Contract No.:" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="Date:" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+
+                    <td colspan="3" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none;">
+                        <apex:outputText value="{!salesOrder.ContractID__r.ContractNumber__c}" style="font-weight: bold;" rendered="{!language == 'en'}"
+                        />
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="{0,date,d-MMM-yy}" style="font-weight: bold;" rendered="{!language == 'en'}">
+                            <apex:param value="{!salesOrder.ContractID__r.ContractSignedDate__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="Buyer" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="3" style="font-size: 14px; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+
+                    </td>
+                    <td colspan="2" style="font-size: 14px; border-width: 1px 0px 1px 1px; border-style: solid;">
+
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none;  border-left:none">
+                        <apex:outputText value="{!salesOrder.CustomerCompanyName__r.Name}" escape="false" style="white-space:pre-wrap; font-weight: bold;" rendered="{!language == 'en'}"
+                        />
+                        <br/>
+                        <apex:outputText value="{!salesOrder.CustomerAddress__c}" escape="false" style="white-space:pre-wrap;" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="5" rowspan="7" style="vertical-align:top !important; font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="Payment: " rendered="{!salesOrder.ReceiptancePaymentType__c == 'T/T' || salesOrder.ReceiptancePaymentType__c == 'D/P'}"
+                        />
+                        <apex:outputText escape="false" style="white-space:pre-wrap;" value="{!salesOrder.PaymentCondition__c}" rendered="{!salesOrder.ReceiptancePaymentType__c == 'T/T' || salesOrder.ReceiptancePaymentType__c == 'D/P'}"
+                        />
+
+                        <apex:outputText value="LC No: " rendered="{!salesOrder.ReceiptancePaymentType__c != 'T/T' && salesOrder.ReceiptancePaymentType__c != 'D/P'}"
+                        />
+                        <apex:outputText value="{!salesOrder.LCNo__c}" rendered="{!salesOrder.ReceiptancePaymentType__c != 'T/T' && salesOrder.ReceiptancePaymentType__c != 'D/P'}"
+                        />
+                        <br/>
+                        <apex:outputText value="Date of Issue: " rendered="{!salesOrder.ReceiptancePaymentType__c != 'T/T' && salesOrder.ReceiptancePaymentType__c != 'D/P'}"
+                        />
+                        <apex:outputText value="{0,date,d-MMM-yyyy}" rendered="{!salesOrder.ReceiptancePaymentType__c != 'T/T' && salesOrder.ReceiptancePaymentType__c != 'D/P'}">
+                            <apex:param value="{!salesOrder.LCDate__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="Notify Party" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="{!salesOrder.NotifyParty__r.Name}" escape="false" style="white-space:pre-wrap; font-weight: bold;" rendered="{!language == 'en'}" />
+                        <br/>
+                        <apex:outputText value="{!salesOrder.NotifyPartysAddress__c}" escape="false" style="white-space:pre-wrap;" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="Port of loading" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="{!salesOrder.PortofLoading__r.Name}," style="font-weight: bold; text-transform: uppercase;" rendered="{!salesOrder.PortofLoading__r.Name != null}"
+                        />
+                        <apex:outputText value=" {!salesOrder.PortofLoading__r.Country_Name__c}" style="font-weight: bold; text-transform: uppercase;"
+                            rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman;border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="Port of Discharging" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="{!salesOrder.PortofDischarge__r.Name}," style="font-weight: bold; text-transform: uppercase;" rendered="{!salesOrder.PortofDischarge__r.Name != null}"
+                        />
+                        <apex:outputText value=" {!salesOrder.PortofDischarge__r.Country_Name__c}" style="font-weight: bold; text-transform: uppercase;"
+                            rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="width:64%; font-family: Times-Roman; text-align: center; vertical-align: middle; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="COMMODITY DESCRIPTION OF GOODS" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}"
+                        />
+                    </td>
+                    <td colspan="2" style="width:12%; font-family: Times-Roman; text-align: center; vertical-align: middle; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="QUANTITY" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                        <br/>
+                        <apex:outputText value="({!salesOrder.ChargeUnit__c})" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="1" style="width:12%; font-family: Times-Roman; text-align: center; vertical-align: middle; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+                        <apex:outputText value="Unit Price" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                        <br/>
+                        <apex:outputText value="({!salesOrder.UnitpriceChargeUnit__c})" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="2" style="width:12%; font-family: Times-Roman; text-align: center; vertical-align: middle; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="Amount" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                        <br/>
+                        <apex:outputText value="(USD)" style="font-size: 14px; font-weight: bold;" rendered="{!language == 'en'}" />
+                    </td>
+                </tr>
+                <apex:outputPanel rendered="{!salesOrder.CommodityDescriptionofGoods__c!=null && salesOrder.CommodityDescriptionofGoods__c!=''}">
+                    <tr style="border: 1px solid black !important;">
+                        <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                            <apex:outputText escape="false" style="white-space:pre-wrap;" value="{!salesOrder.CommodityDescriptionofGoods__c}"/>
+                        </td>
+                        <td colspan="2" style="font-size: 14px; font-family: Times-Roman; border-width: 0px 0px 0px 1px; border-style: solid;">
+                            
+                        </td>
+                        <td colspan="1" style="font-size: 14px; font-family: Times-Roman;border-width: 0px 0px 0px 0px; border-style: solid; border-right:none">
+                            
+                        </td>
+                        <td colspan="2" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 0px; border-style: solid;">
+                        </td>
+                    </tr>
+                </apex:outputPanel>
+                <apex:repeat value="{!listTRSBills}" var="trsBill">
+                    <tr style="border: 1px solid black !important;">
+                        <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                            <apex:outputText escape="false" style="white-space:pre-wrap" value="{!trsBill.ProductNamedetailatprintEng__c}" />
+                        </td>
+                        <td colspan="2" style="font-size: 14px; font-family: Times-Roman; text-align:right; border-width: 1px 0px 1px 1px; border-style: solid;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(trsBill.ChargeUnitTotal__c != null, trsBill.ChargeUnitTotal__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                        <td colspan="1" style="font-size: 14px; font-family: Times-Roman; text-align:right; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(trsBill.UnitPriceOfSellUSD__c != null, trsBill.UnitPriceOfSellUSD__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                        <td colspan="2" style="font-size: 14px; font-family: Times-Roman; text-align:right; border-width: 1px 0px 1px 1px; border-style: solid;">
+                            <apex:outputText value="{0, number, ###,##0.00}">
+                                <apex:param value="{!IF(trsBill.TotalAmountOfSellUSD__c != null, trsBill.TotalAmountOfSellUSD__c, 0)}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+
+
+                <tr style="border: 1px solid black !important;">
+                    <td colspan="5" style="font-size: 14px; font-family: Times-Roman; border-width: 1px 0px 1px 1px; border-style: solid; border-right:none; border-left:none">
+                        <apex:outputText value="TOTAL" style="font-weight: bold;" rendered="{!language == 'en'}" />
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman; text-align:right; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="{0, number, ###,##0.00}" style="font-weight: bold;">
+                            <apex:param value="{!grossWeightTotal}" />
+                        </apex:outputText>
+                    </td>
+                    <td colspan="1" style="font-size: 14px; font-family: Times-Roman; text-align:right;border-width: 1px 0px 1px 1px; border-style: solid; border-right:none">
+
+                    </td>
+                    <td colspan="2" style="font-size: 14px; font-family: Times-Roman; text-align:right; border-width: 1px 0px 1px 1px; border-style: solid;">
+                        <apex:outputText value="{0, number, ###,##0.00}" style="font-weight: bold;">
+                            <apex:param value="{!amountOfSellUSDTotal}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr style="display:{!IF(salesOrder.TotalAmountofSelling_inwords__c != null, '', 'none')}; vertical-align:top !important;">
+                    <td colspan="10" class="amount-in-word" width="100%" style="font-family: Times-Roman;  min-height: 50px;">
+                        <apex:outputText value="SAY" style="font-size: 14px; font-weight: bold;" />:
+                        <apex:outputText value=" {!sayContext}" style="font-size: 14px; font-weight: bold; text-transform: uppercase;"
+                        />
+                    </td>
+                </tr>
+                <tr style="display:{!IF(salesOrder.Notes__c != null, '', 'none')};  vertical-align:top !important;">
+                    <td colspan="10" class="remark" style="font-size: 14px; font-family: Times-Roman; min-height: 50px;">
+                        <apex:outputText value="NOTES" style="font-size: 14px; font-weight: bold;" />:
+                        <apex:outputText value=" {!salesOrder.Notes__c}" escape="false" style="white-space:pre-wrap; font-size: 14px; font-weight: bold;" />
+                    </td>
+                </tr>
+                <tr style="height: 20px;">
+                    <td colspan="10" width="100%">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" width="50%" style="font-family: Times-Roman;">
+                        <apex:outputPanel rendered="{!templateType == 'official'}">
+                            <apex:outputText value="Bank's Beneficiary detailed :" style="font-size: 14px" />
+                        </apex:outputPanel>
+                    </td>
+                    <td colspan="5" width="50%" style="font-family: Times-Roman; text-align:center">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="10">
+                        <apex:outputPanel rendered="{!templateType == 'official'}">
+                            <table style="width: 100%;  font-size: 14px;">
+                                <tr style="width: 100%; vertical-align:top;">
+                                    <td style="font-family: Times-Roman;width: 15%;">
+                                        <apex:outputText value="{!translations['account_name']}" />
+                                    </td>
+                                    <td style="font-family: Times-Roman;  width: 85%;">
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%; vertical-align:top;">
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value="{!translations['bank_name']}" />
+                                    </td>
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%; vertical-align:top;">
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value="{!translations['bank_address']}" />
+                                    </td>
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%; vertical-align:top;">
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value="{!translations['swift_code']}" />
+                                    </td>
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr style="width: 100%; vertical-align:top;">
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value="{!translations['account_no']}" />
+                                    </td>
+                                    <td style="font-family: Times-Roman;">
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" width="50%" style="font-family: Times-Roman;">
+
+                    </td>
+                    <td colspan="5" width="50%" style="font-family: Times-Roman; vertical-align: top; height:100%;">
+                        <apex:outputText value="{!salesOrder.ContractID__r.SellerCompany__r.Name}" style="font-weight: bold; font-size: 14px;" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <apex:outputPanel rendered="{!showFooter}">
+            <div class="divfooter" style="width: 100%; font-size: 14px;">
+                <!-- <strong>Head Office:</strong> No.21 Street, Song Da Zone, Hiep Binh Chanh Ward, Thu Duc District, HCMC, Vietnam
+                <br/>
+                <strong>Factory:</strong> Dong Nai Province | Binh Duong Province | Binh Phuoc Province -->
+                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Footer__c}" escape="false"  style="white-space:pre-wrap"/>
+            </div>
+        </apex:outputPanel> 
+    </body>
+</apex:page>

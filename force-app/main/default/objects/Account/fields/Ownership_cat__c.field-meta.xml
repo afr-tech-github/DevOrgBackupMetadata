@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ownership_cat__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>OWNERSHIP TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>当社ノミカーゴ</fullName>
+                <default>false</default>
+                <label>当社ノミカーゴ</label>
+            </value>
+            <value>
+                <fullName>パートナーFree-Handカーゴ(輸入のみ）</fullName>
+                <default>false</default>
+                <label>パートナーFree-Handカーゴ(輸入のみ）</label>
+            </value>
+            <value>
+                <fullName>パートナーノミカーゴ</fullName>
+                <default>false</default>
+                <label>パートナーノミカーゴ</label>
+            </value>
+            <value>
+                <fullName>共同営業</fullName>
+                <default>false</default>
+                <label>共同営業</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

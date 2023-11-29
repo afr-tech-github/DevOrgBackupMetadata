@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shiharaikigen__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(ShiharaiSyurui__c) , &apos;立替金&apos;    , TEXT(YEAR(DeadlineForPaymentOfExpense__c)) +&apos;/&apos;+ TEXT(MONTH(DeadlineForPaymentOfExpense__c))+&apos;/&apos;+TEXT(DAY(DeadlineForPaymentOfExpense__c)),
+                                   &apos;諸請求金&apos;    , TEXT(YEAR(DeadlineForPaymentOfExpense__c)) +&apos;/&apos;+ TEXT(MONTH(DeadlineForPaymentOfExpense__c))+&apos;/&apos;+TEXT(DAY(DeadlineForPaymentOfExpense__c)),
+                                  &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>「支払い種類」を条件にして 
+諸請求支払い期限もしくは立替金支払い期限を表示しています。</inlineHelpText>
+    <label>DUE DATE OF PAYMENT</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

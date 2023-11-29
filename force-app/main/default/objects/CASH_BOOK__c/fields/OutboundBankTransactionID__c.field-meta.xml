@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OutboundBankTransactionID__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>OUTBOUND BANK TRANSACTION ID</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>BankTransaction__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Outbound Transaction-Local Currency, Outbound Transaction-USD Currency</value>
+        </filterItems>
+        <filterItems>
+            <field>BankTransaction__c.Currency__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Currency__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>BankTransaction__c</referenceTo>
+    <relationshipLabel>INBOUND CASH TRANSACTION</relationshipLabel>
+    <relationshipName>CASH</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>BuyUSDkoushinMasutaMeisai</fullName>
+        <field>SellTankaUSD__c</field>
+        <formula>IF ( ISNULL( SellTankaUSD__c ) || TEXT(SellTankaUSD__c) = &apos;&apos; , MTariff__r.SellAmountUSD__c , SellTankaUSD__c)</formula>
+        <name>販売単価(USD)更新：マスタ明細</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>JPYMasutaMeisai</fullName>
+        <field>SellTankaJPY__c</field>
+        <formula>IF ( ISNULL( SellTankaJPY__c ) || TEXT(SellTankaJPY__c) = &apos;&apos; ,
+
+IF ( TEXT(curr__c) = &apos;JPY&apos; ,
+MTariff__r.SellKingakuJPY__c ,
+SellTankaUSD__c *  KawaseSel__c
+),
+
+SellTankaJPY__c)</formula>
+        <name>販売単価(JPY)更新：マスタ明細</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ShiireJPYKousinMasutaMeisai</fullName>
+        <field>BuyTankaJPY__c</field>
+        <formula>IF ( (ISNULL( BuyTankaJPY__c ) || TEXT(BuyTankaJPY__c) = &apos;&apos;) &amp;&amp;  (TEXT(MasterAnken__r.MConsolidationType__c) = &apos;複数BL貨物(Multiple BL Cargo)&apos;) ,
+
+IF ( TEXT(curr__c) = &apos;JPY&apos; ,
+MTariff__r.BuyKingaku__c ,
+BuyTankaUSD__c *  KawaseBay__c
+),
+
+BuyTankaJPY__c)</formula>
+        <name>仕入単価(JPY)更新：マスタ明細</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ShiireUSDkoushinMasutaMeisai</fullName>
+        <field>BuyTankaUSD__c</field>
+        <formula>IF ( (ISNULL( BuyTankaUSD__c ) || TEXT(BuyTankaUSD__c) = &apos;&apos;)  &amp;&amp;  (TEXT(MasterAnken__r.MConsolidationType__c) = &apos;複数BL貨物(Multiple BL Cargo)&apos;), 
+MTariff__r.BuyAmountUSD__c , BuyTankaUSD__c)</formula>
+        <name>仕入単価(USD)更新：マスタ明細</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>M B%2FL BUYING DETAIL AUTO FIELD UPDATE</fullName>
+        <actions>
+            <name>BuyUSDkoushinMasutaMeisai</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>JPYMasutaMeisai</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ShiireJPYKousinMasutaMeisai</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ShiireUSDkoushinMasutaMeisai</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>マスタ案件明細項目自動更新</description>
+        <formula>True</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

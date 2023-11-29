@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>COPY_TO_H_B_L_SHIPMENTS</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>DATA COPY TO H B/L SHIPMENTS</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var left = (screen.width/2)-(400); 
+var top = (screen.height/2)-(250); 
+
+var url = &apos;{!URLFOR(&quot;/apex/clofor_com_cfs__page_CopyingMShipDataToHShips?id=&quot; + URLENCODE(MasterAnken__c.Id))}&apos;; 
+window.open(url,&apos;&apos;,&apos;width=800,height=500,top=&apos; + top + &apos;,left=&apos; + left);</url>
+</WebLink>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>PurchasingOrder__c</columns>
+    <columns>ResourceID__c</columns>
+    <columns>InvoiceId__c</columns>
+    <columns>PaymentToVendor__c</columns>
+    <columns>ChargeUnit__c</columns>
+    <columns>Currency__c</columns>
+    <columns>TotalAmountLocal__c</columns>
+    <columns>AmountOfTaxLocal__c</columns>
+    <columns>AmountIncludedTaxLocal__c</columns>
+    <columns>PaidAmountLocal__c</columns>
+    <columns>UnpaidBalanceLocal__c</columns>
+    <columns>BankAccountPurchasing__c</columns>
+    <columns>PaymentSettledDate__c</columns>
+    <columns>Beneficiary__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

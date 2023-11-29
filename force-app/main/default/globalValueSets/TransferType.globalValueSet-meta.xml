@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Obsolete</fullName>
+        <default>false</default>
+        <label>Obsolete</label>
+    </customValue>
+    <customValue>
+        <fullName>Damaged beyond economical repair</fullName>
+        <default>false</default>
+        <label>Damaged beyond economical repair</label>
+    </customValue>
+    <customValue>
+        <fullName>Needs repair</fullName>
+        <default>false</default>
+        <label>Needs repair</label>
+    </customValue>
+    <customValue>
+        <fullName>Irreparable</fullName>
+        <default>false</default>
+        <label>Irreparable</label>
+    </customValue>
+    <customValue>
+        <fullName>Transferred</fullName>
+        <default>false</default>
+        <label>Transferred</label>
+    </customValue>
+    <customValue>
+        <fullName>Disposed</fullName>
+        <default>false</default>
+        <label>Disposed</label>
+    </customValue>
+    <masterLabel>TRANSFER TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

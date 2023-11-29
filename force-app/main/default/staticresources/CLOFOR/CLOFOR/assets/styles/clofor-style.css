@@ -1,0 +1,18 @@
+.klomos .slds-tabs--path__item__medium {
+	height: 5rem;
+}
+
+.klomos .slds-tabs--path__item__medium:before {
+	left: -3rem;
+	width: calc(5rem - (2px * 2));
+	height: calc(5rem - (2px * 2));	
+}
+
+.klomos .slds-tabs--path__link__medium {
+	line-height: 4.5rem;
+	vertical-align: middle;
+}
+
+.klomos .slds-tabs--path__stage__medium {
+	margin-top: -2.5rem;
+}

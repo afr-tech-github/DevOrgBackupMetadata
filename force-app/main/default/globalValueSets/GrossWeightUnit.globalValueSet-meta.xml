@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>KGM</fullName>
+        <default>true</default>
+        <label>KGM</label>
+    </customValue>
+    <customValue>
+        <fullName>TNE</fullName>
+        <default>false</default>
+        <label>TNE</label>
+    </customValue>
+    <customValue>
+        <fullName>LBR</fullName>
+        <default>false</default>
+        <label>LBR</label>
+    </customValue>
+    <masterLabel>Gross Weight Unit</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

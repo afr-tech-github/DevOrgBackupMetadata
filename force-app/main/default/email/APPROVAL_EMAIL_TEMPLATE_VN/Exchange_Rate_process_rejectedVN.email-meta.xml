@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi xem xét tỉ giá bị từ chối.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Tỉ giá qui đổi-Không được chấp nhận</name>
+    <style>none</style>
+    <subject>EXCHANGE RATE-Approval Rejected-{!MgmtMaster__c.Mgmt_Exrate_fromto__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

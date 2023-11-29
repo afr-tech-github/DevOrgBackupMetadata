@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Các mẫu email được gửi tới khách hàng tự phục vụ để thông báo với họ thì lời nhận xét công khai sẽ được thêm vào trong trường hợp này.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>SUPPORT:  Tự nhận thông báo phản hồi(Mẫu)</name>
+    <style>none</style>
+    <subject>Your case {!Case.CaseNumber} has been updated</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

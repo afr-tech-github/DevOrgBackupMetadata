@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Inventory Physical Counting</fullName>
+        <default>false</default>
+        <label>Inventory Physical Counting</label>
+    </customValue>
+    <customValue>
+        <fullName>Inventory Quantity Review in System</fullName>
+        <default>false</default>
+        <label>Inventory Quantity Review in System</label>
+    </customValue>
+    <customValue>
+        <fullName>Inventory Valuation Review</fullName>
+        <default>false</default>
+        <label>Inventory Valuation Review</label>
+    </customValue>
+    <customValue>
+        <fullName>Hardware Physical Counting</fullName>
+        <default>false</default>
+        <label>Hardware Physical Counting</label>
+    </customValue>
+    <customValue>
+        <fullName>Hardware Valuation Review</fullName>
+        <default>false</default>
+        <label>Hardware Valuation Review</label>
+    </customValue>
+    <customValue>
+        <fullName>Software Valuation Review</fullName>
+        <default>false</default>
+        <label>Software Valuation Review</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Audit Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

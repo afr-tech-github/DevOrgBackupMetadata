@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>MaterialName__c</columns>
+    <columns>Manufacturer__c</columns>
+    <columns>OriginCountry__c</columns>
+    <columns>BuyingUnitPriceLocal__c</columns>
+    <columns>BuyingUnitPriceUSD__c</columns>
+    <columns>QuantityPerUnit__c</columns>
+    <columns>StandardMarginRate__c</columns>
+    <columns>StandardSellingUnitPriceLocal__c</columns>
+    <columns>StandardSellingUnitPriceUSD__c</columns>
+    <columns>LWHUnit__c</columns>
+    <columns>Length__c</columns>
+    <columns>Width__c</columns>
+    <columns>Height__c</columns>
+    <columns>MeasurementCBM__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

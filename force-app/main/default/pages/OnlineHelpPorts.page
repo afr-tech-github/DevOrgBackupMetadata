@@ -1,0 +1,102 @@
+<apex:page showHeader="false">
+<head>
+    <title>Port Code</title>
+ 
+<style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+
+
+
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        Port Code Help Page
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+  <!-- Begin Default Content REMOVE THIS -->
+  <h2>Trợ giúp trực tuyến cho object Cảng</h2>
+<br></br>
+Chức năng này dung để quản lý các mã của các cảng biển và sân bay trên toàn thế giới.Nếu một vài cảng không có sẵn thì chúng ta<br></br>
+có thể tự  cập nhật thêm<br></br>
+Các cảng, sân bay đã đăng ký có thể dể dàng tìm kiếm bằng chức năng look up tại ô tìm kiếm của trang này<br></br>
+
+
+</body>
+<br></br>
+
+<body>
+<h2>Online Help for Ports</h2><br></br>
+This object is for managing sea port and airport all around the world. <br></br>
+If the certain port cannot be found in the list, it can be added by anyone.<br></br>
+
+Registered port can be utilized from the look up window in Port of Loading, Port of Dispatch, Port of receipt, Port of Delivery.<br></br>
+
+<br></br>
+</body>
+<body>
+<h2>ポートに関するオンラインヘルプ</h2><br></br>
+世界中の港および空港の情報を管理するオブジェクトです。<br></br>
+リストの中に港が見つからない場合は、どなたでも新しく追加することが出来ます。<br></br>
+登録されたポートはPort of Loading, Port of Dispatch, Port of receipt, Port of Deliveryのルックアップウインドウから検索することができます。<br></br>
+
+</body>
+
+<br></br>
+
+<body>
+<h2>포트에 대한 온라인 도움말</h2><br></br>
+세계의 항구 및 공항 정보를 관리하는 오브젝트(객체)입니다.<br></br>
+목록에서 항구가 없으면 누구나 새로 추가 할 수 있습니다.<br></br>
+등록 된 포트는 Port of Loading, Port of Dispatch, Port of receipt, Port of Delivery조회 창에서 검색 할 수 있습니다.<br></br>
+</body>
+
+
+
+
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

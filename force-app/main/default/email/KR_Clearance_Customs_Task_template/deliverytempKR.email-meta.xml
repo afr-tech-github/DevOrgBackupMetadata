@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>배송의뢰서를 보낼 때, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>배송의뢰서 템플릿</name>
+    <style>none</style>
+    <subject>배송의뢰서를 전송합니다.</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

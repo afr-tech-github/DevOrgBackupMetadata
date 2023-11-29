@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>お客様にCHECK B/Lに関する書類を転送する時にこのテンプレートを使用してください。</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[海上輸出]お客様用自動メール - CHECK B/Lリンク</name>
+    <style>none</style>
+    <subject>輸出貨物進捗自動お知らせ by CloTra -**Check B/L書類リンクあり**--ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

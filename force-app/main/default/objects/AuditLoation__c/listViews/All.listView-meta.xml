@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>AuditID__c</columns>
+    <columns>LocatorD__c</columns>
+    <columns>LocatorLayer__c</columns>
+    <columns>LocatorDetail__c</columns>
+    <columns>Status__c</columns>
+    <columns>ScheduleStartDateTime__c</columns>
+    <columns>ScheduleEndDateTime__c</columns>
+    <columns>ActualStartDateTime__c</columns>
+    <columns>ActualEndDateTime__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

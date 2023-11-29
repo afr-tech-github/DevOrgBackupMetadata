@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Warehouse Rental</fullName>
+        <default>false</default>
+        <label>Warehouse Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Office Rental</fullName>
+        <default>false</default>
+        <label>Office Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Yard Rental</fullName>
+        <default>false</default>
+        <label>Yard Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Parking Area Rental</fullName>
+        <default>false</default>
+        <label>Parking Area Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Pallet Rental</fullName>
+        <default>false</default>
+        <label>Pallet Rental</label>
+    </customValue>
+    <customValue>
+        <fullName>Maintenance Fee</fullName>
+        <default>false</default>
+        <label>Maintenance Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>Management Fee</fullName>
+        <default>false</default>
+        <label>Management Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>System</fullName>
+        <default>false</default>
+        <label>System</label>
+    </customValue>
+    <customValue>
+        <fullName>Cleaning</fullName>
+        <default>false</default>
+        <label>Cleaning</label>
+    </customValue>
+    <customValue>
+        <fullName>Office Supplies</fullName>
+        <default>false</default>
+        <label>Office Supplies</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver Salary</fullName>
+        <default>false</default>
+        <label>Driver Salary</label>
+    </customValue>
+    <customValue>
+        <fullName>Electricity</fullName>
+        <default>false</default>
+        <label>Electricity</label>
+    </customValue>
+    <customValue>
+        <fullName>Water</fullName>
+        <default>false</default>
+        <label>Water</label>
+    </customValue>
+    <customValue>
+        <fullName>Internet</fullName>
+        <default>false</default>
+        <label>Internet</label>
+    </customValue>
+    <customValue>
+        <fullName>Rubbish Collection</fullName>
+        <default>false</default>
+        <label>Rubbish Collection</label>
+    </customValue>
+    <customValue>
+        <fullName>Miscellaneous</fullName>
+        <default>false</default>
+        <label>Miscellaneous</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver Compensation</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Driver Compensation</label>
+    </customValue>
+    <masterLabel>FACILITY FIXED COST</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,44 @@
+<template>
+    <div class="slds-is-relative">
+        <div class="slds-box">
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="slds-col slds-text-heading_medium">
+                    {_wos.Name}
+                </div>
+                <div class="slds-col">
+                    <lightning-button icon-name="utility:success" label="Finalize" variant="brand" onclick={handleFinalize}></lightning-button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-box slds-m-top_x-small">
+            <c-qr-landing-v2_-scan-products
+                data-name="_productId"
+                worker-id={workerId} 
+                locator-id={locatorId} 
+                wos-id={wosId}
+                product-id={_productId}
+                onchange={handleInputChange}></c-qr-landing-v2_-scan-products>
+
+            <c-qr-landing-v2_-scan-cargoes class="slds-show slds-m-top_small" 
+                data-name="_cargoId"
+                worker-id={workerId} 
+                locator-id={locatorId} 
+                wos-id={wosId}
+                product-id={_productId}
+                onchange={handleInputChange}></c-qr-landing-v2_-scan-cargoes>
+
+            <c-qr-landing-v2_-cargo-fields class="slds-show slds-m-top_small" if:true={_cargoId} 
+                worker-id={workerId}
+                locator-id={locatorId}
+                cargo-id={_cargoId}
+                wos-id={wosId} ></c-qr-landing-v2_-cargo-fields>
+
+            <div class="slds-text-align_right slds-m-top_small" if:true={_showSubmit}>
+                <lightning-button variant="brand" label="Go" icon-name="utility:push" onclick={handleProcessCargo}></lightning-button>
+            </div>
+        </div>
+
+        <lightning-spinner if:true={_isLoading} alternative-text="Loading..." ></lightning-spinner>
+    </div>
+</template>

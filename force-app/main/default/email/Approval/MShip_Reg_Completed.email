@@ -1,0 +1,21 @@
+Dear Team members 
+
+I completed data registration for Master Shipment as below.
+
+◎Master ShipID：{!MasterAnken__c.MasterID__c}  Link to CloFor:{!MasterAnken__c.Link} 
+◎MBL No：{!MasterAnken__c.MMaster_B_L_No__c} 
+◎Vessel, Voyage：{!MasterAnken__c.MVessel__c}  /  {!MasterAnken__c.MVoy_No__c} 
+◎ETA ： {!MasterAnken__c.META__c} (Day：{!MasterAnken__c.META_DAY__c}) 
+◎Number of HBL：{!MasterAnken__c.NO_HOUSE_B_L__c} H B/L 
+◎Container： {!MasterAnken__c.MContainer__c}*{!MasterAnken__c.MContainerNumber__c}　/ {!MasterAnken__c.MContainer2__c}*{!MasterAnken__c.MContainerNumber2__c} 
+◎Devanning Date：{!MasterAnken__c.MDevanningDate__c} 
+◎Internal Memo for information sharing：{!MasterAnken__c.Internal_Memo__c}
+
+Best regards.
+
+********************************************************* 
+{!MasterAnken__c.Mail_Merge_Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

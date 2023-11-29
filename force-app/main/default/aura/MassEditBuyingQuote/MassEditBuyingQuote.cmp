@@ -1,0 +1,316 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" controller="MassEditBuyingQuoteLineController">
+    <aura:attribute name="recordTypeId" type="String"/>
+    <aura:attribute name="showForm" type="Boolean" default="true" />
+    <aura:attribute name="isShowTable" type="Boolean" default="true" />
+    <aura:attribute name="showMassUpdateRow" type="Boolean" default="true" />
+    <aura:attribute name="isDisabledContainerType" type="Boolean"/>
+    <aura:attribute name="numberOfDisplayRecord" type="Integer" default="0" />
+    <aura:attribute name="overflowY" type="Boolean" default="false" />
+    <aura:attribute name="changedFields" type="List" default="[]" />
+    <aura:attribute name="fieldLabels" type="Object"/>
+    <aura:attribute name="isMultiCurrency" type="Boolean" default="false" />
+    
+    <aura:method name="onDelete" action="{! c.onDelete}"/>
+    <aura:method name="onClone" action="{! c.onClone}"/>
+    <aura:handler name="change" value="{!v.numberOfDisplayRecord}" action="{!c.changeNumberOfDisplayRecord}" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+	<lightning:spinner aura:id="spinner" class="slds-hide"/>
+    <div style="overflow: auto">
+        <div style="display: inline-block; width: 3000px">
+    <aura:if isTrue="{! v.showForm}">
+        <lightning:recordEditForm aura:id="recordEditForm" onsuccess="{!c.onSuccess}" onerror="{!c.onError}"
+            objectApiName="clofor_com_cfs__QuoteLine__c">
+            <lightning:messages />
+            <lightning:inputField class="slds-hide" fieldName="RecordTypeId" value="{!v.recordTypeId}" />
+            <lightning:inputField class="slds-hide" fieldName="clofor_com_cfs__QuoteID__c" value="{!v.recordId}" />
+            <div class="slds-grid">
+                <!--<div style="width: 174px; padding-top:32px;">
+                    <span style="font-size: 15px;">Add Quote Line</span>
+                </div>-->
+                 <div class="slds-col slds-p-right_x-small slds-p-vertical_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.Name}</label>
+                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="Name" />
+                 </div>
+                <!-- <div class="slds-col slds-p-right_xx-small slds-p-vertical_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__PrintingSection__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__PrintingSection__c" />
+                </div> -->
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ServicePricingID__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ServicePricingID__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Invoice_to__c}</label>
+                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Invoice_to__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CarrierAirlinerVendor__c}</label>
+                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__CarrierAirlinerVendor__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__POLAOD__c}</label>
+                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__POLAOD__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__PODAOA__c}</label>
+                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__PODAOA__c" />
+                </div>
+                <!-- <div class="slds-col slds-p-around_xx-small" style="width:100px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Print__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Print__c" />
+                </div> -->
+                <div class="slds-col slds-p-around_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Quantity__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Quantity__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Unit__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Unit__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ContainerType__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ContainerType__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CurrencyBuying__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__CurrencyBuying__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__TaxRateBuying__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__TaxRateBuying__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__LineItemName__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__LineItemName__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPriceLocal__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__BuyingListPriceLocal__c" />
+                </div>
+                <div class="slds-col slds-p-around_xx-small"  style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPriceUSD__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__BuyingListPriceUSD__c" />
+                </div>
+                <!-- <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="width:180px;"> -->
+                    <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ServiceSchedule__c}</label> -->
+                    <!-- <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ServiceSchedule__c" /> -->
+                 <!-- </div> -->
+                 <!-- <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="width:180px;"> -->
+                    <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__TransitTimeDays__c}</label> -->
+                    <!-- <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__TransitTimeDays__c" /> -->
+                 <!-- </div> -->
+                <!-- <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="width:180px;"> -->
+                    <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Remarks__c}</label> -->
+                    <!-- <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Remarks__c" /> -->
+                <!-- </div> -->
+                <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="{!if(v.isMultiCurrency, 'width:240px;', 'display:none;')}">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPrice3rdCurrency__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__BuyingListPrice3rdCurrency__c" />
+                </div>
+                <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ExchangeRateBuying__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ExchangeRateBuying__c" />
+                 </div>
+                 <div class="slds-col slds-p-left_xx-small slds-p-vertical_xx-small" style="width:180px;">
+                    <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CurrencyConverseForBuying__c}</label>
+                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__CurrencyConverseForBuying__c" />
+                 </div>
+            </div>
+            <div class="slds-clearfix">
+                <div class="slds-float_right" >
+                    <lightning:button class="slds-m-bottom_small" variant="brand" type="submit" onclick="{!c.onAdd}" name="Add" label="Add Quote Line" />
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </aura:if>
+    
+    <aura:if isTrue="{! v.showMassUpdateRow}">
+        <lightning:recordEditForm aura:id="massUpdateRow" onsuccess="{!c.onSuccess}" onerror="{!c.onError}"
+            objectApiName="clofor_com_cfs__QuoteLine__c">
+            <lightning:messages />
+            <table style="padding-bottom: 24px;">
+           		<tr>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.Name}</label>
+                        <lightning:inputField variant="label-hidden" value="" onchange="{!c.onUpdateFieldChange}" fieldName="Name" />
+                    </td>
+                	<!-- <td style="width:180px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__PrintingSection__c}</label>
+                    	<lightning:inputField variant="label-hidden" value="" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__PrintingSection__c" />
+                	</td> -->
+                	<td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ServicePricingID__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__ServicePricingID__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Invoice_to__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__Invoice_to__c" />
+                    </td>
+                	<td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CarrierAirlinerVendor__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__CarrierAirlinerVendor__c" />
+                	</td>
+                    <!-- <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__LineItemName__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__LineItemName__c" />
+                    </td> -->
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__POLAOD__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__POLAOD__c" />
+                    </td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__PODAOA__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__PODAOA__c" />
+                    </td>
+                	<!-- <td style="width:100px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Print__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__Print__c" />
+                	</td> -->
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Quantity__c}</label>
+                        <lightning:inputField variant="label-hidden" value="" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__Quantity__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Unit__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__Unit__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ContainerType__c}</label>{!v.isDisabledContainerType}
+                        <lightning:inputField variant="label-hidden" disabled="{!v.isDisabledContainerType}" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__ContainerType__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CurrencyBuying__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__CurrencyBuying__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__TaxRateBuying__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__TaxRateBuying__c" />
+                    </td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__LineItemName__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__LineItemName__c" />
+                    </td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPriceLocal__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__BuyingListPriceLocal__c" />
+                	</td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPriceUSD__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__BuyingListPriceUSD__c" />
+                	</td>
+                    <!-- <td> -->
+                        <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ServiceSchedule__c}</label> -->
+                        <!-- <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__ServiceSchedule__c" /> -->
+                    <!-- </td> -->
+                    <!-- <td> -->
+                        <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__TransitTimeDays__c}</label> -->
+                        <!-- <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__TransitTimeDays__c" /> -->
+                    <!-- </td> -->
+                    <!-- <td> -->
+                        <!-- <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__Remarks__c}</label> -->
+                        <!-- <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__Remarks__c" /> -->
+                	<!-- </td> -->
+                    <td style="{!if(v.isMultiCurrency, 'width:240px;', 'display:none;')}">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__BuyingListPrice3rdCurrency__c}</label>
+                        <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__BuyingListPrice3rdCurrency__c" />
+                    </td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__ExchangeRateBuying__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__ExchangeRateBuying__c" />
+                    </td>
+                    <td style="width:211px;">
+                        <label class="slds-form-element__label">{!v.fieldLabels.clofor_com_cfs__CurrencyConverseForBuying__c}</label>
+                        <lightning:inputField variant="label-hidden" onchange="{!c.onUpdateFieldChange}" fieldName="clofor_com_cfs__CurrencyConverseForBuying__c" />
+                    </td>
+                </tr>
+                <tr>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                	<td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                	</td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <td style="{!if(v.isMultiCurrency, 'width:240px;', 'display:none;')}">
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <!-- <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td>
+                    <td>
+                        <lightning:button class="slds-m-bottom_small" onclick="{!c.onUpdate}" variant="brand" type="button" label="Update" />
+                    </td> -->
+                </tr>
+            </table>
+        </lightning:recordEditForm>
+        <div class="slds-grid">
+            <lightning:button class="slds-m-bottom_small" onclick="{!c.onSelectAll}" variant="brand" type="button" label="Select All" />
+            <lightning:button class="slds-m-bottom_small" onclick="{!c.onUnselectAll}" variant="brand" type="button" label="Unselect All" />
+            <lightning:button class="slds-m-bottom_small" onclick="{!c.onRefresh}" variant="brand" type="button" label="Refresh" />
+            <div class="slds-var-m-around_medium slds-var-p-left_medium">
+                <lightning:input type="checkbox" label="Multi-currency?" onchange="{!c.onChangeMultiCurrency}" checked="{!v.isMultiCurrency}"/>
+            </div>
+            <!--<div class="slds-col_bump-left" >
+               <lightning:button class="slds-m-bottom_small" onclick="{!c.resetUpdate}" variant="brand" type="button" name="Update" label="Reset" />
+                <lightning:button class="slds-m-bottom_small" onclick="{!c.updateMass}" variant="brand" type="button" name="Update" label="Update Mass Quote Line" />
+            </div>-->
+        </div>
+    </aura:if>
+    <span style="font-size: 15px;">Edit Mass Quote Line</span>
+    <!-- {!v.body} -->
+    <aura:if isTrue="{!v.isShowTable}">
+        <div style="{! if(v.overflowY, 'max-height: 352px; overflow-y: auto;', 'max-height: 352px;')}">
+            {!v.body}
+        </div>
+    </aura:if>
+    </div>
+    </div>
+        <!--<div class="slds-clearfix">
+            <div class="slds-float_right" >
+            	<lightning:button class="slds-m-bottom_small" onclick="{!c.onSaveAll}" variant="brand" type="button" name="Save" label="Save All" />
+            </div>
+        </div>-->
+</aura:component>

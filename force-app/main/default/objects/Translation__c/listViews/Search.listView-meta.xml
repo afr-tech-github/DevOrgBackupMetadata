@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Search</fullName>
+    <columns>NAME</columns>
+    <columns>SETUP_TYPE</columns>
+    <columns>Active__c</columns>
+    <columns>Context__c</columns>
+    <columns>en_US__c</columns>
+    <columns>ja__c</columns>
+    <columns>ko__c</columns>
+    <columns>vi__c</columns>
+    <columns>kh__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ko__c</field>
+        <operation>contains</operation>
+        <value>통관</value>
+    </filters>
+    <label>Search</label>
+    <language>en_US</language>
+</ListView>

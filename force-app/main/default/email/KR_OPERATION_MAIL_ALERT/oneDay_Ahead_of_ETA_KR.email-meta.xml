@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>입항일로부터 1일전에 A/N이 송부되지 않을 경우, 이 템플릿을 사용하세요</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>입항일 1일전 자동알림메일 템플릿</name>
+    <style>none</style>
+    <subject>자동메일알림 - ID: {!CustomObject1__c.Name}-입항일 하루 전 공지</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WkInitial__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>CASE(  RecordType.DeveloperName  
+, &apos;RecordType1&apos;, &apos;IS&apos;
+, &apos;oceanimport_lock&apos;, &apos;IS&apos;
+
+, &apos;RecordType&apos;, &apos;OS&apos;
+, &apos;oceanexport_lock&apos;, &apos;OS&apos;
+
+, &apos;InAir&apos;, &apos;IA&apos;
+, &apos;airimportlock&apos;, &apos;IA&apos;
+
+, &apos;OutAir&apos;, &apos;OA&apos;
+, &apos;OutAir_lock&apos;, &apos;OA&apos;
+
+, &apos;Domestic_Transportation&apos;, &apos;DT&apos;
+, &apos;Domestic_Transportation_Lock&apos;, &apos;DT&apos;
+
+, &apos;LogisticsService&apos;, &apos;LG&apos;
+, &apos;LogisticsServiceLock&apos;, &apos;LG&apos;
+
+, &apos;CrossBoarder&apos;, &apos;CB&apos;
+, &apos;CrossBoarderLock&apos;, &apos;CB&apos;
+
+, &apos;Express&apos;, &apos;ES&apos;
+, &apos;ExpressLock&apos;, &apos;ES&apos;
+
+, &apos;QUOTATION&apos;, &apos;QT&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>wkHEAD CHARACTER</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

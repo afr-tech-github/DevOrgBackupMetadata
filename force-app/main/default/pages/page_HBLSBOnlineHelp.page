@@ -1,0 +1,172 @@
+<apex:page showHeader="false">
+<head>
+    <title>HBL SB Online</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+ 
+ 
+ 
+ </head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        H B/L SELLING/BUYING Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <body>
+    <h2>Trợ giúp trực tuyến cho object Vận đơn thứ cấp Bán/Mua. </h2>
+
+<br></br>
+  
+Đây là Object để quản lý tỷ giá bán cho khách hàng và tỷ giá mua từ nhà cung cấp dịch vụ.<br></br>
+Đồng thời để quản lý các khoản thanh toán ( khoản phải trả cho nhà cung cấp dịch vụ và khoản phải nhận từ khách hàng.)<br></br>
+<br></br>
+1.Tất cả danh sách(ALL LISTS): Hiển thị tất cả mục H B/L MUA/BÁN trong danh sách<br></br>
+2.Quy trình thanh toán-Tiêu chuẩn (ID)(2.1Payment Process-Standard(ID)): Xem để tiến hành thanh toán cho cả việc mua và bán <br></br>
+3.Quy trình thanh toán – Nhận(3.Receiving(S)Process-Standard(ID)): Xem để tiến hành thanh toán – nhận ( bán hàng)<br></br>
+4.Quy trình (B) phải trả - Tiêu chuẩn (ID)(4.Payable(B) Process-Standard(ID)): Xem để tiến hành thanh toán – trả ( mua hàng)<br></br>
+Thanh toán Chuyên dụng – Phân bổ hợp nhất (Master Payment-Consolidation allocation): Xem để kiểm tra và điều chỉnh các khoản phân bổ chi phí hợp nhất.<br></br>
+Quyết toán Đối tác – Khoản còn phải trả(Partner Settlement-Payable Remained): cho quy trình thanh toán giữa đối tác ( mua hàng)<br></br>
+Quyết toán Đối Tác – Khoản còn phải nhận(Partner settlement-Receivables remained): Cho quy trình thanh toán giữa đối tác (bán hàng)<br></br>
+Quy trình thanh toán – Phải trả cho người bán-Vận đơn thứ cấp(Payment Process-Payable to vendor-H BL): Xem để tiến hành thanh toán cho người bán nội địa<br></br>
+Khoản phải nhận từ khách hàng nội địa(Receivable from Domestic client): Xem để xác nhận khoản phải nhận từ khách hàng nội địa<br></br>
+Tổng quan Xác Nhận Thuế(Tax Confirmation View): Xem và lọc loại thuế nhất định của các mục bán/mua<br></br>
+<br></br>
+
+Mục thiết lập: TÀI KHOẢN NGÂN HÀNG CHUYỂN TỚI –BÁN HÀNG<br></br>
+==>Danh sách ngân hàng phải được đăng kí như Chi tiết hàng hóa(Picklist)<br></br>
+<br></br>
+
+
+Tỷ giá<br></br>
+==>Tỷ giá bán và tỷ giá mua sẽ được đồng bộ nếu đáp ứng những điều kiện sau.<br></br>
+1. Nhập khẩu: ngày đến dự kiến ở giữa Ngày bắt đầu và ngày kết thúc của tỷ giá.<br></br>
+2. Xuất khẩu: ngày khởi hành dự kiến ở giữa Ngày bắt đầu và ngày kết thúc của tỷ giá.<br></br>
+<br></br>
+
+
+-----------------------------------------------------------------------------------------------------<br></br>
+<h2>Online Help for HBL SELLING/BUYING Object</h2>
+<br></br>
+  
+This is an Object to manage the selling rate to customers and the buying rates from service suppliers.<br></br>
+Also to manage the payment(payable to service provider and receivable from the customers).<br></br>
+<br></br>
+1.All LISTS:  -Show all the HB/L SELLING/BUYING items in the list<br></br>
+2.Payment Process-Standard(ID) : -View to process payment for both selling and buying <br></br>
+3.Payment Process-Receiving :-View to process payment-receiving(selling)<br></br>
+4.Payable(B)Process- Standard(ID) : -View to process payment-paying(buying)<br></br>
+Master Payment-Consolidation allocation :- -View to check and modify the consolidation cost allocation items<br></br>
+Partner Settlement-Payable Remained: for processing the settlement between partner(buying)<br></br>
+Partner Settlement- Receivables remained: For processing the settlement between partner(selling)<br></br>
+Payment process-Payable to vendor-H B/L: View to process the payment to local vendor<br></br>
+Receivable from Domestic client: View to confirm the receivable from customer left<br></br>
+Tax Confirmation view: View to filter the certain tax-type of selling/buying items<br></br>
+<br></br>
+
+Setup Field: BANK ACCCOUNT TRANSFERED TO-SELLING<br></br>
+==>the bank list must be registered as Picklist<br></br>
+<br></br>
+
+
+Exchange rate<br></br>
+==>Selling exchange rate and Buying exchange rate are syncronized if the below condition met.<br></br>
+1. Import: ETA is inbetween Start Date and End date of Exchange rate.<br></br>
+2. Export: ETD is inbetween Start Date and End date of Exchange rate.<br></br>
+<br></br>
+-----------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>HB/L請求/仕入明細に関するオンラインヘルプ</h2><br></br>
+<br></br>
+顧客への販売価格と業者からの仕入れ価格を管理するオブジェクトです。<br></br>
+また、入金及び支払(顧客からの入金残高と業者への支払残高)も管理します。<br></br>
+<br></br>
+1.All LISTS: 全てのHB/L請求・仕入明細をリストに表示します<br></br>
+2.Payment Process-Standard(ID) : 請求及び仕入の支払い処理をするためのビューです<br></br> 
+3.Payment Process-Receiving : 入金(請求)処理をするためのビューです<br></br>
+4.Payable(B)Process- Standard(ID) : 支払(仕入)処理をするためのビューです<br></br>
+Master Payment-Consolidation allocation : 費用按分アイテムをチェックしたり修正したりするためのビューです<br></br>
+Partner Settlement-Payable Remained: パートナーとの精算の支払(仕入)処理をするためのビューです<br></br>
+Partner Settlement- Receivables remained: パートナーとの精算の入金(請求)処理をするためのビューです<br></br>
+Payment process-Payable to vendor-H B/L: 国内業者への支払い処理を行うためのビューです<br></br>
+Receivable from Domestic client:　国内顧客向けで入金残高がある分を表示するビューです<br></br>
+Tax Confirmation view: 請求・仕入明細を税分類でふるい分けるビューです<br></br>
+<br></br>
+設定が必要なフィールド:<br></br>　
+入金口座、出金口座->選択リストへ銀行の登録が必要<br></br>
+<br></br>
+為替レート->為替レート(Selling)および為替レート(Buying)は以下の条件が満たされた時自動で同期されます<br></br>
+1.輸入:入港日が為替オブジェクトに設定されている開始日と終了日の中にあること<br></br>
+2.輸出:出港日が為替オブジェクトに設定されている開始日と終了日の中にあること<br></br>
+<br></br>
+
+-----------------------------------------------------------------------------------------------------<br></br>
+<br></br>
+<h2>H B/L 청구/구매 내역에 대한 온라인 도움말</h2><br></br>
+<br></br>
+고객에 대한 판매 가격과 업체로부터의 매입 가격을 관리하는 오브젝트입니다.<br></br>
+또한, 입금 및 지급 (고객 입금 잔액 및 업체에 지불 잔액)도 관리합니다.<br></br>
+<br></br>
+1.All LISTS: 모든 HB/L 청구,매입 내역을 목록으로 표시합니다.<br></br>
+2.Payment Process-Standard(ID) : 청구 및 공급의 지불 처리를 하기위한 뷰입니다.<br></br> 
+3.Payment Process-Receiving : 입금(결제)처리를 하는 뷰입니다.<br></br>
+4.Payable(B)Process- Standard(ID) : 지불(공급)처리를 하는 뷰입니다.<br></br>
+Master Payment-Consolidation allocation : 비용 안분 항목을 확인하거나 수정하는 뷰입니다.<br></br>
+Partner Settlement-Payable Remained: 파트너와의 정산 지불 (공급) 처리를하기위한 뷰입니다.<br></br>
+Partner Settlement- Receivables remained: 파트너와의 정산 입금 (결제) 처리를하기위한 뷰입니다.<br></br>
+Payment process-Payable to vendor-H B/L: 국내 업체에 지불 처리를 위한 뷰입니다.<br></br>
+Receivable from Domestic client:　국내 고객들로 입금 잔액이 있는 분을 표시하는 뷰입니다.<br></br>
+Tax Confirmation view: 청구 · 구매 명세서를 세금 분류 체로 뷰입니다.<br></br>
+<br></br>
+설정이 필요한 필드:<br></br>　
+입금 계좌 출금 계좌 -> 선택 목록에 은행의 등록이 필요.<br></br>
+<br></br>
+환율 -> 환율-청구용과 환율-매입용은 다음의 조건이 충족 될 때 자동으로 동기화됩니다.<br></br>
+1. 수입 : 입항 날짜가 환율 오브젝트에 설정되어 있는 시작일과 종료일의 사이에 설정된 경우.<br></br>
+2. 수출 : 출항 날짜가 환율 오브젝트에 설정되어 있는 시작일과 종료일의 사이에 설정된 경우.<br></br>
+<br></br>
+</body>
+</apex:page>

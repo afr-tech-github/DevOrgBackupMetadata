@@ -1,0 +1,350 @@
+<apex:page controller="PackSubscriberSettingsController" sidebar="false">
+    <apex:sectionHeader subtitle="AFR Solutions" title="APPLICATION CUSTOM SETTINGS"/>
+    <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock title="Setup Company Information">
+            <apex:pageBlockSection title="Company Information" columns="1">
+                <apex:inputField value="{!settings.Company_Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Local_Company_Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.ShortCompanyName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Company_Email__c}" style="width: 300px;"/>
+                <apex:inputTextarea value="{!settings.Company_Address__c}" cols="80" rows="3"/>
+                <apex:inputTextarea value="{!settings.EnglishCompanyAddressLine1__c}" cols="80" rows="3"/>
+                <apex:inputTextarea value="{!settings.EnglishCompanyAddressLine2__c}" cols="80" rows="3"/>
+                <apex:inputField value="{!settings.Company_Address_ZIP__c}" style="width: 300px;"/>
+                <apex:inputTextarea value="{!settings.Local_Company_Address__c}" cols="80" rows="3"/>
+                <apex:inputTextarea value="{!settings.LocalCompanyAddressLine1__c}" cols="80" rows="3"/>
+                <apex:inputTextarea value="{!settings.LocalCompanyAddressLine2__c}" cols="80" rows="3"/>
+                <apex:inputField value="{!settings.Local_Company_Address_ZIP__c}" style="width: 300px;"/>
+                <apex:inputTextarea value="{!settings.Footer__c}" cols="80" rows="3"/>
+                <apex:selectList size="1" value="{!settings.Company_Country__c}">
+                    <apex:selectOptions value="{!countries}"></apex:selectOptions>
+                </apex:selectList>
+                <apex:inputField value="{!settings.Company_Phone__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Company_Fax__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Website__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Facebook__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Registration_No_Form__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Registration_No_Serial__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Tax_Code__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.CorporateMyNumber__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.CorporateNumber__c}" style="width: 300px;"/>
+                <apex:selectList size="1" value="{!settings.Local_Currency__c}">
+                <apex:selectOptions value="{!currencies}"></apex:selectOptions>
+                </apex:selectList>
+                <apex:selectList size="1" value="{!settings.FCY_Currency__c}">
+                <apex:selectOptions value="{!currencies}"></apex:selectOptions>
+                </apex:selectList>
+                <!--Add Billing Default Currency - 20200318 - Ms. Thu--> 
+                <apex:selectList size="1" value="{!settings.BillingDefaultCurrency__c}">
+                    <apex:selectOptions value="{!currencies}"></apex:selectOptions>
+                </apex:selectList> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Financial Information" columns="1">
+                <apex:pageBlockSection title="Local Bank" columns="1">
+                    <apex:pageBlockSection title="Local Bank 1" columns="2">
+                        <apex:inputField value="{!settings.Local_Bank_Account_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.LocalCurrencyBankAccountShortName1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_Address_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_No_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Name_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Address_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_1_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Local Bank 2" columns="2">
+                        <apex:inputField value="{!settings.Local_Bank_Account_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.LocalCurrencyBankAccountShortName2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_Address_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_No_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Name_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Address_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_2_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Local Bank 3" columns="2">
+                        <apex:inputField value="{!settings.Local_Bank_Account_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.LocalCurrencyBankAccountShortName3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_Address_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_No_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Name_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Address_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_3_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Local Bank 4" columns="2">
+                        <apex:inputField value="{!settings.Local_Bank_Account_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.LocalCurrencyBankAccountShortName4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_Address_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_No_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Name_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Address_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_4_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Local Bank 5" columns="2">
+                        <apex:inputField value="{!settings.Local_Bank_Account_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.LocalCurrencyBankAccountShortName5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_Address_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Account_No_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Name_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_Address_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Local_Bank_5_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Foreign Bank" columns="1">
+                    <apex:pageBlockSection title="Foreign Bank 1" columns="2">
+                        <apex:inputField value="{!settings.Foreign_Bank_Account_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.FCYBankAccountShortName1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_Address_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_No_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Name_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Address_1__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_1_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Foreign Bank 2" columns="2">
+                        <apex:inputField value="{!settings.Foreign_Bank_Account_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.FCYBankAccountShortName2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_Address_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_No_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Name_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Address_2__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_2_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Foreign Bank 3" columns="2">
+                        <apex:inputField value="{!settings.Foreign_Bank_Account_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.FCYBankAccountShortName3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_Address_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_No_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Name_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Address_3__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_3_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Foreign Bank 4" columns="2">
+                        <apex:inputField value="{!settings.Foreign_Bank_Account_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.FCYBankAccountShortName4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_Address_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_No_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Name_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Address_4__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_4_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Foreign Bank 5" columns="2">
+                        <apex:inputField value="{!settings.Foreign_Bank_Account_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.FCYBankAccountShortName5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_Address_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Account_No_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Name_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_Address_5__c}" style="width: 300px;"/>
+                        <apex:inputField value="{!settings.Foreign_Bank_5_Other__c}" style="width: 300px;"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlockSection>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="SLA Definitions" columns="1">
+                <apex:inputField value="{!settings.Ferry_SLA__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Container_Vessel_SLA__c}" style="width: 300px;"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Invoice Template" columns="2">
+                <apex:inputField value="{!settings.InvoiceTemplateSet1Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet1__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet2Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet2__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet3Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet3__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet4Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet4__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet5Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet5__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet6Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet6__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet7Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet7__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet8Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet8__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet9Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet9__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet10Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet10__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet11Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet11__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet12Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet12__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet13Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet13__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet14Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet14__c}"/>
+                <apex:inputField value="{!settings.InvoiceTemplateSet15Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.EnableInvoiceTemplateSet15__c}"/>
+                <apex:inputField value="{!settings.CustomInvoiceTemplate__c}" style="width: 300px;"/>
+                <!--Add Custom Invoice Excel Template - 20200414 - Ms. Thu--> 
+                <apex:inputField value="{!settings.CustomInvoiceExcelTemplate__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Other" columns="1">
+                <apex:inputField value="{!settings.VAT_Running_Number__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.DebitStartNumber__c}" style="width: 300px;"/>
+                <apex:selectList size="1" value="{!settings.Custom_Date_Format__c}"> 
+                    <apex:selectOptions value="{!dateFormats}"></apex:selectOptions>
+                </apex:selectList>
+                <apex:inputField value="{!settings.PayableViewName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.ReceivableViewName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.ExpensePayableViewName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.ExchangeRateViewName__c}" style="width: 300px;"/>
+
+                <apex:inputField value="{!settings.CloWMSPayableViewName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.CloWMSReceivableViewName__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.CloWMSExchangeRateViewName__c}" style="width: 300px;"/>
+
+
+                <apex:inputField value="{!settings.Ocean_HBL_No_Prefix__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Air_HBL_No_Prefix__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.LogisticAssociationNumber__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.NvoccCode__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.Logo_URL__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.HBLTemplateURL__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.HBLTemplateURLOriginal__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.HBLTemplateURLSurrendered__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.HBLTemplateURLWaybill__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.HAWBTemplateURL__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.BL_Issued_Location__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.VAT_Background_Image__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.My_Domain_Name__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.AS_AGENT_FOR_CARRIER_1__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.AS_AGENT_FOR_CARRIER_2__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.GPSSystem1URL__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.GPSSystem2URL__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.FileConverterURL__c}" style="width: 300px;"/>
+
+                <apex:inputField value="{!settings.ClientCommunication__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.SwitchToNewUnitPriceCalculation__c}" style="width: 100px;"/>
+                <apex:inputField value="{!settings.TurnOnAccountingClosingLock__c}" style="width: 100px;"/>
+                <apex:inputField value="{!settings.SwitchToUnitInBilling__c}" style="width: 300px;"/>
+                <apex:inputField value="{!settings.SwitchToInternalBarCodePhoto__c}" style="width: 300px;"/>
+                <apex:inputTextarea value="{!settings.Company_Signature__c}" cols="80" rows="3"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!reset}" value="Reset"/>
+                           </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Update Operation Email Alerts With Role-based Recipients" rendered="{!allowedUpdateOperationEmailAlert}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Update Operation Email Alerts" action="{!updateOperationAlertRecipients}"/>
+            </apex:pageBlockButtons>
+            <p>
+                Click the "Update Operation Email Alerts" button will update initial solution package Email Alerts to populate
+                role-based recipients as pre-setup.
+                If you already ran this, you should not run again.
+            </p>
+            <br />
+            Ensure that
+            <ul>
+                <li>Remote Site URL <strong><apex:outputText value="{!currentHost}"/></strong> has been added to Remote Site Settings</li>
+            </ul>
+            <p>
+                List of affected Email Alerts
+            </p>
+            <ul>
+                <li>Account.NEW OVERSEA PARTNER REGIST ALERT</li>
+                <li>Account.NEW DOMESTIC CUSTOMER REGIST ALERT</li>
+                <li>H B/L請求・仕入明細.UNCOLLECTED CHARGE REMINDER</li>
+                <li>H B/L請求・仕入明細.UNCOLLECTED ADVANCE CHARGE REMINDER</li>
+                <li>H B/L案件.AIR-EXPORT-PARTNER:航空輸出(パートナー用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.AIR-EXPORT-PARTNER:航空輸出(パートナー用)-STANDARD</li>
+                <li>H B/L案件.AIR-IMPORT-CLIENT:航空輸入(顧客用)-STANDARD</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.AIR-IMPORT-PARTNER:航空輸入(パートナー用)-STANDARD</li>
+                <li>H B/L案件.AIR-IMPORT-CLIENT:航空輸入(顧客用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-STANDARD</li>
+                <li>H B/L案件.HOUSE Registeration Notification Email - Internal</li>
+                <li>H B/L案件.Approval has been Rejected</li>
+                <li>H B/L案件.AIR-IMPORT-PARTNER:航空輸入(パートナー用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.QUOTATION-PARTNER:見積(パートナー用)-STANDARD</li>
+                <li>H B/L案件.QUOTATION-CLIENT:見積(顧客用)-STANDARD</li>
+                <li>H B/L案件.QUOTATION-PARTNER:見積(パートナー用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.OCEAN-IMPORT-PARTNER:海上輸入(パートナー用)-STANDARD</li>
+                <li>H B/L案件.OCEAN-IMPORT-CLIENT:海上輸入(顧客用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.OCEAN-IMPORT-CLIENT:海上輸入(顧客用)-STANDARD</li>
+                <li>H B/L案件.OCEAN-EXPORT-PARTNER:海上輸出(パートナー用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.OCEAN-EXPORT-PARTNER:海上輸出(パートナー用)-STANDARD</li>
+                <li>H B/L案件.OCEAN-IMPORT-PARTNER:海上輸入(パートナー用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-STANDARD-DO NOT SEND</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-STANDARD</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-Freight Memo Doc Link</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-S/I Doc Link</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-Check B/L Doc Link</li>
+                <li>H B/L案件.OCEAN-EXPORT-PARTNER:海上輸出(パートナー用)-Debit/Credit Note Link</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-B/L Doc Link</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-C/C Doc Link</li>
+                <li>H B/L案件.OCEAN-EXPORT-CLIENT:海上輸出(顧客用)-C/C DOC Link</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-Freight Memo Doc Link</li>
+                <li>H B/L案件.AIR-IMPORT-PARTNER:航空輸入(パートナー用)-Debit/Credit Note Link</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-S/I Doc Link</li>
+                <li>H B/L案件.AIR-IMPORT-CLIENT:航空輸入(顧客用)-C/C Doc LInk</li>
+                <li>H B/L案件.AIR-EXPORT-PARTNER:航空輸出(パートナー用)-Debit/Credit Note Link</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-Check B/L Doc Link</li>
+                <li>H B/L案件.AIR-EXPORT-CLIENT:航空輸出(顧客用)-B/L Doc Link</li>
+                <li>H B/L案件.OCEAN-IMPORT-CLIENT:海上輸入(顧客用)-A/N DOC Link</li>
+                <li>H B/L案件.OCEAN-IMPORT-CLIENT:海上輸入(顧客用)-D/O DOC Link</li>
+                <li>H B/L案件.OCEAN-IMPORT-CLIENT:海上輸入(顧客用)-C/C DOC Link</li>
+                <li>H B/L案件.OCEAN-IMPORT-PARTNER:海上輸入(パートナー用)-Debit/Credit Note Link</li>
+                <li>標準為替.Exchange Rate process - Rejected</li>
+                <li>消費税率管理.Tax Ratio Activation process - rejected</li>
+                <li>標準為替.Exchange Rate Approval Process - requested</li>
+                <li>消費税率管理.Tax Ratio Activation process - requested</li>
+            </ul>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Update Reminding Email Alerts With Role-based Recipients" rendered="{!allowedUpdateReminderEmailAlert}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Update Reminding Email Alerts" action="{!updateReminderAlertRecipients}"/>
+            </apex:pageBlockButtons>
+            <p>
+                Click the "Update Reminding Email Alerts" button will update initial solution package Email Alerts to populate
+                role-based recipients as pre-setup.
+                If you already ran this, you should not run again.
+            </p>
+            <br />
+            Ensure that
+            <ul>
+                <li>Remote Site URL <strong><apex:outputText value="{!currentHost}"/></strong> has been added to Remote Site Settings</li>
+            </ul>
+            <p>
+                List of affected Email Alerts
+            </p>
+            <ul>
+                <li>Check_if_Arrival_notice_is_not_sent_1_day_before</li>
+                <li>Original_BL_Collection_Alert_AIR_After_1_week_of_ETA</li>
+                <li>Original_BL_Collection_Alert_CUSTOM_CLEARANCE_After_1_week_of_ETA</li>
+                <li>Original_BL_Collection_Alert_SEA_After_1_week_of_ETA</li>
+                <li>Reminding_operation_to_check_if_Arrival_notice_is_sent_successfully_or_not_HSD</li>
+                <li>Reminding_operation_to_check_if_Arrival_notice_is_sent_successfully_or_not_FCL</li>
+                <li>Reminding_operation_to_check_if_Arrival_notice_is_sent_successfully_or_not_LCL</li>
+                <li>COMPLETE_AIR_IMPORT_HBL_SHIPMENT_REMINDER</li>
+                <li>COMPLETE_AIR_EXPORT_HBL_SHIPMENT_REMINDER</li>
+                <li>COMPLETE_OCEAN_IMPORT_HBL_SHIPMENT_REMINDER</li>
+                <li>COMPLETE_OCEAN_EXPORT_HBL_SHIPMENT_REMINDER</li>
+            </ul>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="Populate Report Mappings for Custom Reports" rendered="{!allowedPopulateReportMappings}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Populate Report Mappings" action="{!populateReportMappings}"/>
+            </apex:pageBlockButtons>
+            <p>
+                This is to populate report ID for the following reports to Custom Setting for reference in Custom Weblinks
+            </p>
+            <p>
+                List of Reports
+            </p>
+            <ul>
+                <li>HB/L Duplication Check</li>
+                <li>Payment checking for Receivable/Payable</li>
+                <li>M B/L Profit Analysis</li>
+                <li>M B/L Container Load Plan</li>
+                <li>M B/L Cost allocation and payment process</li>
+                <li>Payment detail checking to vendor</li>
+                <li>H B/L Profit Analysis</li>
+                <li>Simular HB/L Search</li>
+                <li>Unpaid Receivable</li>
+            </ul>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

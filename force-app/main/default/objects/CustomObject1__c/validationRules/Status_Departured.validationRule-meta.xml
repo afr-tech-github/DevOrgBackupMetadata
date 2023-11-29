@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Departured</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(OR(ISPICKVAL(status__c , &quot;輸出 本船/フライト出発済(Departured)&quot;),ISPICKVAL(status__c , &quot;輸入 本船/フライト出発済(Departured)&quot;)) ,  ISBLANK(ETD__c), false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>出港日と出港地を必ずいれてください。
+Please enter ETD and POL.</errorMessage>
+</ValidationRule>

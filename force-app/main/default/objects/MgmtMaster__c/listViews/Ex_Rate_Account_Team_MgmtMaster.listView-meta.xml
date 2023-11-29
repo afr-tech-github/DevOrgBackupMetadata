@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ex_Rate_Account_Team_MgmtMaster</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Ex Rate-Account Team</label>
+    <queue>Ex_Rate_Account_Team</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

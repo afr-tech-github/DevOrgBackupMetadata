@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReceivingProcessStandardID</fullName>
+    <columns>NAME</columns>
+    <columns>SalesOrderID__c</columns>
+    <columns>InvoiceTo__c</columns>
+    <columns>BillNameAtPrintLocal__c</columns>
+    <columns>RcvConfirmSell__c</columns>
+    <columns>ApplicantSell__c</columns>
+    <columns>AmountSelliInclTAXLocal__c</columns>
+    <columns>AmountRcvCustomerLocal__c</columns>
+    <columns>UnRcvBalLocal__c</columns>
+    <columns>RcvTypeSell__c</columns>
+    <columns>RcvSettledDate__c</columns>
+    <columns>RcvNotesSell__c</columns>
+    <columns>BankAccountForRcv__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>AmountSelliInclTAXLocal__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>UnRcvBalLocal__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <label>3.Receiving(S)Process-Standard(ID)</label>
+    <language>en_US</language>
+</ListView>

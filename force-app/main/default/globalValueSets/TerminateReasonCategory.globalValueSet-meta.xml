@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>High Cost</fullName>
+        <default>false</default>
+        <label>High Cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Low Performance</fullName>
+        <default>false</default>
+        <label>Low Performance</label>
+    </customValue>
+    <customValue>
+        <fullName>Frequent Malfunction</fullName>
+        <default>false</default>
+        <label>Frequent Malfunction</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Terminate Reason Category</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

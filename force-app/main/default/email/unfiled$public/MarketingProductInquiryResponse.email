@@ -1,0 +1,14 @@
+Dear {!Lead.Name},
+
+Thank you for your inquiry about GenWatt's products.
+
+A representative will contact you shortly.
+
+Thanks,
+The GenWatt Team
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

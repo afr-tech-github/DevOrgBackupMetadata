@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FUMIGATION_STATUS__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>FUMIGATION</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>UnitType__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>燻蒸確認済み</fullName>
+                <default>false</default>
+                <label>燻蒸確認済み</label>
+            </value>
+            <value>
+                <fullName>燻蒸不要 : プラスチック製</fullName>
+                <default>false</default>
+                <label>燻蒸不要 : プラスチック製</label>
+            </value>
+            <value>
+                <fullName>未処理</fullName>
+                <default>false</default>
+                <label>未処理</label>
+            </value>
+            <value>
+                <fullName>搬入時廃棄</fullName>
+                <default>false</default>
+                <label>搬入時廃棄</label>
+            </value>
+            <value>
+                <fullName>不明</fullName>
+                <default>false</default>
+                <label>不明</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Pallet &amp; Package</controllingFieldValue>
+            <controllingFieldValue>Wooden Drum</controllingFieldValue>
+            <controllingFieldValue>Package</controllingFieldValue>
+            <controllingFieldValue>Packet</controllingFieldValue>
+            <controllingFieldValue>Parcel</controllingFieldValue>
+            <valueName>燻蒸確認済み</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pallet &amp; Package</controllingFieldValue>
+            <controllingFieldValue>Wooden Drum</controllingFieldValue>
+            <controllingFieldValue>Package</controllingFieldValue>
+            <controllingFieldValue>Packet</controllingFieldValue>
+            <controllingFieldValue>Parcel</controllingFieldValue>
+            <valueName>燻蒸不要 : プラスチック製</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pallet &amp; Package</controllingFieldValue>
+            <controllingFieldValue>Wooden Drum</controllingFieldValue>
+            <controllingFieldValue>Package</controllingFieldValue>
+            <controllingFieldValue>Packet</controllingFieldValue>
+            <controllingFieldValue>Parcel</controllingFieldValue>
+            <valueName>未処理</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pallet &amp; Package</controllingFieldValue>
+            <controllingFieldValue>Wooden Drum</controllingFieldValue>
+            <controllingFieldValue>Package</controllingFieldValue>
+            <controllingFieldValue>Packet</controllingFieldValue>
+            <controllingFieldValue>Parcel</controllingFieldValue>
+            <valueName>搬入時廃棄</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pallet &amp; Package</controllingFieldValue>
+            <controllingFieldValue>Wooden Drum</controllingFieldValue>
+            <controllingFieldValue>Package</controllingFieldValue>
+            <controllingFieldValue>Packet</controllingFieldValue>
+            <controllingFieldValue>Parcel</controllingFieldValue>
+            <valueName>不明</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

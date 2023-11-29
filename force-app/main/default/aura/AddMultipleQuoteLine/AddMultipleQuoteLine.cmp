@@ -1,0 +1,69 @@
+<aura:component controller="AddMultipleQuoteLineController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="billList" type="QuoteLine__c[]"/>
+    <!-- <aura:attribute name="showMassUpdateRow" type="Boolean" default="true" /> -->
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}"/>
+	<aura:html tag="style">
+    .cuf-content { padding: 0 0rem !important; } .slds-p-around--medium {
+    padding: 0rem !important; } .slds-modal__content{ height:unset !important;
+    max-height:unset !important; } .slds-modal__container{ max-width:95rem
+    !important; width:100% !important; }
+  </aura:html>
+    
+	<lightning:spinner aura:id="spinner" class="slds-hide"/>
+    <!-- <lightning:card> -->
+    <!-- <aura:if isTrue="{!v.showMassUpdateRow}"> -->
+        <div style="overflow: auto;">
+            <div style="display: inline-block; min-width: 1700px;max-width: 2800px;min-height: 500px;">
+                        <div>
+                            <div>        
+                                            <div style="display: flex; background-color:rgb(210, 210, 210);text-align: left;">
+                                                <div style="min-width:30px;">No</div>
+                                                <div style="min-width:100px;margin-left: 32px;">Service Name</div>
+                                                <div style="min-width:100px;margin-left: 17px;height: ;">Print</div>
+                                                <div style="max-width:90px;margin-left: -58px;">Charge Quantity</div>
+                                                <div style="min-width:75px;margin-left: -15px;">Charge Unit</div>
+                                                <div style="min-width:75px;margin-left: 48px;">Type</div>
+                                                <div style="min-width:75px;margin-left: -6px;">Currency-Selling</div>
+                                                <div style="max-width:90px;margin-left: 21px;">Selling Price (Local)</div>
+                                                <div style="max-width:90px;margin-left: 1px;">Selling Price (FCY)</div>
+                                                <div style="max-width:70px;margin-left: -1px;">Tax Rate-Selling (%)</div>
+                                                <div style="min-width:100px;margin-left: 40px;">Notes</div>
+                                                <div style="min-width:30px;margin-left: 15px;">Action</div>
+                                                
+                                            </div>
+                                        <aura:iteration items="{!v.billList}" var="bill" indexVar="index" >
+                                            <lightning:recordEditForm class="iteration" aura:id="recordEditForm" objectApiName="clofor_com_cfs__QuoteLine__c">
+                                                <div style="display: flex;">
+                                                    <div style="min-width: 12px; align-self: flex-end; padding-bottom: 9px;">{!index + 1}</div>
+                                                    <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__ServicePricingID__c" value="{!bill.clofor_com_cfs__ServicePricingID__c}" style="max-width: 160px;align-self: flex-end;margin: 0px 2px;"/>
+                                                    <!-- <lightning:input styleClass="checkbox" type="checkbox" value="{!bill.clofor_com_cfs__Print__c}" style="align-self: flex-end;margin:0px -13px 6px 2px"/> -->
+                                                    <!-- <lightning:input variant="label-hidden" fieldName="clofor_com_cfs__Print__c" value="{!bill.clofor_com_cfs__Print__c}"  aura:id="checkbox1" /> -->
+                                                    <lightning:input type="checkbox" value="{!bill.clofor_com_cfs__Print__c}" checked="{!bill.clofor_com_cfs__Print__c}" style="align-self: flex-end;margin:0px -13px 6px 2px"/>
+                                                    <lightning:input type="text" value="{!bill.clofor_com_cfs__Quantity__c}" maxlength="5" style="min-width: 70px;max-width: 70px; margin: 0px 2px;"/>
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__Unit__c" value="{!bill.clofor_com_cfs__Unit__c}" disabled="false" style="min-width: 110px; align-self: flex-end;margin: 0 2px;"/>
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__ContainerType__c" value="{!bill.clofor_com_cfs__ContainerType__c}" style="min-width: 90px;max-width: 90px; align-self: flex-end;margin: 0 2px;"/>
+                                                    <lightning:inputField variant="label-hidden" fieldName="clofor_com_cfs__CurrencySelling__c" value="{!bill.clofor_com_cfs__CurrencySelling__c}" style="min-width: 90px; max-width: 90px; align-self: flex-end;margin: 0 2px; "/>
+                                                    <lightning:input type="number" value="{!bill.clofor_com_cfs__SellingListPriceLocal__c}" maxlength="8" style="max-width: 95px; margin: 0 2px"/>
+                                                    <lightning:input type="number" value="{!bill.clofor_com_cfs__SellingListPriceUSD__c}" maxlength="8" style="max-width: 95px; margin: 0 2px"/>
+                                                    <lightning:input type="number" formatter="percent-fixed" step="0.01" maxlength="2" value="{!bill.clofor_com_cfs__TaxRate__c}" style="min-width: 10px;max-width: 70px; margin: 0 2px;"/>
+                                                    <lightning:input type="text" value="{!bill.clofor_com_cfs__Remarks__c}" style="min-width: 150px;margin: 0 2px;"/>
+                                                    <a onclick="{!c.removeRecord}" data-record="{!index}" style="margin: 0px 2px; align-self: flex-end; padding-bottom: 6px;min-width: 50px">
+                                                        <lightning:icon iconName="utility:delete" size="small" alternativeText="Delete"/>
+                                                        <span class="slds-assistive-text">Delete</span>
+                                                    </a>
+                                                </div>
+                                        </lightning:recordEditForm>
+                                        </aura:iteration>
+      
+                                <div class="slds-align_absolute-center slds-p-top_small" style="padding-top: 150px;">
+                                    <lightning:button variant="brand" label="Add" title="Brand action" onclick="{!c.addRow}"/>
+                                    <!-- <button type="button" class = "addBtn">Add<button>   -->
+                                    <lightning:button variant="brand" label="Submit" title="Brand action" onclick="{!c.saveBills}" />
+                                </div>
+                            </div>
+                        </div>
+            </div>    
+        </div>        
+    <!-- </aura:if>     -->
+    <!-- </lightning:card> -->
+</aura:component>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MasterAnkenName__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Choose only when Consolidation Cargo or Groupage Cargo</inlineHelpText>
+    <label>MASTER SHIPMENT NAME</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.ETD__c</field>
+            <operation>equals</operation>
+            <valueField>MasterAnken__c.METD__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>MasterAnken__c</referenceTo>
+    <relationshipName>MasterBL</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

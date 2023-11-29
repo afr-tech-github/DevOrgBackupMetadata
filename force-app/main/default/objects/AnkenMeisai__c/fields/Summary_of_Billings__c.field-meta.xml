@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Summary_of_Billings__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>Name +&apos; | &apos;+  InsatuyouSyohinEng__c +&apos; | &apos;+&apos;Invoice to: &apos;+ Seikyusaki__r.Name +&apos; | &apos;+ TEXT(Tariff__r.SellKingakuJPY__c) +&apos; &apos;+  $Setup.Site_Custom_Settings__c.Local_Currency__c+&apos; | &apos;+&apos;Payment to: &apos;+ PaymentTo__r.Name+ &apos; | &apos;+ TEXT(Tariff__r.BuyKingaku__c) +&apos; &apos;+  $Setup.Site_Custom_Settings__c.Local_Currency__c+&apos; | &apos;+ TEXT(Suryo__c) +&apos; | &apos;+ ChargeUnitInPrint__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Summary of Billings</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

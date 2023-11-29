@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FCLExport</fullName>
+    <columns>ContainerSize__c</columns>
+    <columns>NAME</columns>
+    <columns>Subcategory__c</columns>
+    <columns>BuyKingaku__c</columns>
+    <columns>BuyAmountUSD__c</columns>
+    <columns>UNIT__c</columns>
+    <columns>YukouKigen__c</columns>
+    <columns>Supplier__c</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>ProductFlag__c</columns>
+    <columns>TRANSIT_TIME__c</columns>
+    <columns>POD__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ProductSearch__c</field>
+        <operation>equals</operation>
+        <value>FCL輸出</value>
+    </filters>
+    <filters>
+        <field>POD__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>TRANSIT_TIME__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>FCL Export</label>
+    <language>en_US</language>
+</ListView>

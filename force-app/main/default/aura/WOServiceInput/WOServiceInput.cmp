@@ -1,0 +1,101 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+                controller="WOServiceInputController" access="global" >
+	<aura:attribute name="Destination" type="String" />
+    <aura:attribute name="tempCargo" type="Object" />
+    <aura:attribute name="isLoading" type="Boolean" />
+    <aura:attribute name="listParent" type="List" default="[]"/>
+    
+
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+
+    <force:recordData aura:id="WOrecordLoader"
+      recordId="{!v.recordId}"
+      layoutType="FULL"         
+      targetFields="{!v.simpleRecord}"
+      targetError="{!v.recordError}"
+      />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <article class="slds-card" style="border:1px;">
+
+        <header class="slds-card__header">
+            <div class="slds-no-flex">
+                <lightning:button label="Add" title="Add" onclick="{! c.addParent }" disabled="true"/>
+            </div>
+        </header>
+
+        <aura:iteration items="{!v.listParent}" var="parent" indexVar="indexParent">
+        <div style="border: solid #dddbda 1px;padding: 5px 10px 5px 10px; margin-top: 10px;">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <c:strike_lookup label="Destination Facility"
+                                         object="clofor_com_cfs__Facility__c"
+                                         searchField="clofor_com_cfs__FacilityName__c"
+                                         placeholder="Select an option"
+                                         iconName="standard:account"
+                                         subtitleField="clofor_com_cfs__OwnerCompanyName__c"
+                                         order="clofor_com_cfs__FacilityName__c"
+                                         limit="5"
+                                         loadingMessage="Loading..."
+                                         errorMessage="Invalid input"/>
+                    </div>
+                    <div class="slds-media__body">
+                        
+                    </div>
+                    <div class="slds-no-flex">
+                        <lightning:button disabled="true" name="{!indexParent}" label="Delete" title="Delete" onclick="{! c.removeParent }"/>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body">
+                <table>
+                    <aura:iteration items="{!parent.listCargo}" var="item" indexVar="idx">
+                        <tr >
+                            <td style="width: 5%;padding-top: 19px;">
+                                <lightning:buttonIcon name="{!indexParent+'_'+idx}" variant="error" onclick="{!c.removeCargo}"  iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                            </td>
+                            <td style="width: 55%;">
+                                <div style="width:90%">
+                                <c:strike_lookup
+                                                 label="Product"
+                                                 object="clofor_com_cfs__PRODUCT__c"
+                                                 searchField="clofor_com_cfs__ProductName__c"
+                                                 placeholder="Select a Product"
+                                                 iconName="standard:account"
+                                                 subtitleField="Name"
+                                                 order="clofor_com_cfs__ProductName__c"
+                                                 limit="5"
+                                                 value="{!item.productId}"
+                                                 loadingMessage="Loading..."
+                                                 errorMessage="Invalid input"/>
+                                </div>
+                            </td>
+                            <td style="width: 40%;">
+                                <lightning:input style="width:90%" type="number" value="{!item.quantity}" name="quantity" label="Enter a number" />
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                    <tr>
+                        <td style="width: 5%;padding-top: 19px;">
+                            <lightning:buttonIcon name="{!indexParent}" variant="error" onclick="{!c.addCargo}"  iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="icon"/>
+                        </td>
+                        <td style="width: 55%;">
+                        </td>
+                        <td style="width: 40%;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </aura:iteration>
+        <footer class="slds-card__footer">
+            <div class="slds-no-flex">
+                <lightning:button label="Save" title="Save" onclick="{! c.saveCargo }"/>
+            </div>
+        </footer>
+    </article>
+</aura:component>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>MasterAnken__c</columns>
+    <columns>Shiiresaki__c</columns>
+    <columns>KawaseBay__c</columns>
+    <columns>BuyTankaJPY__c</columns>
+    <columns>BuyTankaUSD__c</columns>
+    <columns>Suryo__c</columns>
+    <columns>BuyAmountJPN__c</columns>
+    <columns>BuyAmountUSD__c</columns>
+    <columns>BuyTaxInitial__c</columns>
+    <columns>BuyTaxShow__c</columns>
+    <columns>ProductTax__c</columns>
+    <columns>BuyTaxNum__c</columns>
+    <columns>BuyInTaxAmountJPY__c</columns>
+    <columns>MTariff__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>all</label>
+    <language>en_US</language>
+</ListView>

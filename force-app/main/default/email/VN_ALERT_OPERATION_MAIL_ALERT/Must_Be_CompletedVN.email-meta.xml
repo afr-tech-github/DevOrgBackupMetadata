@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi lô hàng còn lại phải được hoàn thành.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Bắt buộc hoàn thành</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-Didn&apos;t you forget to change the status to &quot;Completed&quot;?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

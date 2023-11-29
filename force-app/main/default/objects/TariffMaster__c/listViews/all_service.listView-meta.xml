@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>all_service</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>ProductID__c</columns>
+    <columns>ProductFlag__c</columns>
+    <columns>Supplier__c</columns>
+    <columns>ProductSearch__c</columns>
+    <columns>Subcategory__c</columns>
+    <columns>PrintProduct__c</columns>
+    <columns>BuyKingaku__c</columns>
+    <columns>SellKingakuJPY__c</columns>
+    <columns>Zeibunrui__c</columns>
+    <columns>YukouKigen__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

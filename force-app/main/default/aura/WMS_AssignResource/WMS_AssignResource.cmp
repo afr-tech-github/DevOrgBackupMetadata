@@ -1,0 +1,88 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" 
+                access="global" controller="WMS_AssignResource" >
+	<aura:attribute name="entWorkOrder" type="Object" />
+    <aura:attribute name="origWosRecords" type="Object[]" default="[]" />
+    <aura:attribute name="hasOrigWos" type="Boolean" default="false" />
+    <aura:attribute name="mapRecordTypes" type="Object" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="wosMassive" type="Object" default="{}" />
+    <aura:attribute name="picklistWorker" type="Object[]" default="[]" />
+    <aura:attribute name="picklistStatus" type="Object[]" default="[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler event="force:refreshView" action="{!c.onInit}" />
+    
+    <div>
+        <!-- ALL -->
+    	<div>
+        	<table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium" style="box-shadow: 0 0 2px #aaa;">
+                <thead>
+                	<tr>
+                        <th class="slds-text-title_caps" scope="col">
+                            <lightning:input type="checkbox" label="ALL" checked="{!v.wosMassive.isSelected}" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<aura:if isTrue="{!v.wosMassive.isSelected}" >
+                        <tr>
+                        	<td>
+                            	<div class="slds-grid slds-wrap slds-grid_align-space">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+                                        <c:strike_lookup
+                                            label="Locator"
+                                            required="false"
+                                            value="{!v.wosMassive.record.clofor_com_cfs__Locator__c}"
+                                            object="clofor_com_cfs__LOCATOR__c"
+                                            searchField="Name"
+                                            placeholder="LOCATOR ID"
+                                            iconName="standard:contact"
+                                            subtitleField="Name"
+                                            order="Name"
+                                            limit="5"
+                                            loadingMessage="Loading..."
+                                            errorMessage="Invalid input"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+                                        <lightning:combobox label="Status" placeholder="Select Status" options="{!v.picklistStatus }"
+                                                    value="{!v.wosMassive.record.clofor_com_cfs__Status__c}" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+                                        <lightning:input type="date" label="Scheduled start date" 
+                                                 value="{!v.wosMassive.record.clofor_com_cfs__ScheduledStartTime__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-2 slds-p-left_small">
+                                        <lightning:input type="date" label="Scheduled end date" 
+                                                 value="{!v.wosMassive.record.clofor_com_cfs__ScheduledEndTime__c}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-left_small">
+                                        <lightning:dualListbox
+                                            label= "Worker"
+                                            variant="label-hidden"
+                                            sourceLabel="Available"
+                                            selectedLabel="Selected"
+                                            options="{!v.picklistWorker}"
+                                            value="{!v.wosMassive.lstWorker}"/>
+                                    </div>
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                    </aura:if>
+                </tbody>
+            </table>
+        </div>
+		
+		<!-- ORIGIN -->
+        <div>
+        	<table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium" style="box-shadow: 0 0 2px #aaa;">
+                <thead>
+                	
+                </thead>
+            </table>
+        </div>
+
+		<!-- DESTINATION -->        
+        
+    </div>
+</aura:component>

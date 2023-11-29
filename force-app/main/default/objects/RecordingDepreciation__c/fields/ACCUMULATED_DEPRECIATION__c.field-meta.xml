@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACCUMULATED_DEPRECIATION__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>JanDepreciationExpense__c +  FebDepreciationExpense__c +
+MarDepreciationExpense__c +
+AprDepreciationExpense__c +
+MayDepreciationExpense__c +
+JunDepreciationExpense__c +
+JulDepreciationExpense__c +
+AugDepreciationExpense__c +
+SepDepreciationExpense__c +
+OctDepreciationExpense__c +
+NovDepreciationExpense__c +
+DecDepreciationExpense__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ACCUMULATED DEPRECIATION</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

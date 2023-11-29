@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AccountQRcodeImage__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IMAGE(&apos;https://chart.googleapis.com/chart?chs=100x100&amp;cht=qr&amp;chl=&apos; + AccountQRcode__c,  &apos;Account QR/Barcode ID&apos;)</formula>
+    <label>Account QR/Barcode Image</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Tax_Ratio_Activation_process_rejected</fullName>
+        <description>Tax Ratio Activation process - rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>LastModifiedById</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Approval/Tax_Ratio_Activation_process_rejected</template>
+    </alerts>
+    <alerts>
+        <fullName>Tax_Ratio_Activation_process_requested</fullName>
+        <description>Tax Ratio Activation process - requested</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>LastModifiedById</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Approval/Tax_Ratio_Activation_process_request</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Tax_Ratio_Activation_Field_Update</fullName>
+        <field>Active__c</field>
+        <literalValue>1</literalValue>
+        <name>Tax Ratio Activation Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

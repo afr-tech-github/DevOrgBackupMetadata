@@ -1,0 +1,104 @@
+<!--
+ - Created by khanhpham on 6/17/17.
+ -->
+
+<apex:page id="DataLoader" controller="DataLoadingController">
+    <div>
+        <a href="/apex/clofor_com_cfs__NavigationFlow">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+                 width="250px" height="80px"/>
+        </a>
+    </div>
+    <apex:form >
+        <table style="width: 100%; border: 0; min-height: 300px;">
+            <tr>
+                <td style="width: 250px; vertical-align: top;">
+                    <apex:pageBlock >
+                        <apex:outputPanel >
+                        <h1>{!translations['BROWSE_FILE']}</h1>
+                        <table cellpadding="2" cellspacing="2">
+                            <tr>
+                                <td style="width: 500px;">Shipment Order:</td>
+                                <td><apex:inputField value="{!dummyContainer.HBL_SHIPMENT__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td>File:</td>
+                                <td>
+                                    <apex:inputFile value="{!csvFileBody}" fileName="{!fileName}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{!translations['OBJECT_TITLE']}:</td>
+                                <td>
+                                    <apex:selectList size="1" value="{!uploadOption}">
+                                        <apex:selectOptions value="{!uploadOptionList}"/>
+                                    </apex:selectList>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        </apex:outputPanel>
+                        <apex:commandButton value="{!translations['LOAD_TITLE']}" action="{!loadData}"/>
+                        <apex:commandButton value="{!translations['SAVE_TITLE']}" action="{!save}"/>
+                        <apex:commandButton value="{!translations['Cancel']}" action="{!cancel}" rendered="{!NOT(ISBLANK(shipmentId))}"/>
+                    </apex:pageBlock>
+                </td>
+                <td valign="top">
+                    <apex:pageBlock >
+                        <apex:pageMessages id="errors"/>
+
+                        <apex:pageBlockTable value="{!containerInfoList}" var="container">
+                            <apex:column >
+                                <apex:outputField value="{!container.HBL_SHIPMENT__c}" id="HBL"/>
+                                <apex:facet name="header">SHIPMENT ORDER</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.Container_NO__c}" id="ContainerNo"/>
+                                <apex:facet name="header">CONTAINER NUMBER</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.Container__c}" id="ContainerSize"/>
+                                <apex:facet name="header">CONTAINER SIZE</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.GROSS_WEIGHT__c}" id="GrossWeight"/>
+                                <apex:facet name="header">GROSS WEIGHT</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.NET_WEIGHT__c}" id="NetWeight"/>
+                                <apex:facet name="header">NET WEIGHT (KG)</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.CargoTypeUnit__c}" id="CargoTypeUnit"/>
+                                <apex:facet name="header">CARGO TYPE UNIT</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.QUANTITY_PACKAGES__c}" id="Package"/>
+                                <apex:facet name="header">QUANTITY (PACKAGES)</apex:facet>
+                            </apex:column>
+                             <apex:column >
+                                <apex:outputField value="{!container.MEASUREMENT_CBM__c}" id="Measurement"/>
+                                <apex:facet name="header">MEASUREMENT (CBM)</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.Seal_No__c}" id="SealNo"/>
+                                <apex:facet name="header">SEAL NUMBER</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.Verified_Gross_Weight__c}" id="VerifiedGrossWeight"/>
+                                <apex:facet name="header">VERIFIED GROSS WEIGHT (KG)</apex:facet>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputField value="{!container.Empty_Full_Container_Identification__c}" id="ContainerIdentification"/>
+                                <apex:facet name="header">EMPTY/FULL</apex:facet>
+                            </apex:column>
+
+                            <apex:inlineEditSupport event="ondblClick"
+                                                    showOnEdit="saveButton,cancelButton" hideOnEdit="editButton"/>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+        </table>
+    </apex:form>
+</apex:page>

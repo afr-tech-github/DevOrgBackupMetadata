@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellTankaJPY__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>This field is input automatically if there is no manual input.1. It will refer the amount in Unit Price of Selling(Local) in Service Master Object. 2. If not, take the amount =Unit Price of Selling(USD)×Exchange Rate-Selling</inlineHelpText>
+    <label>UNIT PRICE OF SELLING(LOCAL)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

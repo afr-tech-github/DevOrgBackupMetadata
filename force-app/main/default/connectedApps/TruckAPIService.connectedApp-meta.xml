@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>afr-thao@gmail.com</contactEmail>
+    <label>TruckAPIService</label>
+    <oauthConfig>
+        <callbackUrl>https://afrs-dev-ed.my.salesforce.com</callbackUrl>
+        <consumerKey>3MVG9ZL0ppGP5UrDHbV6qFYYaaYgoKutZddyA7HmN53jHt7UBTpHlJv2Z3XSxzQNUlT_z1.Oo369w2YEiuXkW</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isClientCredentialEnabled>false</isClientCredentialEnabled>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Full</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+</ConnectedApp>

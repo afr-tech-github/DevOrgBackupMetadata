@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PROFIT_SHEET</fullName>
+    <columns>NAME</columns>
+    <columns>Active__c</columns>
+    <columns>Context__c</columns>
+    <columns>en_US__c</columns>
+    <columns>ja__c</columns>
+    <columns>ko__c</columns>
+    <columns>vi__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Context__c</field>
+        <operation>equals</operation>
+        <value>Profit_Sheet</value>
+    </filters>
+    <label>PROFIT SHEET</label>
+    <language>en_US</language>
+</ListView>

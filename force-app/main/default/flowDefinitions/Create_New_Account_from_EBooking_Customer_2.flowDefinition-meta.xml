@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>29</activeVersionNumber>
+    <description>create new account for Requester, Shipper, and consignee</description>
+    <masterLabel>Create New Account from EBooking Master Flow-V3</masterLabel>
+</FlowDefinition>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Used as an alternative for standard field Type</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For Customer, choose from Domestic Customer-, and partner from Oversea Partner-、vendor from 3RD Vendor-. For your own company, choose Internal Use Only .</inlineHelpText>
+    <label>TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>国内顧客 - 見込み</fullName>
+                <default>false</default>
+                <label>LOCAL CUSTOMER - LEAD(APPROACHING)</label>
+            </value>
+            <value>
+                <fullName>国内顧客 - 既存</fullName>
+                <default>true</default>
+                <label>LOCAL CUSTOMER - EXISTING</label>
+            </value>
+            <value>
+                <fullName>国内顧客 - フォワーダー</fullName>
+                <default>false</default>
+                <label>LOCAL CUSTOMER - FORWARDER</label>
+            </value>
+            <value>
+                <fullName>国内顧客 - 営業不要</fullName>
+                <default>false</default>
+                <label>LOCAL CUSTOMER - NO NEED SALES</label>
+            </value>
+            <value>
+                <fullName>海外顧客 - 見込み</fullName>
+                <default>false</default>
+                <label>OVERSEA CUSTOMER - LEAD(APPORACHING)</label>
+            </value>
+            <value>
+                <fullName>海外顧客 - 既存</fullName>
+                <default>false</default>
+                <label>OVERSEA CUSTOMER - EXISTING</label>
+            </value>
+            <value>
+                <fullName>Oversea Customer - No Need Sales</fullName>
+                <default>false</default>
+                <label>Oversea Customer - No Need Sales</label>
+            </value>
+            <value>
+                <fullName>LOCAL PARTNER - LEAD(APPROACHING)</fullName>
+                <default>false</default>
+                <label>LOCAL PARTNER - LEAD(APPROACHING)</label>
+            </value>
+            <value>
+                <fullName>LOCAL PARTNER - EXISTING</fullName>
+                <default>false</default>
+                <label>LOCAL PARTNER - EXISTING</label>
+            </value>
+            <value>
+                <fullName>LOCAL PARTNER - NO NEED SALES</fullName>
+                <default>false</default>
+                <label>LOCAL PARTNER - NO NEED SALES</label>
+            </value>
+            <value>
+                <fullName>海外パートナー - 見込み</fullName>
+                <default>false</default>
+                <label>OVERSEA PARTNER - LEAD(APPROACHING)</label>
+            </value>
+            <value>
+                <fullName>海外パートナー - 既存</fullName>
+                <default>false</default>
+                <label>OVERSEA PARTNER - EXISTING</label>
+            </value>
+            <value>
+                <fullName>海外パートナー - 営業不要</fullName>
+                <default>false</default>
+                <label>OVERSEA PARTNER - NO NEED SALES</label>
+            </value>
+            <value>
+                <fullName>業者 - Co-Loader</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - CONSOLIDATOR</label>
+            </value>
+            <value>
+                <fullName>Co-Loader</fullName>
+                <default>false</default>
+                <label>Co-Loader</label>
+            </value>
+            <value>
+                <fullName>業者 - 通関（当社手配先）</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - CUSTOMS CLEARANCE AGENT/OUR AGENT</label>
+            </value>
+            <value>
+                <fullName>業者 - BB/通関（当社手配先）</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - BB/CUSTOMERS CLEARANCE/OUR AGENT</label>
+            </value>
+            <value>
+                <fullName>業者 - 通関（お客様手配先）</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - CUSTOMS CLEARANCE AGENT/CUSTOMER AGENT</label>
+            </value>
+            <value>
+                <fullName>業者 - 運送</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - TRUCKING</label>
+            </value>
+            <value>
+                <fullName>Rail Agent</fullName>
+                <default>false</default>
+                <label>Rail Agent</label>
+            </value>
+            <value>
+                <fullName>Courier/Express</fullName>
+                <default>false</default>
+                <label>Courier/Express</label>
+            </value>
+            <value>
+                <fullName>業者 - 船社</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - CARRIER</label>
+            </value>
+            <value>
+                <fullName>3RDVENDOR - AIRLINER</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - AIRLINER</label>
+            </value>
+            <value>
+                <fullName>業者 - 倉庫・保管</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - WAREHOUSE/STORAGE</label>
+            </value>
+            <value>
+                <fullName>Shipping Broker</fullName>
+                <default>false</default>
+                <label>Shipping Broker</label>
+            </value>
+            <value>
+                <fullName>Packing Vendor</fullName>
+                <default>false</default>
+                <label>Packing Vendor</label>
+            </value>
+            <value>
+                <fullName>Inspection Vendor</fullName>
+                <default>false</default>
+                <label>Inspection Vendor</label>
+            </value>
+            <value>
+                <fullName>Insurance Agent</fullName>
+                <default>false</default>
+                <label>Insurance Agent</label>
+            </value>
+            <value>
+                <fullName>業者 - ポート</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - PORT</label>
+            </value>
+            <value>
+                <fullName>業者 - DEPOT</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - DEPOT</label>
+            </value>
+            <value>
+                <fullName>業者 - 銀行</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - BANK</label>
+            </value>
+            <value>
+                <fullName>Office Vendor</fullName>
+                <default>false</default>
+                <label>Office Vendor</label>
+            </value>
+            <value>
+                <fullName>業者 - システム</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - SYSTEM</label>
+            </value>
+            <value>
+                <fullName>Port Authority</fullName>
+                <default>false</default>
+                <label>Port Authority</label>
+            </value>
+            <value>
+                <fullName>官公省</fullName>
+                <default>false</default>
+                <label>GOVERMENT OFFICE</label>
+            </value>
+            <value>
+                <fullName>ドキュメント記載用</fullName>
+                <default>false</default>
+                <label>FOR DOCUMENT PURPOSE ONLY</label>
+            </value>
+            <value>
+                <fullName>当社社内利用</fullName>
+                <default>false</default>
+                <label>INTERNAL USE ONLY</label>
+            </value>
+            <value>
+                <fullName>業者 - その他</fullName>
+                <default>false</default>
+                <label>3RD VENDOR - OTHERS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

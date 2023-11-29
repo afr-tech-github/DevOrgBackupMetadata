@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bulk</fullName>
+    <active>true</active>
+    <description>Choose this Pricing when related with bulk cargos.</description>
+    <label>BULK</label>
+</RecordType>

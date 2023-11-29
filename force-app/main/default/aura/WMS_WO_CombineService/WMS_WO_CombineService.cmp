@@ -1,0 +1,89 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" access="global" controller="WMS_WO_CombineService">
+    <aura:attribute name="entWorkOrder" type="Object" />
+    <aura:attribute name="mapRecordTypes" type="Object" />
+    <aura:attribute name="isLoading" type="Boolean" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="warehouseId" type="String" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="listDestinations" type="Object[]" default="[]" />
+    <aura:attribute name="picklistCargoType" type="Object[]" default="[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler name="change" value="{!v.warehouseId}" action="{!c.onWarehouse_Changed}" />
+    <aura:handler event="force:refreshView" action="{!c.onInit}" />
+
+    <div>
+        <aura:if isTrue="{!v.recordId == null}">
+            <div class="slds-box slds-p-around_medium slds-m-bottom_medium" style="background:#fff;">
+                <c:strike_lookup
+                    label="Origin Warehouse"
+                    required="true"
+                    value="{!v.warehouseId}"
+                    object="clofor_com_cfs__Facility__c"
+                    searchField="clofor_com_cfs__FacilityName__c"
+                    placeholder="Origin Warehouse"
+                    iconName="standard:contact"
+                    subtitleField="Name"
+                    order="clofor_com_cfs__FacilityName__c"
+                    limit="5"
+                    loadingMessage="Loading..."
+                    errorMessage="Invalid input"/>
+            </div>
+        </aura:if>
+
+        <aura:iteration items="{!v.listDestinations}" var="dest" indexVar="destIdx">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium" style="box-shadow: 0 0 2px #aaa;">
+                <thead>
+                    <tr>
+                        <th class="slds-text-title_caps">
+                            {!dest.destination.Name} - {!dest.destination.clofor_com_cfs__FacilityName__c}
+                        </th>
+                        <th class="slds-text-align_right">
+                            <aura:if isTrue="{!v.recordId == null}" >
+                                <lightning:button name="{!dest.destinationId}" iconName="utility:add" label="Create Work Order" onclick="{!c.doCreateWorkOrder}" />
+                            </aura:if>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="slds-text-title_caps" >
+                            Work Order
+                        </th>
+                        <th class="slds-text-title_caps" >
+                            Client
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!dest.records}" var="item" >
+                        <tr>
+                            <aura:if isTrue="{!v.recordId != null}" >
+                                <td>
+                                    <lightning:input type="checkbox" label="{!item.clofor_com_cfs__WorkOrder__r.Name}" checked="{!item.isSelected}" disabled="{!item.isDisabled}" />
+                                </td>
+                            </aura:if>
+                            <aura:if isTrue="{!v.recordId == null}" >
+                                <td>
+                                    {!item.clofor_com_cfs__WorkOrder__r.Name}
+                                </td>
+                            </aura:if>
+                            <td>
+                                {!item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__Customer__r.Name}
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </aura:iteration>
+
+        <aura:if isTrue="{!v.recordId != null}">
+    		<div class="slds-text-align_right slds-p-around_small">
+                <lightning:button iconName="utility:save" variant="brand" label="Save" onclick="{!c.doCombineService}" />
+    		</div>
+        </aura:if>
+
+    	<aura:if isTrue="{!v.isLoading}">
+    		<lightning:spinner variant="brand" size="large" alternativeText="Loading..."/>
+    	</aura:if>
+
+    </div>
+</aura:component>

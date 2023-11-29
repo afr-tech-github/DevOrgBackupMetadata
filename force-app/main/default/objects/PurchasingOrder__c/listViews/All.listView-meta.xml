@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>PurchasingOrderName__c</columns>
+    <columns>Status__c</columns>
+    <columns>Vendor__c</columns>
+    <columns>Detail__c</columns>
+    <columns>InvoiceReceivedDate__c</columns>
+    <columns>PaymentDueDate__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>EndDate__c</columns>
+    <columns>ContractNumber__c</columns>
+    <columns>InvoiceNumberFromVendor__c</columns>
+    <columns>TotalAmountInclTaxLocal__c</columns>
+    <columns>TotalAmountInclTax__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

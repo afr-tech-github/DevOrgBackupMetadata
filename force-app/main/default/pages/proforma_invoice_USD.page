@@ -1,0 +1,350 @@
+<apex:page contentType="text-html" renderAs="pdf" controller="cntl_Document" showHeader="false" applyHtmlTag="false"> 
+    <head>
+        <style type="text/css">
+            @page {size: 210mm 300mm ;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;}
+            body {
+            font-family: Arial Unicode MS;
+            font-size: 10.5pt;
+            }
+            
+            .F08    { font-size: 8px;}
+            .F09    { font-size: 9px;}
+            .F10    { font-size: 10.5px;}
+            .F12    { font-size: 12px;}
+            .FF     { font-size: 16px;color:red;}
+            .F14    { font-size: 14px;}
+            .F18    { font-size: 18px;}
+            .F20    { font-size: 20px;font-weight: bold;}
+            .F25    { font-size: 25px;font-weight: bold;}
+            .F30    { font-size: 30px;font-weight: bold;}
+            table{
+            border-collapse: collapse;
+            
+            }
+            .billing-table td, .billing-table th{
+            border:0.5px black solid;
+            padding: 5px;
+            }
+            .billing-table th{
+            text-align: center;
+            }
+            .billing-table tr{
+            min-height: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <apex:variable var="currency" value=""/>
+        <apex:repeat value="{!WrapdisplayitemList}" var="list">
+            <!-- header -->
+            <div class="header F12">
+                <table style="width:100%">
+                    <tr>
+                        <td width="40%"><img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" height="80px"/></td>
+                        <td width="60%"><span class="F25">INVOICE</span></td>
+                    </tr>
+                </table>
+            <!-- company info -->
+            <table style="width:100%;" class="F12">
+                
+                <tr>
+                        <td width="60%" style="padding-left:25px">
+                            <br/>
+                            <apex:outputLabel value="Company: {!$Setup.Site_Custom_Settings__c.Company_Name__c}"/><br/>
+                            <apex:outputLabel value="Address: {!$Setup.Site_Custom_Settings__c.Company_Address__c}"/><br/>
+                            <apex:outputLabel value="Tel: {!$Setup.Site_Custom_Settings__c.Company_Phone__c} 　　Fax: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}    Tax Code: {!$Setup.Site_Custom_Settings__c.Tax_Code__c}"/>
+                            <br/>
+                        </td>
+                        <td width="40%" style="padding-left:80px" class="F12">
+                            <!--Registration No.(Form): {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Form__c} <br/>-->
+                            Invoice No.: S{!AnkenList.WkInitial__c}{!AnkenList.Name}<apex:outputText value="-{!AnkenList.QuotationVer__c}" /><br/>
+                            <!--Registration No.(Serial): {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Registration_No_Serial__c}<br/>-->
+                            Job Request No.: {!AnkenList.JobRequestID__c}<br/>
+                            Reference No.: {!AnkenList.REFNO__c}<br/>
+                            <apex:outputText value="Date: {0,date,dd/MM/yyyy}">
+                                <apex:param value="{!AnkenList.PrintDate__c}"/>
+                            </apex:outputText>
+                        </td>
+                </tr>
+            </table>
+            
+            
+            <!-- end company info -->
+            <div style="left:0px; margin-top:10px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <!-- foreign bank account info -->    
+            <div style="padding-left:25px; margin-top:10px; width:100%;" class="F12">
+                    Account name: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Account_1__c} <br />                                   
+                    Account number: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Account_No_1__c} <br />
+                    Bank: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Name_1__c} &nbsp;&nbsp;&nbsp;{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_1_Other__c}<br />
+                    Address: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Address_1__c}
+            </div>
+            <!-- end bank account info -->
+            <div style="left:0px; margin-top:10px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <!-- buyer info -->            
+            
+            <div class="F12" style="padding-left:25px; margin-top: 10px; width: 98%;">
+                Customer: &nbsp;<apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.EnglishCompanyName__c}"/><br />
+                Address: &nbsp;<apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.EnglishAddress__c}"/><br />
+                
+                <table style="padding:0px !important;  border-collapse: collapse;">
+                            <tr style="padding:0px !important">
+                                <td style="padding-left:0px !important">
+                                    Tel: &nbsp; <apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.Phone}"/>
+                                </td>
+                                <td style="padding-left:25px !important">
+                                    Fax: &nbsp; <apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.Fax}"/>
+                                </td>
+                                <td style="padding-left:25px !important">
+                                    Tax Code: &nbsp; <apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.Tax_Code__c}"/>
+                                </td>
+                            </tr>
+                  </table>
+            </div>
+            <!--
+            <div class="F12" style="margin-left:300px; margin-top: -18px;">
+                Bank Account: &nbsp;<apex:outputText rendered="{!ItemList.size > 0}" value="{!ItemList[0].Seikyusaki__r.Bank1__c}"/>
+            </div>
+            -->
+            <!-- end buyer info -->
+            <div style="left:0px; margin-top:10px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <!-- payment -->
+            <div class="f10" style="padding-left: 25px; margin-top:10px; width:100%; font-size:9pt; min-height: 20px;">
+                <div style="float: left; width: 50%;">
+                <apex:outputText value="Due Date: {0,date,dd/MM/yyyy}" rendered="{!AppearFlag}">
+                    <apex:param value="{!AnkenList.DeadlineForPaymentOfInvoices__c}"/>
+                </apex:outputText>
+                <apex:outputText value="Due Date {0,date,dd/MM/yyyy}" rendered="{!(!AppearFlag)}">
+                    <apex:param value="{!AnkenList.DeadlineForPaymentOfExpense__c}"/>
+                </apex:outputText>
+                </div>
+                <div style="float: left; width: 50%;">
+                    <div style="float:left;font-size:9pt;">
+                        Ex-Rate:
+                    </div>
+                    <div style="float:left; margin-left:30px;font-size:9pt;">                        
+                        {!AnkenList.ExchangeRate__c}                        
+                    </div>   
+                </div>    
+            </div>
+            <!-- end payment -->
+            
+            <!-- HBL Details -->
+            <div style="left:0px; margin-top:10px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            <table width="100%">
+                <tr>
+                    <td style="padding-left: 25px; width: 20%;">H BL/HAWB NO.</td>
+                    <td style="width: 16%"> <apex:outputText value="{!AnkenList.HBL__c}"  />
+                        <apex:outputText value="{!AnkenList.HAWB__c}" /></td>
+                    <td style="width: 16%">VESSEL/FLIGHT</td>
+                    <td style="width: 16%">
+                        <apex:outputText value="{!AnkenList.Vessle__c}"  />
+                        <apex:outputText value="{!AnkenList.FlightNo__c}" />
+                    </td>
+                    <td style="width: 16%">VOY NO.</td>
+                    <td style="width: 16%">{!AnkenList.Voy_No__c}</td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 25px;">WEIGHT</td>
+                    <td>{!AnkenList.weight__c}</td>
+                    <td>P.O.L(A.O.D)</td>
+                    <td>{!AnkenList.POL__r.Name}</td>
+                    <td>P.O.D(A.O.A)</td>
+                    <td> {!AnkenList.POL__r.Name}</td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 25px;">QUANTITY</td>
+                    <td> 
+                        {!AnkenList.carton__c} {!AnkenList.UnitType__c}(s)
+                    </td>
+                    <td>E.T.D</td>
+                    <td>
+                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                            <apex:param value="{!AnkenList.ETD__c}"/>
+                        </apex:outputText> 
+                    </td>
+                    <td>E.T.A</td>
+                    <td > 
+                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                            <apex:param value="{!AnkenList.ETA__c}"/>
+                        </apex:outputText> 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 25px;">SIZE</td>
+                    <td>
+                        <apex:outputPanel rendered="{!AnkenList.TranporationType__c == 'LCL' || AnkenList.TranporationType__c == 'AIR' || AnkenList.TranporationType__c == 'BULK'}">
+                            
+                            <apex:outputField value="{!AnkenList.TranporationType__c}"/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!AnkenList.TranporationType__c == 'FCL' || AnkenList.TranporationType__c == 'MTY' || AnkenList.TranporationType__c == 'MTY & FCL'}">
+                            {!AnkenList.TranporationType__c + ' : '}
+                            <apex:outputPanel rendered="{!AnkenList.Container__c != null && AnkenList.ContainerNumber__c!= null}">
+                                {!AnkenList.Container__c} * {!AnkenList.ContainerNumber__c  }
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!AnkenList.Container2__c != null && AnkenList.ContainerNumber2__c!= null}">
+                                 /{!AnkenList.Container2__c} * {!AnkenList.ContainerNumber2__c }
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!AnkenList.Container3__c != null && AnkenList.ContainerNumber3__c!= null}">
+                                 /{!AnkenList.Container3__c} * {!AnkenList.ContainerNumber3__c }
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!AnkenList.Container4__c != null && AnkenList.ContainerNumber4__c!= null}">
+                                 /{!AnkenList.Container4__c} * {!AnkenList.ContainerNumber4__c } 
+                            </apex:outputPanel>
+                        
+                        </apex:outputPanel>
+                        
+                    </td>
+                    <td>MEASUREMENENT</td>
+                    <td><apex:outputPanel rendered="{!AnkenList.CBM__c!= null}">
+                            {!AnkenList.CBM__c}  <span class="F09"> CBM</span>
+                        </apex:outputPanel>
+                    </td>
+                    <td>C/C DECL NO</td>
+                    <td>{!AnkenList.CustomsClearanceDeclarationNo__c} </td>
+                </tr>
+            </table> 
+            </div>
+            <div style="left:0px; margin-top:10px; width:760px; border-width:0.5px; border-style:solid;"></div>
+            
+                <!-- end HBL Details -->
+            <div style="margin-top: 10px;">
+                <table class="billing-table F12" style="width: 100%" >
+                    <tr>
+                        <th>NO </th>
+                        <th style="width: 40%">DESCRIPTION</th>
+                        <th>UNIT COST (USD)</th>
+                        <th>UNIT</th>
+                        <th>CHARGE UNIT</th>
+                        <th>AMOUNT(USD)</th>
+                        <th>TAX(USD)</th>
+                    </tr>
+                    <apex:repeat value="{!list.objectList}" var="inlist">
+                        <tr>
+                            <td style="text-align: center;">{!inlist.SeikyuBangou__c}</td>
+                            <td>
+                                <apex:outputText value="{!SUBSTITUTE(SUBSTITUTE(inlist.InsatuyouSyohinEng__c,'Surcharge Included',''),'Surcharge Excluded','')}">
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,##0.000}" rendered="{!inlist.curr__c != 'USD'}">
+                                    <apex:param value="{!inlist.SellTankaUSD__c}" />
+                                </apex:outputText>
+                                <apex:outputText value="{0,number,###,###,##0.000}" rendered="{!inlist.curr__c = 'USD'}">
+                                    <apex:param value="{!inlist.SellTankaUSD__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center; padding-right: 5px;" ><apex:variable var="unitPrint" value="{!inlist.ChargeUnitInPrint__c}"/>
+                                
+                                <apex:variable var="unitKey" value="{!inlist.ChargeUnitFormula__c}"/>
+                                <apex:variable var="unitPrint" value="{!inlist.ChargeUnitInPrint__c}"/>
+                                <apex:outputPanel rendered="{!unitKey != null}">
+                                    <apex:outputText value="{!translations[unitPrint]}" rendered="{!unitPrint != null && unitKey !='コンテナ' && unitKey != 'Container'}"/>
+                                    <apex:outputText value="{!translations[unitKey]}" rendered="{!unitPrint == null && unitKey != 'コンテナ' && unitKey != 'Container'}"/>
+                                    <apex:outputText value="{!inlist.ContainerSizeFormula__c}" rendered="{!inlist.ContainerSizeFormula__c != null && (unitKey == 'コンテナ' || unitKey == 'Container')}"/>
+                                    <apex:outputText value="{!unitKey}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'Container')}"/>
+                                    <apex:outputText value="{!translations[unitKey]}" rendered="{!inlist.ContainerSizeFormula__c == null && (unitKey == 'コンテナ')}"/>
+                                </apex:outputPanel>
+                            </td>
+                            
+                            <td style="text-align: right; padding-right: 5px;">
+                                {!VALUE(inlist.wkSuryo__c)}
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,##0.000}" rendered="{!inlist.curr__c != 'USD'}">
+                                    <apex:param value="{!inlist.SellAmountUSD__c}" />
+                                </apex:outputText>
+                                <apex:outputText value="{0,number,###,###,##0.000}" rendered="{!inlist.curr__c = 'USD'}">
+                                    <apex:param value="{!inlist.SellAmountUSD__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,##0.000}">
+                                    <apex:param value="{!inlist.SellTaxNum_USD__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td ></td>
+                        <td style="text-align: center">SUBTOTAL    </td>
+                        <td style="text-align: right" colspan="4"> 
+                            
+                            
+                            <apex:outputText value="{0,number,#,###,###,##0.00}">
+                                <apex:param value="{!ROUND(list.pageSyokeiUSD, 2)}" />
+                            </apex:outputText>
+                            
+                            
+                        </td>
+                        <td style="text-align: center">
+                            <apex:outputLabel value="USD"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: center">TAX    </td>
+                        <td style="text-align: right" colspan="4">
+                            
+                            <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}"></apex:outputText>
+                            <apex:outputText value="{0,number,#,###,###,##0.00}" rendered="{!list.gyoNo == displayListSize}">
+                                <apex:param value="{!ROUND(SyohizeiUSD, 2)}"/>
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: center">
+                                <apex:outputLabel value="USD"/>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td ></td>
+                        <td style="text-align: center">TOTAL    </td>
+                        <td style="text-align: right" colspan="4">
+                            <apex:outputText value="*******" rendered="{!list.gyoNo != displayListSize}"></apex:outputText>
+                            <apex:outputText value="{0,number,#,###,###,##0.00}" rendered="{!list.gyoNo == displayListSize}">
+                                <apex:param value="{!ROUND(SyokeiUSD, 2) + ROUND(SyohizeiUSD, 2) }"/>
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: center">
+                            <apex:outputLabel value="USD"/>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div style="padding-left:25px;">
+                <div style="float:left; width:100px;font-size:9pt; margin-top: 5px;">
+                        IN WORDS:
+                </div>
+                <div style="float:left; width:650px;font-size:9pt; margin-top: 5px; margin-left: 15px; text-transform: uppercase;">
+                        {!totalAmountText_Wording}.
+                </div>
+            </div>
+            <div style="left:0px; margin-top:25px; width:780px; border-width:0.5px; border-style:solid; clear:both"></div>
+            
+            <div style="padding-left: 25px; width: 100%; font-size:9pt">
+                
+                <div style="float: left; width: 50%;">
+                        Remarks: <br/> <apex:outputField value="{!AnkenList.SeikyusyoRemark__c}"/>
+                </div>
+                <div style="float: left; width: 50%; text-align: center">
+                        Authorized Signature
+                </div>    
+            </div>
+            
+            <div STYLE="position:absolute; margin-left:600px;  margin-top:140px; width:760px; font-size:8pt;">
+                Powered by AFR Solutions Co., Ltd.
+            </div>
+            <!-- ページ番号 -->
+            <div STYLE="position:absolute; left:385px; margin-top:140px;">
+                <apex:outputText value="{!list.gyoNo}" />
+            </div>
+            
+            <apex:outputText rendered="{!NOT(list.gyoNo = displayListSize)}">
+                <div style="page-break-before: always;"></div>
+                <div style="height:8px;"></div>
+            </apex:outputText>
+              
+        </apex:repeat>
+        
+    </body>
+</apex:page>

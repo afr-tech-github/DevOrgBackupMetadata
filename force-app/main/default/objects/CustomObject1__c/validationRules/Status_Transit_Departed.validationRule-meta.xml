@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Transit_Departed</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(ISPICKVAL(status__c , &quot;輸入 トランジット本船/フライト出発済(Transit Departured)&quot;) , OR(ISBLANK(T_ETD__c),ISBLANK(TS__c),ISBLANK(TransitV__c)), false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>Transit出港日、積み替え港、積み替え前の船を必ずいれてください。
+Please enter Transit ETD at Transit Port, Transit Port and Transit Vessel.</errorMessage>
+</ValidationRule>

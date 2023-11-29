@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>고객님께 견적서 링크를 전송할 때, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[견적서] 고객용 자동 메일 링크</name>
+    <style>none</style>
+    <subject>견적서 진척상황 안내 -ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c},powered by CloTra</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PICKUP_DATE_BEFORE_DELIVERY_DATE</fullName>
+    <active>false</active>
+    <description>The PICKUP DATE must be ealier the DELIVERY DATE</description>
+    <errorConditionFormula>DeliveryDate__c  &gt;=  Pickupdate__c</errorConditionFormula>
+    <errorDisplayField>Pickupdate__c</errorDisplayField>
+    <errorMessage>The PICKUP DATE must be earlier than the DELIVERY DATE</errorMessage>
+</ValidationRule>

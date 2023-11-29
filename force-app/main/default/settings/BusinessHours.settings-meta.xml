@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessHoursSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>17:00:00.000Z</fridayEndTime>
+        <fridayStartTime>08:00:00.000Z</fridayStartTime>
+        <mondayEndTime>17:00:00.000Z</mondayEndTime>
+        <mondayStartTime>08:00:00.000Z</mondayStartTime>
+        <name>Japan Team</name>
+        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Tokyo</timeZoneId>
+        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>true</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>08:30:00.000Z</fridayStartTime>
+        <mondayEndTime>17:30:00.000Z</mondayEndTime>
+        <mondayStartTime>08:30:00.000Z</mondayStartTime>
+        <name>Vietnamese Team</name>
+        <saturdayEndTime>12:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>08:30:00.000Z</saturdayStartTime>
+        <sundayEndTime>17:30:00.000Z</sundayEndTime>
+        <sundayStartTime>08:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Ho_Chi_Minh</timeZoneId>
+        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>00:00:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>aaa</name>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>00:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
+        <timeZoneId>America/Los_Angeles</timeZoneId>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>00:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>00:00:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>bbb</name>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>00:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
+        <timeZoneId>America/Los_Angeles</timeZoneId>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>00:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every September 22 effective 2016/09/22</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Autumn_Equinox</name>
+        <recurrenceDayOfMonth>22</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>September</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-09-22</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every May 5 effective 2016/05/05</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Children&apos;s_Day</name>
+        <recurrenceDayOfMonth>5</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>May</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-05-05</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every January 11 effective 2016/01/11</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Coming_of_Age_Day</name>
+        <recurrenceDayOfMonth>11</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>January</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-01-11</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every May 3 effective 2016/05/03</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Constitution_Memorial_Day</name>
+        <recurrenceDayOfMonth>3</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>May</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-05-03</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every November 3 effective 2016/11/03</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Culture_Day</name>
+        <recurrenceDayOfMonth>3</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>November</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-11-03</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every December 23 effective 2016/12/23</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Emperor&apos;s_Birthday</name>
+        <recurrenceDayOfMonth>23</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>December</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-12-23</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every May 4 effective 2016/05/04</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Greenery_Day</name>
+        <recurrenceDayOfMonth>4</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>May</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-05-04</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every November 23 effective 2016/11/23</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Labor_Thanksgiving_Day</name>
+        <recurrenceDayOfMonth>23</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>November</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-11-23</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every August 11 effective 2016/08/11</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Mountain_Day</name>
+        <recurrenceDayOfMonth>11</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>August</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-08-11</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every February 11 effective 2016/02/11</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_National_Foundation_Day</name>
+        <recurrenceDayOfMonth>11</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>February</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-02-11</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every January 1 effective 2016/01/01</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_New_Year&apos;s_Day</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>January</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-01-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every September 19 effective 2016/09/19</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Respect_for_the_Aged_Day</name>
+        <recurrenceDayOfMonth>19</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>September</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-09-19</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every July 18 effective 2016/07/18</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Sea_Day</name>
+        <recurrenceDayOfMonth>18</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>July</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-07-18</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every April 29 effective 2016/04/29</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Showa_Day</name>
+        <recurrenceDayOfMonth>29</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>April</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-04-29</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every October 10 effective 2016/10/10</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Sports_Day</name>
+        <recurrenceDayOfMonth>10</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>October</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-10-10</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Japan Team</businessHours>
+        <description>Occurs every March 21 effective 2016/03/21</description>
+        <isRecurring>true</isRecurring>
+        <name>Jp_Spring_Equinox_observed</name>
+        <recurrenceDayOfMonth>21</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>March</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-03-21</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every April 17 effective 2016/04/17</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_HungKings&apos;_Commemoration_Day</name>
+        <recurrenceDayOfMonth>17</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>April</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-04-17</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every May 1 effective 2016/05/01</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_Labor_Day</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>May</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-05-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every February 7 effective 2016/02/07 until 2016/02/11</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_Lunar_New_Year</name>
+        <recurrenceDayOfMonth>7</recurrenceDayOfMonth>
+        <recurrenceEndDate>2016-02-11</recurrenceEndDate>
+        <recurrenceMonthOfYear>February</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-02-07</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every January 1 effective 2016/01/01</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_New_Year&apos;s_Day</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>January</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-01-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every April 30 effective 2016/04/30</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_Victory_Day</name>
+        <recurrenceDayOfMonth>30</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>April</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-04-30</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Vietnamese Team</businessHours>
+        <description>Occurs every September 2 effective 2016/09/02</description>
+        <isRecurring>true</isRecurring>
+        <name>Vi_Vietnam_National_Day</name>
+        <recurrenceDayOfMonth>2</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>September</recurrenceMonthOfYear>
+        <recurrenceStartDate>2016-09-02</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <activityDate>2016-01-13</activityDate>
+        <isRecurring>false</isRecurring>
+        <name>sample</name>
+    </holidays>
+</BusinessHoursSettings>

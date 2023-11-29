@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <decisions>
+        <description>If fields is null -&gt; update</description>
+        <name>GW_null_or_not</name>
+        <label>GW null or not</label>
+        <locationX>232</locationX>
+        <locationY>359</locationY>
+        <defaultConnector>
+            <targetReference>Update_G_W</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Gross_weight_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__autorollupgw__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Gross_Weight__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.autorollupgw__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_G_W</targetReference>
+            </connector>
+            <label>Gross weight null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If fields is null -&gt; update</description>
+        <name>Which_fields_need_to_update_0</name>
+        <label>CBM Null</label>
+        <locationX>521</locationX>
+        <locationY>530</locationY>
+        <defaultConnector>
+            <targetReference>Update_CBM</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>CBM_Null_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__MCBM__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Autorollupcbm__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Autorollupcbm__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_CBM</targetReference>
+            </connector>
+            <label>CBM Null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>If fields is null -&gt; update</description>
+        <name>Which_fields_need_to_update_0_0</name>
+        <label>Quantity null</label>
+        <locationX>726</locationX>
+        <locationY>694</locationY>
+        <defaultConnector>
+            <targetReference>Update_quantity</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Quantity_Null_0_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Mcarton_c__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record.Autorollupcargoquantity__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.clofor_com_cfs__Autorollupcargoquantity__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_quantity</targetReference>
+            </connector>
+            <label>Quantity Null</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Auto update Rollup to manual {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Auto update Rollup to manual</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_CBM</name>
+        <label>Update CBM</label>
+        <locationX>731</locationX>
+        <locationY>521</locationY>
+        <connector>
+            <targetReference>Which_fields_need_to_update_0_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MCBM__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>MCBM__c</field>
+            <value>
+                <elementReference>$Record.Autorollupcbm__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_G_W</name>
+        <label>Update G.W</label>
+        <locationX>529</locationX>
+        <locationY>370</locationY>
+        <connector>
+            <targetReference>Which_fields_need_to_update_0</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Gross_Weight__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Gross_Weight__c</field>
+            <value>
+                <elementReference>$Record.autorollupgw__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_quantity</name>
+        <label>Update quantity</label>
+        <locationX>969</locationX>
+        <locationY>671</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Mcarton_c__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Mcarton_c__c</field>
+            <value>
+                <elementReference>$Record.Autorollupcargoquantity__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>458</locationX>
+        <locationY>48</locationY>
+        <connector>
+            <targetReference>GW_null_or_not</targetReference>
+        </connector>
+        <object>MasterAnken__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

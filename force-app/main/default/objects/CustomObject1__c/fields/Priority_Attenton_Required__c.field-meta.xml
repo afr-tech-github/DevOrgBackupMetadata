@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Priority_Attenton_Required__c</fullName>
+    <deprecated>false</deprecated>
+    <description>優先順位-確認用(3点：HIGH、2点：MEDIUM、3点：LOW)</description>
+    <externalId>false</externalId>
+    <formula>IF(OR(
+ISPICKVAL( status__c , &quot;&quot;),
+ISPICKVAL( status__c , &quot;輸入 出荷情報入手(Cargo Info Received)&quot;),
+ISPICKVAL( status__c , &quot;輸入 最初メール受付返事済み(First Contact Reply Email Sent to Parnter)&quot;),
+ISPICKVAL( status__c , &quot;輸入 Pre-Alertデータ入力済み(Pre-Alert Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 AFRデータファイリング済み(AFR Data Filed)&quot;),
+ISPICKVAL( status__c , &quot;輸入 B/L情報登録済み(B/L Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報入手(Booking Info Received)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報変更(Booking Info Changed)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 A/N情報登録済み(A/N Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト出発済(Departured)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト到着済(Arrived)&quot;)
+) 
+&amp;&amp; ETA__c - Today() &lt;= 3 &amp;&amp; ETA__c - Today() &gt; 0 
+&amp;&amp; Today() - ETD__c == 1, 
+3, 
+
+IF (OR(
+ISPICKVAL( status__c , &quot;&quot;),
+ISPICKVAL( status__c , &quot;輸入 出荷情報入手(Cargo Info Received)&quot;),
+ISPICKVAL( status__c , &quot;輸入 最初メール受付返事済み(First Contact Reply Email Sent to Parnter)&quot;),
+ISPICKVAL( status__c , &quot;輸入 Pre-Alertデータ入力済み(Pre-Alert Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 AFRデータファイリング済み(AFR Data Filed)&quot;),
+ISPICKVAL( status__c , &quot;輸入 B/L情報登録済み(B/L Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報入手(Booking Info Received)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報変更(Booking Info Changed)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 A/N情報登録済み(A/N Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト出発済(Departured)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト到着済(Arrived)&quot;)
+) 
+&amp;&amp; ETA__c - Today() &lt;= 3&amp;&amp; ETA__c - Today() &gt; 0, 
+2, 
+
+IF (OR (
+ISPICKVAL( status__c , &quot;&quot;),
+ISPICKVAL( status__c , &quot;輸入 出荷情報入手(Cargo Info Received)&quot;),
+ISPICKVAL( status__c , &quot;輸入 最初メール受付返事済み(First Contact Reply Email Sent to Parnter)&quot;),
+ISPICKVAL( status__c , &quot;輸入 Pre-Alertデータ入力済み(Pre-Alert Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 AFRデータファイリング済み(AFR Data Filed)&quot;),
+ISPICKVAL( status__c , &quot;輸入 B/L情報登録済み(B/L Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 輸入 SWITCH B/L情報登録済み(Switch B/L Data Registered)&quot;),
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報入手(Booking Info Received)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 ブッキング情報変更(Booking Info Changed)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 A/N情報登録済み(A/N Data Registered)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト出発済(Departured)&quot;), 
+ISPICKVAL( status__c , &quot;輸入 本船/フライト到着済(Arrived)&quot;)
+) , 1, 0) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Cargo need your attention(3-High,2-Medium,1-Low)</inlineHelpText>
+    <label>ATTENTION PRIORITY(3H,2M,1L)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

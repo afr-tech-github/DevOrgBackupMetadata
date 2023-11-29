@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>현재 날짜가 H B/L의 입항일로부터 이틀 이상 지나고 운영 담당자한테 자동메일을 보낼 경우, 이 템플릿을 사용하십시오.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>입항일 이후 화물확인 자동메일 템플릿</name>
+    <style>none</style>
+    <subject>자동메일알림-ID: {!CustomObject1__c.Name}-입항일 이후 안건확인</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

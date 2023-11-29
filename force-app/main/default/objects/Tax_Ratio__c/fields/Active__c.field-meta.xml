@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>default is unchecked. once approved, it is automatically checked by Field Update.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>After creating Tax ratio management record, press &apos;Submit for Approval&apos; button. After the review and approval by accounting team, it will be automatically activated.</inlineHelpText>
+    <label>Active</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

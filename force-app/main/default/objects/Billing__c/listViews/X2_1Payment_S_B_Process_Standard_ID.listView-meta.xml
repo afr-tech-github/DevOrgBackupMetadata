@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2_1Payment_S_B_Process_Standard_ID</fullName>
+    <columns>NAME</columns>
+    <columns>BillNameForInternal__c</columns>
+    <columns>ApplicantSelling__c</columns>
+    <columns>AmountSellingIncludeTAX__c</columns>
+    <columns>UnreceivedBalanceLocal__c</columns>
+    <columns>AmountBuyingIncludeTAX__c</columns>
+    <columns>UnpaidBalanceOfBuyingLocal__c</columns>
+    <columns>ReceiptanceTypeSelling__c</columns>
+    <columns>ReceiptanceConfirmationSelling__c</columns>
+    <columns>ReceiptanceSettledDate__c</columns>
+    <columns>PaymentTypeBuying__c</columns>
+    <columns>PaymentConfirmedBuying__c</columns>
+    <columns>PaymentSettledDateBuying__c</columns>
+    <columns>BeneficiaryBuying__c</columns>
+    <columns>BankAccountForPayment__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Billing__c.Billing</value>
+    </filters>
+    <label>2.1Payment(S&amp;B) Process-Standard(ID)</label>
+    <language>en_US</language>
+</ListView>

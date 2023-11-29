@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>LoanID__c</columns>
+    <columns>PreviousLoanRepaymentID__c</columns>
+    <columns>OpeningBalance__c</columns>
+    <columns>ClosingBalance__c</columns>
+    <columns>InterestsAmount__c</columns>
+    <columns>RepaymentAmount__c</columns>
+    <columns>TotalAmountOfLoanRepayment__c</columns>
+    <columns>AmountPaid__c</columns>
+    <columns>UnpaidBalanceOfLR__c</columns>
+    <columns>PaymentSettledDateLR__c</columns>
+    <columns>BankAccountLR__c</columns>
+    <columns>PaymentTypeLR__c</columns>
+    <columns>BeneficiaryLR__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

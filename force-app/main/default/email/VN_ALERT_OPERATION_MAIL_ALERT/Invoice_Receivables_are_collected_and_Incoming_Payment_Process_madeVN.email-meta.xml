@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi Hóa Đơn không cần phải thu vượt quá thời hạn thanh toán.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Liệu các hóa đơn không bao gồm thuế đã được thu  và doanh thu đã được xác nhận ?</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-NON-DUTY Invoice Receiveables are collected and Incoming Payment processed?</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

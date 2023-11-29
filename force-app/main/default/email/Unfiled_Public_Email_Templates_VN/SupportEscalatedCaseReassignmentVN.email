@@ -1,0 +1,11 @@
+Tác vụ này đã được phân công lại cho bạn vì gần đết hạn chót, nhưng nó vẫn còn chưa giải quyết.
+
+Công Ty: {!Account.Name} 
+Mức dịch vụ: {!Account_Service_Level} 
+Sản phẩm: {!Case.00N28000007V66W} 
+Trường hơp số#: {!Case.CaseNumber} 
+Tiêu đề số: {!Case.Subject}
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c}  
+*********************************************************

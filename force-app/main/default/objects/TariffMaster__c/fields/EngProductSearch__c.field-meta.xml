@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EngProductSearch__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CATEGORY(ENG)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ProductSearch__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FCL Import</fullName>
+                <default>false</default>
+                <label>FCL Import</label>
+            </value>
+            <value>
+                <fullName>FCL Export</fullName>
+                <default>false</default>
+                <label>FCL Export</label>
+            </value>
+            <value>
+                <fullName>FCL Triangular trade</fullName>
+                <default>false</default>
+                <label>FCL Triangular trade</label>
+            </value>
+            <value>
+                <fullName>LCL Import</fullName>
+                <default>false</default>
+                <label>LCL Import</label>
+            </value>
+            <value>
+                <fullName>LCL Export</fullName>
+                <default>false</default>
+                <label>LCL Export</label>
+            </value>
+            <value>
+                <fullName>LCL Triangular trade</fullName>
+                <default>false</default>
+                <label>LCL Triangular trade</label>
+            </value>
+            <value>
+                <fullName>Import Custom Clearance</fullName>
+                <default>false</default>
+                <label>Import Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>Export Custom Clearance</fullName>
+                <default>false</default>
+                <label>Export Custom Clearance</label>
+            </value>
+            <value>
+                <fullName>Air</fullName>
+                <default>false</default>
+                <label>Air</label>
+            </value>
+            <value>
+                <fullName>Drayage</fullName>
+                <default>false</default>
+                <label>Drayage</label>
+            </value>
+            <value>
+                <fullName>Deliver</fullName>
+                <default>false</default>
+                <label>Deliver</label>
+            </value>
+            <value>
+                <fullName>Warehouse</fullName>
+                <default>false</default>
+                <label>Warehouse</label>
+            </value>
+            <value>
+                <fullName>Actual Expense</fullName>
+                <default>false</default>
+                <label>Actual Expense</label>
+            </value>
+            <value>
+                <fullName>Oversea Local Charge</fullName>
+                <default>false</default>
+                <label>Oversea Local Charge</label>
+            </value>
+            <value>
+                <fullName>Consolidation Cost Allocation</fullName>
+                <default>false</default>
+                <label>Consolidation Cost Allocation</label>
+            </value>
+            <value>
+                <fullName>Empty Container</fullName>
+                <default>false</default>
+                <label>Empty Container</label>
+            </value>
+            <value>
+                <fullName>Product</fullName>
+                <default>false</default>
+                <label>Product</label>
+            </value>
+            <value>
+                <fullName>Bulk</fullName>
+                <default>false</default>
+                <label>Bulk</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>マスター按分</controllingFieldValue>
+            <valueName>Consolidation Cost Allocation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ドレー</controllingFieldValue>
+            <valueName>Drayage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>配送</controllingFieldValue>
+            <valueName>Deliver</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>倉庫</controllingFieldValue>
+            <valueName>Warehouse</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>実費</controllingFieldValue>
+            <valueName>Actual Expense</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Empty Container</controllingFieldValue>
+            <valueName>Empty Container</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Product</controllingFieldValue>
+            <valueName>Product</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bulk</controllingFieldValue>
+            <valueName>Bulk</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FCL輸入</controllingFieldValue>
+            <valueName>FCL Import</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FCL輸出</controllingFieldValue>
+            <valueName>FCL Export</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FCL三国間</controllingFieldValue>
+            <valueName>FCL Triangular trade</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LCL輸入</controllingFieldValue>
+            <valueName>LCL Import</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LCL輸出</controllingFieldValue>
+            <valueName>LCL Export</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>LCL三国間</controllingFieldValue>
+            <valueName>LCL Triangular trade</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>海外現地費用</controllingFieldValue>
+            <valueName>Oversea Local Charge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>通関輸入</controllingFieldValue>
+            <valueName>Import Custom Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>通関輸出</controllingFieldValue>
+            <valueName>Export Custom Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>エア</controllingFieldValue>
+            <valueName>Air</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

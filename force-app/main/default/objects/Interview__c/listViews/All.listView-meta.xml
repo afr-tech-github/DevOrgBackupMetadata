@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Recruitment_CRM__c</columns>
+    <columns>Approver__c</columns>
+    <columns>Interviewschedule__c</columns>
+    <columns>Interviewer__c</columns>
+    <columns>Jobopening__c</columns>
+    <columns>PreviousInterview__c</columns>
+    <columns>CONNECTION_RECEIVED.NAME</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>CONNECTION_SENT.NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Comment_from_HR__c</columns>
+    <columns>Comment_from_Interviewer__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

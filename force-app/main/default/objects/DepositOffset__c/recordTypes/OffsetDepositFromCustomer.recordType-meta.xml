@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OffsetDepositFromCustomer</fullName>
+    <active>true</active>
+    <label>Offset Deposit From Customer</label>
+</RecordType>

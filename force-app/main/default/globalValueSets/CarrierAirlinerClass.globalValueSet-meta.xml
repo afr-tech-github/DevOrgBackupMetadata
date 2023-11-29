@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Carrier</fullName>
+        <default>false</default>
+        <label>Carrier</label>
+    </customValue>
+    <customValue>
+        <fullName>Airliner</fullName>
+        <default>false</default>
+        <label>Airliner</label>
+    </customValue>
+    <masterLabel>CARRIER/AIRLINER CLASSIFICATION</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

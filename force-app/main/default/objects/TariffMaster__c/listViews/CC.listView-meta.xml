@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CC</fullName>
+    <columns>NAME</columns>
+    <columns>ProductID__c</columns>
+    <columns>CustomCategory__c</columns>
+    <columns>Subcategory__c</columns>
+    <columns>BuyKingaku__c</columns>
+    <columns>SellKingakuJPY__c</columns>
+    <columns>AvailableHarbor__c</columns>
+    <columns>UNIT__c</columns>
+    <columns>YukouKigen__c</columns>
+    <columns>Supplier__c</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ProductSearch__c</field>
+        <operation>contains</operation>
+        <value>Import Custom Clearance,Export Custom Clearance</value>
+    </filters>
+    <label>Customs Clearance</label>
+    <language>en_US</language>
+</ListView>

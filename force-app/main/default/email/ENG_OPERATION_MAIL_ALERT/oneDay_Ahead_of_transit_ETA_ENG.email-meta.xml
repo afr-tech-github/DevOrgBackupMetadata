@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when reminding operation to check if Arrival notice is not sent one day before.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>1DAY AHEAD OF Transit ETA</name>
+    <style>none</style>
+    <subject>Alert Email-ID: {!CustomObject1__c.Name}-1Day Ahead of Transit ETA</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

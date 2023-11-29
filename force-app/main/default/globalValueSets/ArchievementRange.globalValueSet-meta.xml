@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Under 80%</fullName>
+        <default>false</default>
+        <label>Under 80% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>80%-89%</fullName>
+        <default>false</default>
+        <label>80%-89% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Under 90%</fullName>
+        <default>false</default>
+        <label>Under 90% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>90%-99%</fullName>
+        <default>false</default>
+        <label>90%-99% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Under 100% of Target</fullName>
+        <default>false</default>
+        <label>Under 100% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>100%-109%</fullName>
+        <default>false</default>
+        <label>100%-109% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 100% of Target</fullName>
+        <default>false</default>
+        <label>Over 100% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>110-119</fullName>
+        <default>false</default>
+        <label>110%-119% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 110%</fullName>
+        <default>false</default>
+        <label>Over 110% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>120%-129%</fullName>
+        <default>false</default>
+        <label>120%-129% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 120%</fullName>
+        <default>false</default>
+        <label>Over 120% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>130%-139% of Target</fullName>
+        <default>false</default>
+        <label>130%-139% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 130%</fullName>
+        <default>false</default>
+        <label>Over 130% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>140%-149% of Target</fullName>
+        <default>false</default>
+        <label>140%-149% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 140% of Target</fullName>
+        <default>false</default>
+        <label>Over 140% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>150%-159% of Target</fullName>
+        <default>false</default>
+        <label>150%-159% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 150% of Target</fullName>
+        <default>false</default>
+        <label>Over 150% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>160%-169% of Target</fullName>
+        <default>false</default>
+        <label>160%-169% of Target</label>
+    </customValue>
+    <customValue>
+        <fullName>Over 160% of Target</fullName>
+        <default>false</default>
+        <label>Over 160% of Target</label>
+    </customValue>
+    <masterLabel>ARCHIEVEMENT RANGE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

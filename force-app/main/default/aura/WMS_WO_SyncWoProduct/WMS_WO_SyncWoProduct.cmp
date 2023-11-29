@@ -1,0 +1,65 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" access="global" controller="WorkOrderService" extends="c:BaseComponent">
+	<aura:attribute name="entity" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="generalTranslation" type="Map"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<force:recordData aura:id="recordLoader"
+		recordId="{!v.recordId}"
+		fields="Name,clofor_com_cfs__SalesOrderID__c,clofor_com_cfs__PurchasingOrderID__c"
+		targetFields="{!v.entity}"
+		targetError="{!v.recordLoadError}"
+		recordUpdated="{!c.onLoad}"
+	/>
+
+	<div class="slds-m-top_small">
+		<a href="javascript:void(0);" class="slds-box slds-box_link slds-box_x-small slds-media slds-m-bottom_medium" onclick="{!c.doCalculateQuantity}">
+			<div class="slds-media__figure slds-media__figure_fixed-width slds-align_absolute-center slds-m-left_xx-small">
+				<lightning:icon iconName="utility:automate" />
+			</div>
+			<div class="slds-media__body slds-border_left slds-p-around_small">
+				<h2 class="slds-truncate slds-text-heading_small">{!v.generalTranslation.update_final_quantity_label}</h2>
+				<p class="slds-m-top_small">{!v.generalTranslation.update_final_quantity_description}</p>
+			</div>
+		</a>
+
+		<a href="javascript:void(0);" class="slds-box slds-box_link slds-box_x-small slds-media slds-m-bottom_medium" onclick="{!c.doSyncFromPo}" disabled="{!v.entity.clofor_com_cfs__PurchasingOrderID__c == null}">
+			<div class="slds-media__figure slds-media__figure_fixed-width slds-align_absolute-center slds-m-left_xx-small">
+				<lightning:icon iconName="utility:copy" />
+			</div>
+			<div class="slds-media__body slds-border_left slds-p-around_small">
+				<h2 class="slds-truncate slds-text-heading_small">{!v.generalTranslation.copy_from_purchasing_order_label}</h2>
+				<p class="slds-m-top_small">{!v.generalTranslation.copy_from_purchasing_order_description}</p>
+			</div>
+		</a>
+
+		<a href="javascript:void(0);" class="slds-box slds-box_link slds-box_x-small slds-media slds-m-bottom_medium" onclick="{!c.doSyncToPo}" disabled="{!v.entity.clofor_com_cfs__PurchasingOrderID__c == null}">
+			<div class="slds-media__figure slds-media__figure_fixed-width slds-align_absolute-center slds-m-left_xx-small">
+				<lightning:icon iconName="utility:fulfillment_order" />
+			</div>
+			<div class="slds-media__body slds-border_left slds-p-around_small">
+				<h2 class="slds-truncate slds-text-heading_small">{!v.generalTranslation.update_to_purchasing_order_label}</h2>
+				<p class="slds-m-top_small">{!v.generalTranslation.update_to_purchasing_order_description}</p>
+			</div>
+		</a>
+
+		<a href="javascript:void(0);" class="slds-box slds-box_link slds-box_x-small slds-media slds-m-bottom_medium" onclick="{!c.doSyncFromSo}" disabled="{!v.entity.clofor_com_cfs__SalesOrderID__c == null}">
+			<div class="slds-media__figure slds-media__figure_fixed-width slds-align_absolute-center slds-m-left_xx-small">
+				<lightning:icon iconName="utility:copy" />
+			</div>
+			<div class="slds-media__body slds-border_left slds-p-around_small">
+				<h2 class="slds-truncate slds-text-heading_small">{!v.generalTranslation.copy_from_sales_order_label}</h2>
+				<p class="slds-m-top_small">{!v.generalTranslation.copy_from_sales_order_description}</p>
+			</div>
+		</a>
+
+		<a href="javascript:void(0);" class="slds-box slds-box_link slds-box_x-small slds-media" onclick="{!c.doSyncToSo}" disabled="{!v.entity.clofor_com_cfs__SalesOrderID__c == null}">
+			<div class="slds-media__figure slds-media__figure_fixed-width slds-align_absolute-center slds-m-left_xx-small">
+				<lightning:icon iconName="utility:fulfillment_order" />
+			</div>
+			<div class="slds-media__body slds-border_left slds-p-around_small">
+				<h2 class="slds-truncate slds-text-heading_small">{!v.generalTranslation.update_to_sales_order_label}</h2>
+				<p class="slds-m-top_small">{!v.generalTranslation.update_to_sales_order_description}</p>
+			</div>
+		</a>
+	</div>
+</aura:component>

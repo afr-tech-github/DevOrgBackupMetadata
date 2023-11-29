@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sử dụng mẫu này khi xem xét thuế suất được yêu cầu.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>yêu cầu kích hoạt thông báo tỉ giá</name>
+    <style>none</style>
+    <subject>TAX RATIO Approval Request - {!Tax_Ratio__c.TAX_RATIO_ID__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,21 @@
+Kính gửi các thành viên
+
+Tôi đã hoàn thành nhập liệu cho lô hàng Master như sau:
+
+◎Mã số lô hàng master:{!MasterAnken__c.MasterID__c} Link to SF:{!MasterAnken__c.Link}
+◎Số bill master:{!MasterAnken__c.MMaster_B_L_No__c} 
+◎Tàu: {!MasterAnken__c.MVessel__c} {!MasterAnken__c.MVoy_No__c} 
+◎Ngày đến dự kiến: {!MasterAnken__c.META__c} (Day：{!MasterAnken__c.META_DAY__c}) 
+◎Số bill house：{!MasterAnken__c.NO_HOUSE_B_L__c} H B/L 
+◎Container： {!MasterAnken__c.MContainer__c}*{!MasterAnken__c.MContainerNumber__c}　/ {!MasterAnken__c.MContainer2__c}*{!MasterAnken__c.MContainerNumber2__c} 
+◎Ngày Rút hàng：{!MasterAnken__c.MDevanningDate__c} 
+◎Những qui định nội để chia sẽ bộ:{!MasterAnken__c.Internal_Memo__c} 
+
+Vui lòng kiểm tra và cho tôi biết nếu có điều gì  cần bổ sung.
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

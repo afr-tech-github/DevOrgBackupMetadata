@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X4_Payable_B_Process_Standard_ID3</fullName>
+    <columns>NAME</columns>
+    <columns>Anken__c</columns>
+    <columns>InsatuyouSyohinEng__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>SiharaiKakuninzumi__c</columns>
+    <columns>actual_payer__c</columns>
+    <columns>BuyInTaxAmountJPY__c</columns>
+    <columns>Siharaigaku__c</columns>
+    <columns>BuyDifferentiation__c</columns>
+    <columns>BuyInTaxAmountUSD__c</columns>
+    <columns>AMOUNT_PAID_BUYING_USD__c</columns>
+    <columns>UNPAID_BALANCE_OF_BUYING_USD__c</columns>
+    <columns>PaymentDate__c</columns>
+    <columns>PayingBank__c</columns>
+    <columns>payment_category__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>BuyInTaxAmountJPY__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>BuyDifferentiation__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <label>4.Payable(B) Process-Standard(ID)</label>
+    <language>en_US</language>
+</ListView>

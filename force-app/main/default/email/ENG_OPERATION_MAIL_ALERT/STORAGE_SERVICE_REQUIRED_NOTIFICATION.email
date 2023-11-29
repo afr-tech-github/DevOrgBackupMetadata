@@ -1,0 +1,188 @@
+Dear Storage Team, <br>
+<br>
+This mail is from auto mail alert.<br>
+<br>
+New Work Order is required your attention to process Storage Services from your team.<br>
+
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				COMMON INFORMATION
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				PRODUCT ID
+			</th>
+			<td width="200">
+				{!WorkOrder__c.ProductID__c}<br>
+                       
+			</td width="400">
+			<th>
+				STATUS
+			</th>
+			<td width="200">
+				{!WorkOrder__c.WorkOrderStatus__c}
+			</td width="400">
+		</tr>
+		<tr>
+			<th>
+				CUSTOMER
+			</th>
+			<td>
+				{!WorkOrder__c.Customer__c}　
+
+			</td>
+	<th> 
+                                                           EXCHANGE RATE ID
+			</th>
+			<td>
+                                                 {!WorkOrder__c.ExchangeRateID__c}
+			</td>
+</tr>
+              
+
+		<tr><thead>
+			<th colspan="4">
+				BASIC INFORMATION
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				WAREHOUSE ID 
+			</th>
+			<td>
+				{!WorkOrder__c.WarehouseID__c}
+			</td>
+			<th>
+				WAREHOUSE NAME
+			</th>
+			<td>
+				{!WorkOrder__c.WarehouseName__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				DATA UPDATE METHOD
+			</th>
+			<td>
+				{!WorkOrder__c.DataUpdateMethod__c} 
+			</td>
+			<th>
+				DATA PULL
+			</th>
+			<td>
+				{!WorkOrder__c.DataPull__c}
+
+			</td>
+		</tr>
+		
+		<tr>
+			<th>
+				GOODS PURCHASING ORDER ID
+			</th>
+			<td>
+				{!WorkOrder__c.PurchasingOrderID__c}
+			</td>
+			<th>
+				SHIPMENT ORDER ID
+			</th>
+			<td>
+                                {!WorkOrder__c.CloFMSShipmentOrderID__c} 
+			</td>
+		</tr>
+
+
+
+		<tr>
+			<th>
+				GOODS SALES ORDER ID
+			</th>
+			<td>
+				{!WorkOrder__c.SalesOrderID__c}
+			</td>
+			<th>
+				PRODUCT NAME
+			</th>
+			<td>
+				{!WorkOrder__c.ProductName__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				ITEM NUMBER
+			</th>
+			<td>
+				{!WorkOrder__c.ItemNumber__c}
+			</td>
+			<th>
+				QUANTITY
+			</th>
+			<td>
+                                {!WorkOrder__c.Quantity__c} 
+			</td>
+		</tr>
+		<tr>
+			<th>
+				CARGO TYPE	</th>
+			<td>
+				{!WorkOrder__c.UnitType__c}
+			</td>
+			<th>
+				MEASUREMENT
+			</th>
+			<td>
+				{!WorkOrder__c.Measurement__c}CBM
+			</td>
+		</tr>
+		<tr>
+			<th>
+				NET WEIGHT
+			</th>
+			<td>
+{!WorkOrder__c.NETWeight__c} KGS
+
+
+			</td>
+			<th>
+				GROSS WEIGHT
+			</th>
+			<td>
+				{!WorkOrder__c.GrossWeight__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br><br>
+Best regards.
+<br>
+*********************************************************<br>
+{!Account.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

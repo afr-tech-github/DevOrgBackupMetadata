@@ -1,0 +1,159 @@
+<apex:page showHeader="false">
+<head>
+    <title>Services Online Help</title>
+ 
+ <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+ 
+
+ 
+ 
+ 
+ 
+ 
+</head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+       Service Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+    <h2>Trợ giúp trực tuyến cho "DỊCH VỤ" </h2>
+<br></br>
+<br></br>
+Phần này dùng để quản lý 3 loại dữ liệu sau:<br></br>
+<ul>
+1. Danh sách dịch vụ mà mình cung cấp cho khách hàng<br></br>
+2. Gía bán tiêu chuẩn (hay thỏa thuận) với khách hàng<br></br>
+3. Gía mua từ các nhà cung cấp dịch vụ<br></br>
+</ul>
+<br></br>
+Liên quan tới các mục khác, Đối với hàng FCL, ý  nghĩa của charge unit (total) trong<br></br>
+ Vận đơn thứ cấp-Bán/Mua  mà đơn vị tính là “container” với size cùng nhau, thì Charge Unit (total) được thể hiện như sau<br></br>
+SỐ LƯỢNG LOẠI CONTAINER 1 trong Vận đơn thứ cấp ==> SỐ LƯỢNG (trong mục CHI TIẾT DỊCH VỤ) trong Vận đơn thứ cấp-Bán/Mua.<br></br>
+SỐ LƯỢNG LOẠI CONTAINER 2 trong Vận đơn thứ cấp ==> SỐ LƯỢNG (trong mục CHI TIẾT DỊCH VỤ) trong Vận đơn thứ cấp-Bán/Mua.<br></br><br></br>
+Trường hợp LCL, nếu SỐ LƯỢNG là “R/TON”,thì  SỐ ĐO(THỂ TÍCH) HÀNG HÓA trong Vận đơn thứ cấp sẽ là SỐ LƯỢNG (trong mục CHI TIẾT DỊCH VỤ) trong Vận đơn thứ cấp-Bán/Mua.<br></br>
+SỐ LƯỢNG có thể được thao tác bằng nhập liệu thông thường<br></br>
+•   Lưu ý R/TON : 1CBM tương đương 1000kg, được áp dụng đối với hàng nặng<br></br>
+(ex. 3000kg-2.6CBM =>R/TON is 3, 1500kg-2.6CBM=>R/TON is 2.6)<br></br>
+
+----------------------------------------------------------------------------------------------<br></br>
+
+<h2>Online Help for SERVICES Object</h2>
+<br></br> <br></br>    
+This is an Object to manage below 3 data.<br></br>
+<ul>
+1. the list of service that you are providing to customers<br></br> 
+2. Standard Selling Rate<br></br>
+3. Buying rate from service suppliers<br></br>
+</ul>
+<br></br>
+
+Relation with other objects<br></br>
+CHARGE UNIT (TOTAL) in H B/L Selling/Buying<br></br>
+-In case of FCL, if the Unit is "Container" and Container Size is the same, the CHARGE UNIT (TOTAL) is set as below.<br></br>
+Container Number1 in H B/L Shipment ==> CHARGE UNIT (TOTAL) in H B/L Selling/Buying<br></br>
+Container Number2 in H B/L Shipment ==> CHARGE UNIT (TOTAL) in H B/L Selling/Buying<br></br><br></br>
+-In case of LCL, if the Unit is "RTON",
+The MEASUREMENT(TOTAL CBM) in H B/L Shipment ==> CHARGE UNIT (TOTAL) in H B/L Selling/Buying<br></br>
+<br></br>
+CHARGE UNIT (TOTAL) can be modified by manually.<br></br>
+
+About R/TON: 1CBM Approx 1000Kg, whichever higher will be taken as R/TON<br></br>
+(ex. 3000kg-2.6CBM =>R/TON is 3, 1500kg-2.6CBM=>R/TON is 2.6) 
+ <br></br>
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>サービスに関するオンラインヘルプ</h2><br></br>
+<br></br>
+ここでは以下の3つのデータを管理します。<br></br>
+<ul>
+1.貴社が顧客に提供するサービス<br></br>
+2.販売金額<br></br>
+3.業者からの仕入金額<br></br>
+</ul>
+<br></br>
+
+他のオブジェクトとの関連<br></br>
+1.H B/L請求・仕入明細の数量<br></br>
+-FCLの場合で、単位が”コンテナ”、コンテナサイズが同じ場合は、数量は以下のように設定されます。<br></br>
+H B/L案件のコンテナ本数-> H B/L請求・仕入明細の数量<br></br>
+H B/L案件のコンテナ本数②- H B/L請求・仕入明細の数量<br></br><br></br>
+-LCLの場合で、単位がR/TONの場合、H B/L案件の量積(合計CBM)-> HB/L請求・仕入明細の数量<br></br>
+<br></br>
+また、H B/L請求・仕入明細の数量は手入力で変更することができます。<br></br>
+R/TONについて：1CBM=約1000Kgで、数値の高い方がR/TONとして採用されます。<br></br>
+(例:3000Kg – 2.6CBM=> R/TON=3,  1500Kg – 2.6CBM=>R/TON =2.6 )
+
+<br></br> 
+----------------------------------------------------------------------------------------------<br></br> 
+<br></br>
+<h2>서비스 온라인 도움말</h2><br></br>
+<br></br>
+여기에서는 다음의 3 가지 데이터를 관리합니다.<br></br>
+<ul>
+1.귀사가 고객에게 제공하는 서비스<br></br>
+2.판매 금액<br></br>
+3.업체에서의 매입 금액<br></br>
+</ul>
+<br></br>
+
+다른 객체와의 관계<br></br>
+1.H B/L청구 · 매입 내역의 수량<br></br>
+-FCL의 경우 단위가 "컨테이너", 컨테이너 크기가 동일한 경우, 수량은 다음과 같이 설정됩니다.<br></br>
+H B/L 안건의 컨테이너 개수 1 -> H B/L-청구/지불 세부 사항의 수량에 적용<br></br>
+H B/L 안건의 컨테이너 개수 2 -> H B/L-청구/지불 세부 사항의 수량에 적용<br></br><br></br>
+
+-LCL의 경우 단위가 R/TON의 경우 H B/L 안건의 양(총 CBM) -> H B/L-청구/지불 세부 사항의 수량<br></br>
+<br></br>
+또한 H B/L-청구/지불 세부 사항의 수량은 수동으로 변경할 수 있습니다.<br></br>
+R / TON 소개 : 1CBM = 약 1000Kg에서 숫자가 높은 쪽이 R/TON으로 채용됩니다.<br></br>
+(例:3000Kg – 2.6CBM=> R/TON=3,  1500Kg – 2.6CBM=>R/TON =2.6 )
+
+</body>
+
+
+
+</apex:page>

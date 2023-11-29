@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Location Positioning App Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">A Mobile App to track the real-time movement and history of movement of truck driver or truck itself. Please contact AFR Sales Representative for more details if want to use this app.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">トラック・ドライバーの現在位置や移動経路を追跡可能なアプリ。ご利用されたい場合はAFR営業担当までご連絡ください。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">트럭 또는 트럭 운전수가 현재 현재 위치 및 운행 경로를 확인 가능한 앱.  사용을 원하시시면 AFR영업담당에게 문의하여 주시기 바랍니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">Location Positioning App(Beta)</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Ứng dụng di động giúp theo dõi sự lịch sử di chuyển cũng như vị trí real-time của tài xế xe tải, hoặc xe tải. Vui lòng liên hệ BPKD của AFR để có thêm chi tiết nếu công ty bạn có nhu cầu sử dụng.</value>
+    </values>
+</CustomMetadata>

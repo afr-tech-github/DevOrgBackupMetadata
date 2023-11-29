@@ -1,0 +1,500 @@
+<apex:page controller="SOSummaryNoteController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0">
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+        <head>
+            
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+            <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+                <apex:includeScript value="{!URLFOR($Resource.barcode ,'barcode/JsBarcode.all.min.js')}"/>
+            <style>
+
+
+
+                @media print {
+                    body{
+                        counter-reset: page;
+                    }
+                    .no-print, .no-print * {
+                        display: none !important;
+                    }
+
+                    
+                    
+                    div.footer {
+                        counter-increment: page;
+                        display: block;
+
+                        text-align: center;
+
+                        position: running(footer);
+
+                    }
+                    @page { 
+                        
+                        padding-bottom: 10mm;
+                        @bottom-center { 
+                            content: element(footer);
+                        
+                        }
+                    }
+                    .tblDetail {
+                        overflow: visible !important;
+                    }
+                    
+                    .pagenumber:after {
+                        
+                        content: counter(page);
+                    }
+
+                    .pagecount:before {
+
+                        content: counter(pages);
+
+                    }
+                    table { overflow: visible !important; }
+                    thead { display: table-header-group }
+                    tfoot { display: table-row-group }
+                    tr { page-break-inside: avoid }
+                }
+
+                @page {
+                    size: A4 landscape;
+                    margin: 10mm;
+
+                }
+                .content {
+                    max-height: calc(100% - 100px);
+                }
+                
+                body {
+                    font-family: "Times New Roman", Times, serif;
+                }
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+                .footer {
+                    width: -webkit-fill-available;
+                    position: fixed;
+                    bottom: 0;
+                    display: none;
+                }
+
+                .divTitle{
+                    font-size: 16pt;
+                    text-align: center;
+                    display: table-cell;
+                    width: 100%;
+                    margin-top: -15px;
+                    position: absolute;
+                }
+                /*.divHeader{
+                    display: table-row;
+                }*/
+                .divToday{
+                    text-align: right;
+                    float: right;
+                    width: 100%;
+                    position: fixed;
+                }
+                .pngInf{
+                    width: 100%;
+                    text-align: center;
+                }
+                .pngInfDetail{
+                    width: 100%;
+                }
+                .tblImf{
+                    width : 100%;
+                }
+                .tblImf .colTitle{
+                    width: 20%;
+                    text-align: left;
+                }
+                .colImf1{
+                    width: 40%;
+                    text-align: left;
+                }
+                .colImf2{
+                    width: 20%;
+                    text-align: left;
+                }
+                .tblTRHeader{
+                    text-align: center;
+                    font-weight: bold;
+
+                }
+                .tblTRHeader th {
+                    padding:5px;
+                    border: 1px solid black;
+                }
+
+                .tblDetail{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 30px;
+                }
+                .tblDetail td{
+                    border: 1px solid black;
+                    padding: 5px;
+                }
+                .tblTRTotal td{
+                    border: none !important;
+                }
+                .hideColumn{
+                    display: none;
+                }
+                .showColumn{
+                    /*display: none;*/
+                }
+            </style>
+            <script type="text/javascript">
+        
+                j$ = jQuery.noConflict();
+                j$(document).ready(function() {
+        
+                var barcodeItems = j$( ".barcode" );
+                for(var i = 0; i < barcodeItems.length; i++){
+                    var item = barcodeItems[i];
+                    var itemId = item.id;
+                    var itemInfos = itemId.split('__');
+                    j$( "#" + itemId).JsBarcode(itemInfos[1]);
+                }
+                    //j$( ".barcode" ).JsBarcode("Hi!");
+                });
+                </script>
+        </head>
+        <body>
+            <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+                {!translations['print_note']}
+            </button>
+            <div class="content">
+                <div class="divHeader" width="100%">
+                    
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" style="vertical-align: top">
+                                <apex:image value="{!siteSetting.Logo_URL__c}" />
+                            </td>
+                            <td width="61%" style="text-align: center; vertical-align: top">
+                                <apex:outputText value="{!IF(printType == 'Completed', translations['final_so_note'], translations['plan_so_note'])}" style="font-weight: bold;" />
+                                <!-- <br/>
+                                <apex:outputText value="(SUMMARY NOTE)" style="font-style: italic;" /> -->
+                            </td>
+                            <td width="19%">
+                                
+                                <div>
+                                    <div style="padding-top: 35px; float: left;">
+                                        <apex:outputText value="{!translations['so_no']}: " style="font-weight: bold;"/>
+                                    </div>
+                                    <div style="float: left; height: 90px;width: 90px;">
+                                    <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!so.Name}" alt="Create Qr Code for this item" border="0"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <apex:panelGrid columns="2" styleClass="pngInf" cellspacing="0">
+                    <apex:outputPanel styleClass="pngInfDetail">
+                        <apex:outputText value="{!translations['place_of_delivery']}" style="font-weight: bold;" />
+                        <br/>
+                        <!-- <apex:outputText value="{!so.DestinationWarehouseID__r.Name}" />
+                        <br/>
+                        <apex:outputText value="{!so.DestinationWarehouseID__r.FacilityName__c}" />
+                        <br/> -->
+                        <apex:outputText value="{!so.ShippingAddress__c}" />
+                        <br/>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel styleClass="pngInfDetail">
+                        <apex:outputText value="{!translations['receiver']}" style="font-weight: bold;" />
+                        <br/>
+                        <apex:outputText value="{!so.CustomerCompanyName__r.Name}" />
+                        <br/>
+                        <apex:outputText value="{!receiverAdress}" />
+                        <br/>
+                        {!translations['phone']}: <apex:outputText value=" {!so.CustomerCompanyName__r.Phone}" />
+                        <br/>
+                        {!translations['fax']}: <apex:outputText value="{!so.CustomerCompanyName__r.Fax}" />
+                        <br/>
+                        <!-- Email: <apex:outputText value=" {!so.Company_Email__c} " />
+                        <br/> -->
+                    </apex:outputPanel>
+                    
+                    
+                </apex:panelGrid>
+                <br/>
+                    
+                <table class="tblImf">
+                    <colgroup>
+                        <td class="colTitle" />
+                        <td class="colImf1" />
+                        <td class="colTitle" />
+                        <td class="colImf2" />
+                    </colgroup>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['customer_purchase_order_no']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!so.CustomerOrderNumber__c}"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{!translations['order_date_and_time']}:" style="font-weight: bold;" />                    
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date, dd/MM/yyyy}"> 
+                                <apex:param value="{!so.OrderDate__c}" /> 
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['so_no']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!so.Name}" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!translations['mandatory_delivery_date']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{0,date, dd/MM/yyyy}"> 
+                                <apex:param value="{!so.DeliveryTargetDate__c}" /> 
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <apex:outputText value="PO Type:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!so.CSCDType__c}" />
+                        </td>
+                        <td>
+                            <apex:outputText value="Vendor Name:" style="font-weight: bold;" />                    
+                        </td>
+                        <td>
+                            <apex:outputText value="{!so.Supplier__r.Name}" />
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!translations['user']}:" style="font-weight: bold;" />
+                        </td>
+                        <td>
+                            <apex:outputText value="{!so.CreatedBy.Name} "/>
+                            
+                            <apex:outputText value=" - {!so.CreatedBy.Email} " rendered="{!so.CreatedBy.Email <> null && so.CreatedBy.Email <> ''}"/>
+
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </table>
+                
+                <table class="tblDetail">
+                    <tr class="tblTRHeader">
+                        <th>{!translations['no']}</th>
+                        <th>{!translations['sku_no']}</th>
+                        <th>{!translations['product']}</th>
+                        <th>{!translations['product_name']}</th>
+                        <!--<th>QR / BARCODE</th>-->
+                        <th>{!translations['qr_barcode_image']}</th>
+                        <th>{!translations['unit']}</th>
+                        <th>{!translations['hs_code']}</th>
+                        <th style="text-align: center; padding-right: 5px;" class="{!IF(printType == 'Completed', 'hideColumn', 'showColumn')}">{!translations['plan_quantity']}</th>
+                        <th style="text-align: center; padding-right: 5px;" class="{!IF(printType <> 'Completed', 'hideColumn', 'showColumn')}" width="5%">{!translations['final_quantity']}</th>
+                        <th width="5%">{!translations['bq_bill_of_quantity']}</th>
+                        <th width="5%" class="{!IF(printType == 'Completed', 'hideColumn', 'showColumn')}" >{!translations['plan_net_weight']}</th>
+                        <th width="5%" class="{!IF(printType <> 'Completed', 'hideColumn', 'showColumn')}">{!translations['final_net_weight']}</th>
+                        <th>{!translations['billing_type']}</th>
+                        <th width="5%">{!translations['gross_weight']}</th>
+                        <th>{!translations['cbm']}</th>
+                        <th>{!translations['currency']}</th>
+                        <th>{!translations['unit_price']}</th>
+                        <!-- <th width="5%">VAT/Product</th> -->
+                        <th>{!translations['amount']}</th>
+                        <th>{!translations['vat']}</th>
+                        <th>{!translations['total_amount']}</th>
+                    </tr>   
+                    <apex:variable value="{!0}" var="indexCount"/>
+                    <apex:repeat value="{!listGoodSOProductNode}" var="item">
+                        <apex:variable value="{!indexCount+1}" var="indexCount"/>
+                        <tr>
+                            <td style="text-align: center;">{!indexCount}</td>
+                            <td>{!item.SKUNumber}</td>
+                            <td> <a href="/{!item.ProductId}">{!item.Product}</a></td>
+                            <td>{!item.ProductName}</td>
+                            <td style="text-align: center;">
+
+                                <apex:outputPanel rendered="{!item.CodeImageType != 'Barcode'}">
+                                        <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.ProductQRCode}" alt="Create Qr Code for this item" border="0"/>
+                                        <br/>
+                                        {!item.ProductQRCode}
+                                </apex:outputPanel>
+
+                                <apex:outputPanel rendered="{!item.CodeImageType == 'Barcode'}">
+                                    <img id="{!item.ID + '__' + item.ProductQRCode}" class="barcode"/>
+                                </apex:outputPanel>
+                            </td>
+                            <td style="text-align: center;">{!translations[item.Type]}</td>
+                            <td>{!item.HSCode}</td>
+                            <td class="{!IF(printType == 'Completed', 'hideColumn', 'showColumn')}" style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.PlanQuantity}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(printType <> 'Completed', 'hideColumn', 'showColumn')}" style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.FinalQuantity}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                {!item.BQ}
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;" class="{!IF(printType == 'Completed', 'hideColumn', 'showColumn')}">
+                                
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.NetWeight}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;" class="{!IF(printType <> 'Completed', 'hideColumn', 'showColumn')}">
+                                
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.FinalNetWeight}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;">{!item.BillingType}</td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.GrossWeight}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                               
+                                
+                                <apex:outputText value="{0,number,###,###,###,###.###}" >
+                                    <apex:param value="{!item.Measurement}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;">{!item.curr}</td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{!item.NetPurchaseValueVND}" rendered="{!siteSetting.Local_Currency__c == 'VND'}" />
+                                <apex:outputText value="{0,number,###,###,###,###}" rendered="{!siteSetting.Local_Currency__c <> 'VND'}" >
+                                    <apex:param value="{!item.NetPurchaseValue}" />
+                                </apex:outputText>
+                            </td>
+                            <!-- <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="0" rendered="{!item.VAT == 0}"/>
+                                <apex:outputText value="{!item.VATVND}" rendered="{!item.VAT <> 0 && siteSetting.Local_Currency__c == 'VND'}" /> 
+                                <apex:outputText value="{0,number,###,###,###,###.0}" rendered="{!item.VAT <> 0 && siteSetting.Local_Currency__c <> 'VND'}">
+                                    <apex:param value="{!item.VAT}" />
+                                </apex:outputText>
+                            </td> -->
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="{!item.AmountVND}" rendered="{!siteSetting.Local_Currency__c == 'VND'}" />
+                                <apex:outputText value="{0,number,###,###,###,###}" rendered="{!siteSetting.Local_Currency__c <> 'VND'}">
+                                    <apex:param value="{!item.Amount}" />
+                                </apex:outputText>
+                                
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="0" rendered="{!item.AmountTax == 0}"/>
+                                <apex:outputText value="{!item.AmountTaxVND}" rendered="{!item.AmountTax <> 0 && siteSetting.Local_Currency__c == 'VND'}" /> 
+                                <apex:outputText value="{0,number,###,###,###,###.#}" rendered="{!item.AmountTax <> 0 && siteSetting.Local_Currency__c <> 'VND'}">
+                                    <apex:param value="{!item.AmountTax}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: right; padding-right: 5px;">
+                                <apex:outputText value="0" rendered="{!item.TotalAmount == 0}"/>
+                                <apex:outputText value="{!item.TotalAmountVND}" rendered="{!item.TotalAmount <> 0 && siteSetting.Local_Currency__c == 'VND'}" />
+                                <apex:outputText value="{0,number,###,###,###,###.#}" rendered="{!item.TotalAmount <> 0 && siteSetting.Local_Currency__c <> 'VND'}">
+                                    <apex:param value="{!item.TotalAmount}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        
+                    </apex:repeat>
+                    <tr class="tblTRTotal">
+                        <td colspan="10" style="text-align: center; font-weight: bold;">
+                            {!translations['total']}
+                        </td>
+                        
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;" class="{!IF(printType == 'Completed', 'hideColumn', 'showColumn')}">
+                            <apex:outputText value="0" rendered="{!total.totalNetWeight == 0}"/>
+                            <apex:outputText value="{0,number,###,###,###,###.###}" rendered="{!total.totalNetWeight <> 0}">
+                                <apex:param value="{!total.totalNetWeight}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;" class="{!IF(printType <> 'Completed', 'hideColumn', 'showColumn')}">
+                                <apex:outputText value="0" rendered="{!total.totalFinalNetWeight == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,###.###}" rendered="{!total.totalFinalNetWeight <> 0}">
+                                    <apex:param value="{!total.totalFinalNetWeight}" />
+                                </apex:outputText>
+                            </td>
+                        <td></td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            <apex:outputText value="0" rendered="{!total.totalGrossWeight == 0}"/>
+                            
+                            <apex:outputText value="{0,number,###,###,###,###.###}" rendered="{!total.totalGrossWeight <> 0}">
+                                <apex:param value="{!total.totalGrossWeight}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            <apex:outputText value="0" rendered="{!total.totalMeasurement == 0}"/>
+                            
+                            <apex:outputText value="{0,number,###,###,###,###.###}" rendered="{!total.totalMeasurement <> 0}">
+                                <apex:param value="{!total.totalMeasurement}" />
+                            </apex:outputText>
+                        </td>
+                        <td colspan="1"></td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            <apex:outputText value="{!total.totalAmountVND}" rendered="{!siteSetting.Local_Currency__c == 'VND'}"/>
+
+                            <apex:outputText value="{0,number,###,###,###,###}" rendered="{!siteSetting.Local_Currency__c <> 'VND'}">
+                                <apex:param value="{!total.TotalAmount}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            <apex:outputText value="0" rendered="{!total.totalAmountTax == 0}"/>
+                            <apex:outputText value="{!total.totalAmountTaxVND}" rendered="{!total.totalAmountTax <> 0 && siteSetting.Local_Currency__c == 'VND'}" /> 
+                            <apex:outputText value="{0,number,###,###,###,###.#}" rendered="{!total.totalAmountTax <> 0 && siteSetting.Local_Currency__c <> 'VND'}">
+                                <apex:param value="{!total.totalAmountTax}" />
+                            </apex:outputText>              
+                        </td>
+                        <td style="text-align: right; padding-right: 5px; font-weight: bold;">
+                            <apex:outputText value="0" rendered="{!total.totalAmountIncludeTax == 0}"/>
+                            <apex:outputText value="{!total.totalAmountIncludeTaxVND}" rendered="{!total.totalAmountIncludeTax <> 0 && siteSetting.Local_Currency__c == 'VND'}" />
+                            <apex:outputText value="{0,number,###,###,###,###.#}" rendered="{!total.totalAmountIncludeTax <> 0 && siteSetting.Local_Currency__c <> 'VND'}">
+                                <apex:param value="{!total.totalAmountIncludeTax}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+
+            <div class="footer" style="clear:both; width: 100%;vertical-align: text-bottom; ">
+                <div class="footerLeft" style="float:left; text-align: left; width: 50%;">
+                    <apex:outputText value="{!so.LastModifiedBy.Name}"/> 
+                    - <apex:outputText value=" {!so.LastModifiedBy.Email}"/> 
+                    - <apex:outputText value=" {0,date, HH:mm:ss dd/MM/yyyy}"> 
+                        <apex:param value="{!NOW()}" /> 
+                    </apex:outputText>
+                </div>
+                <div class="footerRight" style="float:left; width: 50%; text-align: right;">
+                 Powered by AFR Solutions Co., Ltd.
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

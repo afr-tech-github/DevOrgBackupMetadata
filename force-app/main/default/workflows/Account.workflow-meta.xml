@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>ACCOUNT_ESTABLISHED_DATE_ALERT</fullName>
+        <ccEmails>thongnguyenminh06@gmail.com</ccEmails>
+        <description>ACCOUNT ESTABLISHED DATE ALERT</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ENG_OPERATION_MAIL_ALERT/ACCOUNT_ESTABLISHED_DATE_ALERT</template>
+    </alerts>
+    <alerts>
+        <fullName>NEW_DOMESTIC_CUSTOMER_REGIST_ALERT</fullName>
+        <description>NEW DOMESTIC CUSTOMER REGIST ALERT</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <field>LastModifiedById</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Main_owner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>SubOwner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ENG_OPERATION_MAIL_ALERT/NEW_DOMESTIC_CUSTOMER_REGIST_ALERT_ENG</template>
+    </alerts>
+    <alerts>
+        <fullName>NEW_OVERSEA_PARTNER_REGIST_ALERT</fullName>
+        <description>NEW OVERSEA PARTNER REGIST ALERT</description>
+        <protected>false</protected>
+        <recipients>
+            <field>LastModifiedById</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>Main_owner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <recipients>
+            <field>SubOwner__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ENG_OPERATION_MAIL_ALERT/NEW_OVERSEA_PARTNER_REGIST_ALERT_ENG</template>
+    </alerts>
+    <alerts>
+        <fullName>REACTIVATE_ACCOUNT_ESTABLISHED_DATE_ALERT</fullName>
+        <description>REACTIVATE ACCOUNT ESTABLISHED DATE ALERT</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>ENG_OPERATION_MAIL_ALERT/REACTIVATE_ACCOUNT_ESTABLISHED_DATE_ALERT</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Account_Auto_update_Airliner_Code</fullName>
+        <field>Airliner_Code__c</field>
+        <formula>Carrier_Code__r.Airliner_Code__c</formula>
+        <name>[Account] Auto update Airliner Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_ACC_Approved</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approval Status ACC-Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_ACC_Initial</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Approval Status ACC-Initial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_ACC_Rejected</fullName>
+        <field>Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Approval Status ACC-Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>REMIND_ESTABLISHED_DATE_Field_update</fullName>
+        <field>RemindEstablishedDate__c</field>
+        <literalValue>0</literalValue>
+        <name>REMIND ESTABLISHED DATE Field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>%5BAccount%5D Auto update Airliner Code</fullName>
+        <actions>
+            <name>Account_Auto_update_Airliner_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Vendor/Supplier</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACCOUNT ESTABLISHED DATE ALERT</fullName>
+        <actions>
+            <name>ACCOUNT_ESTABLISHED_DATE_ALERT</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>REMIND_ESTABLISHED_DATE_Field_update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <failedMigrationToolVersion>236.19.16</failedMigrationToolVersion>
+        <formula>(Field2__c  - DATE(YEAR( Field2__c ), 1, 1)) - (TODAY() - DATE(YEAR( TODAY() ), 1, 1)) &lt;= 7  &amp;&amp; (Field2__c  - DATE(YEAR( Field2__c ), 1, 1)) - (TODAY() - DATE(YEAR( TODAY() ), 1, 1))  &gt;= 0 &amp;&amp;  RemindEstablishedDate__c = TRUE</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>NEW DOMESTIC CUSTOMER REGISTER ALERT</fullName>
+        <actions>
+            <name>NEW_DOMESTIC_CUSTOMER_REGIST_ALERT</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Custom_Type__c</field>
+            <operation>equals</operation>
+            <value>国内顧客 - 既存,国内顧客 - 見込み,国内顧客 - 営業不要,国内顧客 - フォワーダー,国内顧客 - 既存の関連会社</value>
+        </criteriaItems>
+        <description>When domestic customer is registered, send mail</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>NEW OVERSEA PARTNER REGISTER ALERT</fullName>
+        <actions>
+            <name>NEW_OVERSEA_PARTNER_REGIST_ALERT</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Custom_Type__c</field>
+            <operation>equals</operation>
+            <value>海外パートナー - 既存,海外パートナー - 見込み,海外パートナー - 営業不要</value>
+        </criteriaItems>
+        <description>When oversea partner is registered, send mail</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>REACTIVATE ACCOUNT ESTABLISHED DATE ALERT</fullName>
+        <actions>
+            <name>REACTIVATE_ACCOUNT_ESTABLISHED_DATE_ALERT</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <failedMigrationToolVersion>236.19.16</failedMigrationToolVersion>
+        <formula>(Field2__c  - DATE(YEAR( Field2__c ), 1, 1)) - (TODAY() - DATE(YEAR( TODAY() ), 1, 1)) = -3 &amp;&amp;  RemindEstablishedDate__c = FALSE</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

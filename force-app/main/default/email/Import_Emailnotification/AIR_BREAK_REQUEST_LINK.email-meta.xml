@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>B/B BROKERさんにBBに関する書類を転送する時にこのテンプレートを使用してください。</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>[航空輸入]B/B BROKER用自動メール  -B/B Doc Link</name>
+    <style>none</style>
+    <subject>輸入貨物進捗自動お知らせ by CloTra -**B/B及び代行回収依頼書類リンクあり**-ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

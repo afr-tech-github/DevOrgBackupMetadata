@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>General storage area</fullName>
+        <default>false</default>
+        <label>General storage area</label>
+    </customValue>
+    <customValue>
+        <fullName>High rack storage area</fullName>
+        <default>false</default>
+        <label>High rack storage area</label>
+    </customValue>
+    <customValue>
+        <fullName>Fixed bin storage area</fullName>
+        <default>false</default>
+        <label>Fixed bin storage area</label>
+    </customValue>
+    <customValue>
+        <fullName>Rack storage area</fullName>
+        <default>false</default>
+        <label>Rack storage area</label>
+    </customValue>
+    <customValue>
+        <fullName>Bulk storage area</fullName>
+        <default>false</default>
+        <label>Bulk storage area</label>
+    </customValue>
+    <masterLabel>STORAGE TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

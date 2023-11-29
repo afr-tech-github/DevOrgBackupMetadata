@@ -1,0 +1,56 @@
+<template>
+    <lightning-tabset variant="scoped">
+        <template for:each={_wosList} for:item="group">
+            <lightning-tab key={group} label={group.label}>
+                <div if:false={group.hasRecords} class="slds-card__body_inner">
+                    No task found for this service.
+                </div>
+                <div if:true={group.hasRecords} class="slds-p-horizontal_x-small slds-m-bottom_large">
+                    <!--PURCHASE ORDER FILTER-->
+                    <lightning-combobox class="slds-m-top_small" name={group.value} data-filter="filterPo" label="Purchase Order" options={group.listPo} value={group.filterPo} onchange={handleWosFilter} disabled={group.listPoDisabled} ></lightning-combobox>
+                    <!--SALES ORDER FILTER-->
+                    <lightning-combobox class="slds-m-top_small" name={group.value} data-filter="filterSo" label="Sales Order" options={group.listSo} value={group.filterSo} onchange={handleWosFilter} disabled={group.listSoDisabled} ></lightning-combobox>
+                    <!--WORK ORDER FILTER-->
+                    <lightning-combobox class="slds-m-top_small" name={group.value} data-filter="filterWo" label="Work Order" options={group.listWo} value={group.filterWo} onchange={handleWosFilter} disabled={group.listWoDisabled} ></lightning-combobox>
+                </div>
+                
+                <template for:each={group.filteredRecords} for:item="item">
+                    <table key={item} class="slds-table slds-no-row-hover slds-table_bordered" style="margin-top:-1px">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col"><a data-recordid={item.Id} data-servicetype={group.value} onclick={handleSelectService}>{item.Name}</a></th>
+                                <th scope="col">{item.clofor_com_cfs__Status__c}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="slds-text-color_weak" style="width:1%">W/O</td>
+                                <td><a>{item.clofor_com_cfs__WorkOrder__r.Name}</a></td>
+                            </tr>
+                            <tr if:true={item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__PurchasingOrderID__c}>
+                                <td class="slds-text-color_weak">P/O</td>
+                                <td><a>{item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__PurchasingOrderID__r.Name}</a></td>
+                            </tr>
+                            <tr if:true={item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__SalesOrderID__c}>
+                                <td class="slds-text-color_weak">S/O</td>
+                                <td><a target="_blank">{item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__SalesOrderID__r.Name}</a></td>
+                            </tr>
+                            <tr>
+                                <td class="slds-text-color_weak">Schedule</td>
+                                <td style="color:maroon">
+                                    <template if:true={item.clofor_com_cfs__ScheduledStartTime__c}>
+                                        <lightning-formatted-date-time value={item.clofor_com_cfs__ScheduledStartTime__c} month="2-digit" day="2-digit" weekday="short"></lightning-formatted-date-time><br/>
+                                        <lightning-formatted-date-time value={item.clofor_com_cfs__ScheduledStartTime__c} hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                        <template if:true={item.clofor_com_cfs__ScheduledEndTime__c}>
+                                            - <lightning-formatted-date-time value={item.clofor_com_cfs__ScheduledEndTime__c} hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                        </template>
+                                    </template>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </template>
+            </lightning-tab>
+        </template>
+    </lightning-tabset>
+</template>

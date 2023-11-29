@@ -1,0 +1,24 @@
+Kính gửi Kế toán Trưởng,
+
+{!MgmtMaster__c.Name} đã không được duyệt. Vui lòng xem lý do và điều chỉnh rồi nộp lại. 
+
+Vui lòng nhấp vào đường link này để từ chối dử liệu. 
+
+◎Tỉ giá mã số:[{!MgmtMaster__c.Name}] Link to SF:{!MgmtMaster__c.Link} 
+Bạn có thể duyệt, từ chối hay nêu lý do không duyệt từ trình duyệt của bạn.
+◎Tỉ giá quy đổi (từ USD):　{!MgmtMaster__c.Mgmt_Exrate_fromto__c}
+◎Ngày bắt đầu: : {!MgmtMaster__c.Mgmt_Exrate_Start_Date__c}
+◎Ngày kết thúc : {!MgmtMaster__c.Mgmt_Exrate_End_Date__c}
+◎Tỉ giá áp dụng cho khách hàng là Forwarding:{!MgmtMaster__c.Mgmt_Exrate_FowardingtoDomesticCustomer__c} 
+◎Tỉ giá áp dụng cho khách hàng có yêu cầu thông quan:{!MgmtMaster__c.Mgmt_Exrate_CCtoDomesticCustomer__c} 
+◎Tỉ giá bán tiêu chuẩn áp dụng cho đối tác::{!MgmtMaster__c.Mgmt_Exrate_SellingtoPartner__c} 
+◎Tỉ giá mua tiêu chuẩn từ đối tác:{!MgmtMaster__c.Mgmt_Exrate_BuyingfromPartner__c} 
+
+Trân Trọng.
+
+*********************************************************
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

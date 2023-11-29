@@ -1,0 +1,309 @@
+<apex:page controller="DeliveryLetterController" contentType="text-html" renderAs="pdf" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false">
+    <head>
+        <style type="text/css">
+            @page {
+                size: 210mm 300mm;
+                margin-top:50px;
+                margin-bottom:20px;
+                margin-left:20px;
+                margin-right:0px;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10.5pt;
+            }
+            
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+            }
+
+            .f5 {
+                font-size: 5pt;
+            }
+            
+            .f7 {
+                font-size: 7pt;
+            }
+            
+            .f8 {
+                font-size: 8pt;
+            }
+            
+            .f9 {
+                font-size: 9pt;
+            }
+            
+            .f10 {
+                font-size: 10pt;
+            }
+            
+            .f11 {
+                font-size: 11pt;
+            }
+            
+            .f12 {
+                font-size: 12pt;
+            }
+            
+            .f14 {
+                font-size: 14pt;
+            }
+            
+            .f16 {
+                font-size: 16pt;
+            }
+            
+            .f18 {
+                font-size: 18pt;
+            }
+            
+            .f20 {
+                font-size: 20pt;
+                font-weight: bold;
+            }
+            
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+            
+            .f30 {
+                font-size: 30pt;
+                font-weight: bold;
+            }
+            
+            .table-td {
+                padding: 0 5px;
+                text-align: left;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+            }
+            
+            .table-header-td {
+                padding: 0 5px;
+                text-align: center;
+                border-collapse: collapse;
+                border: thin solid;   
+                height: 30px;
+                font-weight: bold;
+            }
+            
+            .table-1 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .table-2 {
+                border: thin solid;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 10px;
+            }
+            
+            .section {
+                margin-top: 25px;
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <!--heading-->
+        <div style="z-index:-2; width: 100%; margin-left:20px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div class="f18 section" style="width:95%; text-align:center;">
+            CARGO DELIVERY REQUEST FORM(COMMON)
+        </div>
+        
+        <div class="f12 section" style="text-align:left; width:100%;">
+            <apex:outputLabel value="Dear {!deliveryCompanyEnglish}"/>
+        </div>
+        <div class="f9 section" style="left:20px; width:100%;  text-align:left;">
+            We always appreciate your sincere supports.<br/>
+            Please ship the following cargo. If you have any inquiry, please contact &nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/>.
+        </div>
+
+        <div class="f10, section" style="width: 95%;">
+            <table class="table-1">
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">CONSIGNEE</td>
+                    <td style="width: 35%;" class="table-td"><apex:outputText value="{!shipment.Cnee__r.EnglishCompanyName__c}"/></td>
+                    <td style="width: 15%;" class="table-header-td">GROSS WEIGHT</td>
+                    <td style="width: 35%;" class="table-td">
+                        <apex:outputText value="{0, number, ###,##0}">
+                            <apex:param value="{!shipment.weight__c}" /> 
+                        </apex:outputText>
+                        KGS
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">CARGO TYPE</td>
+                    <td style="width: 35%;" class="table-td"><apex:outputText value="{!shipment.UnitType__c}"/></td>
+                    <td style="width: 15%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isOcean}">H B/L NO</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isAir}">HAWB NO</apex:outputPanel>
+                    </td>
+                    <td style="width: 35%;" class="table-td">
+                        <apex:outputText value="{!shipment.HBL__c}" rendered="{!isOcean}"/>
+                        <apex:outputText value="{!shipment.HAWB__c}" rendered="{!isAir}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">QUANTITY</td>
+                    <td style="width: 35%;" class="table-td"><apex:outputText value="{!shipment.carton__c}"/></td>
+                    <td style="width: 15%;" class="table-header-td">MARKS and NUMBERS</td>
+                    <td style="width: 35%;" class="table-td"><apex:outputText value="{!shipment.Marks_and_Numbers__c}"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">TYPE/CBM</td>
+                    <td style="width: 35%;" class="table-td">
+                        <apex:outputText value="{!shipment.Container__c}" rendered="{!(isOcean && shipment.Container__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container2__c}" rendered="{!(isOcean && shipment.Container2__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container3__c}" rendered="{!(isOcean && shipment.Container3__c != null)}"/>
+                        <apex:outputText value="/{!shipment.Container4__c}" rendered="{!(isOcean && shipment.Container4__c != null)}"/>
+                        <apex:outputText value=" / {0, number, ###,##0.###} CBM"  rendered="{!shipment.CBM__c != null}">
+                            <apex:param value="{!shipment.CBM__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="width: 15%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isOcean}">D.O TYPE</apex:outputPanel>
+                        <apex:outputPanel rendered="{!isAir}">CUSTOMS CLEARANCE BROKER</apex:outputPanel>
+                    </td>
+                    <td style="width: 35%;" class="table-td">
+                        <apex:outputText value="{!shipment.D_O_type__c}" rendered="{!isOcean}"/>
+                        <apex:outputText value="{!shipment.Custom_Clearance_Broker__r.EnglishCompanyName__c}" rendered="{!isAir}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" class="table-header-td">
+                        <apex:outputPanel rendered="{!isOcean}">CC BROKER</apex:outputPanel>
+                    </td>
+                    <td style="width: 35%;" class="table-td">
+                        <apex:outputText value="{!shipment.Custom_Clearance_Broker__r.EnglishCompanyName__c}" rendered="{!isOcean}"/>
+                    </td>
+                    <td style="width: 15%;" class="table-header-td"></td>
+                    <td style="width: 35%;" class="table-td"></td>
+                </tr>
+            </table>
+        </div>
+        
+        <apex:repeat value="{!cargoDeliveries}" var="cargoDelivery">
+            <div class="f10, section" style="width: 100%;">
+                <div style="width: 45%; display: inline-block; vertical-align: top;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">CONTAINER ID</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Name}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">DELIVERY TYPE</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryType__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%; font-weight: bold;">PICKUP DATE</td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                    <apex:param value="{!cargoDelivery.Pickupdate__c}"/>
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">PICKUP FROM</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Receiver__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">PICKUP ADDRESS</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.AddressForAccept__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">TEL OF PICKUP</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverContact__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">PIC OF PICKUP</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.PersonInChargeForAccept__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="width: 45%; display: inline-block; vertical-align: top; margin-left: 35px;">
+                    <table class="table-2">
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">CONTAINER NUMBER</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.CONTAINER_ID__r.Container_NO__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">EXPECTED DELIVERY DATE</td>
+                            <td class="table-td" style="width: 70%;">
+                                <apex:outputText value="{0,date,yyyy/MM/dd}"> 
+                                    <apex:param value="{!cargoDelivery.DeliveryDate__c}"/>
+                                </apex:outputText>
+                                
+                                <apex:outputPanel rendered="{!(isImport && cargoDelivery.DeliveryTime__c != null)}">
+                                    <div style="border-left:solid 1px rgb(0,0,0); height:100%; display: inline; margin-left: 10px; margin-right: 10px"></div>
+                                    <apex:outputText value="{!cargoDelivery.DeliveryTime__c}"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">DELIVERY DESTINATION</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Destination__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">DELIVERY DESTINATION ADDRESS</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.Destinationaddress__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">TEL OF DELIVERY DESTINATION</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryPhone__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">PIC OF DELIVERY DESTINATION</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.ReceiverRep__c}"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table-header-td" style="width: 30%;">DELIVERY REMARKS</td>
+                            <td class="table-td" style="width: 70%;"><apex:outputText value="{!cargoDelivery.DeliveryNote__c}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:repeat>        
+        <div style="width: 100%;" class="section">
+            REMARKS
+            <ul>
+              
+               <li>Please notify us when you received our request form.（By Phone or E-Mail）</li>
+                    <li>When driver determined, please contact to us.（By Phone or E-Mail）</li>
+                    <li>When the cargo is departured from the warehouse, please contact to us.（By Phone）</li>
+                    <li>When delivery is completed, please contact to us. (By Phone）</li>
+                    <li>Please send an invoice with REF Number in it.</li>
+                    <li>If cago damages detected, please take a photograph that can prove damage condition,<br/> and send it to us immediately.</li>
+                    <li>We do always appreciate for your sincerely supports.</li>
+                              
+              
+            </ul>
+        </div>
+
+        <div style="width: 100%;" class="section">
+            <div style="display:inline-block; margin-left: 0px; width: 45%;">
+                <apex:outputText value="DOC OPERATOR: {!shipment.PersonInCharge__r.Name}"/>
+                <br/>
+                <apex:outputText value="DATE INVOICE ISSUED: {0,date,yyyy/MM/dd}"> 
+                    <apex:param value="{!shipment.PrintDate__c}"/>
+                </apex:outputText> <br/>
+                <apex:outputText value="REF NO: S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"/>          
+            </div>
+              
+            <div STYLE="position:absolute; margin-left:540px;  margin-top:68px; width:760px; font-size:10pt;">
+                Powered by AFR Solutions co.,ltd
+            </div>  
+        </div>
+    </body>
+    
+</apex:page>

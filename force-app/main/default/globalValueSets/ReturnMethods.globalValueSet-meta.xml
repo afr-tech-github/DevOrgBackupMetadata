@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Return to Registered Address</fullName>
+        <default>false</default>
+        <label>Return to Registered Address</label>
+    </customValue>
+    <customValue>
+        <fullName>Return to Pickup Address</fullName>
+        <default>true</default>
+        <label>Return to Pickup Address</label>
+    </customValue>
+    <customValue>
+        <fullName>Return to New Address</fullName>
+        <default>false</default>
+        <label>Return to New Address</label>
+    </customValue>
+    <customValue>
+        <fullName>Abandon</fullName>
+        <default>false</default>
+        <label>Abandon</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Return Methods</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

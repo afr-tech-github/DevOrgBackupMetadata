@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_AFR_Data_Filed_Input_Valiation</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF( ISPICKVAL( status__c , &quot;輸入 AFRデータファイリング済み(AFR Data Filed)&quot;) ,  ISBLANK(Filing_Time__c)  , false)</errorConditionFormula>
+    <errorDisplayField>status__c</errorDisplayField>
+    <errorMessage>AFR申告日及びFiling担当者(PIC)を必ず入れてください。
+Please enter the AFR FILING TIME.</errorMessage>
+</ValidationRule>

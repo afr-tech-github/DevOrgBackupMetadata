@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>USER_ACCOUNT_NAME_CHECK</fullName>
+    <active>false</active>
+    <errorConditionFormula>ISBLANK( UserAccountName__c )</errorConditionFormula>
+    <errorDisplayField>UserAccountName__c</errorDisplayField>
+    <errorMessage>USER ACCOUNT ID is required to manage Employee information in CloHRM.
+Please choose the USER ACCOUNT which the employee is using. If there is no license, please contact AFR Sales Representative for purchasing the CloSCM license.</errorMessage>
+</ValidationRule>

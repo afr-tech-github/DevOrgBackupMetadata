@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>In Stock</fullName>
+        <default>false</default>
+        <label>In Stock</label>
+    </customValue>
+    <customValue>
+        <fullName>Out Of Stock</fullName>
+        <default>false</default>
+        <label>Out Of Stock</label>
+    </customValue>
+    <customValue>
+        <fullName>Reconcile Stock After Physical Check</fullName>
+        <default>false</default>
+        <label>Reconcile Stock After Physical Check</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>STOCK COUNTING STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

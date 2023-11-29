@@ -1,0 +1,72 @@
+{
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "componentName" : "siteforce:sldsTwoCol48Layout",
+  "dataProviders" : [ ],
+  "id" : "1edb2cd9-7636-4043-8557-eeb858534ef7",
+  "label" : "Home",
+  "regions" : [ {
+    "id" : "f6cf7e32-c83f-4da3-86a8-d25dd66fa59e",
+    "regionName" : "header",
+    "type" : "region"
+  }, {
+    "id" : "ea915ad7-64bc-461e-be22-bf0bd9fbfce4",
+    "regionName" : "content",
+    "type" : "region"
+  }, {
+    "id" : "adc36899-ac09-46b0-ae74-fa3295d02854",
+    "regionName" : "sidebar",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "richTextValue" : "<p style=\"text-align: center;\"><b style=\"font-size: 20px; color: rgb(0, 102, 204);\">Please find shipping schedules at the calendar.</b></p>"
+      },
+      "componentName" : "forceCommunity:richTextInline",
+      "id" : "1f77423e-ec0f-4f9e-ba37-caaf6b6987a5",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "richTextValue" : "Replace this text with content of your own."
+      },
+      "componentName" : "forceCommunity:richTextInline",
+      "id" : "0c538564-9d7b-4009-bc0a-492920bc196b",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    }, {
+      "componentAttributes" : {
+        "showCreateNewCalendar" : false,
+        "showOtherCalendars" : false,
+        "showSidebar" : true
+      },
+      "componentName" : "forceCommunity:calendar",
+      "id" : "5dc1053b-af22-48d2-9842-5f29a3bf29be",
+      "renderPriority" : "NEUTRAL",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "770711b4-d63e-4fe1-bb26-2c29aa8c81aa",
+    "regionName" : "footer",
+    "type" : "region"
+  }, {
+    "components" : [ {
+      "componentAttributes" : {
+        "customHeadTags" : "",
+        "description" : "",
+        "title" : "Home"
+      },
+      "componentName" : "forceCommunity:seoAssistant",
+      "id" : "56e8d2ff-1bda-44d6-95a7-17628be6387d",
+      "renditionMap" : { },
+      "type" : "component"
+    } ],
+    "id" : "9f0cfabe-5974-4bbd-95b9-af7972649fa4",
+    "regionName" : "sfdcHiddenRegion",
+    "type" : "region"
+  } ],
+  "themeLayoutType" : "Home",
+  "type" : "view",
+  "viewType" : "home"
+}

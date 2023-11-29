@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>配送依頼書送付時に使用</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>配送依頼書テンプレート</name>
+    <style>none</style>
+    <subject>配送依頼書について</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

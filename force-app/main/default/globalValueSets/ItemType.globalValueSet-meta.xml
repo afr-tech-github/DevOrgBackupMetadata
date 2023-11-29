@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>General merchandise</fullName>
+        <default>false</default>
+        <label>General merchandise</label>
+    </customValue>
+    <customValue>
+        <fullName>Household/furniture</fullName>
+        <default>false</default>
+        <label>Household/furniture</label>
+    </customValue>
+    <customValue>
+        <fullName>Special commodity</fullName>
+        <default>false</default>
+        <label>Special commodity</label>
+    </customValue>
+    <customValue>
+        <fullName>Cold storage</fullName>
+        <default>false</default>
+        <label>Cold storage</label>
+    </customValue>
+    <masterLabel>ITEM TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

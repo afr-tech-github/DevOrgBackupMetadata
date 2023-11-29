@@ -1,0 +1,17 @@
+<apex:page controller="FMS_SortByCurrentSOController" showHeader="false" sidebar="false">
+    <apex:includeLightning />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="LightningComponentId" />
+    <script>
+        $Lightning.use("c:SortByCurrentSOApp", function() {
+            $Lightning.createComponent("c:lwcSortBySo",
+                    {
+                        recordId : '{!$CurrentPage.parameters.id}'
+                    },
+                    "LightningComponentId",
+                    function(cmp) {
+                        console.log('RUN PAGE');
+                    });
+        });
+    </script>
+</apex:page>

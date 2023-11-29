@@ -1,0 +1,2962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <prompts>
+        <label>Mise à niveau de la version CloSCM V3.72</label>
+        <name>CloSCMV372VersionUpgrade</name>
+        <promptVersions>
+            <header>Mise à jour de version 3.72</header>
+            <label>Mise à niveau de la version CloSCM V3.72</label>
+            <name>CloSCM V3.72 Version Upgrade</name>
+            <title>Mise à jour de version 3.72</title>
+        </promptVersions>
+    </prompts>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>Nouveau client</label>
+        <name>CreateCustomer</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>Nouvelle réservation en ligne</label>
+        <name>CreateEBooking</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>Nouveau problème de cargaison</label>
+        <name>NewCargoTrouble</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewContact --></label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewEvent --></label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>Nouveau devis</label>
+        <name>NewQuote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewTask --></label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <reportTypes>
+        <description>Type de rapport pour créer une taxe douanière avec le code SH</description>
+        <label>CODE A/C--&gt;PRIX--&gt;F/TMS Facturation</label>
+        <name>ACCodeWithPriceingAndInvoicing</name>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>FACTURE+TVA</label>
+            <name>BILL+VAT</name>
+        </sections>
+        <sections>
+            <label>FACTURE F/TMS</label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL+VAT --></label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>FACTURATION(NOM DU SERVICE)</label>
+            <name>INVOICING(SERVICE NAME)</name>
+        </sections>
+        <sections>
+            <label>MAÎTRE DES SERVICES</label>
+            <name>SERVICE MASTER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>APPLICATION avec APPLICATION LINE avec APPLICATION LINE+CARGO</description>
+        <label>APPLICATION avec APPLICATION LINE avec APPLICATION LINE+CARGO</label>
+        <name>APPLICATION_with_APPLICATION_LINE_with_APPLICATION_LINE_CARGO</name>
+        <sections>
+            <label><!-- APPLICATION --></label>
+            <name>APPLICATION</name>
+        </sections>
+        <sections>
+            <label>LIGNE D&apos;APPLICATION</label>
+            <name>APPLICATION LINE</name>
+        </sections>
+        <sections>
+            <label>LIGNE D&apos;APPLICATION+CARGO</label>
+            <name>APPLICATION LINE+CARGO</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Montant approuvé d&apos;achat avec taxe (local)</description>
+        <label>Approuvé - Montant total d&apos;achat avec taxe</label>
+        <name>ASSET_with_ASSET_TRANSFER_with_ASSET_TRANS_OTHER</name>
+        <sections>
+            <label><!-- ASSET --></label>
+            <name>ASSET</name>
+        </sections>
+        <sections>
+            <label>TRANSFERT D&apos;ACTIFS + AUTRE</label>
+            <name>ASSET TRANS+OTHER</name>
+        </sections>
+        <sections>
+            <label>TRANSFERT D&apos;ACTIFS</label>
+            <name>ASSET TRANSFER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec A/C BAL+B/S</description>
+        <label>CODE A/C avec A/C BAL avec A/C BAL+B/S</label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_B_S</name>
+        <sections>
+            <label><!-- A/C BAL+B/S --></label>
+            <name>A/C BAL+B/S</name>
+        </sections>
+        <sections>
+            <label>SOLDE DES COMPTES</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CODE A/C avec A/C BAL avec A/C BAL+C/F</description>
+        <label>CODE A/C avec A/C BAL avec A/C BAL+C/F</label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_C_F</name>
+        <sections>
+            <label><!-- A/C BAL --></label>
+            <name>A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- A/C BAL+C/F --></label>
+            <name>A/C BAL+C/F</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec A/C BAL+I/S(P/L)</description>
+        <label>A/C CODE avec A/C BAL avec A/C BAL+I/S(P/L)</label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_I_S_P_L</name>
+        <sections>
+            <label><!-- A/C BAL --></label>
+            <name>A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- A/C BAL+I/S(P/L) --></label>
+            <name>A/C BAL+I/S(P/L)</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec A/C BAL+TAX</description>
+        <label>A/C CODE avec A/C BAL avec A/C BAL+TAX</label>
+        <name>A_C_CODE_with_A_C_BAL_with_A_C_BAL_TAX</name>
+        <sections>
+            <label><!-- A/C BAL+TAX --></label>
+            <name>A/C BAL+TAX</name>
+        </sections>
+        <sections>
+            <label>SOLDE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec BANK+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec BANK+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_BANK_A_C_BAL</name>
+        <sections>
+            <label>SOLDE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>BANQUE + BAL A/C</label>
+            <name>BANK+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec CASH+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec CASH+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_CASH_A_C_BAL</name>
+        <sections>
+            <label>BILAN A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- CASH+A/C BAL --></label>
+            <name>CASH+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec DÉPÔT+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec DÉPÔT+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_DEPOSIT_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>DÉPÔT+SOL</label>
+            <name>DEPOSIT+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec FMS BILL+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec FMS BILL+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_FMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- FMS BILL+A/C BAL --></label>
+            <name>FMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec H/S/U INSURANCE+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec H/S/U ASSURANCE+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_H_S_U_INSURANCE_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>H/S/U ASSURANCE+A/C BAL</label>
+            <name>H/S/U INSURANCE+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec LOAN PAY+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec LOAN PAY+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_LOAN_PAY_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>PAIEMENT DE PRÊT+A/C BAL</label>
+            <name>LOAN PAY+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec LoanACBal</description>
+        <label>A/C CODE avec A/C BAL avec LoanACBal</label>
+        <name>A_C_CODE_with_A_C_BAL_with_LoanACBal</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>PrêtACBal</label>
+            <name>LoanACBal</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec OTHER+A/C BAL</description>
+        <label>CODE A/C avec BILAN A/C avec AUTRE+BILAN A/C</label>
+        <name>A_C_CODE_with_A_C_BAL_with_OTHER_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>AUTRE+A/C BAL</label>
+            <name>OTHER+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec PAYSLIP+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec PAYSLIP+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_PAYSLIP_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAYE+A/C BAL</label>
+            <name>PAYSLIP+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec PUR INV+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec PUR INV+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_PUR_INV_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV+A/C BAL --></label>
+            <name>PUR INV+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec TVA+A/C BAL</description>
+        <label>A/C CODE avec A/C BAL avec TVA+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_VAT_A_C_BAL</name>
+        <sections>
+            <label>BALANCE A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>TVA+A/C BAL</label>
+            <name>VAT+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>A/C CODE avec A/C BAL avec WMS BILL+A/C BAL</description>
+        <label>CODE A/C avec A/C BAL avec WMS BILL+A/C BAL</label>
+        <name>A_C_CODE_with_A_C_BAL_with_WMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>BILAN D&apos;A/C</label>
+            <name>A/C BALANCE</name>
+        </sections>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label>FACTURATION WMS+A/C BAL</label>
+            <name>WMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;Nourriture P/O--&gt;P/O+PRODUIT</description>
+        <label>Comptes--&gt;Marchandises P/O--&gt;Marchandises P/O+Produit</label>
+        <name>AcccountPOPOProduct</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>BONUS P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES P/O+PRODUIT</label>
+            <name>GOODS P/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte avec demande</description>
+        <label>Compte avec demande</label>
+        <name>AccountApplication</name>
+        <sections>
+            <label><!-- 取引先 --></label>
+            <name>取引先</name>
+        </sections>
+        <sections>
+            <label><!-- 申請(顧客) --></label>
+            <name>申請(顧客)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte avec Cargo avec Application+Cargo</description>
+        <label>Compte avec Cargo avec Application+Cargo</label>
+        <name>AccountCargoApplicationCargo</name>
+        <sections>
+            <label><!-- CARGO --></label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label><!-- カーゴ --></label>
+            <name>カーゴ</name>
+        </sections>
+        <sections>
+            <label><!-- 取引先 --></label>
+            <name>取引先</name>
+        </sections>
+        <sections>
+            <label><!-- 申請カーゴ --></label>
+            <name>申請カーゴ</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte--&gt;Marchandises S/O--&gt;Facture TRS</description>
+        <label>Comptes--&gt;Nourriture S/O+TRS Facturation</label>
+        <name>AccountSOBill</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O GOODS</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;FMS S/O--&gt;Container--&gt;Facturation</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;CNTR dans les transports--&gt;F/TMS Facturation</label>
+        <name>AccountSOCntrBill</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>DÉTAIL DU CONTENEUR</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- FMS/TMS BILL (CONTAINER ID) --></label>
+            <name>FMS/TMS BILL (CONTAINER ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;Biens S/O--&gt;Biens S/O+PRODUCT</description>
+        <label>Comptes--&gt;Nourriture S/O--&gt;Nourriture S/O+Produit</label>
+        <name>AccountSOSOProduct</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O GOODS</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Ptnr/3ème partie--&gt;WO--&gt;WOS--&gt;WMS BILL</description>
+        <label>Comptes--&gt;WMS E/S--&gt;W/O/S--&gt;WMS Facturation</label>
+        <name>AccountWOWOSBILL</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O(CUSTOMER) --></label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>S/O/S</label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>FACTURE WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>SERVICE DE COMMANDE DE TRAVAIL</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Type de rapport Code comptable</description>
+        <label>Type de rapport Code de compte</label>
+        <name>Account_Code_Report_Type</name>
+        <sections>
+            <label>CODE A/C</label>
+            <name>A/C CODE</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>H B/L-VENTE/ACHAT</label>
+            <name>H B/L-SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>MAITRE SVC</label>
+            <name>SVC MASTER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte --&gt; Ordre de vente</description>
+        <label>Compte --&gt; Commande client</label>
+        <name>Account_Sales_Order</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>GOODS S/O (Nom de la société du client)</label>
+            <name>GOODS S/O (Customer Company Name)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte-&gt;Commande d&apos;expédition-&gt;Conteneur</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;CNTR dans le domaine du transport--&gt;Transport</label>
+        <name>Account_Shipment_Order_Container</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>LIVRAISON DE LA CARGAISON</label>
+            <name>CARGO DELIVERY</name>
+        </sections>
+        <sections>
+            <label>DÉTAIL DU CONTENEUR</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION (CLIENT)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;API Config--&gt;Tracking</description>
+        <label>Comptes--&gt;API Config--&gt;Tracking</label>
+        <name>AccountsAPIConfigTracking</name>
+        <sections>
+            <label><!-- API CONFIG --></label>
+            <name>API CONFIG</name>
+        </sections>
+        <sections>
+            <label>SUIVI D&apos;API</label>
+            <name>API TRACKING</name>
+        </sections>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;Contrat--&gt;Marchandises S/O--&gt;TRS Facturation</description>
+        <label>Comptes--&gt;Contrat--&gt;Marchandises S/O--&gt;TRS Facturation</label>
+        <name>AccountsGoodsSOTRSBilling</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTRAT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>S/O GOODS</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;Nourriture S/O--&gt;W/O--&gt;W/O+Produit</description>
+        <label>Comptes--&gt;Nourriture S/O--&gt;WMS W/O--&gt;WMS W/O+Produit</label>
+        <name>AccountsGoodsSOWOProduct</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O --></label>
+            <name>CloWMS W/O</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>SANS+PRODUIT</label>
+            <name>W/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- W/W/O+Product --></label>
+            <name>W/W/O+Product</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes--&gt;Biens S/O--&gt;Biens S/O+Produit--&gt;Facturation TRS</description>
+        <label>Comptes--&gt;Marchandises P/O--&gt;Marchandises P/O+Produit--&gt;Facturation TRS</label>
+        <name>AccountsSOProductBilling</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Signaler au compte n&apos;ayant aucune activité</description>
+        <label>Comptes sans activités</label>
+        <name>AccountsWithoutActivities</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>Activités</label>
+            <name>Activities</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec FMS S/O avec FMS CNTR</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;CNTR dans les transports</label>
+        <name>Accounts_with_FMS_S_O_with_FMS_CNTR</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>DÉTAIL DU CONTENEUR</label>
+            <name>CONTAINER DETAIL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec FMS/TMS S/O avec FMS/TMS BILL avec CloFMS BILL+BANK</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Facturation--&gt;F/TMS Facturation+Banque</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_CloFMS_BILL_BANK</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloFMS BILL(BILL ID) --></label>
+            <name>CloFMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label><!-- CloFMS BILL+BANK --></label>
+            <name>CloFMS BILL+BANK</name>
+        </sections>
+        <sections>
+            <label>CloFMS S/O (CLIENT)</label>
+            <name>CloFMS S/O (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec FMS/TMS S/O avec FMS/TMS BILL avec FMS BILL+A/C BAL</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Facturation--&gt;F/TMS Facturation+Balancements C/C</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- FMS BILL+A/C BAL --></label>
+            <name>FMS BILL+A/C BAL</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL(ID BILL)</label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec FMS/TMS S/O avec FMS/TMS BILL avec FMS BILL+PAY REQ</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+Trx Plan</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_BILL_PAY_REQ</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>F/TMS FACTURE+TRX PLAN</label>
+            <name>F/TMS BILL+TRX PLAN</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill+TRX Plan --></label>
+            <name>F/TMS Bill+TRX Plan</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- FMS BILL+PAY REQ --></label>
+            <name>FMS BILL+PAY REQ</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS BILL(ID. BILL)</label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec FMS/TMS S/O avec FMS/TMS BILL avec FMS/TMS BILL+LOAN</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Billing--&gt;F/TMS Billing+Loan</label>
+        <name>Accounts_with_FMS_TMS_S_O_with_FMS_TMS_BILL_with_FMS_TMS_BILL_LOAN</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- FMS/TMS BILL(BILL ID) --></label>
+            <name>FMS/TMS BILL(BILL ID)</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS FACTURE+PRÊT</label>
+            <name>FMS/TMS BILL+LOAN</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec F/TMS S/O avec CONTRACT+F/TMS S/O</description>
+        <label>Comptes avec F/TMS S/O avec CONTRACT+F/TMS S/O</label>
+        <name>Accounts_with_F_TMS_S_O_with_CONTRACT_F_TMS_S_O</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTRAT+F/TMS S/O</label>
+            <name>CONTRACT+F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>F/TMS S/O (client)</label>
+            <name>F/TMS S/O (Customer)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec S/O F/TMS avec FTMSSOBankTrx</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;S/O+Banque</label>
+        <name>Accounts_with_F_TMS_S_O_with_FTMSSOBankTrx</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- FTMSSOBankTrx --></label>
+            <name>FTMSSOBankTrx</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec F/TMS S/O avec F/TMS S/O+Cash Trx</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;S/O+Cash</label>
+        <name>Accounts_with_F_TMS_S_O_with_F_TMS_S_O_Cash_Trx</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O+CASH TRX --></label>
+            <name>F/TMS S/O+CASH TRX</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec E/S F/TMS avec E/S F/TMS+Trx Plan</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;S/O+Trx Plan</label>
+        <name>Accounts_with_F_TMS_S_O_with_F_TMS_S_O_Trx_Plan</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O+Trx Plan --></label>
+            <name>F/TMS S/O+Trx Plan</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (CLIENT)</label>
+            <name>FMS/TMS S/O (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec H B/L-SHIPMENTS avec livraison de cargaison</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;Transport</label>
+        <name>Accounts_with_H_B_L_SHIPMENTS_with_Cargo_Delivery</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>Livraison de la cargaison</label>
+            <name>Cargo Delivery</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L-EXPÉDITIONS (CLIENT)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>ITINÉRAIRE &amp; amp; CHARGER</label>
+            <name>ROUTE &amp;amp; LOAD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec H B/L-SHIPMENTS avec dédouanement</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;C.Clearance</label>
+        <name>Accounts_with_H_B_L_SHIPMENTS_with_Custom_Clearance</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>Dédouanement à façon</label>
+            <name>Custom Clearance</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L-L-LIVRAISONS (CLIENT)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec E/S avec WMS BILL avec CloWMS BILL+BANK</description>
+        <label>Comptes--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Banque</label>
+        <name>Accounts_with_WMS_W_O_with_WMS_BILL_with_CloWMS_BILL_BANK</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS BILL --></label>
+            <name>CloWMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS BILL+BANK --></label>
+            <name>CloWMS BILL+BANK</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O(CUSTOMER) --></label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec W/O avec WMS BILL avec WMS BILL+A/C BAL</description>
+        <label>Comptes--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Balance A/C</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_A_C_BAL</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O(CUSTOMER) --></label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>FACTURE WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>FACTURATION WMS+A/C BAL</label>
+            <name>WMS BILL+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec W/O avec WMS BILL avec WMS BILL+LOAN</description>
+        <label>Comptes--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Loan</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_LOAN</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O(CUSTOMER) --></label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>FACTURE WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>WMS FACTURATION+PRÊT</label>
+            <name>WMS BILL+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec W/O avec WMS BILL avec WMS BILL+PAY REQ</description>
+        <label>Comptes--&gt;WMS W/O--&gt;WMS Billing--&gt;WMS Billing+Trx Plan</label>
+        <name>Accounts_with_W_O_with_WMS_BILL_with_WMS_BILL_PAY_REQ</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- CloWMS W/O(CUSTOMER) --></label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>FACTURE WMS</label>
+            <name>WMS BILL</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE FACTURATION ET DE PAIEMENT WMS</label>
+            <name>WMS BILL+PAY REQ</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Comptes avec E/S avec WO+Cargoes</description>
+        <label>Comptes--&gt;WMS E/S--&gt;WMS E/S+Cargo</label>
+        <name>Accounts_with_W_O_with_WO_Cargoes</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CloWMS W/O(CLIENT)</label>
+            <name>CloWMS W/O(CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>WO+Cargaison</label>
+            <name>WO+Cargoes</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte--&gt;Quote--&gt;S/O</description>
+        <label>Comptes--&gt;Quote--&gt;F/TMS S/O</label>
+        <name>AcountQuoteSO</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FMS/TMS S/O (DEVIS)</label>
+            <name>FMS/TMS S/O (QUOTE)</name>
+        </sections>
+        <sections>
+            <label>DEVIS</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Historique des approbations</description>
+        <label>Historique des approbations</label>
+        <name>Approval_history</name>
+        <sections>
+            <label>Instance de processus</label>
+            <name>Process Instance</name>
+        </sections>
+        <sections>
+            <label>Nœud d&apos;instance de processus</label>
+            <name>Process Instance Node</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>GÉRER LE SOLDE BANCAIRE</description>
+        <label>Solde de la banque</label>
+        <name>BANK_BALANCE</name>
+        <sections>
+            <label>SOLDE BANCAIRE</label>
+            <name>BANK BAL.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un rapport pour le compte bancaire</description>
+        <label>Compte bancaire--&gt;F/TMS Facturation à payer</label>
+        <name>BankAccountWithInvoicePayment</name>
+        <sections>
+            <label><!-- BANK ACC --></label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>COMPTE BANCAIRE</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>FACTURATION (COMPTE BANCAIRE POUR LE PAIEMENT)</label>
+            <name>INVOICING(BANK ACCOUNT FOR PAYMENT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un rapport pour le compte bancaire</description>
+        <label>Compte bancaire --&gt;F/TMS Facturation à recevoir</label>
+        <name>BankAccountWithInvoiceReceiving</name>
+        <sections>
+            <label>ACC DE BANQUE</label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>COMPTE BANCAIRE</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label>FACTURATION (COMPTE BANCAIRE POUR LE PAIEMENT)</label>
+            <name>INVOICING(BANK ACCOUNT FOR PAYMENT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Type de rapport pour créer un rapport de paie</description>
+        <label>Banque Acc--&gt;Payable</label>
+        <name>BankAccountWithPayroll</name>
+        <sections>
+            <label><!-- BANK ACC --></label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>COMPTE BANCAIRE</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>H/S/UNEM ASSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>FEUILLE DE PAIE</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un rapport de compte bancaire avec la facture d&apos;achat</description>
+        <label>Compte bancaire --&gt;Procurement P/I</label>
+        <name>BankAccountWithPurchasingInvoice</name>
+        <sections>
+            <label><!-- BANK ACC --></label>
+            <name>BANK ACC</name>
+        </sections>
+        <sections>
+            <label>COMPTE BANCAIRE</label>
+            <name>BANK ACCOUNT</name>
+        </sections>
+        <sections>
+            <label><!-- Bank Acc --></label>
+            <name>Bank Acc</name>
+        </sections>
+        <sections>
+            <label>FACTURE D&apos;ACHAT</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Ce rapport est utilisé pour vérifier la facture avec ou sans TVA</description>
+        <label>Facture avec ou sans TVA</label>
+        <name>Bill_with_or_without_VAT</name>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label>FACTURE F/TMS(F/TMS S/O)</label>
+            <name>F/TMS BILL(F/TMS S/O)</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL+VAT --></label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Un rapport sur les tendances historiques vous aide à analyser les changements dans le temps. Lorsque vous comparez les valeurs historiques et actuelles de données, telles que des dates, des heures et des jours, vous obtenez un rapport de tendance historique.</description>
+        <label>TAXE DE CONSOMMATION avec tendance historique</label>
+        <name>CONSUMPTION_TAX_with_Historical_Trending</name>
+        <sections>
+            <label>TAXE DE CONSOMMATION</label>
+            <name>CONSUMPTION TAX</name>
+        </sections>
+        <sections>
+            <label>TAXE DE CONSOMMATION (historique)</label>
+            <name>CONSUMPTION TAX (Historical)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT. avec GOODS S/O avec Container (Goods S/Os)</description>
+        <label>CONTRAT. avec marchandise S/O avec conteneur (marchandises S/O)</label>
+        <name>CONTRACT_with_GOODS_S_O_with_Container_Goods_S_Os</name>
+        <sections>
+            <label>CONTRAT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>Conteneur (marchandises S/O)</label>
+            <name>Container (Goods S/Os)</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT avec S/O GOODS avec GOODS SALES ORDER+PRODUCT</description>
+        <label>Contrat--&gt;Marchandises S/O--&gt;Marchandises S/O+Produit</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GOODS_SALES_ORDER_PRODUCT</name>
+        <sections>
+            <label>CONTRAT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>COMMANDE DE MARCHANDISES+PRODUIT</label>
+            <name>GOODS SALES ORDER+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT. avec GOODS S/O avec GoodsSOCargo</description>
+        <label>Contrat--&gt;Marchandises S/O--&gt;Marchandises S/O+Cargo</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GoodsSOCargo</name>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+CARGO</label>
+            <name>GOODS S/O+CARGO</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT avec S/O GOODS avec GoodsSOPO</description>
+        <label>Contrat--&gt;Marchandises S/O--&gt;Marchandises S/O+P/O</label>
+        <name>CONTRACT_with_GOODS_S_O_with_GoodsSOPO</name>
+        <sections>
+            <label>CONTRAT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+P/O</label>
+            <name>GOODS S/O+P/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT. avec S/O GOODS avec Montant des Créances</description>
+        <label>CONTRAT. avec S/O GOODS avec montant des créances</label>
+        <name>CONTRACT_with_GOODS_S_O_with_Receivables_Amount</name>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>Montant des créances</label>
+            <name>Receivables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT avec S/O de biens avec TRS BILL</description>
+        <label>Contrat--&gt;Nourriture S/O--&gt;Facturation TRS</label>
+        <name>CONTRACT_with_GOODS_S_O_with_TRS_BILL</name>
+        <sections>
+            <label>CONTRAT</label>
+            <name>CONTRACT</name>
+        </sections>
+        <sections>
+            <label><!-- CONTRACT. --></label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>COMMANDE DE MARCHANDISES</label>
+            <name>GOODS SALES ORDER</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>CONTRAT. avec Biens S/O avec TRS Achat</description>
+        <label>Contrat avec le fournisseur de marchandises avec achat TRS</label>
+        <name>CONTRACT_with_GOODS_S_O_with_TRS_Buying</name>
+        <sections>
+            <label>CONTRAT.</label>
+            <name>CONTRACT.</name>
+        </sections>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>Achat TRS</label>
+            <name>TRS Buying</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Rapport pour lier Cargo et CargoApplication</description>
+        <label>Cargaison avec demande+Cargaison</label>
+        <name>CargoApplicationCargo</name>
+        <sections>
+            <label><!-- APPLICATION+CARGO --></label>
+            <name>APPLICATION+CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- CARGO --></label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec WO avec RC avec BL</description>
+        <label>Cust/Ptnr/3rd Party avec WO avec RC avec BL</label>
+        <name>CustPtnr3rdPartyWO_RC_BL</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Rapport financier</description>
+        <label>Client/Ptnr/3ème partie-&gt;PO-&gt;PI</label>
+        <name>CustPtnr3rdParty_PO_PI</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>FACTURE D&apos;ACHAT</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>COMMANDE D&apos;ACHAT</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec FORWARDING avec INVOICING avec INVOICING &amp; VAT</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Facturation--&gt;F/TMS Facturation+TVA</label>
+        <name>Cust_Ptnr_3rd_Party_with_FORWARDING_with_INVOICING_with_INVOICING_VAT</name>
+        <sections>
+            <label>Cust/Ptnr/3ème partie</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL+VAT --></label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>EXPÉDITION (CLIENT)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>FACTURATION &amp; TVA</label>
+            <name>INVOICING &amp; VAT</name>
+        </sections>
+        <sections>
+            <label>FACTURATION (ID FACTURE)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec FORWARDING avec objet de jonction (Forwarding/VAT)</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS S/O+TVA</label>
+        <name>Cust_Ptnr_3rd_Party_with_FORWARDING_with_Junction_Object_Forwarding_VAT</name>
+        <sections>
+            <label>Client/Partenaire/3ème partie</label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O+VAT --></label>
+            <name>F/TMS S/O+VAT</name>
+        </sections>
+        <sections>
+            <label>EXPÉDITION (CLIENT)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>JONCTION FACTURATION TVA</label>
+            <name>VAT INVOICE JUNCTION</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec SHIPMENT ORDER avec TRANSIT</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;Transit</label>
+        <name>Cust_Ptnr_3rd_Party_with_SHIPMENT_ORDER_with_TRANSIT</name>
+        <sections>
+            <label><!-- Cust/Ptnr/3rd Party --></label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION (CLIENT)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label><!-- TRANSIT --></label>
+            <name>TRANSIT</name>
+        </sections>
+        <sections>
+            <label><!-- Transit --></label>
+            <name>Transit</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec SHIPPMENT ORDER avec INVOICING avec CONNECT INVOICING AND CASH</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;F/TMS Facturation--&gt;Facturation+Cash</label>
+        <name>Cust_Ptnr_3rd_Party_with_SHIPPMENT_ORDER_with_INVOICING_with_CONNECT_INVOICING</name>
+        <sections>
+            <label>CONNECTER LA FACTURATION ET LA TRÉSORERIE</label>
+            <name>CONNECT INVOICING AND CASH</name>
+        </sections>
+        <sections>
+            <label><!-- Cust/Ptnr/3rd Party --></label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FACTURATION (ID FACTURE)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION (CLIENT)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Ptnr/3ème partie avec ordre de travail avec facturation</description>
+        <label>Client/Partenaire/3ème partie avec ordre de travail avec facturation</label>
+        <name>Cust_Ptnr_3rd_Party_with_WORK_ORDER_with_BILLING</name>
+        <sections>
+            <label><!-- BILLING --></label>
+            <name>BILLING</name>
+        </sections>
+        <sections>
+            <label><!-- Cust/Ptnr/3rd Party --></label>
+            <name>Cust/Ptnr/3rd Party</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Partenaire/3ème partie avec OT avec VA avec BILLING</description>
+        <label>Client/Partenaire/3ème partie avec OC avec VA avec BL</label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_BILLING</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Cust/Ptnr/3rd Party avec WO avec DP avec BILLING</description>
+        <label>Client/Partenaire/3ème partie avec OT avec DP avec BL</label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_DP_with_BILLING</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Ptnr/3ème Partie avec Ordre de Travail avec Dispatch avec Dispatch Details</description>
+        <label>Client/Partenaire/3ème partie avec OT avec DP avec DPD</label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_DP_with_DPD</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Partenaire/3ème partie avec OT avec Stoc avec facturation</description>
+        <label>Cust/Ptnr/3rd Party avec WO avec ST avec BL</label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_Stoc_with_Billing</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>FACTURATION(ID DE STOCK)</label>
+            <name>BILLING(STOCK ID)</name>
+        </sections>
+        <sections>
+            <label><!-- STOCK --></label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Client/Ptnr/3ème partie avec Ordre de travail avec SVA avec détails SVA</description>
+        <label>Client/Partenaire/3ème partie avec WO avec VAS avec VAD</label>
+        <name>Cust_Ptnr_3rd_Party_with_WO_with_VAS_with_VAD</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>DEMANDE DE SERVICE</label>
+            <name>WORK ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte et contacts avec ordre d&apos;expédition et facturation</description>
+        <label>Comptes--&gt;F/TMS S/O--&gt;Facturation</label>
+        <name>CustomReportType</name>
+        <sections>
+            <label>Compte</label>
+            <name>Account</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L VENTE/ACHAT</label>
+            <name>H B/L SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>H B/L EXPÉDITION</label>
+            <name>H B/L SHIPMENT</name>
+        </sections>
+        <sections>
+            <label>H B/L-VENTE/ACHAT</label>
+            <name>H B/L-SELLING/BUYING</name>
+        </sections>
+        <sections>
+            <label>H B/L-L-LIVRAISONS (CLIENT)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>DÉPÔT avec DEP OFFS avec DEP OFF+A/C BAL</description>
+        <label>DÉPÔT avec DEP OFFS avec DEP OFF+A/C BAL</label>
+        <name>DEPOSIT_with_DEP_OFFS_with_DEP_OFF_A_C_BAL</name>
+        <sections>
+            <label>DÉPÔT</label>
+            <name>DEPOSIT</name>
+        </sections>
+        <sections>
+            <label>Dépôt compensé</label>
+            <name>DEPOSIT OFFSET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>DÉPÔT avec DEP OFFS avec TRX PLAN+DEPOSIT OFFSET</description>
+        <label>DÉPÔT avec DEP OFFS avec TRX PLAN+DEPOSIT OFFSET</label>
+        <name>DEPOSIT_with_DEP_OFFS_with_TRX_PLAN_DEPOSIT_OFFSET</name>
+        <sections>
+            <label>DÉPÔT</label>
+            <name>DEPOSIT</name>
+        </sections>
+        <sections>
+            <label>Dépôt compensé</label>
+            <name>DEPOSIT OFFSET</name>
+        </sections>
+        <sections>
+            <label>PLAN TRX + COMPENSATION DE DÉPÔT</label>
+            <name>TRX PLAN+DEPOSIT OFFSET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>FAC avec LOCATOR avec emplacement d&apos;audit</description>
+        <label>Facility--&gt;Locator--&gt;Localisation de l&apos;audit</label>
+        <name>FAC_with_LOCATOR_with_Audit_Location</name>
+        <sections>
+            <label><!-- AUDIT --></label>
+            <name>AUDIT</name>
+        </sections>
+        <sections>
+            <label><!-- FAC --></label>
+            <name>FAC</name>
+        </sections>
+        <sections>
+            <label>LOCALISATEUR</label>
+            <name>LOCATOR</name>
+        </sections>
+        <sections>
+            <label><!-- Locator --></label>
+            <name>Locator</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>FAC avec LOCATOR avec Masters de stock</description>
+        <label>Installation--&gt;Localisateur--&gt;Stock</label>
+        <name>FAC_with_LOCATOR_with_Stock_Masters</name>
+        <sections>
+            <label><!-- FAC --></label>
+            <name>FAC</name>
+        </sections>
+        <sections>
+            <label>LOCALISATEUR</label>
+            <name>LOCATOR</name>
+        </sections>
+        <sections>
+            <label><!-- Locator --></label>
+            <name>Locator</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Bon P/O --&gt; Bon P/O+Produit</description>
+        <label>Bon P/O --&gt; Bon P/O+Produit</label>
+        <name>Good_P_O_Good_P_O_Product</name>
+        <sections>
+            <label>BONUS P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES P/O+PRODUIT</label>
+            <name>GOODS P/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>MARCHANDISES S/O+PRODUCT</description>
+        <label>MARCHANDISES S/O+PRODUCT</label>
+        <name>GoodsSOProduct</name>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Marchandises S/O--&gt;Marchandises S/O+Produit--&gt;Facture TRS</description>
+        <label>Marchandises S/O--&gt;Marchandises S/O+Produit--&gt;Facture TRS</label>
+        <name>GoodsSOProductTRSBill</name>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS</label>
+            <name>TRS BILL</name>
+        </sections>
+        <sections>
+            <label>FACTURE TRS (BIENFAITS S/O+PRODUIT)</label>
+            <name>TRS BILL (GOODS S/O+PRODUCT)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Marchandises P/O --&gt; Montant à payer</description>
+        <label>Biens P/O --&gt; Montant à payer</label>
+        <name>Goods_P_O_Payables_Amount</name>
+        <sections>
+            <label>BIENS P/O</label>
+            <name>GOODS P/O</name>
+        </sections>
+        <sections>
+            <label>Montant à payer</label>
+            <name>Payables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Marchandises S/O --&gt; Marchandises S/O+produit</description>
+        <label>Biens S/O --&gt; Biens S/O+produit</label>
+        <name>Goods_S_O_Goods_S_O_product</name>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUCT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Marchandises S/O --&gt; Montant des créances</description>
+        <label>Biens S/O --&gt; Montant des créances</label>
+        <name>Goods_S_O_Receivables_Amount</name>
+        <sections>
+            <label>BONUS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>Montant des créances</label>
+            <name>Receivables Amount</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire une déclaration auprès de l&apos;assurance</description>
+        <label>Politique RH--&gt;Assurance</label>
+        <name>HRStandardWithInsurance</name>
+        <sections>
+            <label>EMPLOYÉ</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>GESTION DES EMPLOYÉS</label>
+            <name>EMPLOYEE MANAGEMENT</name>
+        </sections>
+        <sections>
+            <label>H/S/UNEM ASSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>POLITIQUE RH</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>STANDARD RH</label>
+            <name>HR STANDARD</name>
+        </sections>
+        <sections>
+            <label>FEUILLE DE PAIE</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un rapport PIT</description>
+        <label>Politique RH--&gt;PIT</label>
+        <name>HRStandardWithPIT</name>
+        <sections>
+            <label>EMPLOYÉ</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>GESTION DES EMPLOYÉS</label>
+            <name>EMPLOYEE MANAGEMENT</name>
+        </sections>
+        <sections>
+            <label>POLITIQUE RH</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>STANDARD RH</label>
+            <name>HR STANDARD</name>
+        </sections>
+        <sections>
+            <label>FEUILLE DE PAIE</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>IMPÔT SUR LE REVENU</label>
+            <name>PERSONAL INCOME TAX</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>POLITIQUE RH avec EMPLOYEE avec SuppHRPolicyEmployee</description>
+        <label>Politique RH--&gt;Employé--&gt;Sup Politique RH+Employé</label>
+        <name>HR_POLICY_with_EMPLOYEE_with_SuppHRPolicyEmployee</name>
+        <sections>
+            <label>EMPLOYÉ</label>
+            <name>EMPLOYEE</name>
+        </sections>
+        <sections>
+            <label>POLITIQUE RH</label>
+            <name>HR POLICY</name>
+        </sections>
+        <sections>
+            <label>SUPPLÉMENT POLITIQUE RH+EMPLOYÉ</label>
+            <name>SUPPLEMENT HR POLICY+EMPLOYEE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>faire un rapport de code SH</description>
+        <label>HS Code--&gt;F/TMS Billing</label>
+        <name>HSCodeWithInvoicing</name>
+        <sections>
+            <label>CODE SH</label>
+            <name>HS CODE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Un rapport sur les tendances historiques vous aide à analyser les changements dans le temps. Lorsque vous comparez les valeurs historiques et actuelles de données telles que des dates, vous obtenez un rapport de tendances historiques.</description>
+        <label>JOURNAL D&apos;INVENTAIRE avec tendances historiques</label>
+        <name>INVENTORY_LOG_with_Historical_Trending</name>
+        <sections>
+            <label>JOURNAL D&apos;INVENTAIRE</label>
+            <name>INVENTORY LOG</name>
+        </sections>
+        <sections>
+            <label>JOURNAL D&apos;INVENTAIRE (Historique)</label>
+            <name>INVENTORY LOG (Historical)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un rapport de Kickback</description>
+        <label>Rebond</label>
+        <name>Kickback_report</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>REBOND</label>
+            <name>KICKBACK</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION (CLIENT)</label>
+            <name>SHIPMENT ORDER (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PRÊT avec PRÊT PAY avec PRÊT PAY+A/C BAL</description>
+        <label>Prêt--&gt; Remboursement du prêt--&gt; Remboursement du prêt + AC Bal</label>
+        <name>LOAN_with_LOAN_PAY_with_LOAN_PAY_A_C_BAL</name>
+        <sections>
+            <label>PRÊT</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>REMBOURSEMENT DU PRÊT</label>
+            <name>LOAN PAY</name>
+        </sections>
+        <sections>
+            <label>PAIEMENT DE PRÊT+A/C BAL</label>
+            <name>LOAN PAY+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>LOAN avec LOAN PAY avec LOAN PAY+PAY REQ</description>
+        <label>Prêt--&gt; Remboursement de prêt--&gt; Plan de remboursement de prêt + Trx</label>
+        <name>LOAN_with_LOAN_PAY_with_LOAN_PAY_PAY_REQ</name>
+        <sections>
+            <label>PRÊT</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>PAIEMENT DE PRÊT + DEMANDE DE PAIEMENT</label>
+            <name>LOAN PAY+PAY REQ</name>
+        </sections>
+        <sections>
+            <label>REMBOURSEMENT DE PRÊT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PRÊT avec REMBOURSEMENT DE PRÊT avec PRÊT PAY+BANQUE</description>
+        <label>Prêt--&gt;Paiement du prêt--&gt;Paiement du prêt+Banque</label>
+        <name>LOAN_with_LOAN_REPAYMENT_with_LOAN_PAY_BANK</name>
+        <sections>
+            <label>PRÊT</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>PRÊT PAY+BANQUE</label>
+            <name>LOAN PAY+BANK</name>
+        </sections>
+        <sections>
+            <label>REMBOURSEMENT DE PRÊT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PRÊT avec REMBOURSEMENT DE PRÊT avec PAIEMENT DE PRÊT+AUTRES</description>
+        <label>Prêt--&gt;Paiement du prêt--&gt;Paiement du prêt+Autres</label>
+        <name>LOAN_with_LOAN_REPAYMENT_with_LOAN_PAY_OTHERS</name>
+        <sections>
+            <label>PRÊT</label>
+            <name>LOAN</name>
+        </sections>
+        <sections>
+            <label>PAIEMENT DE PRÊT+AUTRES</label>
+            <name>LOAN PAY+OTHERS</name>
+        </sections>
+        <sections>
+            <label>REMBOURSEMENT DE PRÊT</label>
+            <name>LOAN REPAYMENT</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Charger/décharger--&gt; conteneur dans le transport</description>
+        <label>Charger/Décharger--&gt;Conteneur en Trans</label>
+        <name>LoadUnloadContainerInTrans</name>
+        <sections>
+            <label>CONTENEUR EN TRANSACTION (Déchargement)</label>
+            <name>CONTAINER IN TRANSACTION (Unload)</name>
+        </sections>
+        <sections>
+            <label>CHARGER/DÉCHARGER</label>
+            <name>LOAD/UNLOAD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Consolidation avec ordre d&apos;expédition et facturation</description>
+        <label>Consolidation--&gt;F/TMS S/O--&gt;F/TMS Facturation</label>
+        <name>MAnkenReport</name>
+        <sections>
+            <label><!-- CONSOL --></label>
+            <name>CONSOL</name>
+        </sections>
+        <sections>
+            <label><!-- Consol --></label>
+            <name>Consol</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- マスター案件 --></label>
+            <name>マスター案件</name>
+        </sections>
+        <sections>
+            <label><!-- 案件 --></label>
+            <name>案件</name>
+        </sections>
+        <sections>
+            <label><!-- 請求明細 --></label>
+            <name>請求明細</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- MNF - - &gt; Input --></description>
+        <label><!-- MNF - - &gt; Input --></label>
+        <name>MNF_Input</name>
+        <sections>
+            <label><!-- Input (MNF Process) --></label>
+            <name>Input (MNF Process)</name>
+        </sections>
+        <sections>
+            <label><!-- Manufacture Process --></label>
+            <name>Manufacture Process</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- MNF - - &gt; Output --></description>
+        <label><!-- MNF - - &gt; Output --></label>
+        <name>MNF_Output</name>
+        <sections>
+            <label><!-- Manufacture Process --></label>
+            <name>Manufacture Process</name>
+        </sections>
+        <sections>
+            <label><!-- Output (MNF Process) --></label>
+            <name>Output (MNF Process)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour faire un autre rapport à payer</description>
+        <label>Autre --&gt; Autre + AC Bal</label>
+        <name>OtherToOtherACBal</name>
+        <sections>
+            <label>AUTRE</label>
+            <name>OTHER</name>
+        </sections>
+        <sections>
+            <label>AUTRE+A/C BAL</label>
+            <name>OTHER+A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- Other --></label>
+            <name>Other</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>ORDRE DE PAIE avec FICHE DE PAIE avec ASSURANCE H/S/UNEM</description>
+        <label>Paie--&gt;Fiche de paie--&gt;Assurance</label>
+        <name>PAYROLL_ORDER_with_PAYROLL_SLIP_with_H_S_UNEM_INSURANCE</name>
+        <sections>
+            <label>H/S/UNEM ASSURANCE</label>
+            <name>H/S/UNEM INSURANCE</name>
+        </sections>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>ORDRE DE PAIE</label>
+            <name>PAYROLL ORDER</name>
+        </sections>
+        <sections>
+            <label>FEUILLE DE PAIE</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>ORDRE DE SALAIRE avec FICHE DE SALAIRE avec IMPÔT SUR LE REVENU DES PERSONNES PHYSIQUES</description>
+        <label>Paie--&gt;Fiche de paie--&gt;PIT</label>
+        <name>PAYROLL_ORDER_with_PAYROLL_SLIP_with_PERSONAL_INCOME_TAX</name>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>ORDRE DE PAIE</label>
+            <name>PAYROLL ORDER</name>
+        </sections>
+        <sections>
+            <label>FEUILLE DE PAIE</label>
+            <name>PAYROLL SLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>IMPÔT SUR LE REVENU</label>
+            <name>PERSONAL INCOME TAX</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PAYROLL avec PAYSLIP avec PAYSLIP+A/C BAL</description>
+        <label>Paie--&gt;Fiche de paie--&gt;Fiche de paie+AC Bal</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_A_C_BAL</name>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAYE+A/C BAL</label>
+            <name>PAYSLIP+A/C BAL</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PAYROLL avec PAYSLIP avec PAYSLIP+BANK</description>
+        <label>Paie--&gt;Fiche de paie--&gt;Fiche de paie+Banque</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_BANK</name>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>BULLETIN DE SALAIRE+BANQUE</label>
+            <name>PAYSLIP+BANK</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PAYROLL avec PAYSLIP avec PAYSLIP+CASH</description>
+        <label>Paie--&gt;Fiche de paie--&gt;Fiche de paie+Cash</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_CASH</name>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>BULLETIN DE SALAIRE+ARGENT</label>
+            <name>PAYSLIP+CASH</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PAIE avec BULLETIN avec BULLETIN+PRÊT</description>
+        <label>Paie--&gt;Fiche de paie--&gt;Fiche de paie+Prêt</label>
+        <name>PAYROLL_with_PAYSLIP_with_PAYSLIP_LOAN</name>
+        <sections>
+            <label>PAIE</label>
+            <name>PAYROLL</name>
+        </sections>
+        <sections>
+            <label>FICHE DE PAIE</label>
+            <name>PAYSLIP</name>
+        </sections>
+        <sections>
+            <label>FICHE DE SALAIRE+PRÊT</label>
+            <name>PAYSLIP+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>BON DE COMMANDE avec FACTURE D&apos;ACHAT avec CONNECT FACTURE D&apos;ACHAT ET COMPTANT</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+Cash</label>
+        <name>PURCHASING_ORDER_with_PURCHASING_INVOICE_with_CONNECT_PURCHASING_INVOICE_AND_C</name>
+        <sections>
+            <label>CONNECTER LA FACTURE D&apos;ACHAT ET LA CAISSE</label>
+            <name>CONNECT PURCHASING INVOICE AND CASH</name>
+        </sections>
+        <sections>
+            <label>FACTURE D&apos;ACHAT</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>COMMANDE D&apos;ACHAT</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PUR ORD avec PUR INV avec PILoan</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+Prêt</label>
+        <name>PUR_ORD_with_PUR_INV_with_PILoan</name>
+        <sections>
+            <label>INV PUR</label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+        <sections>
+            <label>FACTURE D&apos;ACHAT + PRÊT</label>
+            <name>PURCHASING INVOICE+LOAN</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PUR ORD avec PUR INV avec PUR INV+A/C BAL</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+AC Bal</label>
+        <name>PUR_ORD_with_PUR_INV_with_PUR_INV_A_C_BAL</name>
+        <sections>
+            <label>INV PUR</label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV+A/C BAL --></label>
+            <name>PUR INV+A/C BAL</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PUR ORD avec PUR INV avec PUR INV+PAY REQ</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+Plan Trx</label>
+        <name>PUR_ORD_with_PUR_INV_with_PUR_INV_PAY_REQ</name>
+        <sections>
+            <label>INV PUR</label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR INV+PAY REQ --></label>
+            <name>PUR INV+PAY REQ</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PUR ORD avec PUR INV avec P/I+BANK</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+Banque</label>
+        <name>PUR_ORD_with_PUR_INV_with_P_I_BANK</name>
+        <sections>
+            <label>P/I+BANQUE</label>
+            <name>P/I+BANK</name>
+        </sections>
+        <sections>
+            <label>INV PUR</label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PUR ORD avec PUR INV avec P/I+VAT INV</description>
+        <label>Approvisionnement P/O--&gt;P/I--&gt;P/I+TVA/INV</label>
+        <name>PUR_ORD_with_PUR_INV_with_P_I_VAT_INV</name>
+        <sections>
+            <label>P/I+TVA INV</label>
+            <name>P/I+VAT INV</name>
+        </sections>
+        <sections>
+            <label>INV PUR</label>
+            <name>PUR INV</name>
+        </sections>
+        <sections>
+            <label><!-- PUR ORD --></label>
+            <name>PUR ORD</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Produit--&gt; Cargo--&gt; WOSL</description>
+        <label>Produit--&gt;Cargo--&gt;W/O/S/L</label>
+        <name>ProductCargoWOSL</name>
+        <sections>
+            <label><!-- CARGO --></label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label>PRODUIT</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+        <sections>
+            <label>SANS LIGNE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>PRODUIT--&gt;CARGO--&gt;WOSL-&gt;STOCK</description>
+        <label>Produit--&gt;Cargo--&gt;W/O/S/L--&gt;Stock</label>
+        <name>ProductCargoWOSLStock</name>
+        <sections>
+            <label><!-- CARGO --></label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label>TARIFICATION PROD</label>
+            <name>PROD PRICING</name>
+        </sections>
+        <sections>
+            <label>PRODUIT</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+        <sections>
+            <label><!-- STOCK --></label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label>SANS LIGNE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Produit--&gt;Biens S/O--&gt;S/O+Produit</description>
+        <label>Produit--&gt;Biens S/O--&gt;S/O+Produit</label>
+        <name>ProductSOProduct</name>
+        <sections>
+            <label>BONS S/O</label>
+            <name>GOODS S/O</name>
+        </sections>
+        <sections>
+            <label>MARCHANDISES S/O+PRODUIT</label>
+            <name>GOODS S/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label>PRODUIT</label>
+            <name>PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- Products. --></label>
+            <name>Products.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Produit(Stock) --&gt; Stock In/Out</description>
+        <label>Produit(Stock) --&gt; Stock In/Out</label>
+        <name>Product_Stock_Stock_In_Out</name>
+        <sections>
+            <label>PRODUIT (STOCK)</label>
+            <name>PRODUCT (STOCK)</name>
+        </sections>
+        <sections>
+            <label>Entrée/sortie de stock</label>
+            <name>Stock In/Out</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour créer un rapport lié à la commande d&apos;achat et à la facture d&apos;achat</description>
+        <label>Approvisionnement P/O--&gt;P/I</label>
+        <name>PurchaseOrderInvoice</name>
+        <sections>
+            <label>Activités</label>
+            <name>Activities</name>
+        </sections>
+        <sections>
+            <label>FACTURE D&apos;ACHAT</label>
+            <name>PURCHASING INVOICE</name>
+        </sections>
+        <sections>
+            <label>COMMANDE D&apos;ACHAT</label>
+            <name>PURCHASING ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>DEVIS avec QUOTE LINE avec PROD/SRV PRICING+QUOTE LINE</description>
+        <label>Devis--&gt;Ligne de devis--&gt;Tarification+Ligne de devis</label>
+        <name>QUOTE_with_QUOTE_LINE_with_PROD_SRV_PRICING_QUOTE_LINE</name>
+        <sections>
+            <label>PRIX PROD/SRV+LIGNE DE DEVIS</label>
+            <name>PROD/SRV PRICING+QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label>DEVIS</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label>LIGNE DE DEVIS</label>
+            <name>QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label><!-- Quote Line --></label>
+            <name>Quote Line</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte--&gt;Quote--&gt;Ligne de crédit</description>
+        <label>Comptes--&gt;Quote--&gt;Ligne de cotation</label>
+        <name>QuoteAnalysis</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>TARIFICATION PROD/SVC + LIGNE DE DEVIS</label>
+            <name>PROD/SVC PRICING+QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label>DEVIS</label>
+            <name>QUOTE</name>
+        </sections>
+        <sections>
+            <label>LIGNE DE DEVIS</label>
+            <name>QUOTE LINE</name>
+        </sections>
+        <sections>
+            <label><!-- Quote Line --></label>
+            <name>Quote Line</name>
+        </sections>
+        <sections>
+            <label><!-- Quotes. --></label>
+            <name>Quotes.</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Route--&gt; Conteneur dans le transport</description>
+        <label>Route--&gt;Conteneur en Trans</label>
+        <name>RouteContainerInTrans</name>
+        <sections>
+            <label>CONTENEUR EN TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label>ITINÉRAIRE</label>
+            <name>ROUTE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Rapport pour le module camion</description>
+        <label>Itinéraire</label>
+        <name>RouteReport</name>
+        <sections>
+            <label>LIVRAISON DE LA CARGAISON</label>
+            <name>CARGO DELIVERY</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>CHARGEMENT DÉCHARGEMENT</label>
+            <name>LOADING &amp; UNLOADING</name>
+        </sections>
+        <sections>
+            <label>ITINÉRAIRE</label>
+            <name>ROUTE</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION</label>
+            <name>SHIPPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>ORDRE D&apos;EXPÉDITION --&gt; FACTURE</description>
+        <label>F/TMS S/O--&gt;F/TMS Facturation</label>
+        <name>ShipmentOrderInvoice</name>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>FACTURATION (ID FACTURE)</label>
+            <name>INVOICING(INVOICE ID)</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION</label>
+            <name>SHIPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>ORDRE D&apos;EXPÉDITION --&gt; RETOUR</description>
+        <label>F/TMS S/O--&gt;Kickback (ristourne)</label>
+        <name>ShipmentOrderKickback</name>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>REBOND</label>
+            <name>KICKBACK</name>
+        </sections>
+        <sections>
+            <label>ORDRE D&apos;EXPÉDITION</label>
+            <name>SHIPMENT ORDER</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Shipment with Activities --></description>
+        <label><!-- Shipment with Activities --></label>
+        <name>Shipment_with_Activities</name>
+        <sections>
+            <label><!-- Activities --></label>
+            <name>Activities</name>
+        </sections>
+        <sections>
+            <label><!-- Goods S/O --></label>
+            <name>Goods S/O</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Rapport pour le résumé de la carte de localisation</description>
+        <label>RÉSUMÉ DE LA CARTE DE LOCALISATION DE STOCK</label>
+        <name>StockLocatorMapSummary</name>
+        <sections>
+            <label><!-- STOCK --></label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Camion/Flotte--&gt;Route--&gt;Conteneur</description>
+        <label>Camion--&gt;Route--&gt;CNTR dans le transport</label>
+        <name>TruckFleetRouteContainer</name>
+        <sections>
+            <label>CONTENEUR DANS LA TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label>ITINÉRAIRE (CAMION)</label>
+            <name>ROUTE (TRUCK)</name>
+        </sections>
+        <sections>
+            <label>CAMION/FLOTTE</label>
+            <name>TRUCK/FLEET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Camion/Flotte--&gt;Route--&gt;Charger/Décharger</description>
+        <label>Camion/Flotte--&gt;Route--&gt;Charger/Décharger</label>
+        <name>TruckFleetRouteLoadUnload</name>
+        <sections>
+            <label>CHARGER/DÉCHARGER</label>
+            <name>LOAD/UNLOAD</name>
+        </sections>
+        <sections>
+            <label>ITINÉRAIRE (CAMION)</label>
+            <name>ROUTE (TRUCK)</name>
+        </sections>
+        <sections>
+            <label>CAMION/FLOTTE</label>
+            <name>TRUCK/FLEET</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>FACTURE TVA AVEC DÉTAILS D&apos;EXPÉDITION ET DE FACTURATION</description>
+        <label>TVA/INV--&gt;F/TMS S/O--&gt;F/TMS Facturation</label>
+        <name>VAT_INVOICE</name>
+        <sections>
+            <label>FACTURE DE TVA</label>
+            <name>VAT INVOICE</name>
+        </sections>
+        <sections>
+            <label>TVA/INV</label>
+            <name>VAT/INV</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>FACTURE TVA AVEC DÉTAIL D&apos;EXPÉDITION</description>
+        <label>TVA/INV--&gt;F/TMS S/O</label>
+        <name>VAT_INVOICE_FORWARDING</name>
+        <sections>
+            <label>FACTURE DE TVA</label>
+            <name>VAT INVOICE</name>
+        </sections>
+        <sections>
+            <label>TVA/INV</label>
+            <name>VAT/INV</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Pour générer des rapports de TVA</description>
+        <label>TVA/INV</label>
+        <name>VAT_REPORTS</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL --></label>
+            <name>F/TMS BILL</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS BILL+VAT --></label>
+            <name>F/TMS BILL+VAT</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS Bill --></label>
+            <name>F/TMS Bill</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>TRANSFERT (CLIENT)</label>
+            <name>FORWARDING (CUSTOMER)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Type de rapport pour créer un rapport entrant/sortant</description>
+        <label>WMS S/O--&gt;S/O/S</label>
+        <name>WOCargo</name>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>S/O/S</label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>WMS S/O/S</label>
+            <name>WMS W/O/S</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>WMS fret entrant et sortant</description>
+        <label>WMS Sans--&gt; Sans/S--&gt; Sans/S/L--&gt; Cargo</label>
+        <name>WOWOSWOSLCARGO</name>
+        <sections>
+            <label><!-- CARGO --></label>
+            <name>CARGO</name>
+        </sections>
+        <sections>
+            <label><!-- Cargo --></label>
+            <name>Cargo</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>S/O/S</label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>SANS LIGNE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+        <sections>
+            <label>SERVICE DE COMMANDE DE TRAVAIL</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>S/S-&gt;S/S/S-&gt;S/S/S/L-&gt;STOCK</description>
+        <label>WMS Sans--&gt; Sans/S--&gt; Sans/S/L--&gt; Stock</label>
+        <name>WOWOSWOSLStock</name>
+        <sections>
+            <label><!-- STOCK --></label>
+            <name>STOCK</name>
+        </sections>
+        <sections>
+            <label><!-- Stock --></label>
+            <name>Stock</name>
+        </sections>
+        <sections>
+            <label>S/O</label>
+            <name>W/O</name>
+        </sections>
+        <sections>
+            <label>S/O/S</label>
+            <name>W/O/S</name>
+        </sections>
+        <sections>
+            <label>SANS LIGNE</label>
+            <name>W/O/S LINE</name>
+        </sections>
+        <sections>
+            <label><!-- W/O/S Line --></label>
+            <name>W/O/S Line</name>
+        </sections>
+        <sections>
+            <label>SERVICE DE COMMANDE DE TRAVAIL</label>
+            <name>WORK ORDER SERVICE</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>rapport</description>
+        <label>Sans+Produit--&gt;Produit</label>
+        <name>W_O_Product_Product</name>
+        <sections>
+            <label>S/S+CARGO</label>
+            <name>W/O+CARGO</name>
+        </sections>
+        <sections>
+            <label>SANS+PRODUIT</label>
+            <name>W/O+PRODUCT</name>
+        </sections>
+        <sections>
+            <label><!-- W/W/O+Product --></label>
+            <name>W/W/O+Product</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description>Compte et contacts avec H B/L-SHIPMENTS</description>
+        <label>Analyse du conteneur (erreur dans LE)</label>
+        <name>container_analysis</name>
+        <sections>
+            <label>Compte</label>
+            <name>Account</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+        <sections>
+            <label>H B/L EXPÉDITION</label>
+            <name>H B/L SHIPMENT</name>
+        </sections>
+        <sections>
+            <label>H B/L-EXPÉDITIONS (CLIENT)</label>
+            <name>H B/L-SHIPMENTS (CUSTOMER)</name>
+        </sections>
+        <sections>
+            <label>conteneur</label>
+            <name>container</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- test --></description>
+        <label><!-- test --></label>
+        <name>test</name>
+        <sections>
+            <label>ACCOUNTS</label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label>CONTENEUR EN TRANSACTION</label>
+            <name>CONTAINER IN TRANSACTION</name>
+        </sections>
+        <sections>
+            <label><!-- E-BOOKING --></label>
+            <name>E-BOOKING</name>
+        </sections>
+        <sections>
+            <label><!-- F/T/SMS S/O --></label>
+            <name>F/T/SMS S/O</name>
+        </sections>
+        <sections>
+            <label><!-- F/TMS S/O --></label>
+            <name>F/TMS S/O</name>
+        </sections>
+    </reportTypes>
+</Translations>

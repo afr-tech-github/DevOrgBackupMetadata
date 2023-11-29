@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DeprecationFormula__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>DEPRECIATION FORMULA</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>DepreciationMethod__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>DeprecationFormula</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Straight-line</controllingFieldValue>
+            <valueName>Depreciation Expense = (Cost – Salvage value) / Useful life</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Double declining balance</controllingFieldValue>
+            <valueName>Depreciation Expense = Beginning book value x Rate of depreciation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Units of production</controllingFieldValue>
+            <valueName>Depreciation Expense = (Number of units produced / Life in number of units) x (Cost – Salvage value)</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

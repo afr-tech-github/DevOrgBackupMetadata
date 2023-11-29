@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContainerDetail__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>&quot;CONTAINER ID:&quot;&amp;  Delivery__r.CONTAINER_ID__r.Name &amp;BR() &amp; 
+&quot;MEASUREMENT(CBM):&quot;&amp;text(Delivery__r.CONTAINER_ID__r.MEASUREMENT_CBM__c) &amp;BR() &amp;
+&quot;NET/GROSS WEIGHT(KG):&quot;&amp; text(Delivery__r.CONTAINER_ID__r.NET_WEIGHT__c) &amp;&quot;/&quot;&amp; 
+text(Delivery__r.CONTAINER_ID__r.GROSS_WEIGHT__c) &amp;BR() &amp;
+&quot;PACKAGES:&quot;&amp; text(Delivery__r.CONTAINER_ID__r.QUANTITY_PACKAGES__c) &amp;BR() &amp;
+&quot;CONTAINER/SEAL NUMBER:&quot;&amp;  Delivery__r.CONTAINER_ID__r.Container_NO__c &amp;&quot;/&quot;&amp; Delivery__r.CONTAINER_ID__r.Seal_No__c</formula>
+    <label>CONTAINER DETAIL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

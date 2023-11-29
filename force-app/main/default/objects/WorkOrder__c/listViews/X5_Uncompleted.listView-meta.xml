@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X5_Uncompleted</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Customer__c</columns>
+    <columns>ProductID__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>GrossWeight__c</columns>
+    <columns>Measurement__c</columns>
+    <columns>UnitType__c</columns>
+    <columns>ContainerType1__c</columns>
+    <columns>ContainerQNTY1__c</columns>
+    <columns>ContainerType2__c</columns>
+    <columns>ContainerQNTY2__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>WorkOrderStatus__c</field>
+        <operation>equals</operation>
+        <value>Created,Planned,Resource Assigned,On Progress,Rescheduled,Others</value>
+    </filters>
+    <label>5.Uncompleted</label>
+    <language>en_US</language>
+</ListView>

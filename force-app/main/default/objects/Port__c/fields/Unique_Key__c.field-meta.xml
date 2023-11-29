@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_Key__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <deprecated>false</deprecated>
+    <description>This is the combination of new Port Code and Port Type to form a unique key for Port object. This field will not be shown on UI</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is the combination of new Port Code and Port Type to form a unique key for Port object. This field will not be shown on UI</inlineHelpText>
+    <label>Unique Key</label>
+    <length>80</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

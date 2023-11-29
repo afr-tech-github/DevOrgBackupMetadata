@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BALANCE_AT_CLOSING_USD__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>BALANCE_AT_START_USD__c  + AMOUNT_RECEIVED_USD_IN_H_BL__c   +  AMOUNT_RECEIVED_USD_NOT_IN_H_BL__c  -  AMOUNT_PAID_USD_IN_H_BL__c  -  AMOUNT_PAID_USD_NOT_IN_H_BL__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The value is automatically calculated as below. 
+Balance at Closing:USD=Balance at Start:USD+Amount Received:USD(in H B/L Ship)+Amount Received:USD(not in H B/L Ship)-Amount Paid:USD(in H B/L Ship)-Amount Paid:USD(not in H B/L Ship)</inlineHelpText>
+    <label>BALANCE AT CLOSING-USD</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>3</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

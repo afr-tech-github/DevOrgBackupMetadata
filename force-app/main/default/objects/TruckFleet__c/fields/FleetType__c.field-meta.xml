@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FleetType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>FLEET TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FULL CONTAINER TRUCK HEAD</fullName>
+                <default>false</default>
+                <label>FULL CONTAINER TRUCK HEAD</label>
+            </value>
+            <value>
+                <fullName>SHASSI</fullName>
+                <default>false</default>
+                <label>SHASSI</label>
+            </value>
+            <value>
+                <fullName>TRUCK</fullName>
+                <default>false</default>
+                <label>TRUCK</label>
+            </value>
+            <value>
+                <fullName>Forklift</fullName>
+                <default>false</default>
+                <label>Forklift</label>
+            </value>
+            <value>
+                <fullName>Crane</fullName>
+                <default>false</default>
+                <label>Crane</label>
+            </value>
+            <value>
+                <fullName>Wrapping Machine</fullName>
+                <default>false</default>
+                <label>Wrapping Machine</label>
+            </value>
+            <value>
+                <fullName>Turntable</fullName>
+                <default>false</default>
+                <label>Turntable</label>
+            </value>
+            <value>
+                <fullName>Vessel</fullName>
+                <default>false</default>
+                <label>Vessel</label>
+            </value>
+            <value>
+                <fullName>10TON</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>10TON</label>
+            </value>
+            <value>
+                <fullName>20TON</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>20TON</label>
+            </value>
+            <value>
+                <fullName>4TON</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>4TON</label>
+            </value>
+            <value>
+                <fullName>SHASSI-20&apos;DC WTH 3AXIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>SHASSI-20&apos;DC WTH 3AXIS</label>
+            </value>
+            <value>
+                <fullName>SHASSI-20&apos;DC*2 WTH 2AXIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>SHASSI-20&apos;DC*2 WTH 2AXIS</label>
+            </value>
+            <value>
+                <fullName>SHASSI-20&apos;DC*2 WTH 3AXIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>SHASSI-20&apos;DC*2 WTH 3AXIS</label>
+            </value>
+            <value>
+                <fullName>SHASSI-40&apos;DC WTH 3AXIS</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>SHASSI-40&apos;DC WTH 3AXIS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

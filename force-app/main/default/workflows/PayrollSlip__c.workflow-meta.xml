@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Actual_Net_Income_PR</fullName>
+        <field>actualnetincomePR__c</field>
+        <name>Actual Net Income - PR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_PS_Approved</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Approval Status PS-Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_PS_Initial</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Approval Status PS-Initial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approval_Status_PS_Rejected</fullName>
+        <field>ApprovalStatus__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Approval Status PS-Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update</fullName>
+        <field>TotalamountofinsurancePR__c</field>
+        <formula>totalamountofinsuranceemployerside__c</formula>
+        <name>Update: Total amount of insurance</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Payroll_ID</fullName>
+        <field>Payroll_ID__c</field>
+        <formula>PayrollOrder__r.Name</formula>
+        <name>Update Payroll ID</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Total_Withholding_for_Insurance</fullName>
+        <field>Total_Withholding_for_Insurance_PR__c</field>
+        <formula>totalwithholdingforinsurance__c</formula>
+        <name>Update: Total Withholding for Insurance</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_to_fields_use_to_check_dupplicate</fullName>
+        <field>checkduplicatepayslip__c</field>
+        <formula>PayrollOrder__c &amp; FullName__c</formula>
+        <name>Update to fields use to check dupplicate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Updateactualnetincome</fullName>
+        <field>actualnetincomePR__c</field>
+        <formula>actualnetincome__c</formula>
+        <name>Update: Actual Net Income</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

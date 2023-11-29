@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HSUInsuranceByEmployee__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>SalaryToContributeSocialInsurance__c *  PayrollSlip__r.EmployeeID__r.CloHRMStandard__r.HSUInsuranceRatioByEmployee__c</formula>
+    <inlineHelpText>H/S/UNEM Insurance by Employee=Salary to Contribute Social Insurance*H/S/UNEM Insurance Ratio by Employee in HR Policy.</inlineHelpText>
+    <label>H/S/UNEM INSURANCE BY EMPLOYEE</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

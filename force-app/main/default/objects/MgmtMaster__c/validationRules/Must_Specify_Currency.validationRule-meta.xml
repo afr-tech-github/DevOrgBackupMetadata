@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Must_Specify_Currency</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(TEXT( Mgmt_Exrate_fromto__c ))</errorConditionFormula>
+    <errorDisplayField>Mgmt_Exrate_fromto__c</errorDisplayField>
+    <errorMessage>Please select the currency to convert to.</errorMessage>
+</ValidationRule>

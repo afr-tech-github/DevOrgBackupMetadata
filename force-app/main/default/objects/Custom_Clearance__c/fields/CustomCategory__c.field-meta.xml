@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomCategory__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>REGULATORY CATEGORY</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Normal Customs Clearance</fullName>
+                <default>true</default>
+                <label>Normal Customs Clearance</label>
+            </value>
+            <value>
+                <fullName>Customs Clearance - Special Act. For Tax Reduction</fullName>
+                <default>false</default>
+                <label>Customs Clearance - Special Act. For Tax Reduction</label>
+            </value>
+            <value>
+                <fullName>Customs Clearance - Food Quarantine</fullName>
+                <default>false</default>
+                <label>Customs Clearance - Food Quarantine</label>
+            </value>
+            <value>
+                <fullName>Customs Clearance - Medical Quarantine</fullName>
+                <default>false</default>
+                <label>Customs Clearance - Medical Quarantine</label>
+            </value>
+            <value>
+                <fullName>Customs Clearance - Animal Quarantine</fullName>
+                <default>false</default>
+                <label>Customs Clearance - Animal Quarantine</label>
+            </value>
+            <value>
+                <fullName>Customs Clearance - Plant Quarantine</fullName>
+                <default>false</default>
+                <label>Customs Clearance - Plant Quarantine</label>
+            </value>
+            <value>
+                <fullName>ATA CARNET</fullName>
+                <default>false</default>
+                <label>ATA CARNET</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

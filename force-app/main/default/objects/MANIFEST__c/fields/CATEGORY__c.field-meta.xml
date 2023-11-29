@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CATEGORY__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CATEGORY</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>State</fullName>
+                <default>false</default>
+                <label>State</label>
+            </value>
+            <value>
+                <fullName>Port</fullName>
+                <default>false</default>
+                <label>Port</label>
+            </value>
+            <value>
+                <fullName>Passport Type</fullName>
+                <default>false</default>
+                <label>Passport Type</label>
+            </value>
+            <value>
+                <fullName>GrossUnit</fullName>
+                <default>false</default>
+                <label>GrossUnit</label>
+            </value>
+            <value>
+                <fullName>Document&apos;s function</fullName>
+                <default>false</default>
+                <label>Document&apos;s function</label>
+            </value>
+            <value>
+                <fullName>Kind of packages</fullName>
+                <default>false</default>
+                <label>Kind of packages</label>
+            </value>
+            <value>
+                <fullName>Occupation</fullName>
+                <default>false</default>
+                <label>Occupation</label>
+            </value>
+            <value>
+                <fullName>Container</fullName>
+                <default>false</default>
+                <label>Container</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

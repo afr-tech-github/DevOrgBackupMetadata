@@ -1,0 +1,328 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes" access="global" controller="WMS_QrService">
+    <ltng:require styles="{!$Resource.CLOFOR + '/CLOFOR/assets/styles/qr-reader.css'}" />
+
+    <aura:attribute name="workerId" type="String" />
+    <aura:attribute name="locatorId" type="String" />
+    <aura:attribute name="putawayLocatorId" type="String" />
+    <aura:attribute name="locatorCode" type="String" />
+    <aura:attribute name="putawayLocatorCode" type="String" />
+    <aura:attribute name="taskType" type="String" default="all" description="Stores the type of task being shown (all, receiving, dispatch, etc.)"/>
+    <aura:attribute name="taskId" type="String" description="Stores the record ID of selected task"/>
+
+    <aura:attribute name="listAllTasks" type="Object" />
+    <aura:attribute name="listTasks" type="Object[]" />
+
+    <aura:attribute name="selectedService" type="Object" />
+    <aura:attribute name="listRelatedServices" type="Object[]" />
+    <aura:attribute name="lineItems" type="Object[]" />
+    <aura:attribute name="groupedCargoes" type="Object" default="{}" />
+    <aura:attribute name="plannedProducts" type="Object[]" default="[]" />
+    <aura:attribute name="cargoStatus" type="String" default="Completed" />
+
+    <aura:attribute name="ckbAutoScan" type="Boolean" default="false" />
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+    <aura:attribute name="step" type="Integer" default="0" />
+	
+    <aura:attribute name="scanMode" type="String" default="cargo" />
+	<aura:attribute name="scanModeOptions" type="List" default="[
+		{'label': 'Cargo', 'value': 'cargo'},
+		{'label': 'Product', 'value': 'product'}
+    ]"/>
+
+    <aura:attribute name="productUnit" type="String" default="unit" />
+    <aura:attribute name="isWeightUnit" type="Boolean" default="false" />
+	<aura:attribute name="productUnitOptions" type="List"/>
+	<aura:attribute name="mapCargoWeight" type="List"/>
+    <aura:attribute name="cargoId" type="String" />
+    <aura:attribute name="productId" type="String" />
+    <aura:attribute name="expireDate" type="Date" />
+    <aura:attribute name="lotNumber" type="String" />
+
+    <aura:attribute name="productQuantity" type="Integer" default="1" />
+    <aura:attribute name="productMaxQuantity" type="Integer" default="0" />
+    <aura:attribute name="plannedWeight" type="Decimal" />
+    <aura:attribute name="weight" type="Decimal" />
+    <aura:attribute name="inputValue" type="String"/>
+    <aura:attribute name="NameUnit" type="String"/>
+    <aura:attribute name="NameProduct" type="String"/>
+    <aura:attribute name="wosId" type="String" />
+
+
+     
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}" />
+    <div class="slds-container_small slds-clearfix" style="margin:auto">
+        <aura:if isTrue="{!v.step > 0}">
+            <div class="slds-m-vertical_small slds-grid slds-grid_align-spread">
+                <div class="slds-col">
+                    <lightning:button onclick="{!c.doBack}" label="Back" iconName="utility:chevronleft"/>
+                </div>
+                <aura:if isTrue="{!v.step == 2}">
+                    <div class="slds-col">
+                        <lightning:button variant="brand" onclick="{!c.doFinalize}" label="Finalise" iconName="utility:success"/>
+                    </div>
+                </aura:if>
+            </div>
+        </aura:if>
+
+        <aura:if isTrue="{!v.step == 0}">
+            <lightning:card title="" class="slds-card_boundary">
+                <aura:set attribute="actions">
+                    <lightning:button label="Show tasks" onclick="{!c.doGetTasks}"/>
+                </aura:set>
+                <div class="slds-card__body_inner slds-clearfix">
+                    <div class="slds-m-top_small">
+                        <c:cmp_lookup aura:id="step0-worker" required="true" label="Operator" objectType="clofor_com_cfs__WORKER__c" searchField="Name" subtitleField="clofor_com_cfs__FULL_NAME__c" showRecentRecords="true" ref="v.workerId" value="{!v.workerId}" onselect="{!c.onLookupChange}" />
+                    </div>
+                    <div class="slds-m-top_small">
+                        <c:cmp_lookup aura:id="step0-facility" required="true" label="Locator" objectType="clofor_com_cfs__Locator__c" searchField="Name" subtitleField="clofor_com_cfs__Locator_Code__c" showRecentRecords="true" ref="v.locatorId" value="{!v.locatorId}" onselect="{!c.onLookupChange}" />
+                        <!-- <c:cmp_lookup aura:id="step0-facility" required="true" label="Locator" objectType="clofor_com_cfs__Locator__c" searchField="clofor_com_cfs__Locator_Code__c" subtitleField="clofor_com_cfs__Summary__c" showRecentRecords="true" ref="v.locatorCode" value="{!v.locatorCode}" onselect="{!c.onLookupChange}" /> -->
+                    </div>
+                    <div class="slds-m-top_small">
+                        <lightning:select aura:id="step0-tasks" label="Task type" value="{!v.taskType}">
+                            <option value="all">All</option>
+                            <option value="receiving">Receiving</option>
+                            <option value="vas">Value added service</option>
+                            <option value="putaway">Put away</option>
+                            <option value="dispatch">Dispatch</option>
+                            <option value="picking">Picking</option>
+                        </lightning:select>
+                    </div>
+                </div>
+            </lightning:card>
+        </aura:if>
+
+        <aura:if isTrue="{!v.step == 1}">
+            <lightning:tabset>
+                <aura:iteration items="{!v.listTasks}" var="taskGroup">
+                    <lightning:tab label="{!taskGroup.label}" >
+                        <!--NO RECORD-->
+                        <aura:if isTrue="{!taskGroup.records.length == 0}">
+                            <div class="slds-card__body_inner slds-clearfix">
+                                No task found for this service.
+                            </div>
+                        </aura:if>
+                            
+                        <aura:if isTrue="{!taskGroup.records.length > 0}">
+                            <div class="slds-p-horizontal_small slds-m-bottom_large">
+                                <!--PURCHASE ORDER FILTER-->
+                                <lightning:combobox class="slds-m-top_small" name="{!taskGroup.name}" label="Purchase Order" options="{!taskGroup.listPo}" value="{!taskGroup.filterPo}" onchange="{!c.handleWosFilter}" disabled="{!taskGroup.listPo.length == 1}" />
+                                <!--SALES ORDER FILTER-->
+                                <lightning:combobox class="slds-m-top_small" name="{!taskGroup.name}" label="Sales Order" options="{!taskGroup.listSo}" value="{!taskGroup.filterSo}" onchange="{!c.handleWosFilter}" disabled="{!taskGroup.listSo.length == 1}" />
+                                <!--WORK ORDER FILTER-->
+                                <lightning:combobox class="slds-m-top_small" name="{!taskGroup.name}" label="Work Order" options="{!taskGroup.listWo}" value="{!taskGroup.filterWo}" onchange="{!c.handleWosFilter}" disabled="{!taskGroup.listWo.length == 1}" />
+                            </div>
+                        </aura:if>
+                        <!--LIST WOS-->
+                        <aura:iteration items="{!taskGroup.filteredRecords}" var="item">
+                            <table class="slds-table slds-no-row-hover slds-table_bordered" style="margin-top:-1px">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th scope="col"><a data-recordid="{!item.Id}" onclick="{!c.doStartService}">{!item.Name}</a></th>
+                                        <th scope="col">{!item.clofor_com_cfs__Status__c}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="slds-text-color_weak" style="width:1%">W/O</td>
+                                        <td><a href="{!'/' + item.clofor_com_cfs__WorkOrder__c}" target="_blank">{!item.clofor_com_cfs__WorkOrder__r.Name}</a></td>
+                                    </tr>
+                                    <aura:if isTrue="{!item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__PurchasingOrderID__c}">
+                                        <tr>
+                                            <td class="slds-text-color_weak">P/O</td>
+                                            <td><a href="{!'/' + item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__PurchasingOrderID__c}" target="_blank">{!item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__PurchasingOrderID__r.Name}</a></td>
+                                        </tr>
+                                    </aura:if>
+                                    <aura:if isTrue="{!item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__SalesOrderID__c}">
+                                        <tr>
+                                            <td class="slds-text-color_weak">S/O</td>
+                                            <td><a href="{!'/' + item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__SalesOrderID__c}" target="_blank">{!item.clofor_com_cfs__WorkOrder__r.clofor_com_cfs__SalesOrderID__r.Name}</a></td>
+                                        </tr>
+                                    </aura:if>
+                                    <tr>
+                                        <td class="slds-text-color_weak">Schedule</td>
+                                        <td style="color:maroon">
+                                            <aura:if isTrue="{!item.clofor_com_cfs__ScheduledStartTime__c}">
+                                                <ui:outputDateTime value="{!item.clofor_com_cfs__ScheduledStartTime__c}" format="EEE dd/MM"/><br/>
+                                                <ui:outputDateTime value="{!item.clofor_com_cfs__ScheduledStartTime__c}" format="HH:mm"/>
+                                                <aura:if isTrue="{!item.clofor_com_cfs__ScheduledEndTime__c}">
+                                                    - <ui:outputDateTime value="{!item.clofor_com_cfs__ScheduledEndTime__c}" format="HH:mm"/>
+                                                </aura:if>
+
+                                                <aura:set attribute="else">-</aura:set>
+                                            </aura:if>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <!--
+                            <lightning:card title="{!item.Name}" class="slds-card_boundary">
+                                <aura:set attribute="actions">
+                                    <aura:if isTrue="{!item.clofor_com_cfs__ActualEndTime__c == null}">
+                                        <aura:if isTrue="{!item.clofor_com_cfs__ActualStartTime__c == null}">
+                                            <lightning:button variant="brand" onclick="{!c.doStartService}" label="Start" name="{!item.Id}"/>
+                                            <aura:set attribute="else">
+                                                <lightning:button variant="brand" onclick="{!c.doStartService}" label="Resume" name="{!item.Id}" iconName="utility:redo"/>
+                                            </aura:set>
+                                        </aura:if>
+                                    </aura:if>
+                                </aura:set>
+                                <div class="slds-card__body_inner slds-clearfix">
+                                    <div class="slds-tile__detail">
+                                        <dl class="slds-wrap slds-has-dividers_bottom">
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Work Order</dt>
+                                            <dd class="slds-item slds-item_detail slds-truncate">{!item.clofor_com_cfs__WorkOrder__r.Name}</dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Status</dt>
+                                            <dd class="slds-item slds-item_detail slds-truncate">{!item.clofor_com_cfs__Status__c}</dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Scheduled Start Time</dt>
+                                            <dd class="slds-item slds-item_detail slds-truncate"><ui:outputDateTime value="{!item.clofor_com_cfs__ScheduledStartTime__c}" />&nbsp;</dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Scheduled End Time</dt>
+                                            <dd class="slds-item slds-item_detail slds-truncate"><ui:outputDateTime value="{!item.clofor_com_cfs__ScheduledEndTime__c}" />&nbsp;</dd>
+                                            <dt class="slds-item_label slds-text-color_weak slds-truncate">Start Time</dt>
+                                            <dd class="slds-item slds-item_detail slds-truncate"><ui:outputDateTime value="{!item.clofor_com_cfs__ActualStartTime__c}" />&nbsp;</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </lightning:card>
+
+                        -->
+                        </aura:iteration>
+                    </lightning:tab>
+                </aura:iteration>
+            </lightning:tabset>
+        </aura:if>
+
+        <aura:if isTrue="{!v.step == 2}">
+            <div class="slds-box slds-p-around_small slds-m-bottom_small" style="background:#fff;">
+                <lightning:radioGroup label="Scanning" options="{!v.scanModeOptions}" value="{!v.scanMode}" type="button" />
+                
+                <aura:if isTrue="{!v.selectedService.RecordType.DeveloperName == 'Picking' || v.selectedService.RecordType.DeveloperName == 'Putaway'}">
+                    <div class="slds-m-top_small">
+                        <c:cmp_lookup aura:id="step2-locator" required="true" label="Locator" objectType="clofor_com_cfs__Locator__c" searchField="Name" subtitleField="clofor_com_cfs__Summary__c" showRecentRecords="true" ref="v.putawayLocatorId" value="{!v.putawayLocatorId}" onselect="{!c.onLookupChange}" />
+                        <!-- <c:cmp_lookup aura:id="step2-locator" required="true" label="Locator" objectType="clofor_com_cfs__Locator__c" searchField="clofor_com_cfs__Locator_Code__c" subtitleField="clofor_com_cfs__Summary__c" showRecentRecords="true" ref="v.putawayLocatorCode" value="{!v.putawayLocatorCode}" onselect="{!c.onLookupChange}" /> -->
+                    </div>
+                </aura:if>
+
+                <!--SCAN CARGO-->
+                <aura:if isTrue="{!v.scanMode == 'cargo'}">
+					<lightning:input class="slds-m-top_small"
+						type="checkbox"
+						checked="{!v.ckbAutoScan}"
+						label="Batch Mode" />
+                    <c:cmp_lookup class="slds-m-top_small" aura:id="step2-cargo" required="true" label="Cargo QR Code" objectType="clofor_com_cfs__Cargo__c" searchField="Name" subtitleField="clofor_com_cfs__Summary__c" showRecentRecords="true" ref="v.cargoId" value="{!v.cargoId}" onselect="{!c.onCargoQr_Scan}" />
+                </aura:if>
+                
+                <!--SCAN PRODUCT-->
+                <aura:if isTrue="{!v.scanMode == 'product'}">
+                        <c:cmp_lookup class="slds-m-top_small" aura:id="step2-product" required="true" 
+                        label="Product Qr Code" 
+                        objectType="clofor_com_cfs__PRODUCT__c" 
+                        searchField="clofor_com_cfs__QR_Code__c" 
+                        extraSearchFields = "clofor_com_cfs__ProductCodeLevel1__c,clofor_com_cfs__ProductCodeLevel2__c"
+                        subtitleField="clofor_com_cfs__Summary__c" 
+                        optionalFields="clofor_com_cfs__BillingType__c,clofor_com_cfs__WeightUnit__c" 
+                        showRecentRecords="true" 
+                        ref="v.productId" value="{!v.productId}" 
+                        onselect="{!c.onProductQr_Scan}" 
+                        onvaluechange="{!c.getValueFromLwc}"   
+                        />
+                        <lightning:input style="{! IF ((v.NameProduct == '' || v.NameProduct == null ), 'display: none ') }" disabled="true" value="{!v.NameUnit}" label="Unit" />
+                    <aura:if isTrue="{!!v.isWeightUnit}">
+                        <lightning:input type="number" aura:id="productQuantity" value="{!v.productQuantity}" label="Quantity" class="slds-m-top_small" min="1" max="{!v.productMaxQuantity}"/>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isWeightUnit}">
+                        <lightning:combobox class="slds-m-top_small" label="Available Cargoes" options="{!v.mapCargoWeight}" value="{!v.plannedWeight}" onchange="{!c.handleSelectCargoWeight}" />
+                        <div class="slds-grid slds-gutters_xx-small slds-m-top_small">
+                            <div class="slds-col">
+                                <lightning:input type="number" value="{!v.productQuantity}" label="Quantity" min="1" />
+                            </div>
+                            <div class="slds-col">
+                                <lightning:input type="number" value="{!v.weight}" label="Actual Weight" step="any" min="0"/>
+                            </div>
+                        </div>
+                    </aura:if>
+                </aura:if>
+
+                <lightning:input class="slds-m-top_small" type="date" value="{!v.expireDate}" label="Expire date" />
+                <lightning:input aura:id="hihihi" oninput="{!c.onblurCustom}" class="slds-m-top_small" value="{!v.lotNumber}" label="Lot Number" />
+
+				<lightning:select class="slds-m-top_small" value="{!v.cargoStatus}" label="Cargo Status" >
+					<aura:iteration items="{!v.listAllTasks.receiving.cargoStatuses}" var="item">
+						<option>{!item}</option>
+					</aura:iteration>
+				</lightning:select> 
+                <aura:if isTrue="{!!v.ckbAutoScan || v.scanMode == 'product' }">
+                    <div class="slds-grid slds-gutters_xx-small slds-m-top_small slds-grid_align-spread">
+                        <div class="slds-col">
+                            <aura:if isTrue="{!v.isWeightUnit}">
+                                <lightning:button label="Clear" iconName="utility:close" onclick="{!c.handleClearForm}"/>
+                            </aura:if> 
+                        </div>
+                        <div class="slds-col">
+                            <lightning:button variant="brand" label="Goooo" iconName="utility:push" onclick="{!c.handleProcessCargo}"/>
+                        </div>
+                    </div>
+                </aura:if> 
+            </div>
+			<div class="slds-clearfix">
+				 <aura:iteration items="{!v.listRelatedServices}" var="destination">
+					<table class="{!'slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium ' + (destination.isSelected ? 'tbl-selected' : '')}" style="box-shadow: 0 0 2px #aaa; cursor: pointer;">
+						<thead>
+							<tr>
+								<th colspan="2" onclick="{!c.doSelectDest}" data-destinationid="{!destination.destinationId}">{!destination.destination.Name} | {!destination.destination.clofor_com_cfs__FacilityName__c}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<aura:iteration items="{!destination.records}" var="item" indexVar="idx">
+								<tr>
+									<td width="20%">
+										<lightning:input type="checkbox" label="{!item.Name}" checked="{!item.isSelected}" />
+									</td>
+									<td>{!item.RecordType.Name}</td>
+								</tr>
+							</aura:iteration>
+						</tbody>
+					</table>
+				</aura:iteration> 
+			</div>
+
+            <div class="slds-clearfix">
+				<table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover slds-m-bottom_medium" style="box-shadow: 0 0 2px #aaa; cursor: pointer;">
+					<thead>
+						<tr>
+							<th>Scanned products</th>
+							<th>QTY</th>
+						</tr>
+					</thead>
+					<tbody>
+						<aura:iteration items="{!v.groupedCargoes.items}" var="item" indexVar="idx">
+							<tr>
+								<td style="white-space:normal">
+									{!item.product.clofor_com_cfs__Summary__c}
+								</td>
+								<td width="15%" class="slds-text-align_right">{!item.count}/{!item.planned}</td>
+							</tr>
+						</aura:iteration>
+
+						<tr>
+							<td class="slds-text-align_right"><b>Total cargoes scanned:</b></td>
+							<td class="slds-text-align_right">{!v.lineItems ? v.lineItems.length : 0}/{!v.groupedCargoes ? v.groupedCargoes.total : 0}</td>
+						</tr>
+						<tr>
+							<td class="slds-text-align_right"><b>Total products scanned:</b></td>
+							<td class="slds-text-align_right">{!v.groupedCargoes ? v.groupedCargoes.items.length : 0}/{!v.plannedProducts ? v.plannedProducts.length : 0}</td>
+						</tr>
+
+						<aura:if isTrue="{!v.groupedCargoes.items.length == 0}">
+							<tr><td colspan="2">No cargo scanned.</td></tr> 
+						</aura:if>
+					</tbody>
+				</table>
+            </div>
+        </aura:if>
+
+    	<aura:if isTrue="{!v.isLoading}">
+    		<lightning:spinner variant="brand" size="large" alternativeText="Loading..."/>
+    	</aura:if>
+    </div>
+</aura:component>

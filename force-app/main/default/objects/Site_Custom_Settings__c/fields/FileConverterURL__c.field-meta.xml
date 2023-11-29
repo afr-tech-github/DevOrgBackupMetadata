@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FileConverterURL__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Store URL to online File Converter tool.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Store URL to online File Converter tool.</inlineHelpText>
+    <label>File Converter URL</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

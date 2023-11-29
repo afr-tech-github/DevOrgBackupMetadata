@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HouseAllowanceTaxRatio__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>HA=Housing Allowance
+if((((((HA&lt; 5000000), (5%*HA),if(((((HA&lt;=10000000),(10%*HA-250000),if(((((HA&lt;=18000000),(15%*HA-750000),if ((((HA&lt;=32000000),(20%*HA-1650000),if(((HA&lt;=52000000),(25%*HA-3250000),if((HA&lt;=80000000),(30%*HA-5850000), (35%*HA-9850000))))</inlineHelpText>
+    <label>HOUSING ALLOWANCE TAX RATIO</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

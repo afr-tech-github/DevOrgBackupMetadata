@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Tangible Fixed Asset</fullName>
+        <default>true</default>
+        <label>Tangible Fixed Asset</label>
+    </customValue>
+    <customValue>
+        <fullName>Intangible Fixed Asset</fullName>
+        <default>false</default>
+        <label>Intangible Fixed Asset</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Fixed Asset</fullName>
+        <default>false</default>
+        <label>Other Fixed Asset</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Intangible Fixed Asset</fullName>
+        <default>false</default>
+        <label>Other Intangible Fixed Asset</label>
+    </customValue>
+    <masterLabel>ASSET TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

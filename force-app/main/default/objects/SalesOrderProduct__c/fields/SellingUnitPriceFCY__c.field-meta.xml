@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SellingUnitPriceFCY__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>In case The Product is Unit Base, Selling Unit Price(FCY)=Standard Selling Unit Price(FCY)
+In case The Product is Weight Base, Selling Unit Price(FCY)=Standard Selling Unit Price(FCY)/Kg or Gram</inlineHelpText>
+    <label>Selling Unit Price(FCY)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

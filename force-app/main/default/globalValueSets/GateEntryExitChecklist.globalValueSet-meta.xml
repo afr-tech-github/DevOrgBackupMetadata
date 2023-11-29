@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Number Plate</fullName>
+        <default>false</default>
+        <label>Number Plate</label>
+    </customValue>
+    <customValue>
+        <fullName>Container Number</fullName>
+        <default>false</default>
+        <label>Container Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Seal Number</fullName>
+        <default>false</default>
+        <label>Seal Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Seal Intact</fullName>
+        <default>false</default>
+        <label>Seal Intact</label>
+    </customValue>
+    <customValue>
+        <fullName>Driver</fullName>
+        <default>false</default>
+        <label>Driver</label>
+    </customValue>
+    <customValue>
+        <fullName>Cargo Left</fullName>
+        <default>false</default>
+        <label>Cargo Left</label>
+    </customValue>
+    <customValue>
+        <fullName>Approved Entry Permission Sheet</fullName>
+        <default>false</default>
+        <label>Approved Entry Permission Sheet</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <customValue>
+        <fullName>Packing List</fullName>
+        <default>false</default>
+        <label>Packing List</label>
+    </customValue>
+    <masterLabel>Gate Entry &amp; Exit Checklist</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

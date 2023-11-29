@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExpireDateSKUNumber__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>Product__r.SKUNumber__c &amp; LPAD(Text(Month(ExpiredDate__c)),2,&quot;0&quot;) &amp; Right(Text(Year(ExpiredDate__c)),2)</formula>
+    <label>EXPIRE DATE SKU NUMBER</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

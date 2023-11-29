@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GateTrafficSummary</fullName>
+    <columns>NAME</columns>
+    <columns>GateEntryExitStatus__c</columns>
+    <columns>EntryPermissionStatus__c</columns>
+    <columns>PlateNumber__c</columns>
+    <columns>CntrInTransport__c</columns>
+    <columns>PlanEntryDateTime__c</columns>
+    <columns>PlanExitDateTime__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Gate Traffic Summary</label>
+</ListView>

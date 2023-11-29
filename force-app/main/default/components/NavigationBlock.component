@@ -1,0 +1,90 @@
+<!--
+ - Created by khanhpham on 5/6/17.
+ -->
+
+<apex:component id="NavigationBlock">
+    <apex:attribute name="WorkProgressList" type="WorkProgressItemWrapper[]"
+                    description="List of WorkProgressItemWrapper"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS102, 'assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+    <html xmlns="http://www.w3.org/2000/svg">
+    <head>
+        <style>
+            .klomos .slds-tabs--path__item__medium {
+                height: 5rem;
+            }
+
+            .klomos .slds-tabs--path__item__medium:before {
+                left: -3rem;
+                width: calc(5rem - (2px * 2));
+                height: calc(5rem - (2px * 2));
+            }
+
+            .klomos .slds-tabs--path__link__medium {
+                vertical-align: middle;
+                top: 0px;
+                padding: 0 0.25rem 0 0.25rem
+            }
+
+            .klomos ol, .klomos ul {
+                list-style: initial;
+            }
+
+            .klomos .slds-tabs--path__title {
+                max-width: 100%;
+                text-overflow: ellipsis;
+            }
+
+            .klomos .slds-tabs--path .slds-is-complete .slds-tabs--path__title {
+                transform: rotateX(0deg);
+            }
+
+            .klomos ::selection {
+                color: rgba(4, 132, 75, 0.95);
+            }
+
+            .sub_flow {
+                display: none;
+            }
+
+            .compact_button {
+                margin-right: 0px !important;
+                margin-left: 0px;
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+                border: 1px solid #FFFFFF !important;
+            }
+
+            .center_a {
+                padding: 0.15rem 1.15rem 0.15rem 1.25rem !important;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="klomos">
+        <div class="slds-grid">
+            <div class="slds-tabs--path" role="application">
+                <ul class="slds-tabs--path__nav" role="tablist">
+                    <apex:repeat value="{!WorkProgressList}" var="workItem">
+                        <li class="compact_button slds-button slds-button--brand slds-path__mark-complete slds-no-flex slds-m-horizontal--small slds-is-{!workItem.status}"
+                            role="presentation">
+                            <a id="{!workItem.id}" class="slds-tabs--path__link__medium slds-tabs--path__link"
+                               aria-controls="content-path-1" aria-selected="false" tabindex="-1" role="tab"
+                               href="{!workItem.listingURL}" target="_blank" aria-live="assertive">
+                                <div>
+                                    <apex:image rendered="{!workItem.iconURL != null}"
+                                                url="{!URLFOR($Resource.Navigation, workItem.iconURL)}"
+                                                style="vertical-align:middle; width:50px;height:50px; padding: 5px;"/>
+                                    <span><apex:outputText value="{!workItem.caption}" escape="false"></apex:outputText></span>
+                                </div>
+                            </a>
+                        </li>
+                    </apex:repeat>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    </body>
+    </html>
+</apex:component>

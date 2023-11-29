@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RollupTotalLoanRepayment__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>ROLLUP TOTAL LOAN REPAYMENT</label>
+    <summarizedField>LoanPayBank__c.TotalAmountOfLoanRepaymentPayReq__c</summarizedField>
+    <summaryForeignKey>LoanPayBank__c.LoanPayBankID__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

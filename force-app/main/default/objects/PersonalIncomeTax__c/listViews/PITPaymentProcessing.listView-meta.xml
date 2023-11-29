@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PITPaymentProcessing</fullName>
+    <columns>NAME</columns>
+    <columns>EmployeeID__c</columns>
+    <columns>PayrollOrder__c</columns>
+    <columns>PayrollSlip__c</columns>
+    <columns>PITPaid__c</columns>
+    <columns>PITPaidDate__c</columns>
+    <columns>PayPeriodStartDate__c</columns>
+    <columns>PayPeriodEndDate__c</columns>
+    <columns>TaxableIncome__c</columns>
+    <columns>TotalDeduction__c</columns>
+    <columns>TaxableAmountAfterDeduction__c</columns>
+    <columns>PersonalIncomeTaxRatio__c</columns>
+    <columns>TaxAdjustment__c</columns>
+    <columns>PersonalIncomeTax__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PITPaid__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>PIT PAYMENT PROCESSING</label>
+    <language>en_US</language>
+    <sharedTo>
+        <role>HRManager</role>
+        <role>HRStaff</role>
+    </sharedTo>
+</ListView>

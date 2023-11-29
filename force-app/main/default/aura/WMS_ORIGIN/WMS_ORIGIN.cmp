@@ -1,0 +1,7 @@
+<aura:component access="global" controller="WMS_AssignResource" >
+    <aura:method name="reInit" action="{!c.doInitWorkOrder}" />
+	<aura:attribute name="WorkOrderList" type="List" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInitWorkOrder}" />
+    <aura:attribute name="recordId" type="String"/>
+    <c:WMS_WorkOrderList WorkOrderList="{!v.WorkOrderList}" nameTab="ORIGIN" aura:id="detail"/>
+</aura:component>

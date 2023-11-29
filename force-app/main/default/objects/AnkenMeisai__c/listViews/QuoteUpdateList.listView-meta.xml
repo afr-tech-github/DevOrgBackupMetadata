@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuoteUpdateList</fullName>
+    <columns>NAME</columns>
+    <columns>QuoteLineID__c</columns>
+    <columns>DataUpdateStatusBillToQL__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>QuoteLineID__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>Quote Update List</label>
+    <language>en_US</language>
+</ListView>

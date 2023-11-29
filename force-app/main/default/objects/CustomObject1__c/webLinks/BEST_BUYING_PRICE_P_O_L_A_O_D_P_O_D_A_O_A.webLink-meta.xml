@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BEST_BUYING_PRICE_P_O_L_A_O_D_P_O_D_A_O_A</fullName>
+    <availability>online</availability>
+    <displayType>link</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>true</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>true</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>BEST BUYING PRICE(P.O.L/A.O.D-&gt;P.O.D/A.O.A)</masterLabel>
+    <openType>newWindow</openType>
+    <position>fullScreen</position>
+    <protected>false</protected>
+    <showsLocation>true</showsLocation>
+    <showsStatus>true</showsStatus>
+    <url>/{!$Setup.Report_Mappings__c.Best_Pricing_for_Route__c}?pv0={!URLENCODE( CustomObject1__c.POL__c )}&amp;pv1={!URLENCODE( CustomObject1__c.POD__c )}</url>
+    <width>800</width>
+</WebLink>

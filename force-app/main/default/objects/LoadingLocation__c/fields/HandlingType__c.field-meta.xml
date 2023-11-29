@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HandlingType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>HANDLING TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Load</fullName>
+                <default>false</default>
+                <label>Load</label>
+            </value>
+            <value>
+                <fullName>Moving</fullName>
+                <default>false</default>
+                <label>Moving</label>
+            </value>
+            <value>
+                <fullName>Unload</fullName>
+                <default>false</default>
+                <label>Unload</label>
+            </value>
+            <value>
+                <fullName>Partially Load</fullName>
+                <default>false</default>
+                <label>Partially Load</label>
+            </value>
+            <value>
+                <fullName>Partially Unload</fullName>
+                <default>false</default>
+                <label>Partially Unload</label>
+            </value>
+            <value>
+                <fullName>Return To Truck Carage</fullName>
+                <default>false</default>
+                <label>Return To Truck Garage</label>
+            </value>
+            <value>
+                <fullName>From Truck Garage to ICD</fullName>
+                <default>false</default>
+                <label>From Truck Garage to ICD</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

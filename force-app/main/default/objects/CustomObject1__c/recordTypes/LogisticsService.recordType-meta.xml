@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LogisticsService</fullName>
+    <active>true</active>
+    <description>Choose this record type to create a new Logistic Service shipment such as Customs Clearance and transporation.</description>
+    <label>Logistics Service</label>
+</RecordType>

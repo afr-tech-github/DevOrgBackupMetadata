@@ -1,0 +1,529 @@
+<apex:page controller="HouseBillLadingReportController" contentType="application/vnd.ms-excel#HBLReport.xls" cache="true">
+    <apex:outputText value="{!xlsHeader}"/>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:html="http://www.w3.org/TR/REC-html40">
+        <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+            <ActiveSheet>1</ActiveSheet>
+        </ExcelWorkbook>
+        <Styles>
+            <Style ss:ID="report_header">
+                <Alignment ss:Horizontal="Center" ss:WrapText="1"/>
+                <Borders>
+                 <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+            <Style ss:ID="s1">
+                <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+                <Borders>
+                 <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+            <Style ss:ID="header">
+                <Alignment  ss:Vertical="Center" ss:WrapText="1"/>
+                <Borders>
+                 <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+                  <Font ss:Bold="1"/>
+                <Interior ss:Color="#d8b200" ss:Pattern="Solid"/>
+            </Style>
+        </Styles>
+        <Worksheet ss:Name="Declaration List">
+            <Table x:FullColumns="1" x:FullRows="1">
+                <apex:variable var="index" value="{!0}"/>
+                <Row>
+                    <Cell><Data ss:Type="String">PORT</Data></Cell>
+                    <Cell><Data ss:Type="String">PORT NAME</Data></Cell>
+                    <Cell><Data ss:Type="String">DOCUMENT'S FUNCTION</Data></Cell>
+                    <Cell><Data ss:Type="String">DOCUMENT'S FUNCTION NAME</Data></Cell>
+                    <Cell><Data ss:Type="String">GROSS UNIT</Data></Cell>
+                    <Cell><Data ss:Type="String">GROSS UNIT NAME</Data></Cell>
+                </Row>
+                <apex:repeat value="{!manifest.manifestRecords}" var="mr">
+                    <Row>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfPorts > index)}"><apex:outputText value="{!mr.portCode}"/></apex:outputPanel></Data>
+                        </Cell>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfPorts > index)}"><apex:outputText value="{!mr.portCodeName}"/></apex:outputPanel></Data>
+                        </Cell>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfDocFunctions > index)}"><apex:outputText value="{!mr.docFunction}"/></apex:outputPanel></Data>
+                        </Cell>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfDocFunctions > index)}"><apex:outputText value="{!mr.docFunctionName}"/></apex:outputPanel></Data>
+                        </Cell>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfGrossUnits > index)}"><apex:outputText value="{!mr.grossUnit}"/></apex:outputPanel></Data>
+                        </Cell>
+                        <Cell>
+                            <Data ss:Type="String"><apex:outputPanel rendered="{!(manifest.numberOfGrossUnits > index)}"><apex:outputText value="{!mr.grossUnitName}"/></apex:outputPanel></Data>
+                        </Cell>
+                    </Row>
+                    <apex:variable var="index" value="{!(index + 1)}"/>
+                </apex:repeat>
+            </Table>
+        </Worksheet>
+        <Worksheet ss:Name="House bill of lading">
+            <Table x:FullColumns="1" x:FullRows="1">
+                <Column ss:Width="150"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Row>
+                    <Cell ss:MergeAcross="5" ss:StyleID="report_header">
+                        <Data ss:Type="String">VẬN ĐƠN GOM HÀNG</Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:MergeAcross="5" ss:StyleID="report_header">
+                        <Data ss:Type="String">(House bill of lading)</Data>
+                    </Cell>
+                </Row>
+
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Số hồ sơ / Document's No</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Năm đăng ký hồ sơ / Document's Year</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Chức năng của chứng từ / Document's function</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-3]C:R[{!(manifest.numberOfPorts - 4)}]C[1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Người gửi hàng* / Consigner</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.consignerAddress}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Người nhận hàng* / Consignee</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.consigneeAddress}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Người được thông báo 1 / Notify Party 1</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.notifyAddress}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Người được thông báo 2 / Notify Party 2</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Mã Cảng chuyển tải/quá cảnh / Cofe of Port of tranship/transit</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-8]C[-2]:R[{!(manifest.numberOfPorts - 9)}]C[-1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Tên cảng chuyển tải/quá cảnh / Name of Port of tranship/transit</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.portOfTransit}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Cảng giao hàng/cảng đích (HÀNG NHẬP) / Final destination</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-10]C[-2]:R[{!(manifest.numberOfPorts - 11)}]C[-1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Cảng giao hàng/cảng đích (HÀNG XUẤT) / Final destination</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.placeOfDelivery}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Tên Cảng xếp hàng (HÀNG NHẬP) / Name of Port of load</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.portOfLoad}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Mã cảng xếp hàng (HÀNG XUẤT) / Code of Port of Load</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-13]C[-2]:R[{!(manifest.numberOfPorts - 14)}]C[-1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Cảng dỡ hàng (HÀNG NHẬP) / Port of unload/discharge</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-14]C[-2]:R[{!(manifest.numberOfPorts - 15)}]C[-1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Tên Cảng dỡ hàng (HÀNG XUẤT) / Port of unload/discharge</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.portOfDischarge}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Địa điểm giao hàng* / Place of Delivery</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.placeOfDelivery}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Loại hàng* / Cargo Type</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.cargoType}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Số vận đơn * / Bill of lading number</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.houseBillNumber}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Ngày phát hành vận đơn* / Date of bill of lading</Data></Cell>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!wrapper.dateOfBill}"/>
+                            </apex:outputText>
+                        </Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Số vận đơn gốc* / Master bill number</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.masterBillNumber}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Ngày phát hành vận đơn gốc* / Date of master bill</Data></Cell>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!wrapper.dateOfMasterBillIssued}"/>
+                            </apex:outputText>
+                        </Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Ngày khởi hành* / Departure date</Data></Cell>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                <apex:param value="{!wrapper.departureDate}"/>
+                            </apex:outputText>
+                        </Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Tổng số kiện và loại kiện* / Number of packages and Kind of packages</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.numberOfPackages} / {!wrapper.unitType}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Ghi chú / Remark</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.remarks}"/></Data></Cell>
+                </Row>
+
+                <Row/>
+
+                <Row>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Mã hàng / HS code if avail</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Mô tả hàng hóa* / Description of Goods</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Tổng trọng lượng* / Gross weight</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Kích thước/thể tích* / Demension/tonnage</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Số hiệu container / Cont. number</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Số seal container / Seal number</Data>
+                    </Cell>
+                </Row>
+
+                <apex:repeat value="{!wrapper.containers}" var="container">
+                    <Row>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.hsCode}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.goods}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{0,number,###,###,##0.###}">
+                                    <apex:param value="{!container.grossWeigth}"/>
+                                </apex:outputText>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{0,number,###,###,##0.###}">
+                                    <apex:param value="{!container.measurement}"/>
+                                </apex:outputText>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.containerNo}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.sealNo}"/>
+                            </Data>
+                        </Cell>
+                    </Row>
+                </apex:repeat>
+            </Table>
+            <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
+                <Range>R5C2</Range>
+                <Type>List</Type>
+                <Value><apex:outputText value="'Declaration List'!R2C3:R{!(manifest.numberOfDocFunctions + 1)}C3"/></Value>
+            </DataValidation>
+            <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
+                <Range>R10C2,R12C2,R15C2,R16C2</Range>
+                <Type>List</Type>
+                <Value><apex:outputText value="'Declaration List'!R2C1:R{!(manifest.numberOfPorts + 1)}C1"/></Value>
+            </DataValidation>
+        </Worksheet>
+
+        <Worksheet ss:Name="Goods Declaration">
+            <Table x:FullColumns="1" x:FullRows="1">
+                <Column ss:Width="150"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Row>
+                    <Cell ss:MergeAcross="5" ss:StyleID="report_header">
+                        <Data ss:Type="String">BẢN KHAI HÀNG HÓA</Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:MergeAcross="5" ss:StyleID="report_header">
+                        <Data ss:Type="String">(Goods Declaration)</Data>
+                    </Cell>
+                </Row>
+
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Số hồ sơ / Document's No</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Năm đăng ký hồ sơ / Document's Year</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,yyyy}">
+                                <apex:param value="{!wrapper.dateOfBill}"/>
+                            </apex:outputText>
+                        </Data>
+                    </Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Chức năng của chứng từ / Document's function</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                    <Cell ss:Formula="=VLOOKUP(RC[-1],'Declaration List'!R[-3]C:R[{!(manifest.numberOfPorts - 4)}]C[1],2,FALSE)"><Data ss:Type="Error">#N/A</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Tổng số kiện và loại kiện* / Number of packages and Kind of packages</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.numberOfPackages} / {!wrapper.unitType}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Cảng dỡ hàng / Port Of Discharge</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.portOfDischarge}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Cảng đích / Port Of Destination</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Cảng xếp hàng / Port Of Loading</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.portOfLoad}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Cảng xếp hàng gốc / Port Of Orginal Loading</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.placeOfReceipt}"/></Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="s1">
+                        <Data ss:Type="String">Cảng trung chuyển / Place Of Dispatch</Data>
+                    </Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String"><apex:outputText value="{!wrapper.placeOfDelivery}"/></Data></Cell>
+                </Row>
+
+                <Row/>
+
+                <Row>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Vận số số* / B/L No</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Người gửi hàng*/ Consigner</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Người nhận hàng* / Consignee</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Người được thông báo / Notificated party</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Người được thông báo 2 / Notificated party 2</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Số hiệu cont / Cont's number</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Số seal cont / Seal number </Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Mã hàng (nếu có)/ HS code If avail. </Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Tên hàng/mô tả hàng hóa / Name, Discription of goods </Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Trọng lượng tịnh*/ Net weight </Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Tổng trọng lượng* / Gross weight</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Kích thước/thể tích* / Demension /tonnage</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Số tham chiếu manifest / Ref. no manifest*</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Căn cứ hiệu chỉnh / Ajustment basis</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Đơn vị tính trọng lượng* / GrossUnit</Data>
+                    </Cell>
+                    <Cell ss:StyleID="header">
+                        <Data ss:Type="String">Cảng giao hàng/cảng đích / Final Destination</Data>
+                    </Cell>
+                </Row>
+                <apex:repeat value="{!wrapper.containers}" var="container">
+                    <Row>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.houseBillNumber}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.consignerAddress}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.consigneeAddress}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.notifyAddress}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" ></Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.containerNo}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.sealNo}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.hsCode}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!container.goods}"/>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{0,number,###,###,##0.###}">
+                                    <apex:param value="{!container.netWeigth}"/>
+                                </apex:outputText>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{0,number,###,###,##0.###}">
+                                    <apex:param value="{!container.grossWeigth}"/>
+                                </apex:outputText>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{0,number,###,###,##0.###}">
+                                    <apex:param value="{!container.measurement}"/>
+                                </apex:outputText>
+                            </Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" ></Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" ></Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" ></Data>
+                        </Cell>
+                        <Cell ss:StyleID="s1">
+                            <Data ss:Type="String" >
+                                <apex:outputText value="{!wrapper.placeOfDelivery}"/>
+                            </Data>
+                        </Cell>
+                    </Row>
+                </apex:repeat>
+            </Table>
+            <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
+                <Range>R5C2</Range>
+                <Type>List</Type>
+                <Value><apex:outputText value="'Declaration List'!R2C3:R{!(manifest.numberOfDocFunctions + 1)}C3"/></Value>
+            </DataValidation>
+            <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
+                <Range>R14C15,R15C15</Range>
+                <Type>List</Type>
+                <Value><apex:outputText value="'Declaration List'!R2C5:R{!(manifest.numberOfGrossUnits + 1)}C5"/></Value>
+            </DataValidation>
+        </Worksheet>
+    </Workbook>
+</apex:page>

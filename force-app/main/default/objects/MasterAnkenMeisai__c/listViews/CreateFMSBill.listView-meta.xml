@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CreateFMSBill</fullName>
+    <columns>NAME</columns>
+    <columns>MasterAnken__c</columns>
+    <columns>MTariff__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>CreateFMSBill1__c</columns>
+    <columns>CreateFMSBill2__c</columns>
+    <columns>CreateFMSBill3__c</columns>
+    <columns>CreateFMSBill4__c</columns>
+    <columns>CreateFMSBill5__c</columns>
+    <columns>BuyTankaJPY__c</columns>
+    <columns>BuyTankaUSD__c</columns>
+    <columns>SellTankaJPY__c</columns>
+    <columns>SellTankaUSD__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Create FMS Bill</label>
+</ListView>

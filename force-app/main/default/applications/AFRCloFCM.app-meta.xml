@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>Facility__c</defaultLandingTab>
+    <description>FCM(Facility Module):Module to manage Facility and equipment. also manage the fixed and variable costs of facility and equipment.</description>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AFR CloFCM-Facility Module</label>
+    <logo>AFR_New_Logo/LogisForce_Logo.png</logo>
+    <tabs>Facility__c</tabs>
+    <tabs>FacilityCostBuilding__c</tabs>
+    <tabs>LOCATOR__c</tabs>
+    <tabs>Locator_Map</tabs>
+    <tabs>TruckFleet__c</tabs>
+    <tabs>WORKER__c</tabs>
+    <tabs>Claim__c</tabs>
+    <tabs>MAINTENANCE_REPAIR__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>NewNavigation</tabs>
+    <tabs>DownloadDocument</tabs>
+    <tabs>Energy_Audit__c</tabs>
+    <tabs>Chart_of_Accounts__c</tabs>
+    <tabs>SOA_Copy</tabs>
+</CustomApplication>

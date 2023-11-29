@@ -1,0 +1,29 @@
+Rate Request
+
+- Request name: {!RFPRFQ__c.RFPREQName__c}
+- CRM Ref #:{!RFPRFQ__c.Name}
+- Request Date: {!RFPRFQ__c.RequestDate__c}
+- Request by:  {!RFPRFQ__c.RquestBy__c}
+
+Shipment Info:
+
+- Mode: {!RFPRFQ__c.Mode__c}
+- T/Term: {!RFPRFQ__c.Incoterms__c}
+- Comm: {!RFPRFQ__c.DescriptionOfGoods__c}
+- Volume: {!RFPRFQ__c.Volume__c}
+- POL: {!RFPRFQ__c.POLAOD__c}
+- POD: {!RFPRFQ__c.PODAOA__c}
+- Pickup Location: {!RFPRFQ__c.PickLocation__c}
+- ETD: {!RFPRFQ__c.ETD__c}
+
+Rate request:
+
+Please check and advise us the best rate for above shipment. By the way, kindly advise T/Time, Freq. and local charges both ends (if any) for our reference.
+
+Other Notes:
+
+{!RFPRFQ__c.NotesForREPEmailTemplate__c}
+
+Awaiting your soon feedback.
+
+Best regards,

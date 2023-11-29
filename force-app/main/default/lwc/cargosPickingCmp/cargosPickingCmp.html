@@ -1,0 +1,15 @@
+<template>
+    <lightning-card  title="Cargos List">
+        <lightning-button label="Pick Cargos" slot="actions"></lightning-button>
+        <p class="slds-p-horizontal_small">{recordId}
+
+
+        </p>
+
+        <lightning-record-form
+                object-api-name="clofor_com_cfs__ConnectWOProduct__c"
+                fields={fields}>
+        </lightning-record-form>
+        <!-- <p slot="footer">Card Footer</p> -->
+    </lightning-card>
+</template>

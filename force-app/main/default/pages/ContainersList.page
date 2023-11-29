@@ -1,0 +1,283 @@
+<apex:page controller="ContainerListingController" contentType="text-html" showHeader="false" applyHtmlTag="false"
+           applyBodyTag="false" renderAs="pdf" action="{!buildContainerLists}">
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+                height: 681px;
+                width: 100%;
+            }
+
+            @page {
+                size: 297mm 210mm;
+            }
+
+            .f7 {
+                font-size: 7pt;
+            }
+
+            .f9 {
+                font-size: 9pt;
+            }
+
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                vertical-align: text-top;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            /*@page {
+                margin: 0.1in 0.5in 0.1in 0.5in;
+                size: A4 landscape;
+            }
+
+            @page :first {
+                margin: 0.1in 0.5in 0.1in 0.5in;
+                size: A4 portrait;
+            }*/
+        </style>
+    </head>
+    <body>
+    <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+        <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+             width="130px" height="60px"/>
+    </div>
+    <div class="f25" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+        <apex:outputPanel rendered="{!fullList}">DANH SÁCH CONTAINER</apex:outputPanel>
+        <apex:outputPanel rendered="{!NOT(fullList)}">DANH SÁCH CONTAINER RỖNG</apex:outputPanel>
+    </div>
+    <!--
+    <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+        <apex:outputText value="Mẩu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Form__c}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+        <apex:outputText value="Ký hiệu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Serial__c}"></apex:outputText>
+    </div>
+    -->
+    <div class="f7" style="position:absolute; margin-top:00px; left:880px;  text-align:left;">
+        <apex:outputText value="Số Debit Note: {!invoiceNo}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+        <apex:outputText value="Ngày: {0,date,dd/MM/yyyy}">
+            <apex:param value="{!printDate}"/>
+        </apex:outputText>
+    </div>
+
+    <div style="height: 100px"></div>
+
+    <div style="margin-top: 15px; display: block">
+        <apex:outputPanel rendered="{!fullList}">
+            <apex:repeat value="{!pages}" var="page">
+                <table style="width: 98%; border: 1px solid black; text-align: center" class="f9">
+                    <tr>
+                        <td></td>
+                        <td colspan="6">THÔNG TIN LÔ HÀNG</td>
+                        <td colspan="2">THÔNG TIN TỜ KHAI</td>
+                        <td colspan="4">THÔNG TIN CONTAINER</td>
+                    </tr>
+                    <tr>
+                        <td>STT</td>
+                        <td>SỐ MASTER BOOKING</td>
+                        <td>P.O.D (A.O.D)</td>
+                        <td>P.O.L (A.O.A)</td>
+                        <td>ETD</td>
+                        <td>ETA</td>
+                        <td>NGÀY ĐÓNG HÀNG / DỠ HÀNG</td>
+                        <td>SỐ TỜ KHAI</td>
+                        <td>NGÀY TỜ KHAI</td>
+                        <td>MÃ CONT</td>
+                        <td>LOẠI CONT</td>
+                        <td>SỐ CONT</td>
+                        <td>XÁC MINH CONT RỖNG / ĐẦY</td>
+                    </tr>
+
+                    <apex:repeat value="{!page.lines}" var="line">
+                        <tr style="text-align: center;" class="f8">
+                            <td>
+                                <apex:outputText value="{!line.index}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.bookingNumber}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.portOfDischarge}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.portOfLoading}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.etd}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.eta}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.stuffingUnstuffingDate}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.appDeclarationNo}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.ccPermitDate}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerId}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerType}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerNumber}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.fullOrEmpty}"></apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+
+                    <apex:outputText rendered="{!NOT(page.pageNo = numberOfPages)}">
+                        <div style="page-break-before: always;"></div>
+                        <div style="height:8px;"></div>
+                        <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+                            <img align="middle"
+                                 src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+                                 width="130px" height="60px"/>
+                        </div>
+                        <div class="f25"
+                             style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+                            CONTAINER LISTS
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+                            <apex:outputText value="Mẩu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Form__c}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+                            <apex:outputText value="Ký hiệu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Serial__c}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+                            <apex:outputText value="Số hoá đơn: {!invoiceNo}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:60px; left:880px;  text-align:left;">
+                            <apex:outputText value="Ngày: {0,date,dd/MM/yyyy}">
+                                <apex:param value="{!printDate}"/>
+                            </apex:outputText>
+                        </div>
+
+                        <div style="height: 100px"></div>
+                    </apex:outputText>
+                </table>
+            </apex:repeat>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!NOT(fullList)}">
+            <apex:repeat value="{!pages}" var="page">
+                <table style="width: 98%; border: 1px solid black; text-align: center" class="f9">
+                    <tr>
+                        <td></td>
+                        <td colspan="5">THÔNG TIN LÔ HÀNG</td>
+                        <td colspan="4">THÔNG TIN CONTAINER</td>
+                    </tr>
+                    <tr>
+                        <td>STT</td>
+                        <td>SỐ MASTER BOOKING</td>
+                        <td>P.O.D (A.O.D)</td>
+                        <td>P.O.L (A.O.A)</td>
+                        <td>ETD</td>
+                        <td>ETA</td>
+                        <td>MÃ CONT</td>
+                        <td>LOẠI CONT</td>
+                        <td>SỐ CONT</td>
+                        <td>XÁC MINH CONT RỖNG / ĐẦY</td>
+                    </tr>
+
+                    <apex:repeat value="{!page.lines}" var="line">
+                        <tr style="text-align: center;" class="f8">
+                            <td>
+                                <apex:outputText value="{!line.index}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.bookingNumber}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.portOfDischarge}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.portOfLoading}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.etd}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!line.eta}"/>
+                                </apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerId}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerType}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.containerNumber}"></apex:outputText>
+                            </td>
+                            <td>
+                                <apex:outputText value="{!line.fullOrEmpty}"></apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+
+                    <apex:outputText rendered="{!NOT(page.pageNo = numberOfPages)}">
+                        <div style="page-break-before: always;"></div>
+                        <div style="height:8px;"></div>
+                        <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+                            <img align="middle"
+                                 src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+                                 width="130px" height="60px"/>
+                        </div>
+                        <div class="f25" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+                            <apex:outputPanel rendered="{!fullList}">CONTAINER LISTS</apex:outputPanel>
+                            <apex:outputPanel rendered="{!NOT(fullList)}">EMPTY CONTAINER LISTS</apex:outputPanel>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+                            <apex:outputText value="Mẩu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Form__c}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+                            <apex:outputText value="Ký hiệu số: {!$Setup.Site_Custom_Settings__c.Registration_No_Serial__c}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+                            <apex:outputText value="Số hoá đơn: {!invoiceNo}"></apex:outputText>
+                        </div>
+                        <div class="f7" style="position:absolute; margin-top:60px; left:880px;  text-align:left;">
+                            <apex:outputText value="Ngày: {0,date,dd/MM/yyyy}">
+                                <apex:param value="{!printDate}"/>
+                            </apex:outputText>
+                        </div>
+
+                        <div style="height: 100px"></div>
+                    </apex:outputText>
+                </table>
+            </apex:repeat>
+        </apex:outputPanel>
+    </div>
+    </body>
+</apex:page>

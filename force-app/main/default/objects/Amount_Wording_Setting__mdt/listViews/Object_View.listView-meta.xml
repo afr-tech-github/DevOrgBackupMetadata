@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Object_View</fullName>
+    <columns>API_Object_Name__c</columns>
+    <columns>MasterLabel</columns>
+    <columns>DeveloperName</columns>
+    <columns>API_Amount_Field_Name__c</columns>
+    <columns>API_Wording_Field_Name__c</columns>
+    <columns>API_En_Wording_Field_Name__c</columns>
+    <columns>Currency_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Object View</label>
+    <language>en_US</language>
+</ListView>

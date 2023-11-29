@@ -1,0 +1,7 @@
+<apex:page controller="FMS_SortByCurrentSOController" sidebar="false" tabStyle="CustomObject1__c" showHeader="true">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    </head>
+</apex:page>

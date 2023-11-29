@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActualWorkedPaidLeaveDay__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>ActualWorkedDay__c  +  NumberOfDaysForPaidLeave__c +  holidayleave__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Actual Worked &amp; Paid Leave Day=Actual Worked Day+Number of Days For Paid Leave</inlineHelpText>
+    <label>ACTUAL WORKED &amp; PAID LEAVE DAY</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>1</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

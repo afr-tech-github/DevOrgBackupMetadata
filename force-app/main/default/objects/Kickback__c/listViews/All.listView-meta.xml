@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>KickbackName__c</columns>
+    <columns>ShipmentOrder__c</columns>
+    <columns>WorkOrderID__c</columns>
+    <columns>KickbackTo__c</columns>
+    <columns>KickbackRequester__c</columns>
+    <columns>TotalKickbackAmount__c</columns>
+    <columns>TotalKickbackAmountUSD__c</columns>
+    <columns>UnpaidBalance__c</columns>
+    <columns>UnpaidBalanceUSD__c</columns>
+    <columns>PaymentType__c</columns>
+    <columns>PaymentConfirmed__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

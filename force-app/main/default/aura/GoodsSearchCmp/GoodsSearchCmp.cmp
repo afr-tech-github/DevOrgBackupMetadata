@@ -1,0 +1,709 @@
+<aura:component access="global" controller="GoodsSearchLightningController" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="productSearch" type="PRODUCT__c" />
+    <aura:attribute name="goodSOs" type="String" />
+    <aura:attribute name="workOrders" type="String" />
+    <aura:attribute name="listResultSearch" type="List" />
+
+    <aura:attribute name="listResultIterator" type="List" />
+
+    <aura:attribute name="pageSizeList" type="Integer[]" default="[5,10,20,50, 100]" />
+    <aura:attribute name="totalRecords" type="Integer" default="0" />
+    <aura:attribute name="pageSize" type="Integer" default="10" />
+    <aura:attribute name="startPage" type="Integer" default="0" />
+    <aura:attribute name="endPage" type="Integer" />
+    <aura:attribute name="totalPages" type="Integer" />
+    <aura:attribute name="currentPage" type="Integer" default="1" />
+
+    <aura:attribute name="isSectionSearchOpen" type="Boolean" default="true" />
+    <aura:attribute name="isSectionResultOpen" type="Boolean" default="true" />
+    <aura:attribute name="isViewingDetailProduct" type="Boolean" default="false" />
+    <aura:attribute name="isSectionDetailProductOpen" type="Boolean" default="true" />
+    <aura:attribute name="isSectionLocatorOpen" type="Boolean" default="true" />
+    <aura:attribute name="idProductViewing" type="String" />
+    <aura:attribute name="productNameViewing" type="String" />
+    <aura:attribute name="listLocatorViewing" type="List" />
+    <aura:attribute name="listLocatorIterator" type="List" />
+
+    <aura:attribute name="totalStockRecords" type="Integer" default="0" />
+    <aura:attribute name="pageStockSize" type="Integer" default="10" />
+    <aura:attribute name="startStockPage" type="Integer" default="0" />
+    <aura:attribute name="endStockPage" type="Integer" />
+    <aura:attribute name="totalStockPages" type="Integer" />
+    <aura:attribute name="currentStockPage" type="Integer" default="1" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE" />
+    <aura:attribute name="isInit" type="Boolean" default="true" />
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+    <aura:attribute name="currentProductWapper" type="Object" />
+    <aura:attribute name="translations" type="Map" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:if isTrue="{!v.isLoading}">
+        <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <article class="slds-card">
+        <div class="slds-section slds-is-open">
+            <h3 class="slds-section__title">
+                <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" onclick="{!c.expandSectionSearch}">
+	    		<aura:if isTrue="{!v.isSectionSearchOpen}">
+	      			<lightning:icon iconName="utility:chevrondown" alternativeText="Utility chevrondown" size="x-small"/>
+	      			<aura:set attribute="else">
+	      			<lightning:icon iconName="utility:chevronup" alternativeText="Utility chevronup" size="x-small"/>
+	      			</aura:set>
+	      		</aura:if>
+	    		<span class="slds-truncate slds-p-left_small" title="Section Title"> {!v.translations.search_condition_section}</span>
+	    	</button>
+            </h3>
+            <aura:if isTrue="{!v.isSectionSearchOpen}">
+                <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                    <div class="slds-grid slds-wrap slds-grid_align-space">
+
+
+                    </div>
+                    <lightning:recordEditForm aura:id="productSearch" onsubmit="{!c.handleSubmit}" onload="{!c.handleLoad}" objectApiName="clofor_com_cfs__PRODUCT__c" class="slds-p-right_small slds-form--stacked">
+
+                        <!-- the messages component is for error messages -->
+                        <lightning:messages />
+                        <div class="slds-grid slds-wrap slds-grid_align-space slds-form-element_stacked">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <c:MultiLookup aura:id="goodsSOList" label="{!v.translations.search_required_from_goods_so}" object="clofor_com_cfs__SALES_ORDER__c" searchField="Name" placeholder="{!v.translations.select_goods_so}" iconName="standard:account" subtitleField="clofor_com_cfs__SalesOrderName__c"
+                                    order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <c:MultiLookup aura:id="workOrderList" label="{!v.translations.search_required_from_work_order_outbound}" object="clofor_com_cfs__WorkOrder__c" searchField="Name" subtitleField="RecordType.Name" placeholder="{!v.translations.select_work_order}" iconName="standard:account"
+                                    order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <c:MultiLookup aura:id="warehouseList" label="{!v.translations.warehouse}" object="clofor_com_cfs__Facility__c" searchField="Name" placeholder="{!v.translations.select_warehouse}" iconName="standard:account" subtitleField="clofor_com_cfs__FacilityName__c"
+                                    order="Name" limit="5" loadingMessage="Loading..." errorMessage="Invalid input" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <c:MultiLookup aura:id="locatorList" label="{!v.translations.locator}" object="clofor_com_cfs__LOCATOR__c" searchField="Name" subtitleField="clofor_com_cfs__LocatorCode__c" placeholder="{!v.translations.select_locator}" iconName="standard:account" order="Name"
+                                    limit="5" loadingMessage="Loading..." errorMessage="Invalid input" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small">
+                                <!--<lightning:inputField fieldName="clofor_com_cfs__SKUNumber__c" />-->
+                                <lightning:input aura:id="skuNumber" type="text" name="skuNumber" label="{!v.translations.sku_number}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <lightning:input aura:id="expiredDate" type="text" name="expiredDate" label="{!v.translations.expire_date_sku_number}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-p-right_small">
+                                <!-- <lightning:input aura:id="cargoLifeCycle" type="text" name="cargoLifeCycle" label="Cargo Life Cycle" /> -->
+
+                                <lightning:select name="selectCargoLifeCycle" label="{!v.translations.select_cargo_life_cycle}" aura:id="cargoLifeCycleId" value="{!v.selectedValue}">
+                                    <!-- <option text="Select"/> -->
+                                    <aura:iteration items="{!v.options}" var="option">
+                                        <option text="{!option.label}" value="{!option.value}" selected="{!option.isSelected}" />
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__ProductName__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__GoodOwner__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__Buyer__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__Manufacturer__c" class="slds-form-element_stacked" />
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__SerialNumber__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__ItemNumber__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__LOTNumber__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__InventoryType__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__PartNumber__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__FastSlowClassification__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__ItemType__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__DangerousClassification__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__HSCode__c" class="slds-form-element_stacked" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_stacked">
+                                <lightning:inputField fieldName="clofor_com_cfs__SKU__c" class="slds-form-element_stacked" />
+                            </div>
+                        </div>
+
+
+                        <div class="slds-m-top_medium slds-align_absolute-center">
+                            <lightning:button variant="brand" type="submit" name="{!v.translations.search_button}" label="{!v.translations.search_button}" />
+                        </div>
+                    </lightning:recordEditForm>
+                    <!-- <div class="slds-m-top_medium slds-align_absolute-center">
+                        <lightning:button variant="brand" onclick="{!c.doSearch}" name="Search" label="Search" />
+                    </div> -->
+                </div>
+            </aura:if>
+        </div>
+        <aura:if isTrue="{!!v.isViewingDetailProduct}">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title">
+                    <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" onclick="{!c.expandSectionResult}">
+	    		<aura:if isTrue="{!v.isSectionResultOpen}">
+	      			<lightning:icon iconName="utility:chevrondown" alternativeText="Utility chevrondown" size="x-small"/>
+	      			<aura:set attribute="else">
+	      			<lightning:icon iconName="utility:chevronup" alternativeText="Utility chevronup" size="x-small"/>
+	      			</aura:set>
+	      		</aura:if>
+	    		<span class="slds-truncate slds-p-left_small " title="Section Title"> {!v.translations.search_result_section}</span>
+	    	</button>
+                </h3>
+
+                <aura:if isTrue="{!v.isSectionResultOpen}">
+                    <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                        <div class="slds-p-left_small slds-p-bottom_small slds-p-right_small">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_1-of-12">
+                                <lightning:select aura:id="select" name="select" label="{!v.translations.page_size}" required="true" value="{!v.pageSize}" onchange="{! c.onChangePageSize }">
+                                    <aura:iteration items="{!v.pageSizeList}" var="size">
+                                        <option value="{!size}">{!size}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                            <aura:if isTrue="{!and(empty(v.listResultIterator), !v.isInit, !v.isLoading)}">
+                                <div style="width: 100%; text-align: center; padding: 10px"><span style="color:red">{!v.translations.no_result_message}</span></div>
+                            </aura:if>
+                            <ui:scrollerWrapper>
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Name.label}"> {!v.translations.product_number}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.ProductName__c.label}">{!v.translations.product_name}</div>
+                                            </th>
+
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.GoodOwner__c.label}">{!v.translations.goods_owner}</div>
+                                            </th>
+                                            <th scope="col">
+
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Buyer__c.label}">{!v.translations.buyer}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Measurement__c.label}">{!v.translations.mesurement}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.GrossWeight__c.label}">{!v.translations.gross_weight}</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="Good S/O">{!v.translations.goods_so}</div>
+                                            </th>
+                                            <th>
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="Required Quantity">{!v.translations.rquired_quantity}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}">{!v.translations.locator_number}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.LocatorCode__c.label}">{!v.translations.locator_code}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}">{!v.translations.facility}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}">{!v.translations.expire_date}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}">{!v.translations.inbound_date}</div>
+                                            </th>
+
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="Remain Quantity">{!v.translations.remain_quantity}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}">{!v.translations.current_occupied_capacity_cbm} </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}">{!v.translations.current_occupied_capacity_kg} </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}">{!v.translations.actual_occupied_capacity_cbm} </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}">{!v.translations.actual_occupied_capacity_kg} </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <apex:variable var="productIdIndex" value="none"/> -->
+                                        <!-- <apex:repeat value="{!listSetProduct}" var="productWapperItem"> -->
+                                        <aura:iteration items="{!v.listResultIterator}" var="productWapperItem">
+                                            <aura:iteration items="{!productWapperItem.listLocator}" var="locatorWapper" indexVar="indx">
+
+                                                <tr>
+                                                    <aura:if isTrue="{!indx == 0}">
+                                                        <td data-label="{!productWapperItem.productName}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" title="{!productWapperItem.product.Id}">
+                                                                <a onclick="{!c.viewDetailProduct}" id="{!productWapperItem.product.Id + '_' + productWapperItem.productName}">{!productWapperItem.productName}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="{!productWapperItem.product.ProductName__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" title="{!productWapperItem.product.ProductName__c}" style="white-space: pre-line;">{!productWapperItem.product.clofor_com_cfs__ProductName__c}</div>
+                                                        </td>
+                                                        <!--<td data-label="{!productWapperItem.remainQuantityProduct}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle; white-space: pre-line;','display:none;')} " rowspan="{!productWapperItem.listLocatorSize}" >
+                                                    <div class="slds-truncate" title="{!productWapperItem.remainQuantityProduct}" style="white-space: pre-line;">{!productWapperItem.remainQuantityProduct}</div>
+                                                </td>-->
+                                                        <td data-label="{!productWapperItem.product.GoodOwner__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.clofor_com_cfs__GoodOwner__c}"><a href="{!'/' + productWapperItem.product.clofor_com_cfs__GoodOwner__c}">{!productWapperItem.goodsOwnerName}</a></div>
+                                                        </td>
+                                                        <td data-label="{!productWapperItem.product.Buyer__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.Buyer__c}">
+                                                                <a href="{!'/' + productWapperItem.product.clofor_com_cfs__Buyer__c}">{!productWapperItem.buyerName}</a></div>
+                                                        </td>
+
+                                                        <td data-label="{!productWapperItem.product.Measurement__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" title="{!productWapperItem.product.Measurement__c}">{!productWapperItem.product.clofor_com_cfs__Measurement__c}</div>
+                                                        </td>
+
+                                                        <td data-label="{!productWapperItem.product.GrossWeight__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                            <div class="slds-truncate" title="{!productWapperItem.product.GrossWeight__c}">{!productWapperItem.product.clofor_com_cfs__GrossWeight__c}</div>
+                                                        </td>
+                                                        <td rowspan="{!productWapperItem.listLocatorSize}" colspan="2">
+                                                            <aura:iteration items="{!productWapperItem.listSOPWrapper}" var="SOPitem">
+                                                                <a href="{!'/' + SOPitem.SOId}">{!SOPitem.SOName}</a> <span style="margin-left: 30px">{!SOPitem.requiredNumber}</span>
+                                                                <br/>
+                                                            </aura:iteration>
+                                                        </td>
+                                                    </aura:if>
+                                                    <td data-label="{!locatorWapper.locatorId}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.locatorName}">
+                                                            <!-- <apex:outputLink value="{!'/' + locatorWapper.locatorId}" id="theLocatorLink">{!locatorWapper.locatorName}</apex:outputLink> -->
+
+                                                            <a href="{!'/' + locatorWapper.locatorId}">{!locatorWapper.locatorName}</a>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="{!locatorWapper.locatorId}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.locatorCode}">
+                                                            <!-- <apex:outputLink value="{!'/' + locatorWapper.locatorId}" id="theLocatorLink">{!locatorWapper.locatorName}</apex:outputLink> -->
+
+                                                            {!locatorWapper.locatorCode}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{!'/' + locatorWapper.warehouseId}">{!locatorWapper.warehouseName}</a>
+                                                    </td>
+                                                    <td>
+                                                        {!locatorWapper.expiredDate}
+                                                    </td>
+                                                    <td>
+                                                        {!locatorWapper.inboundDate}
+                                                    </td>
+
+                                                    <td data-label="{!locatorWapper.remainQuantity}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.remainQuantity}">{!locatorWapper.remainQuantity}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorWapper.totalLocatorMeasurement}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.totalLocatorMeasurement}">{!locatorWapper.totalLocatorMeasurement}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorWapper.totalLocatorGrossWeight}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.totalLocatorGrossWeight}">{!locatorWapper.totalLocatorGrossWeight}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorWapper.totalLocatorMeasurementIncludePlan}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.totalLocatorMeasurementIncludePlan}">{!locatorWapper.totalLocatorMeasurementIncludePlan}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorWapper.totalLocatorGrossWeightIncludePlan}">
+                                                        <div class="slds-truncate" title="{!locatorWapper.totalLocatorGrossWeightIncludePlan}">{!locatorWapper.totalLocatorGrossWeightIncludePlan}</div>
+                                                    </td>
+
+                                                </tr>
+                                                <!-- <apex:variable var="productIdIndex" value="{!locatorWapper.productName}"/> -->
+                                            </aura:iteration>
+                                            <aura:if isTrue="{!productWapperItem.listLocatorSize == 1}">
+                                                <tr>
+                                                    <td data-label="{!productWapperItem.productName}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" title="{!productWapperItem.productName}">
+                                                            <a>{!productWapperItem.productName}</a>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="{!productWapperItem.product.ProductName__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" title="{!productWapperItem.product.ProductName__c}" style="white-space: pre-line;">{!productWapperItem.product.clofor_com_cfs__ProductName__c}</div>
+                                                    </td>
+                                                    <!--<td data-label="{!productWapperItem.remainQuantityProduct}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle; white-space: pre-line;','display:none;')} " rowspan="{!productWapperItem.listLocatorSize}" >
+                                                    <div class="slds-truncate" title="{!productWapperItem.remainQuantityProduct}" style="white-space: pre-line;">{!productWapperItem.remainQuantityProduct}</div>
+                                                </td>-->
+                                                    <td data-label="{!productWapperItem.product.GoodOwner__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.clofor_com_cfs__GoodOwner__c}"><a href="{!'/' + productWapperItem.product.clofor_com_cfs__GoodOwner__c}">{!productWapperItem.goodsOwnerName}</a></div>
+                                                    </td>
+                                                    <td data-label="{!productWapperItem.product.Buyer__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.Buyer__c}">
+                                                            <a href="{!'/' + productWapperItem.product.clofor_com_cfs__Buyer__c}">{!productWapperItem.buyerName}</a></div>
+                                                    </td>
+
+                                                    <td data-label="{!productWapperItem.product.Measurement__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" title="{!productWapperItem.product.Measurement__c}">{!productWapperItem.product.clofor_com_cfs__Measurement__c}</div>
+                                                    </td>
+
+                                                    <td data-label="{!productWapperItem.product.GrossWeight__c}" rowspan="{!productWapperItem.listLocatorSize}">
+                                                        <div class="slds-truncate" title="{!productWapperItem.product.GrossWeight__c}">{!productWapperItem.product.clofor_com_cfs__GrossWeight__c}</div>
+                                                    </td>
+                                                    <td rowspan="{!productWapperItem.listLocatorSize}" colspan="2">
+                                                        <aura:iteration items="{!productWapperItem.listSOPWrapper}" var="SOPitem">
+                                                            <a href="{!'/' + SOPitem.SOId}">{!SOPitem.SOName}</a> <span style="margin-left: 30px">{!SOPitem.requiredNumber}</span>
+                                                            <br/>
+                                                        </aura:iteration>
+                                                    </td>
+                                                    <td style="background-color: #d6d6c2;">{!v.translations.total} : </td>
+                                                    <td colspan="4" style="background-color: #d6d6c2;"></td>
+                                                    <td style="background-color: #d6d6c2">{!productWapperItem.remainQuantityProduct}</td>
+                                                    <td style="background-color: #d6d6c2">{!productWapperItem.totalProductMeasurement} (CBM)</td>
+                                                    <td style="background-color: #d6d6c2">{!productWapperItem.totalProductGrossWeight} (KG)</td>
+                                                    <td style="background-color: #d6d6c2">{!productWapperItem.totalProductMeasurementIncludePlan} (CBM)</td>
+                                                    <td style="background-color: #d6d6c2">{!productWapperItem.totalProductGrossWeightIncludePlan} (KG)</td>
+                                                </tr>
+                                            </aura:if>
+                                            <aura:if isTrue="{!productWapperItem.listLocatorSize > 1}">
+                                                <tr style="background-color: #d6d6c2">
+                                                    <td>{!v.translations.total} : </td>
+                                                    <td colspan="4"></td>
+                                                    <td>{!productWapperItem.remainQuantityProduct}</td>
+                                                    <td>{!productWapperItem.totalProductMeasurement} (CBM)</td>
+                                                    <td>{!productWapperItem.totalProductGrossWeight} (KG)</td>
+                                                    <td>{!productWapperItem.totalProductMeasurementIncludePlan} (CBM)</td>
+                                                    <td>{!productWapperItem.totalProductGrossWeightIncludePlan} (KG)</td>
+
+                                                </tr>
+                                            </aura:if>
+                                            <!-- <apex:variable var="productIdIndex" value="{!productWapperItem.productName}"/> -->
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                            </ui:scrollerWrapper>
+                            <aura:if isTrue="{!v.totalRecords > 0}">
+                                <div class="slds-size_1-of-1 slds-align_absolute-center slds-p-top_small">
+                                    <lightning:buttonGroup>
+                                        <lightning:button label="{!v.translations.previous}" disabled="{!v.currentPage == 1}" onclick="{!c.previous}" variant="brand" iconName='utility:back' /> &nbsp; &nbsp; &nbsp;
+                                        <div class="centered">{!v.totalRecords}&nbsp;{!v.translations.items} • {!v.translations.page} {!v.currentPage} / {!v.totalPages}</div>&nbsp; &nbsp; &nbsp;
+                                        <lightning:button label="{!v.translations.next}" disabled="{!v.currentPage == v.totalPages}" onclick="{!c.next}" variant="brand" iconName='utility:forward' iconPosition='right' />
+                                    </lightning:buttonGroup>
+                                </div>
+                            </aura:if>
+                        </div>
+                    </div>
+                </aura:if>
+
+            </div>
+            <aura:set attribute="else">
+                <div>
+                    <lightning:button label="{!v.translations.back_to_product_list}" onclick="{!c.backtoProductList}" variant="brand" iconName='utility:back' />
+                </div>
+                <!-- product detail section -->
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" onclick="{!c.expandSectionProductDetail}">
+			    		<aura:if isTrue="{!v.isSectionDetailProductOpen}">
+			      			<lightning:icon iconName="utility:chevrondown" alternativeText="Utility chevrondown" size="x-small"/>
+			      			<aura:set attribute="else">
+			      			<lightning:icon iconName="utility:chevronup" alternativeText="Utility chevronup" size="x-small"/>
+			      			</aura:set>
+			      		</aura:if>
+			    		<span class="slds-truncate slds-p-left_small" title="Section Title"> {!v.translations.product_detail}</span>
+			    	</button>
+                    </h3>
+                    <aura:if isTrue="{!v.isSectionDetailProductOpen}">
+                        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                            <lightning:recordViewForm recordId="{!v.idProductViewing}" objectApiName="clofor_com_cfs__PRODUCT__c" class="slds-p-right_small">
+                                <div class="slds-grid slds-wrap slds-grid_align-space">
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly" data-aura-rendered-by="615:0">
+                                        <div data-aura-rendered-by="616:0" class="slds-form-element" lightning-outputfield_outputfield-host=""><span lightning-outputfield_outputfield="" class="slds-form-element__label">{!v.translations.prod_pricing_id}</span>
+                                            <div lightning-outputfield_outputfield="" class="slds-form-element__control"><span lightning-outputfield_outputfield="" class="slds-form-element__static">{!v.productNameViewing}</span>
+                                                <div lightning-outputfield_outputfield=""></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__ProductName__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__GoodOwner__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__Buyer__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__Manufacturer__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__SKUNumber__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__SerialNumber__c" />
+
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__ItemType__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__PartNumber__c" />
+
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__LOTNumber__c" />
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__Measurement__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__NETWeight__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__GrossWeight__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__FastSlowClassification__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__InventoryType__c" />
+                                    </div>
+
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__HSCode__c" />
+                                    </div>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__RollupStockIn__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__RollupStockOut__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__SKU__c" />
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_1-of-3 slds-p-left_small slds-form-element_readonly">
+                                        <lightning:outputField fieldName="clofor_com_cfs__DangerousClassification__c" />
+                                    </div>
+
+                                </div>
+
+                            </lightning:recordViewForm>
+                        </div>
+                    </aura:if>
+                </div>
+                <!-- Locator List section -->
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title">
+                        <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" onclick="{!c.expandSectionLocatatorList}">
+			    		<aura:if isTrue="{!v.isSectionLocatorOpen}">
+			      			<lightning:icon iconName="utility:chevrondown" alternativeText="Utility chevrondown" size="x-small"/>
+			      			<aura:set attribute="else">
+			      			<lightning:icon iconName="utility:chevronup" alternativeText="Utility chevronup" size="x-small"/>
+			      			</aura:set>
+			      		</aura:if>
+			    		<span class="slds-truncate slds-p-left_small" title="Section Title"> {!v.translations.locator_list}</span>
+			    	</button>
+                    </h3>
+                    <aura:if isTrue="{!v.isSectionLocatorOpen}">
+                        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                            <div class="slds-p-left_small slds-p-bottom_small slds-p-right_small">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_1-of-12">
+                                    <lightning:select aura:id="selectStock" name="select" label="{!v.translations.page_size}" required="true" value="{!v.pageStockSize}" onchange="{! c.onChangeStockPageSize }">
+                                        <aura:iteration items="{!v.pageSizeList}" var="size">
+                                            <option value="{!size}">{!size}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <ui:scrollerWrapper>
+                                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                        <thead>
+                                            <tr class="slds-text-title_caps">
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}"> {!v.translations.locator_id}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}">{!v.translations.warehouse_id}</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="Remain Quantity">{!v.translations.remain_quantity}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.ExpireDateCargo__c.label}">{!v.translations.expire_date}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.StockDate__c.label}">{!v.translations.stock_date}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Name.label}">{!v.translations.stock_id}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Name.label}">{!v.translations.cargo_id}</div>
+                                                </th>
+                                                <th scope="col">
+
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.RecordTypeId.label}">{!v.translations.record_type}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.StockStatus__c.label}">{!v.translations.stock_status}</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Quantity__c.label}">{!v.translations.quantity}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Measurement__c.label}">{!v.translations.measurement_cbm}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.GrossWeight__c.label}">{!v.translations.gross_weight_kg}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}">{!v.translations.occupied_capacity_cbm_exclude_planned}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}">{!v.translations.occupied_capacity_kg_exclude_planned}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}">{!v.translations.occupied_capacity_cbm_include_planned}</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}">{!v.translations.occupied_capacity_kg_include_planned}</div>
+                                                </th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="background-color: #d6d6c2">
+
+                                                <td style="font-weight: bold" colspan="4">Total:</td>
+                                                <td style="font-weight: bold">{!v.currentProductWapper.remainQuantityProduct}</td>
+                                                <td colspan="7"></td>
+
+                                                <td style="font-weight: bold">{!v.currentProductWapper.totalProductMeasurement}</td>
+                                                <td style="font-weight: bold">{!v.currentProductWapper.totalProductGrossWeight}</td>
+                                                <td style="font-weight: bold">{!v.currentProductWapper.totalProductMeasurementIncludePlan}</td>
+                                                <td style="font-weight: bold">{!v.currentProductWapper.totalProductGrossWeightIncludePlan}</td>
+                                            </tr>
+                                            <aura:iteration items="{!v.listLocatorIterator}" var="locatorItem">
+                                                <aura:iteration items="{!locatorItem.listStock}" var="stock" indexVar="indxStock">
+                                                    <tr>
+                                                        <aura:if isTrue="{!indxStock == 0}">
+                                                            <td data-label="{!locatorItem.locatorName}" rowspan="{!locatorItem.listStocksize - 1}">
+
+                                                                <div class="slds-truncate" title="{!locatorItem.locatorName}">
+                                                                    <a href="{!'/' + locatorItem.locatorId}">{!locatorItem.locatorName}</a>
+                                                                </div>
+                                                            </td>
+                                                            <td data-label="{!locatorItem.facitityName}" rowspan="{!locatorItem.listStocksize-1}">
+                                                                <div class="slds-truncate" title="{!stock.StockLocator__r.WarehouseID__c}" style="white-space: pre-line;">
+                                                                    <a href="{!'/' + stock.clofor_com_cfs__StockLocator__r.clofor_com_cfs__WarehouseID__c}">{!stock.clofor_com_cfs__StockLocator__r.clofor_com_cfs__WarehouseID__r.Name}</a></div>
+                                                            </td>
+
+                                                            <td data-label="{!locatorItem.remainQuantity}" rowspan="{!locatorItem.listStocksize - 1}">
+                                                                <div class="slds-truncate" title="{!locatorItem.remainQuantity}">{!locatorItem.remainQuantity}</div>
+                                                            </td>
+
+                                                        </aura:if>
+
+                                                        <td data-label="{!stock.ExpireDateCargo__c}">
+                                                            <div class="slds-truncate" title="{!stock.ExpireDateCargo__c}">{!stock.clofor_com_cfs__ExpireDateCargo__c}</div>
+                                                        </td>
+                                                        <td data-label="{!stock.StockDate__c}">
+                                                            <div class="slds-truncate" title="{!stock.StockDate__c}">{!stock.clofor_com_cfs__StockDate__c}</div>
+                                                        </td>
+                                                        <td data-label="{!stock.Name}" style="padding-left: 1.5rem;">
+                                                            <div class="slds-truncate" title="{!stock.Name}">
+                                                                <a href="{!'/' + stock.Id}">{!stock.Name}</a></div>
+                                                        </td>
+                                                        <td data-label="{!stock.CargoName__c}" style="padding-left: 1.5rem;">
+                                                            <div class="slds-truncate" title="{!stock.CargoName__c}">
+
+                                                                <a href="{!'/' + stock.clofor_com_cfs__CargoID__c}">{!stock.clofor_com_cfs__CargoName__c}</a>
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="{!stock.RecordTypeId}">
+                                                            <div class="slds-truncate" title="{!stock.RecordTypeId}">{!stock.RecordType.Name}</div>
+                                                        </td>
+
+                                                        <td data-label="{!stock.StockStatus__c}">
+                                                            <div class="slds-truncate" title="{!stock.StockStatus__c}">{!stock.clofor_com_cfs__StockStatus__c}</div>
+                                                        </td>
+
+                                                        <td data-label="{!stock.Quantity__c}">
+                                                            <div class="slds-truncate" title="{!stock.Quantity__c}">{!stock.clofor_com_cfs__Quantity__c}</div>
+                                                        </td>
+                                                        <td data-label="{!stock.Measurement__c}">
+                                                            <div class="slds-truncate">{!stock.clofor_com_cfs__Measurement__c}</div>
+                                                        </td>
+                                                        <td data-label="{!stock.GrossWeight__c}">
+                                                            <div class="slds-truncate" title="{!stock.GrossWeight__c}">
+                                                                {!stock.clofor_com_cfs__GrossWeight__c}</div>
+                                                        </td>
+                                                        <!-- <td data-label="{!stock.ExpireDateCargo__c}">
+                                                            <div class="slds-truncate" title="{!stock.ExpireDateCargo__c}">
+                                                                {!stock.clofor_com_cfs__ExpireDateCargo__c}</div>
+                                                        </td>
+                                                        <td data-label="{!stock.StockDate__c}">
+                                                            <div class="slds-truncate" title="{!stock.StockDate__c}">
+                                                                {!stock.clofor_com_cfs__StockDate__c}</div>
+                                                        </td> -->
+                                                        <aura:if isTrue="{!indxStock == 0}">
+                                                            <td data-label="{!locatorItem.totalLocatorMeasurement}" rowspan="{!locatorItem.listStocksize  - 1}">
+                                                                <div class="slds-truncate" title="{!locatorItem.totalLocatorMeasurement}">{!locatorItem.totalLocatorMeasurement}</div>
+                                                            </td>
+                                                            <td data-label="{!locatorItem.totalLocatorGrossWeight}" rowspan="{!locatorItem.listStocksize  - 1}">
+                                                                <div class="slds-truncate" title="{!locatorItem.totalLocatorGrossWeight}">{!locatorItem.totalLocatorGrossWeight}</div>
+                                                            </td>
+                                                            <td data-label="{!locatorItem.totalLocatorMeasurementIncludePlan}" rowspan="{!locatorItem.listStocksize  - 1}">
+                                                                <div class="slds-truncate" title="{!locatorItem.totalLocatorMeasurementIncludePlan}">{!locatorItem.totalLocatorMeasurementIncludePlan}</div>
+                                                            </td>
+                                                            <td data-label="{!locatorItem.totalLocatorGrossWeightIncludePlan}" rowspan="{!locatorItem.listStocksize  - 1}">
+                                                                <div class="slds-truncate" title="{!locatorItem.totalLocatorGrossWeightIncludePlan}">{!locatorItem.totalLocatorGrossWeightIncludePlan}</div>
+                                                            </td>
+                                                        </aura:if>
+
+                                                    </tr>
+
+                                                </aura:iteration>
+
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </ui:scrollerWrapper>
+                                <aura:if isTrue="{!v.totalStockRecords > 0}">
+                                    <div class="slds-size_1-of-1 slds-align_absolute-center slds-p-top_small">
+                                        <lightning:buttonGroup>
+                                            <lightning:button label="{!v.translations.previous}" disabled="{!v.currentStockPage == 1}" onclick="{!c.previousStock}" variant="brand" iconName='utility:back' /> &nbsp; &nbsp; &nbsp;
+                                            <div class="centered">{!v.totalStockRecords}&nbsp;{!v.translations.items} • {!v.translations.page} {!v.currentStockPage} / {!v.totalStockPages}</div>&nbsp; &nbsp; &nbsp;
+                                            <lightning:button label="{!v.translations.next}" disabled="{!v.currentStockPage == v.totalStockPages}" onclick="{!c.nextStock}" variant="brand" iconName='utility:forward' iconPosition='right' />
+                                        </lightning:buttonGroup>
+                                    </div>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </aura:if>
+                </div>
+            </aura:set>
+        </aura:if>
+
+    </article>
+
+</aura:component>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mass_new_Q_Line_FCY</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 and 6</booleanFilter>
+    <columns>QuoteID__c</columns>
+    <columns>NAME</columns>
+    <columns>QuoteLineNumber__c</columns>
+    <columns>ServicePricingID__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Unit__c</columns>
+    <columns>ContainerType__c</columns>
+    <columns>CarrierAirlinerVendor__c</columns>
+    <columns>SellingListPriceUSD__c</columns>
+    <columns>BuyingListPriceUSD__c</columns>
+    <columns>TaxRate__c</columns>
+    <columns>TaxRateBuying__c</columns>
+    <columns>CurrencySelling__c</columns>
+    <columns>CurrencyBuying__c</columns>
+    <columns>PrintingSection__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TextServiceID__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>SellingListPriceUSD__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>SellingListPriceLocal__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>BuyingListPriceUSD__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>BuyingListPriceLocal__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>CarrierAirlinerVendor__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Mass new Q.Line (FCY)</label>
+    <language>en_US</language>
+</ListView>

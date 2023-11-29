@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TranporationType__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CONTAINER MODE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>LCL</fullName>
+                <default>false</default>
+                <label>LCL</label>
+            </value>
+            <value>
+                <fullName>FCL</fullName>
+                <default>false</default>
+                <label>FCL</label>
+            </value>
+            <value>
+                <fullName>AIR</fullName>
+                <default>false</default>
+                <label>AIR</label>
+            </value>
+            <value>
+                <fullName>BULK</fullName>
+                <default>false</default>
+                <label>BULK</label>
+            </value>
+            <value>
+                <fullName>MTY</fullName>
+                <default>false</default>
+                <label>MTY</label>
+            </value>
+            <value>
+                <fullName>MTY &amp; FCL</fullName>
+                <default>false</default>
+                <label>MTY &amp; FCL</label>
+            </value>
+            <value>
+                <fullName>Consol</fullName>
+                <default>false</default>
+                <label>Consol</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

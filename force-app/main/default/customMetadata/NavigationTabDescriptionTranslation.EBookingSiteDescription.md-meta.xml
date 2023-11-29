@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>E-Booking Site Description</label>
+    <protected>false</protected>
+    <values>
+        <field>EnglishDescription__c</field>
+        <value xsi:type="xsd:string">An public website for clients to submit a booking information. The submitted booking information will be stored into an Internal Booking Record. Please contact AFR Sales Representative for more details if want to use this app.</value>
+    </values>
+    <values>
+        <field>JapaneseDescription__c</field>
+        <value xsi:type="xsd:string">お客様自身でBooking情報を登録できるサイト。登録された情報は社内Bookingレコードとして保存されます。
+ご利用されたい場合はAFR営業担当までご連絡ください。</value>
+    </values>
+    <values>
+        <field>KoreanTranslation__c</field>
+        <value xsi:type="xsd:string">고객이 직접 북킹정보를 입력 가능한 E-Booking웹사이트. 등록된 북킹 정보는 사내북킹레코드에 저장됩니다. 이용을 원하시면 AFR영업담당에게 문의하여 주시기 바랍니다.</value>
+    </values>
+    <values>
+        <field>NavigationTabName__c</field>
+        <value xsi:type="xsd:string">E-Booking for Client</value>
+    </values>
+    <values>
+        <field>VietnameseDescription__c</field>
+        <value xsi:type="xsd:string">Một trang web public dành cho các khách hàng sử dụng để gởi booking trực tuyến. Booking sau khi gởi sẽ được lưu trữ ở mục Quản lý Booking nội bộ. Vui lòng liên hệ BPKD của AFR để có thêm chi tiết nếu công ty bạn có nhu cầu sử dụng.</value>
+    </values>
+</CustomMetadata>

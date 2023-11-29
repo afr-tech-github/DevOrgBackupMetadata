@@ -1,0 +1,501 @@
+<apex:page controller="GoodSearchController" lightningStylesheets="true" sidebar="false" docType="html-5.0">
+    <apex:slds />
+    <style type="text/css">
+        body .bPageBlock .pbBody .red .pbSubheader{
+        background-color:#c00000;
+        }
+        body .bPageBlock .pbBody .grey .pbSubheader{
+        background-color:#c0c0c0;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader h3{
+        display: -webkit-inline-box;
+        color: black;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .hideListButton{
+        background-position: 0 -12px;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .showListButton{
+        background-position: 1px 0px;
+        }
+        .availableSpace{
+        background-color: #4bca81;
+        }
+        .fullSpace{
+        background-color: #b0adab;
+        }
+        
+    </style>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1" id="searchSectionId" title="{!$Label.clofor_com_cfs__search_goods}" >
+                <!--search-->
+                <apex:outputPanel >
+                    <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+                        <col width="30%"/>
+                        <col width="20%"/>
+                        <col width="30%"/>
+                        <col width="20%"/>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.Name.label}"/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputText value="{!objectProductSearch.Name}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.ProductName__c.label} : "/> 
+                            </td>
+                            <td>
+                                <apex:inputField value="{!objectProductSearch.ProductName__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.GoodOwner__c.label} : "/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.GoodOwner__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.Buyer__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.Buyer__c}"/>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            
+                            
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.Manufacturer__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.Manufacturer__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.SKUNumber__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.SKUNumber__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.SerialNumber__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.SerialNumber__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.ItemNumber__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.ItemNumber__c}"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.LOTNumber__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.LOTNumber__c}"/>
+                            </td>
+                            
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.PartNumber__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.PartNumber__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.FastSlowClassification__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.FastSlowClassification__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.InventoryType__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.InventoryType__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.ItemType__c.label} : "/> 
+                            </td>
+                            <td>
+                                <apex:inputField value="{!objectProductSearch.ItemType__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.DangerousClassification__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.DangerousClassification__c}"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.HSCode__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.HSCode__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.PRODUCT__c.fields.SKU__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!objectProductSearch.SKU__c}"/>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    <br/>
+                    
+                    <div style="width: 100%; margin: 0 50%; text-align: left">
+                        <apex:commandButton onclick="af_doSearch(); return false;" value="Search" id="theButtonSearch" styleClass="slds-button slds-button_outline-brand"/>
+                    </div>
+                    
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:actionFunction action="{!doSearch}" name="af_doSearch" rerender="ResultSearch"/>
+        </apex:pageBlock>
+        <apex:outputPanel id="ResultSearch">
+            <apex:pageBlock id="pageBlockResultSearch" rendered="{!isDisplayResultSearch}">
+                <apex:pageBlockSection columns="1" id="searchSectionId" title="{!$Label.clofor_com_cfs__search_result}" >
+                    <!--{!sqlStr}-->
+                    <apex:outputPanel rendered="{!listProductResult.size == 0}">
+                        {!$Label.clofor_com_cfs__no_data_found}
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!listProductResult.size > 0}" Id="resultSearchTable">
+                        <apex:outputPanel id="tableResultSearch">
+                            <apex:outputPanel >
+                                {!$Label.PAGE_SIZE} &nbsp; 
+                                <apex:selectList value="{!sizeSearchPage}" multiselect="false" size="1" onchange="af_refreshSearchPageSize();" styleClass="slds-select slds-size_1-of-12">
+                                    <apex:selectOptions value="{!paginationSizeOptions}"/>
+                                </apex:selectList>
+                            </apex:outputPanel>
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Name.label}">{!$ObjectType.PRODUCT__c.fields.Name.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.ProductName__c.label}">{!$ObjectType.PRODUCT__c.fields.ProductName__c.label}</div>
+                                        </th>
+                                        
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.GoodOwner__c.label}">{!$ObjectType.PRODUCT__c.fields.GoodOwner__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Buyer__c.label}">{!$ObjectType.PRODUCT__c.fields.Buyer__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.Measurement__c.label}">{!$ObjectType.PRODUCT__c.fields.Measurement__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.PRODUCT__c.fields.GrossWeight__c.label}">{!$ObjectType.PRODUCT__c.fields.GrossWeight__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}">{!$ObjectType.LOCATOR__c.fields.Name.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="Remain Quantity">Remain Quantity</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:variable var="productIdIndex" value="none"/>
+                                    <apex:repeat value="{!listSetProduct}" var="productWapperItem">
+                                        <apex:repeat value="{!productWapperItem.listLocator}" var="locatorWapper">
+                                            
+                                            <tr>
+                                                <td data-label="{!productWapperItem.productName}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!productWapperItem.listLocator.size + 1}">
+                                                    <div class="slds-truncate" title="{!productWapperItem.productName}">
+                                                        <apex:commandLink value="{!productWapperItem.productName}" onclick="af_viewDetailProduct('{!productWapperItem.product.Id}'); return false;"/>
+                                                    </div>
+                                                </td>
+                                                <td data-label="{!productWapperItem.product.ProductName__c}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle; white-space: pre-line;','display:none;')} " rowspan="{!productWapperItem.listLocator.size + 1}" >
+                                                    <div class="slds-truncate" title="{!productWapperItem.product.ProductName__c}" style="white-space: pre-line;">{!productWapperItem.product.ProductName__c}</div>
+                                                </td>
+                                                <!--<td data-label="{!productWapperItem.remainQuantityProduct}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle; white-space: pre-line;','display:none;')} " rowspan="{!productWapperItem.listLocator.size + 1}" >
+                                                    <div class="slds-truncate" title="{!productWapperItem.remainQuantityProduct}" style="white-space: pre-line;">{!productWapperItem.remainQuantityProduct}</div>
+                                                </td>-->
+                                                <td data-label="{!productWapperItem.product.GoodOwner__c}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!productWapperItem.listLocator.size + 1}">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.GoodOwner__c}"><apex:outputField value="{!productWapperItem.product.GoodOwner__c}"/></div>
+                                                </td>
+                                                <td data-label="{!productWapperItem.product.Buyer__c}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!productWapperItem.listLocator.size + 1}">
+                                                    <div class="slds-truncate" style="white-space: pre-line;" title="{!productWapperItem.product.Buyer__c}"><apex:outputField value="{!productWapperItem.product.Buyer__c}"/></div>
+                                                </td>
+                                                
+                                                <td data-label="{!productWapperItem.product.Measurement__c}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!productWapperItem.listLocator.size + 1}">
+                                                    <div class="slds-truncate" title="{!productWapperItem.product.Measurement__c}">{!productWapperItem.product.Measurement__c}</div>
+                                                </td>
+                                                
+                                                <td data-label="{!productWapperItem.product.GrossWeight__c}" style="{!IF(productIdIndex != locatorWapper.productName, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!productWapperItem.listLocator.size + 1}">
+                                                    <div class="slds-truncate" title="{!productWapperItem.product.GrossWeight__c}">{!productWapperItem.product.GrossWeight__c}</div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.locatorId}">
+                                                    <div class="slds-truncate" title="{!locatorWapper.locatorName}">
+                                                        <apex:outputLink value="{!'/' + locatorWapper.locatorId}" id="theLocatorLink">{!locatorWapper.locatorName}</apex:outputLink></div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.remainQuantity}" >
+                                                    <div class="slds-truncate" title="{!locatorWapper.remainQuantity}">{!locatorWapper.remainQuantity}</div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.totalLocatorMeasurement}" >
+                                                    <div class="slds-truncate" title="{!locatorWapper.totalLocatorMeasurement}">{!locatorWapper.totalLocatorMeasurement}</div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.totalLocatorGrossWeight}" >
+                                                    <div class="slds-truncate" title="{!locatorWapper.totalLocatorGrossWeight}">{!locatorWapper.totalLocatorGrossWeight}</div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.totalLocatorMeasurementIncludePlan}" >
+                                                    <div class="slds-truncate" title="{!locatorWapper.totalLocatorMeasurementIncludePlan}">{!locatorWapper.totalLocatorMeasurementIncludePlan}</div>
+                                                </td>
+                                                <td data-label="{!locatorWapper.totalLocatorGrossWeightIncludePlan}" >
+                                                    <div class="slds-truncate" title="{!locatorWapper.totalLocatorGrossWeightIncludePlan}">{!locatorWapper.totalLocatorGrossWeightIncludePlan}</div>
+                                                </td>
+                                                
+                                            </tr>
+                                            <apex:variable var="productIdIndex" value="{!locatorWapper.productName}"/>
+                                        </apex:repeat>
+                                        <tr style="background-color: #d6d6c2">
+                                            <td>Total : </td>
+                                            <td>{!productWapperItem.remainQuantityProduct}</td>
+                                            <td>{!productWapperItem.totalProductMeasurement} (CBM)</td>
+                                            <td>{!productWapperItem.totalProductGrossWeight} (KG)</td>
+                                            <td>{!productWapperItem.totalProductMeasurementIncludePlan} (CBM)</td>
+                                            <td>{!productWapperItem.totalProductGrossWeightIncludePlan} (KG)</td>
+                                            
+                                        </tr>
+                                        <apex:variable var="productIdIndex" value="{!productWapperItem.productName}"/>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            <apex:outputPanel style="text-align:center;" layout="block">
+                                <apex:outputText value="<<{!$Label.clofor_com_cfs__previous}" rendered="{!!hasPreviousProduct}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="<<{!$Label.clofor_com_cfs__previous}" action="{!previousProduct}" title="Previous Page" rendered="{!hasPreviousProduct}"/>
+                                <span>&nbsp;Page {!pageNumberProduct} of {!totalPageProduct}&nbsp;</span>
+                                <apex:outputText value="{!$Label.clofor_com_cfs__next}>>" rendered="{!!hasNextProduct}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="{!$Label.clofor_com_cfs__next}>>" action="{!nextProduct}" title="Next Page" rendered="{!hasNextProduct}"/> 
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                    </apex:outputPanel>
+                </apex:pageBlockSection>
+                
+            </apex:pageBlock>
+            
+            <apex:pageBlock rendered="{!isDisplayDetailProduct}">
+                <apex:pageBlockSection columns="2" id="detailSectionId" title="Good Detail" >
+                    <!--<apex:outputLink value="{!currentProduct.Name}"/>-->
+                    <!--<div class="slds-truncate" title="{!currentProduct.Name}">-->
+                    <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.PRODUCT__c.fields.Name.label}" for="productLinkDetail"/>
+                    <apex:outputLink value="/{!currentProduct.Id}" id="productLinkDetail">{!currentProduct.Name} </apex:outputLink>
+                    </apex:pageBlockSectionItem>
+                    <!--</div>-->
+                    <apex:outputField value="{!currentProduct.ProductName__c}"/>
+                    <apex:outputField value="{!currentProduct.GoodOwner__c}"/>
+                    <apex:outputField value="{!currentProduct.Buyer__c}"/>
+                    <apex:outputField value="{!currentProduct.Manufacturer__c}"/>
+                    <apex:outputField value="{!currentProduct.SKUNumber__c}"/>
+                    <apex:outputField value="{!currentProduct.SerialNumber__c}"/>
+                    <apex:outputField value="{!currentProduct.ItemNumber__c}"/>
+                    <apex:outputField value="{!currentProduct.PartNumber__c}"/>
+                    <apex:outputField value="{!currentProduct.LOTNumber__c}"/>
+                    <apex:outputField value="{!currentProduct.SKU__c}"/>
+                    <apex:outputField value="{!currentProduct.Measurement__c}"/>
+                    <apex:outputField value="{!currentProduct.NETWeight__c}"/>
+                    <apex:outputField value="{!currentProduct.GrossWeight__c}"/>
+                    <apex:outputField value="{!currentProduct.FastSlowClassification__c}"/>
+                    <apex:outputField value="{!currentProduct.InventoryType__c}"/>
+                    <apex:outputField value="{!currentProduct.ItemType__c}"/>
+                    <apex:outputField value="{!currentProduct.DangerousClassification__c}"/>
+                    <apex:outputField value="{!currentProduct.HSCode__c}"/>
+                    
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1" id="listStockSectionId" title="List Stock of {!currentProduct.Name}" >
+                    <apex:outputPanel rendered="{!currentListLocator.size > 0}" Id="resultDetailTable">
+                        <apex:outputPanel >
+                                {!$Label.PAGE_SIZE} &nbsp; 
+                                <apex:selectList value="{!sizeDetailPage}" multiselect="false" size="1" onchange="af_refreshDetailPageSize();" styleClass="slds-select slds-size_1-of-12">
+                                    <apex:selectOptions value="{!paginationSizeOptions}"/>
+                                </apex:selectList>
+                            </apex:outputPanel>
+                        
+                                 <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}">{!$ObjectType.LOCATOR__c.fields.Name.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}">{!$ObjectType.LOCATOR__c.fields.WarehouseID__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="Remain Quantity">Remain Quantity</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Name.label}">{!$ObjectType.Stock__c.fields.Name.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.RecordTypeId.label}">{!$ObjectType.Stock__c.fields.RecordTypeId.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.StockStatus__c.label}">{!$ObjectType.Stock__c.fields.StockStatus__c.label}</div>
+                                            </th>
+                                            
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Quantity__c.label}">{!$ObjectType.Stock__c.fields.Quantity__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.Measurement__c.label}">{!$ObjectType.Stock__c.fields.Measurement__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.GrossWeight__c.label}">{!$ObjectType.Stock__c.fields.GrossWeight__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.Stock__c.fields.StockDate__c.label}">{!$ObjectType.Stock__c.fields.StockDate__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityCBM__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentOccupiedCapacityKG__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityCBM__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualOccupiedCapacityKG__c.label}</div>
+                                            </th>
+                                            
+                                            
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:variable var="locatorIndex" value="none"/>
+                                        <tr style="background-color: #d6d6c2">
+                                        <td></td>
+                                        <td style="font-weight: bold">Total:</td>
+                                        <td style="font-weight: bold">{!currentProductWapper.remainQuantityProduct}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        
+                                        <td style="font-weight: bold">{!currentProductWapper.totalProductMeasurement}</td>
+                                        <td style="font-weight: bold">{!currentProductWapper.totalProductGrossWeight}</td>
+                                        <td style="font-weight: bold">{!currentProductWapper.totalProductMeasurementIncludePlan}</td>
+                                        <td style="font-weight: bold">{!currentProductWapper.totalProductGrossWeightIncludePlan}</td>
+                                        </tr>
+                                        <apex:repeat value="{!listSetLocator}" var="locatorItem">
+                                            <apex:repeat value="{!locatorItem.listStock}" var="stock">
+                                                <tr>
+                                                    <td data-label="{!locatorItem.locatorName}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.locatorName}">
+                                                            <apex:OutputLink value="/{!locatorItem.locatorId}">{!locatorItem.locatorName}</apex:OutputLink>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="{!locatorItem.facitityName}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}" >
+                                                        <div class="slds-truncate" title="{!stock.StockLocator__r.WarehouseID__c}" style="white-space: pre-line;"><apex:outputField value="{!stock.StockLocator__r.WarehouseID__c}"/></div>
+                                                    </td>
+                                                    <td data-label="{!locatorItem.remainQuantity}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.remainQuantity}">{!locatorItem.remainQuantity}</div>
+                                                    </td>
+                                                    <td data-label="{!stock.Name}">
+                                                        <div class="slds-truncate" title="{!stock.Name}">
+                                                            <apex:OutputLink value="/{!stock.Id}">{!stock.Name}</apex:OutputLink></div>
+                                                    </td>
+                                                    <td data-label="{!stock.RecordTypeId}">
+                                                        <div class="slds-truncate" title="{!stock.RecordTypeId}"><apex:outputField value="{!stock.RecordTypeId}"/></div>
+                                                    </td>
+                                                    
+                                                    <td data-label="{!stock.StockStatus__c}">
+                                                        <div class="slds-truncate" title="{!stock.StockStatus__c}"><apex:outputField value="{!stock.StockStatus__c}"/></div>
+                                                    </td>
+                                                    
+                                                    <td data-label="{!stock.Quantity__c}">
+                                                        <div class="slds-truncate" title="{!stock.Quantity__c}"><apex:outputField value="{!stock.Quantity__c}"/></div>
+                                                    </td>
+                                                    <td data-label="{!stock.Measurement__c}">
+                                                        <div class="slds-truncate" title="{!stock.Measurement__c}">
+                                                            <apex:outputField value="{!stock.Measurement__c}"/></div>
+                                                    </td>
+                                                    <td data-label="{!stock.GrossWeight__c}" >
+                                                        <div class="slds-truncate" title="{!stock.GrossWeight__c}">
+                                                            <apex:outputField value="{!stock.GrossWeight__c}"/></div>
+                                                    </td>
+                                                    <td data-label="{!stock.StockDate__c}" >
+                                                        <div class="slds-truncate" title="{!stock.StockDate__c}">
+                                                            <apex:outputField value="{!stock.StockDate__c}"/></div>
+                                                    </td>
+                                                    
+                                                    <td data-label="{!locatorItem.totalLocatorMeasurement}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.totalLocatorMeasurement}">{!locatorItem.totalLocatorMeasurement}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorItem.totalLocatorGrossWeight}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.totalLocatorGrossWeight}">{!locatorItem.totalLocatorGrossWeight}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorItem.totalLocatorMeasurementIncludePlan}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.totalLocatorMeasurementIncludePlan}">{!locatorItem.totalLocatorMeasurementIncludePlan}</div>
+                                                    </td>
+                                                    <td data-label="{!locatorItem.totalLocatorGrossWeightIncludePlan}" style="{!IF(locatorIndex != stock.StockLocator__c, 'display:table-cell; vertical-align: middle;','display:none;')}" rowspan="{!locatorItem.listStock.size}">
+                                                        <div class="slds-truncate" title="{!locatorItem.totalLocatorGrossWeightIncludePlan}">{!locatorItem.totalLocatorGrossWeightIncludePlan}</div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <apex:variable var="locatorIndex" value="{!locatorItem.locatorId}"/>
+                                            </apex:repeat>
+                                            <apex:variable var="locatorIndex" value="{!locatorItem.locatorId}"/>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                           
+                       
+                        <apex:outputPanel style="text-align:center;" layout="block">
+                                <apex:outputText value="<<{!$Label.clofor_com_cfs__previous}" rendered="{!!hasPreviousLocator}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="<<{!$Label.clofor_com_cfs__previous}" action="{!previousLocator}" title="Previous Page" rendered="{!hasPreviousLocator}"/>
+                                <span>&nbsp;Page {!pageNumberLocator} of {!totalPageLocator}&nbsp;</span>
+                                <apex:outputText value="{!$Label.clofor_com_cfs__next}>>" rendered="{!!hasNextLocator}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="{!$Label.clofor_com_cfs__next}>>" action="{!nextLocator}" title="Next Page" rendered="{!hasNextLocator}"/> 
+                            </apex:outputPanel> 
+                    </apex:outputPanel>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            <apex:actionFunction action="{!viewDetailProduct}" name="af_viewDetailProduct" rerender="ResultSearch">
+                <apex:param name="productId" value="" />
+                
+            </apex:actionFunction>
+            <apex:actionFunction action="{!refreshPageSizeSearch}" name="af_refreshSearchPageSize" rerender="tableResultSearch">
+            </apex:actionFunction>
+            <apex:actionFunction action="{!refreshPageSizeDetail}" name="af_refreshDetailPageSize" rerender="resultDetailTable">
+            </apex:actionFunction>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

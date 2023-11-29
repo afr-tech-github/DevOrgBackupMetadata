@@ -1,0 +1,21 @@
+Kính gửi {!Contact.FirstName},
+
+Tất cả công ty GenWatt rất hân hạnh có được khách hàng {!Account.Name} 
+
+Tôi xin trân trọng giới thiệu là quản lý khách hàng. 
+Qúi Khách hàng có cần thêm thông tin gì, vui lòng liên hệ với số điện thoại của tôi{phone} hay gửi mail cho tôi {!User.Email}. 
+
+Qúi khách cũng có thể liên hệ với GenWatt bằng các số sau: 
+
+Main: 810-545-1000
+Sales: 810-545-1222
+Customer Service & Support: 810-545-1333
+Fax: 810-545-1001
+
+ Tôi cam đoan GenWatt sẽ luôn phục vụ Qúi khách và hy vọng mối quan hệ của chúng ta ngày  càng phát triển tốt đẹp mãi mãi
+
+Trân Trọng, 
+{!User.Name}
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************

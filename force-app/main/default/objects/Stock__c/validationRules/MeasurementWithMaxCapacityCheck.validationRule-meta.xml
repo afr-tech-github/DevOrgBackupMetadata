@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MeasurementWithMaxCapacityCheck</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(RecordType.DeveloperName == &apos;StockIn&apos;,
+Measurement__c &gt;  MaxCapacityCBM__c)</errorConditionFormula>
+    <errorDisplayField>Measurement__c</errorDisplayField>
+    <errorMessage>The Measurement stock in can not greater than Max Capacity CBM.</errorMessage>
+</ValidationRule>

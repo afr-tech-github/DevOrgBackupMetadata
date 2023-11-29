@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duplicated_Cont_number</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK( duplicateIDcontno__c ) )</errorConditionFormula>
+    <errorMessage>You&apos;ve just input duplicated Container number in same Shipment. Please check again</errorMessage>
+</ValidationRule>

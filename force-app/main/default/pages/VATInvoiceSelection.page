@@ -1,0 +1,81 @@
+<apex:page controller="VATInvoiceSelectionController" showHeader="false" sidebar="false" docType="html-5.0"
+           title="Invoice">
+    <head>
+    
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        <script>
+            j$ = jQuery.noConflict();
+
+            function showReport() {
+                var errorMessageEl = j$('span[id$=afr_ErrorMessage]');
+                var errorMessage = errorMessageEl.text();
+
+                if (errorMessage === undefined || errorMessage === '' || errorMessage === null) {
+                    var el = j$('span[id$=afr_PageOpenUrl]');
+                    var openUrl = el.text();
+
+                    window.opener.location.href = "/{!$CurrentPage.parameters.id}";
+                    window.top.close();
+                    window.open(openUrl);
+                }
+            }
+
+            function closePopupDialog() {
+                window.top.close();
+            }
+        </script>
+    </head>
+    <apex:outputPanel style="display:none;" id="openUrlPlaceholder">
+        <apex:outputText value="{!openUrl}" id="afr_PageOpenUrl"></apex:outputText>
+    </apex:outputPanel>
+    <apex:form >
+        <apex:sectionHeader subtitle="VAT INVOICE"/>
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandButton value="{!translations['btn_generate']}" action="{!generateReport}"
+                                        oncomplete="showReport()" reRender="openUrlPlaceholder,errorMessageSection"/>
+                    <apex:commandButton value="{!translations['btn_close']}" onclick="closePopupDialog()"/>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="errorMessageSection">
+                <apex:outputText value="{!errorMessage}" id="afr_ErrorMessage" style="color: red;"></apex:outputText>
+            </apex:outputPanel>
+            <apex:pageBlockSection title="{!translations['section_1_title']}" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!translations['language']}</apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedLanguage}" id="languages">
+                        <apex:actionSupport event="onchange" action="{!refreshReportList}"
+                                            reRender="buttonBlock, available_report"/>
+                        <apex:selectOptions value="{!languages}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!translations['invoice']}</apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedReport}" id="available_report">
+                        <apex:actionSupport event="onchange" action="{!setUpReportOptions}" reRender="groupingOption"/>
+                        <apex:selectOptions value="{!reports}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Grouping Option</apex:outputLabel>
+                    <apex:selectList size="1" value="{!selectedGroupingOption}" id="groupingOption">
+                        <apex:selectOptions value="{!groupingOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Currency"/>
+                    <apex:selectList size="1" value="{!selectedCurrency}">
+                        <apex:selectOptions value="{!currencies}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!translations['section_2_title']}" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:inputCheckbox value="{!requiredAttachmentCreation}"/>
+                    <apex:outputLabel >{!translations['chk_attachment']}</apex:outputLabel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

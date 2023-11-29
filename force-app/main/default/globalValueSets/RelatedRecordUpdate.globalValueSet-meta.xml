@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Create New Record</fullName>
+        <default>false</default>
+        <label>Create New Record</label>
+    </customValue>
+    <customValue>
+        <fullName>Update Previous Record</fullName>
+        <default>false</default>
+        <label>Update Previous Record</label>
+    </customValue>
+    <masterLabel>RELATED RECORD UPATE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

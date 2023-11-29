@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VASLocator</fullName>
+    <columns>NAME</columns>
+    <columns>LocatorCode__c</columns>
+    <columns>LocatorLayer__c</columns>
+    <columns>ParentLocator__c</columns>
+    <columns>WarehouseID__c</columns>
+    <columns>CurrentOccupiedCapacityCBM__c</columns>
+    <columns>CurrentAvailableCapacityCBM__c</columns>
+    <columns>CurrentOccupiedCapacityKG__c</columns>
+    <columns>CurrentAvailableCapacityKG__c</columns>
+    <columns>ActualOccupiedCapacityCBM__c</columns>
+    <columns>ActualAvailableCapacityCBM__c</columns>
+    <columns>ActualOccupiedCapacityKG__c</columns>
+    <columns>ActualAvailableCapacityKG__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>LocationAreaType__c</field>
+        <operation>equals</operation>
+        <value>VAS(Value Added Service) Area</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>3. VAS Locator</label>
+    <language>en_US</language>
+</ListView>

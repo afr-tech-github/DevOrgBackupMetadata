@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Planning</fullName>
+        <default>false</default>
+        <label>Planning</label>
+    </customValue>
+    <customValue>
+        <fullName>Testing</fullName>
+        <default>false</default>
+        <label>Testing</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Procurement</fullName>
+        <default>false</default>
+        <label>Under Procurement</label>
+    </customValue>
+    <customValue>
+        <fullName>In Operation</fullName>
+        <default>false</default>
+        <label>In Operation</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Maintenance</fullName>
+        <default>false</default>
+        <label>Under Maintenance</label>
+    </customValue>
+    <customValue>
+        <fullName>Sold</fullName>
+        <default>false</default>
+        <label>Sold</label>
+    </customValue>
+    <customValue>
+        <fullName>Disposed</fullName>
+        <default>false</default>
+        <label>Disposed</label>
+    </customValue>
+    <customValue>
+        <fullName>Decommissioned</fullName>
+        <default>false</default>
+        <label>Decommissioned</label>
+    </customValue>
+    <customValue>
+        <fullName>Lost</fullName>
+        <default>false</default>
+        <label>Lost</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>IMPLEMENTATION STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

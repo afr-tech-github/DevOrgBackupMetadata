@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Full</fullName>
+        <default>false</default>
+        <label>Full</label>
+    </customValue>
+    <customValue>
+        <fullName>A Part Of</fullName>
+        <default>false</default>
+        <label>A Part Of</label>
+    </customValue>
+    <masterLabel>Full or Part Mode</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

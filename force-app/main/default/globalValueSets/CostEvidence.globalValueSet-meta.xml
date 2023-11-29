@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Internal Report</fullName>
+        <default>false</default>
+        <label>Internal Report</label>
+    </customValue>
+    <customValue>
+        <fullName>All VAT(Outbound VAT to Customer &amp; Vendor VAT)</fullName>
+        <default>false</default>
+        <label>All VAT(Outbound VAT to Customer &amp; Vendor VAT)</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendor VAT</fullName>
+        <default>false</default>
+        <label>Vendor VAT</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound VAT to Customer</fullName>
+        <default>false</default>
+        <label>Outbound VAT to Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendor Debit</fullName>
+        <default>false</default>
+        <label>Vendor Debit</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendor Quote</fullName>
+        <default>false</default>
+        <label>Vendor Quote</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendor Order</fullName>
+        <default>false</default>
+        <label>Vendor Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Vendor Website</fullName>
+        <default>false</default>
+        <label>Vendor Website</label>
+    </customValue>
+    <customValue>
+        <fullName>Contract</fullName>
+        <default>false</default>
+        <label>Contract</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Proposal</fullName>
+        <default>false</default>
+        <label>Internal Proposal</label>
+    </customValue>
+    <customValue>
+        <fullName>No Evidence</fullName>
+        <default>false</default>
+        <label>No Evidence</label>
+    </customValue>
+    <masterLabel>COST EVIDENCE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

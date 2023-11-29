@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consolidation</fullName>
+    <columns>NAME</columns>
+    <columns>Field1__c</columns>
+    <columns>Master_B_L__c</columns>
+    <columns>HBL__c</columns>
+    <columns>MA_N__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>DevanningDate__c</columns>
+    <columns>Vessle__c</columns>
+    <columns>Partner__c</columns>
+    <columns>Container__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ConsolidationType__c</field>
+        <operation>equals</operation>
+        <value>自社混載(Consolidation Cargo)</value>
+    </filters>
+    <label>5. Consolidation Shipment</label>
+</ListView>

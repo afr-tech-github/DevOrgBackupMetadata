@@ -1,0 +1,41 @@
+<template>
+    <template if:true={_isReady}>
+        <lightning-input 
+            type="date" 
+            name="_cargo.clofor_com_cfs__ExpiredDate__c"
+            label={objInfo_Cargo.data.fields.clofor_com_cfs__ExpiredDate__c.label}
+            value={_cargo.clofor_com_cfs__ExpiredDate__c} 
+            onchange={handleInputChange}></lightning-input>
+
+        <lightning-input class="slds-m-top_small input" if:true={_isUnit} required
+            type="number" 
+            name="_cargo.clofor_com_cfs__LotQuantity__c"
+            data-type="Integer"
+            label={objInfo_Cargo.data.fields.clofor_com_cfs__LotQuantity__c.label}
+            value={_cargo.clofor_com_cfs__LotQuantity__c} 
+            min="1"
+            onchange={handleInputChange}></lightning-input>
+
+        <lightning-input class="slds-m-top_small input" if:true={_isWeight} required
+            type="number" 
+            name="_cargo.clofor_com_cfs__Weight__c" 
+            data-type="Decimal"
+            label={_lblWeight} 
+            value={_cargo.clofor_com_cfs__Weight__c} 
+            min="0" step="any"
+            onchange={handleInputChange}></lightning-input>
+
+        <lightning-combobox class="slds-m-top_small input" required
+            name="_wosLine.clofor_com_cfs__CargoStatus__c"
+            label={objInfo_WosLine.data.fields.clofor_com_cfs__CargoStatus__c.label}
+            value={_wosLine.clofor_com_cfs__CargoStatus__c}
+            options={_optionsCargoStatus}
+            onchange={handleInputChange}></lightning-combobox>
+
+        <lightning-textarea class="slds-m-top_small" if:true={_showNote}
+            name="_cargo.clofor_com_cfs__CargoTroubleNote__c"
+            label={objInfo_Cargo.data.fields.clofor_com_cfs__CargoTroubleNote__c.label}
+            value={_cargo.clofor_com_cfs__CargoTroubleNote__c}
+            onchange={handleInputChange}></lightning-textarea>
+    </template>
+</template>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ShiharaibiKeikaNisu__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(ShiharaiSyurui__c) , &apos;立替金&apos;    , IF (DeadlineForPaymentOfExpense__c   &lt;= TODAY(), TEXT(TODAY() - DeadlineForPaymentOfExpense__c)   , &apos;まだ支払日を過ぎていません&apos;),
+                                             &apos;諸請求金&apos; , IF (DeadlineForPaymentOfInvoices__c &lt;= TODAY(), TEXT(TODAY() - DeadlineForPaymentOfInvoices__c) ,     &apos;まだ支払日を過ぎていません&apos;),
+                                          &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>「支払い種類」を条件にして
+本日から諸請求支払い期限もしくは立替金支払い期限までの支払いまでの支払日からの経過日数を計算しています。</inlineHelpText>
+    <label>DAYS AFTER DUE DAY OF PAYMENT</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

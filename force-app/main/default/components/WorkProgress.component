@@ -1,0 +1,166 @@
+<apex:component >
+    <apex:attribute name="WorkProgressList" type="WorkProgressItemWrapper[]"
+                    description="List of WorkProgressItemWrapper"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery-3.4.1.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS102, 'assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <head>
+        <style>
+            .klomos .slds-tabs--path__item__medium {
+                height: 5rem;
+            }
+
+            .klomos .slds-tabs--path__item__medium:before {
+                left: -3rem;
+                width: calc(5rem - (2px * 2));
+                height: calc(5rem - (2px * 2));
+            }
+
+            .klomos .slds-tabs--path__link__medium {
+                vertical-align: middle;
+                top: 0px;
+            }
+
+            .klomos ol, .klomos ul {
+                list-style: initial;
+            }
+
+            .klomos .slds-tabs--path__title {
+                max-width: 100%;
+                text-overflow: ellipsis;
+            }
+
+            .klomos .slds-tabs--path .slds-is-complete .slds-tabs--path__title {
+                transform: rotateX(0deg);
+            }
+
+            .klomos ::selection {
+                color: rgba(4, 132, 75, 0.95);
+            }
+            
+            .sub_flow {
+                display: none;
+            }
+            
+            .compact_button {
+                margin-right: 0px !important;
+                margin-left: 0px;
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+                border: 1px solid #FFFFFF !important;
+            }
+            
+            .center_a {
+                padding: 0.15rem 1.15rem 0.15rem 1.25rem !important;
+            }
+            
+            .klomos a:link {
+                text-decoration: none;
+            }
+            
+            .klomos a:visited {
+                text-decoration: none;
+            }
+            
+            .klomos a:hover {
+                text-decoration: none;
+            }
+            
+            .klomos a:active {
+                text-decoration: none;
+            }
+            
+            .klomos a {
+                color: black;
+            }
+    		.slds-tabs--path__link {
+               line-height: 1.2rem !important;
+               font-size: 11px !important;
+             }
+        </style>
+    </head>
+    <body>
+    <div class="klomos">
+        <div class="slds-grid">
+            <div class="slds-tabs--path" role="application">
+                <ul class="slds-tabs--path__nav" role="tablist">
+                    <apex:repeat value="{!WorkProgressList}" var="workItem">
+                        <li class="slds-tabs--path__item__medium slds-tabs--path__item slds-is-{!workItem.status}"
+                            role="presentation">
+                            <apex:outputPanel rendered="{!workItem.hasSubFlow == false}">
+                                <div id="{!workItem.id}" class="slds-tabs--path__link__medium slds-tabs--path__link">
+                                    <div>
+                                        <a href="{!IF(workItem.creatingURL != null, workItem.creatingURL, workItem.listingURL)}" target="_blank" aria-controls="content-path-1" aria-selected="false" tabindex="-1" role="tab"
+                                           aria-live="assertive">
+                                            <apex:image rendered="{!workItem.iconURL != null}"
+                                                    url="{!URLFOR($Resource.Navigation, workItem.iconURL)}"
+                                                    style="vertical-align:middle; width:100px;height:100px; padding: 5px;"/>
+                                        </a>
+                                        <a href="{!IF(workItem.listingURL != null, workItem.listingURL, workItem.creatingURL)}" target="_blank"  aria-controls="content-path-1" aria-selected="false" tabindex="-1" role="tab"
+                                           aria-live="assertive">
+                                            <span><apex:outputText value="{!workItem.caption}" escape="false" ></apex:outputText></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </apex:outputPanel> 
+                            <apex:outputPanel rendered="{!workItem.hasSubFlow == true}">
+                                <div class="slds-tabs--path__link__medium slds-tabs--path__link">
+                                    <div id="{!workItem.id}">
+                                        <apex:image rendered="{!workItem.iconURL != null}"
+                                                    url="{!URLFOR($Resource.Navigation, workItem.iconURL)}"
+                                                    style="vertical-align:middle; width:50px;height:50px; padding: 5px;"/>
+                                    </div>
+                                    <a href="{!workItem.listingURL}" target="_blank"
+                                       aria-controls="content-path-1" aria-selected="false" tabindex="-1" role="tab"
+                                       aria-live="assertive">
+                                        <span><apex:outputText value="{!workItem.caption}" escape="false"
+                                                               ></apex:outputText></span>
+                                    </a>
+                                </div>
+                            </apex:outputPanel>
+                        </li>
+                    </apex:repeat>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <apex:repeat value="{!WorkProgressList}" var="workItem">
+        <apex:outputPanel rendered="{!workItem.hasSubFlow}">
+            <div class="klomos" id="{!workItem.id}_subflow" style="display:none;">
+                <apex:variable value="{!workItem.id}" var="parent_id"/>
+                <div class="slds-grid">
+                    <div class="slds-tabs--path" role="application">
+                        <ul class="slds-tabs--path__nav" role="tablist">
+                            <apex:repeat value="{!workItem.subFlowItems}" var="subItem">
+                                <li class="compact_button slds-button slds-button--brand slds-path__mark-complete slds-no-flex slds-m-horizontal--small slds-is-{!subItem.status}"
+                                    role="presentation">
+                                    <a class="center_a slds-tabs--path__link slds-tabs--path__link"
+                                       aria-controls="content-path-1" aria-selected="false" tabindex="-1" role="tab"
+                                       href="{!subItem.listingURL}" target="_blank" aria-live="assertive">
+                                        <div>
+                                            <span><apex:outputText value="{!subItem.caption}" escape="false"></apex:outputText></span>
+                                        </div>
+                                    </a>
+                                </li>                                   
+                            </apex:repeat>
+                        </ul>
+                    </div>
+                </div>
+                <script>
+                    var j$ = jQuery.noConflict();
+
+                    j$(document).ready(function() {
+                        j$("div[id$={!parent_id}]").click(function(){
+                            j$("div[id$=_subflow]").hide();
+                            j$("div[id$={!parent_id}_subflow").toggle();
+                        });
+                    });
+                </script>
+            </div>
+        </apex:outputPanel>
+    </apex:repeat>
+    
+    </body>
+    </html>
+</apex:component>

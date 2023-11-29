@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WORK_TYPE__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>WORK TYPE</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FULL CONTAINER TRUCK DRIVER</fullName>
+                <default>false</default>
+                <label>FULL CONTAINER TRUCK DRIVER</label>
+            </value>
+            <value>
+                <fullName>TRUCK DRIVER</fullName>
+                <default>false</default>
+                <label>TRUCK DRIVER</label>
+            </value>
+            <value>
+                <fullName>FORKLIFT DRIVER</fullName>
+                <default>false</default>
+                <label>FORKLIFT DRIVER</label>
+            </value>
+            <value>
+                <fullName>WAREHOUSE STAFF</fullName>
+                <default>false</default>
+                <label>WAREHOUSE STAFF</label>
+            </value>
+            <value>
+                <fullName>Warehouse Inbound Operator</fullName>
+                <default>false</default>
+                <label>Warehouse Inbound Operator</label>
+            </value>
+            <value>
+                <fullName>Warehouse Outbound Operator</fullName>
+                <default>false</default>
+                <label>Warehouse Outbound Operator</label>
+            </value>
+            <value>
+                <fullName>Vessel Crew</fullName>
+                <default>false</default>
+                <label>Vessel Crew</label>
+            </value>
+            <value>
+                <fullName>Gate Operator</fullName>
+                <default>false</default>
+                <label>Gate Operator</label>
+            </value>
+            <value>
+                <fullName>Terminal Operator</fullName>
+                <default>false</default>
+                <label>Terminal Operator</label>
+            </value>
+            <value>
+                <fullName>Port Operator</fullName>
+                <default>false</default>
+                <label>Port Operator</label>
+            </value>
+            <value>
+                <fullName>ICD Operator</fullName>
+                <default>false</default>
+                <label>ICD Operator</label>
+            </value>
+            <value>
+                <fullName>Yard Operator</fullName>
+                <default>false</default>
+                <label>Yard Operator</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

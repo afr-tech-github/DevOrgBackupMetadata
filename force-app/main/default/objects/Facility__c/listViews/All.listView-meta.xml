@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>FacExternalID__c</columns>
+    <columns>FacilityName__c</columns>
+    <columns>Active__c</columns>
+    <columns>FacilityType__c</columns>
+    <columns>WarehoueType__c</columns>
+    <columns>StorageType__c</columns>
+    <columns>ItemType__c</columns>
+    <columns>TemperatureType__c</columns>
+    <columns>CapacityCBM__c</columns>
+    <columns>CapacityKG__c</columns>
+    <columns>Address__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

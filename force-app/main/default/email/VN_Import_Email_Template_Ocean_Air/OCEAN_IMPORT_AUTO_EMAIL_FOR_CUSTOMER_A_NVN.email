@@ -1,0 +1,323 @@
+Kính gửi {!CustomObject1__c.Field1__c}
+<br>
+{!CustomObject1__c.CustmerInCharge__c} <br>
+<br>
+Cám ơn Qúi Công ty đã sử dụng dịch vụ giao nhận của chúng tôi.
+<br>
+<br>
+Tình trạng hiện tại của lô hàng này là 「{!CustomObject1__c.status__c}」. 
+<br>
+<br>
+Để mở hay sao lưu thông tin về chứng từ về việc thông quan, vui lòng nhấp vào đường link và điền vào mật khẩu. 
+<br> ################################################################################################################### <br>
+ĐƯỜNG DẪN THÔNG BÁO HÀNG ĐẾN ：{!CustomObject1__c.A_N_LINK__c} 
+<br>
+Mật khẩu：{!CustomObject1__c.A_N_PASSWORD__c} <br>
+################################################################################################################### 
+<br>
+<br>
+Vui lòng xem chi tiết ở bảng bên dưới.<br>
+<br>
+※Đây là mail tự động được gửi từ (Hệ thông cập nhật thông tinh bằng thời gian thật) mỗi khi tình trạng của lô hàng được cập nhật.
+<br>
+
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+				COMMON INFORMATION
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.ID__c}
+			</td width="400">
+			<th>
+				STATUS
+			</td>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td width="400">
+		</tr>
+			<tr>
+			<th>
+				IMPORTER
+			</th>
+			<td colspan="1">
+				{!CustomObject1__c.Field1__c}
+			</td>
+			<th>
+				PIC OF IMPORTER 
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}
+			</td>
+		</tr>
+
+	
+
+
+		<tr><thead>
+			<th colspan="4">
+				CARGO BASIC INFORMATION 
+			</th></thead>
+
+<tr>
+			<th>
+				H B/L NO.
+			</th>
+			<td>
+				{!CustomObject1__c.HBL__c}
+			</td>
+<th>
+				B/L TYPE
+			</th>
+			<td>
+				{!CustomObject1__c.BLtype__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				VESSEL NAME
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c}
+			</td>
+<th>
+				VOY NO.
+			</th>
+			<td>
+				{!CustomObject1__c.Voy_No__c}
+			</td>
+
+
+	</tr>
+<tr>
+<th>
+				SHIPPER
+			</th>
+			<td>
+				{!CustomObject1__c.shipper__c}
+			</td>
+
+			<th>
+				CONSIGNEE
+			</th>
+			<td>
+				{!CustomObject1__c.Cnee__c}
+			</td>
+
+　　　　　　　　</tr>
+		<tr>
+			<th>
+				GOODS
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+
+			<th>
+				P.O.L
+			</th>
+			<td>
+                {!CustomObject1__c.POL__c}<br>
+		{!CustomObject1__c.POL__r.Country_Name__c}   
+			</td>
+		</tr>
+		<tr>
+			<th>
+				WEIGHT
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+
+			<th>
+				E.T.D
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				QUNTITY/MEASURMENT
+			</th>
+			<td>
+				{!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c}/{!CustomObject1__c.CBM__c}CBM  			</td>
+
+			<th>
+				P.O.D
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c}<br>
+				{!CustomObject1__c.POD__r.Country_Name__c}   
+			</td>
+		</tr>
+		<tr>
+			<th>
+				CONTAINER TYPE			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c}   {!CustomObject1__c.Container__c} *  {!CustomObject1__c.ContainerNumber__c} / {!CustomObject1__c.Container2__c} *  {!CustomObject1__c.ContainerNumber2__c}   
+			</td>
+			<th>
+				E.T.A
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				FREE DEMURRAGE TIME
+			</th>
+			<td>
+				{!CustomObject1__c.FreeDemurrageTime__c}
+			</td>
+<th>
+				INCOTERMS
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>		</tr>
+		<tr>
+			<th>
+				   
+FREE DETENTION TIME 			
+</th>
+			<td>
+				{!CustomObject1__c.FreeDetentionTime__c}
+			</td>
+　　　　　　<th>
+				INSURANCE
+			</th>
+			<td>
+				{!CustomObject1__c.Insurance__c}
+			</td>
+
+		</tr>
+		<tr>
+			<th>
+				D/O TYPE
+			</th>
+			<td>
+				{!CustomObject1__c.D_O_type__c}
+			</td>
+			<th>
+				HDS
+			</th>
+			<td>
+				{!CustomObject1__c.HDS__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				D/O NO.
+			</th>
+			<td>
+				{!CustomObject1__c.DO_NO__c}
+			</td>
+			<th>
+				
+			</th>
+			<td>
+				
+			</td>
+		</tr>
+
+		<tr><thead>
+			<th colspan="4">
+	TRIANGLE TRADE & TRANSIT
+			</th></thead>
+<tr>
+			<th>
+				TRANSIT PORT
+			</th>
+			<td>
+				{!CustomObject1__c.TS__c}	</td>
+<th>
+				TRANSIT VESSEL/VOY NO.
+			</th>
+			<td>
+				{!CustomObject1__c.TransitV__c}
+			</td>
+</tr>
+<tr>
+			<th>
+				FIRST SHIPPER 
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WElD}	
+	</td>
+　　　　　 <th>
+                           TRANSIT ETD
+	</th>
+	<td>
+	{!CustomObject1__c.T_ETD__c}	
+	</td>
+	</tr>
+<tr><thead>
+			<th colspan="4">
+				DELIVERY			
+                  </th></thead>
+		</tr>
+		<tr>
+			<th>
+				NUMBER OF DELIVERY LOCATIONS 
+			</th>
+			<td colspan="3">
+{!CustomObject1__c.DeliveryService_required__c}  
+Trong trường hợp địa điểm giao hàng nhiều hơn 0, thông tin chi tiết giao hàng sẽ được cung cấp bởi một e-mail khác
+
+			</td>
+
+		</tr>
+
+			<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th >
+				REMARK
+			</th>
+			<td colspan="3">
+				{!CustomObject1__c.Remark__c} 			</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+Nếu có cần thêm thông tin, vui lòng liên hệ với chúng tôi. <br>
+Rất hân hạnh  được tiếp tục phục vụ Qúi Công Ty. <br>
+<br>
+{!CustomObject1__c.PersonInCharge__c}<br>
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

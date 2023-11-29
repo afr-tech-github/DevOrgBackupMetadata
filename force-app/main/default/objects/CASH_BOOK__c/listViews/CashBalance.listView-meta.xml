@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CashBalance</fullName>
+    <columns>NAME</columns>
+    <columns>BankFrom__c</columns>
+    <columns>BankTo__c</columns>
+    <columns>OpeningBalanceLocal__c</columns>
+    <columns>ACTUAL_PAID_TO_VENDOR__c</columns>
+    <columns>ActualAmountCollected__c</columns>
+    <columns>ClosingBalanceLocal__c</columns>
+    <columns>DATE_TIME_HANDOVER_TO_STAFF__c</columns>
+    <columns>AccountedDate__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Cash Balance</label>
+    <language>en_US</language>
+</ListView>

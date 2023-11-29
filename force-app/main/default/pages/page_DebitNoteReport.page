@@ -1,0 +1,522 @@
+<apex:page controller="InvoiceDebitNoteReport" renderAs="advanced_pdf" contentType="text-html" showHeader="false" applyHtmlTag="false" applyBodyTag="false">
+    <head>
+
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}" />
+
+        <style type="text/css" media="print">
+            @page {
+                size: 210mm 310mm;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                margin-left: 15px;
+                margin-right: 15px;
+                font-size: 12px;
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            body {
+                font-family: Times-Roman, Arial Unicode MS, Courier, Helvetica, sans-serif;
+                font-size: 7.5pt;
+                line-height: 15px;
+            }
+
+            .invoice-logo {
+                background-image: "{!URLFOR($Resource.invoice_logo_FMS, 'invoice_logo_FMS.png')}";
+            }
+
+            /* div.header {
+            padding-top: 30px;
+            position: running(header);
+            
+            } */
+
+            div.footer {
+
+                display: block;
+
+                position: running(footer);
+
+            }
+
+            .pagenumber:before {
+
+                content: counter(page);
+
+            }
+
+            .pagecount:before {
+
+                content: counter(pages);
+
+            }
+
+            /* table td, table th{
+            padding: 5px;
+            } */
+
+            .content-table,
+            .content-table tr {
+                border: 0.5px solid black !important;
+                border-collapse: collapse;
+
+            }
+
+            .content-table th {
+                font-weight: bold;
+                font-size: 12px;
+                text-align: center;
+                padding: 5px;
+            }
+
+            .content-table td {
+                padding: 5px;
+                line-height: 22px;
+                min-height: 22px;
+            }
+
+            .border {
+                border: 0.5px solid black !important;
+            }
+
+            .border-left {
+                border-left: 0.5px solid black !important;
+            }
+
+            .border-bold-left {
+                border-left: 2px solid black !important;
+            }
+
+            .border-right {
+                border-right: 0.5px solid black !important;
+            }
+
+            .border-bold-right {
+                border-right: 2px solid black !important;
+            }
+
+            .border-top {
+                border-top: 0.5px solid black !important;
+            }
+
+            .border-bold-top {
+                border-top: 2px solid black !important;
+            }
+
+            .border-bottom {
+                border-bottom: 0.5px solid black !important;
+            }
+
+            .border-bold-bottom {
+                border-bottom: 2px solid black !important;
+            }
+
+            .vertical-top {
+                vertical-align:top !important; 
+                padding-top: 8px !important;
+            }
+
+            .text-align-center {
+                text-align:center !important;
+            }
+
+            .invoice-debit-info td,
+            .shipment-detail td {
+                padding: 0px !important;
+            }
+
+            .hide {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header" style="padding-left: 10px; padding-right: 10px;">
+            <div style="padding-left: 0px; padding-right: 0px;">
+                <apex:outputPanel rendered="{!templateType == 'official'}">
+                    <div style="width: 30%; float: left; " width="200px" height="100px">
+                        <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="200px" style="max-height: 100px;"
+                        />
+                    </div>
+                    <!-- Company Info -->
+                    <div style="width: 65%; float: left; padding-left: 15px; padding-right: 15px">
+                        <apex:outputPanel rendered="{!language == 'en'}">
+                            <div style="font-weight:bold; font-size:20px;">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}" />
+                            </div>
+                            <div style="font-size: 10.5px; padding-top: 10px;">
+                                <apex:outputLabel style="white-space:pre-wrap;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine1__c}" />
+                                <apex:outputLabel style="white-space:pre-wrap;" value="{!$Setup.Site_Custom_Settings__c.EnglishCompanyAddressLine2__c}" />
+                            </div>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!language != 'en'}">
+                            <div style="padding-top: 10px; font-size: 20px; line-height: 20px">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Local_Company_Name__c}" />
+                            </div>
+                            <div style="font-size: 10.5px; padding-top: 10px;">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.LocalCompanyAddressLine1__c}" />
+                            </div>
+                            <div style="font-size: 10.5px;;">
+                                <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.LocalCompanyAddressLine2__c}" />
+                            </div>
+                        </apex:outputPanel>
+                        <div style="font-size: 10.5px;">
+                            <span>
+                                <apex:outputLabel value="{!translations['tel']}/{!translations['fax']}: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}/{!$Setup.Site_Custom_Settings__c.Company_Fax__c} 　　{!translations['tax_code']}: {!$Setup.Site_Custom_Settings__c.Tax_Code__c}"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+            </div>
+            <div style="text-align: center; font-size: 25px; clear: both">
+                <apex:outputText value="{!translations[typeDoc]}" />
+
+            </div>
+        </div>
+        <div class="footer" style="clear:both; width: 760px">
+            <div class="footerleft" style="float:left; width: 45%; text-align: right;">
+                <span class="pagenumber" />/
+                <span class="pagecount" />
+            </div>
+            <div class="footerright" style="float:right; width: 40%; text-align: right;">
+                <span>{!userName}</span> -
+                <span>{!today}</span>
+            </div>
+        </div>
+        <div class="content" style="clear: both; padding-top: 30px;">
+            <table class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td width="10%" class="vertical-top">
+                        CUSTOMER
+                    </td>
+                    <td colspan="4" width="50%" class="vertical-top">
+                        : LOGENIX INTERNATIONAL
+                    </td>
+                    <td colspan="1" width="20%" class="vertical-top border-bold-top border-bold-left border-bottom">
+                        Tax Invoice
+                    </td>
+                    <td colspan="2" width="20%" class="vertical-top border-bold-top border-bold-right border-bottom">
+                        : C2022-0050
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td width="10%" class="vertical-top">
+                        C'NEE NAME
+                    </td>
+                    <td colspan="4" width="50%" class="vertical-top">
+                        : MINISTRY OF HEALTH
+                    </td>
+                    <td colspan="1" width="20%" class="vertical-top border-bold-left border-bottom">
+                        Ref No
+                    </td>
+                    <td colspan="2" width="20%" class="vertical-top border-bold-right border-bottom">
+                        : IMP.PJ2203-0017
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td width="10%" class="vertical-top">
+                        ATTN
+                    </td>
+                    <td colspan="4" width="50%" class="vertical-top">
+                        : Mr DAVID HEDGES
+                    </td>
+                    <td colspan="1" width="20%" class="vertical-top border-bold-left border-bold-bottom">
+                        Date of Issue
+                    </td>
+                    <td colspan="2" width="20%" class="vertical-top border-bold-right border-bold-bottom">
+                        : MAR-28-2022
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td width="10%" class="vertical-top">
+                        Address
+                    </td>
+                    <td colspan="4" width="50%" class="vertical-top">
+                        : DUBAI COUNTRY
+                    </td>
+                    <td colspan="1" width="20%" class="vertical-top border-bold-left">
+                        
+                    </td>
+                    <td colspan="2" width="20%" class="vertical-top">
+                       
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td width="10%" class="vertical-top">
+                        Email
+                    </td>
+                    <td colspan="4" width="50%" class="vertical-top">
+                        : dhedges@logenix.com
+                    </td>
+                    <td colspan="1" width="20%" class="vertical-top border-bold-left">
+                        Job Description:
+                    </td>
+                    <td colspan="2" width="20%" class="vertical-top">
+                       
+                    </td>
+                </tr>
+            </table>
+            <!-- information shipping -->
+            <table class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 2px 0.5px 0.5px 2px; border-style: solid;">
+                        FLIGHT NO.
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 2px 0.5px 0.5px 0.5px; border-style: solid;">
+                        NAWATA BHUM V. 181N
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-left: 2px solid;">
+                        
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 2px; border-style: solid;">
+                        ETD
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 0.5px; border-style: solid;">
+                        1-Feb-22
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0px 0px 0px 2px; border-style: solid;">
+                        IMPORT BY SEA: 1X40'
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 2px; border-style: solid;">
+                        ETA
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 0.5px; border-style: solid;">
+                        21-Mar-22
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0px 0px 0px 2px; border-style: solid;">
+                        Container No CGMU5346160/40'
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 2px; border-style: solid;">
+                        FROM
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 0.5px; border-style: solid;">
+                        INDIA
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0px 0px 0px 2px; border-style: solid;">
+                        
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 2px; border-style: solid;">
+                        TO
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 0.5px 0.5px; border-style: solid;">
+                        SIHANOUK VILLE PORT, CAMBODIA
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0px 0px 0px 2px; border-style: solid;">
+                        
+                    </td>
+                </tr>
+                <tr style="vertical-align:top !important; border: 0.5px solid black !important; ">
+                    <td colspan="3" width="20%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 2px 2px; border-style: solid;">
+                        B/L Nos
+                    </td>
+                    <td colspan="4" width="40%" style="vertical-align:top; padding-top: 8px; border-width: 0.5px 0.5px 2px 0.5px; border-style: solid;">
+                        9501231013
+                    </td>
+                    <td colspan="3" width="40%" style="vertical-align:top; padding-top: 8px; border-left: 2px solid;">
+                        
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Table Invoice Item -->
+            <apex:outputPanel >
+                <table class="content-table" style="width: 100%; border: 0.5px solid black; border-collapse: collapse; ">
+                    <tr>
+                        <th class="border border-bold-top border-bold-left" style="width: 5%">
+                            <apex:outputText value="Item" />
+                        </th>
+                        <th class="border border-bold-top" style="width: 55%">
+                            <apex:outputText value="{!translations['description']}" />
+                        </th>
+                        <th class="border border-bold-top">
+                            <apex:outputText value="Quantity" />
+                        </th>
+                        <th class="border border-bold-top">
+                            <apex:outputText value="Rate" />
+                        </th>
+                        <th class="border border-bold-top border-bold-right">
+                            <apex:outputText value="{!translations['amount']}" />
+                        </th>
+                    </tr>
+                    <tr style="display:{!IF(listBillWrapperOnBehalf.size >0, '', 'none')}">
+                        <td colspan="10" style="font-size: 12px" class="border">
+                            <apex:outputText value="{!translations['freight_charge_surcharge']}" />
+                        </td>
+                    </tr>
+                    <apex:variable var="indexBillWrapper" value="{!1}" />
+                    <apex:repeat value="{!listBillWrapper}" var="billWrapper">
+                        <tr>
+                            <td class="border-bold-left border-right border-bottom" style="text-align:center;">
+                                <apex:outputText value="{!indexBillWrapper}" />
+                                <apex:variable var="indexBillWrapper" value="{!indexBillWrapper + 1}" />
+                            </td>
+                            <td class="border-left border-right border-bottom">
+                                <apex:outputText value="{!billWrapper.descriptionEng}" rendered="{!language == 'en'}" />
+                                <apex:outputText value="{!billWrapper.description}" rendered="{!language != 'en'}" />
+                            </td>
+                            <td class="border-left border-right border-bottom" style="text-align:center;">
+                                {!billWrapper.quantity}
+                            </td>
+                            <td class="border-left border-right border-bottom" style="text-align:right;">
+                                <apex:outputText value="0" rendered="{!billWrapper.curr != 'VND' && (billWrapper.amountUSD == 0)}" />
+                                <apex:outputText value="{!formatAmountUSD}" rendered="{!billWrapper.curr != 'VND' && billWrapper.amountUSD != 0 && billWrapper.amountUSD != null}">
+                                    <apex:param value="{!billWrapper.amountUSD}" />
+                                </apex:outputText>
+                                <apex:outputText value="0" rendered="{!billWrapper.curr == 'VND' && (billWrapper.amountVND == 0)}" />
+                                <apex:outputText value="{!formatAmountLocal}" rendered="{!billWrapper.curr == 'VND' && billWrapper.amountVND != 0 && billWrapper.amountVND != null}">
+                                    <apex:param value="{!billWrapper.amountVND}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="border-left border-bold-right border-bottom" style="text-align:right;">
+                                <apex:outputText value="0.00" rendered="{!billWrapper.tax == 0}" />
+                                <apex:outputText value="{!formatTax}" rendered="{!billWrapper.tax != 0 && billWrapper.tax != null}">
+                                    <apex:param value="{!billWrapper.tax}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <th colspan="2" style="font-size: 12px" class="border border-bold-bottom border-bold-left">
+                            <apex:outputText value="TOTAL AMOUNT" />
+                        </th>
+                        <td class="border-left border-right border-top border-bold-bottom" style="text-align:center;">
+                            
+                        </td>
+                        <td class="border-left border-right border-top border-bold-bottom" style="text-align:center;">
+
+                        </td>
+                        <td style="font-size: 12px; text-align:right" class="border-top border-bold-bottom border-bold-right">
+                            1000
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </div>
+        <div style="page-break-inside: avoid;">
+            <div class="amount-in-word" width="100%" style="min-height: 50px; padding-top: 10px;">
+                <table width="100%">
+                    <tr>
+                        <td style="font-size: 12px; vertical-align:top;">
+                            <apex:outputText value="USD: ONE THOUSAND SIX HUNDRED FIFTEEN ONLY" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- <div class="border" width="100%">
+            </div> -->
+        </div>
+        <div class="bank-info-signature" width="100%" style="padding-top: 10px; page-break-inside: avoid; ">
+            <table width="100%">
+                <tr>
+                    <td width="75%">
+                        <apex:outputPanel rendered="{!templateType == 'official'}">
+                            <apex:outputText value="{!translations['bank_account_information']}" style="font-size: 12px" />:</apex:outputPanel>
+                    </td>
+                    <td width="25%" style="text-align:left">
+                        <apex:outputText value="{!translations['authorized_signature']}" style="font-size: 12px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputPanel rendered="{!templateType == 'official'}">
+                            <table>
+                                <tr>
+                                    <td style="min-width: 80px;">
+                                        <apex:outputText value="{!translations['account_name']}" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <apex:outputText value="{!translations['bank_name']}" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <apex:outputText value="{!translations['bank_address']}" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <apex:outputText value="{!translations['swift_code']}" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <apex:outputText value="{!translations['account_no']}" />
+                                    </td>
+                                    <td>
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}" rendered="{!bankType == 'local1'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}" rendered="{!bankType == 'local2'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}" rendered="{!bankType == 'local3'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}" rendered="{!bankType == 'local4'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}" rendered="{!bankType == 'local5'}" />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}" rendered="{!bankType == 'foreign1'}"
+                                        />
+                                        <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c}" rendered="{!bankType == 'foreign2'}"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

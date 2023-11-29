@@ -1,0 +1,11 @@
+{
+  "activeViewId" : "5d633e7c-bec8-498c-af03-6d0f8ec9faf9",
+  "appPageId" : "1a12b620-fb9b-4315-bac4-05747467dee6",
+  "configurationTags" : [ ],
+  "id" : "0d98ddf5-c4ce-46ea-9d8b-cc304539e44f",
+  "label" : "E-BOOKING List",
+  "objectApiName" : "clofor_com_cfs__EBooking__c",
+  "routeType" : "list-a3H",
+  "type" : "route",
+  "urlPrefix" : "ebooking"
+}

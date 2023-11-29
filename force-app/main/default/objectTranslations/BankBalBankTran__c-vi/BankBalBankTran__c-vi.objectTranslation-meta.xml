@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>GD Ngân hàng+Cân đối quỹ</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>GD Ngân hàng+Cân đối quỹ</value>
+    </caseValues>
+    <nameFieldLabel>ID GD Ngân hàng+Cân đối quỹ</nameFieldLabel>
+</CustomObjectTranslation>

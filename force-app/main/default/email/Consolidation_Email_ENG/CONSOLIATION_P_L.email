@@ -1,0 +1,25 @@
+Dear {!MasterAnken__c.MDevan__c} 
+{!MasterAnken__c.MDevanRep__c} 
+
+
+Here is the PL for the consolidation container in the below H BL SHIPMENT. 
+
+◎H SHIP NO： 
+◎H B/L NO： 
+◎QUANTITY： 
+
+Detail of MASTER SHIPMENT
+◎M-SHIP ID：{!MasterAnken__c.MasterID__c} 
+◎M B/L NO：{!MasterAnken__c.MMaster_B_L_No__c} 
+◎VESSEL NAME / VOYAGE：{!MasterAnken__c.MVessel__c} /  {!MasterAnken__c.MVoy_No__c}　 
+
+Thank you for your supports always.
+
+Best regards.
+
+********************************************************* 
+{!MasterAnken__c.Mail_Merge_Company_Signature__c} 
+********************************************************* 
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner) 
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform 
+www.afr-solutions.com

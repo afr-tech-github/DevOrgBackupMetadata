@@ -1,0 +1,24 @@
+{!CustomObject1__c.00N28000007WEBs} 
+{!CustomObject1__c.00N28000007WEBr} 様
+
+◎下記の案件のBBをお願いします。 
+-HAWB NO.: {!CustomObject1__c.HAWB__c} 
+-MAWB NO.: {!CustomObject1__c.MAWB__c} 
+-CNEE: {!CustomObject1__c.Cnee__c}
+-FLIGHT NO.: {!CustomObject1__c.FlightNo__c} 
+-WEIGHT: {!CustomObject1__c.weight__c}  KG
+-QUANTITY/MEASURMENT: {!CustomObject1__c.carton__c}{!CustomObject1__c.UnitType__c} / {!CustomObject1__c.carton__c} Carton 
+-ETA: {!CustomObject1__c.ETA__c} 
+
+◎Custom Clearance Broker：{!CustomObject1__c.Custom_Clearance_Broker__c} 
+
+B/Lと回収費用を添付いたしますので、詳細をご確認ください。 
+
+今後ともどうぞよろしくお願い申し上げます。 
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

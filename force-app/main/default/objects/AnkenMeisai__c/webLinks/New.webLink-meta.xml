@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New</fullName>
+    <availability>online</availability>
+    <description>/a00/e?00N28000007WE9d={!clofor_com_cfs__CustomObject1__c.clofor_com_cfs__BUYING__c}&amp;retURL={!URLENCODE(clofor_com_cfs__CustomObject1__c.Id)}&amp;CF00N28000007WE7r={!clofor_com_cfs__CustomObject1__c.Name}&amp; CF00N28000007WE7r_lkid={!URLENCODE(clofor_com_cfs__CustomObject1__c.Id)}&amp;00N28000007WE9e={!clofor_com_cfs__CustomObject1__c.clofor_com_cfs__ExchangeRate__c}&amp;{!clofor_com_cfs__AnkenMeisai__c.Id}</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>NEW</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/</url>
+</WebLink>

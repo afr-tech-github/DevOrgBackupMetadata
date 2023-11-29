@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CC_LINK__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>Paste the link for Customs Clearance Document generated in &apos;Content Deliveries&apos;. Also paste the password from Content Deliveries into &apos;Customs Clearance Document Password&apos;</inlineHelpText>
+    <label>CUSTOMS CLEARANCE DOCUMENT LINK</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

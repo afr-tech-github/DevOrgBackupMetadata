@@ -1,0 +1,489 @@
+<apex:page controller="VATInvoiceExcelController" applyBodyTag="false" applyHtmlTag="false" showHeader="false"
+    contentType="application/vnd.ms-excel#VATInvoice.xls" cache="true" action="{!generateExcel}">
+    <head>
+        <style type="text/css">
+            @page{
+                margin-left: 15px;
+                margin-right: 15;                
+            }
+
+            body {
+                font-size: 12px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            }
+
+            th {
+                text-align: center;
+            }
+
+            .dataTable th {
+                font-weight: normal !important;
+            }
+
+            .title {
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+            }
+            
+            .dataTable {
+                width: 100%;
+                border-collapse: collapse;
+                border: none;
+            }
+            .dataTable th{
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            .dataTable tr {
+                border: thin solid;
+                border-collapse: collapse;
+                vertical-align: middle;
+            }
+            
+            .dataTable td {
+                font-size: 12px;
+                text-align:center;
+                border-collapse: collapse;
+                border: thin solid;
+                line-height: 30px;
+            }
+
+            #tbCompanyInfo, .clsVatInvoice {
+                width: 100%;
+                font-size: 12px;
+            }
+
+            #tbCompanyInfo td {
+                text-align: center;
+            }
+            .clsVatInvoice td {vertical-align: top;}
+
+            .clsLeft {text-align: left;}
+            .clsRight {text-align: right;}
+            .clsCenter {text-align: center;}
+            .clsA {
+                border: none !important;
+            }
+        </style>
+        <meta http-equiv="Content-Type" content="text/HTML;charset=UTF-8" />
+    </head>
+    <body>
+        <table id="tbCompanyInfo">
+            <tr>
+                <td style="width: 20px !important;"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="4" style="font-size: 17px; font-weight: bold;">
+                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td rowspan="5" colspan="3" style="text-align: center; vertical-align: middle">
+                    <img align="center" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="180" height="140"/>
+                </td>
+                <td colspan="4" style="font-size: 17px; font-weight: bold;">
+                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Name__c}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="font-size: 12px;">
+                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Address__c}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="font-size: 12px;">
+                    {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Address__c}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="font-size: 12px;">
+                    លេខអត្តសញ្ញាណកម្មអតប (VAT No) : {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Tax_Code__c}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="font-size: 12px;">
+                    លេខទូរស័ព្ទ / Tel: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c}      លេខទូរសារ / Fax: {!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c}
+                </td>
+            </tr>
+        </table>
+        
+        <p/>
+        <p/>
+        <div class='title'>វិក្កយបត្រអាករ</div>
+        <div class='title'>TAX INVOICE</div>
+        <p/>
+        <p/>
+
+        <table id="tbVatInvoice" class="clsVatInvoice">
+            <tr>
+                <td class="clsA" style="width: 20px !important;"></td>
+                <td colspan="2">អតិថិជន​</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="4">{!objVatInvoice.clofor_com_cfs__VAT_INVOICE_TO__r.Name}</td>
+                <td>លេខរៀងវិក្កយប័ត្រ</td>
+                <td>:</td>
+                <td class="clsLeft">{!objVatInvoice.clofor_com_cfs__RED_INVOICE_NO__c}</td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2">(Customer)</td>
+                <td>:</td>
+                <td colspan="4">{!objVatInvoice.clofor_com_cfs__VAT_INVOICE_TO__r.clofor_com_cfs__EnglishCompanyName__c}</td>
+                <td>Invoice No.</td>
+                <td></td>
+                <td></td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2">អាសយដ្ឋាន</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="4">{!cusAddress}</td>
+                <td>កាលបរិច្ឆេទ</td>
+                <td>:</td>
+                <td class="clsLeft">
+                    &nbsp;<apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                        <apex:param value="{!objVatInvoice.VATInvoicePrintDate__c}"/>
+                    </apex:outputText>
+                </td>                        
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2">(Address)</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="4">
+                    {!objVatInvoice.clofor_com_cfs__VAT_INVOICE_TO__r.clofor_com_cfs__EnglishAddress__c}
+                </td>    
+                <td>Date</td>
+                <td></td>
+                <td></td>              
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2">លេខទូរស័ព្ទ (Tel)</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="4">&nbsp;{!objVatInvoice.clofor_com_cfs__CUSTOMER_PHONE_NUMBER__c}</td>
+                <td></td>
+                <td></td>
+                <td></td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="4">លេលេខអត្តសញ្ញាណកម្មសារពើពន្ធ (VAT No) : {!objVatInvoice.clofor_com_cfs__VAT_INVOICE_TO__r.clofor_com_cfs__TAX_CODE__c}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>        
+            </tr>
+        </table>
+        <br/>
+
+        <table class="clsVatInvoice">
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2" class="clsRight">Master Booking No</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="2">{!customObject1.clofor_com_cfs__MASTER_BOOKINGNO__c}</td>
+                <td colspan="2" class="clsRight">House Booking No :</td>
+                <td class="clsLeft" colspan="3">{!customObject1.clofor_com_cfs__HouseBookingNo__c}</td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2" class="clsRight">MBL / MAWB No</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="2">{!customObject1.clofor_com_cfs__MBL_Number_SEA_AIR__c}</td>
+                <td colspan="2" class="clsRight">P.O.L / A.O.D :</td>
+                <td class="clsLeft" colspan="3">{!customObject1.clofor_com_cfs__PortOfLoadingDetailPrint__c}</td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2" class="clsRight">HBL / HAWB No</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="2">{!customObject1.clofor_com_cfs__HBL_Number_SEA_AIR__c}</td>
+                <td colspan="2" class="clsRight">P.O.D / A.O.A :</td>
+                <td class="clsLeft" colspan="3">{!customObject1.clofor_com_cfs__PortOfDischargeDetailPrint__c}</td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="width: 50px !important;"></td>
+                <td style="width: 50px !important;"></td>
+                <td colspan="2" class="clsRight"><apex:outputText value="ETD & ETA :"/></td>
+                <td class="clsLeft" colspan="3">
+                    &nbsp;<apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                        <apex:param value="{!customObject1.ETD__c}"/>
+                    </apex:outputText>
+                    <apex:outputText value=" & " rendered="{!AND(customObject1.ETD__c != null, customObject1.ETA__c != null)}"/>
+                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                        <apex:param value="{!customObject1.ETA__c}"/>
+                    </apex:outputText>
+                </td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2" class="clsRight">Transport Type</td>
+                <td>:</td>
+                <td class="clsLeft" colspan="3">                    
+                    <apex:outputText value="{!customObject1.TranporationType__c} : "/>                    
+                    <apex:outputText value="{!customObject1.Container__c}*{!customObject1.ContainerNumber__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container__c != null, customObject1.ContainerNumber__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container2__c}*{!customObject1.ContainerNumber2__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container2__c != null, customObject1.ContainerNumber2__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container3__c}*{!customObject1.ContainerNumber3__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container3__c != null, customObject1.ContainerNumber3__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container4__c}*{!customObject1.ContainerNumber4__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container4__c != null, customObject1.ContainerNumber4__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container5__c}*{!customObject1.ContainerNumber5__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container5__c != null, customObject1.ContainerNumber5__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container6__c}*{!customObject1.ContainerNumber6__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container6__c != null, customObject1.ContainerNumber6__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.Container7__c}*{!customObject1.ContainerNumber7__c}"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'FCL', customObject1.Container7__c != null, customObject1.ContainerNumber7__c != null)}"/>
+                    <apex:outputText value="/{!customObject1.NumberOfContainers__c}/{!customObject1.CBM__c} CBM"
+                                    rendered="{!AND(customObject1.TranporationType__c == 'LCL', customObject1.NumberOfContainers__c != null, customObject1.CBM__c != null)}"/>
+                </td>
+                <td class="clsRight"></td>
+                <td colspan="3"></td>                
+            </tr>
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="2" class="clsRight"><apex:outputText value="Container & Seal No"/></td>
+                <td>:</td>
+                <td class="clsLeft" colspan="7">{!containerSealNo}</td>                   
+            </tr>
+        </table>
+        <br/>
+        
+        <table class='dataTable'>
+            <tr>
+                <th class="clsA"></th>
+                <th class="clsCol1">​​​​​ល.រ​​​​<br/>SQ</th>
+                <th colspan="4" class="clsCol2">​​​​​បរិយាយមុខទំនិញ<br/>DESCRIPTION</th>
+                <th class="clsCol3">ឯកតាសាក<br/>UNIT</th>
+                <th class="clsCol4">បរិមាណ<br/>QUANTITY</th>
+                <th class="clsCol5">​​​​​ថ្លៃឯកតា<br/>UNIT PRICE</th>
+                <th colspan="2" class="clsCol6">​​​​​ថ្លៃទំនិញ<br/>TOTAL AMOUNT</th>
+            </tr>
+            <apex:variable value="{!0}" var="rowNo"/>
+            <apex:repeat value="{!invoicingVatList}" var="invoicingVatItem">
+            <apex:variable value="{!rowNo + 1}" var="rowNo"/>
+                <tr>
+                    <td class="clsA"></td>
+                    <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol1">                         
+                        {!rowNo}
+                    </td>
+                    <td colspan="4" style="text-align: left; border-top: none !important; border-bottom: none !important;" class="clsCol2">
+                        <apex:outputText value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.InsatuyouSyohin__c}"/><br/>
+                        <apex:outputText value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.InsatuyouSyohinEng__c}"/>
+                    </td>
+                    <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol3">
+                        <apex:outputText value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.ChargeUnitInPrint__c}"/>
+                    </td>
+                    <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol4">
+                        <apex:outputText value="{0,number,###,##0.000}" rendered="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.Suryo__c != null}">
+                            <apex:param value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.Suryo__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="text-align: right; border-top: none !important; border-bottom: none !important;" class="clsCol5">
+                        <apex:outputText value="{0,number,###,##0.00}" rendered="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.SellTankaUSD__c != null}">
+                            <apex:param value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.SellTankaUSD__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td colspan="2" style="text-align: right; border-top: none !important; border-bottom: none !important;" class="clsCol6">
+                        <apex:outputText value="{0,number,###,##0.00}" rendered="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.SellAmountUSD__c != null}">
+                            <apex:param value="{!invoicingVatItem.clofor_com_cfs__INVOICING__r.SellAmountUSD__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>                   
+            </apex:repeat>
+            <tr>
+                <td class="clsA"></td>
+                <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol1">                         
+                </td>
+                <td colspan="4" style="text-align: left; border-top: none !important; border-bottom: none !important;" class="clsCol2">
+                </td>
+                <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol3">
+                </td>
+                <td style="text-align: center; border-top: none !important; border-bottom: none !important;" class="clsCol4">
+                </td>
+                <td style="text-align: right; border-top: none !important; border-bottom: none !important;" class="clsCol5">
+                </td>
+                <td colspan="2" style="text-align: right; border-top: none !important; border-bottom: none !important;" class="clsCol6">
+                </td>
+            </tr>           
+            <tr>
+                <td class="clsA"></td>
+                <td colspan="5" style="text-align: left;">
+                    <div>&nbsp;Please transfer to our bank A/C No:</div>
+                    <apex:outputPanel rendered="{!bankType == 'local1'}">
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_Address_1__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}"/></div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!bankType == 'local2'}">
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_Address_2__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}"/></div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!bankType == 'local3'}">
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_Address_3__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}"/></div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!bankType == 'local4'}">
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_Address_4__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}"/></div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!bankType == 'local5'}">
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Account_Address_5__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}"/></div>
+                        <div>&nbsp;<apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}"/></div>
+                    </apex:outputPanel>
+                </td>
+                <td colspan="4" style="text-align: right; border-right: none !important;">
+                    <div>សរុប​/SUB TOTAL    :</div>
+                    <div>អាករលើតម្លៃបន្ថែម 10% /VAT (10%)   :</div>
+                    <div>សរុបរួម/ GRAND TOTAL   :</div>
+                    <br/>
+                    <div>អត្រាប្ដូរប្រាក់ជារៀល/EXCHANGE RATE IN RIEL    :</div>
+                    <br/>
+                    <div>តម្លៃសរុបជារៀល/ GRAND TOTAL IN RIEL    :</div>
+                </td>
+                <td style="text-align: right; border-left: none !important;">
+                        <div>
+                            <apex:outputText value="&nbsp;" escape="false"
+                            rendered="{!objVatInvoice.TotalAmountOfVATSellingFCY__c == null}"/>
+
+                            <apex:outputText value="${0,number,###,##0.00}"
+                                    rendered="{!objVatInvoice.TotalAmountOfVATSellingFCY__c != null}">
+                                <apex:param value="{!objVatInvoice.TotalAmountOfVATSellingFCY__c}" />
+                            </apex:outputText>
+                        </div>
+                        <div>
+                            <apex:outputText value="&nbsp;" escape="false"
+                            rendered="{!objVatInvoice.AmountOfTaxVATSellingFCY__c == null}"/>
+
+                            <apex:outputText value="${0,number,###,##0.00}"
+                                    rendered="{!objVatInvoice.AmountOfTaxVATSellingFCY__c != null}">
+                                <apex:param value="{!objVatInvoice.AmountOfTaxVATSellingFCY__c}" />
+                            </apex:outputText>
+                        </div>
+                        <div>
+                            <apex:outputText value="&nbsp;" escape="false"
+                            rendered="{!objVatInvoice.AmountVATSellingIncludeVATFCY__c == null}"/>
+
+                            <apex:outputText value="${0,number,###,##0.00}"
+                                    rendered="{!objVatInvoice.AmountVATSellingIncludeVATFCY__c != null}">
+                                <apex:param value="{!objVatInvoice.AmountVATSellingIncludeVATFCY__c}" />
+                            </apex:outputText>
+                        </div>
+                        <br/>
+                        <div>
+                            <apex:outputText value="&nbsp;" escape="false"
+                            rendered="{!objVatInvoice.ExchangeRate__c == null}"/>
+
+                            <apex:outputText value="R{0,number,###,###}"
+                                    rendered="{!objVatInvoice.ExchangeRate__c != null}">
+                                <apex:param value="{!objVatInvoice.ExchangeRate__c}" />
+                            </apex:outputText>
+                        </div>
+                        <br/>
+                        <div>
+                            <apex:outputText value="&nbsp;" escape="false"
+                            rendered="{!objVatInvoice.AmountVATSellingIncludeVAT__c == null}"/>
+
+                            <apex:outputText value="R{0,number,###,###}"
+                                    rendered="{!objVatInvoice.AmountVATSellingIncludeVAT__c != null}">
+                                <apex:param value="{!objVatInvoice.AmountVATSellingIncludeVAT__c}" />
+                            </apex:outputText>
+                        </div>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        
+        <table style="font-size: 12px;">
+            <tr>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center;">{!objVatInvoice.clofor_com_cfs__VAT_INVOICE_TO__r.Name}</td>
+                <td></td>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center;">{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Local_Company_Name__c}</td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <table style="font-size: 12px;">
+            <tr>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center; margin-top: 100px; border-top: thin black solid; border-collapse: collapse;">
+                    <span>ហត្ថលេខា និងឈ្មោះ អ្នកទិញ</span>
+                </td>
+                <td></td>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center; margin-top: 100px; border-top: thin black solid; border-collapse: collapse;">
+                    <span>ហត្ថលេខា និងឈ្មោះ អ្នកលក់</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center;">
+                    <apex:outputText value="Customer's Signature & Name"/>
+                </td>
+                <td></td>
+                <td></td>
+                <td colspan="4" style="width: 40%; text-align: center;">
+                   <apex:outputText value="Seller's Signature & Name"/>
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+        <table style="font-size: 12px;">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>  
+                <td></td>          
+                <td class="clsCenter">
+                    <apex:outputText value="&nbsp;1/1"/>
+                </td>                        
+                <td colspan="4" class="clsRight">
+                    Powered by AFR Solutions Co., Ltd.
+                </td>
+            </tr>
+        </table>
+    </body>
+</apex:page>

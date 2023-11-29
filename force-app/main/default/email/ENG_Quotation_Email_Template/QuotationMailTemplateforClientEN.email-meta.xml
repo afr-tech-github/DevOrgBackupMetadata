@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when you send quotation to customer.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>[QUOTATION]AUTO EMAIL FOR CUSTOMER</name>
+    <style>none</style>
+    <subject>Quotation Status by CloTra -ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

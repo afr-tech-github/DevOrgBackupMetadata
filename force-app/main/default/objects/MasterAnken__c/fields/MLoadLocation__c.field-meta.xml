@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MLoadLocation__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>CARGO LOADING WAREHOUSE</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.MBookingNv__c</field>
+            <operation>equals</operation>
+            <valueField>LoadLocation__c.WharehouseCompany__c</valueField>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>LoadLocation__c</referenceTo>
+    <relationshipLabel>CONSOLIDATION (CARGO LOADING WAREHOUSE)</relationshipLabel>
+    <relationshipName>M_BL</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

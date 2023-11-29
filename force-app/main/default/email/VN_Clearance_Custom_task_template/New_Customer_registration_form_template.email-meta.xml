@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Sử dụng khi muốn gửi tới Khách Hàng Mới mẫu đăng kí.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>MẪU ĐĂNG KÝ KHÁCH HÀNG MỚI</name>
+    <style>none</style>
+    <subject>old</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

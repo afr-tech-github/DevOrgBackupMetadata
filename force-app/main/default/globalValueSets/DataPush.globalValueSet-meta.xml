@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Data Push To Putaway</fullName>
+        <default>false</default>
+        <label>Data Push To PUTAWAY</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To VAS</fullName>
+        <default>false</default>
+        <label>Data Push To VAS</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To Stock</fullName>
+        <default>false</default>
+        <label>Data Push To STOCK</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To Picking</fullName>
+        <default>false</default>
+        <label>Data Push To PICKING</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To Dispatch</fullName>
+        <default>false</default>
+        <label>Data Push To DISPATCH</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To GOODS PURCHASING ORDER</fullName>
+        <default>false</default>
+        <label>Data Push To GOODS PURCHASING ORDER</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To Billing</fullName>
+        <default>false</default>
+        <label>Data Push To BILLING</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Push To RECEIVING</fullName>
+        <default>false</default>
+        <label>Data Push To RECEIVING</label>
+    </customValue>
+    <masterLabel>CloWMS/CloTRS DATA PUSH</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

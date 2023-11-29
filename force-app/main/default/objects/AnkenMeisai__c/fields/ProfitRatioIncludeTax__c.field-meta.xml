@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProfitRatioIncludeTax__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF (SellInTaxAmountJPY__c  = null || SellInTaxAmountJPY__c  = 0, 0, ( SellInTaxAmountJPY__c  -  BuyInTaxAmountJPY__c) / SellInTaxAmountJPY__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Profit Ratio Include Tax=(\R\Nprofit Include Tax(FCY)=Amount Selling including Tax(FCY)-Amount Buying including Tax(FCY))/Amount Selling including Tax(FCY)</inlineHelpText>
+    <label>PROFIT RATIO INCLUDE TAX</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NewAll</fullName>
+    <columns>NAME</columns>
+    <columns>Carrier_Code__c</columns>
+    <columns>Company_Name__c</columns>
+    <columns>OBJECT_ID</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CarrierAirlinerClass__c</field>
+        <operation>equals</operation>
+        <value>Airliner</value>
+    </filters>
+    <label>All</label>
+</ListView>

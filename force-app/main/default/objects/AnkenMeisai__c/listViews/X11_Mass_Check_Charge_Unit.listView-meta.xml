@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X11_Mass_Check_Charge_Unit</fullName>
+    <columns>SeikyuBangou__c</columns>
+    <columns>TextFTMSSOID__c</columns>
+    <columns>NAME</columns>
+    <columns>Tariff__c</columns>
+    <columns>InsatuyouSyohin__c</columns>
+    <columns>Seikyusaki__c</columns>
+    <columns>PaymentTo__c</columns>
+    <columns>Suryo__c</columns>
+    <columns>ChargeUnitInPrint__c</columns>
+    <columns>ChargeUnit__c</columns>
+    <columns>ContainerSize__c</columns>
+    <columns>ADVANCE_PAYMENT_ON_BEHALF_OF__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>AnkenMeisai__c.Selling_Buyging_Standard</value>
+    </filters>
+    <label>11. Mass Check: Charge Unit</label>
+</ListView>

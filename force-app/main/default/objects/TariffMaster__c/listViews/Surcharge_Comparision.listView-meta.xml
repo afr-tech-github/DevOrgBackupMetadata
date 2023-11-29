@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Surcharge_Comparision</fullName>
+    <columns>NAME</columns>
+    <columns>PrintProduct__c</columns>
+    <columns>ContainerSize__c</columns>
+    <columns>Carrier_Code__c</columns>
+    <columns>POD__c</columns>
+    <columns>POL__c</columns>
+    <columns>FREE_DEMURRAGE_EXTENSION__c</columns>
+    <columns>FREE_DETENTION_EXTENSION__c</columns>
+    <columns>EngPrintProduct__c</columns>
+    <columns>BuyKingaku__c</columns>
+    <columns>BuyAmountUSD__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ContainerSize__c</field>
+        <operation>equals</operation>
+        <value>20&apos;DC</value>
+    </filters>
+    <filters>
+        <field>POL__c</field>
+        <operation>equals</operation>
+        <value>HOCHIMIN</value>
+    </filters>
+    <filters>
+        <field>POD__c</field>
+        <operation>equals</operation>
+        <value>TOKYO</value>
+    </filters>
+    <label>Surcharge Comparision</label>
+    <language>en_US</language>
+</ListView>

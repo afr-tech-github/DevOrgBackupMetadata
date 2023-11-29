@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Fruit</fullName>
+        <default>false</default>
+        <label>Fruit</label>
+    </customValue>
+    <customValue>
+        <fullName>Fruit Juice</fullName>
+        <default>false</default>
+        <label>Fruit Juice</label>
+    </customValue>
+    <customValue>
+        <fullName>Vegetable</fullName>
+        <default>false</default>
+        <label>Vegetable</label>
+    </customValue>
+    <customValue>
+        <fullName>Vegetable Juice</fullName>
+        <default>false</default>
+        <label>Vegetable Juice</label>
+    </customValue>
+    <customValue>
+        <fullName>Meat</fullName>
+        <default>false</default>
+        <label>Meat</label>
+    </customValue>
+    <customValue>
+        <fullName>Poultry</fullName>
+        <default>false</default>
+        <label>Poultry</label>
+    </customValue>
+    <customValue>
+        <fullName>Seafood</fullName>
+        <default>false</default>
+        <label>Seafood</label>
+    </customValue>
+    <customValue>
+        <fullName>Eggs</fullName>
+        <default>false</default>
+        <label>Eggs</label>
+    </customValue>
+    <customValue>
+        <fullName>Nuts</fullName>
+        <default>false</default>
+        <label>Nuts</label>
+    </customValue>
+    <customValue>
+        <fullName>Seeds</fullName>
+        <default>false</default>
+        <label>Seeds</label>
+    </customValue>
+    <customValue>
+        <fullName>Beans</fullName>
+        <default>false</default>
+        <label>Beans</label>
+    </customValue>
+    <customValue>
+        <fullName>Fluid Milk</fullName>
+        <default>false</default>
+        <label>Fluid Milk</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheese</fullName>
+        <default>false</default>
+        <label>Cheese</label>
+    </customValue>
+    <customValue>
+        <fullName>Yogurt</fullName>
+        <default>false</default>
+        <label>Yogurt</label>
+    </customValue>
+    <customValue>
+        <fullName>Ice Cream</fullName>
+        <default>false</default>
+        <label>Ice Cream</label>
+    </customValue>
+    <customValue>
+        <fullName>Pudding</fullName>
+        <default>false</default>
+        <label>Pudding</label>
+    </customValue>
+    <customValue>
+        <fullName>Wheat</fullName>
+        <default>false</default>
+        <label>Wheat</label>
+    </customValue>
+    <customValue>
+        <fullName>Rice</fullName>
+        <default>false</default>
+        <label>Rice</label>
+    </customValue>
+    <customValue>
+        <fullName>Oats</fullName>
+        <default>false</default>
+        <label>Oats</label>
+    </customValue>
+    <customValue>
+        <fullName>Barley</fullName>
+        <default>false</default>
+        <label>Barley</label>
+    </customValue>
+    <customValue>
+        <fullName>Cornmeal</fullName>
+        <default>false</default>
+        <label>Cornmeal</label>
+    </customValue>
+    <customValue>
+        <fullName>Nuts Oil</fullName>
+        <default>false</default>
+        <label>Nuts Oil</label>
+    </customValue>
+    <customValue>
+        <fullName>Olives Oil</fullName>
+        <default>false</default>
+        <label>Olives Oil</label>
+    </customValue>
+    <customValue>
+        <fullName>Avocados Oil</fullName>
+        <default>false</default>
+        <label>Avocados Oil</label>
+    </customValue>
+    <customValue>
+        <fullName>Fish Oil</fullName>
+        <default>false</default>
+        <label>Fish Oil</label>
+    </customValue>
+    <customValue>
+        <fullName>Snacks</fullName>
+        <default>false</default>
+        <label>Snacks</label>
+    </customValue>
+    <customValue>
+        <fullName>Alcohol</fullName>
+        <default>false</default>
+        <label>Alcohol</label>
+    </customValue>
+    <customValue>
+        <fullName>Cafe</fullName>
+        <default>false</default>
+        <label>Cafe</label>
+    </customValue>
+    <masterLabel>FOOD SUB-CATEGORY</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

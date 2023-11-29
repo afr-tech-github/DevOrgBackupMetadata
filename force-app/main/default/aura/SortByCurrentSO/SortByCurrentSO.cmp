@@ -1,0 +1,6 @@
+<aura:component controller ="FMS_SortByCurrentSOController"
+				implements="force:lightningQuickActionWithoutHeader,flexipage:availableForRecordHome,force:hasRecordId"
+				access="global">
+    <!--<ltng:require styles="{!$Resource.ModalWidth90CSS}"/>-->
+    <c:lwcSortBySo recordId="{!v.recordId}"></c:lwcSortBySo>
+</aura:component>

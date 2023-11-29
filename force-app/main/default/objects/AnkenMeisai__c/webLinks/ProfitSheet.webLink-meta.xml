@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProfitSheet</fullName>
+    <availability>online</availability>
+    <description>same as https://afrs-dev-ed.my.salesforce.com/00b28000001ZVAf?type=01I280000011C15&amp;setupid=CustomObjects&amp;retURL=%2F01I280000011C15%3Fsetupid%3DCustomObjects</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>PROFIT SHEET</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>/apex/clofor_com_cfs__ProfitSheet?id={!URLENCODE(CustomObject1__c.Id)}</url>
+</WebLink>

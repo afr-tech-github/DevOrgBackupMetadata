@@ -1,0 +1,475 @@
+<apex:page controller="ProfitSheetController" contentType="text-html" showHeader="false" applyHtmlTag="false"
+           applyBodyTag="false" renderAs="pdf">
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial Unicode MS;
+                font-size: 10pt;
+                height: 681px;
+                width: 100%;
+            }
+
+            @page {
+                size: 297mm 210mm;
+            }
+
+            .f7 {
+                font-size: 7pt;
+            }
+
+            .f9 {
+                font-size: 9pt;
+            }
+            .f15 {
+                font-size: 15pt;
+            }
+            .f25 {
+                font-size: 25pt;
+                font-weight: bold;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                vertical-align: text-top;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+    <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+        <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+             width="130px" height="60px"/>
+    </div>
+    <div class="f15" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+      PROFIT SHEET   
+    </div>
+    <div class="f7" style="position:absolute; margin-top:25px; left:130px;  width:710px; text-align:center;">
+        <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:65px; left:200px; width:600px;  text-align:center;">
+        <apex:outputLabel value="TEL:{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX:{!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:0px; left:810px;  text-align:left;">
+        ISSUE DATE:
+    </div>
+    <div class="f7" style="position:absolute; margin-top:0px; left:880px; width:110px;  ">
+        <apex:outputText value="{0,date,dd/MM/yyyy}">
+            <apex:param value="{!shipment.PrintDate__c}"/>
+        </apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:20px; left:810px;  text-align:left;">
+        <apex:outputText value="WKID : S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:40px; left:810px;  text-align:left;">
+        <apex:outputText value="REF NO: {!shipment.REFNO__c}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:60px; left:810px;  text-align:left;">
+        <apex:outputText value="PIC: {!shipment.PersonInCharge__r.Name}"></apex:outputText>
+    </div>
+
+    <div style="height: 100px"></div>
+
+
+    <div style="margin-top: 5px; display: block">
+        <table style="width: 98%; border: 1px solid black;" class="f9">
+            <tr>
+                <td colspan="4">
+                    CONSIGNEE<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.Cnee__r.EnglishCompanyName__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">VESSEL<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.VESSEL_FLIGHT__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">VOYAGE NO<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.Voy_No__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">H.B/L NO<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.HBL_Number_SEA_AIR__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">M.B/L NO<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.MBL_Number_SEA_AIR__c}"></apex:outputText></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    SHIPPER<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.shipper__r.EnglishCompanyName__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">PORT OF LOADING<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.POL__r.Name} - {!shipment.POL__r.Country_Name__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">PORT OF DISCHARGE<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.POD__r.Name} - {!shipment.POD__r.Country_Name__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">PLACE OF DELIVERY<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.Place_of_Delivery__r.Name} - {!shipment.Place_of_Delivery__r.Country_Name__c}"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">ETA<br/>
+                    <span class="f7">
+                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                            <apex:param value="{!shipment.ETA__c}"/>
+                        </apex:outputText>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    DESCRIPTION OF GOODS<br/>
+                    <span class="f7"><apex:outputfield value="{!shipment.Item__c}"/></span>
+                </td>
+                <td style="width: 13%;">PACKAGE<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.carton__c} {!shipment.UnitType__c}"></apex:outputText>(s)</span>
+                </td>
+                <td style="width: 13%;">GROSS WEIGHT<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.weight__c} KGS"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">MEASUREMENT<br/>
+                    <span class="f7"><apex:outputText value="{!shipment.CBM__c} CBM"></apex:outputText></span>
+                </td>
+                <td style="width: 13%;">CTNR SIZE * NO<br/>
+                    <span class="f7">
+                        <div class="f7">
+                            <apex:outputText value="{!shipment.Container__c} {!shipment.ContainerNumber__c}"/>
+                            <apex:outputText value=" / {!shipment.Container2__c} {!shipment.ContainerNumber2__c}"/>
+                        </div>
+                        <div class="f7">
+                            <apex:outputText value="{!shipment.Container3__c} {!shipment.ContainerNumber3__c}"/>
+                            <apex:outputText value=" / {!shipment.Container4__c} {!shipment.ContainerNumber4__c}"/>
+                        </div>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="margin-top: 15px; display: block">
+        <table style="width: 98%; border: 1px solid black; text-align: left;" class="f7">
+            <apex:repeat value="{!referenceLines}" var="ref">
+                <tr>
+                    <td style="width: 50%; padding-left: 10px;">{!ref.firstReference}</td>
+                    <td style="width: 50%; padding-left: 10px;">{!ref.secondReference}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+    </div>
+
+    <div style="margin-top: 15px; display: block">
+        <apex:repeat value="{!invoicingListWrappers}" var="invoicingListWrapper">
+            <table style="width: 98%; border: 1px solid black; text-align: center" class="f9">
+                <tr>
+                    <td colspan="3" rowspan="2">
+                        DESCRIPTION
+                    </td>
+                    <td colspan="5">REVENUE</td>
+                    <td colspan="5">COST</td>
+                    <td colspan="2">PROFIT</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Invoice to</td>
+                    <td colspan="2">Total</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">Payment To</td>
+                    <td colspan="2">Total</td>
+                    <td>VAT</td>
+                    <td>Total</td>
+                    <td rowspan="2">(USD)</td>
+                    <td rowspan="2">(VND)</td>
+                </tr>
+                <tr>
+                    <td style="width: 150px;">Item</td>
+                    <td>Q'ty</td>
+                    <td>Unit</td>
+                    <td>(USD)</td>
+                    <td>(VND)</td>
+                    <td>(VND)</td>
+                    <td>(VND)</td>
+                    <td>(USD)</td>
+                    <td>(VND)</td>
+                    <td>(VND)</td>
+                    <td>(VND)</td>
+                </tr>
+
+
+                <apex:repeat value="{!invoicingListWrapper.invoicingList}" var="invoicing">
+                    <tr style="text-align: right;" class="f7">
+                        <td style="text-align: left;">
+                        <span>
+                                {!SUBSTITUTE(SUBSTITUTE(invoicing.InsatuyouSyohinEng__c,'Surcharge Included' ,''),'Surcharge Excluded','')}
+                        </span>
+                            <br/>
+
+                            <div style="margin-left: 100px; font-style: italic;">Ex Rate</div>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.#}">
+                                <apex:param value="{!invoicing.Suryo__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:variable var="unitKey" value="{!invoicing.Tariff__r.UNIT__c}"/>
+                            <apex:outputText value="{!translations[unitKey]}" rendered="{!unitKey != null}"/>
+                        </td>
+                        <td>
+                                {!invoicing.Seikyusaki__r.Reference_Number__c}
+                        </td>
+                        <td>
+                            <span>
+                                <apex:outputText value="{0, number, ###,###,##0.###}">
+                                    <apex:param value="{!invoicing.SellAmountUSD__c}"/>
+                                </apex:outputText>
+                            </span>
+                            <br/>
+                            <span>{!invoicing.KawaseSel__c}</span>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.SellAmountJPN__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.SellTaxNum__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.SellInTaxAmountJPY__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>{!invoicing.PaymentTo__r.Reference_Number__c}</td>
+
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.BuyAmountUSD__c}"/>
+                            </apex:outputText>
+                            <br/>
+                            <span>{!invoicing.KawaseBay__c}</span>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!invoicing.BuyAmountJPN__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.BuyTaxNum__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!invoicing.BuyInTaxAmountJPY__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.###}">
+                                <apex:param value="{!invoicing.PROFIT_USD__c}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!invoicing.Ararigaku__c}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+
+                </apex:repeat>
+                <apex:outputText rendered="{!(invoicingListWrapper.pageNo = numberOfPages)}">
+                    <tr style="text-align: right;" class="f7">
+                        <td colspan="3" style="text-align: left">TOTAL</td>
+                        <td></td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!renvenueCostSummary.totalRevenueUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!renvenueCostSummary.totalRevenue}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.0##}">
+                                <apex:param value="{!renvenueCostSummary.totalRevenueTax}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!renvenueCostSummary.totalRevenueInclTax}"/>
+                            </apex:outputText>
+                        </td>
+                        <td></td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!renvenueCostSummary.totalCostUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!renvenueCostSummary.totalCost}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.0##}">
+                                <apex:param value="{!renvenueCostSummary.totalCostTax}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!renvenueCostSummary.totalCostInclTax}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0.##}">
+                                <apex:param value="{!renvenueCostSummary.totalProfitUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}">
+                                <apex:param value="{!renvenueCostSummary.totalProfit}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:outputText>
+            </table>
+
+            <apex:outputText rendered="{!NOT(invoicingListWrapper.pageNo = numberOfPages)}">
+                <div style="page-break-before: always;"></div>
+                <div style="height:8px;"></div>
+                <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+                    <img align="middle"
+                         src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+                         width="130px" height="60px"/>
+                </div>
+                <div class="f15"
+                     style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+                    PROFIT SHEET
+                </div>
+                <div class="f7"
+                     style="position:absolute; margin-top:25px; left:130px;  width:710px; text-align:center;">
+                    <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/>
+                </div>
+                <div class="f7"
+                     style="position:absolute; margin-top:65px; left:200px; width:600px;  text-align:center;">
+                    <apex:outputLabel value="TEL:{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX:{!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/>
+                </div>
+                <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+                    ISSUE DATE:
+                </div>
+                <div class="f7" style="position:absolute; margin-top:0px; left:950px; width:110px;  ">
+                    <apex:outputText value="{0,date,yyyy/MM/dd}">
+                        <apex:param value="{!shipment.PrintDate__c}"/>
+                    </apex:outputText>
+                </div>
+                <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+                    <apex:outputText value="WKID : {!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"></apex:outputText>
+                </div>
+                <div class="f7" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+                    <apex:outputText value="REF NO: S{!shipment.REFNO__c}"></apex:outputText>
+                </div>
+                <div class="f7" style="position:absolute; margin-top:60px; left:880px;  text-align:left;">
+                    <apex:outputText value="PIC: {!shipment.PersonInCharge__r.Name}"></apex:outputText>
+                </div>
+
+                <div style="height: 100px"></div>
+            </apex:outputText>
+        </apex:repeat>
+    </div>
+
+    <div style="page-break-before: always;"></div>
+    <div STYLE="position:absolute; z-index:-2; left:0px; margin-top:0px;">
+        <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}"
+             width="130px" height="60px"/>
+    </div>
+    <div class="f15" style="position:absolute; margin-top:0px; left:200px; height:5px; width:600px; text-align:center;">
+        PROFIT SHEET
+    </div>
+    <div class="f7" style="position:absolute; margin-top:25px; left:130px;  width:710px; text-align:center;">
+        <apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:65px; left:200px; width:600px;  text-align:center;">
+        <apex:outputLabel value="TEL:{!$Setup.Site_Custom_Settings__c.Company_Phone__c}     FAX:{!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:0px; left:880px;  text-align:left;">
+        ISSUE DATE:
+    </div>
+    <div class="f7" style="position:absolute; margin-top:0px; left:950px; width:110px;  ">
+        <apex:outputText value="{0,date,yyyy/MM/dd}">
+            <apex:param value="{!shipment.PrintDate__c}"/>
+        </apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:20px; left:880px;  text-align:left;">
+        <apex:outputText value="WKID : S{!shipment.WkInitial__c}{!shipment.Name}-{!shipment.QuotationVer__c}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:40px; left:880px;  text-align:left;">
+        <apex:outputText value="REF NO: {!shipment.REFNO__c}"></apex:outputText>
+    </div>
+    <div class="f7" style="position:absolute; margin-top:60px; left:880px;  text-align:left;">
+        <apex:outputText value="PIC: {!shipment.PersonInCharge__r.Name}"></apex:outputText>
+    </div>
+
+    <div style="height: 100px"></div>
+
+    <div style="text-align: center">
+        <div style="margin-top: 10px; width: 40%; display: inline-block; float: left;">
+            <table style="width: 98%; border: 1px solid black; text-align: center;" class="f7">
+                <tr>
+                    <td colspan="3">APPROVAL</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%; padding-right: 20px; padding-left: 20px;">PREPARED</td>
+                    <td style="width: 30%; padding-right: 20px; padding-left: 20px;">1st REVIEWED</td>
+                    <td style="width: 30%; padding-right: 20px; padding-left: 20px;">2nd REVIEWED</td>
+                </tr>
+                <tr style="height: 50px;">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-top: 10px; width: 55%; display: inline-block; float: right; margin-right: 10px">
+            <table style="width: 98%; border: 1px solid black; text-align: center;" class="f7">
+                <tr>
+                    <td>CHARGE TO</td>
+                    <td>PROFIT RATIO</td>
+                    <td>PROFIT RATIO W/ TAX</td>
+                    <td>PROFIT RATIO(USD)</td>
+                    <td>PROFIT RATIO W/ TAX(USD)</td>
+                </tr>
+                <apex:repeat value="{!profitRatioSummaryList}" var="profitRatio">
+                    <tr>
+                        <td>
+                            <apex:outputText value="{!profitRatio.referenceNumber}"/>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}%">
+                                <apex:param value="{!profitRatio.profitRatio}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}%">
+                                <apex:param value="{!profitRatio.profitRatioInclTax}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}%">
+                                <apex:param value="{!profitRatio.profitRatioUSD}"/>
+                            </apex:outputText>
+                        </td>
+                        <td>
+                            <apex:outputText value="{0, number, ###,###,##0}%">
+                                <apex:param value="{!profitRatio.profitRatioInclTaxUSD}"/>
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>
+    </div>
+    </body>
+</apex:page>

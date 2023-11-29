@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BB__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>To have lists in pickup list, the lists need to be setup in advance.
+How to Setup the Airport, 
+1.click Quick Access Menu at right side tab
+2.click view fields
+3.click BB Available Airport
+4.click New button in Picklist value
+5.add airports</inlineHelpText>
+    <label>BB AVAILABLE AIRPORT</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Custom_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Enter Break Bulk available airport in here</fullName>
+                <default>false</default>
+                <label>Enter Break Bulk available airport in here</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>業者 - BB/通関（当社手配先）</controllingFieldValue>
+            <valueName>Enter Break Bulk available airport in here</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>7</visibleLines>
+</CustomField>

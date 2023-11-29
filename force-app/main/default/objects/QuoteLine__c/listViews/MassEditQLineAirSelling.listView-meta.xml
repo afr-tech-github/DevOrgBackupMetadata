@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MassEditQLineAirSelling</fullName>
+    <columns>NAME</columns>
+    <columns>QuoteLineNumber__c</columns>
+    <columns>LineItemName__c</columns>
+    <columns>ServicePricingID__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Unit__c</columns>
+    <columns>Minimum__c</columns>
+    <columns>Under45kg__c</columns>
+    <columns>Over45kg__c</columns>
+    <columns>Over100kg__c</columns>
+    <columns>Over300kg__c</columns>
+    <columns>Over500kg__c</columns>
+    <columns>Over1000kg__c</columns>
+    <columns>FSCSCS__c</columns>
+    <columns>ISS__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>QuoteLine__c.AirLogisticsServiceQuote</value>
+    </filters>
+    <label>Mass Edit Q.Line-Air Selling</label>
+    <language>en_US</language>
+</ListView>

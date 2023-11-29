@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Created</fullName>
+        <default>false</default>
+        <label>Created</label>
+    </customValue>
+    <customValue>
+        <fullName>Planned</fullName>
+        <default>false</default>
+        <label>Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Requested to Factory</fullName>
+        <default>false</default>
+        <label>Requested to Factory</label>
+    </customValue>
+    <customValue>
+        <fullName>Requests Confirmed by Factory</fullName>
+        <default>false</default>
+        <label>Requests Confirmed by Factory</label>
+    </customValue>
+    <customValue>
+        <fullName>Repaired</fullName>
+        <default>false</default>
+        <label>Repaired</label>
+    </customValue>
+    <customValue>
+        <fullName>Completed</fullName>
+        <default>false</default>
+        <label>Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancelled</fullName>
+        <default>false</default>
+        <label>Cancelled</label>
+    </customValue>
+    <masterLabel>Repair &amp; Maintenance Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

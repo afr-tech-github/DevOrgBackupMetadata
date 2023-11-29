@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InventoryLogCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>ProductID__c</fields>
+    <fields>FacilityID__c</fields>
+    <fields>StartStockQuantity__c</fields>
+    <fields>StockInQuantity__c</fields>
+    <fields>StockOutQuantity__c</fields>
+    <fields>StockQuantityOnHand__c</fields>
+    <label>Inventory log Compact Layout</label>
+</CompactLayout>

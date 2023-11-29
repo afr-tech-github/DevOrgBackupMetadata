@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsSO</fullName>
+    <fields>ContractID__c</fields>
+    <fields>PurchasingOrderNumber__c</fields>
+    <fields>RollupTotalAmountBuying__c</fields>
+    <fields>RollupAmountOfBuyingTax__c</fields>
+    <fields>RollupBuyingAmountInclTax__c</fields>
+    <label>Goods S/O</label>
+</CompactLayout>

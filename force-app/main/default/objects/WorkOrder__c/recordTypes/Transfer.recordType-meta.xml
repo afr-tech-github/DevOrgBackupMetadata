@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transfer</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Summary</compactLayoutAssignment>
+    <description>Transfer Cargo for 1 client to another warehouse</description>
+    <label>Single Transfer</label>
+</RecordType>

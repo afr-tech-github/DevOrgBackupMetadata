@@ -1,0 +1,55 @@
+<aura:component controller ="WMS_InvoiceSelectionController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<aura:attribute name="language" type="String"/>
+	<aura:attribute name="printType" type="String" default="DEBIT_LOCAL"/>
+	<aura:attribute name="custommerId" type="String"/>
+	<aura:attribute name="selectedDisplay" type="Object"/>
+	<aura:attribute name="generalTranslation" type="Map"/>
+	<aura:attribute name="isCreateAttachment" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<div>
+		<div class="slds-card">
+		    <div class="slds-p-around_medium">
+		    	
+		    	<div class="slds-section slds-is-open">
+				  <!-- <h3 class="slds-section__title">
+				    <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+				      <lightning:icon iconName="utility:chevrondown" size="x-small" alternativeText="{!v.selectedDisplay.translationMap.wms_debitcreditslection.language_and_type_debitHeader_wms}"/>
+				      <span class="slds-truncate" title="Section Title">Select Language &amp; Invoice/Quotation</span>
+				    </button>
+				  </h3> -->
+
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="languageSelect" name="select" label="{!v.generalTranslation.language_option}" value="{!v.language}" onchange="{!c.onchangeLanguage}">
+				       	<aura:iteration items="{!v.selectedDisplay.languageOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}" selected="{!option.selected}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="printTypeSelect" name="select" label="{!v.generalTranslation.type_print}" value="{!v.printType}" onchange="{!c.onchangePrintType}">
+				       	<aura:iteration items="{!v.selectedDisplay.typePrintOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}" selected="{!option.selected}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:select aura:id="customerSelect" name="select" label="{!v.generalTranslation.customer}" value="{!v.custommerId}" onchange="{!onchangeCustomer}">
+				       	<aura:iteration items="{!v.selectedDisplay.customerOptions}" var="option">
+				            <option text="{!option.label}" value="{!option.value}"/>
+				        </aura:iteration>
+				    </lightning:select>
+				  </div>
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				  	{!v.generalTranslation.create_attachment_label}
+				    <ui:inputCheckbox aura:id="checkboxAttachment" label="{!v.generalTranslation.create_attachment_label}" value="{!v.isCreateAttachment}"/>
+				  </div>
+				  
+				  <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+				    <lightning:button variant="brand" label="{!v.generalTranslation.generate}" title="{!v.generalTranslation.generate}" onclick="{!c.handleGenerate}" />
+				  </div>
+				</div>
+				
+		    </div>
+		</div>
+	</div>
+</aura:component>

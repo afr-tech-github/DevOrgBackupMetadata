@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsSO__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Goods S/O</label>
+    <referenceTo>SALES_ORDER__c</referenceTo>
+    <relationshipName>GoodsSOCargo</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

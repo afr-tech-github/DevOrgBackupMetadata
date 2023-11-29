@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Planned</fullName>
+        <default>true</default>
+        <label>Planned</label>
+    </customValue>
+    <customValue>
+        <fullName>Notified</fullName>
+        <default>false</default>
+        <label>Notified</label>
+    </customValue>
+    <customValue>
+        <fullName>Receipt Confirmed</fullName>
+        <default>false</default>
+        <label>Receipt Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>NOTICE STATUS</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

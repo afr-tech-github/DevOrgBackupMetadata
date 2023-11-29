@@ -1,0 +1,57 @@
+<apex:page controller="FMS_VATInvoiceSelectionController" title="Invoice" showHeader="false" sidebar="false">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+        <script>
+
+            function closePopupDialog() {
+                window.top.close();
+            }
+        </script>
+    </head>
+    <apex:form >
+        <apex:sectionHeader subtitle="{!translations['invoice_selection_title']}"/>
+        <apex:pageBlock tabStyle="VAT_INVOICE__c" >
+            <apex:pageBlockButtons location="bottom">
+                <apex:outputPanel id="buttonBlock">
+                    <apex:commandButton value="Generate" action="{!generateInvoice}"/>
+                    <apex:commandButton value="close" onclick="closePopupDialog()"/>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!translations['language_and_type_Header']}" columns="1">
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!translations['language_option']}</apex:outputLabel>
+                    <apex:selectList size="1" value="{!language}" id="language">
+                        <apex:actionSupport event="onchange" action="{!refreshResultDisplay}"
+                                            reRender="buttonBlock, available_report"/>
+                        <apex:selectOptions value="{!resultDisplay.languageOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!translations['invoice_option']}</apex:outputLabel>
+                    <apex:selectList size="1" value="{!invoiceType}" id="available_report">
+                        <apex:actionSupport event="onchange" action="{!refreshResultDisplay}" reRender="groupingOption"/>
+                        <apex:selectOptions value="{!resultDisplay.invoiceTypeOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!translations['grouping_option']}</apex:outputLabel>
+                    <apex:selectList size="1" value="{!groupingType}" id="groupingOption">
+                        <apex:selectOptions value="{!resultDisplay.groupingTypeOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!translations['currency_option']}"/>
+                    <apex:selectList size="1" value="{!currencyType}">
+                        <apex:selectOptions value="{!resultDisplay.currencyTypeOptions}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="{!translations['attachment_option']}" columns="1">
+                 <apex:pageBlockSectionItem >
+                    <apex:inputCheckbox value="{!requiredAttachmentCreation}"/>
+                    <apex:outputLabel >{!translations['create_attachment_label']}</apex:outputLabel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

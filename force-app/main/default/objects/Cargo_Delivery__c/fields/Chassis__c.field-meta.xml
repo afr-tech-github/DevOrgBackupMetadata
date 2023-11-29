@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chassis__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Chassis</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>TruckFleet__c.RecordType.Name</field>
+            <operation>equals</operation>
+            <value>Full Container Chassis</value>
+        </filterItems>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>TruckFleet__c</referenceTo>
+    <relationshipLabel>TRANSPORT (CHASSIS)</relationshipLabel>
+    <relationshipName>Chassis</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

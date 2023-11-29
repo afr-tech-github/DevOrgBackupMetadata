@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quotation</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Quotation</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>var left = (screen.width/2)-(300);
+var top = (screen.height/2)-(200);
+
+var url = &apos;/apex/clofor_com_cfs__InvoiceSelection?id={!URLENCODE(CustomObject1__c.Id)}&amp;wkid={!URLENCODE(CustomObject1__c.Name)}&amp;version={!CustomObject1__c.QuotationVer__c}&amp;reportType=quotation&apos;
+
+window.open(url,&apos;&apos;,&apos;width=600,height=400,top=&apos; + top + &apos;,left=&apos; + left);</url>
+</WebLink>

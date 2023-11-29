@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PrintEmployeeDocument</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>PRINT EMPLOYEE DOCUMENTS</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://{!$Setup.Site_Custom_Settings__c.My_Domain_Name__c}/mail/mmchoose.jsp?id={!URLENCODE(Employee__c.Id)}&amp;1={!Employee__c.Name}&amp;retURL=%2F{!URLENCODE(Employee__c.Id)}</url>
+</WebLink>

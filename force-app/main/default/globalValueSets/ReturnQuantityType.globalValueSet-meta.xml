@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Full Returned</fullName>
+        <default>false</default>
+        <label>Full Returned</label>
+    </customValue>
+    <customValue>
+        <fullName>Partial Returned</fullName>
+        <default>false</default>
+        <label>Partial Returned</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Returned</fullName>
+        <default>false</default>
+        <label>Not Returned</label>
+    </customValue>
+    <masterLabel>Return Quantity Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

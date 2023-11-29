@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Domestic Transaction</fullName>
+        <default>false</default>
+        <label>Domestic Transaction</label>
+    </customValue>
+    <customValue>
+        <fullName>Oversea Transaction</fullName>
+        <default>false</default>
+        <label>Oversea Transaction</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Transaction to another bank</fullName>
+        <default>false</default>
+        <label>Internal Transaction to another bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Withdraw to cash</fullName>
+        <default>false</default>
+        <label>Withdraw to cash</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <masterLabel>BANK TRANSACTION TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

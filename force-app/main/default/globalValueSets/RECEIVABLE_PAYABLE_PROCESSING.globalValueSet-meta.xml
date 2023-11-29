@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>CloFMS Invoicing Selling</fullName>
+        <default>false</default>
+        <label>CloFMS Invoicing Selling</label>
+    </customValue>
+    <customValue>
+        <fullName>CloFMS Invoicing Buying</fullName>
+        <default>false</default>
+        <label>CloFMS Invoicing Buying</label>
+    </customValue>
+    <customValue>
+        <fullName>CloWMS Billing Selling</fullName>
+        <default>false</default>
+        <label>CloWMS Billing Selling</label>
+    </customValue>
+    <customValue>
+        <fullName>CloWMS Billing Buying</fullName>
+        <default>false</default>
+        <label>CloWMS Billing Buying</label>
+    </customValue>
+    <customValue>
+        <fullName>Kickback</fullName>
+        <default>false</default>
+        <label>Kickback</label>
+    </customValue>
+    <customValue>
+        <fullName>Purchasing Invoice</fullName>
+        <default>false</default>
+        <label>Purchasing Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>Deposit From Customer</fullName>
+        <default>false</default>
+        <label>Deposit From Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Deposit To Vendor</fullName>
+        <default>false</default>
+        <label>Deposit To Vendor</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Revenue</fullName>
+        <default>false</default>
+        <label>Other Revenue</label>
+    </customValue>
+    <customValue>
+        <fullName>Other Cost</fullName>
+        <default>false</default>
+        <label>Other Cost</label>
+    </customValue>
+    <customValue>
+        <fullName>Payslip</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Payslip</label>
+    </customValue>
+    <masterLabel>RECEIVABLE &amp; PAYABLE PROCESSING</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

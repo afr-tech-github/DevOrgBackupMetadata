@@ -1,0 +1,220 @@
+<apex:page controller="CargoStandardLabelController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0">
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.barcode ,'barcode/JsBarcode.all.min.js')}"/>
+    <style>
+        @media print {
+            body{
+                counter-reset: page;
+            }
+            .no-print, .no-print * {
+                display: none !important;
+            }
+
+            
+            
+            div.footer {
+                counter-increment: page;
+                display: block;
+
+                text-align: center;
+
+                position: running(footer);
+
+            }
+            @page { 
+                
+                padding-bottom: 10mm;
+                @bottom-center { 
+                    content: element(footer);
+                
+                }
+            }
+            .tblDetail {
+                overflow: visible !important;
+            }
+            
+            .pagenumber:after {
+                
+                content: counter(page);
+            }
+
+            .pagecount:before {
+
+                content: counter(pages);
+
+            }
+            table { overflow: visible !important; page-break-inside: avoid}
+            thead { display: table-header-group }
+            tfoot { display: table-row-group }
+            tr { page-break-inside: avoid }
+            .pagination{
+                display: none;
+            }
+        }
+        table{
+            border-collapse: collapse;
+        }
+        td, th{
+            border: 0.5px solid #aaa;
+            line-height: 20px;
+            text-transform: uppercase;
+        }
+        .button{
+            padding: 5px;
+        }
+    </style>
+     <script type="text/javascript">
+        
+        j$ = jQuery.noConflict();
+        j$(document).ready(function() {
+
+        var barcodeItems = j$( ".barcode" );
+        for(var i = 0; i < barcodeItems.length; i++){
+            var item = barcodeItems[i];
+            var itemId = item.id;
+            var itemInfos = itemId.split('__');
+            j$( "#" + itemId).JsBarcode(itemInfos[1]);
+            j$( "#" + itemId + "cargo").JsBarcode(itemInfos[1]);
+        }
+            //j$( ".barcode" ).JsBarcode("Hi!");
+        });
+        </script>
+    <button class="no-print" onclick="window.print();" style="margin:2mm 2mm 2mm 2mm; text-transform: uppercase; padding:2mm 3mm;font-size:17pt;float:right;">
+            {!translations['print_label']}
+    </button>
+    <apex:form >
+        <apex:outputPanel id="pbId">
+            <apex:actionStatus id="fetchStatus">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                        <div style="display: inline-block; padding: 2px;width: 125px;">
+                            <span style="display: inline-block; padding: 10px 0px; color:green; font-weight:bold; font-size: 20px;" >Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+        <div class="content">
+            <div style="width: 100%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                <div style="float:left; width: 50%; text-align: left;">
+                    {!translations['total']}: {!WosLineItems.size}/{!Records.size} {!translations['records']}
+                </div>
+                <div style="float:left; width: 50%; text-align: left;" >
+                    <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['first']}" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+
+                    <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['previous']}" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+    
+                    <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['next']}" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+    
+                    <apex:commandButton status="fetchStatus" reRender="pbId" value="{!translations['last']}" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                </div>
+            </div>
+            <apex:repeat value="{!WosLineItems}" var="item">
+                <table width="100%">
+                    <tr>
+                        <th colspan="2" width="50%" style="text-align: center; text-transform:uppercase">{!translations['cargo_qr_code']}</th>
+                        <th colspan="2" width="50%" style="text-align: center;">{!translations['product_barcode_qr_code']}</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" width="50%" style="text-align: center;" >
+                                <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c != 'Barcode'}">
+                                        <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Cargo__r.Product__r.QR_Code__c}" alt="Product QR Code" border="0"/>
+                                        
+                                        <br/>
+                                        {!item.Cargo__r.Product__r.QR_Code__c}
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c == 'Barcode'}">
+                                        <img id="{!item.Id + '__' + item.Cargo__r.Product__r.QR_Code__c + 'cargo'}" class="barcode"/>
+                                    </apex:outputPanel>
+                            <br/>
+                            {!item.Cargo__r.Name}
+                        </th>
+                        <th colspan="2" width="50%" style="text-align: center;" >
+                            <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c != 'Barcode'}">
+                                <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl={!item.Cargo__r.Product__r.QR_Code__c}" alt="Product QR Code" border="0"/>
+
+                                <br/>
+                                {!item.Cargo__r.Product__r.QR_Code__c}
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!item.Cargo__r.Product__r.CodeImageType__c == 'Barcode'}">
+                                <img id="{!item.Id + '__' + item.Cargo__r.Product__r.QR_Code__c}" class="barcode"/>
+                            </apex:outputPanel>
+
+                            
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                            {!translations['customer']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                            {!item.WorkOrderService__r.WorkOrder__r.Customer__r.Name}
+                        </th>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                            {!translations['cargo_type']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                                {!item.Cargo__r.CargoType__c}
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                            {!translations['measurement_cbm']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                            {!item.Cargo__r.Product__r.Measurement__c}
+                        </th>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                                {!translations['gross_weight_kg']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                                {!item.Cargo__r.Product__r.GrossWeight__c}
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                                {!translations['sku_number']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                            {!item.Cargo__r.Product__r.SKUNumber__c}
+                        </th>
+                        <th width="20%" style="text-align: center; text-transform:uppercase" >
+                                {!translations['exprire_date_cap']}
+                        </th>
+                        <th width="30%" style="text-align: right; padding: 10px;" >
+                                
+                            <apex:outputText value="{0,date,dd/MM/yyyy}" >  
+                                <apex:param value="{!item.Cargo__r.ExpiredDate__c}"/>  
+                            </apex:outputText> 
+                        </th>
+                    </tr>
+                    <tr>
+                            <th width="20%" style="text-align: center; text-transform:uppercase" >
+                                    {!translations['category']}
+                            </th>
+                            <th width="30%" style="text-align: right; padding: 10px;" >
+                                <apex:outputText value="{!item.Cargo__r.Product__r.FoodCategory__c}" rendered="{!item.Cargo__r.Product__r.ProductCategory__c == 'Food'}"/>
+                                <apex:outputText value="{!item.Cargo__r.Product__r.CosmeticCategory__c}" rendered="{!item.Cargo__r.Product__r.ProductCategory__c == 'Cosmetic'}"/>
+                            </th>
+                            <th width="20%" style="text-align: center; text-transform:uppercase" >
+                                    {!translations['sub_category']}
+                            </th>
+                            <th width="30%" style="text-align: right; padding: 10px;" >
+                                    
+                                <apex:outputText value="{!item.Cargo__r.Product__r.FoodSubCategory__c}" rendered="{!item.Cargo__r.Product__r.ProductCategory__c == 'Food'}"/>
+                            </th>
+                        </tr>
+                </table>
+                <div style="height:20px;"></div>
+            </apex:repeat>
+        </div>
+    </apex:outputPanel>
+    </apex:form>
+</apex:page>

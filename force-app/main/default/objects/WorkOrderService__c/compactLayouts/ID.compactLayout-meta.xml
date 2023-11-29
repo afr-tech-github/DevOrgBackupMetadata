@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ID</fullName>
+    <fields>Name</fields>
+    <fields>WorkOrder__c</fields>
+    <fields>RecordTypeId</fields>
+    <fields>Status__c</fields>
+    <fields>PlannedQuantity__c</fields>
+    <fields>FinalQuantityRollUp__c</fields>
+    <fields>Locator__c</fields>
+    <label>ID</label>
+</CompactLayout>

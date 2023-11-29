@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsStockSearch</fullName>
+    <columns>NAME</columns>
+    <columns>ProductName__c</columns>
+    <columns>GoodsOwner__c</columns>
+    <columns>Customer__c</columns>
+    <columns>PurchasingOrderID__c</columns>
+    <columns>StockStatus__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>SalesOrderID__c</columns>
+    <columns>StockLocator__c</columns>
+    <columns>TotalQuantityInStock__c</columns>
+    <columns>SKUNumber__c</columns>
+    <columns>Supplier__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ProductName__c</field>
+        <operation>contains</operation>
+        <value>,DECK</value>
+    </filters>
+    <label>☘GOODS STOCK SEARCH☘</label>
+    <language>en_US</language>
+</ListView>

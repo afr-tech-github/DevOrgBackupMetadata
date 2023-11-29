@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Social insurance</fullName>
+        <default>false</default>
+        <label>Social insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Health insurance</fullName>
+        <default>false</default>
+        <label>Health insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Unemployment insurance</fullName>
+        <default>false</default>
+        <label>Unemployment insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>INSURANCE TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

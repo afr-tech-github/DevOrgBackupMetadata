@@ -1,0 +1,221 @@
+{!CustomObject1__c.Field1__c}　
+<br>
+{!CustomObject1__c.CustmerInCharge__c} 様
+<br>
+<br>
+毎度　弊社のサービスご利用くださり、誠にありがとうございます。
+<br>
+<br>
+現在、お見積書の進捗状況は「{!CustomObject1__c.status__c}」となっております。<br><br>
+URLにアクセスしてパスワードを入力してください。見積書類をダウンロードできます。 <br>
+################################################################################################################### <br>
+見積書類 LINK ：{!CustomObject1__c.QUOTATION_LINK__c} <br>
+見積書類 PASSWORD：{!CustomObject1__c.QUOTATION_PASSWORD__c} <br>
+###################################################################################################################<br>
+<br>
+アカウントをお持ちのお客様は、専用サイトからも詳細をご確認いただけます。<br>
+<br>
+※下記のメールはCloTra(Cloud Cargo Tracking Service)によってシステムから自動配信されています。<br>
+
+
+<br>
+<style>
+table {
+	border-collapse: collapse;
+}
+th {
+	border: solid 1px #666666;
+	color: #000080;
+	background-color: #DCDCDC;
+}
+td {
+	border: solid 1px #666666;
+	color: #000000;
+	background-color: #ffffff;
+}
+thead th {
+	background-color: #4682B4;
+}
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="4">
+			ご依頼者様詳細
+			</th>
+		</tr>
+	</thead>
+	<thead>
+			</thead>
+　　　　　　　　<thead>
+			</thead>	
+
+
+
+
+
+　　　　　　　　<tbody>
+<tr>
+			<th>
+				ID
+			</th>
+			<td width="200">
+				{!CustomObject1__c.Name}
+			</td >
+			<th >
+				ステータス            
+			</th>
+			<td width="200">
+				{!CustomObject1__c.status__c}
+			</td >
+		</tr>
+<tr>
+			<th>
+                              運送タイプ
+</th>
+			<td>
+				{!CustomObject1__c.CarrierType__c}
+			</td>
+			 <th>
+				頻度			                 
+                       </th>
+			<td>
+				{!CustomObject1__c.Frequency__c}
+			</td>
+		</tr>
+
+                                    <tr>
+			<th>
+				見積書NO.
+			</th>
+			<td>
+				{!CustomObject1__c.QuotationNO__c}
+			</td>
+			<th>
+				建値
+			</th>
+			<td>
+				{!CustomObject1__c.PriceTerms__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				依頼者様      
+			</th>
+			<td>
+				{!CustomObject1__c.Field1__c}様　
+			</td>
+			<th>
+				提出期限
+			</th>
+			<td>
+				{!CustomObject1__c.SubmisionDueDate__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				依頼主担当者様
+			</th>
+			<td>
+				{!CustomObject1__c.CustmerInCharge__c}様　　
+			</td>
+			<th>
+				見積担当者
+			</th>
+			<td>
+			{!CustomObject1__c.00N28000007WEj8}
+			</td>
+		</tr>
+		<tr><thead>
+			<th colspan="4">
+				予定貨物情報
+			</th></thead>
+		</tr>
+		<tr>
+			<th>
+				船 ・便名
+			</th>
+			<td>
+				{!CustomObject1__c.Vessle__c} {!CustomObject1__c.FlightNo__c}
+			</td>
+			<th>
+				商品
+			</th>
+			<td>
+				{!CustomObject1__c.Item__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				出港日
+			</th>
+			<td>
+				{!CustomObject1__c.ETD__c}
+			</td>
+			<th>
+				出港地
+			</th>
+			<td>
+                                {!CustomObject1__c.POL__c} {!CustomObject1__c.POL_Country_Name__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				入港日
+			</th>
+			<td>
+				{!CustomObject1__c.ETA__c}
+			</td>
+			<th>
+				入港地
+			</th>
+			<td>
+                                {!CustomObject1__c.POD__c} {!CustomObject1__c.POD_Country_Name__c}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				コンテナ情報
+			</th>
+			<td>
+{!CustomObject1__c.TranporationType__c}   {!CustomObject1__c.Container__c}    {!CustomObject1__c.Container2__c}
+			</td>
+			<th>
+				重量
+			</th>
+			<td>
+				{!CustomObject1__c.weight__c}KGS
+			</td>
+		</tr>
+　　                        　</tr>
+			<tr><thead>
+			<th colspan="4">
+				REMARK
+			</th></thead>
+		</tr>
+		<tr>
+			<th rowspan="2">
+				REMARK
+			</th>
+			<td rowspan="2" colspan="3">
+				{!CustomObject1__c.Remark__c}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+<br>
+ご不明な点やご質問などがございましたら、ご遠慮なくお知らせください。<br>
+
+今後ともどうぞよろしくお願い申し上げます。<br><br>
+
+*********************************************************<br>
+{!CustomObject1__c.Mail_Merge_Company_Signature__c} <br>
+*********************************************************<br>
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)<br>
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform<br>
+<a href="www.afr-solutions.com">www.afr-solutions.com</a>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Meter</fullName>
+        <default>true</default>
+        <label>Meter</label>
+    </customValue>
+    <customValue>
+        <fullName>Centimeter</fullName>
+        <default>false</default>
+        <label>Centimeter</label>
+    </customValue>
+    <customValue>
+        <fullName>Millimeter</fullName>
+        <default>false</default>
+        <label>Millimeter</label>
+    </customValue>
+    <customValue>
+        <fullName>Inches</fullName>
+        <default>false</default>
+        <label>Inches</label>
+    </customValue>
+    <customValue>
+        <fullName>Feet</fullName>
+        <default>false</default>
+        <label>Feet</label>
+    </customValue>
+    <customValue>
+        <fullName>Yard</fullName>
+        <default>false</default>
+        <label>Yard</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>WLD UNIT</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

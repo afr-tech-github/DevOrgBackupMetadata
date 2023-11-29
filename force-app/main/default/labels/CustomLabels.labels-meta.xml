@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>API_ACCOUNT_ENG_NAME</fullName>
+        <categories>Constant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API ACCOUNT ENG NAME</shortDescription>
+        <value>3FFOOD (INTERNAL USE ONLY)</value>
+    </labels>
+    <labels>
+        <fullName>API_CONTRACT_NAME</fullName>
+        <categories>Constant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API CONTRACT NAME</shortDescription>
+        <value>CT-000005</value>
+    </labels>
+    <labels>
+        <fullName>API_FAC_VENDOR</fullName>
+        <categories>Constant</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>API FAC VENDOR</shortDescription>
+        <value>FC-000000</value>
+    </labels>
+    <labels>
+        <fullName>BACK_TO_WAREHOUSE_LIST</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BACK TO WAREHOUSE LIST</shortDescription>
+        <value>Back to Warehouse list</value>
+    </labels>
+    <labels>
+        <fullName>DUPLICATE_LOCATOR_CODE_ERROR_MSG</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>DUPLICATE LOCATOR CODE ERROR MSG</shortDescription>
+        <value>Duplicate {0} code in {1} warehouse</value>
+    </labels>
+    <labels>
+        <fullName>LOCATORS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOCATORS</shortDescription>
+        <value>Locators</value>
+    </labels>
+    <labels>
+        <fullName>NEXT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NEXT</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>NO_DATA_FOUND</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NO DATA FOUND</shortDescription>
+        <value>No data found.</value>
+    </labels>
+    <labels>
+        <fullName>NewLine</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NewLine</shortDescription>
+        <value>.
+·</value>
+    </labels>
+    <labels>
+        <fullName>PAGE_SIZE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGE SIZE</shortDescription>
+        <value>Page size</value>
+    </labels>
+    <labels>
+        <fullName>PAGE_TEXT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGE TEXT</shortDescription>
+        <value>Page</value>
+    </labels>
+    <labels>
+        <fullName>PORT_ACCOUNT_ID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Port Account ID</shortDescription>
+        <value>001x000xxx35tPN</value>
+    </labels>
+    <labels>
+        <fullName>PREVIOUS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PREVIOUS</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>SEARCH_GOODS</fullName>
+        <categories>SEARCH GOODS</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SEARCH GOODS</shortDescription>
+        <value>Search Goods</value>
+    </labels>
+    <labels>
+        <fullName>SEARCH_LOCATORS</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SEARCH LOCATORS</shortDescription>
+        <value>Search Locators</value>
+    </labels>
+    <labels>
+        <fullName>SEARCH_RESULT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SEARCH RESULT</shortDescription>
+        <value>Search Result</value>
+    </labels>
+    <labels>
+        <fullName>STOCK_IN_RECORDTYPE</fullName>
+        <categories>RecordType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>STOCK IN RECORDTYPE</shortDescription>
+        <value>StockIn</value>
+    </labels>
+    <labels>
+        <fullName>STOCK_IN_RECORDTYPE_ID</fullName>
+        <categories>RecordType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>STOCK IN RECORDTYPE ID</shortDescription>
+        <value>0120K000000pm7EQAQ</value>
+    </labels>
+    <labels>
+        <fullName>STOCK_OUT_RECORDTYPE</fullName>
+        <categories>RecordType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>STOCK OUT RECORDTYPE</shortDescription>
+        <value>StockOut</value>
+    </labels>
+    <labels>
+        <fullName>STOCK_OUT_RECORDTYPE_ID</fullName>
+        <categories>RecordType</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>STOCK OUT RECORDTYPE ID</shortDescription>
+        <value>0120K000000pm7JQAQ</value>
+    </labels>
+    <labels>
+        <fullName>VAS_CROSSDOCK_RECORDTYPE_ID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VAS CROSSDOCK RECORDTYPE ID</shortDescription>
+        <value>0120K000000pmKh</value>
+    </labels>
+    <labels>
+        <fullName>VAS_INBOUND_RECORDTYPE_ID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VAS INBOUND RECORDTYPE ID</shortDescription>
+        <value>0120K000000pmKX</value>
+    </labels>
+    <labels>
+        <fullName>VAS_OUTBOUND_RECORDTYPE_ID</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VAS OUTBOUND RECORDTYPE ID</shortDescription>
+        <value>0120K000000pmKc</value>
+    </labels>
+    <labels>
+        <fullName>WAREHOUSES</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>WAREHOUSES</shortDescription>
+        <value>Warehouses</value>
+    </labels>
+    <labels>
+        <fullName>WAREHOUSE_INFORMATION</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>WAREHOUSE_INFORMATION</shortDescription>
+        <value>Warehouse Infomation</value>
+    </labels>
+</CustomLabels>

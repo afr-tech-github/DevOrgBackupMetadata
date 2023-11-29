@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NonTemperatureProduct</fullName>
+    <columns>NAME</columns>
+    <columns>ProductName__c</columns>
+    <columns>ProductGroup__c</columns>
+    <columns>GoodOwner__c</columns>
+    <columns>QuantityPerUnit__c</columns>
+    <columns>UnitType__c</columns>
+    <columns>ChargeType__c</columns>
+    <columns>Measurement__c</columns>
+    <columns>GrossWeight__c</columns>
+    <columns>SKU__c</columns>
+    <columns>SKUNumber__c</columns>
+    <columns>BuyingCommercialValuePerUnitLocal__c</columns>
+    <columns>SellingCommercialValuePerUnitLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PRODUCT__c.NonTemperatureProduct</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>1.Non Temperature Product</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InstallationServiceBillingFreq__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Installation Service Billing Freq</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>InstallationServiceBillingFreqType__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Frequency</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Monthly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Quarterly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Biannually</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Annually</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Daily</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Weekly</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Weekday</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Continuous Billing</controllingFieldValue>
+            <valueName>Weekend</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ad-Hoc</controllingFieldValue>
+            <valueName>Ad-Hoc</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Company_Country__c</fullName>
+    <deprecated>false</deprecated>
+    <description>The country to consider as &quot;local&quot;. This is driven by HBL SHIPMENT POL-COUNTRY</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The country to consider as local. This is driven by HBL Shipment POL-Country</inlineHelpText>
+    <label>Company Country</label>
+    <length>50</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

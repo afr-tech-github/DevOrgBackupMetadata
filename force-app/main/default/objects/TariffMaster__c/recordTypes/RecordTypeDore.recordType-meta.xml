@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RecordTypeDore</fullName>
+    <active>true</active>
+    <description>Choose this Pricing when related with Full Contrainer Trucking. Other than Full Container Trucking, Choose Trucking.</description>
+    <label>FULL CONTAINER TRUCK(DRAYAGE)</label>
+</RecordType>

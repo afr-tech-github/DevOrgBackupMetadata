@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>New Flow to copy data from Cargo to Contract, Goods S/O and Goods P/O</description>
+    <masterLabel>Auto record from Cargo to Contract, Goods S/O and P/O</masterLabel>
+</FlowDefinition>

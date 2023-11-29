@@ -1,0 +1,577 @@
+<apex:page controller="LocatorMapViewController" lightningStylesheets="true" sidebar="false" docType="html-5.0">
+    <apex:slds />
+    <!--<apex:styleSheet value="{!URLFOR($Resource.Bootstrap, 'bootstrap-4/css/bootstrap.css')}"/>
+<apex:styleSheet value="{!URLFOR($Resource.Bootstrap, 'bootstrap-4/css/bootstrap-grid.css')}"/>
+<apex:styleSheet value="{!URLFOR($Resource.Bootstrap, 'bootstrap-4/css/bootstrap-reboot.css')}"/>-->
+    <style type="text/css">
+        body .bPageBlock .pbBody .red .pbSubheader{
+        background-color:#c00000;
+        }
+        body .bPageBlock .pbBody .grey .pbSubheader{
+        background-color:#c0c0c0;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader h3{
+        display: -webkit-inline-box;
+        color: black;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .hideListButton{
+        background-position: 0 -12px;
+        }
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader .showListButton{
+        background-position: 1px 0px;
+        }
+        .availableSpace{
+        background-color: #4bca81;
+        }
+        .fullSpace{
+        background-color: #b0adab;
+        }
+        
+    </style>
+    
+    
+    <apex:form >
+        <apex:pageBlock tabStyle="Facility__c">
+            <apex:pageBlockSection columns="1" id="searchSectionId" title="{!$Label.clofor_com_cfs__search_locators}" >
+                <!--search-->
+                <apex:outputPanel >
+                    <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered">
+                        <col width="30%"/>
+                        <col width="20%"/>
+                        <col width="30%"/>
+                        <col width="20%"/>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.Facility__c.fields.FacilityName__c.label}"/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:input type="text" value="{!locatorSearch.warehouseName}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label} : "/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <!--<apex:input type="text" value=""/>-->
+                                <apex:selectList value="{!locatorSearch.locatorLayer}" multiselect="false" size="1" >
+                                    <apex:selectOptions value="{!layerPickList}"/>
+                                </apex:selectList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:input type="number" value="{!locatorSearch.currentAvailableCBM}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:input type="number" value="{!locatorSearch.currentAvailableKG}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:input type="number" value="{!locatorSearch.actualAvailableCBM}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:input type="number" value="{!locatorSearch.actualAvailableKG}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.CapacityCBM__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.CapacityKG__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.Tenant__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.Tenant__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.Supplier__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.Supplier__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.Buyer__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.Buyer__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.ChargeType__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.SKU__c.label} : "/> 
+                            </td>
+                            <td>
+                                <apex:inputField value="{!locatorSearch.locator.SKU__c}"/>
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:outputText value="{!$ObjectType.LOCATOR__c.fields.FastSlowClassification__c.label} : "/> 
+                            </td>
+                            <td style="white-space: pre-line;" >
+                                <apex:inputField value="{!locatorSearch.locator.FastSlowClassification__c}"/>
+                            </td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <br/>
+                    
+                    <div style="width: 100%; margin: 0 50%; text-align: left">
+                        <apex:commandButton onclick="af_doSearch(); return false;" value="Search" id="theButtonSearch" styleClass="slds-button slds-button_outline-brand"/>
+                    </div>
+                    
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        <apex:outputPanel id="SearchResultContentId">
+            <!--{!query}-->
+            <apex:pageBlock id="pageBlockResultSearch" rendered="{!OR(isDisplayResultSearch, isDisplayWarehouseList)}">
+                <apex:outputPanel rendered="{!isDisplayResultSearch}">
+                    <apex:pageBlockSection title="{!$Label.clofor_com_cfs__search_result}" columns="1">
+                        <apex:outputPanel rendered="{!resultSearchLocator.size == 0}">
+                            {!$Label.clofor_com_cfs__no_data_found}
+                            <apex:commandLink value="{!$Label.clofor_com_cfs__back_to_warehouse_list}" onclick="af_getListWareHouse(); return false;"/>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!resultSearchLocator.size > 0}" Id="resultSearchTable">
+                            <apex:outputPanel >
+                            {!$Label.PAGE_SIZE} &nbsp;
+                            <apex:selectList value="{!sizeSearch}" multiselect="false" size="1" onchange="af_refreshSearchPageSize();" styleClass="slds-select slds-size_1-of-12">
+                                <apex:selectOptions value="{!paginationSizeOptions}"/>
+                            </apex:selectList>
+                            </apex:outputPanel>
+                            <br/>
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}">{!$ObjectType.LOCATOR__c.fields.Name.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}">{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}">{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div style="white-space: pre-line;" title="{!$ObjectType.Facility__c.fields.FacilityName__c.label}">{!$ObjectType.Facility__c.fields.FacilityName__c.label}</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!locatorSearchResult}" var="locator">
+                                        <tr class="{!IF(locator.ActualAvailableCapacityCBM__c > 0,'availableSpace', 'fullSpace')}">
+                                            <th scope="row" data-label="{!$ObjectType.LOCATOR__c.fields.Name.label}">
+                                                <div class="slds-truncate" title="{!locator.Name}"><apex:commandLink value="{!locator.Name}" onclick="af_getListLocatorChild('{!locator.WarehouseID__c}','{!locator.Id}','{!locator.LocatorLayer__c}'); return false;"/>
+                                                    
+                                                </div>
+                                            </th>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}">
+                                                <div class="slds-truncate" title="{!locator.CapacityCBM__c}">{!locator.CapacityCBM__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}">
+                                                <div class="slds-truncate" title="{!locator.CapacityKG__c}">{!locator.CapacityKG__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}">
+                                                <div class="slds-truncate" title="{!locator.ActualAvailableCapacityCBM__c}">{!locator.ActualAvailableCapacityCBM__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}">
+                                                <div class="slds-truncate" title="{!locator.ActualAvailableCapacityKG__c}">{!locator.ActualAvailableCapacityKG__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}">
+                                                <div class="slds-truncate" title="{!locator.CurrentAvailableCapacityCBM__c}">{!locator.ActualAvailableCapacityCBM__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}">
+                                                <div class="slds-truncate" title="{!locator.CurrentAvailableCapacityKG__c}">{!locator.ActualAvailableCapacityKG__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}">
+                                                <div class="slds-truncate" title="{!locator.ChargeType__c}">{!locator.ChargeType__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}">
+                                                <div class="slds-truncate" title="{!locator.LocatorLayer__c}">{!locator.LocatorLayer__c}</div>
+                                            </td>
+                                            <td data-label="{!$ObjectType.Facility__c.fields.FacilityName__c.label}">
+                                                <div class="slds-truncate" title="{!locator.WarehouseID__r.FacilityName__c}"><apex:outputField value="{!locator.WarehouseID__r.FacilityName__c}" /></div>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <apex:outputPanel style="text-align:center;" layout="block">
+                                <apex:outputText value="<<{!$Label.clofor_com_cfs__previous}" rendered="{!!setLocatorSearch.hasPrevious}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="<<{!$Label.clofor_com_cfs__previous}" action="{!setLocatorSearch.previous}" title="Previous Page" rendered="{!setLocatorSearch.hasPrevious}"/>
+                                <span>&nbsp;Page {!setLocatorSearch.pageNumber} of {!totalPageSearchs}&nbsp;</span>
+                                <apex:outputText value="{!$Label.clofor_com_cfs__next}>>" rendered="{!!setLocatorSearch.hasNext}" />
+                                <apex:commandLink status="fetchStatus" reRender="resultSearchTable" value="{!$Label.clofor_com_cfs__next}>>" action="{!setLocatorSearch.next}" title="Next Page" rendered="{!setLocatorSearch.hasNext}"/> 
+                            </apex:outputPanel>
+                            
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+                <!-- warehouse list-->
+                
+                <apex:outputPanel id="mapWareHousePanel"  rendered="{!isDisplayWarehouseList}">
+                    <!--<apex:sectionHeader title="Warehouses"/>-->
+                    <apex:pageBlockSection columns="3" id="listWarehouseSection" title="{!$Label.clofor_com_cfs__warehouses}">
+                        <apex:outputPanel >
+                            {!$Label.PAGE_SIZE} &nbsp; 
+                            <apex:selectList value="{!sizeWarehouse}" multiselect="false" size="1" onchange="af_refreshWareHousePageSize();" styleClass="slds-select slds-size_1-of-3">
+                                <apex:selectOptions value="{!paginationSizeOptions}"/>
+                            </apex:selectList>
+                        </apex:outputPanel>
+                        <apex:outputPanel >
+                        </apex:outputPanel>
+                        <apex:outputPanel >
+                        </apex:outputPanel>
+                        
+                            
+                            <!--<div class="slds-grid slds-gutters">-->
+                                <apex:repeat value="{!listWarehouse}" var="warehouse" id="warehouseEl">
+                                    <!--<div class="slds-col slds-size_1-of-3" onclick="af_getListLocator('{!warehouse.Id}'); return false;" style="cursor: pointer;">-->
+                                        <apex:outputPanel >
+                                        <div class="slds-card" onclick="af_getListLocator('{!warehouse.Id}'); return false;" style="cursor: pointer;">
+                                            <div class="slds-card__header slds-grid">
+                                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                    <div class="slds-media__figure">
+                                                        <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                                                            
+                                                            <span class="slds-assistive-text">WareHouse</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="slds-media__body">
+                                                        <h2 class="slds-card__header-title">
+                                                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Contacts (1)">
+                                                                <span class="slds-text-heading_small"><apex:commandLink styleClass="slds-card__header-link slds-truncate" value="{!warehouse.Name}" onclick="af_getListLocator('{!warehouse.Id}'); return false;"/></span>
+                                                            </a>
+                                                        </h2>
+                                                    </div>
+                                                </header>
+                                            </div>
+                                            <div class="slds-card__body">
+                                                <table class="slds-table slds-table_fixed-layout slds-table_bordered slds-no-row-hover slds-table_cell-buffer">
+                                                    <col width="55%" />
+                                                    <col width="45%"/>
+                                                    <tbody>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.FacilityName__c.label}">{!$ObjectType.Facility__c.fields.FacilityName__c.label}</div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.FacilityName__c}"><apex:outputText value="{!warehouse.FacilityName__c}" id="facilityName"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.FacilityType__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.FacilityType__c.label}"/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.FacilityType__c}"><apex:outputText value="{!warehouse.FacilityType__c}" id="facilityType"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.WarehoueType__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.WarehoueType__c.label}"/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.WarehoueType__c}"><apex:outputText value="{!warehouse.WarehoueType__c}" id="warehoueType"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.CapacityCBM__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.CapacityCBM__c.label}"/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.CapacityCBM__c}"><apex:outputText value="{!warehouse.CapacityCBM__c}" id="capacityCBM"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.CapacityKG__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.CapacityKG__c.label}"/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.CapacityKG__c}"><apex:outputText value="{!warehouse.CapacityKG__c}" id="capacityKG"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.ChargeType__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.ChargeType__c.label} : "/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.ChargeType__c}"><apex:outputText value="{!warehouse.ChargeType__c}" id="chargeType"/></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="slds-hint-parent">
+                                                            <th scope="row">
+                                                                <div style="slds-truncate" title="{!$ObjectType.Facility__c.fields.StorageType__c.label}"><apex:outputText value="{!$ObjectType.Facility__c.fields.StorageType__c.label}"/></div>
+                                                            </th>
+                                                            <td>
+                                                                <div style="slds-truncate" title="{!warehouse.StorageType__c}"><apex:outputText value="{!warehouse.StorageType__c}" id="storageType"/></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> 
+                                        </apex:outputPanel>                  
+                                                      
+                                </apex:repeat>
+                            <!--</div>-->
+                            
+                        
+                       
+                    </apex:pageBlockSection>
+                    <apex:outputPanel style="text-align:center;" layout="block">
+                            <apex:outputText value="<<{!$Label.clofor_com_cfs__previous}" rendered="{!!setWarehouseList.hasPrevious}" />
+                            <apex:commandLink status="fetchStatus" reRender="mapWareHousePanel" value="<<{!$Label.clofor_com_cfs__previous}" action="{!setWarehouseList.previous}" title="Previous Page" rendered="{!setWarehouseList.hasPrevious}"/>
+                            <span>&nbsp;{!setWarehouseList.pageNumber} / {!totalPageWarehouses}&nbsp;</span>
+                            <apex:outputText value="{!$Label.clofor_com_cfs__next}>>" rendered="{!!setWarehouseList.hasNext}" />
+                            <apex:commandLink status="fetchStatus" reRender="mapWareHousePanel" value="{!$Label.clofor_com_cfs__next}>>" action="{!setWarehouseList.next}" title="Next Page" rendered="{!setWarehouseList.hasNext}"/>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        <apex:outputPanel id="HierarchyContentPanelId" >
+            <apex:pageBlock id="HierarchyContentBlockId" tabStyle="Facility__c" rendered="{!AND(!isDisplayWarehouseList,!isDisplayResultSearch)}">
+                <apex:outputPanel id="thedetailSectionContent" >
+                    <apex:commandLink value="{!$Label.clofor_com_cfs__back_to_warehouse_list}" onclick="af_getListWareHouse(); return false;"/>
+                    <!--<apex:sectionHeader title="Warehouse: {!currentWarehouse.Name}"/>-->
+                    <apex:pageBlockSection columns="2" rendered="{!!isDisplayWarehouseList}" id="warehouseInfoSection" title="{!$Label.clofor_com_cfs__warehouse_information}: {!currentWarehouse.Name}">    
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="{!$ObjectType.Facility__c.fields.FacilityName__c.label}" for="warehouseName"/>
+                            <apex:outputLink value="/{!currentWarehouse.Id}" id="warehouseName">{!IF(ISBLANK(currentWarehouse.FacilityName__c),currentWarehouse.Name ,currentWarehouse.FacilityName__c)}</apex:outputLink> 
+                        </apex:pageBlockSectionItem>
+                        <!--<apex:outputField value="{!currentWarehouse.FacilityName__c}"/>-->
+                        <apex:outputField value="{!currentWarehouse.FacilityType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.WarehoueType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.CapacityCBM__c}"/>
+                        <apex:outputField value="{!currentWarehouse.CapacityKG__c}"/>
+                        <apex:outputField value="{!currentWarehouse.ChargeType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.StorageType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.Address__c}"/>
+                        <apex:outputField value="{!currentWarehouse.ItemType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.OwnershipType__c}"/>
+                        <apex:outputField value="{!currentWarehouse.OwnerCompanyName__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpActualOccupiedCapacityCBM__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpActualOccupiedCapacityKG__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpCurrentOccupiedCapacityCBM__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpCurrentOccupiedCapacityKG__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpMaxMeasurementCapacity__c}"/>
+                        <apex:outputField value="{!currentWarehouse.RollUpMaxWeightKGCapacity__c}"/>
+                    </apex:pageBlockSection>
+                    <apex:outputPanel id="LocatorSectionWrapper">
+                        <apex:outputPanel rendered="{!OR(listLocator.size > 0, isParentsSelected)}">
+                            <apex:pageBlockSection columns="1" id="hierarchyLocatorPanel" rendered="{!isParentsSelected}" title="Hierarchy Locators" collapsible="false">
+                                <apex:outputPanel >
+                                    <apex:variable var="indexTree" value="{!1}"/>
+                                    <apex:commandLink value="Floor Level Locators List" onclick="af_getListLocator('{!currentWarehouse.Id}'); return false;"/> 
+                                    <apex:repeat value="{!listTree}" var="locatorNode">
+                                        > <apex:commandLink value="{!locatorNode.Name}" onclick="af_getListLocatorChild('{!currentWarehouse.Id}','{!locatorNode.Id}', '','{!indexTree}'); return false;"/> 
+                                        <apex:variable var="indexTree" value="{!indexTree+ 1}"/>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </apex:pageBlockSection>
+                            <apex:repeat value="{!listTree}" var="locatorDetail">
+                                <apex:pageBlockSection columns="2" title="{!locatorDetail.Name +'-'+ locatorDetail.LocatorLayer__c}">
+                                    
+                                    <!--<apex:outputField value="{!locatorDetail.LocatorLayer__c}"/>-->
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputLabel value="{!$ObjectType.LOCATOR__c.fields.Name.label}" for="locatorName"/>
+                                        <apex:outputLink value="/{!locatorDetail.Id}" id="locatorName">{!locatorDetail.Name}</apex:outputLink>
+                                    </apex:pageBlockSectionItem>
+                                    <apex:outputField value="{!locatorDetail.LocatorDescription__c}"/>
+                                    <apex:outputField value="{!locatorDetail.ActualAvailableCapacityCBM__c}"/>
+                                    <apex:outputField value="{!locatorDetail.CurrentAvailableCapacityCBM__c}"/>
+                                    <apex:outputField value="{!locatorDetail.ActualAvailableCapacityKG__c}"/>
+                                    <apex:outputField value="{!locatorDetail.CurrentAvailableCapacityKG__c}"/>
+                                    <apex:outputField value="{!locatorDetail.ActualOccupiedCapacityCBM__c}"/>
+                                    <apex:outputField value="{!locatorDetail.CurrentOccupiedCapacityCBM__c}"/>
+                                    <apex:outputField value="{!locatorDetail.ActualOccupiedCapacityKG__c}"/> 
+                                    <apex:outputField value="{!locatorDetail.CurrentOccupiedCapacityKG__c}"/>                       
+                                    <apex:outputField value="{!locatorDetail.SharedCapacityCBM__c}"/> 
+                                    <apex:outputField value="{!locatorDetail.SharedCapacityKG__c}"/> 
+                                    <apex:outputField value="{!locatorDetail.CapacityCBM__c}"/>
+                                    <apex:outputField value="{!locatorDetail.CapacityKG__c}"/>
+                                    <apex:outputField value="{!locatorDetail.Tenant__c}"/>
+                                    <apex:outputField value="{!locatorDetail.Supplier__c}"/>
+                                    <apex:outputField value="{!locatorDetail.Buyer__c}"/>
+                                    <apex:outputField value="{!locatorDetail.ChargeType__c}"/>
+                                    <apex:outputField value="{!locatorDetail.SKU__c}"/>
+                                    <apex:outputField value="{!locatorDetail.FastSlowClassification__c}"/>
+                                    <apex:outputField value="{!locatorDetail.LocatorLayer__c}"/>
+                                    <apex:outputField value="{!locatorDetail.LocatorCode__c}"/>
+                                    
+                                </apex:pageBlockSection>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!listLocator.size > 0}">
+                        <apex:pageBlockSection columns="1"  rendered="{!!isDisplayWarehouseList}" id="locatorSection" title="{!$Label.clofor_com_cfs__locators}">   
+                            <!--Child Locators-->
+                            <apex:outputPanel rendered="{!listLocator.size > 0}" id="childLocatorTable">
+                                <apex:outputPanel >
+                                {!$Label.PAGE_SIZE} &nbsp;
+                                <apex:selectList value="{!sizeChildLocator}" multiselect="false" size="1" onchange="af_refreshChildPageSize();" styleClass="slds-select slds-size_1-of-12">
+                                    <apex:selectOptions value="{!paginationSizeOptions}"/>
+                                </apex:selectList>
+                                <br/>
+                                </apex:outputPanel>
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.Name.label}">{!$ObjectType.LOCATOR__c.fields.Name.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}">{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}">{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}">{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div style="white-space: pre-line;" title="{!$ObjectType.Facility__c.fields.FacilityName__c.label}">{!$ObjectType.Facility__c.fields.FacilityName__c.label}</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!listLocator}" var="locator">
+                                            <tr class="{!IF(locator.ActualAvailableCapacityCBM__c > 0,'availableSpace', 'fullSpace')}">
+                                                <th scope="row" data-label="{!$ObjectType.LOCATOR__c.fields.Name.label}">
+                                                    <div class="slds-truncate" title="Cloudhub"><apex:commandLink value="{!locator.Name}" onclick="af_getListLocatorChild('{!currentWarehouse.Id}','{!locator.Id}'); return false;"/></div>
+                                                </th>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.CapacityCBM__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.CapacityCBM__c}">{!locator.CapacityCBM__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.CapacityKG__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.CapacityKG__c}">{!locator.CapacityKG__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityCBM__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.ActualAvailableCapacityCBM__c}">{!locator.ActualAvailableCapacityCBM__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.ActualAvailableCapacityKG__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.ActualAvailableCapacityKG__c}">{!locator.ActualAvailableCapacityKG__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityCBM__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.CurrentAvailableCapacityCBM__c}">{!locator.ActualAvailableCapacityCBM__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.CurrentAvailableCapacityKG__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.CurrentAvailableCapacityKG__c}">{!locator.ActualAvailableCapacityKG__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.ChargeType__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.ChargeType__c}">{!locator.ChargeType__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.LOCATOR__c.fields.LocatorLayer__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.LocatorLayer__c}">{!locator.LocatorLayer__c}</div>
+                                                </td>
+                                                <td data-label="{!$ObjectType.Facility__c.fields.FacilityName__c.label}">
+                                                    <div class="slds-truncate" title="{!locator.WarehouseID__r.FacilityName__c}"><apex:outputField value="{!locator.WarehouseID__r.FacilityName__c}" /></div>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <apex:outputPanel style="text-align:center;" layout="block">
+                                    <apex:outputText value="<<{!$Label.clofor_com_cfs__previous}" rendered="{!!setChildLocators.hasPrevious}" />
+                                    <apex:commandLink status="fetchStatus" reRender="childLocatorTable" value="<<{!$Label.clofor_com_cfs__previous}" action="{!setChildLocators.previous}" title="Previous Page" rendered="{!setChildLocators.hasPrevious}"/>
+                                    <span>&nbsp;Page {!setChildLocators.pageNumber} of {!totalPageChildLocators}&nbsp;</span>
+                                    <apex:outputText value="{!$Label.clofor_com_cfs__next}>>" rendered="{!!setChildLocators.hasNext}" />
+                                    <apex:commandLink status="fetchStatus" reRender="childLocatorTable" value="{!$Label.clofor_com_cfs__next}>>" action="{!setChildLocators.next}" title="Next Page" rendered="{!setChildLocators.hasNext}"/>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </apex:outputPanel>
+                    
+                </apex:outputPanel>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        <apex:actionFunction action="{!viewLocators}" name="af_getListLocatorChild" rerender="mapWareHousePanel, HierarchyContentPanelId, SearchResultContentId">
+            <apex:param name="warehouseId" value="" />
+            <apex:param name="locatorParentId" value="" />
+            <apex:param name="locatorLayer" value="" />
+            <apex:param name="indexTreeParam" value="" />
+            
+        </apex:actionFunction>
+        <apex:actionFunction action="{!viewLocators}" name="af_getListLocator" rerender="HierarchyContentPanelId, SearchResultContentId">
+            <apex:param name="warehouseId" value="" />
+            <apex:param name="indexTreeParam" value="0" />
+        </apex:actionFunction> 
+        <apex:actionFunction action="{!doInit}" name="af_getListWareHouse" rerender="HierarchyContentPanelId, SearchResultContentId, mapWareHousePanel">
+        </apex:actionFunction>
+        
+        <apex:actionFunction action="{!doSearch}" name="af_doSearch" rerender="SearchResultContentId, HierarchyContentPanelId, resultSearchTable">
+            
+        </apex:actionFunction>
+        <apex:actionFunction action="{!refreshPageSizeSearch}" name="af_refreshSearchPageSize" rerender="resultSearchTable">
+        </apex:actionFunction>
+        <apex:actionFunction action="{!refreshPageSizeChildLocator}" name="af_refreshChildPageSize" rerender="childLocatorTable" /> 
+        <apex:actionFunction action="{!refreshPageSizeWarehouse}" name="af_refreshWareHousePageSize" rerender="mapWareHousePanel" />
+        
+    </apex:form>
+</apex:page>

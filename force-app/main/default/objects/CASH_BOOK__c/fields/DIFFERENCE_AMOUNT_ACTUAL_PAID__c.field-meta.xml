@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DIFFERENCE_AMOUNT_ACTUAL_PAID__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>TotalAmount__c  -  ACTUAL_PAID_TO_VENDOR__c + AdditionalAmountPayToStaffLocal__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>The value is automatically calculated. 
+Difference(Total Amount-Paid/Collected)=Total Amount - Actual Paid/Collected + Additional Amount Pay to Staff</inlineHelpText>
+    <label>DIFFERENCE(TOTAL AMOUNT-PAID)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<span style="font-size: medium;">There is cargo OSD(Overage/Shortage/Damaged) identified.</span>]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div style=""><div style=""><font face="arial">There is cargo OSD(Overage/Shortage/Damaged) identified.</font></div><div style=""><font face="arial">W/O/S ID:</font><span style="font-size: 12pt;">{!WorkOrderService__c.Name}</span></div><div style=""><span style="font-size: 12pt;">Plan Quantity: {!WorkOrderService__c.PlannedQuantity__c}</span></div><div style=""><font face="arial">Missing Quantity: {!WorkOrderService__c.MissingQuantity__c}</font></div><div style=""><font face="arial">Initial Quantity: {!WorkOrderService__c.InitialQuantity__c}</font></div><div style=""><font face="arial">Returned Quantity:{!WorkOrderService__c.DamagedQuantity__c}</font></div><div style=""><font face="arial">Final Quantity:{!WorkOrderService__c.FinalQuantityRollUp__c}</font></div><div style=""><font face="arial">Variance Quantity:{!WorkOrderService__c.VarianceQuantity__c}</font></div><div style=""><font face="arial">OSD Report:{!WorkOrderService__c.MissingDamageReport__c}</font></div></div>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[]]></td>
+</tr>
+</table>

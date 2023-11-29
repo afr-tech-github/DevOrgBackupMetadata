@@ -1,0 +1,15 @@
+Dear, {!Cargo_Delivery__c.DeliveryCompany__c}
+{!Cargo_Delivery__c.TRUCKING_COMPANY_PIC__c} 
+
+Please confirm the attached file of  Trucking Request form. 
+If there were anything unclear, please contact with us. 
+
+Best regards.
+
+{!User.LastName} 
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************
+Powered by AFR Solutions Co.,LTD(Certified Salesforce Partner)
+All-In-One Cloud Freight Forwarding Solution on Salesforce Platform
+www.afr-solutions.com

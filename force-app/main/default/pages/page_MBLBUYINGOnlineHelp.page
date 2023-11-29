@@ -1,0 +1,148 @@
+<apex:page showHeader="false">
+<head>
+    <title>M BL BUYING Online Help</title>
+ 
+  <style>
+        body {
+            font-family: Arial, Helvetica, "sans-serif", Verdana, Geneva;
+            font-size: 1em;
+            width: 90%;
+            margin: 20px auto 20px auto;
+        }
+
+        .help-container table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .help-container th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .help-container tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        .help-container th {
+            background-color: darkslategrey;
+            color: white;
+
+        }
+
+        .notes {
+            background-color: lavender;
+        }
+
+        h2 {
+            color: dodgerblue;
+        }
+
+        table tr td:first-child {
+            width: 30%;
+            font-weight: bold;
+        }
+    </style>
+
+  
+  
+  
+  
+  </head>
+<div STYLE="position:absolute; z-index:-2; left:53px; margin-top:0px;">
+            <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" width="150px" height="60px"/>
+        </div>
+        <div style="font-size:25px; position:absolute; margin-top:50px; left:500px;">
+        M B/L BUYING Online Help
+        </div>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+<body>
+    <h2>Trợ giúp trực tuyến cho Object HÀNG GHÉP Object</h2>
+
+<br></br>
+Đây là một Object quản lý chi phí cho một container (HÀNG GHÉP). <br></br>
+Những chi phí này cuối cùng được phân bổ tới vận đơn thứ cấp có liên quan, dựa vào khối lượng hàng hóa.<br></br>
+Trong trường hợp Ô Hợp Nhất, có 4 chi phí được chia sẻ trong HÀNG GHÉP-MUA<br></br>
+<ul>
+1. Phân bổ chi phí cho đối tác<br></br>
+2. Phân bổ chi phí nhà kho ( ví dụ, chi phí dỡ hàng container)<br></br>
+3. Phân bổ chi phí cho công ty vận tải(ví dụ: phí CY và phụ phí khác).<br></br>
+4. Phân bổ chi phí cho công ty vận tải(gồm thuế) ( ví dụ: phí DOC)<br></br>
+</ul>
+<br></br>
+Phân bổ chi phí kết nối tự động tới Vận đơn thứ cấp Mua/Bán, hai điều kiện dưới đây phải được đáp ứng:<br></br>
+<ul>
+1. DANH MỤC PHÂN BỔ CHI PHÍ phải được chọn trong Object HÀNG GHÉP MUA<br></br>
+2. DANH MỤC PHÂN BỔ CHI PHÍ phải được chọn trong Object VẬN ĐƠN THỨ CẤP Bán/Mua<br></br>
+3. Dữ liệu được chọn phải giống giữa 1 và 2<br></br>
+</ul>
+<br></br>
+-----------------------------------------------------------------------------<br></br>
+<h2>Online Help for M B/L BUYING Object</h2>
+<br></br>
+This is an Object to manage costs for one container(MB/L shipment). <br></br>
+These costs are eventually allocated to relevant H B/L based on the cargo volume.<br></br>
+In case of Consolidation Box, there are 4 shared costs in M B/L Buying<br></br>
+<ul>
+1. Partner Cost allocation<br></br>
+2. Warehouse Cost Allocation(example, Devanning Charge)<br></br>
+3. Carrier Cost Allocation(example, CY charge and other Surcharges)<br></br>
+4. Carrier Cost Allocation(TAX)(example, DOC Fee)<br></br>
+</ul>
+<br></br>
+To allocate the costs to linked H B/L Selling/Buying automatically, below two conditions must be met.<br></br>
+<ul>
+1. COST ALLOCATION CATEGORY must be selected in MBL BUYING Object.<br></br>
+2. COST ALLOCATION CATEGORY must be selected in H B/L Selling/Buying Object.<br></br>
+3. Selected data must be the same between 1 and 2.<br></br>
+</ul>
+<br></br>
+
+
+-----------------------------------------------------------------------------<br></br>
+<br></br>
+
+<h2>M B/L仕入明細に関するオンラインヘルプ</h2><br></br>
+<br></br>
+一つのコンテナに対する費用を管理するオブジェクトです。<br></br>
+ここでの費用は後に、関連するHBL案件にCBM(R/TON)に従って按分されます。<br></br>
+<ul>
+1.パートナー費用按分<br></br>
+2.倉庫費用按分（デバン費用など）<br></br>
+3.船社費用按分(サーチャージなど)<br></br>
+4.船社費用按分(課税)　(DOC　FEEなど)<br></br>
+</ul>
+<br></br>
+関連するハウス案件に請求･仕入を按分するには、以下の条件が満たされていなければなりません。<br></br>
+<ul>
+1. 按分カテゴリーが個々のM B/L仕入明細オブジェクトで選択されていなければなりません。<br></br>
+2. 按分カテゴリーがH B/L請求･仕入れ明細オブジェクトで選択されていなければなりません。<br></br>
+3. 1.と2.の間で選択されたデータが一致していなければなりません。<br></br>
+</ul>
+
+-----------------------------------------------------------------------------<br></br>
+<br></br>
+
+<h2>M B/L 구매 내역에 대한 온라인 도움말</h2><br></br>
+<br></br>
+하나의 컨테이너에 대한 비용을 관리하는 오브젝트(객체)입니다.<br></br>
+여기서 비용은 이후에 관련 HBL 안건에 CBM (R/TON)에 따라 비용배분됩니다.<br></br>
+<ul>
+1.파트너 비용배분<br></br>
+2.스토리지 비용배분（데바닝 비용 등）<br></br>
+3.선사 비용배분(할증료 등)<br></br>
+4.선사 비용배분(과세)　(DOC FEE 등)<br></br>
+</ul>
+<br></br>
+관련된 하우스 안건에 청구/지불을 비용배분하려면 다음의 조건이 충족되지 않으면 안됩니다.<br></br>
+<ul>
+1. 개별 M B/L(콘솔)-지불의 비용배분 분류를 선택해야 합니다.<br></br>
+2. H B/L-청구/지불의 비용배분 분류를 선택해야 합니다.<br></br>
+3. 1과 2 사이에서 선택된 데이터가 일치하지 않으면 안됩니다.<br></br>
+</ul>
+
+</body>
+
+
+</apex:page>

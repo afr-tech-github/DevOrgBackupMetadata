@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TransferReceiving</fullName>
+    <columns>NAME</columns>
+    <columns>WorkOrderService__c</columns>
+    <columns>WOSRecordType__c</columns>
+    <columns>WorkOrderID__c</columns>
+    <columns>CargoStatus__c</columns>
+    <columns>ScanTime__c</columns>
+    <columns>GoodsPOID__c</columns>
+    <columns>GoodsSOID__c</columns>
+    <columns>CarrierCode__c</columns>
+    <columns>Carrier__c</columns>
+    <columns>Cargo__c</columns>
+    <columns>QRCodeLabel__c</columns>
+    <columns>ProductID__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>WOSRecordType__c</field>
+        <operation>equals</operation>
+        <value>Transfer Receiving</value>
+    </filters>
+    <label>5.Transfer Receiving</label>
+    <language>en_US</language>
+</ListView>

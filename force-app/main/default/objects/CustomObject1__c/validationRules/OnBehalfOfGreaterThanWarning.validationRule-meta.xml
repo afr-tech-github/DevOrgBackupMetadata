@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OnBehalfOfGreaterThanWarning</fullName>
+    <active>true</active>
+    <errorConditionFormula>((Field1__r.BaltoWarningOnBehalfOfAmountLocal__c &lt; 0) || (Field1__r.BaltoWarningOnBehalfOfAmountFCY__c &lt; 0)) &amp;&amp; INCLUDES( Field1__r.ControlWarningOnBehalfOfAmount__c , &quot;Not allow to create F/TMS S/O&quot;) &amp;&amp; DATEvalue(CreatedDate)= TODAY()</errorConditionFormula>
+    <errorMessage>You can not create new S/O because this client has uncollected On-Behalf-Of more than Warning.</errorMessage>
+</ValidationRule>

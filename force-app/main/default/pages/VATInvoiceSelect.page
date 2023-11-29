@@ -1,0 +1,15 @@
+<apex:page controller="VATInvoiceExcelController" showHeader="false" sidebar="false">
+    <apex:includeLightning />    
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="VATInvoiceComponent"/>
+    
+    <script>
+        $Lightning.use("c:VATInvoiceSelectApp", function() {
+            $Lightning.createComponent("c:VATInvoiceSelect",
+                {
+                    "recordId": "{!$CurrentPage.parameters.id}"
+                },  "VATInvoiceComponent", function(cmp) {
+            });
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActualGasolineAllowance__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>EmployeeID__r.GasolineAllowance__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Synchronize from Actual Gasoline Allowance in Payroll Ship.</inlineHelpText>
+    <label>ACTUAL GASOLINE ALLOWANCE</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

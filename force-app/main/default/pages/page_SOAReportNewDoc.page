@@ -1,0 +1,787 @@
+<apex:page controller="SOAReportNewController"  renderAs="pdf" applyBodyTag="false" cache="true" title="OutStanding Statement Detail" showHeader="false">
+    <head>
+        <style>
+            @page{
+                size:landscape;
+            }
+            .companyInfo {
+                text-align: center;
+                font-size: 10px;
+            }
+            body {
+                font-size: 10px;
+                font-family: "Arial Unicode MS", "MS Pゴシック", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "MS PGothic", sans-serif;
+            	text-transform: uppercase;
+            }
+            th {
+                text-align: center;
+                font-weight: bold;
+            }
+            .title {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .dataTable {
+                width: 100%;
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            .dataTable th, .dataTable td{
+                border-collapse: collapse;
+                border: thin solid;
+            }
+            .dataTable tr {
+                border: thin solid ;
+                border-collapse: collapse;
+            }
+            
+            .dataTable td {
+                font-size: 10px;
+                text-align:center;
+                border-collapse: collapse;
+                border: thin solid ;
+                line-height: 20px;
+            }
+            .hideColumn{
+            display: none;
+            }
+            .showColumn{
+                display: table-cell;
+            }
+            .fontBold{
+                font-weight: bold
+            }
+            table tr td{
+                 page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div align="center">
+                <img align="middle" src="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Logo_URL__c}" height="80"/>
+            </div>
+            <div class='title' style="margin-top: 10px;">
+                <span><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Name__c}"/></span>
+            </div>
+            <div class='companyInfo'>
+                <span><apex:outputLabel value="{!$Setup.Site_Custom_Settings__c.Company_Address__c}"/></span>
+            </div>
+        	<div class='companyInfo'>
+        		<span>
+                    <apex:outputLabel rendered="{!$Setup.Site_Custom_Settings__c.Local_Currency__c == 'PHP'}" 
+                                        value="VAT Reg. TIN: "/>
+                    <apex:outputLabel rendered="{!$Setup.Site_Custom_Settings__c.Local_Currency__c <> 'PHP'}" 
+                                        value="Tax Code:"/>
+                    <apex:outputLabel rendered="{!$Setup.Site_Custom_Settings__c.Tax_Code__c <> null}" 
+                                        value="{!$Setup.Site_Custom_Settings__c.Tax_Code__c}"/>
+                </span>
+        	</div>
+            <div class='companyInfo'>
+                <span>
+                    <apex:outputLabel rendered="{!$Setup.Site_Custom_Settings__c.Company_Phone__c <> null}"
+                                      value="TEL: {!$Setup.Site_Custom_Settings__c.Company_Phone__c}" />
+                </span>
+                <span style="{!IF(AND($Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Phone__c <> null, $Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Fax__c <> null),
+                             'margin-left: 20px; ', '')}"></span>
+                <span><apex:outputLabel rendered="{!$Setup.Site_Custom_Settings__c.Company_Fax__c <> null}"
+                                        value="FAX: {!$Setup.Site_Custom_Settings__c.Company_Fax__c}"/></span>
+            </div>
+            <p/>
+            <p/>
+            <div class='title'>
+                {!translations['report_tittle_print']}
+            </div>
+            <p/>
+            <p/>
+            <table width="100%" style="font-size: 10px;">
+                <tr>
+                    <td width="70%"> {!translations['greeting']}: {!report.clientName} </td>
+                    <td ></td>
+                </tr>  
+                <tr>
+                	<td width="70%">
+                        <apex:outputLabel rendered="{!IF(AND($Setup.Site_Custom_Settings__c.Local_Currency__c == 'PHP', language <> 'vi', report.taxCode <> null), true, false)}" 
+                                        value="VAT Reg. TIN: "/>
+                    	<apex:outputLabel rendered="{!IF(AND($Setup.Site_Custom_Settings__c.Local_Currency__c <> 'PHP', language <> 'vi', report.taxCode <> null), true, false)}" 
+                                        value="Tax Code:"/>
+                        <apex:outputLabel rendered="{!IF(AND(language == 'vi', report.taxCode <> null), true, false)}" 
+                                        value="MST:"/>
+                    	<apex:outputLabel value="{!report.taxCode}" rendered="{!report.taxCode <> null}"></apex:outputLabel>
+                    </td>
+                    <td ></td>
+                </tr>
+                <tr>
+                	<td width="70%">
+                        <apex:outputLabel rendered="{!language == 'vi'}" 
+                                        value="Địa chỉ: "/>
+                    	<apex:outputLabel rendered="{!language <> 'vi'}" 
+                                        value="Address: "/>
+                    	<apex:outputLabel value="{!report.address}" rendered="{!report.address <> null}"></apex:outputLabel>
+                    </td>
+                    <td ></td>
+                </tr>
+                <tr>
+                    <!-- <td width="70%">{!translations['ATTN']}</td> -->
+                    <!-- <td width="30%" style="text-align: right"> -->
+<!--                          -->
+                        <!-- <apex:outputText value="{!translations['print_date']}:" styleClass="fontBold"/> -->
+                        <!-- <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> -->
+                            <!-- <apex:param value="{!Today()}"/> -->
+                        <!-- </apex:outputText> -->
+                    <!-- </td> -->
+                    <td width="70%">
+    
+                        <apex:outputText value="{!translations['print_date']}: " styleClass="fontBold"/>
+                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                            <apex:param value="{!Today()}"/>
+                        </apex:outputText>
+                    </td>
+                </tr>
+              
+                <tr>
+                    <td width="70%">
+                        <apex:outputLabel value="{!translations['period']}: " rendered="{!period <> null}"/>
+                        <apex:outputLabel value="{!period}" rendered="{!period <> null}"/>
+                    </td>
+                    <!-- <td width="30%" style="text-align: right"> -->
+                        <!-- <apex:outputText value="{!translations['payment_due_date']}:" styleClass="fontBold" rendered="{!report.dueDateOfPayment <> null}"/> -->
+                        <!-- <apex:outputText value="{0,date,dd'/'MM'/'yyyy}" rendered="{!report.dueDateOfPayment <> null}"> -->
+                            <!-- <apex:param value="{!report.dueDateOfPayment}"/> -->
+                        <!-- </apex:outputText> -->
+                    <!-- </td> -->
+                </tr>
+            </table>          
+            <p/>
+
+            <p/>
+            <table class='dataTable' style="font-size: 10px">
+                <tr>
+                    <th rowspan="2" style="text-align: center;"><b>NO</b></th>
+                    <!-- <th colspan="8" style="text-align: center;"><b>{!translations['shipment_detail_tittle']}</b></th> -->
+                    <!-- <td colspan="12" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="11" class ="{!IF(report.dueDateOfPayment == null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="11" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="10" class ="{!IF(report.dueDateOfPayment == null  && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td> -->
+
+                    <td colspan="11" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['shipment_detail_tittle']}</td>
+                    <td colspan="10" class ="{!IF(report.dueDateOfPayment == null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['shipment_detail_tittle']}</td>
+                    <td colspan="10" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['shipment_detail_tittle']}</td>
+                    <td colspan="9" class ="{!IF(report.dueDateOfPayment == null  && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['shipment_detail_tittle']}</td>
+                    <!-- <th class="{!IF(report.dueDateOfPayment <> null, 'showColumn', 'hideColumn')}" colspan="9" style="text-align: center;" >{!translations['shipment_detail_tittle']}</th> -->
+                    <!-- <th class="{!IF(report.dueDateOfPayment == null, 'showColumn', 'hideColumn')}" colspan="8" style="text-align: center;" >{!translations['shipment_detail_tittle']}</th> -->
+                    <th colspan="3" style="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'text-align: center;', 'display: none;')}"><b>LOCAL</b></th>
+                    <th colspan="3" style="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'text-align: center;', 'display: none;')}"><b>USD</b></th>
+                </tr>
+                <tr>
+                    <th style="display:{!IF(AND(NOT(AND(showWKID,InvoiceDebit)),showWKID), '', 'none')};"><b>WKID</b></th>
+                    <th style="display:{!IF(InvoiceDebit, '', 'none')};"><b>INV/DEBT No</b></th>
+                    <th style="display:{!IF(showJobId, '', 'none')};"><b>JOB ID</b></th>
+
+                    <th colspan="{!IF(AND(NOT(AND(showWKID,InvoiceDebit)),showWKID), 1, 2)}">{!IF(isInvoicing,translations['invoicing_date'],translations['sale_accounted_date'])}</th>
+                    <td class="{!IF(stringDebitNo != '' && stringDebitNo != null, 'showColumn', 'hideColumn')}" style="width: 5%;" >{!translations['debit_no']}</td>
+                    <th colspan="{!IF(showJobId, 1, 2)}"><b>{!translations['HBL']}</b></th>
+                    <th colspan="{!IF(InvoiceDebit, 1, 2)}"><b>{!translations['MBL']}</b></th>
+                    <th><b>{!translations['ETD']}</b></th>
+                    <th><b>{!translations['ETA']}</b></th>
+                    <!--<th class="{!IF(reportType <> 'partner_report_type','showColumn','hideColumn')}" width="8%">CUST INVOICE STATUS</th>
+                    <th class="{!IF(reportType == 'partner_report_type','showColumn','hideColumn')}" width="8%">PRTN DEBIT STATUS</th>-->
+
+                    <th class="{!IF(report.dueDateOfPayment <> null, 'showColumn', 'hideColumn')}"><b><apex:outputText escape="false" value="{!translations['due_date_of_payment']}"/></b></th>
+                    <th><b>{!translations['quantity']}</b></th>
+                    <th width="7%" style="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', '', 'display: none;')}">
+                        <b>{!translations['debit']}</b>
+                    </th>
+                    <th width="7%" style="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', '', 'display: none;')}">
+                        <b>{!translations['credit']}</b>
+                    </th>
+                    <th width="7%" style="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', '', 'display: none;')}">
+                        <b>{!translations['balance']}</b>
+                    </th>
+                    <th width="7%" style="{!IF(currencyType <> 'VND'  && currencyType <> 'All VND', '', 'display: none;')}">
+                        <b>{!translations['debit']}</b>
+                    </th>
+                    <th width="7%" style="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', '', 'display: none;')}">
+                        <b>{!translations['credit']}</b>
+                    </th>
+                    <th width="7%" style="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', '', 'display: none;')}">
+                        <b>{!translations['balance']}</b>
+                    </th>
+                </tr>
+                <apex:variable value="{!0}" var="index"/>
+                <apex:repeat value="{!report.listShipment}" var="shipmentItem">
+                <apex:variable value="{!index + 1}" var="index"/>
+                        <tr>
+                            <td style="text-align: center;">
+                                
+                                {!index}
+                            </td>
+                            <td style="display:{!IF(AND(NOT(AND(showWKID,InvoiceDebit)),showWKID), '', 'none')}; text-align: center;">
+                                <apex:outputText escape="false" value="{!shipmentItem.shipmentNo}"/>
+                            </td>
+                            <td style="display:{!IF(InvoiceDebit, '', 'none')}; text-align: center;">
+                                <apex:outputText escape="false" value="{!shipmentItem.shipmentNo}"/>
+                                    <apex:outputText escape="false"  rendered="{!shipmentItem.listBilling[0].invoiceNo != null}" value="-{!shipmentItem.listBilling[0].invoiceNo}"/>
+                            </td>
+                            <td style="display:{!IF(showJobId, '', 'none')}; text-align: center;">
+                                <apex:outputText escape="false" value="{!shipmentItem.jobID}"/>
+                            </td>
+                            <td colspan="{!IF(AND(NOT(AND(showWKID,InvoiceDebit)),showWKID), 1, 2)}" style="text-align: center;">
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!shipmentItem.saleAccountedDate}"/>
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(stringDebitNo != '' && stringDebitNo != null, 'showColumn', 'hideColumn')}" >{!shipmentItem.debitNo}</td>
+                            <td colspan="{!IF(showJobId, 1, 2)}" style="text-align: center;">{!shipmentItem.noHBL}</td>
+                            <td  colspan="{!IF(InvoiceDebit, 1, 2)}" style="text-align: center;">{!shipmentItem.noMBL}</td>
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!shipmentItem.dateETD}"/>
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align: center;">
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!shipmentItem.dateETA}"/>
+                                </apex:outputText>
+                            </td>
+                            <!--<td class="{!IF(reportType <> 'partner_report_type','showColumn ','hideColumn')}" width="8%">{!shipmentItem.invoiceIssueStatus}</td>
+                            <td class="{!IF(reportType == 'partner_report_type','showColumn','hideColumn')}" width="8%">{!shipmentItem.debitIssueStatus}</td>-->
+                            <td class="{!IF(report.dueDateOfPayment <> null, 'showColumn', 'hideColumn')}" style="text-align: center;">
+                                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!shipmentItem.dueDateOfPayment}"/>
+                                </apex:outputText>
+                            </td>
+                            <td class=" boldFont" style="text-align: center;" >{!shipmentItem.quantity} INV</td>
+                            <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}" style="text-align: center;">
+                                <apex:outputText value="-" rendered="{!shipmentItem.debit == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,###}" rendered="{!shipmentItem.debit <> 0}">
+                                    <apex:param value="{!shipmentItem.debit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}" style="text-align: center;">
+                                <apex:outputText value="-" rendered="{!shipmentItem.credit == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,###}" rendered="{!shipmentItem.credit <> 0}">
+                                    <apex:param value="{!shipmentItem.credit}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}" style="text-align: center;">
+                                <apex:outputText value="-" rendered="{!shipmentItem.balance == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,###}" rendered="{!shipmentItem.balance <>0}">
+                                    <apex:param value="{!shipmentItem.balance}" />
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!shipmentItem.debitUSD == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.debitUSD <> 0}">
+                                    <apex:param value="{!shipmentItem.debitUSD}" />
+                                    <!-- <apex:param value="{!shipmentItem.debitUSD}" /> -->
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!shipmentItem.creditUSD == 0}"/>
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.creditUSD <> 0}">
+                                    <apex:param value="{!shipmentItem.creditUSD}" />
+                                    <!-- <apex:param value="{!shipmentItem.creditUSD}" /> -->
+                                </apex:outputText>
+                            </td>
+                            <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                                <apex:outputText value="-" rendered="{!shipmentItem.balanceUSD == 0}"/>
+                                
+                                <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!shipmentItem.balanceUSD <> 0}">
+                                    <apex:param value="{!shipmentItem.balanceUSD}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <!-- <td colspan="8"> -->
+                            <!-- {!translations['total_tittle']} -->
+                        <!-- </td> -->
+                        <td colspan="12" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="11" class ="{!IF(report.dueDateOfPayment == null && (stringDebitNo != '' && stringDebitNo != null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="11" class ="{!IF(report.dueDateOfPayment <> null && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td colspan="10" class ="{!IF(report.dueDateOfPayment == null  && (stringDebitNo == '' || stringDebitNo == null), 'showColumn', 'hideColumn')} ">{!translations['total_tittle']}</td>
+                        <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                            <apex:outputText value="-" rendered="{!report.debit == 0}"/>        
+                            <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,###,###,###,###}" rendered="{!report.debit <> 0}">
+                                <apex:param value="{!report.debit}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                            <apex:outputText value="-" rendered="{!report.credit == 0}"/>
+                            <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,###,###,###,###}" rendered="{!report.credit <> 0}">
+                                <apex:param value="{!report.credit}" />
+                            </apex:outputText>
+                       </td>
+                        <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                            <apex:outputText value="-" rendered="{!report.balance == 0}"/>
+                            <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,###,###,###,###}" rendered="{!report.balance <> 0}">
+                                <apex:param value="{!report.balance}" />
+                            </apex:outputText>
+                        </td>
+                        <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                            <apex:outputText value="-" rendered="{!report.debitUSD == 0}"/>
+                            <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.debitUSD <> 0}">
+                                <apex:param value="{!report.debitUSD}" />
+                            </apex:outputText>
+                        </td>
+                        <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+                            <apex:outputText value="-" rendered="{!report.creditUSD == 0}"/>
+                            <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.creditUSD <> 0}">
+                                <apex:param value="{!report.creditUSD}" />
+                            </apex:outputText>
+                        </td>
+                        <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}">
+
+                            <apex:outputText value="-" rendered="{!report.balanceUSD == 0}"/>
+                            <apex:outputText value="USD {0,number,###,###,###,##0.00}" rendered="{!report.balanceUSD <> 0}">
+                                <apex:param value="{!report.balanceUSD}" />
+                            </apex:outputText>
+                        </td>
+
+                    </tr>
+            </table>
+             <p/>
+            <div style="font-size: 12px;">
+                <b>{!translations['total_balance_due_to']} {!$Setup.Site_Custom_Settings__c.Company_Name__c} : </b> 
+                <span>
+                    <b>
+                        <!-- <apex:outputText value="-" rendered="{!report.balance == 0}"/> -->
+                        <apex:outputPanel rendered="{!currencyType <> 'USD' && currencyType <> 'All USD'}">
+
+                            <apex:outputText value="-" rendered="{!currencyType == 'USD' || currencyType == 'All USD'}"/>
+                            <!-- <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,###,###,###,###}" rendered="{!report.balance <> 0}"> -->
+                                <apex:outputText value="{!$Setup.Site_Custom_Settings__c.Local_Currency__c} {0,number,###,###,###,###}" rendered="{!currencyType <> 'USD' && currencyType <> 'All USD'}">
+                                <apex:param value="{!report.balance}" />
+                            </apex:outputText>
+                        </apex:outputPanel>
+                    </b>
+                </span>
+                <span style="margin-left: 30px;">
+                    <b> 
+                        <!-- <apex:outputText value="-" rendered="{!(report.balanceUSD == 0)}"/> -->
+                        <apex:outputPanel rendered="{!currencyType <> 'VND' && currencyType <> 'All VND'}">
+
+                        <apex:outputText value="-" rendered="{!currencyType == 'VND' || currencyType == 'All VND'}"/>
+                        <!-- <apex:outputText value=" USD {0,number,###,###,###.00}" rendered="{!report.balanceUSD <> 0}"> -->
+                        <apex:outputText value=" USD {0,number,###,###,##0.00}" rendered="{!currencyType <> 'VND' && currencyType <> 'All VND'}">
+                            <apex:param value="{!report.balanceUSD}" />
+                        </apex:outputText>
+                        </apex:outputPanel>
+                    </b>
+                </span>
+            </div> 
+            <apex:outputPanel rendered="{!isDisplayDetail}">
+            <div style="page-break-before: always; "/>
+            <!-- Billing detail-->
+            <apex:outputPanel >
+                <table class='dataTable' width="100%" style="font-size: 10px">
+                    <tr>
+                        <th rowspan="2" style="text-align: center;"><b>NO</b></th>
+                        <th colspan="{!IF(stringDebitNo != '' && stringDebitNo != null, '10', '9')}" style="text-align: center;"><b>{!translations['shipment_detail_tittle']}</b></th>
+                        <th colspan="3" style="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'text-align: center;', 'display: none;')}"><b>LOCAL</b></th>
+                        <th colspan="3" style="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'text-align: center;', 'display: none;')}"><b>USD</b></th>
+                        <th width="8%" rowspan="2">
+                                {!translations['advance_payment_title']}
+                        </th>
+                    </tr>
+                    <tr>
+                        
+                        <th class="" >{!translations['billing_fms_tms_id']}</th>
+                        <th class="" >{!translations['sale_accounted_invoicing']}</th>
+                        <th class="{!IF(stringDebitNo != '' && stringDebitNo != null, 'showColumn', 'hideColumn')}" >{!translations['debit_no']}</th>
+                        <th class="" >{!translations['pricing_name_at_print_local']}</th>
+                        <th class="" >{!translations['invoice_to']}</th>
+                        <th class="" >{!inboundVAT} </th>
+                        <th class="" >{!translations['payment_to']}</th>
+                        <th class="" >{!outboundVAT} </th>
+                        <th class="">{!translations['description']}</th>
+                        <th class="" >{!translations['charge_unit_total']}</th>
+                        <th width="8%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                            {!translations['unreceived_balance_of_selling']}
+                        </th>
+                        <th width="8%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+
+                            {!translations['unpaid_balance_of_buying']}
+                        </th>
+                        <th width="8%" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn', 'hideColumn')}">
+                            {!translations['balance']}
+                        </th>
+                        <th width="8%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}" >
+                            {!translations['unreceived_balance_of_selling']}
+                        </th>
+                        <th width="8%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}" >
+                            {!translations['unpaid_balance_of_buying']}
+                        </th>
+                        <th width="8%" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn', 'hideColumn')}" >
+                            {!translations['balance']}
+                        </th>
+                        
+                    </tr>
+                    <apex:variable value="{!0}" var="index"/>
+                    <apex:repeat value="{!report.listShipment}" var="shipmentItem">
+                        <apex:repeat value="{!shipmentItem.listBilling}" var="billingItem">
+                            <apex:variable value="{!index + 1}" var="index"/>
+                            <tr>
+                                <td style="text-align: center;">
+                                    
+                                    {!index}
+                                </td>
+                                <td class="" style="text-align: center;">{!billingItem.noBill}</td>
+                                <td class="" style="text-align: center;">
+                                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                        <apex:param value="{!billingItem.saleAccountedDateInvoicing}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td class="{!IF(stringDebitNo != '' && stringDebitNo != null, 'showColumn', 'hideColumn')}" >{!billingItem.debitNo}</td>
+                                <td class="" >{!billingItem.pricingName}</td>
+                                <td class="" >{!billingItem.invoiceToName}</td>
+                                <td class="" >{!billingItem.inboundInvoiceNo} </td>
+                                <td class="" >{!billingItem.paymentToName}</td>
+                                <td class="" >{!billingItem.outboundInvoiceNo} </td>
+                                <td class=""  >{!billingItem.description}</td>
+
+                                <td class="" style="text-align: center;">{!billingItem.chargeUnitTotal}</td>
+
+                                <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.debit == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,###}" rendered="{!billingItem.debit <> 0}">
+                                        <apex:param value="{!billingItem.debit}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.credit == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,###}" rendered="{!billingItem.credit <> 0}">
+                                        <apex:param value="{!billingItem.credit}" />
+                                    </apex:outputText>
+                               </td>
+                                <td style="text-align: center;" class="{!IF(currencyType <> 'USD' && currencyType <> 'All USD', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.balance == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,###}" rendered="{!billingItem.balance <> 0}">
+                                        <apex:param value="{!billingItem.balance}" />
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.debitUSD == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.debitUSD <> 0}">
+                                        <apex:param value="{!billingItem.debitUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.creditUSD == 0}"/>
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.creditUSD <> 0}">
+                                        <apex:param value="{!billingItem.creditUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td  style="text-align: center;" class="{!IF(currencyType <> 'VND' && currencyType <> 'All VND', 'showColumn ', 'hideColumn ')}">
+                                    <apex:outputText value="-" rendered="{!billingItem.balanceUSD == 0}"/>
+
+                                    <apex:outputText value="{0,number,###,###,###,##0.00}" rendered="{!billingItem.balanceUSD <> 0}">
+                                        <apex:param value="{!billingItem.balanceUSD}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="text-align: center;">{!billingItem.advancePayment}</td>
+                            </tr>
+                            </apex:repeat>
+                        </apex:repeat>
+                 
+                </table>
+            </apex:outputPanel> 
+            </apex:outputPanel>
+            <div>
+
+                -------------------------------------------------------------------------------------
+            </div>
+            <div style="font-size: 12px;">
+                <p>
+                    <apex:outputText value="{!translations['remark']}" escape="false"/>
+                    <br/>
+                    <!--{!translations['account_name']}:   <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Account_1__c}"/><br/>
+                    {!translations['address']}:        <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Account_Address_1__c}"/><br/>
+                    {!translations['bank_name']}:      <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Name_1__c}"/><br/>
+                    {!translations['account_number']}: <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Account_No_1__c}"/><br/>
+                    {!translations['swift_code']}:     <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_1_Other__c}"/><br/>
+                    {!translations['bank_address']}:   <apex:outputLabel value="{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Foreign_Bank_Address_1__c}"/><br/>
+                    <br/>-->
+                    <apex:outputPanel rendered="{!IF(bankType == '', false, true)}">
+                    <table>
+                    	<tr>
+                        	<td>
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c <> null), true, false)}"
+                                                 />
+                                
+                                <apex:outputText value="{!translations['account_name']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['account_name']}"
+                                                rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_3__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['account_name']}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_4__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['account_name']}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_5__c <> null), true, false)}"/>
+                            </td>
+                            <td>
+                            	<apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Account_1__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Account_2__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Account_3__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Account_4__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Account_5__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_1__c <> null), true, false)}"
+                                                 />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_2__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_3__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_4__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_4__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Account_5__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Account_5__c <> null), true, false)}"/>
+                            </td>
+                        </tr>    
+                        <tr>
+                        	<td>
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c <> null), true, false)}"
+                                                 />
+                                
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_3__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_4__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_name']}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_5__c <> null), true, false)}"/>
+                            </td>
+                            <td>
+                            	<apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Name_1__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Name_2__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Name_3__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Name_4__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Name_5__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_1__c <> null), true, false)}"
+                                                 />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_2__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_3__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_3__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_4__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_4__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Name_5__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Name_5__c <> null), true, false)}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c <> null), true, false)}" />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c <> null), true, false)}" />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c <> null), true, false)}" />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c <> null), true, false)}" />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c <> null), true, false)}" />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c <> null), true, false)}"
+                                                 />
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_3__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_4__c <> null), true, false)}"/>
+                                <apex:outputText value="{!translations['bank_address']}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_5__c <> null), true, false)}"/>
+                            </td>
+                            <td>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_Address_1__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_Address_2__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_Address_3__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_Address_4__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_Address_5__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_1__c <> null), true, false)}"
+                                                 />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_2__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_3__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_4__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_4__c <> null), true, false)}"/>
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_Address_5__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_Address_5__c <> null), true, false)}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td>
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Account_No_1__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Account_No_2__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Account_No_3__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Account_No_4__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Account_No_5__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Account_No_3__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Account_No_4__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['account_number']}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Account_No_5__c <> null), true, false)}" />
+
+                            </td>
+                            <td>
+                            	<apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Account_No_1__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Account_No_2__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_3__c}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Account_No_3__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Account_No_4__c}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Account_No_4__c <> null), true, false)}" />
+                                <apex:outputText value=": !$Setup.Site_Custom_Settings__c.Local_Account_No_5__c}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Account_No_5__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Account_No_1__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Account_No_2__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_3__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Account_No_3__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_4__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Account_No_4__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Account_No_5__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Account_No_5__c <> null), true, false)}" />                                                               
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td>
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c <> null), true, false)}" />
+                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c <> null), true, false)}" />
+                                                                
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_3_Other__c <> null), true, false)}" />
+
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                 rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_4_Other__c <> null), true, false)}" />
+
+                                <apex:outputText value="{!translations['swift_code']}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_5_Other__c <> null), true, false)}" />
+                            </td>
+                            <td>
+                            	<apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'local1', $Setup.Site_Custom_Settings__c.Local_Bank_1_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'local2', $Setup.Site_Custom_Settings__c.Local_Bank_2_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'local3', $Setup.Site_Custom_Settings__c.Local_Bank_3_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'local4', $Setup.Site_Custom_Settings__c.Local_Bank_4_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'local5', $Setup.Site_Custom_Settings__c.Local_Bank_5_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign1', $Setup.Site_Custom_Settings__c.Foreign_Bank_1_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign2', $Setup.Site_Custom_Settings__c.Foreign_Bank_2_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_3_Other__c}"
+                                                 rendered="{!IF(AND(bankType == 'foreign3', $Setup.Site_Custom_Settings__c.Foreign_Bank_3_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_4_Other__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign4', $Setup.Site_Custom_Settings__c.Foreign_Bank_4_Other__c <> null), true, false)}" />
+                                <apex:outputText value=": {!$Setup.Site_Custom_Settings__c.Foreign_Bank_5_Other__c}"
+                                                rendered="{!IF(AND(bankType == 'foreign5', $Setup.Site_Custom_Settings__c.Foreign_Bank_5_Other__c <> null), true, false)}" />
+                            </td>
+                        </tr>
+                	</table>
+                    </apex:outputPanel>
+                    <!--<apex:outputText escape="false" value="{!translations['print_note']}    "/> <br/>{!$Setup.clofor_com_cfs__Site_Custom_Settings__c.clofor_com_cfs__Company_Signature__c}<br/>-->
+                </p>
+            </div>     
+            
+            <!--<div style="font-size:12px; margin-left:500px;">
+                Powered by {!$Setup.Site_Custom_Settings__c.Company_Name__c}
+            </div>-->
+    </body>
+</apex:page>

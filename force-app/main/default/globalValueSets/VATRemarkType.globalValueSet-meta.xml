@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>H B/L Number From Shipment Order</fullName>
+        <default>true</default>
+        <label>H B/L Number From Shipment Order</label>
+    </customValue>
+    <customValue>
+        <fullName>M B/L Number From Shipment Order</fullName>
+        <default>false</default>
+        <label>M B/L Number From Shipment Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Container Number From Shipment Order</fullName>
+        <default>false</default>
+        <label>Container Number From Shipment Order</label>
+    </customValue>
+    <customValue>
+        <fullName>Manual Input</fullName>
+        <default>false</default>
+        <label>Manual Input</label>
+    </customValue>
+    <masterLabel>VAT REMARK TYPE</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

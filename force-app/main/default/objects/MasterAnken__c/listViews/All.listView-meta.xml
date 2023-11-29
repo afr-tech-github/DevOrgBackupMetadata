@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>MasterID__c</columns>
+    <columns>Master_type__c</columns>
+    <columns>MPartner__c</columns>
+    <columns>META__c</columns>
+    <columns>MCnee__c</columns>
+    <columns>MShipper__c</columns>
+    <columns>MContainer__c</columns>
+    <columns>MContainerNumber__c</columns>
+    <columns>MContainer_No__c</columns>
+    <columns>MDevan__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>META__c</field>
+        <operation>greaterOrEqual</operation>
+    </filters>
+    <filters>
+        <field>META__c</field>
+        <operation>lessOrEqual</operation>
+    </filters>
+    <label>all</label>
+</ListView>

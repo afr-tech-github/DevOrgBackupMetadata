@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MustHaveCompanyNameForNewSO</fullName>
+    <active>true</active>
+    <errorConditionFormula>CompanyName__c = null   &amp;&amp;   
+INCLUDES(CreateNewRecordForActualCargo__c,&quot;Create New F/TMS S/O&quot;)</errorConditionFormula>
+    <errorDisplayField>CompanyName__c</errorDisplayField>
+    <errorMessage>The &quot;Company Name&quot; must be selected in order to auto create new F/TMS S/O.</errorMessage>
+</ValidationRule>

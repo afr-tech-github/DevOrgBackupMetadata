@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Request_List</fullName>
+    <columns>NAME</columns>
+    <columns>PaymentRequestStatus__c</columns>
+    <columns>PaymentDueDate__c</columns>
+    <columns>ApprovalStatus__c</columns>
+    <columns>ExternalRequester__c</columns>
+    <columns>InternalUser__c</columns>
+    <columns>AmountLocal__c</columns>
+    <columns>AmountUSD__c</columns>
+    <columns>ACCOUNTANT__c</columns>
+    <columns>PlannedProcessingDate__c</columns>
+    <columns>CreditACName__c</columns>
+    <columns>CreditACNumber__c</columns>
+    <columns>CreditBankBranchName__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PaymentRequestStatus__c</field>
+        <operation>equals</operation>
+        <value>Planned,Payment Arranged,Payment Delayed</value>
+    </filters>
+    <filters>
+        <field>PaymentSourceCategory__c</field>
+        <operation>includes</operation>
+        <value>Advance payment to staff payment</value>
+    </filters>
+    <label>Advance payment</label>
+    <language>en_US</language>
+</ListView>

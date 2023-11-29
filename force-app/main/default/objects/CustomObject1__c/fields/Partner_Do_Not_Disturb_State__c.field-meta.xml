@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_Do_Not_Disturb_State__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Store Partner selection for &quot;DO NOT WANT TO EMAIL ANNOUNCE&quot; option (to whether want to receive email notification from HBL or not).
+This field is required because of limitation from SF for number of relationships in an object (15 relationships).</description>
+    <externalId>false</externalId>
+    <label>Partner Do Not Disturb State</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

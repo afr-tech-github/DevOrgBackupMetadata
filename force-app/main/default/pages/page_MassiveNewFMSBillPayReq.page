@@ -1,0 +1,396 @@
+<apex:page controller="MassiveNewFMSBillPayReqController" sidebar="false" title="MASSIVE NEW">
+    <apex:stylesheet value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.CommonResource ,'CommonResource/Jquery-UI/jquery-ui.min.js')}"/>
+    <style>
+        table th{
+            text-align: center;
+            white-space: normal;
+        }
+
+        .tblDetail td, .tblDetail th{
+            padding:5px;
+            line-height: 22px;
+            border: 1px solid black;
+        }
+        .tblDetail{
+            border-collapse: collapse;
+        }
+        .hideColumn{
+            display: none;
+        }
+        
+    </style>
+    <script type="text/javascript">
+        j$ = jQuery.noConflict();
+        j$(document).ready(function() {
+            j$("#select_language").hide();
+        
+            j$( "input[id$=dateFrom]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/mm/yy"
+            })
+            
+            j$( "input[id$=dateTo]" ).datepicker({
+                defaultDate: "+1w",
+                changeMonth: true,
+                changeYear: true,
+                numberOfMonths: 1,
+                /*dateFormat:"yy/mm/dd"*/
+                dateFormat:"dd/mm/yy"
+            })
+            
+            j$("input[id$=inpTaxInit]").on("keypress keyup blur",function (event) {
+                j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+                if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            })
+            
+            j$("input[id$=inpBuyTaxInt]").on("keypress keyup blur",function (event) {
+                j$(this).val(j$(this).val().replace(/[^0-9\.]/g,''));
+                if ((event.which != 46 || j$(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                    event.preventDefault();
+                }
+            })
+        });
+    </script>
+    <apex:form >
+        <apex:sectionHeader title="F/TMS BILL+TRX PLAN"/>
+        <apex:pageBlock title="F/TMS BILL+TRX PLAN" id="pbSearch" tabStyle="AnkenMeisai__c">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Search" action="{!doSearchNew}" reRender="pbResult,pbId" />
+                <apex:commandButton value="Clear" action="{!doClear}" reRender="pbSearch" />
+                <apex:commandButton value="Close" action="{!doClose}"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel styleClass="opAll" layout="block">
+                <apex:pageBlockSection columns="2" title="S/O - Condition Search">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel styleClass="colLabel" value="FMS/TMS S/O ID" />
+                            <apex:inputText value="{!shipmentOrderId}" />
+                        </apex:pageBlockSectionItem>
+                        <!-- <apex:pageBlockSectionItem >     -->
+                            <!-- <apex:outputLabel styleClass="colLabelRight" value="REF.NO / JOB REQUEST ID" /> -->
+                            <!-- <apex:inputField value="{!shipmentOrderSearch.REFNO__c}" /> -->
+                        <!-- </apex:pageBlockSectionItem> -->
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="REF.NO / JOB REQUEST ID" />
+                            <apex:inputField value="{!shipmentOrderSearch.REFNO__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="CUSTOMER" />
+                            <apex:inputText value="{!objSearch.sCustomer}" id="shipment__customer"/>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="TIME" />
+                            <apex:selectList value="{!objSearch.sTimeType}" size="1">
+                                <apex:selectOption itemValue="Accounted Date" itemLabel="Accounted Date" />
+                                <apex:selectOption itemValue="ETD" itemLabel="ETD" />
+                                <apex:selectOption itemValue="ETA" itemLabel="ETA" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="SHIPPER" />
+                           <apex:inputField value="{!shipmentOrderSearch.shipper__c}" id="shipment__shipper"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="FROM TIME" />
+                            <apex:inputText value="{!objSearch.sFromTime}" id="dateFrom" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="CONSIGNEE" />
+                            <apex:inputField value="{!shipmentOrderSearch.Cnee__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="TO TIME" />
+                            <apex:inputText value="{!objSearch.sToTime}" id="dateTo" />
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="POL" />
+                            <apex:inputField value="{!shipmentOrderSearch.POL__c}" id="shipment__pol"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabel" value="H B/L NUMBER(Sea Or Air)" />
+                            <apex:inputText value="{!shipmentOrderSearch.HBL_Number_SEA_AIR__c}" id="shipment__hblnumberseaorair"/>
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="POD" />
+                            <apex:inputField value="{!shipmentOrderSearch.POD__c}" id="shipment__pod"/>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabel" value="M B/L NUMBER(Sea Or Air)" />
+                            <apex:inputText value="{!shipmentOrderSearch.MBL_Number_SEA_AIR__c}" id="shipment__mblnumberseaorair"/>
+                        </apex:pageBlockSectionItem>
+              
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" title="BILL - Condition Search">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="INBOUND VAT INVOICE NO" for="bill__invoiceboundinvoice"/>
+                            <apex:inputField value="{!billSearch.InboundVATInvNo__c}" id="bill__invoiceboundinvoice"/> 
+                        </apex:pageBlockSectionItem>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="OUTBOUND VAT INVOICE NO" for="bill__outboundinvoice"/>
+                            <apex:inputField value="{!billSearch.OutboundVATInvNo__c}" id="bill__outboundinvoice"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="INVOICE TO-SELLING" for="bill__invoiceto"/>
+                            <apex:inputField value="{!billSearch.Seikyusaki__c}" id="bill__invoiceto"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="PAYMENT TO-BUYING" for="bill__paymento"/>
+                            <apex:inputField value="{!billSearch.PaymentTo__c}" id="bill__paymento"/> 
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel styleClass="colLabelRight" value="CURRENCY" />
+                            <apex:selectList size="1" value="{!objSearch.currencyType}">
+                                <apex:selectOptions value="{!currencies}"></apex:selectOptions>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel styleClass="colLabelRight" value="AMOUNT TYPE" />
+                            <apex:selectList value="{!objSearch.amountType}" size="1">
+                                <apex:selectOption itemValue="Both" itemLabel="Both" />
+                                <apex:selectOption itemValue="BUYING" itemLabel="BUYING" />
+                                <apex:selectOption itemValue="SELLING" itemLabel="SELLING" />
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="pbResult">
+            
+            <apex:pageMessages ></apex:pageMessages>
+            <apex:outputPanel id="pbId">
+            <div style=" margin-bottom: 20px;">
+                <!-- <apex:outputLabel value="TOTAL: {!listBillResult.size} record(s)" style="color: #42619f; font-weight: bold;" /> -->
+                <div style="width: 40%; padding-top: 10px; padding-bottom: 10px;" class="pagination">
+                    <div style="color: #42619f; font-weight: bold;">
+                        TOTAL: {!listBillResult.size} record(s)
+                    </div>
+                    <div style="margin-top:20px">
+                        <apex:commandButton status="fetchStatus" reRender="pbId" value="First" action="{!setCon.first}" disabled="{!!setCon.hasPrevious}" title="First Page" styleClass="button"/> 
+
+                        <apex:commandButton status="fetchStatus" reRender="pbId" value="Previous" action="{!setCon.previous}" disabled="{!!setCon.hasPrevious}" title="Previous Page" styleClass="button"/> 
+        
+                        <apex:commandButton status="fetchStatus" reRender="pbId" value="Next" action="{!setCon.next}" disabled="{!!setCon.hasNext}" title="Next Page" styleClass="button"/> 
+        
+                        <apex:commandButton status="fetchStatus" reRender="pbId" value="Last" action="{!setCon.last}" disabled="{!!setCon.hasNext}" title="Last Page" styleClass="button"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 20px; float: right; margin-top: -45px;">
+                <apex:commandButton value="Insert" onclick="insertRecord(); return false;" style="width: 85px;" />
+            </div>
+            
+            <table class="tblDetail" width="100%" >
+                <tr>
+                    <th>
+                        <input type="checkbox" id="billItemAll" onchange="checkAllRecord();return false" />
+                    </th>
+                    <th>BILL ID</th>
+                    <th>ACTIVITY ID</th>
+                    <th>JOB REQUEST ID</th>
+                    <th width ="5%">TRX PLAN</th>
+                    <th>MBL NUMBER</th>
+                    <th>HBL NUMBER</th>
+                    <th class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">PAYMENT TO</th>
+                    <th class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">INVOICE TO</th>
+                    <th>{!$ObjectType.AnkenMeisai__c.fields.InsatuyouSyohin__c.Label}</th>
+                    <th class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">INBOUND VAT INVOICE NO</th>
+                    <th class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">OUTBOUND VAT INVOICE NO</th>
+
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT BUYING INCLUDING TAX(LOCAL)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT PAID-BUYING(LOCAL)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">UNPAID BALANCE OF BUYING(LOCAL)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT BUYING INCLUDING TAX(FCY)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT PAID-BUYING(FCY)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">UNPAID BALANCE OF BUYING(FCY)</th>
+
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT SELLING INCLUDING TAX(LOCAL) </th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">AMOUNT RECEIVED-SELLING(LOCAL)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">UNRECEIVED BALANCE OF SELLING(LOCAL)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT SELLING INCLUDING TAX(FCY) </th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">AMOUNT RECEIVED-SELLING(FCY)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">UNRECEIVED BALANCE OF SELLING(FCY)</th>
+
+                    <th class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">AMOUNT PAID-BUYING(3RD CURRENCY)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">AMOUNT SELLING INCLUDING TAX(3RD CURRENCY)</th>
+                    <th class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">AMOUNT BUYING INCLUDING TAX(3RD CURRENCY)</th>
+                    <th class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">AMOUNT RECEIVED-SELLING(3RD CURRENCY)</th>
+                    <th class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">UNPAID BALANCE OF BUYING(3RD CURRENCY)</th>
+
+                </tr>
+                <apex:variable value="{!0}" var="count"/>
+                <!-- <apex:variable var="b" value="{!Borrower}"/> -->
+                <apex:repeat value="{!Bills}" var="item">
+                    <!-- <apex:variable value="{!count + 1}" var="count"/> -->
+                    <tr>
+                        <td style="text-align: center;">
+                            <input type="checkbox" id="{!item.Id}" class="billItem"/>
+                        </td>
+                        <td style="text-align: center;"><a href="/{!item.Id}">{!item.Name}</a></td>
+                        <td style="text-align: center;"> <a href="/{!item.Anken__c}">{!item.Anken__r.Name}</a></td>
+                        <td style="text-align: center;">{!item.Anken__r.JobRequestID__c}</td>          
+                        <td style="text-align: center;">
+                            <apex:outputText escape="false" value="{!trxPlan2[count]}"/>
+                        </td>    
+                        <td style="text-align: center;">{!item.Anken__r.MBL_Number_SEA_AIR__c}</td>
+                        <td style="text-align: center;">{!item.Anken__r.HBL_Number_SEA_AIR__c}</td>
+                        <td style="text-align: left; padding-left:5px" class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}"><a href="/{!item.PaymentTo__c}">{!item.PaymentTo__r.Name}</a></td>
+                        <td style="text-align: left; padding-left:5px" class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}"><a href="/{!item.Seikyusaki__c}">{!item.Seikyusaki__r.Name}</a></td>
+                        <td style="text-align: left; padding-left:5px">{!item.InsatuyouSyohin__c}</td>
+                        
+                        
+                        <td style="text-align: center;" class="{!IF(objSearch.amountType=='SELLING', 'hideColumn', '')}">{!item.InboundVATInvNo__c}</td>
+                        <td style="text-align: center;" class="{!IF(objSearch.amountType=='BUYING', 'hideColumn', '')}">{!item.OutboundVATInvNo__c}</td>
+
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.BuyInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.Siharaigaku__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.BuyDifferentiation__c}" />
+                            </apex:outputText>
+                        </td>
+                        
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}" >
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.BuyInTaxAmountUSD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AMOUNT_PAID_BUYING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.UNPAID_BALANCE_OF_BUYING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.SellInTaxAmountJPY__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.Nyukingaku__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='USD' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###}">
+                                <apex:param value="{!item.SellDifferentiation__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.SellInTaxAmount_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AMOUNT_PAID_SELLING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND' ), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.UNPAID_BALANCE_OF_SELLING_USD__c}" />
+                            </apex:outputText>
+                        </td>
+
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AmountPaid3rdCurrency__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='SELLING',objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AmountSellingInclTax3rdCurrency__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.amountType=='BUYING',objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AmountBuyingInclTax3rdCurrency__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.AmountReceived3rdCurrency__c}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="text-align: right; padding-right:5px" class="{!IF(OR(objSearch.currencyType=='VND',objSearch.currencyType=='USD'), 'hideColumn', '')}">
+                            <apex:outputText value="{0,number,###,###,###,###.###}">
+                                <apex:param value="{!item.UnpaidBalance3rdCurrency__c}" />
+                            </apex:outputText>
+                        </td>
+
+                    </tr>
+                    <apex:variable value="{!count + 1}" var="count"/>
+                </apex:repeat>
+            </table>
+            </apex:outputPanel>
+            <apex:actionFunction name="af_insertbillPlan"
+                                        action="{!doInsert}"
+                                        reRender="pbResult"
+                                        status="Waiting">
+                <apex:param name="listBillIds" value=""/>
+            </apex:actionFunction>
+        </apex:pageBlock>
+        <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        function doChangeTab(element) {
+            af_ChangeTab(element);
+        }
+        function checkAllRecord(){
+            
+            if(j$('#billItemAll').is(":checked")){
+                j$('.billItem').prop( "checked", true);
+            }else{
+                j$('.billItem').prop( "checked", false);
+            }
+        }
+        function insertRecord(){
+            var billcheckeds = j$('.billItem:checkbox:checked');
+            var billIds = [];
+            for(var i =0; i<billcheckeds.length; i++){
+               var idbill = billcheckeds[i].id;
+               billIds.push(idbill);
+            };
+            var strbillIds = billIds.join(',');
+            if(!strbillIds){
+                alert('Please select at least 1 bill to combine.');
+            }else{
+                /*if(billIds.length > 12){
+                    alert('Maximum 12 records can be handled in once time.');
+                    
+                }else{
+                    af_insertbillPlan(strbillIds);
+                }*/
+                af_insertbillPlan(strbillIds);
+                
+            }
+        }
+    </script>
+    </apex:form>
+</apex:page>

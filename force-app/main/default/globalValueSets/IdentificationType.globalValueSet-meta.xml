@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>National Identification Number</fullName>
+        <default>false</default>
+        <label>National Identification Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Military Number</fullName>
+        <default>false</default>
+        <label>Military Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Passport Number</fullName>
+        <default>false</default>
+        <label>Passport Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Pan Card</fullName>
+        <default>false</default>
+        <label>PAN(Permanent Account No.) Card</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Identification Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

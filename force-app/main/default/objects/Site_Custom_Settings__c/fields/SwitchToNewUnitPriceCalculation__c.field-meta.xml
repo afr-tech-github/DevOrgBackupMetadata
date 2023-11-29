@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SwitchToNewUnitPriceCalculation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>To switch to new logic of Unit Price Calculation, please check on this check box.
+In case you face any problem, please unchecked so that you can switch back to previous logic.
+For more detail on how the new logic works, please contact to AFR Consultant.</inlineHelpText>
+    <label>Switch to New Unit Price Calculation</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

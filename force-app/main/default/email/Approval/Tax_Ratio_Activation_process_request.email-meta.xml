@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when tax ratio submission is requested.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>TAX RATIO ACTIVATION PROCESS - REQUEST</name>
+    <style>none</style>
+    <subject>TAX RATIO Approval Request - {!Tax_Ratio__c.TAX_RATIO_ID__c}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

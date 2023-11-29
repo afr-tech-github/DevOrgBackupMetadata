@@ -1,0 +1,13 @@
+<design:component>
+    <design:attribute name="isSelling" label="Is Selling?" />
+    <design:attribute name="isVATRateSelling" label="Is VAT Rate-selling?" />
+    <design:attribute name="isExchangeRateSellingDebit" label="Is Exchange Rate-Selling(Debit)?" />
+    <design:attribute name="isCurrencyConversionForSelling" label="Is Currency Conversion for Selling?" />
+    <design:attribute name="isExchangeRateIDDebitCredit" label="Is Exchange Rate ID-Debit/Credit?" />
+    
+    <design:attribute name="isVATRateBuying" label="Is VAT Rate-buying?" />
+    <design:attribute name="isExchangeRateBuyingCredit" label="Is Exchange Rate-Buying(Credit)?" />
+    <design:attribute name="isCurrencyConversionForBuying" label="Is Currency Conversion for Buying?" />
+    <design:attribute name="isAdvancePaymentonbehalfofOurCompany" label="Is Advance Payment on-behalf-of Our Company?" />
+    <design:attribute name="isAdvancePaymentonbehalfofOurCompany1" label="Is Advance Payment on-behalf-of Customer?" />
+</design:component>

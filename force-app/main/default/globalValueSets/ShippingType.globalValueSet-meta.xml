@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Hand Carry</fullName>
+        <default>false</default>
+        <label>Hand Carry</label>
+    </customValue>
+    <customValue>
+        <fullName>Official Customs Clearance</fullName>
+        <default>true</default>
+        <label>Official Customs Clearance</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>Shipping Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

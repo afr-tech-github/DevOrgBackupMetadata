@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AmountBuyingincltaxOthers__c</fullName>
+    <deprecated>true</deprecated>
+    <externalId>false</externalId>
+    <label>Amount Buying incl tax-Others</label>
+    <summarizedField>TRSBuying__c.AmountBuyinginclTaxfor__c</summarizedField>
+    <summaryFilterItems>
+        <field>TRSBuying__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>Buying-Others</value>
+    </summaryFilterItems>
+    <summaryForeignKey>TRSBuying__c.GOODSSALESORDER__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

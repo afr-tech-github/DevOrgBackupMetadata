@@ -1,0 +1,16 @@
+Kính gửi {!Contact.FirstName},
+
+Cám ơn Qúi khách đã liên lạc với chúng tôi về yêu cầu trên
+
+Mã số công việc của yêu cầu này là
+Tên hồ sơ của yêu cần là: "{!Case.Subject}"
+
+Chúng tôi mong được trao đổi với Qúi khách ngay khi có thể.
+{!User_Name}
+{!User.Phone}
+{!User.Email}
+{!Organization.Name}
+
+********************************************************* 
+{!$Setup.Site_Custom_Settings__c.Company_Signature__c} 
+*********************************************************

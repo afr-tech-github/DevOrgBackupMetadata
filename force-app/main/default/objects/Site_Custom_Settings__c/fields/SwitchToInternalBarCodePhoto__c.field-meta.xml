@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SwitchToInternalBarCodePhoto__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <inlineHelpText>When 3rd party barcode site has problem, clofor_com_cfs__QR_Image__c will not work.
+when it happen, switch to clofor_com_cfs__BarCodeImage__c for barcode image.
+To use this, barcode should be upload as image.</inlineHelpText>
+    <label>Switch to Internal Bar Code Photo</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

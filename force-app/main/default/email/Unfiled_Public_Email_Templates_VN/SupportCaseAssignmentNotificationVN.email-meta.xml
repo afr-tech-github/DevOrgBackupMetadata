@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Thông báo tới văn phòng đại diện khi công việc được tự động phân công.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Hổ trợ: Thông báo phân công</name>
+    <style>none</style>
+    <subject>Case {!Case.CaseNumber}:&quot;{!Case.Subject}&quot; auto-assigned to you</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

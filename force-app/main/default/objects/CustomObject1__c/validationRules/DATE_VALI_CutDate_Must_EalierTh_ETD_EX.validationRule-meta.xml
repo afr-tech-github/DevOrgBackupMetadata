@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DATE_VALI_CutDate_Must_EalierTh_ETD_EX</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( OR(WkInitial__c = &apos;OS&apos;,WkInitial__c = &apos;OA&apos;) , ETD__c&lt;CutDay__c,FALSE)</errorConditionFormula>
+    <errorDisplayField>ETD__c</errorDisplayField>
+    <errorMessage>Cut Date must be ealier than ETD in case of Export.
+輸出の場合、CUT日は出港日より早い日付を入力してください。</errorMessage>
+</ValidationRule>

@@ -1,0 +1,146 @@
+<aura:component controller="MassEditQuoteLineController" access="global">
+    <aura:attribute name="id" type="String"/>
+    <aura:attribute name="isShow" type="Boolean" default="true"/>
+    <aura:attribute name="isFirstRecord" type="Boolean" default="false"/>
+    <aura:attribute name="isMultiCurrency" type="Boolean" default="false"/>
+    <aura:attribute name="recordLabelClass" type="String" default="slds-form-element__label slds-hide"/>
+    <aura:attribute name="isSelected" type="Boolean" default="false"/>
+    <aura:attribute name="parent" type="Aura.Component" required="true"/>
+    <aura:attribute name="firstTimeRecordLoad" type="Boolean" default="true" />
+    <aura:attribute name="fieldLabels" type="Object"/>
+    <aura:attribute name="isRoute" type="Boolean" default="true" access="global" />
+
+    <aura:method name="updateFields" action="{! c.updateFields}">
+        <aura:attribute name="fields" type="List"/>
+    </aura:method>
+    <aura:method name="getFields" action="{! c.getFields}">
+    </aura:method>
+    <aura:method name="refresh" action="{! c.refresh}">
+    </aura:method>
+    <aura:method name="onToggleSelect" action="{! c.onToggleSelect}">
+        <aura:attribute name="isSelected" type="Boolean"/>
+    </aura:method>
+    <aura:method name="onToggleMultiCurrency" action="{! c.onToggleMultiCurrency}">
+        <aura:attribute name="isMultiCurrency" type="Boolean"/>
+    </aura:method>
+    <aura:method name="onToggleRoute" action="{! c.onToggleRoute}">
+        <aura:attribute name="isRoute" type="Boolean" default="false" access="global"/>
+    </aura:method>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+	<lightning:spinner aura:id="spinner" class="slds-hide"/>
+         <aura:if isTrue="{!v.isShow}">
+	 <lightning:recordEditForm  aura:id="recordEditForm" recordId="{!v.id}" onsubmit="{!c.onSubmit}" onsuccess="{!c.onSuccess}" onerror="{!c.onError}" onload="{!c.onLoad}"
+            objectApiName="clofor_com_cfs__QuoteLine__c">
+         <lightning:messages />
+	         <div class="slds-grid">
+             <div class="slds-col" style="align-self: flex-end; padding-bottom: 20px;">
+                 <lightning:input type="checkbox" checked="{!v.isSelected}" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-right_xx-small slds-p-vertical_x-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.Name}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="Name" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="{!if(v.isRoute, 'width:240px;', 'display:none;')}">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Route__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Route__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__PrintingSection__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__PrintingSection__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__ServicePricingID__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__ServicePricingID__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Invoice_to__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Invoice_to__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__CarrierAirlinerVendor__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__CarrierAirlinerVendor__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__POLAOD__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__POLAOD__c" />
+            </div>
+            <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__PODAOA__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__PODAOA__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:50px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Print__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Print__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Quantity__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Quantity__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Unit__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Unit__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__ContainerType__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__ContainerType__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__CurrencySelling__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__CurrencySelling__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__TaxRate__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__TaxRate__c" />
+            </div>
+            <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__LineItemName__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__LineItemName__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__SellingListPriceLocal__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__SellingListPriceLocal__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__SellingListPriceUSD__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__SellingListPriceUSD__c" />
+             </div>
+             <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small" style="{!if(v.isMultiCurrency, 'width:240px;', 'display:none;')}">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__SellingListPrice3rdCurrency__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__SellingListPrice3rdCurrency__c" />
+            </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__ServiceSchedule__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__ServiceSchedule__c" />
+             </div>
+             <div class="{! if(v.isFirstRecord, 'slds-border_right ', '') + 'slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small'}" style="width:180px;">
+                <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__TransitTimeDays__c}</label>
+                <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__TransitTimeDays__c" />
+             </div>
+             <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small" style="width:180px;">
+                 <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__Remarks__c}</label>
+                 <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__Remarks__c" />
+             </div>
+             <!-- <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small" style="{!if(v.isMultiCurrency, 'width:180px;', 'display:none;')}"> -->
+                 <!-- <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__ThirdCurrencySelling__c}</label> -->
+                 <!-- <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__ThirdCurrencySelling__c" /> -->
+             <!-- </div> -->
+             <!-- <div class="slds-col slds-p-vertical_x-small slds-p-horizontal_xx-small" style="{!if(v.isMultiCurrency, 'width:240px;', 'display:none;')}"> -->
+                 <!-- <label class="{!v.recordLabelClass}">{!v.fieldLabels.clofor_com_cfs__SellingListPrice3rdCurrency__c}</label> -->
+                 <!-- <lightning:inputField aura:id="field" variant="label-hidden" fieldName="clofor_com_cfs__SellingListPrice3rdCurrency__c" /> -->
+             <!-- </div> -->
+             <div class="slds-col slds-p-left_xx-small" style="{!v.isFirstRecord ? 'padding-top: 14px;' : 'margin-top: -8px;'}">
+                <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="Save" label="Save" />
+            </div>
+             <div class="slds-col slds-p-left_xx-small" style="{!v.isFirstRecord ? 'padding-top: 14px;' : 'margin-top: -8px;'}">
+                <lightning:button class="slds-m-top_small" variant="brand" onclick="{!c.onDelete}" name="Delete" label="Delete" />
+            </div>
+            <div class="slds-col slds-p-left_xx-small" style="{!v.isFirstRecord ? 'padding-top: 14px;' : 'margin-top: -8px;'}">
+                <lightning:button class="slds-m-top_small" variant="brand" onclick="{!c.onClone}" name="Clone" label="Clone"/>
+            </div>
+            
+         </div>
+    </lightning:recordEditForm>
+    <!-- <div class="slds-p-top_x-small"></div> -->
+         </aura:if>
+</aura:component>

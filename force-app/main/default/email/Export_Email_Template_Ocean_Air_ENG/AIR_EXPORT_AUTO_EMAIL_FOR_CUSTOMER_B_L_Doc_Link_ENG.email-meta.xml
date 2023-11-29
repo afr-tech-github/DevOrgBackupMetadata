@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Use this template when send B/L document link to customer.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>AIR EXPORT AUTO EMAIL FOR CUSTOMER-B/L Doc Link-ENG</name>
+    <style>none</style>
+    <subject>Air Export Status by CloTra - **B/L Doc Link**-ID:{!CustomObject1__c.Name}, {!CustomObject1__c.status__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

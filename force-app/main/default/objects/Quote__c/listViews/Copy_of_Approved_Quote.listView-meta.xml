@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_of_Approved_Quote</fullName>
+    <columns>NAME</columns>
+    <columns>QuoteName__c</columns>
+    <columns>QuoteStatus__c</columns>
+    <columns>POLAOD__c</columns>
+    <columns>PODAOA__c</columns>
+    <columns>QuoteIssueDate__c</columns>
+    <columns>BuyingAmountInclTaxLocal__c</columns>
+    <columns>AmountInclTaxLocal__c</columns>
+    <columns>ProfitRatioInclTaxLocal__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ForwardingServiceRequired__c</field>
+        <operation>equals</operation>
+        <value>Domestic Transportation</value>
+    </filters>
+    <label>Domestic Service</label>
+</ListView>

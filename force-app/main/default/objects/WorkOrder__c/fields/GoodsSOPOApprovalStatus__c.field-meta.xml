@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GoodsSOPOApprovalStatus__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(PurchasingOrderID__c)) ,  text(PurchasingOrderID__r.ApprovalStatus__c) ,
+
+IF(NOT(ISBLANK(SalesOrderID__c)) ,  text(SalesOrderID__r.ApprovalStatus__c),null
+)
+)</formula>
+    <label>Goods S/O or P/O Approval Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

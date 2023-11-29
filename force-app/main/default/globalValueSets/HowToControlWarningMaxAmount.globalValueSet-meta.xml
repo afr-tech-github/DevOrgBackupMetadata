@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Warning Message via Chatter</fullName>
+        <default>true</default>
+        <label>Warning Message via Chatter</label>
+    </customValue>
+    <customValue>
+        <fullName>Not allow to create F/TMS S/O</fullName>
+        <default>false</default>
+        <label>Not allow to create F/TMS S/O</label>
+    </customValue>
+    <customValue>
+        <fullName>Not allow to create Quote</fullName>
+        <default>false</default>
+        <label>Not allow to create Quote</label>
+    </customValue>
+    <customValue>
+        <fullName>Others</fullName>
+        <default>false</default>
+        <label>Others</label>
+    </customValue>
+    <masterLabel>How to Control Warning/Max Amount</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

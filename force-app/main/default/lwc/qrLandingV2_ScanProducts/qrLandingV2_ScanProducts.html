@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-is-relative">
+        <c-cmp_autocomplete 
+            label="Product" 
+            auto-search 
+            enable-create 
+            message-when-not-found="Product not link to WO" 
+            records={_options}
+            value={_productId}
+            onchange={handleChange}
+            onaddnew={handleAddNewWoProduct}></c-cmp_autocomplete>
+    </div>
+    <c-cmp_modal>
+        <div class="slds-is-relative">
+            <c-cmp_lookup
+                required data-name="_productLookupId"
+                label="Product" 
+                object-type="clofor_com_cfs__PRODUCT__c"
+                search-term={_productLookupSearchTerm}
+                search-field="Name" 
+                subtitle-field="clofor_com_cfs__Summary__c" 
+                show-recent-records="true" 
+                onselect={handleInputChange} ></c-cmp_lookup>
+            <lightning-spinner if:true={_isLoading} alternative-text="Loading..." ></lightning-spinner>
+        </div>
+    </c-cmp_modal>
+</template>

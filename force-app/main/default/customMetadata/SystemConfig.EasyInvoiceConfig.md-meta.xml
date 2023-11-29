@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>EasyInvoiceConfig</label>
+    <protected>false</protected>
+    <values>
+        <field>Value__c</field>
+        <value xsi:type="xsd:string">{ 
+&quot;api_url&quot;: &quot;http://0315164481001.softdreams.vn/&quot;, 
+&quot;username&quot;: &quot;API&quot;, 
+&quot;password&quot;: &quot;0315164481001&quot;, 
+&quot;api_create_invoice &quot;: &quot;api/publish/importInvoice&quot;, 
+&quot;api_create_publish_invoice&quot;: &quot;api/publish/importAndPublishInvoice&quot;, 
+&quot;api_adjust_invoice&quot;: &quot;api/business/adjustInvoice&quot;, 
+&quot;replace_invoice &quot;: &quot;api/business/replaceInvoice&quot;
+}</value>
+    </values>
+</CustomMetadata>

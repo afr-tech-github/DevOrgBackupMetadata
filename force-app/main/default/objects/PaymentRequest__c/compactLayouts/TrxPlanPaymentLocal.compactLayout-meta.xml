@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrxPlanPaymentLocal</fullName>
+    <fields>Name</fields>
+    <fields>RecordTypeId</fields>
+    <fields>PaymentRequestStatus__c</fields>
+    <fields>PaymentTo__c</fields>
+    <fields>PaymentDueDate__c</fields>
+    <fields>AmountLocal__c</fields>
+    <label>Trx Plan-Payment Local</label>
+</CompactLayout>
